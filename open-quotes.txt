@@ -1,0 +1,18 @@
+We can face our problem. We can arrange such facts as we have with order and method. Hercule Poirot, in Murder on the Orient Express (1934)
+
+Practice yourself, for heaven'S sake, in ltitel thins, and thence proceed to greater EPICTETUS Discourses IV.i
+
+
+About 1000 instructions is a reasonable upper limit for the complexity of problems no envisioned. Herman Goldstine and John von Neumann (1946)
+
+
+An algorithm must be seen to be believed.\\--- Donald E. Knuth~\cite{knuth1997fundamental}
+
+@article{knuth1997fundamental,
+  title={Fundamental algorithms},
+  author={Knuth, Donald Ervin},
+  journal={The Art of Computer Programming},
+  volume={1},
+  year={1997},
+  publisher={Addison-Wesley}
+}

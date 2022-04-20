@@ -16,81 +16,67 @@
 
 \SetNextSectionText{\say{My dear Watson, try a little analysis yourself,} said he, with a touch of impatience. \say{You know my methods. Apply them, and it will be instructive to compare results.}\\--- Conan Doyle~\cite[chp.~VI]{doyle2010sign}}
 \section{Präsenzaufgabe}
+{\def\f#1->#2\;{\parbox{7.5em}{\(S = \text{\T{#1}}\)\hfill}\(\quad{\color{gray}\longrightarrow}\quad\hbox to5em{\say{#2\hfill}}\)}
 \begin{frame}{Präsenzaufgabe}
-\begin{aufgabe}{Schau mal, ich bin schon groß!}
-    \pause Entwickeln Sie einen Algorithmus, der als Eingabe eine Liste von Zahlen erhält. Anschließend soll er für jedes Element der Liste bestimmen, ob nach diesem Element noch eine größere Zahl in der Liste folgt.\smallskip
-    \onslide<3->{\parallelcontent[c]{Beispiel mit der Liste \say{1, 0, 7, 5, 2}:
-        \footnotesize\begin{enumerate}[<+(2)->]
-            \item ja \info{da $1 < 7$}
-            \item ja \info{da $0 < 7$}
-            \item nein \info{da $7 > \max\{5,2\}$}
-            \item nein \info{da $5 > 2$}
-            \item nein \info{da letztes Element}
-        \end{enumerate}}{\onslide<9->{Welche Laufzeit hat Ihr Algorithmus im schlechtesten Fall?}}}
+\begin{aufgabe}{Das habe ich schon gesehen!}
+    \onslide<2->{Entwerfen Sie einen Algorithmus, um herauszufinden, ob in einer Zeichenkette \(S\) das Zeichen \T{a}, aber nicht das Zeichen \T{b} vorkommt. Als Ergebnis soll der Algorithmus ausgeben können, ob diese Bedingung zutrifft (\say{Ja}) oder nicht (\say{Nein}).}\medskip\par
+    \onslide<3->{Einige Beispiele\ldots
+\begin{itemize}[<+(1)->]
+    \item \f ababababa->Nein\; \info{Hat \T{a}, aber auch \T{b}}
+    \item \f aaaaaaaaa->Ja\; \info{Hat \T{a} und kein \T{b}}
+    \item \f cdefg->Nein\; \info{Kein \T{a} und kein \T{b}}
+    \item \f klmohna->Ja\; \info{Hat \T{a} und kein \T{b}}
+\end{itemize}}
     \onslide<1->
 \end{aufgabe}
 \end{frame}
+}
 
-\begin{frame}{Präsenzaufgabe - Lösung}
+{
+\SetAlgoVlined
+\SetKwIF{If}{ElseIf}{Else}{Wenn}{tue:\quad}{}{sonst:}{}
+\SetKwFor{For}{für}{tue:}{ende}
+\SetKwInput{KwIn}{Eingabe}
+\SetKw{KwTo}{bis einschließlich}
+\SetKw{KwStep}{in Schritten von}
+\SetKw{KwIs}{ist}
+\SetKw{KwAnd}{und}
+\SetKw{KwNot}{nicht}
+\begin{frame}[c]{Lösung}
 \setcounter{algocf}{0}
-\begin{center}
-\begin{minipage}{0.825\linewidth}
-\begin{algorithm}[H]
+\pause\begin{algorithm}[H]
 \PreCode
-    \KwIn{Eingabe als Liste von $n$ Zahlen: $a_1, \ldots, a_n$}
+    \KwIn{Eingabe als Zeichenkette $S$ mit Zeichen $S=s_1, \ldots, s_n$}\medskip
 \StartCode
-    \pause\For{i = 1 \KwTo n}{
-        $gefunden \gets$ falsch\;
-        \pause\For(\Comment*[h]{Wird für j > n nicht betreten.}){j = i+1 \KwTo n}{
-            \pause{\If{$a_j > a_i$}{
-                \pause $gefunden \gets$ wahr\;
-                \pause \KwBreak\;
-            }}
-        }
-        \pause \leIf{gefunden}{
-            \pause Gebe aus: \say{ja}
-        }{
-            \pause Gebe aus: \say{nein}
-        }
-    }\pause
-    \caption{Naiver Ansatz}
+    \onslide<3->{enthältA $\gets$ falsch\;}
+    \onslide<4->{enthältB $\gets$ falsch\medskip\;}
+    \onslide<5->{\For{i $\gets$ 1 \KwTo n \KwStep 1}{
+        \onslide<6->{\lIf{\(s_i\) ist Buchstabe \T{a}}{enthältA $\gets$ wahr}}
+        \onslide<7->{\lIf{\(s_i\) ist Buchstabe \T{b}}{enthältB $\gets$ wahr}}
+    }}\medskip
+    \onslide<8->{\lIf{enthältA aber nicht enthältB ist wahr}{Gebe aus: \say{Ja}}}
+    \onslide<9->{\lElse{Gebe aus: \say{Nein}}}\medskip
+    \caption{Ein \say{Zeichenkettenfilter}.}
 \end{algorithm}
-\end{minipage}
-\hspace*{-1.8cm}\begin{minipage}{0.2\linewidth}
-    \pause\small\color{gray}Nach kleinem Gauß ergibt sich die Laufzeit: \[c \cdot \frac{n(n+1)}{2} \in \mathcal{O}(n^2).\]
-    \vfill\hbox{}
-\end{minipage}
-\end{center}
+\end{frame}
+}
+
+\MakeThePinguExplainIt[text width=6.65cm,yshift=-2cm]{cap=!hide,hat,hat coronal=paletteA,hat ribbon=paletteA,glasses=!hide,eyes wink,cup=!hide,heart=shadeA,right item angle=-45}{Noch werden wir uns solchen Annahmen zärtlich nähern. Mit der Zeit wird es aber immer mehr auch darum gehen, \textit{was} man eigentlich annehmen darf.}
+\begin{frame}[c]{Schweigsame Annahmen}
+    \onslide<2->{Für das Programm \say{Zeichenkettenfilter} gelten die Annahmen:
+    \begin{enumerate}[<+(1)->]
+        \item die Länge von \(S\) sei endlich und (in endlicher Zeit) berechenbar, hier durch \textit{length(\(S\)) = \(n\)},
+        \item mit \(S = (s_1, s_2, \ldots, s_n)\) seien alle Zeichen über \(s_i\) (\(i \in \{1, \ldots, n\} \subset \N\)) enumeriert und
+        \item alle Zeichen \(s_i\) entstammen einer endlichen Grundmenge \(\Sigma\) an Zeichen.
+    \end{enumerate}}
+\begin{tikzpicture}[overlay,remember picture]
+\onslide<6->{\node[above left,xshift=5mm,scale=.8,yshift=\btdmfootheight] at(current page.south east) {\box\pinguexplainbox};}
+\end{tikzpicture}
 \end{frame}
 
-\begin{frame}[t]{Präsenzaufgabe - Effizientere Lösung}
-    \setcounter{algocf}{1}Für eine optimierte/bessere Laufzeit ($\mathcal{O}(n)$):\pause
-\begin{center}
-\begin{minipage}{0.75\linewidth}
-\begin{algorithm}[H]
-\PreCode
-    \KwIn{Eingabe als Liste von $n$ Zahlen: $a_1, \ldots, a_n$}
-\StartCode
-    \pause Erstelle Liste an $n$ Wörtern: $w_1, \ldots, w_n$\;
-    \pause$max \gets - \infty$\;
-    \pause\For{i = n \KwTo 1}{
-        \pause\leIf{$max > a_i$}{
-            \pause$w_i \gets$ \say{ja}
-        }{
-            \pause$w_i \gets$ \say{nein}
-        }
-        \pause\lIf{$a_i > max$}{$max \gets a_i$}
-    }
-    \pause\For{i = 1 \KwTo n}{
-        \pause Gebe aus: $w_i$\;
-    }\pause
-    \caption{Bezüglich der Laufzeit besserer Ansatz}
-\end{algorithm}
-\end{minipage}
-\end{center}
-\end{frame}
 
 \iffull
+\SetNextSectionText[.35\linewidth]{Avoid syntactic elements from the target programming language\\--- Steve McConnell, \cite[p.~54]{10.5555/151071}}
 \section{Bonus: Pseudocode}
 \def\tpingu{\raisebox{-1pt}{\scalebox{0.15}{\tikz{\pingu}}}}
 \def\tagent{\pingu[sunglasses,wings wave,heart=paletteA,eyes wink]}
@@ -103,14 +89,15 @@
 \setcounter{algocf}{2}
 \begin{algorithm}[H]
     \PreCode
-    \pause\Comment{\textbf{@author} Florian, the lone pengu}
     \KwIn{Eingabe als Liste von $n$ Pingus: $\tpingu_1, \ldots \tpingu_n$}
     \StartCode
     \pause\Comment{Jeder Pinguin ist klasse!}
-    \pause\For{i = 1 \KwTo n}{
+    \pause$i \gets 1$\;
+    \While{$i \leq n$}{
         \pause\lIf{$\tpingu_i$ ist klasse!}{
             \pause\KwRet{$\tpingu_i$}
         }
+        \pause$i \gets i + 1$\;
     }
     \pause\KwRet{\raisebox{-1pt}{\scalebox{0.15}{\tikz{\tagent}}}}\Comment*[l]{Wenn kein klasse Pingu gefunden.}
     \caption{Einen \say{klasse} Pinguin finden}
@@ -144,77 +131,65 @@
 \end{frame}
 
 \begin{frame}[fragile,c]{Pseudocode, Beispiele\hfill I}
-    \pause
-\begin{plainvoid}
-In: !*$\tpingu_1, \ldots, \tpingu_n$*!
-Out: awesome-pengu, if none: mega-pengu
-iterate for every !*$\tpingu_i$*! in !*$\tpingu_1, \ldots, \tpingu_n$*!:
-    if !*$\tpingu_i$*! is awesome:  return !*$\tpingu_i$*! // Pengu found
-return !*\raisebox{-1pt}{\scalebox{0.15}{\tikz{\tagent}}}*! // Not found
+\begin{plainvoid}[morecomment={[l]//}]
+!*\onslide<2->*!In: !*$\tpingu_1, \ldots, \tpingu_n$*!
+!*\onslide<3->*!Out: awesome-pengu, if none: mega-pengu
+!*\onslide<4->*!iterate for every !*$\tpingu_i$*! in !*$\tpingu_1, \ldots, \tpingu_n$*!:
+!*\onslide<5->*!    if !*$\tpingu_i$*! is awesome: !*\onslide<6->*! return !*$\tpingu_i$*! // Pengu found
+!*\onslide<7->*!return !*\raisebox{-1pt}{\scalebox{0.15}{\tikz{\tagent}}}*! // Not found
 \end{plainvoid}
 \end{frame}
 
 \begin{frame}[fragile,c]{Pseudocode, Beispiele\hfill II}
-    \pause
-\begin{plainvoid}
-Sei A die Liste an n Pingus, indexiert mit !*$\tpingu_i$*!.
-Mache nun für jeden Pingu !*$\tpingu_i$*! aus A: [Durchsuche Pingus]
-    Wenn !*$\tpingu_i$*! klasse ist:
-            Gebe !*$\tpingu_i$*! zurück. [Pingu gefunden]
-Wenn kein Pingu super war:
-    Gebe Mega-Pingu (!*\raisebox{-1pt}{\scalebox{0.15}{\tikz{\tagent}}}*!) zurück.
+\begin{plainvoid}[morecomment={[s]\[\]}]
+!*\onslide<2->*!Sei A die Liste an n Pingus, indexiert mit !*$\tpingu_i$*!.
+!*\onslide<3->*!Mache nun für jeden Pingu !*$\tpingu_i$*! aus A: [Durchsuche Pingus]
+!*\onslide<4->*!    Wenn !*$\tpingu_i$*! klasse ist:
+!*\onslide<5->*!            Gebe !*$\tpingu_i$*! zurück. [Pingu gefunden]
+!*\onslide<6->*!Wenn kein Pingu super war:
+!*\onslide<7->*!    Gebe Mega-Pingu (!*\raisebox{-1pt}{\scalebox{0.15}{\tikz{\tagent}}}*!) zurück. [Standardwert: Nichts gefunden]
 \end{plainvoid}
 \end{frame}
 \fi
 
+\SetNextSectionText{Organisatorisches und Einführung\\Abgabe: \DTMDate{2022-04-25}\medskip\\Einzelabgabe, kein reguläres Übungsblatt.}
 \section{Übungsblatt 0}
 \subsection{Aufgabe 1}
-\begin{frame}[t]{Übungsblatt 0 - Aufgabe 1}
+\begin{frame}[t]{Aufgabe 1: Java Compiler und Laufzeitumgebung}
+    \task<2->{Installieren Sie die für Ihr Betriebssystem aktuelle Version des \link{https://www.oracle.com/java/technologies/downloads/}{Java Development Kits}. Diese werden Sie auch noch im Lauf der Veranstaltung für die Bearbeitung der Programmieranteile der  Übungsblätter benötigen. Bestimmen und notieren Sie anschließend die Versionsnummern.}\vfill
+
     % i do not want number highlight for this
     \soldisablenumhl\def\smallerXLST{\lstfs[1.2]{8}}% bracket parser
-    \begin{itemize}[<+(1)->]
-        \item In der Konsole: \rbash[:\smallerXLST\pause]{java -version}
-        \item Sowie: \rbash[:\smallerXLST\pause]{javac -version}
+    \begin{itemize}
+        \item<3-> In der Konsole: \rbash[:\smallerXLST\pause]{java -version}
+        \item<5-> Sowie: \rbash[:\smallerXLST\pause]{javac -version}
     \end{itemize}
 \end{frame}
 
 \subsection{Aufgabe 2}
-\rExecute{javac Hello.java}
-\begin{frame}[t]{Übungsblatt 0 - Aufgabe 2}
-    \only<-5>{\begin{itemize}[<+(1)->]
-        \item Tipp, tipp, tipp, \ldots \ijava{Hello.java}
-        \item Sowie: \cbash{javac Hello.java}%
-        \item Und dann: \iffull\Rbash[:\pause]{java Hello}{java Hello}\else\cbash{java Hello}.\fi
-    \end{itemize}}
-\end{frame}
-
-\section{Kernthemen}
-{\SummaryFrame
-\begin{frame}[fragile]{Super-Wichtige Zusammenfassung}
+\rExecute{javac HelloWorld.java}
+\begin{frame}[t]{Aufgabe 2: Erste Schritte in Java}
+    \task<2->{Speichern Sie den Code in einer Textdatei namens \T{HelloWorld.java} ab.}\vfill
     \begin{itemize}[<+(1)->]
-        \itemsep12pt
-        \item Dinos brauchen mehr Platz.
-        \item Mehr Rechte für Pinguine!
-        \item Gänse sind auch Tiere!
-\begin{java}
-public static float foo(int elem) {
-    return 15 + 0.356;
-}
-\end{java}
-        \item Hat jemand noch eine Ente gesehen?
+        \item<3-> Tipp, tipp, tipp, \ldots \ijava{HelloWorld.java}
+    \end{itemize}
+    \task<4->{Übersetzen Sie das Programm mittels \bbash{javac} und führen Sie den erzeugten Java-Bytecode mit \bbash{java} aus.}\vfill
+    \begin{itemize}[<+(1)->]
+        \item<5-> Wir tun wie geheißen: \cbash{javac HelloWorld.java}%
+        \item<6-> Und dann auch für die Ausgabe: \iffull\Rbash[:\pause]{java HelloWorld}{java HelloWorld}\else\cbash{java HelloWorld}.\fi
     \end{itemize}
 \end{frame}
-}
 
 \iffull
+\SetNextSectionText{Zahlensysteme und Algorithmenkonstruktion\\Abgabe: \DTMDate{2022-05-02}}
 \section{Aussicht: Übungsblatt 1}
 \subsection{Hornerschema}
 \def\h#1{\textcolor{cprimary}{#1}}
 \let\tm\tikzmarknode
-\begin{frame}{Aussicht: Hornerschema, \(b\) zu Dezimal}
+\begin{frame}{Hornerschema, \(b\) zu Dezimal}
     \begin{itemize}[]
-        \item \pause Am Beispiel von $\h{\tm11\tm21\tm30\tm41}_{(\tm02)}$.
-        \pause\[((\h{\tm a1}\cdot \tm x2 + \h{\tm b1})\cdot\tm y2 + \h{\tm c0}) \cdot\tm z2 + \h{\tm d1} \pause = (3\cdot2 + \h{0}) \cdot 2 + \h{1} \pause = (6 \cdot 2) + \h{1} = 13_{(10)}.\]
+        \item \pause Am Beispiel von $\h{\tm11\tm20\tm30\tm41}_{(\tm02)}$.
+        \pause\[((\h{\tm a1}\cdot \tm x2 + \h{\tm b0})\cdot\tm y2 + \h{\tm c0}) \cdot\tm z2 + \h{\tm d1} \pause = (2\cdot2 + \h{0}) \cdot 2 + \h{1} \pause = (6 \cdot 2) + \h{1} = 9_{(10)}.\]
         \begin{tikzpicture}[remember picture,overlay]
             \only<+(1)|handout:0>{\draw[-Kite,gray] (1.south) -- (a);}
             \only<+(1)|handout:0>{\draw[-Kite,gray] (2.south) -- (b);}
@@ -224,46 +199,46 @@ public static float foo(int elem) {
             \only<+(1)|handout:0>{\draw[-Kite,gray] (0.south) -- (y);}
             \only<+(1)|handout:0>{\draw[-Kite,gray] (0.south) -- (z);}
         \end{tikzpicture}
-        \item \pause Tabellarisch: \TikzHorner[13]{1,1,0,1}{2}
+        \item \pause Tabellarisch: \TikzHorner[13]{1,0,0,1}{2}
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Aussicht: Hornerschema, \(b\) zu Dezimal (II)}
+\begin{frame}{Hornerschema, \(b\) zu Dezimal (II)}
     \begin{itemize}[]
-        \item \pause Andere Basis: $\h{\tm11\tm21\tm30\tm41}_{(\tm05)}$.
-        \pause\[((\h{\tm a1}\cdot \tm x5 + \h{\tm b1})\cdot\tm y5 + \h{\tm c0}) \cdot\tm z5 + \h{\tm d1} \pause = (6\cdot5 + \h{0}) \cdot 5 + \h{1} \pause = (30 \cdot 5) + \h{1} = 151_{(10)}.\]
+        \item \pause Andere Basis: $\h{\tm11\tm20\tm30\tm41}_{(\tm05)}$.
+        \pause\[((\h{\tm a1}\cdot \tm x5 + \h{\tm b0})\cdot\tm y5 + \h{\tm c0}) \cdot\tm z5 + \h{\tm d1} \pause = (5\cdot5 + \h{0}) \cdot 5 + \h{1} \pause = (25 \cdot 5) + \h{1} = 126_{(10)}.\]
         \begin{tikzpicture}[remember picture,overlay]
             \only<+(1)|handout:0>{\draw[-Kite,gray] (0.south) -- (x);}
             \only<+(1)|handout:0>{\draw[-Kite,gray] (0.south) -- (y);}
             \only<+(1)|handout:0>{\draw[-Kite,gray] (0.south) -- (z);}
         \end{tikzpicture}
-        \item \pause Tabellarisch: \TikzHorner[9]{1,1,0,1}{5}
+        \item \pause Tabellarisch: \TikzHorner[9]{1,0,0,1}{5}
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Aussicht: Hornerschema, Dezimal zu \(b\)}
+\begin{frame}{Hornerschema, Dezimal zu \(b\)}
     \begin{itemize}[]
-        \item \pause \(151_{10}\) zurück zur Basis \(5\).
-        \item \pause Tabellarisch: \TikzHornerReverse[4]{1,1,0,1}{5}
+        \item \pause \(126_{(10)}\) zurück zur Basis \(5\).
+        \item \pause Tabellarisch: \TikzHornerReverse[4]{1,0,0,1}{5}
     \end{itemize}
 \end{frame}
 
 \subsection{Algorithmen}
-\begin{frame}{Aussicht: Algorithmus, was ist das?}
+\begin{frame}{Ein \say{Algorithmus}, was ist das?}
     \begin{itemize}[<+(1)->]
-        \itemsep11pt
+        \itemsep13pt
         \item \emph{Eindeutige} Handlungsvorschrift zur Lösung eines Problems.
         \item Endlich viele, \emph{wohldefinierte} \info{also nicht mehrdeutige} Einzelschritte.
         \item Mit der Zeit werden wir mehr Eigenschaften zur Charakterisierung betrachten.% TODO: => Tutorium 1 (Determinismus, Korrektheit,\ldots)
     \end{itemize}
 \end{frame}
-\begin{frame}{Aussicht: Algorithmus, wie definiere ich das?}
+\begin{frame}{Algorithmus, wie definiere ich das?}
     \pause\begin{center}
     \begin{tikzpicture}
         \IfBtdmDarkmode{% TODO
             \node[block,paletteA,draw,thick] (A) at(0,0) {Algorithmus};
         }{
-            \node[block,fill=shadeA,draw=paletteA] (A) at(0,0) {Algorithmus};
+            \node[block,text=paletteA,thick,draw=gray] (A) at(0,0) {\sbseries\itshape Algorithmus};
         }
         \node (V) at(-5,0) {Vorbedingung};
         \node (N) at(5,0) {Nachbedingung};
@@ -271,6 +246,7 @@ public static float foo(int elem) {
     \end{tikzpicture}
     \end{center}
     \begin{itemize}[<+(1)->]
+        \itemsep10.5pt
         \item Suche die größte ganze Zahl in einem beliebigen (ganzzahligen, nicht-leeren) Array.
         \item Information: Die Regeln zum Pseudocode gelten hier nach wie vor!
         \item Problemspezifikation:
@@ -283,13 +259,13 @@ public static float foo(int elem) {
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Aussicht: Algorithmus, wie definiere ich das?}
+\begin{frame}{Algorithmus --- Die Spezifikation}
     \begin{center}
     \begin{tikzpicture}
         \IfBtdmDarkmode{% TODO
             \node[block,paletteA,draw,thick] (A) at(0,0) {Algorithmus};
         }{
-            \node[block,fill=shadeA,draw=paletteA] (A) at(0,0) {Algorithmus};
+            \node[block,text=paletteA,thick,draw=gray] (A) at(0,0) {\sbseries\itshape Algorithmus};
         }
         \node (V) at(-5,0) {Vorbedingung};
         \node (N) at(5,0) {Nachbedingung};
@@ -297,6 +273,7 @@ public static float foo(int elem) {
     \end{tikzpicture}
     \end{center}
     \begin{itemize}[<+(1)->]
+        \itemsep10.5pt
         \item \textcolor{gray}{Suche die größte ganze Zahl in einem beliebigen (ganzzahligen, nicht-leeren) Array.}
         \item Problemabstraktion:
         \begin{description}[Gegeben:]
@@ -309,7 +286,7 @@ public static float foo(int elem) {
 
 % TODO: anmerken, dass die Aufgabe dann mit Mengenoperationen noch schwerer ist,
 % das hier ist wirklich nur für das formale.
-\begin{frame}[t]{Aussicht: Algorithmus, wie definiere ich das?}
+\begin{frame}[t]{Algorithmus, wie definiere ich das?}
     \begin{itemize}[<+(1)->]
         \item Algorithmenentwurf: \info{Annahme eines 0-indizierten Arrays mit Zugriff \T{a[$i$]} für das \(i\)-te Element \(t_i\).}\\
         \begin{enumerate}\itemsep0pt
@@ -339,7 +316,7 @@ public static float foo(int elem) {
     \item \color{gray}Lösung ist \(max\).
 \end{enumerate}}}
 
-\begin{frame}{Aussicht: Algorithmus, wie definiere ich das?}
+\begin{frame}{Algorithmus, wie definiere ich das?}
 \begin{itemize}[]
     \item Algorithmenentwurf: \info{Annahme eines 0-indizierten Arrays mit Zugriff \T{a[$i$]} für das \(i\)-te Element \(t_i\).}\\
     \usebox\algobox
@@ -352,6 +329,19 @@ public static float foo(int elem) {
 \end{itemize}
 \end{frame}
 \fi
+
+\section{Abschließendes}
+{\SummaryFrame
+\begin{frame}[t]{Zusammenfassend}
+\pause \printBibCommand
+\vfill\vfill % double fill for more fraction
+\begin{itemize}[<+(1)->]
+    \itemsep16pt
+    \item TODO
+    \item Anmerkung: warum sind die Schritte von Bedeutung?
+\end{itemize}
+\end{frame}
+}
 
 \outro{\centering\begin{tikzpicture}[scale=2.5]
     \only<2->{\pingu[right wing grab,cup=purple!90!green,name=saphira, left eye wink]}
