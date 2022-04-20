@@ -1,0 +1,118 @@
+\documentclass[aspectratio=169,ngerman,handout,t]{beamer}
+\def\thpath{.}
+\usepackage{color-palettes}
+\DefinePalette{Compact}
+{Türkis,türkisfarben: RGB(21, 128, 112)}
+{Türkis,türkisfarben: RGB(21, 128, 112)}
+{Hellblau,hellbläulich: RGB(21, 110, 130)}
+% {Blau,bläulich: RGB(21, 92, 148)}
+{Grün,grünlich: RGB(21, 150, 90)}
+\UsePalette{Compact}
+\def\btdmopts{color=paletteA}%, footfade
+\def\btdmmode{lightmode-fill}
+\input{global.src}
+\UsePalette{Compact}
+% re-inforce the palette in case compact changes
+\usepackage{fmtcount}
+
+\colorlet{MaterialHeaderColor}{paletteB!75!btdm@background}%
+\colorlet{NextMaterialHeaderColor}{paletteB!65!btdm@background}%
+\attachfilesetup{color=paletteB}
+\fullfalse
+\def\maxtut{0}
+\titlenumber{0--\maxtut}
+\title[Alle Tutorien 0--\maxtut]{Kompaktversion Tutorien\\\small Von pinguinreduzierten Tutorien 0--\maxtut}
+\date{\sffamily\today}
+
+
+\let\oldinputif\InputIfFileExists
+
+\makeatletter
+\usepackage{pgfcalendar}
+\edef\semesterstartyear{2022}
+\def\startkwofsemester{16} % used to detect year breaks
+\newcount\@kwconverter
+\newcount\@firstweekday
+\DTMsetdatestyle{german}
+\def\getstartdayofweek#1#2{% #1 is kw, #2 is day offset
+      % do we have a wraparoundi?
+      \ifnum#1<\startkwofsemester \edef\@year{\the\numexpr\semesterstartyear+1}%
+      \else\let\@year\semesterstartyear\fi
+      \pgfcalendardatetojulian{\@year-1-1}{\@kwconverter}\pgfcalendarjuliantoweekday\@kwconverter\@firstweekday
+            % we remove the first weekday as an offset
+            \edef\@day{\the\numexpr#1*7-\number\@firstweekday+#2\relax}%
+      \pgfcalendardatetojulian{\@year-1-1+\@day}{\@kwconverter}%
+      \pgfcalendarjuliantodate{\@kwconverter}\@year\@month\@day
+      \DTMdisplaydate\@year\@month\@day\m@ne\relax
+}
+
+\def\getKwRange#1{\getstartdayofweek{#1}0\,---\,\getstartdayofweek{#1}6}
+
+% sub | title | path | file | num | KW
+\newcommand\Load[5][]{%
+\ifx!\detokenize{#1}!\def\@short{#2}\else\def\@short{#1}\def\beamer@shorttitle{#1}\fi
+\SetNextSectionText{\getKwRange{#5}\\KW~#5}% 3 instead of two as this seems to pop more
+\expandafter\section\expandafter[\@short]{#2}%
+\bgroup\let\section\subsection
+\let\subsection\subsubsection
+% sub sub stays subsub?
+% \let\subsubsection\paragraph
+\gpreto\input@path{{#3/}}%
+\def\curpath{#3/}% for rBash and rExecute
+% we block global.src form being loaded
+% we keep the first for input
+\def\InputIfFileExists##1##2##3{\relax \global\let\InputIfFileExists\oldinputif}%
+% forbid additional loading:
+\renewcommand*\usepackage[2][]{\typeout{gobble: ##1|##2}}
+\renewcommand*\RequirePackage[2][]{\typeout{gobble: ##1|##2}}
+\def\printBibCommand{\let\vfill\relax}%
+\let\titleframe\relax % no extra titlepage
+% get the date:
+\typeout{Loading: #3/source_folien_#4.tex}
+\begin{refsection}[#3/references.bib]% allow for sub bibliographies
+\@input{#3/source_folien_#4.tex}
+\end{refsection}
+\egroup
+}
+
+% update prepath
+\setbeamercolor{section in toc}{fg=darkgray}
+
+% we do not want footers
+\BtdmNoSubsInFooter
+\btdmsetfootlinethreshold{10}
+
+\begin{document}
+% \Titlepage{0--\maxtut}
+\titleframe
+\setcounter{tocdepth}{1}
+{\def\ImpT#1{\textit{\color{btdm@primary}#1}}
+\makeatletter\setfootmarker{\btdm@footbottomleft@title}% this way we get the titlemarker again
+\begin{frame}[c]{}
+\strut\vspace*{3em}\vfill\centering
+% TODO: custom foot left bottom
+      \bfseries\color{btdm@primary!70!white}
+         Diese \ImpT{Kompaktversion} ist dazu gedacht die wichtigsten Kommentare und Lösungen zu sammeln.
+         Sie ist allerdings \ImpT{ohne jede Garantie auf Vollständigkeit} aufzufassen. Zusätzliche Inhalte finden sich in den Folien zu den einzelnen Tutorien.\bigskip\par
+         Liebe Grüße, Flo
+\vfill\strut
+\end{frame}
+}
+\setcounter{tocdepth}{5}
+\def\sheet{\texorpdfstring{\\}{ --- }}
+\Load[Org]{Organisatorisches Tutorium}{Org-Tutorium}{org}{17}
+% \Load[0]{Blatt 0\sheet Hello World}{0-Tutorium}{0}{17}
+% \Load[Tutorium 1]{Blatt 1\sheet Zahlen \& Algorithmen}{1-Tutorium}{1}{44}
+% \Load[Tutorium 2]{Blatt 2\sheet Raten, Typen \& Booleans}{2-Tutorium}{2}{45}
+% \Load[Tutorium 3]{Blatt 3\sheet Programmfluss \& Schleifen}{3-Tutorium}{3}{46}
+% \Load[Tutorium 4]{Blatt 4\sheet Schleifen, Vokale \& Prim}{4-Tutorium}{4}{47}
+% \Load[Tutorium 5]{Blatt 5\sheet Arrays, Matrizen \& Vektoren}{5-Tutorium}{5}{48}
+% \Load[Tutorium 6]{Blatt 6\sheet Methoden \& Tic-Tac-Toe}{6-Tutorium}{6}{49}
+% \Load[Tutorium 7]{Blatt 7\sheet Überladen \& Überschatten}{7-Tutorium}{7}{50}
+% \Load[Tutorium 8]{Blatt 8\sheet Klassen \& Taxis}{8-Tutorium}{8}{2}
+% \Load[Tutorium 9]{Blatt 9\sheet Rekursion}{9-Tutorium}{9}{3}
+% \Load[Tutorium 10]{Blatt 10\sheet Sortierverfahren}{10-Tutorium}{10}{4}
+% \Load[Tutorium 11]{Blatt 11\sheet Stacks und Buffer}{11-Tutorium}{11}{5}
+% \Load[Tutorium 12]{Blatt 12\sheet Bäume und Minimax}{12-Tutorium}{12}{6}
+% \Load[Tutorium 13]{Blatt 13\sheet Vererbung}{13-Tutorium}{13}{7}
+\end{document}

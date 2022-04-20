@@ -1,0 +1,265 @@
+\InputIfFileExists{../global.src}\relax\relax
+\iffull
+\title[Allgemeine Informationen]{Ja sind sie denn schon wieder da?}
+\subtitle{Organisatorisches Tutorium}
+\date{KW 17}
+\addbibresource{references.bib}
+\fi
+% \SetTutoriumNumber{Org}
+\setfootmarker{EidI~\faAngleRight\ Org. Tutorium}
+\titlenumber{Org}
+\setauthormailsubject{Organisatorisches\%20Tutorium}
+
+% \documentclass{article}
+% \usepackage{fetamont}
+% \begin{document}
+% \ffmwfamily\fontseries{eb}\selectfont Gauß
+% \end{document}
+
+\newsavebox\pinguA \newsavebox\pinguB
+\iffull
+
+\begin{document}
+\begin{frame}[plain,c]
+\begin{tikzpicture}[remember picture, overlay]
+    \node at(0,0) {TODO: Übersicht};
+\end{tikzpicture}
+\end{frame}
+
+\titleframe
+\fi
+
+\SetNextSectionText{Schön ist das, was ohne Begriff allgemein gefällt.\\--- Immanuel Kant~\cite[p.~61]{kant1924kritik}}
+\section{Allgemeines}
+
+
+\savebox\pinguA{\tikz\pingu[wings shock,eyes shock,heart=gray!25!white];}
+\savebox\pinguB{\tikz\pingu[wings wave,eyes wink,mask,heart=gray!25!white,halo];}
+\subsection{Hygiene}
+\begin{frame}[c]{Hygienekonzept}
+\begin{itemize}[<+(1)->]
+    \itemsep=\fill
+    \item Bisher keine besonderen Regelungen.
+    \item Dennoch gilt die Empfehlung:
+\end{itemize}
+\vfill
+\begin{center}
+    \scalebox{.8}{\begin{tikzpicture}
+        \contourlength{2pt}
+        \onslide<4->{\node[fill=btdm@border@down,minimum size=4cm,rounded corners=5pt] (wrongy) at (0,0) {\copy\pinguA};
+        \node[gray,scale=1.35] at(wrongy.south east) {\huge\contour{btdm@background}{\faTimes}};}
+        \onslide<5->{\node[fill=btdm@border@down,minimum size=4cm,rounded corners=5pt,right=1.5cm] (righty) at (wrongy.east) {\raisebox{1.4pt}{\copy\pinguB}};
+        \node[gray,xshift=-1mm,yshift=1mm,scale=1.35,btdm@primary] at(righty.south east) {\huge\contour{btdm@background}{\faCheck}};}
+    \end{tikzpicture}}
+\end{center}
+\vspace*{-.75\baselineskip}
+\end{frame}
+
+\begin{frame}[t]{Folien und Tutorien}
+    \begin{itemize}[<+(1)->]
+        \itemsep=18pt
+        \item Folien von Florian Sihler (\link{mailto:florian.sihler@uni-ulm.de}{florian.sihler@uni-ulm.de})
+        \item Mitschriften, Zusammenfassungen und vieles mehr im Cloudstore: \begin{itemize}[<1->]
+            \item \url{https://cloudstore.uni-ulm.de/apps/circles/}
+            \item Kreis: \say{Mitschriebe Informatik} (ganz eingeben)
+        \end{itemize}
+        \item Bei erbrachter Leistung: 3 ECTS (LP)
+    \end{itemize}
+\end{frame}
+
+
+\savebox\pinguA{\tikz\pingu[left wing hug,eyes wink];}
+\savebox\pinguB{\tikz\pingu[right wing hug,eyes shiny];}
+\subsection{Übungsblätter}
+\begin{frame}[t]{Übungsblätter\hfill I}
+\begin{itemize}[<+(1)->]
+    % \itemsep=\fill % yielded wrong results after closing of itemize
+    \item Mindestens \qty{50}\percent\ der Punkte pro Blatt\begin{itemize}
+        \item Maximal 2 der 13 regulären Blätter dürfen nicht bestanden werden
+        \item Aktuell keine Zusatzaufgaben geplant\vfill
+    \end{itemize}
+    \item Tutoriumsteilnahme verpflichtend für Punkte\vfill
+    \item Abgabe in zweier Gruppen \only<handout:0|5>{\smash{\raisebox{-2pt}{\resizebox*!{\baselineskip}{\usebox\pinguA\!\usebox\pinguB}}}}\only<6->{\smash{\raisebox{-2pt}{\resizebox*!{\baselineskip}{\usebox\pinguA\hskip8em\usebox\pinguB}}}}\vfill
+    \item<7-> Erlaubte Formate: {\begin{itemize}
+        \item<8-> Bei einer Datei: PDF, Plaintext (\T{.txt}), Java-Quellcode
+        \item<9-> Bei mehreren: Archiv (\textsc{zip},~\ldots) verwenden% TODO: NOTE: wird vermutlich noch Freigeschaltet
+    \end{itemize}}\vfill
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]{Übungsblätter\hfill II}
+    \begin{itemize}[<+(1)->]
+        \itemsep12pt
+        \item Programme \emph{müssen} lauffähig sein (inklusive \bjava{main})\pause
+        \infoblock{Oder entsprechend kommentiert, wo es (wieso) Probleme gibt.}
+        \item \emph{Jeder} muss die Abgabe vorstellen können.\pause\infoblock{Unabhängig davon, wer die Aufgabe im Team gemacht hat.}
+        \item Im Falle einer Krankheit:\pause\\\emph{Nachricht an den Tutor/die Tutorin mit zugehöriger Entschuldigung!}
+    \end{itemize}
+    \vfill
+    \begin{center}
+        \onslide<8->{\bfseries Lest die \link{https://www.uni-ulm.de/einrichtungen/zuv/dez1/recht-und-organisation/satzungen-und-ordnungen/studium-promotion-habilitation/studien-und-pruefungsordungen-bachelor-master-staatsexamen/}{\textbf{FSPO}}!\\}
+        \onslide<9->{\bfseries Verwendet die Uni-Mail!}
+    \end{center}
+\end{frame}
+
+\iffull
+\begin{frame}[t]{Präsenzaufgaben}
+    \begin{itemize}[<+(1)->]
+        \itemsep10pt
+        \item Stift und Papier
+        \item Jede Woche, unbepunktet
+        \item Darf aber gern abgegeben werden!
+    \end{itemize}
+\end{frame}
+\fi
+
+\begin{frame}{Klausur}
+    \begin{itemize}
+        \itemsep16pt
+        \item Alle Informationen werden rechtzeitig bekanntgegeben
+        \item Früh genug anmelden!
+        \item Termine: \begin{itemize}
+            \item Erstklausur am 10. August 2022
+            \item Zweitklausur am 7. Oktober 2022
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\iffull
+% guard against problems with wget clearing the file even if there is no connection
+\immediate\write18{ping -c1 8.8.8.8 && wget https://media.githubusercontent.com/media/EagleoutIce/Episode-Heaps/gh-pages/preview-01.png -O logoHeaps-\jobname.png}
+\immediate\write18{ping -c1 8.8.8.8 && wget https://media.githubusercontent.com/media/EagleoutIce/Episode-Recursion/gh-pages/preview-01.png -O logoRecursion-\jobname.png}
+\immediate\write18{ping -c1 8.8.8.8 && wget https://media.githubusercontent.com/media/EagleoutIce/Episode-Traversierung/gh-pages/preview-01.png -O logoTraversal-\jobname.png}
+% and more :D
+
+{%
+\IfBtdmDarkmode{
+\UpdateBtdmColor*{btdm@primary}{\colorlet{btdm@block}{btdm@block!20!btdm@border@up}}
+}{
+\UpdateBtdmColor{btdm@primary!68!white}
+}
+\subsection{Zusätzliches}
+\begin{frame}[t]{Zusätzliches}
+    \begin{itemize}[<+(1)->]
+        \itemsep9pt
+        \item Es \textsl{empfiehlt} sich die Abgaben in \LaTeX\ ($2_{\textstyle\varepsilon}$) zu machen
+        \item Dafür wurden erklärende Bonusblöcke erstellt. Darunter:\pause{}
+        \vspace*{-.75\baselineskip}\begin{multicols}{3}
+            \begin{enumerate}[<1->]
+                \item \LaTeX{} (2-3 Tutorien)
+                \item Richtig Kommentieren
+                \item Linux (\& Kommandozeile)
+                \item Git --- Versionsverwaltung
+                \item (Unit-)Testen
+                \item \ldots\par
+            \end{enumerate}
+        \end{multicols}\vspace*{-.75\baselineskip}
+        \item Mit dem letzten Semester gibt es auch tolle Episoden. Darunter:\\\smallskip
+% hella hail the copy and paste
+\resizebox{.85\linewidth}!{\begin{tikzpicture}[align-base]
+    \onslide<2->{\draw[thick,darkgray,rounded corners=2.5pt,path picture={\node at(path picture bounding box.center) {\href{https://media.githubusercontent.com/media/EagleoutIce/Episode-Traversierung/gh-pages/noanim_traversal.pdf}{\includegraphics[width=8.5cm,height=4.788cm,keepaspectratio]{logoTraversal-\jobname.png}}};}] (0,0) rectangle (8.5cm,4.788cm);}
+\end{tikzpicture}\quad\begin{tikzpicture}[align-base]
+    \onslide<2->{\draw[thick,darkgray,rounded corners=2.5pt,path picture={\node at(path picture bounding box.center) {\href{https://media.githubusercontent.com/media/EagleoutIce/Episode-Recursion/gh-pages/noanim_rekursion.pdf}{\includegraphics[width=8.5cm,height=4.788cm,keepaspectratio]{logoRecursion-\jobname.png}}};}] (0,0) rectangle (8.5cm,4.788cm);}
+\end{tikzpicture}\quad\begin{tikzpicture}[align-base]
+    \onslide<2->{\draw[thick,darkgray,rounded corners=2.5pt,path picture={\node at(path picture bounding box.center) {\href{https://media.githubusercontent.com/media/EagleoutIce/Episode-Heaps/gh-pages/noanim_heap.pdf}{\includegraphics[width=8.5cm,height=4.788cm,keepaspectratio]{logoHeaps-\jobname.png}}};}] (0,0) rectangle (8.5cm,4.788cm);}
+\end{tikzpicture}\qquad\textbullet~\textbullet~\textbullet}
+        \item Die (Lösungs-)Folien werden wochenweise veröffentlicht.
+    \end{itemize}
+\end{frame}
+}
+\fi
+
+\SetNextSectionText[.7\linewidth]{As long as there were no machines, programming was no problem at all; when we had a few weak computers, programming became a mild problem, and now we have gigantic computers, programming had become an equally gigantic problem. In this sense the electronic industry has not solved a single problem, it has only created them.\\--- Edsger W. Dijkstra~\cite[p.~861]{dijkstra1972humble}}
+\section{Java \& Editoren}
+\def\os#1{\;\textsuperscript{\tiny\color{btdm@text}\def\x##1{\textcolor{gray!80!lightgray}{##1}}#1}}
+\subsection{Was es für Editoren gibt}
+\begin{frame}[t]{How to Editor}
+    \begin{itemize}[<+(1)->]
+        \itemsep16pt
+        \item Text-Editor mit Syntaxfreude
+        \item Keine IDE!
+        \item Klassisch: \begin{itemize}
+            \item \link{https://notepad-plus-plus.org/}{Nodepad++}\os{\faWindows, \x{\faApple}, \x{\faLinux}}
+            \item \link{https://code.visualstudio.com/Download}{VS-Code}\os{\faLinux, \faApple, \faWindows} (ohne Extensions)
+            \item \link{https://atom.io/}{\textsc{atom}}\os{\faLinux, \faApple, \faWindows}
+        \end{itemize}
+        \item Advanced: \begin{itemize}
+            \item \link{https://www.nano-editor.org/}{nano}\os{\faLinux, \faApple, \x{\faWindows}}
+            \item \link{https://www.vim.org/}{vim}\os{\faLinux, \faApple, \x{\faWindows}}
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\subsection{Wie Java geht}
+\begin{frame}[t]{How to Java}
+    \begin{itemize}[<+(1)->]
+        \itemsep5.5pt
+        \item Linux: \begin{itemize}
+            \item Wenn \T{apt}-basiert: \bbash{sudo apt install default-jdk} (\T{openjdk-14-jdk},~\ldots)
+            \item Auch sonst über den jeweiligen Paketmanager
+            \item Oder per \link{https://www.oracle.com/java/technologies/javase-downloads.html}{download}.
+        \end{itemize}
+        \item Windows: \begin{itemize}
+            \item Download \& Installation der \link{https://www.oracle.com/java/technologies/javase-downloads.html}{gewünschten Version}.
+            \item \T{PATH}-Variable anpassen! Dafür gibt es etliche \link{https://explainjava.com/set-java-path-and-java-home-windows/}{Anleitungen}:
+                \begin{enumerate}
+                    \item \say{Systemumgebungsvariablen bearbeiten} beziehungsweise \say{Edit the system environment variables}
+                    \item \say{bin}-Ordner der JDK zum \T{PATH} hinzufügen. \info{Zum Beispiel: \say{C:\textbackslash Program Files\textbackslash Java\textbackslash jdk-15\textbackslash bin}}
+                \end{enumerate}
+        \end{itemize}
+        \item MacOS: \begin{itemize}
+            \item Download \& Installation der \link{https://www.oracle.com/java/technologies/javase-downloads.html}{gewünschten Version}.
+            \item Sonst unterstützt auch \link{https://brew.sh/}{Homebrew} ein paar Versionen.
+        \end{itemize}
+        \item Es existieren \link{https://jdk.java.net/16/}{open source} Implementationen.
+    \end{itemize}
+\end{frame}
+
+\SetNextSectionText{Gefühl von Grenze darf nicht heißen: hier bist du zu Ende, sondern: hier hast du noch zu wachsen.\\--- Emil Gött~\cite{gott1984zettelspruche}}
+\section{Abschließendes}
+{\SummaryFrame
+\begin{frame}[t]{Zusammenfassend}
+\pause \printBibCommand
+\vfill\vfill % double fill for more fraction
+\begin{itemize}[<+(1)->]
+    \itemsep16pt
+    \item Wöchentliche Übungsblätter in Zweiergruppen \begin{itemize}
+        \item {\qty{50}\percent} der Punkte und Anwesenheit im Tutorium um Blatt zu Bestehen.
+        \item Mindestens 11 der 13 Blätter müssen bestanden werden (exklusive Blatt 0).
+        \item Beide müssen die Abgabe vorstellen können.
+        \item Programme müssen lauffähig sein.
+    \end{itemize}
+    \item Bei Fragen darf sich jederzeit \emph{gerne} gemeldet werden
+\end{itemize}
+\end{frame}
+}
+
+\outro{\begin{tikzpicture}% remember picture does not work :C
+\IfBtdmDarkmode{}{\pgfinterruptboundingbox
+\only<3->{\fill[btdm@primary] (0,0) circle [radius=2*\paperwidth];}
+\endpgfinterruptboundingbox}
+\end{tikzpicture}%
+\null\vfill
+% use fill and stuff to get it done
+\centering
+\only<2|handout:0>{\begin{tikzpicture}[scale=1.5]
+    \pingu[wings wave,name=saphira,eyes wink,pants=cprimary,monocle right]
+    \pgfinterruptboundingbox
+    \onslide<2->{\path[postaction={decorate},decoration={text along path, text={|\huge|Motivation!},text align={fit to path}}] (saphira-bill) ++ (90+55:45pt) arc (90+55:90-55:45pt);}
+    \endpgfinterruptboundingbox
+\end{tikzpicture}}%
+\only<3->{%
+\IfBtdmDarkmode{}{\BtdmMakeNextFullBottom}%inverts bottom
+\begin{tikzpicture}[scale=1.5]
+    \pingu[wings raise,monocle right,name=saphira,eyes wink,devil horns,left eye devil,right eye angry,bill=angry,glow thick=white,heart=pingu@purple!60!black]
+    \pgfinterruptboundingbox
+    \path[postaction={decorate},decoration={text along path, text={|\huge\bfseries\IfBtdmDarkmode{\color{btdm@primary}}{\color{white}}|Motivation!},text align={fit to path}}] (saphira-bill) ++ (90+55:45pt) arc (90+55:90-55:45pt);
+    \endpgfinterruptboundingbox
+\end{tikzpicture}%
+}%
+}
+% {\setbeamercolor{background canvas}{bg=cprimary!15!black}
+% \begin{frame}[plain,c]
+% \null\vfill
+% \end{frame}}
+\iffull\end{document}\fi

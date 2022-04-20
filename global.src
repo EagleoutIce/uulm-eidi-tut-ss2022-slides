@@ -1,0 +1,147 @@
+\errorcontextlines999999
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+
+\usepackage{attachfile2}
+
+% todo: update color to primary
+\attachfilesetup{%
+    author={Florian Sihler},%
+    color=0.2 0.3647 0.4941, icon=Tag, mimetype=text/plain%
+}
+\usepackage{xcolor}
+\usepackage[ngerman]{babel}
+\providecommand\btdmmode{lightmode-fill}
+\providecommand\btdmopts{}
+\usetheme[\btdmmode,\btdmopts]{digital-minimal}
+
+% TODO: set link color so they are easily visible
+
+\newif\iffull
+\fulltrue
+
+\def\curpath{./}
+
+\author[F.~Sihler]{Florian Sihler}
+\email{florian.sihler@uni-ulm.de}
+
+\usepackage{tikz,tikzpingus}
+\usepackage{csquotes}
+
+% TODO:
+\PassOptionsToPackage{defernumbers=true}{biblatex}% allows for split bibs
+\usepackage[%
+    sopra-listings={encoding,cpalette,print,highlights,nodefaultfont},%
+    % sopra-tables,
+    color-palettes,beamer-extra,%
+    %util,%,,%
+    lithie-boxes={germanenv,koma,overwrite},%
+    lithie-task-boxes={cpalette},lecture-bibliography={biber},% ,style=numeric-comp
+    lecture-algorithms,lecture-shortcuts,
+    % lecture-links={},%
+    lecture-registers={disable}% would interfere with beamer
+]{lithie-util}
+
+\usepackage{cancel}
+\usepackage{lecture-runtimes,lecture-personal-tikz,lecture-personal-extra-units,tikzsymbols}
+\usetikzlibrary{decorations.pathreplacing,decorations.text,arrows.meta,decorations,decorations.pathreplacing,tikzmark}
+\solLoadLanguage{latex,bash,cpp}
+\colorlet{cprimary}{btdm@primary} % TODO update that
+
+\def\SetTutoriumNumber#1{
+\setfootmarker{EidI~\faAngleRight\ Tutorium #1} %% TODO: generic tutnum
+\titlenumber{#1}
+\setauthormailsubject{Tutorium\%20#1}
+}
+
+\usepackage{fancy-underline}
+\makeatletter
+\def\fancyul@depth{.85\p@}
+\def\fancyul@contour{.2\p@}
+\def\fancyulbackground{btdm@background}% so that it adapts with the beamer
+\colorlet{url@line@color}{btdm@primary!28!btdm@background}
+\fancyulcolor{url@line@color}
+\newdimen\ul@surround \ul@surround=1.35\p@
+% we make the auto detection of the depth bigger
+\def\update@ul{\setbox\z@\hbox{{(j}}\edef\fancyul@thickness{\the\dimexpr.2\dp\z@}}
+% define a link macro that can be used with href and fancyul
+\DeclareRobustCommand*\link{\hyper@normalise\link@do}
+\def\link@do#1#2{\leavevmode\kern-\ul@surround\href{#1}{\update@ul\kern\ul@surround\relax\fancyul{#2}}}% thinspace for some nicer padding
+\DeclareRobustCommand*\hlink{\hyper@normalise\hlink@do}
+\def\hlink@do#1#2{\leavevmode\kern-\ul@surround\hyperlink{#1}{\update@ul\kern\ul@surround\relax\fancyul{#2}}}%
+\usepackage{letltxmacro}
+\LetLtxMacro\basicurl\url
+\def\url{\begingroup\catcode`{11\catcode`}11\obeyspaces\obeylines\url@do}%
+\def\url@do#1{\endgroup\link@do{#1}{#1}}%
+\AtBeginDocument{%
+\long\def\beamer@ref#1{\hlink@do{#1}{{\beamer@origref*{#1}}}}% the extra set of braces is for soul so that it can work with braces
+}
+\makeatother
+% darker penguins
+
+\RestyleAlgo{plain}
+\colorlet{lithie@box@taskbox@back}{btdm@background}
+\colorlet{lithie@box@taskbox@text}{btdm@text}
+\colorlet{sol@colors@border}{btdm@border@down}
+\colorlet{sol@colors@background}{btdm@background}
+\colorlet{lecture@BashOutput@background}{btdm@background}
+\IfBtdmDarkmode{
+\DefinePalette{Tutorium}
+    {Orange,orangenfarben: RGB(255, 161, 92)}
+    {Orange,orangenfarben: RGB(255, 161, 92)}
+    {Grün,grünlich: RGB(26,185,111)}
+    {Türkis,türkisfarben: RGB(31,191,167)}
+  % \colorlet{pingu@white}{pingu@white!92!btdm@background}
+  \pingudefaults{glow=pingu@white!70!btdm@background}%,glow steps={1,1.1,1.2}}
+}{
+\DefinePalette{Tutorium}
+  {Blau,bläulich: RGB(51, 93, 126)}
+  {Hellblau,hellbläulich: RGB(51, 93, 126)}
+  {Rot,rötlich: RGB(220,43,70)}
+  {Dunkelblau,dunkelbläulich: RGB(31, 56, 76)}
+\colorlet{paletteC}{paletteC!75!paletteA}
+}
+\makeatletter
+\sol@list@define@styles{%
+ {literals: \@declaredcolor{btdm@text}\slshape},%
+ {basic:    \@declaredcolor{btdm@text}\sol@ttfamily}%
+}%
+\AtEndPreamble{\def\sol@cpalette@hook{%
+\lstcolorlet{keywordA}{paletteA!95!black}%
+\lstcolorlet{keywordB}{paletteB!95!black}%
+\lstcolorlet{keywordC}{paletteC!60!paletteA}%
+\lstcolorlet{numbers}{paletteB}%
+\lstcolorlet{literals}{black}%
+\lstcolorlet{comments}{lightgray!80!btdm@text}%
+\lstcolorlet{highlight}{paletteD!90!black}%
+\lstcolorlet{command}{paletteB!90!black}%
+}}
+\def\lstcolorhook{\sol@cpalette@hook}%
+\makeatother
+
+% gray out:
+% \colorlet{codeouthl}{gray!75!white}
+% \makeatletter
+% \def\SetupLstHl{%
+% \lstcolorlet{highlight}{codeouthl}%
+% \sol@list@define@styles{%
+%  {highlight: \@declaredcolor{sol@colors@lst@highlight}\upshape},%
+% }}
+
+\UsePalette{Tutorium}
+
+\providecommand\thpath{..}
+\usepackage{\thpath/tikz-horner}
+
+\usepackage{multicol}
+\def\textor{/}
+
+
+\def\SummaryFrame{%
+\IfBtdmDarkmode{\UpdateBtdmColor*{paletteC}{\colorlet{btdm@block}{paletteC!40!btdm@border@up}}}{\UpdateBtdmColor{paletteC}}\lstcolorhook
+}
+
+\long\def\info#1{\textcolor{gray}{\scriptsize(#1)}}
+\long\def\infoblock#1{\par{\scriptsize\textcolor{gray}{(#1)}\par}}
