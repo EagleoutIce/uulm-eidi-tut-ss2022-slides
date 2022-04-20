@@ -1,6 +1,6 @@
 # EidI SS22 Uni Ulm --- Tutoriumsfolien
 
-![latex](https://img.shields.io/badge/Made%20with-LaTeX-1f425f.svg) [![compile-slides](https://github.com/EagleoutIce/uulm-eidi-tut-ss22-slides/actions/workflows/compile.yaml/badge.svg)](https://github.com/EagleoutIce/uulm-eidi-tut-ss22-slides/actions/workflows/compile.yaml) ![maintenance](https://unmaintained.tech/badge.svg)
+![latex](https://img.shields.io/badge/Made%20with-LaTeX-1f425f.svg) [![compile-slides](https://github.com/EagleoutIce/uulm-eidi-tut-ss2022-slides/actions/workflows/compile.yaml/badge.svg)](https://github.com/EagleoutIce/uulm-eidi-tut-ss2022-slides/actions/workflows/compile.yaml) ![maintenance](https://unmaintained.tech/badge.svg)
 
 Dies sind die historisch gewachsenen LaTeX-Quellen für die Eidi-Tutoriums-Folien von Florian Sihler.
 Diese Version hier ist eine aus dem Eidi-Repo extrahierte Quelle mit veränderter History und leicht modifizierten
