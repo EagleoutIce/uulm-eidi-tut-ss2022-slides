@@ -46,6 +46,11 @@
 
 \usepackage{cancel}
 \usepackage{lecture-runtimes,lecture-personal-tikz,lecture-personal-extra-units,tikzsymbols}
+\usepackage{tikz-qr}
+% adapt
+\def\qrcolor{paletteA!60!btdm@background}
+\AtBeginDocument{\fancyqrset{r color=\qrcolor,l color=\qrcolor}}
+
 \usetikzlibrary{decorations.pathreplacing,decorations.text,arrows.meta,decorations,decorations.pathreplacing,tikzmark}
 \solLoadLanguage{latex,bash,cpp}
 \colorlet{cprimary}{btdm@primary} % TODO update that
@@ -58,6 +63,8 @@
 
 \usepackage{fancy-underline}
 \makeatletter
+\let\sbseries\btdm@sbseries
+
 \def\fancyul@depth{.85\p@}
 \def\fancyul@contour{.2\p@}
 \def\fancyulbackground{btdm@background}% so that it adapts with the beamer
