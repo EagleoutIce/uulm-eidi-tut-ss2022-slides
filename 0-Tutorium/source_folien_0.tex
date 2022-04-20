@@ -16,7 +16,7 @@
 
 \SetNextSectionText{\say{My dear Watson, try a little analysis yourself,} said he, with a touch of impatience. \say{You know my methods. Apply them, and it will be instructive to compare results.}\\--- Conan Doyle~\cite[chp.~VI]{doyle2010sign}}
 \section{Präsenzaufgabe}
-{\def\f#1->#2\;{\parbox{7.5em}{\(S = \text{\T{#1}}\)\hfill}\(\quad{\color{gray}\longrightarrow}\quad\hbox to5em{\say{#2\hfill}}\)}
+{\def\f#1->#2\;{\parbox{7.5em}{\(S = \text{\T{#1}}\)\hfill}\(\quad{\color{gray}\longrightarrow}\quad\hbox to5em{\say{#2}\hfill}\)}
 \begin{frame}{Präsenzaufgabe}
 \begin{aufgabe}{Das habe ich schon gesehen!}
     \onslide<2->{Entwerfen Sie einen Algorithmus, um herauszufinden, ob in einer Zeichenkette \(S\) das Zeichen \T{a}, aber nicht das Zeichen \T{b} vorkommt. Als Ergebnis soll der Algorithmus ausgeben können, ob diese Bedingung zutrifft (\say{Ja}) oder nicht (\say{Nein}).}\medskip\par
@@ -232,7 +232,7 @@
         \item Mit der Zeit werden wir mehr Eigenschaften zur Charakterisierung betrachten.% TODO: => Tutorium 1 (Determinismus, Korrektheit,\ldots)
     \end{itemize}
 \end{frame}
-\begin{frame}{Algorithmus, wie definiere ich das?}
+\begin{frame}{Algorithmus --- Die Spezifikation}
     \pause\begin{center}
     \begin{tikzpicture}
         \IfBtdmDarkmode{% TODO
@@ -259,7 +259,7 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Algorithmus --- Die Spezifikation}
+\begin{frame}{Algorithmus --- Die Abstraktion}
     \begin{center}
     \begin{tikzpicture}
         \IfBtdmDarkmode{% TODO
@@ -286,7 +286,7 @@
 
 % TODO: anmerken, dass die Aufgabe dann mit Mengenoperationen noch schwerer ist,
 % das hier ist wirklich nur für das formale.
-\begin{frame}[t]{Algorithmus, wie definiere ich das?}
+\begin{frame}[t]{Algorithmus --- Entwurf und Korrektheit}
     \begin{itemize}[<+(1)->]
         \item Algorithmenentwurf: \info{Annahme eines 0-indizierten Arrays mit Zugriff \T{a[$i$]} für das \(i\)-te Element \(t_i\).}\\
         \begin{enumerate}\itemsep0pt
@@ -316,7 +316,7 @@
     \item \color{gray}Lösung ist \(max\).
 \end{enumerate}}}
 
-\begin{frame}{Algorithmus, wie definiere ich das?}
+\begin{frame}{Algorithmus --- Die Aufwandsanalyse}
 \begin{itemize}[]
     \item Algorithmenentwurf: \info{Annahme eines 0-indizierten Arrays mit Zugriff \T{a[$i$]} für das \(i\)-te Element \(t_i\).}\\
     \usebox\algobox
@@ -330,6 +330,7 @@
 \end{frame}
 \fi
 
+\SetNextSectionText{He who chooses the beginning of a road chooses the place it leads to. It is the means that determine the end.\\--- Harry Emerson Fosdick, \cite[p.~111]{fosdick1941living}}
 \section{Abschließendes}
 {\SummaryFrame
 \begin{frame}[t]{Zusammenfassend}
@@ -337,8 +338,15 @@
 \vfill\vfill % double fill for more fraction
 \begin{itemize}[<+(1)->]
     \itemsep16pt
-    \item TODO
-    \item Anmerkung: warum sind die Schritte von Bedeutung?
+    \item Für Pseudocode wünschen wir uns \begin{itemize}
+        \item eine konsistente und menschenlesbare Notation,
+        \item mathematische Definitionen,
+        \item aber nichts Sprachspezifisches (\bjava{int}) oder zu allgemeines (\say{löst Problem}).
+    \end{itemize}
+    \item Bei der Algorithmuskonstruktion beachten: \begin{itemize}
+        \item \def\t{~~\faAngleRight~~}Spezifikation\t Abstraktion\t Entwurf\t Verifikation\t Aufwandsanalyse
+        \item Als Frage für die Woche: Warum und wann sind all diese Schritte von Bedeutung?
+    \end{itemize}
 \end{itemize}
 \end{frame}
 }

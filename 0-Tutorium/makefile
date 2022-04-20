@@ -9,9 +9,7 @@ CLEANTARGETS := log aux out ind bbl blg lof lot toc idx acn acr alg glg glo gls 
 all: $(SLIDESPDF)
 
 %.pdf: %.tex $(SOURCESTEX)
-	pdflatex -shell-escape -interaction nonstopmode -draftmode -jobname $(basename $@) $<
-	pdflatex -shell-escape -interaction nonstopmode -jobname $(basename $@) $<
-	for fd in $(CLEANTARGETS); do rm -f ./$(basename $@).$$fd; done
+	sltxrc $<
 
 clean:
 	for fd in $(CLEANTARGETS); do rm -f *.$$fd; done
