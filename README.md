@@ -14,10 +14,12 @@ Die Folien finden sich hier durch die CI direkt im [Repository](https://github.c
 Für die Schnellklicker:\
 [<img src="https://github.com/EagleoutIce/uulm-eidi-tut-ss22-slides/blob/gh-pages/preview-01.png?raw=true" width="650"/>](https://media.githubusercontent.com/media/EagleoutIce/uulm-eidi-tut-ss22-slides/gh-pages/all_pdfs/eidi_tut_compact.pdf)
 
-Die anderen (nicht animiert):
-[org](https://media.githubusercontent.com/media/EagleoutIce/uulm-eidi-tut-ss22-slides/gh-pages/all_pdfs/eidi_tut_org.pdf),
-[0](https://media.githubusercontent.com/media/EagleoutIce/uulm-eidi-tut-ss22-slides/gh-pages/all_pdfs/eidi_tut_0.pdf).\
-Sowohl ihre animierten Versionen:
+### Nicht animierte Versionen
+
+Diese existieren in zwei Modi:
+   * light: [org](https://media.githubusercontent.com/media/EagleoutIce/uulm-eidi-tut-ss22-slides/gh-pages/all_pdfs/eidi_tut_org-light.pdf), [0](https://media.githubusercontent.com/media/EagleoutIce/uulm-eidi-tut-ss22-slides/gh-pages/all_pdfs/eidi_tut_0-light.pdf).
+   * dark: [org](https://media.githubusercontent.com/media/EagleoutIce/uulm-eidi-tut-ss22-slides/gh-pages/all_pdfs/eidi_tut_org-dark.pdf), [0](https://media.githubusercontent.com/media/EagleoutIce/uulm-eidi-tut-ss22-slides/gh-pages/all_pdfs/eidi_tut_0-dark.pdf).
+### Animierte Versionen
 [org](https://media.githubusercontent.com/media/EagleoutIce/uulm-eidi-tut-ss22-slides/gh-pages/all_pdfs/animated/eidi_tut_org.pdf),
 [0](https://media.githubusercontent.com/media/EagleoutIce/uulm-eidi-tut-ss22-slides/gh-pages/all_pdfs/animated/eidi_tut_0.pdf).
 
