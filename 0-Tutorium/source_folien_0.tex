@@ -16,26 +16,63 @@
 
 \SetNextSectionText{\say{My dear Watson, try a little analysis yourself,} said he, with a touch of impatience. \say{You know my methods. Apply them, and it will be instructive to compare results.}\\--- Conan Doyle~\cite[chp.~VI]{doyle2010sign}}
 \section{Präsenzaufgabe}
-{\def\f#1->#2\;{\parbox{7.5em}{\(S = \text{\T{#1}}\)\hfill}\(\quad{\color{gray}\longrightarrow}\quad\hbox to5em{\say{#2}\hfill}\)}
+{\def\f#1->#2\;{\parbox{7.5em}{\(S = \text{\T{#1}}\)\hfill}\(~~{\color{gray}\longrightarrow}~~\hbox to3.5em{\say{#2}\hfill}\)}
 \begin{frame}{Präsenzaufgabe}
 \begin{aufgabe}{Das habe ich schon gesehen!}
-    \onslide<2->{Entwerfen Sie einen Algorithmus, um herauszufinden, ob in einer Zeichenkette \(S\) das Zeichen \T{a}, aber nicht das Zeichen \T{b} vorkommt. Als Ergebnis soll der Algorithmus ausgeben können, ob diese Bedingung zutrifft (\say{Ja}) oder nicht (\say{Nein}).} \onslide<3->{Einige Beispiele\ldots
-\begin{itemize}[<+(1)->]
+\vspace*{-.9\baselineskip}\null\hfill\smash{\raisebox{-\height-.4\baselineskip}{\minipage{.55\linewidth}
+\itemize
     \item<4-> \f ababababa->Nein\; \info{Enthält ein \T{b}}
     \item<5-> \f aaaaaaaaa->Ja\; \info{Hat \T{a} und kein \T{b}}
     \item<6-> \f cdefg->Nein\; \info{Enthält kein \T{a}}
     \item<7-> \f klmohna->Ja\; \info{Hat \T{a} und kein \T{b}}
-\end{itemize}}
+\enditemize
+\endminipage}}\par\parshape 7
+0pt .4125\linewidth
+0pt .4125\linewidth
+0pt .4125\linewidth
+0pt .4125\linewidth
+0pt .4125\linewidth
+0pt .4125\linewidth
+0pt \linewidth
+% \raggedright
+\onslide<2->{Entwerfen Sie einen Algorithmus, um herauszufinden, ob in einer Zeichenkette \(S\) das Zeichen \T{a}, aber nicht das Zeichen \T{b} vorkommt. Als Ergebnis soll der Algorithmus ausgeben können, ob diese Bedingung zutrifft (\say{Ja}) oder nicht (\say{Nein}).} \onslide<3->{Wir vermerken ein paar Beispiele\ldots}%
+\smallskip\par
     \onslide<8->{Führen Sie die Schritte der Algorithmenentwicklung durch:
-    \onslide<+(1)->{Problemspezifikation}\onslide<+(1)->{, Problemabstraktion}  \onslide<+(1)->{, Algorithmenentwurf}\onslide<+(1)->{, Korrektheitsnachweis bzw. Verifikation}\onslide<+(1)->{und die Aufwandsanalyse}}
+    \onslide<+(1)->{a)~Problemspezifikation}\onslide<+(1)->{, b)~Problemabstraktion}  \onslide<+(1)->{, c)~Algorithmenentwurf}\onslide<+(1)->{, d)~Korrektheitsnachweis bzw. Verifikation}\onslide<+(1)->{ und die e)~Aufwandsanalyse.}}
     \onslide<1->
 \end{aufgabe}
 \end{frame}
 }
 
 {
+\def\g{\color{gray}\itshape}
+\setbeamertemplate{enumerate item}{\g\alph{enumi})}
+\begin{frame}{Problemspezifikation und -abstraktion}
+    \onslide<+(1)->\begin{center}
+        Es gelte \(i, j \in \{1, \ldots, n\} \subseteq \N\)
+    \end{center}\vfill
+    % \vskip0pt plus1filll\relax
+    \begin{enumerate}[<+(1)->]
+        \itemsep=16pt
+        \item {\g Spezifikation: Definiere alle relevante Begriffe unmissverständlich}
+        \begin{itemize}[<+(1)->]
+            \itemsep3.5pt
+            \item Eine \say{Zeichenkette} \(S\) ist eine indizierte Liste \((s_1, \ldots, s_n)\) an Zeichen.
+            \item Ein \say{Zeichen} ist ein Symbol \(s_i\) aus einem Alphabet \(\Sigma\).
+            \item Mit \say{Zeichen \(x\) kommt in \(S\) vor} meinen wir: \(\exists i:~s_i = x\)
+            % \item Das \say{nicht-vorkommen} bezeichne hier die aussagenlogische Negation.
+        \end{itemize}
+        \item {\g Abstraktion: Definiere die Eingabe und die gewünschte Ausgabe}
+        \begin{description}[Gegeben:]
+            \itemsep3.5pt
+            \item<+(1)->[Gegeben:] Eine Zeichenkette \(S = s_1, \ldots, s_n\)
+            \item<+(1)->[Gesucht:] Ausgabe \say{Ja} genau dann, wenn \(\exists i: s_i = \text{\T{a}}\) und \(\forall j: s_j \neq \text{\T{b}}\), sonst \say{Nein}
+        \end{description}
+    \end{enumerate}
+\end{frame}
+
 \SetAlgoVlined
-\SetKwIF{If}{ElseIf}{Else}{Wenn}{tue:\quad}{}{sonst:}{}
+\SetKwIF{If}{ElseIf}{Else}{Wenn}{tue:\quad}{}{Sonst:}{}
 \SetKwFor{For}{für}{tue:}{ende}
 \SetKwInput{KwIn}{Eingabe}
 \SetKw{KwTo}{bis einschließlich}
@@ -43,38 +80,126 @@
 \SetKw{KwIs}{ist}
 \SetKw{KwAnd}{und}
 \SetKw{KwNot}{nicht}
-\begin{frame}[c]{Lösung}
+\def\a{\text{\textit{enthältA}}}
+\def\b{\text{\textit{enthältB}}}
+\begin{frame}[c]{Algorithmenentwurf}
 \setcounter{algocf}{0}
 \pause\begin{algorithm}[H]
 \PreCode
     \KwIn{Eingabe als Zeichenkette $S$ mit Zeichen $S=s_1, \ldots, s_n$}\medskip
 \StartCode
-    \onslide<3->{enthältA $\gets$ falsch\;}
-    \onslide<4->{enthältB $\gets$ falsch\medskip\;}
+    \onslide<3->{$\a \gets Nein$\;}
+    \onslide<4->{$\b \gets Nein$\medskip\;}
     \onslide<5->{\For{i $\gets$ 1 \KwTo n \KwStep 1}{
-        \onslide<6->{\lIf{\(s_i\) ist Buchstabe \T{a}}{enthältA $\gets$ wahr}}
-        \onslide<7->{\lIf{\(s_i\) ist Buchstabe \T{b}}{enthältB $\gets$ wahr}}
+        \onslide<6->{\lIf{\(s_i\) \textup{ist Buchstabe \T{a}}}{$\a\gets Ja$}}
+        \onslide<7->{\lIf{\(s_i\) \textup{ist Buchstabe \T{b}}}{$\b\gets Ja$}}
     }}\medskip
-    \onslide<8->{\lIf{enthältA aber nicht enthältB ist wahr}{Gebe aus: \say{Ja}}}
+    \onslide<8->{\lIf{\a\ \textup{ist} Ja \textup{aber} \b\ \textup{ist} Nein}{Gebe aus: \say{Ja}}}
     \onslide<9->{\lElse{Gebe aus: \say{Nein}}}\medskip
     \caption{Ein \say{Zeichenkettenfilter}}
 \end{algorithm}
 \end{frame}
+
+\SetKw{KwTo}{bis}
+\SetKw{KwStep}{Schrittgröße}
+\SetKwIF{If}{ElseIf}{Else}{Wenn}{\!:~}{}{sonst:}{}
+\SetKwFor{For}{für}{\!:~}{ende}
+\def\a{\text{\textit{hatA}}}
+\def\b{\text{\textit{hatB}}}
+\newsavebox\presalgobox
+\setbox\presalgobox=\hbox{\color{gray}\minipage{6cm}\footnotesize\begin{algorithm}[H]
+    $\a \gets Nein,\quad \b \gets Nein$\;
+    \For{i $\gets$ 1 \KwTo n \KwStep 1}{
+        \lIf{\(s_i = \text{\T{a}}\)}{$\a\gets Ja$}
+        \lIf{\(s_i = \text{\T{b}}\)}{$\b\gets Ja$}
+    }
+    \lIf{\(\a = Ja\), \(\b = Nein\)}{\say{Ja}}
+    \lElse{\say{Nein}}
+\end{algorithm}\endminipage}
+
+\def\a{\text{\textit{enthältA}}}
+\def\b{\text{\textit{enthältB}}}
+\begin{frame}{Korrektheitsnachweis, Verifikation}
+\begin{enumerate}[<+(3)->]
+    \setcounter{enumi}{3}
+    \item<3-> {\g Verifikation: Zeige die totale Korrektheit (der Algorithmus\\  terminiert und ist partiell Korrekt):}\smallskip
+    \begin{description}[Partielle Korrektheit:]
+        \itemsep8pt
+        \item[Termination:] Zeilen~\(1\),~\(5\)~\&~\(6\) enthalten Elementar-\\operationen, die per Definition \\terminieren. Die Schleife in Zeile~\(2\)\\terminiert, da \(i\) streng monoton ansteigt und damit in endlicher Zeit mit \(i > n\) die Schleife beendet (die Elementaroperationen in Zeilen~\(3\) und~\(4\) terminieren wieder per Definition).
+        \item[Partielle Korrektheit:] Wir merken uns mit \a\ und \b, ob der jeweilige Buchstabe gefunden wurde. Wir geben \say{Ja} nur dann aus, wenn wir ein \T{a}, aber kein \T{b} finden. Sonst geben wir \say{Nein} aus.
+    \end{description}
+\end{enumerate}
+\tikzpicture[overlay,remember picture]
+    \onslide<2->{\node[below left,xshift=5mm,yshift=-1.25cm,scale=.85,align=center,gray] at(current page.north east) {\copy\presalgobox\\\itshape\small Eine verkürzte Version};}
+\endtikzpicture
+\end{frame}
+\iffull
+\MakeThePinguExplainIt[text width=6.65cm,yshift=-2cm]{cap=!hide,halo,glasses=!hide,eyes shiny,heart=shadeA,body type=chubby,right item angle=-45}{Invarianten mögen vielleicht gruselig klingen, sind aber nur Aussagen, die zum Beispiel im Rahmen von Schleifen \say{immer} (also in jedem Durchlauf) gelten.}
+\begin{frame}{Verifikation --- Eine kleine Vertiefung}
+   \begin{itemize}[<+(1)->]
+    \item Der Alternative, \say{weniger schwammige} Beweis der partiellen Korrektheit: \begin{itemize}
+        \itemsep5pt
+        \item Man überzeuge sich leicht, dass folgende Invariante für alle \(i \in \{1, \ldots, n\}\) gelte: \begin{equation*}
+            \onslide<4->{\a = \begin{cases}
+                Ja, & \exists j \in \{1, \ldots, i\}: s_j = \text{\T{a}}\\
+                Nein,\quad & \text{sonst.}
+            \end{cases}} \qquad \onslide<5->{\b = \begin{cases}
+                Ja, & \exists j \in \{1, \ldots, i\}: s_j = \text{\T{b}}\\
+                Nein,\quad & \text{sonst.}
+            \end{cases}}
+        \end{equation*}
+        \item<6-> Dies kann man beispielsweise mit vollständiger Induktion zeigen.
+        \item<7-> Anschließend folgt der Beweis durch die Übereinstimmung der Bedingung, sowie der aussagenlogischen Formel.
+    \end{itemize}
+   \end{itemize}
+   \begin{tikzpicture}[overlay,remember picture]
+    \onslide<8->{\node[above left,xshift=5mm,scale=.8,yshift=\btdmfootheight] at(current page.south east) {\copy\pinguexplainbox};}% copy for animations
+    \end{tikzpicture}
+\end{frame}
+\fi
+
+
+\begin{frame}{Aufwandsanalyse}
+\begin{itemize}
+    \itemsep14pt
+    \item<3-> Mögliche ist eine tabellarische oder textuelle Erfassung.
+    \item<4-> Wir machen es textuell: \begin{itemize}
+        \itemsep7pt
+        \item<5-> Die 1.~Zeile enthält zwei Zuweisungen, die Bedingung in der\\5.~Zeile enthält zwei Vergleiche und in jedem Fall eine Ausgabe. %\\ (als Elementaroperation).
+        \item<6-> Die Schleife enthält zwei Vergleiche und im schlechtesten Fall eine Zuweisung (so ist für \(\text{\T{a}} \neq \text{\T{b}}\) höchstens eine beider Bedingungen trifft zu).
+        \item<7-> Die Schleife wird immer genau \(n\)-mal durchlaufen.
+    \end{itemize}
+    \item<8-> So erhalten wir im besten (kein \(a\) und kein \(b\)), sowie im schlechtesten Fall (nur \(a\)'s und \(b\)'s): \begin{align*}
+        \onslide<9->\text{best-case} &= 2 + n \cdot (2 + 0) + 2 + 1 = 2n + 5 \in \O(n)\\
+        \onslide<10->\text{worst-case} &= 2 + n \cdot (2 + 1) + 2 + 1 = 3n + 5 \in \O(n)
+    \end{align*}
+\end{itemize}
+\tikzpicture[overlay,remember picture]
+    \onslide<2->{\node[below left,xshift=5mm,yshift=-1.25cm,scale=.85,align=center,gray] at(current page.north east) {\copy\presalgobox\\\itshape\small Eine verkürzte Version};}
+\endtikzpicture
+\end{frame}
 }
 
 \MakeThePinguExplainIt[text width=6.65cm,yshift=-2cm]{cap=!hide,hat,hat coronal=paletteA,hat ribbon=paletteA,glasses=!hide,eyes wink,cup=!hide,heart=shadeA,right item angle=-45}{Noch werden wir uns solchen Annahmen zärtlich nähern. Mit der Zeit wird es aber immer mehr auch darum gehen, \textit{was} man eigentlich annehmen darf.}
-\begin{frame}[c]{Schweigsame Annahmen}
-    \onslide<2->{Für das Programm \say{Zeichenkettenfilter} gelten die Annahmen:
+\begin{frame}[t]{Schweigsame Annahmen}
+    \onslide<2->{\color{btdm@text}Für das Programm \say{Zeichenkettenfilter} gelten die Annahmen:
     \begin{enumerate}[<+(1)->]
-        \item<3-> die Länge von \(S\) sei endlich und (in endlicher Zeit) berechenbar, hier durch \textit{length(\(S\)) = \(n\)},
-        \item<4-> mit \(S = (s_1, s_2, \ldots, s_n)\) seien alle Zeichen über \(s_i\) (\(i \in \{1, \ldots, n\} \subset \N\)) enumeriert und
-        \item<5-> alle Zeichen \(s_i\) entstammen einer endlichen Grundmenge \(\Sigma\) an Zeichen.
+        \item<3-> die Länge \(n\) von \(S\) sei endlich und (in endlicher Zeit) berechenbar%, hier durch \textit{\(n \gets{}\) length(\(S\))},
+        \item<4-> wir können die Zeichen \(s_i\) aus \(\Sigma\) vergleichen.
     \end{enumerate}}
+    \vfill
+    \onslide<6->{\color{gray}Ob die 5.~Zeile wirklich immer zwei Vergleiche hat, hängt davon ab, wie das logische \say{und} funktioniert. Wertet es für \say{\(\text{falsch} \land \langle?\rangle\)} die rechte Seite nicht mehr aus, haben wir Falle keines \(a\)'s einen Aufwand von \(2n + 4\).}
+    \vfill
 \begin{tikzpicture}[overlay,remember picture]
 \onslide<6->{\node[above left,xshift=5mm,scale=.8,yshift=\btdmfootheight] at(current page.south east) {\copy\pinguexplainbox};}% copy for animations
 \end{tikzpicture}
 \end{frame}
 
+% \iffull
+% \begin{frame}{Alternative Ansätze}
+
+% \end{frame}
+% \fi
 
 \iffull
 \SetNextSectionText[.35\linewidth]{Avoid syntactic elements from the target programming language\\--- Steve McConnell, \cite[p.~54]{10.5555/151071}}
@@ -288,7 +413,6 @@
     \end{itemize}
 \end{frame}
 
-% TODO: anmerken, dass die Aufgabe dann mit Mengenoperationen noch schwerer ist,
 % das hier ist wirklich nur für das formale.
 \begin{frame}[t]{Algorithmus --- Entwurf und Korrektheit}
     \begin{itemize}[<+(1)->]
@@ -355,7 +479,7 @@
 \end{frame}
 }
 
-\outro{\centering\begin{tikzpicture}[scale=2.5]
+\outro{\vskip6mm\centering\begin{tikzpicture}[scale=2.5]
     \only<2->{\pingu[right wing grab,headband=purple!90!green,cup=purple!90!green,name=saphira, left eye wink,body type=chubby]}
 \end{tikzpicture}}
 

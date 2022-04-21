@@ -13,6 +13,7 @@
 }
 \usepackage{xcolor}
 \usepackage[ngerman]{babel}
+\usepackage{wrapfig}
 \providecommand\btdmmode{lightmode-fill}
 \providecommand\btdmopts{}
 \usetheme[\btdmmode,\btdmopts]{digital-minimal}
@@ -27,7 +28,8 @@
 \author[F.~Sihler]{Florian Sihler}
 \email{florian.sihler@uni-ulm.de}
 
-\usepackage{tikz,tikzpingus}
+\usepackage{tikz}
+\usepackage[glows]{tikzpingus}
 \usepackage{csquotes}
 
 % TODO:
@@ -178,3 +180,5 @@
 \endtikzpicture}}
 
 \newcommand<>\task[1]{\begin{uncoverenv}#2{\par\begingroup\footnotesize\textcolor{gray}{\itshape#1}\par\endgroup}\end{uncoverenv}}
+
+\AtBeginDocument{\def\O{\ensuremath{\mathcal{O}}}}
