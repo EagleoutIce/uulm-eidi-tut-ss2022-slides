@@ -19,14 +19,15 @@
 {\def\f#1->#2\;{\parbox{7.5em}{\(S = \text{\T{#1}}\)\hfill}\(\quad{\color{gray}\longrightarrow}\quad\hbox to5em{\say{#2}\hfill}\)}
 \begin{frame}{Präsenzaufgabe}
 \begin{aufgabe}{Das habe ich schon gesehen!}
-    \onslide<2->{Entwerfen Sie einen Algorithmus, um herauszufinden, ob in einer Zeichenkette \(S\) das Zeichen \T{a}, aber nicht das Zeichen \T{b} vorkommt. Als Ergebnis soll der Algorithmus ausgeben können, ob diese Bedingung zutrifft (\say{Ja}) oder nicht (\say{Nein}).}\medskip\par
-    \onslide<3->{Einige Beispiele\ldots
+    \onslide<2->{Entwerfen Sie einen Algorithmus, um herauszufinden, ob in einer Zeichenkette \(S\) das Zeichen \T{a}, aber nicht das Zeichen \T{b} vorkommt. Als Ergebnis soll der Algorithmus ausgeben können, ob diese Bedingung zutrifft (\say{Ja}) oder nicht (\say{Nein}).} \onslide<3->{Einige Beispiele\ldots
 \begin{itemize}[<+(1)->]
-    \item<4-> \f ababababa->Nein\; \info{Hat \T{a}, aber auch \T{b}}
+    \item<4-> \f ababababa->Nein\; \info{Enthält ein \T{b}}
     \item<5-> \f aaaaaaaaa->Ja\; \info{Hat \T{a} und kein \T{b}}
-    \item<6-> \f cdefg->Nein\; \info{Kein \T{a} und kein \T{b}}
+    \item<6-> \f cdefg->Nein\; \info{Enthält kein \T{a}}
     \item<7-> \f klmohna->Ja\; \info{Hat \T{a} und kein \T{b}}
 \end{itemize}}
+    \onslide<8->{Führen Sie die Schritte der Algorithmenentwicklung durch:
+    \onslide<+(1)->{Problemspezifikation}\onslide<+(1)->{, Problemabstraktion}  \onslide<+(1)->{, Algorithmenentwurf}\onslide<+(1)->{, Korrektheitsnachweis bzw. Verifikation}\onslide<+(1)->{und die Aufwandsanalyse}}
     \onslide<1->
 \end{aufgabe}
 \end{frame}
