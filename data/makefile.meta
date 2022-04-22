@@ -1,0 +1,52 @@
+# This is the meta makefile included in all slides it is a modified variant of a standard makefile which i've used for several years.
+# therefore it may contain some dead code and cleanups
+
+SLIDES_TEX             := $(shell ls source_*.tex)
+SOURCES                := ${SLIDES_TEX} $(shell [ -f *.java ] && ls *.java) $(shell [ -f *.bib ] && ls *.bib)
+# for each 'source_*' we create n pdf versions which will be prepared here
+SLIDES_BASE            := $(basename $(SLIDES_TEX:source_%=%))
+SLIDES_VARIANTS_NOANIM := $(addprefix noanim_, ${SLIDES_BASE})
+# at the moment, i do not want an animated darkmode :>
+SLIDES_VARIANTS_ALL    := $(addsuffix -light,${SLIDES_VARIANTS_NOANIM}) $(addsuffix -dark,${SLIDES_VARIANTS_NOANIM}) $(addsuffix -light,${SLIDES_BASE})
+SLIDESPDF              := $(addsuffix .pdf,${SLIDES_VARIANTS_ALL})
+CLEANTARGETS           := log aux out ind bbl blg lof lot toc idx acn acr alg glg glo gls fls fdb_latexmk auxlock md5 SATZE ZSM UB TOP listing upa ilg TOPIC DEFS vrb snm nav atfi run.xml
+
+# used internally for rule reuse
+__FILENAME    := ""
+__FILECONTENT := ""
+
+.PHONY = all compile clean produce
+
+all: compile clean
+
+compile: ${SLIDESPDF}
+	@echo Built the pdfs: ${SLIDESPDF}
+
+# for each pdf we set the filename similarly
+%.pdf: __FILENAME = $(addsuffix .tex, $(basename $@))
+
+# this are mere wrapper rules to be used with the common producer below
+# with $* we get the stem (whatever the '%' did expand to)
+noanim_%-light.pdf: __FILECONTENT = \\PassOptionsToClass{handout}{beamer}\\def\\btdmmode{lightmode-fill}\\input{source_$*.tex}
+noanim_%-light.pdf: $(SOURCES)
+	$(produce)
+
+noanim_%-dark.pdf: __FILECONTENT = \\PassOptionsToClass{handout}{beamer}\\def\\btdmmode{darkmode}\\input{source_$*.tex}
+noanim_%-dark.pdf: $(SOURCES)
+	$(produce)
+
+# specified below so it does not trigger the others
+%-light.pdf: __FILECONTENT = \\def\\btdmmode{lightmode-fill}\\input{source_$*.tex}
+%-light.pdf: $(SOURCES)
+	$(produce)
+
+# byusing define we can use target-specific variables :D
+# we only make use of temporary files to do not clutter
+define produce
+	echo "${__FILECONTENT}" > "${__FILENAME}"
+   sltxrc "${__FILENAME}"
+   rm "${__FILENAME}"
+endef
+
+clean:
+	for fd in $(CLEANTARGETS); do rm -f *.$$fd; done
