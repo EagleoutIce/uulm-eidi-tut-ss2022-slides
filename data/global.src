@@ -1,4 +1,4 @@
-\documentclass[aspectratio=169,usepdftitle=true,10pt,ngerman,t]{beamer}
+\documentclass[aspectratio=169,usepdftitle=true,11pt,ngerman,t]{beamer}
 \errorcontextlines999999
 
 \usepackage[T1]{fontenc}
@@ -214,6 +214,3 @@
   \let\mv@bold\mv@iwonabold
 \fi
 \let\define@iwona@mathversions\@undefined
-
-
-\setbeamerfont{section text}{parent=normal text,size=\footnotesize,shape=\slshape}

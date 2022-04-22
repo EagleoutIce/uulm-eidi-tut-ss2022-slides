@@ -21,14 +21,14 @@
 \setbeamertemplate{enumerate item}{\alph{enumi})}
 \begin{frame}[c]{Präsenzaufgabe}
 \begin{aufgabe}{Das habe ich schon gesehen!}
-\vspace*{-.9\baselineskip}\null\hfill\smash{\raisebox{-\height+.25\baselineskip}{\minipage{.55\linewidth}
+\vspace*{-.725\baselineskip}\null\hfill\smash{\raisebox{-\height+.5\baselineskip}{\tikz\node[draw=lightgray,rounded corners=2pt,fill=white,inner sep=5.5pt,very thick,outer sep=0pt]{\minipage{.55\linewidth}
 \itemize
     \item<5-> \f ababababa->Nein\; \info{Enthält ein \T{b}}
     \item<6-> \f aaaaaaaaa->Ja\; \info{Hat \T{a} und kein \T{b}}
     \item<7-> \f cdefg->Nein\; \info{Enthält kein \T{a}}
     \item<8-> \f klmohna->Ja\; \info{Hat \T{a} und kein \T{b}}
 \enditemize
-\endminipage}}\par\only<-3|handout:0>{\parshape 1
+\endminipage};}\kern-2.5mm}\par\only<-3|handout:0>{\parshape 1
 0pt \linewidth}\only<4->{\parshape 6
 0pt .4125\linewidth
 0pt .4125\linewidth
@@ -37,17 +37,16 @@
 0pt .4125\linewidth
 0pt \linewidth}
 % \raggedright
-\onslide<2->{Entwerfen Sie einen Algorithmus, um herauszufinden, ob in einer Zeichenkette \(S\) das Zeichen \T{a}, aber nicht das Zeichen \T{b} vorkommt. Als Ergebnis soll der Algorithmus ausgeben können, ob diese Bedingung zutrifft (\say{Ja}) oder nicht (\say{Nein}).} \onslide<3->{Wir vermerken ein paar Beispiele\ldots}%
-\smallskip\par
+\onslide<2->{Entwerfen Sie einen Algorithmus um herauszufinden, ob in einer Zeichenkette \(S\) das Zeichen \T{a}, aber nicht das Zeichen \T{b} vorkommt. Als Ergebnis soll der Algorithmus ausgeben, ob die Bedingung zutrifft (\say{Ja}) oder nicht (\say{Nein}).} \onslide<3->{Ein paar Beispiele\ldots}%
+\medskip\par
     \only<9->{\relax Führen Sie die Schritte der Algorithmenentwicklung durch:\vspace*{-\topsep}
-    \begin{multicols}{2}
+    \begin{multicols}{3}
         \begin{enumerate}
             \item<10-> \t{Problemspezifikation}
             \item<11-> \t{Problemabstraktion}
             \item<12-> \t{Algorithmenentwurf}
-            \item<13-> \t{Korrektheitsnachweis bzw. Verifikation}
+            \item<13-> \t{Korrektheitsnachweis}% bzw. Verifikation}
             \item<14-> \t{Aufwandsanalyse}
-            \item[]
         \end{enumerate}
     \end{multicols}}
     \onslide<1->
@@ -137,13 +136,13 @@
     \item<3-> {\g Verifikation: Zeige die totale Korrektheit (der Algorithmus\\  terminiert und ist partiell Korrekt):}\smallskip
     \begin{description}[Partiell Korrekt:]
         \itemsep8pt
-        \item[Termination:] \(Z1\) und \(Z3\)--\(Z6\) enthalten Elementaroperationen,\\ diese Terminieren per Definition.\medskip\par
+        \item[Termination:] \(Z1\) und \(Z3\)--\(Z6\) sind Elementaroperationen.\\ Diese Terminieren per Definition.\medskip\par
         Die Schleife in \(Z2\) terminiert, da \(i\) streng monoton ansteigt und damit in endlicher Zeit \(i \leq n\) verletzt.
         \item[Partiell Korrekt:] Wir merken uns mit \a\ und \b, ob der jeweilige Buchstabe gefunden wurde. Wir geben \say{Ja} nur dann aus, wenn wir ein \T{a}, aber kein \T{b} finden. Sonst geben wir \say{Nein} aus.
     \end{description}
 \end{enumerate}
 \tikzpicture[overlay,remember picture]
-    \onslide<2->{\node[below left,xshift=5mm,yshift=-1.5cm,scale=.85,align=center,gray] at(current page.north east) {\copy\presalgobox\\\itshape\small Eine verkürzte Version};}
+    \onslide<2->{\node[below left,xshift=5mm,yshift=-1.35cm,scale=.85,align=center,gray] at(current page.north east) {\copy\presalgobox\\\itshape\small Eine verkürzte Version};}
 \endtikzpicture
 \end{frame}
 \iffull
@@ -162,7 +161,7 @@
             \end{cases}}
         \end{equation*}
         \item<6-> Dies kann man beispielsweise mit vollständiger Induktion zeigen.
-        \item<7-> Anschließend folgt der Beweis durch Abgleich der Bedingungen mit der aussagenlogischen Formel.
+        \item<7-> Anschließend folgt der Beweis durch Abgleich der Bedingungen.
     \end{itemize}
    \end{itemize}
    \begin{tikzpicture}[overlay,remember picture]
@@ -188,7 +187,7 @@
     \end{align*}
 \end{itemize}
 \tikzpicture[overlay,remember picture]
-    \onslide<2->{\node[below left,xshift=5mm,yshift=-1.5cm,scale=.85,align=center,gray] at(current page.north east) {\copy\presalgobox\\\itshape\small Eine verkürzte Version};}
+    \onslide<2->{\node[below left,xshift=5mm,yshift=-1.35cm,scale=.85,align=center,gray] at(current page.north east) {\copy\presalgobox\\\itshape\small Eine verkürzte Version};}
 \endtikzpicture
 \end{frame}
 }
@@ -200,7 +199,7 @@
         \item<3-> die Länge \(n\) von \(S\) sei endlich und (in endlicher Zeit) berechenbar%, hier durch \textit{\(n \gets{}\) length(\(S\))},
         \item<4-> wir können die Zeichen \(s_i\) aus \(\Sigma\) vergleichen.
     \end{enumerate}}
-    \vspace*{1cm}
+    \vspace*{.65cm}
     \onslide<5->{Ob \(Z5\) wirklich immer zwei Vergleiche hat, hängt davon ab, wie das logische \say{und} funktioniert. Wertet es für \say{\(\text{falsch} \land \langle?\rangle\)} den zweiten Operand nicht mehr aus, haben wir Falle eines \(S\) ohne \(a\)'s, einen Aufwand von \(2n + 4\).}
 \begin{tikzpicture}[overlay,remember picture]
 \onslide<6->{\node[above left,xshift=5mm,scale=.8,yshift=\btdmfootheight] at(current page.south east) {\copy\pinguexplainbox};}% copy for animations
@@ -221,7 +220,7 @@
 {\SetAlgoVlined
 \begin{frame}[t]{How-To Pseudocode}
     \begin{itemize}[<+(1)->]
-        \itemsep6pt
+        \itemsep5pt
         \item \textbf{Konsistent bleiben}
         \item Menschenlesbare Notation \info{meist Programmiersprachen-Mathe-Gemisch}
         \item Solange \emph{klar} und \emph{eindeutig}, frei gestaltbar
@@ -433,8 +432,7 @@
             \item Setze \(max = \text{\T{a[$0$]}}\).
             \item Setze \(i = 1\).
             \item \label{alg:loop}Solange \(i < m\):\\
-                \pause{\quad Wenn (\(max < \text{\T{a[$i$]}}\)):}\\
-                \pause{\qquad \(max = \text{\T{a[$i$]}}\).}\\
+                \pause{\quad Wenn (\(max < \text{\T{a[$i$]}}\)):}\pause{~~\(max = \text{\T{a[$i$]}}\).}\\
                 \pause{\quad Inkrementiere \(i\) um \(1\).}
             \item<+(1)-> Lösung ist \(max\).
         \end{enumerate}
@@ -450,8 +448,7 @@
     \item \color{gray}\label{alg:a}Setze \(max = \text{\T{a[$0$]}}\).
     \item \color{gray}\label{alg:b}Setze \(i = 1\).
     \item \color{gray}\label{alg:loop2}Solange \(i < m\): \\
-        \quad Wenn (\(max < \text{\T{a[$i$]}}\)):\\
-        \qquad \(max = \text{\T{a[$i$]}}\). \\
+        \quad Wenn (\(max < \text{\T{a[$i$]}}\)):~~\(max = \text{\T{a[$i$]}}\). \\
         \quad Inkrementiere \(i\) um \(1\).
     \item \color{gray}Lösung ist \(max\).
 \end{enumerate}}}
@@ -459,7 +456,7 @@
 \begin{frame}{Algorithmus --- Die Aufwandsanalyse}
 \begin{itemize}[]
     \item Algorithmenentwurf: \info{Annahme eines 0-indizierten Arrays mit Zugriff \T{a[$i$]} für das \(i\)-te Element \(t_i\).}\\
-    \usebox\algobox
+    \usebox\algobox\vfill
     \item<+(1)-> Aufwandsanalyse:\pause\ Wir machen dies als strukturierten Text: \begin{itemize}
         \item<+(1)-> \ref{alg:a}. und \ref{alg:b}. entsprechen jeweils einer Elementaroperation.
         \item<+(1)-> \ref{alg:loop2}. wird genau \(m - 1\) mal ausgeführt. Sie enthält sicher einen Vergleich und ein Inkrement. Eventuell eine Zuweisung.\pause\ Für unseren Fall also drei Elementaroperationen.
