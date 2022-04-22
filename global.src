@@ -1,3 +1,4 @@
+\documentclass[aspectratio=169,usepdftitle=true,10pt,ngerman,t]{beamer}
 \errorcontextlines999999
 
 \usepackage[T1]{fontenc}

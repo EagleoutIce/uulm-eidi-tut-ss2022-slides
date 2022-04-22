@@ -1,5 +1,6 @@
-\RequirePackage[cmintegrals,cmbraces,ebgaramond]{newtxmath}
 \InputIfFileExists{../global.src}\relax\relax
+\RequirePackage[cmintegrals,cmbraces,ebgaramond]{newtxmath}
+
 \iffull
 \title[Nulltes Tutorium -- Übungsblatt 0]{Mein Compiler und ich}
 \subtitle{Tutorium ZeroHero}
@@ -18,7 +19,7 @@
 \section{Präsenzaufgabe}
 {\def\f#1->#2\;{\parbox{7.5em}{\(S = \text{\T{#1}}\)\hfill}\(~~{\color{gray}\longrightarrow}~~\hbox to3.5em{\say{#2}\hfill}\)}
 \newcounter{presencesub}\def\t#1{\stepcounter{presencesub}\alph{presencesub})~\textit{#1}}
-\begin{frame}{Präsenzaufgabe}
+\begin{frame}[c]{Präsenzaufgabe}
 \begin{aufgabe}{Das habe ich schon gesehen!}
 \vspace*{-.9\baselineskip}\null\hfill\smash{\raisebox{-\height-.4\baselineskip}{\minipage{.55\linewidth}
 \itemize
@@ -98,7 +99,7 @@
     }}\medskip
     \onslide<8->{\lIf{\a\ \textup{ist} Ja \textup{aber} \b\ \textup{ist} Nein}{Gebe aus: \say{Ja}}}
     \onslide<9->{\lElse{Gebe aus: \say{Nein}}}\medskip
-    \caption{Ein \say{Zeichenkettenfilter}}
+    \only<10->{\caption{Ein \say{Zeichenkettenfilter}}}
 \end{algorithm}
 \end{frame}
 
@@ -108,6 +109,7 @@
 \SetKwFor{For}{für}{\!:~}{ende}
 \def\a{\text{\textit{hatA}}}
 \def\b{\text{\textit{hatB}}}
+\SetNlSty{textbf}{Z}{:}
 \newsavebox\presalgobox
 \setbox\presalgobox=\hbox{\color{gray}\minipage{6cm}\footnotesize\begin{algorithm}[H]
     $\a \gets Nein,\quad \b \gets Nein$\;
@@ -127,7 +129,7 @@
     \item<3-> {\g Verifikation: Zeige die totale Korrektheit (der Algorithmus\\  terminiert und ist partiell Korrekt):}\smallskip
     \begin{description}[Partielle Korrektheit:]
         \itemsep8pt
-        \item[Termination:] Zeilen~\(1\),~\(5\)~\&~\(6\) enthalten Elementar-\\operationen, die per Definition \\terminieren. Die Schleife in Zeile~\(2\)\\terminiert, da \(i\) streng monoton ansteigt und damit in endlicher Zeit mit \(i > n\) die Schleife beendet (die Elementaroperationen in Zeilen~\(3\) und~\(4\) terminieren wieder per Definition).
+        \item[Termination:] \(Z1\) und \(Z3\)--\(Z6\) enthalten Elementar-\\operationen, die per Definition \\terminieren. Die Schleife in \(Z2\)\\terminiert, da \(i\) streng monoton ansteigt und damit in endlicher Zeit mit \(i > n\) die Schleife beendet.
         \item[Partielle Korrektheit:] Wir merken uns mit \a\ und \b, ob der jeweilige Buchstabe gefunden wurde. Wir geben \say{Ja} nur dann aus, wenn wir ein \T{a}, aber kein \T{b} finden. Sonst geben wir \say{Nein} aus.
     \end{description}
 \end{enumerate}
@@ -136,7 +138,7 @@
 \endtikzpicture
 \end{frame}
 \iffull
-\MakeThePinguExplainIt[text width=6.65cm,yshift=-2cm]{cap=!hide,halo,glasses=!hide,eyes shiny,heart=shadeA,body type=chubby,right item angle=-45}{Invarianten mögen vielleicht gruselig klingen, sind aber nur Aussagen, die zum Beispiel im Rahmen von Schleifen \say{immer} (also in jedem Durchlauf) gelten.}
+\MakeThePinguExplainIt[text width=6.65cm,yshift=-1.76cm]{cap=!hide,halo,glasses=!hide,eyes shiny,heart=shadeA,body type=chubby,right item angle=-45}{Invarianten mögen vielleicht gruselig klingen, sind aber nur Aussagen, die zum Beispiel im Rahmen von Schleifen \say{immer} (also in jedem Durchlauf) gelten.}
 \begin{frame}{Verifikation --- Eine kleine Vertiefung}
    \begin{itemize}[<+(1)->]
     \item Der Alternative, \say{weniger schwammige} Beweis der partiellen Korrektheit: \begin{itemize}
@@ -151,7 +153,7 @@
             \end{cases}}
         \end{equation*}
         \item<6-> Dies kann man beispielsweise mit vollständiger Induktion zeigen.
-        \item<7-> Anschließend folgt der Beweis durch die Übereinstimmung der Bedingung, sowie der aussagenlogischen Formel.
+        \item<7-> Anschließend folgt der Beweis durch Abgleich der Bedingungen mit der aussagenlogischen Formel.
     \end{itemize}
    \end{itemize}
    \begin{tikzpicture}[overlay,remember picture]
@@ -172,8 +174,8 @@
         \item<7-> Die Schleife wird immer genau \(n\)-mal durchlaufen.
     \end{itemize}
     \item<8-> So erhalten wir im besten (kein \(a\) und kein \(b\)), sowie im schlechtesten Fall (nur \(a\)'s und \(b\)'s): \begin{align*}
-        \onslide<9->\text{best-case} &= 2 + n \cdot (2 + 0) + 2 + 1 = 2n + 5 \in \O(n)\\
-        \onslide<10->\text{worst-case} &= 2 + n \cdot (2 + 1) + 2 + 1 = 3n + 5 \in \O(n)
+        \onslide<9->{\text{best-case}} &\onslide<9->{= 2 + n \cdot (2 + 0) + 2 + 1 = 2n + 5 \in \O(n)}\\
+        \onslide<10->{\text{worst-case}} &\onslide<10->{= 2 + n \cdot (2 + 1) + 2 + 1 = 3n + 5 \in \O(n)}
     \end{align*}
 \end{itemize}
 \tikzpicture[overlay,remember picture]
@@ -184,14 +186,13 @@
 
 \MakeThePinguExplainIt[text width=6.65cm,yshift=-2cm]{cap=!hide,hat,hat coronal=paletteA,hat ribbon=paletteA,glasses=!hide,eyes wink,cup=!hide,heart=shadeA,right item angle=-45}{Noch werden wir uns solchen Annahmen zärtlich nähern. Mit der Zeit wird es aber immer mehr auch darum gehen, \textit{was} man eigentlich annehmen darf.}
 \begin{frame}[t]{Schweigsame Annahmen}
-    \onslide<2->{\color{btdm@text}Für das Programm \say{Zeichenkettenfilter} gelten die Annahmen:
+    \onslide<2->{\color{btdm@text}Für das Programm \say{Zeichenkettenfilter} und seine Analyse gelten die Annahmen:
     \begin{enumerate}[<+(1)->]
         \item<3-> die Länge \(n\) von \(S\) sei endlich und (in endlicher Zeit) berechenbar%, hier durch \textit{\(n \gets{}\) length(\(S\))},
         \item<4-> wir können die Zeichen \(s_i\) aus \(\Sigma\) vergleichen.
     \end{enumerate}}
-    \vfill
-    \onslide<6->{\color{gray}Ob die 5.~Zeile wirklich immer zwei Vergleiche hat, hängt davon ab, wie das logische \say{und} funktioniert. Wertet es für \say{\(\text{falsch} \land \langle?\rangle\)} die rechte Seite nicht mehr aus, haben wir Falle keines \(a\)'s einen Aufwand von \(2n + 4\).}
-    \vfill
+
+    \onslide<5->{Ob \(Z5\) wirklich immer zwei Vergleiche hat, hängt davon ab, wie das logische \say{und} funktioniert. Wertet es für \say{\(\text{falsch} \land \langle?\rangle\)} den zweiten Operand nicht mehr aus, haben wir Falle eines \(S\) ohne \(a\)'s, einen Aufwand von \(2n + 4\).}
 \begin{tikzpicture}[overlay,remember picture]
 \onslide<6->{\node[above left,xshift=5mm,scale=.8,yshift=\btdmfootheight] at(current page.south east) {\copy\pinguexplainbox};}% copy for animations
 \end{tikzpicture}
@@ -255,7 +256,7 @@
 \PreCode
     \KwIn{Eingabe als Liste von $n$ Pingus: $\tpingu_1, \ldots \tpingu_n$}
 \StartCode
-    \pause sucheKlassePingu($\tpingu_1, \ldots \tpingu_n$, \raisebox{-1pt}{\scalebox{0.15}{\tikz{\tagent}}})\;
+    \pause sucheKlassePingu($\tpingu_1, \ldots \tpingu_n$, \raisebox{-1pt}{\scalebox{0.15}{\tikz{\tagent}}})\;\smallskip
     \caption{Einen \say{klasse} Pinguin finden}
 \end{algorithm}
     \end{itemize}
@@ -378,13 +379,13 @@
     \end{center}
     \begin{itemize}[<+(1)->]
         \itemsep10.5pt
-        \item Suche die größte ganze Zahl in einem beliebigen (ganzzahligen, nicht-leeren) Array.
+        \item Suche die größte, ganze Zahl in einem beliebigen (ganzzahligen, nicht-leeren) Array.
         \item Information: Die Regeln zum Pseudocode gelten hier nach wie vor!
         \item Problemspezifikation:
         \begin{description}[Ganzzahliges Array:]
             \item[Ganzzahliges Array:] Tupel der Größe \(m \geq 1\) mit: \(t = (t_1, t_2, \ldots, t_m) \in \Z^m\) \info{\(t_i \in \Z\) für alle \(t_i\)}
             \item[Beliebig:] Die Elemente müssen nicht sortiert vorliegen. \info{Also z.B. nicht \(t_1 \leq \ldots \leq t_m\).}
-            \item[Größte:] Die größte ganze Zahl \(z \in t\) mit \(z = \max(t)\).
+            \item[Größte:] Die größte, ganze Zahl \(z \in t\) mit \(z = \max(t)\).
         \end{description}
         \onslide<+(1)->{Ordentlich wäre rein mathematische\textor axiomatisch belegte Formalisierungen zu nutzen. \onslide<+(1)->{In dieser Veranstaltung beschreiten wir einen Mittelweg.}}
     \end{itemize}
@@ -405,7 +406,7 @@
     \end{center}
     \begin{itemize}[<+(1)->]
         \itemsep10.5pt
-        \item \textcolor{gray}{Suche die größte ganze Zahl in einem beliebigen (ganzzahligen, nicht-leeren) Array.}
+        \item \textcolor{gray}{Suche die größte, ganze Zahl in einem beliebigen (ganzzahligen, nicht-leeren) Array.}
         \item Problemabstraktion:
         \begin{description}[Gegeben:]
             \item[Gegeben:] Endliches unsortiertes Array $t$ an ganzen Zahlen \(n \in \Z\).
