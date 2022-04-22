@@ -17,28 +17,30 @@
 \SetNextSectionText{\say{My dear Watson, try a little analysis yourself,} said he, with a touch of impatience. \say{You know my methods. Apply them, and it will be instructive to compare results.}\\--- Conan Doyle~\cite[chp.~VI]{doyle2010sign}}
 \section{Präsenzaufgabe}
 {\def\f#1->#2\;{\parbox{7.5em}{\(S = \text{\T{#1}}\)\hfill}\(~~{\color{gray}\longrightarrow}~~\hbox to3.5em{\say{#2}\hfill}\)}
+\newcounter{presencesub}\def\t#1{\stepcounter{presencesub}\alph{presencesub})~\textit{#1}}
 \begin{frame}{Präsenzaufgabe}
 \begin{aufgabe}{Das habe ich schon gesehen!}
 \vspace*{-.9\baselineskip}\null\hfill\smash{\raisebox{-\height-.4\baselineskip}{\minipage{.55\linewidth}
 \itemize
-    \item<4-> \f ababababa->Nein\; \info{Enthält ein \T{b}}
-    \item<5-> \f aaaaaaaaa->Ja\; \info{Hat \T{a} und kein \T{b}}
-    \item<6-> \f cdefg->Nein\; \info{Enthält kein \T{a}}
-    \item<7-> \f klmohna->Ja\; \info{Hat \T{a} und kein \T{b}}
+    \item<5-> \f ababababa->Nein\; \info{Enthält ein \T{b}}
+    \item<6-> \f aaaaaaaaa->Ja\; \info{Hat \T{a} und kein \T{b}}
+    \item<7-> \f cdefg->Nein\; \info{Enthält kein \T{a}}
+    \item<8-> \f klmohna->Ja\; \info{Hat \T{a} und kein \T{b}}
 \enditemize
-\endminipage}}\par\parshape 7
+\endminipage}}\par\only<-3|handout:0>{\parshape 1
+0pt \linewidth}\only<4->{\parshape 7
 0pt .4125\linewidth
 0pt .4125\linewidth
 0pt .4125\linewidth
 0pt .4125\linewidth
 0pt .4125\linewidth
 0pt .4125\linewidth
-0pt \linewidth
+0pt \linewidth}
 % \raggedright
 \onslide<2->{Entwerfen Sie einen Algorithmus, um herauszufinden, ob in einer Zeichenkette \(S\) das Zeichen \T{a}, aber nicht das Zeichen \T{b} vorkommt. Als Ergebnis soll der Algorithmus ausgeben können, ob diese Bedingung zutrifft (\say{Ja}) oder nicht (\say{Nein}).} \onslide<3->{Wir vermerken ein paar Beispiele\ldots}%
 \smallskip\par
-    \onslide<8->{Führen Sie die Schritte der Algorithmenentwicklung durch:
-    \onslide<+(1)->{a)~Problemspezifikation}\onslide<+(1)->{, b)~Problemabstraktion}  \onslide<+(1)->{, c)~Algorithmenentwurf}\onslide<+(1)->{, d)~Korrektheitsnachweis bzw. Verifikation}\onslide<+(1)->{ und die e)~Aufwandsanalyse.}}
+    \only<9->{\setcounter{presencesub}0\relax Führen Sie die Schritte der Algorithmenentwicklung durch:
+    \onslide<10->{\t{Problemspezifikation}}\onslide<11->{, \t{Problemabstraktion}}\onslide<12->{, \t{Algorithmenentwurf}}\onslide<13->{, \t{Korrektheitsnachweis bzw. Verifikation}}\onslide<14->{ und die \t{Aufwandsanalyse}.}}
     \onslide<1->
 \end{aufgabe}
 \end{frame}
@@ -56,7 +58,7 @@
         \itemsep=16pt
         \item {\g Spezifikation: Definiere alle relevante Begriffe unmissverständlich}
         \begin{itemize}[<+(1)->]
-            \itemsep3.5pt
+            \itemsep1.5pt
             \item Eine \say{Zeichenkette} \(S\) ist eine indizierte Liste \((s_1, \ldots, s_n)\) an Zeichen.
             \item Ein \say{Zeichen} ist ein Symbol \(s_i\) aus einem Alphabet \(\Sigma\).
             \item Mit \say{Zeichen \(x\) kommt in \(S\) vor} meinen wir: \(\exists i:~s_i = x\)
@@ -64,7 +66,7 @@
         \end{itemize}
         \item {\g Abstraktion: Definiere die Eingabe und die gewünschte Ausgabe}
         \begin{description}[Gegeben:]
-            \itemsep3.5pt
+            \itemsep1.5pt
             \item<+(1)->[Gegeben:] Eine Zeichenkette \(S = s_1, \ldots, s_n\)
             \item<+(1)->[Gesucht:] Ausgabe \say{Ja} genau dann, wenn \(\exists i: s_i = \text{\T{a}}\) und \(\forall j: s_j \neq \text{\T{b}}\), sonst \say{Nein}
         \end{description}
