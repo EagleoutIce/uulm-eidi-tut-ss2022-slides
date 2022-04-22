@@ -135,9 +135,9 @@
     \item<3-> {\g Verifikation: Zeige die totale Korrektheit (der Algorithmus\\  terminiert und ist partiell Korrekt):}\smallskip
     \begin{description}[Partiell Korrekt:]
         \itemsep8pt
-        \item[Termination:] \(Z1\) und \(Z3\)--\(Z6\) sind Elementaroperationen.\\ Diese Terminieren per Definition.\medskip\par
-        Die Schleife in \(Z2\) terminiert, da \(i\) streng monoton ansteigt und damit in endlicher Zeit \(i \leq n\) verletzt.
-        \item[Partiell Korrekt:] Wir merken uns mit \a\ und \b, ob der jeweilige Buchstabe gefunden wurde. Wir geben \say{Ja} nur dann aus, wenn wir ein \T{a}, aber kein \T{b} finden. Sonst geben wir \say{Nein} aus.
+        \item<4->[Termination:] \(Z1\) und \(Z3\)--\(Z6\) sind Elementaroperationen.\\ Diese Terminieren per Definition.\medskip\par
+        \onslide<5->{Die Schleife in \(Z2\) terminiert, da \(i\) streng monoton ansteigt und damit in endlicher Zeit \(i \leq n\) verletzt.}
+        \item<6->[Partiell Korrekt:] Wir merken uns mit \a\ und \b, ob der jeweilige Buchstabe gefunden wurde. \onslide<7->{Wir geben \say{Ja} nur dann aus, wenn wir ein \T{a}, aber kein \T{b} finden. Sonst geben wir \say{Nein} aus.}
     \end{description}
 \end{enumerate}
 \tikzpicture[overlay,remember picture]
@@ -157,7 +157,7 @@
             \end{cases}} \qquad \onslide<5->{\b = \begin{cases}
                 Ja, & \exists j \in \{1, \ldots, i\}: s_j = \text{\T{b}}\\
                 Nein,\quad & \text{sonst.}
-            \end{cases}}
+            \end{cases}}\vspace*{-\topsep}
         \end{equation*}
         \item<6-> Dies kann man beispielsweise mit vollständiger Induktion zeigen.
         \item<7-> Anschließend folgt der Beweis durch Abgleich der Bedingungen.
@@ -180,7 +180,7 @@
         \item<6-> Die Schleife in \(Z2\) enthält zwei Vergleiche und im schlechtesten Fall eine Zuweisung (so ist für \(\text{\T{a}} \neq \text{\T{b}}\) höchstens eine beider Bedingungen trifft zu).
         \item<7-> Die Schleife wird immer genau \(n\)-mal durchlaufen.
     \end{itemize}
-    \item<8-> So erhalten wir im besten (kein \(a\) und kein \(b\)), sowie im schlechtesten Fall (nur \(a\)'s und \(b\)'s): \begin{align*}
+    \item<8-> So erhalten wir im besten (kein \(a\) und kein \(b\)), sowie im schlechtesten Fall (nur \(a\)'s und \(b\)'s):\vspace*{-.5\topsep} \begin{align*}
         \onslide<9->{\text{best-case}} &\onslide<9->{= 2 + n \cdot (2 + 0) + 2 + 1 = 2n + 5 \in \O(n)}\\
         \onslide<10->{\text{worst-case}} &\onslide<10->{= 2 + n \cdot (2 + 1) + 2 + 1 = 3n + 5 \in \O(n)}
     \end{align*}
@@ -191,7 +191,7 @@
 \end{frame}
 }
 
-\MakeThePinguExplainIt[text width=6.65cm,yshift=-1.75cm]{cap=!hide,hat,hat coronal=paletteA,hat ribbon=paletteA,glasses=!hide,eyes wink,cup=!hide,heart=shadeA,right item angle=-45}{Noch werden wir uns solchen Annahmen zärtlich nähern. Mit der Zeit wird es aber immer mehr auch darum gehen, \textit{was} man eigentlich annehmen darf.}
+\MakeThePinguExplainIt[text width=6.65cm,yshift=-1.75cm]{cap=!hide,hat,hat coronal=paletteA,hat ribbon=paletteA,glasses=!hide,eyes wink,cup=!hide,heart=shadeA,right item angle=-50}{Noch werden wir uns solchen Annahmen zärtlich nähern. Mit der Zeit wird es aber immer mehr auch darum gehen, \textit{was} man eigentlich annehmen darf.}
 \begin{frame}[t]{Schweigsame Annahmen}
     \onslide<2->{\color{btdm@text}Für das Programm \say{Zeichenkettenfilter} und seine Analyse gelten die Annahmen:
     \begin{enumerate}[<+(1)->]
@@ -223,7 +223,7 @@
         \item \textbf{Konsistent bleiben}
         \item Menschenlesbare Notation \info{meist Programmiersprachen-Mathe-Gemisch}
         \item Solange \emph{klar} und \emph{eindeutig}, frei gestaltbar
-        \item Beispiel:
+        \item Beispiel:\pause
 % \setcounter{algocf}{2}
 \begin{algorithm}[H]
     \PreCode
@@ -310,12 +310,12 @@
 \begin{frame}[t]{Aufgabe 2: Erste Schritte in Java}
     \task<2->{Speichern Sie den Code in einer Textdatei namens \T{HelloWorld.java} ab.}\vfill
     \begin{itemize}[<+(1)->]
-        \item<3-> Tipp, tipp, tipp, \ldots \ijava{HelloWorld.java}
+        \item<3-> Tipp, tipp, tipp, \ldots \onslide<4->{\ijava{HelloWorld.java}}
     \end{itemize}
-    \task<4->{Übersetzen Sie das Programm mittels \bbash{javac} und führen Sie den erzeugten Java-Bytecode mit \bbash{java} aus.}\vfill
+    \task<5->{Übersetzen Sie das Programm mittels \bbash{javac} und führen Sie den erzeugten Java-Bytecode mit \bbash{java} aus.}\vfill
     \begin{itemize}[<+(1)->]
-        \item<5-> Wir tun wie geheißen: \cbash{javac HelloWorld.java}%
-        \item<6-> Und dann auch für die Ausgabe: \iffull\Rbash[:\onslide<7->]{java HelloWorld}{java HelloWorld}\else\cbash{java HelloWorld}.\fi
+        \item<6-> Wir tun wie geheißen: \cbash{javac HelloWorld.java}%
+        \item<7-> Und dann auch für die Ausgabe: \iffull\Rbash[:\onslide<8->]{java HelloWorld}{java HelloWorld}\else\cbash{java HelloWorld}.\fi
     \end{itemize}
 \end{frame}
 
