@@ -10,11 +10,11 @@ Andere Dateien wurden nachträglich entfernt und bleiben in der History, einfach
 
 ## 🐧Gimme
 
-TODO:
+Solange das Repository privat ist und keine pages die Informationen an die Öffentlichkeit bringen sollen, befinden sich alle PDFs in ihrem aktuell möglichen Stand in der [build-branch](https://github.com/EagleoutIce/uulm-eidi-tut-ss2022-slides/tree/build/all_pdfs).
 
 > Die Folien finden sich hier durch die CI direkt im [Repository](https://github.com/EagleoutIce/uulm-eidi-tut-ss22-slides/tree/gh-pages/all_pdfs) (inklusive aller animierten Versionen).
-> Für die Schnellklicker:\
-> [<img src="https://github.com/EagleoutIce/uulm-eidi-tut-ss22-slides/blob/gh-pages/preview-01.png?raw=true" width="650"/>](https://media.githubusercontent.com/media/EagleoutIce/uulm-eidi-tut-ss22-slides/gh-pages/all_pdfs/eidi_tut_compact.pdf)
+> Für die Schnellklicker:
+<!-- > [<img src="https://github.com/EagleoutIce/uulm-eidi-tut-ss22-slides/blob/gh-pages/preview-01.png?raw=true" width="650"/>](https://media.githubusercontent.com/media/EagleoutIce/uulm-eidi-tut-ss22-slides/gh-pages/all_pdfs/eidi_tut_compact.pdf) -->
 > ### Nicht animierte Versionen
 > Diese existieren in zwei Modi:
 >   * light: [org](https://media.githubusercontent.com/media/EagleoutIce/uulm-eidi-tut-ss22-slides/gh-pages/all_pdfs/eidi_tut_org-light.pdf), [0](https://media.githubusercontent.com/media/EagleoutIce/uulm-eidi-tut-ss22-slides/gh-pages/all_pdfs/eidi_tut_0-light.pdf).
