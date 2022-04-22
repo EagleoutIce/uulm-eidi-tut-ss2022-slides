@@ -20,8 +20,8 @@ retrieve_pdfs: $(TUTS)
 	cp *-Tutorium/folien_*.pdf $(TARGET_DIR)/animated/
 	cp *-Tutorium/noanim_folien_*.pdf $(TARGET_DIR)/
 	# custom rename :D
-	./rename-fb "s/folien_([^.]*)\.pdf/eidi_tut_\1.pdf/" "$(TARGET_DIR)/animated/folien_*.pdf"
-	./rename-fb "s/noanim_folien_([^.]*)\.pdf/eidi_tut_\1.pdf/" "$(TARGET_DIR)/noanim_folien_*.pdf"
+	./data/rename-fb "s/folien_([^.]*)\.pdf/eidi_tut_\1.pdf/" "$(TARGET_DIR)/animated/folien_*.pdf"
+	./data/rename-fb "s/noanim_folien_([^.]*)\.pdf/eidi_tut_\1.pdf/" "$(TARGET_DIR)/noanim_folien_*.pdf"
 
 retrieve_compact: compact
 	test -f eidi_tut_compact.pdf && cp eidi_tut_compact.pdf "$(TARGET_DIR)/eidi_tut_compact.pdf" || true

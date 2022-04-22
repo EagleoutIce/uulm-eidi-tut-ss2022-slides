@@ -141,7 +141,7 @@
 
 \UsePalette{Tutorium}
 
-\providecommand\thpath{..}
+\providecommand\thpath{../data}
 \usepackage{\thpath/tikz-horner}
 
 \usepackage{multicol}
