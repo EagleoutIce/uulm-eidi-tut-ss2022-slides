@@ -214,3 +214,5 @@
   \let\mv@bold\mv@iwonabold
 \fi
 \let\define@iwona@mathversions\@undefined
+
+\usepackage{setspace}

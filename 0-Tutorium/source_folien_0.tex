@@ -17,18 +17,17 @@
 \SetNextSectionText{\say{My dear Watson, try a little analysis yourself,} said he, with a touch of impatience. \say{You know my methods. Apply them, and it will be instructive to compare results.}\\--- Conan Doyle~\cite[chp.~VI]{doyle2010sign}}
 \section{Präsenzaufgabe}
 {\def\f#1->#2\;{\parbox{7.5em}{\(S = \text{\T{#1}}\)\hfill}\(~~{\color{gray}\longrightarrow}~~\hbox to3.5em{\say{#2}\hfill}\)}
-\let\t\textit
 \setbeamertemplate{enumerate item}{\alph{enumi})}
 \begin{frame}[c]{Präsenzaufgabe}
 \begin{aufgabe}{Das habe ich schon gesehen!}
-\vspace*{-.725\baselineskip}\null\hfill\smash{\raisebox{-\height+.5\baselineskip}{\tikz\node[draw=lightgray,rounded corners=2pt,fill=white,inner sep=5.5pt,very thick,outer sep=0pt]{\minipage{.55\linewidth}
+\vspace*{-.825\baselineskip}\null\hfill\smash{\raisebox{-\height+.15\baselineskip}{\only<4->{\tikz\node[draw=lightgray,rounded corners=2pt,fill=white,inner sep=5.5pt,very thick,outer sep=0pt]{\minipage{.55\linewidth}
 \itemize
     \item<5-> \f ababababa->Nein\; \info{Enthält ein \T{b}}
     \item<6-> \f aaaaaaaaa->Ja\; \info{Hat \T{a} und kein \T{b}}
     \item<7-> \f cdefg->Nein\; \info{Enthält kein \T{a}}
     \item<8-> \f klmohna->Ja\; \info{Hat \T{a} und kein \T{b}}
 \enditemize
-\endminipage};}\kern-2.5mm}\par\only<-3|handout:0>{\parshape 1
+\endminipage};}}\kern-2.75mm}\par{\setstretch{1.175}\only<-3|handout:0>{\parshape 1
 0pt \linewidth}\only<4->{\parshape 6
 0pt .4125\linewidth
 0pt .4125\linewidth
@@ -38,15 +37,15 @@
 0pt \linewidth}
 % \raggedright
 \onslide<2->{Entwerfen Sie einen Algorithmus um herauszufinden, ob in einer Zeichenkette \(S\) das Zeichen \T{a}, aber nicht das Zeichen \T{b} vorkommt. Als Ergebnis soll der Algorithmus ausgeben, ob die Bedingung zutrifft (\say{Ja}) oder nicht (\say{Nein}).} \onslide<3->{Ein paar Beispiele\ldots}%
-\medskip\par
+\medskip\par}
     \only<9->{\relax Führen Sie die Schritte der Algorithmenentwicklung durch:\vspace*{-\topsep}
     \begin{multicols}{3}
         \begin{enumerate}
-            \item<10-> \t{Problemspezifikation}
-            \item<11-> \t{Problemabstraktion}
-            \item<12-> \t{Algorithmenentwurf}
-            \item<13-> \t{Korrektheitsnachweis}% bzw. Verifikation}
-            \item<14-> \t{Aufwandsanalyse}
+            \item<10-> Problemspezifikation
+            \item<11-> Problemabstraktion
+            \item<12-> Algorithmenentwurf
+            \item<13-> Korrektheitsnachweis% bzw. Verifikation}
+            \item<14-> Aufwandsanalyse\vspace*{-.35\topsep}
         \end{enumerate}
     \end{multicols}}
     \onslide<1->
