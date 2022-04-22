@@ -214,3 +214,6 @@
   \let\mv@bold\mv@iwonabold
 \fi
 \let\define@iwona@mathversions\@undefined
+
+
+\setbeamerfont{section text}{parent=normal text,size=\footnotesize,shape=\slshape}
