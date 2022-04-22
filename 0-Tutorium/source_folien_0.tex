@@ -1,5 +1,4 @@
 \InputIfFileExists{../global.src}\relax\relax
-\RequirePackage[cmintegrals,cmbraces,ebgaramond]{newtxmath}
 
 \iffull
 \title[Nulltes Tutorium -- Übungsblatt 0]{Mein Compiler und ich}
@@ -18,10 +17,11 @@
 \SetNextSectionText{\say{My dear Watson, try a little analysis yourself,} said he, with a touch of impatience. \say{You know my methods. Apply them, and it will be instructive to compare results.}\\--- Conan Doyle~\cite[chp.~VI]{doyle2010sign}}
 \section{Präsenzaufgabe}
 {\def\f#1->#2\;{\parbox{7.5em}{\(S = \text{\T{#1}}\)\hfill}\(~~{\color{gray}\longrightarrow}~~\hbox to3.5em{\say{#2}\hfill}\)}
-\newcounter{presencesub}\def\t#1{\stepcounter{presencesub}\alph{presencesub})~\textit{#1}}
+\let\t\textit
+\setbeamertemplate{enumerate item}{\alph{enumi})}
 \begin{frame}[c]{Präsenzaufgabe}
 \begin{aufgabe}{Das habe ich schon gesehen!}
-\vspace*{-.9\baselineskip}\null\hfill\smash{\raisebox{-\height-.4\baselineskip}{\minipage{.55\linewidth}
+\vspace*{-.9\baselineskip}\null\hfill\smash{\raisebox{-\height+.25\baselineskip}{\minipage{.55\linewidth}
 \itemize
     \item<5-> \f ababababa->Nein\; \info{Enthält ein \T{b}}
     \item<6-> \f aaaaaaaaa->Ja\; \info{Hat \T{a} und kein \T{b}}
@@ -29,8 +29,7 @@
     \item<8-> \f klmohna->Ja\; \info{Hat \T{a} und kein \T{b}}
 \enditemize
 \endminipage}}\par\only<-3|handout:0>{\parshape 1
-0pt \linewidth}\only<4->{\parshape 7
-0pt .4125\linewidth
+0pt \linewidth}\only<4->{\parshape 6
 0pt .4125\linewidth
 0pt .4125\linewidth
 0pt .4125\linewidth
@@ -40,8 +39,17 @@
 % \raggedright
 \onslide<2->{Entwerfen Sie einen Algorithmus, um herauszufinden, ob in einer Zeichenkette \(S\) das Zeichen \T{a}, aber nicht das Zeichen \T{b} vorkommt. Als Ergebnis soll der Algorithmus ausgeben können, ob diese Bedingung zutrifft (\say{Ja}) oder nicht (\say{Nein}).} \onslide<3->{Wir vermerken ein paar Beispiele\ldots}%
 \smallskip\par
-    \only<9->{\setcounter{presencesub}0\relax Führen Sie die Schritte der Algorithmenentwicklung durch:
-    \onslide<10->{\t{Problemspezifikation}}\onslide<11->{, \t{Problemabstraktion}}\onslide<12->{, \t{Algorithmenentwurf}}\onslide<13->{, \t{Korrektheitsnachweis bzw. Verifikation}}\onslide<14->{ und die \t{Aufwandsanalyse}.}}
+    \only<9->{\relax Führen Sie die Schritte der Algorithmenentwicklung durch:\vspace*{-\topsep}
+    \begin{multicols}{2}
+        \begin{enumerate}
+            \item<10-> \t{Problemspezifikation}
+            \item<11-> \t{Problemabstraktion}
+            \item<12-> \t{Algorithmenentwurf}
+            \item<13-> \t{Korrektheitsnachweis bzw. Verifikation}
+            \item<14-> \t{Aufwandsanalyse}
+            \item[]
+        \end{enumerate}
+    \end{multicols}}
     \onslide<1->
 \end{aufgabe}
 \end{frame}
@@ -127,18 +135,19 @@
 \begin{enumerate}[<+(3)->]
     \setcounter{enumi}{3}
     \item<3-> {\g Verifikation: Zeige die totale Korrektheit (der Algorithmus\\  terminiert und ist partiell Korrekt):}\smallskip
-    \begin{description}[Partielle Korrektheit:]
+    \begin{description}[Partiell Korrekt:]
         \itemsep8pt
-        \item[Termination:] \(Z1\) und \(Z3\)--\(Z6\) enthalten Elementar-\\operationen, die per Definition \\terminieren. Die Schleife in \(Z2\)\\terminiert, da \(i\) streng monoton ansteigt und damit in endlicher Zeit mit \(i > n\) die Schleife beendet.
-        \item[Partielle Korrektheit:] Wir merken uns mit \a\ und \b, ob der jeweilige Buchstabe gefunden wurde. Wir geben \say{Ja} nur dann aus, wenn wir ein \T{a}, aber kein \T{b} finden. Sonst geben wir \say{Nein} aus.
+        \item[Termination:] \(Z1\) und \(Z3\)--\(Z6\) enthalten Elementaroperationen,\\ diese Terminieren per Definition.\medskip\par
+        Die Schleife in \(Z2\) terminiert, da \(i\) streng monoton ansteigt und damit in endlicher Zeit \(i \leq n\) verletzt.
+        \item[Partiell Korrekt:] Wir merken uns mit \a\ und \b, ob der jeweilige Buchstabe gefunden wurde. Wir geben \say{Ja} nur dann aus, wenn wir ein \T{a}, aber kein \T{b} finden. Sonst geben wir \say{Nein} aus.
     \end{description}
 \end{enumerate}
 \tikzpicture[overlay,remember picture]
-    \onslide<2->{\node[below left,xshift=5mm,yshift=-1.25cm,scale=.85,align=center,gray] at(current page.north east) {\copy\presalgobox\\\itshape\small Eine verkürzte Version};}
+    \onslide<2->{\node[below left,xshift=5mm,yshift=-1.5cm,scale=.85,align=center,gray] at(current page.north east) {\copy\presalgobox\\\itshape\small Eine verkürzte Version};}
 \endtikzpicture
 \end{frame}
 \iffull
-\MakeThePinguExplainIt[text width=6.65cm,yshift=-1.76cm]{cap=!hide,halo,glasses=!hide,eyes shiny,heart=shadeA,body type=chubby,right item angle=-45}{Invarianten mögen vielleicht gruselig klingen, sind aber nur Aussagen, die zum Beispiel im Rahmen von Schleifen \say{immer} (also in jedem Durchlauf) gelten.}
+\MakeThePinguExplainIt[text width=6.65cm,yshift=-1.75cm]{cap=!hide,halo,glasses=!hide,eyes shiny,heart=shadeA,body type=chubby,right item angle=-45}{Invarianten mögen vielleicht gruselig klingen, sind aber nur Aussagen, die zum Beispiel im Rahmen von Schleifen \say{immer} (also in jedem Durchlauf) gelten.}
 \begin{frame}{Verifikation --- Eine kleine Vertiefung}
    \begin{itemize}[<+(1)->]
     \item Der Alternative, \say{weniger schwammige} Beweis der partiellen Korrektheit: \begin{itemize}
@@ -169,8 +178,8 @@
     \item<3-> Mögliche ist eine tabellarische oder textuelle Erfassung.
     \item<4-> Wir machen es textuell: \begin{itemize}
         \itemsep7pt
-        \item<5-> Die 1.~Zeile enthält zwei Zuweisungen, die Bedingung in der\\5.~Zeile enthält zwei Vergleiche und in jedem Fall eine Ausgabe. %\\ (als Elementaroperation).
-        \item<6-> Die Schleife enthält zwei Vergleiche und im schlechtesten Fall eine Zuweisung (so ist für \(\text{\T{a}} \neq \text{\T{b}}\) höchstens eine beider Bedingungen trifft zu).
+        \item<5-> \(Z1\) enthält zwei Zuweisungen, die Bedingung in~\(Z5\) enthält zwei\\Vergleiche und in jedem Fall eine Ausgabe. %\\ (als Elementaroperation).
+        \item<6-> Die Schleife in \(Z2\) enthält zwei Vergleiche und im schlechtesten Fall eine Zuweisung (so ist für \(\text{\T{a}} \neq \text{\T{b}}\) höchstens eine beider Bedingungen trifft zu).
         \item<7-> Die Schleife wird immer genau \(n\)-mal durchlaufen.
     \end{itemize}
     \item<8-> So erhalten wir im besten (kein \(a\) und kein \(b\)), sowie im schlechtesten Fall (nur \(a\)'s und \(b\)'s): \begin{align*}
@@ -179,19 +188,19 @@
     \end{align*}
 \end{itemize}
 \tikzpicture[overlay,remember picture]
-    \onslide<2->{\node[below left,xshift=5mm,yshift=-1.25cm,scale=.85,align=center,gray] at(current page.north east) {\copy\presalgobox\\\itshape\small Eine verkürzte Version};}
+    \onslide<2->{\node[below left,xshift=5mm,yshift=-1.5cm,scale=.85,align=center,gray] at(current page.north east) {\copy\presalgobox\\\itshape\small Eine verkürzte Version};}
 \endtikzpicture
 \end{frame}
 }
 
-\MakeThePinguExplainIt[text width=6.65cm,yshift=-2cm]{cap=!hide,hat,hat coronal=paletteA,hat ribbon=paletteA,glasses=!hide,eyes wink,cup=!hide,heart=shadeA,right item angle=-45}{Noch werden wir uns solchen Annahmen zärtlich nähern. Mit der Zeit wird es aber immer mehr auch darum gehen, \textit{was} man eigentlich annehmen darf.}
+\MakeThePinguExplainIt[text width=6.65cm,yshift=-1.75cm]{cap=!hide,hat,hat coronal=paletteA,hat ribbon=paletteA,glasses=!hide,eyes wink,cup=!hide,heart=shadeA,right item angle=-45}{Noch werden wir uns solchen Annahmen zärtlich nähern. Mit der Zeit wird es aber immer mehr auch darum gehen, \textit{was} man eigentlich annehmen darf.}
 \begin{frame}[t]{Schweigsame Annahmen}
     \onslide<2->{\color{btdm@text}Für das Programm \say{Zeichenkettenfilter} und seine Analyse gelten die Annahmen:
     \begin{enumerate}[<+(1)->]
         \item<3-> die Länge \(n\) von \(S\) sei endlich und (in endlicher Zeit) berechenbar%, hier durch \textit{\(n \gets{}\) length(\(S\))},
         \item<4-> wir können die Zeichen \(s_i\) aus \(\Sigma\) vergleichen.
     \end{enumerate}}
-
+    \vspace*{1cm}
     \onslide<5->{Ob \(Z5\) wirklich immer zwei Vergleiche hat, hängt davon ab, wie das logische \say{und} funktioniert. Wertet es für \say{\(\text{falsch} \land \langle?\rangle\)} den zweiten Operand nicht mehr aus, haben wir Falle eines \(S\) ohne \(a\)'s, einen Aufwand von \(2n + 4\).}
 \begin{tikzpicture}[overlay,remember picture]
 \onslide<6->{\node[above left,xshift=5mm,scale=.8,yshift=\btdmfootheight] at(current page.south east) {\copy\pinguexplainbox};}% copy for animations
@@ -247,7 +256,7 @@
     \begin{itemize}[<+(1)->]
         \itemsep7.5pt
         \item \emph{Do:} Gerne eine an Python oder C angelehnte Syntax verwenden.
-        \item \emph{Do:} mathematisch bleiben, also $n \in \mathbb{N}$, $n \in [0,\infty)$ oder \say{$\T{Zeichenkette}~n$}.
+        \item \emph{Do:} mathematisch bleiben, also $n \in \N$, $n \in [0,\infty)$ oder \say{$\T{Zeichenkette}~n$}.
         \item \emph{Don't:} Spracheigene \say{syntactic-sugar} Funktionen oder Definitionen verwenden.\pause{} Also: \emph{kein} \bjava{int}, \bjava{String} oder \bjava{double}.
         \item \emph{Don't:} Einfach nur Java- oder C-Code.
         \item \emph{Don't:} Zu allgemein Formulieren:\smallskip\pause
@@ -412,7 +421,7 @@
             \item[Gegeben:] Endliches unsortiertes Array $t$ an ganzen Zahlen \(n \in \Z\).
             \item[Gesucht:] Maximales ganzzahliges Element \(x = \max(t)\).
         \end{description}
-        \onslide<+(1)->{In diesem Fall ist die Abstaktion nahezu offensichtlich. \onslide<+(1)->{Es dient der Veranschaulichung des Vorgehens \Laughey.}}
+        \onslide<+(1)->{In diesem Fall ist die Abstraktion nahezu offensichtlich. \onslide<+(1)->{Es dient der Veranschaulichung des Vorgehens \Laughey.}}
     \end{itemize}
 \end{frame}
 

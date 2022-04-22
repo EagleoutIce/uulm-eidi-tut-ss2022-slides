@@ -13,13 +13,11 @@
     color=0.2 0.3647 0.4941, icon=Tag, mimetype=text/plain%
 }
 \usepackage{xcolor}
-\usepackage[ngerman]{babel}
-\usepackage{wrapfig}
+\usepackage[main=ngerman]{babel}
+
 \providecommand\btdmmode{lightmode-fill}
 \providecommand\btdmopts{}
 \usetheme[\btdmmode,\btdmopts]{digital-minimal}
-
-% TODO: set link color so they are easily visible
 
 \newif\iffull
 \fulltrue
@@ -35,6 +33,7 @@
 
 % TODO:
 \PassOptionsToPackage{defernumbers=true}{biblatex}% allows for split bibs
+\def\LithieBoxesLoadDefault{}
 \usepackage[%
     sopra-listings={encoding,cpalette,print,highlights,nodefaultfont},%
     % sopra-tables,
@@ -183,3 +182,35 @@
 \newcommand<>\task[1]{\begin{uncoverenv}#2{\par\begingroup\footnotesize\textcolor{gray}{\itshape#1}\par\endgroup}\end{uncoverenv}}
 
 \AtBeginDocument{\def\O{\ensuremath{\mathcal{O}}}}
+
+\AtBeginDocument{\def\N{\mbox{I\kern-1pt\relax N}}}
+
+% iwona math
+\makeatletter
+\DeclareMathVersion{iwona}
+\DeclareMathVersion{iwonabold}
+
+\SetSymbolFont{operators}{iwona}{OT1}{iwonam}{m}{n}
+\SetSymbolFont{letters}{iwona}{OML}{iwona} {m}{it}
+\SetSymbolFont{symbols}{iwona}{OMS}{iwona}{m}{n}
+\SetSymbolFont{largesymbols}{iwona}{OMX}{iwona}{m}{n}
+\SetSymbolFont{operators}{iwonabold}{OT1}{iwonam} {b}{n}
+\SetSymbolFont{letters}  {iwonabold}{OML}{iwona} {b}{it}
+\SetSymbolFont{symbols}  {iwonabold}{OMS}{iwona}{b}{n}
+\SetSymbolFont{largesymbols}{iwonabold}{OMX}{iwona}{b}{n}
+\SetMathAlphabet{\mathbf}{iwona}{OT1}{iwona}{bx}{n}
+\SetMathAlphabet{\mathsf}{iwona}{OT1}{iwona}{m}{n}
+\SetMathAlphabet{\mathit}{iwona}{OT1}{iwona}{m}{it}
+\SetMathAlphabet{\mathtt}{iwona}{OT1}{iwona}{m}{n}
+\SetMathAlphabet\mathsf{iwonabold}{OT1}{iwona}{bx}{n}
+\SetMathAlphabet\mathit{iwonabold}{OT1}{iwona}{bx}{it}
+\mathversion{iwona}
+\ifx\define@iwona@mathversions a
+  \ifx\mv@cmr\@undefined
+    \let\mv@cmr\mv@normal
+    \let\mv@cmrbold\mv@bold
+  \fi
+  \let\mv@normal\mv@iwona
+  \let\mv@bold\mv@iwonabold
+\fi
+\let\define@iwona@mathversions\@undefined
