@@ -37,14 +37,14 @@ noanim_%-dark.pdf: $(SOURCES)
 
 # specified below so it does not trigger the others
 %-light.pdf: __FILECONTENT = \\def\\btdmmode{lightmode-fill}\\input{source_$*.tex}
-%-light.pdf: $(SOURCES)
+%-light.pdf: ../data $(SOURCES)
 	$(produce)
 
 # byusing define we can use target-specific variables :D
 # we only make use of temporary files to do not clutter
 define produce
 	echo "${__FILECONTENT}" > "${__FILENAME}"
-	sltxrc "${__FILENAME}"
+	sltx raw-compile --recipe "default-lua-latexmk.recipe" "${__FILENAME}"
 	rm "${__FILENAME}"
 endef
 
