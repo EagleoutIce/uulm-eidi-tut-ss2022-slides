@@ -322,44 +322,9 @@
 \iffull
 \SetNextSectionText{Zahlensysteme und Algorithmenkonstruktion\\Abgabe: \DTMDate{2022-05-02}}
 \section{Aussicht: Übungsblatt 1}
-\subsection{Hornerschema}
-\def\h#1{\textcolor{cprimary}{#1}}
-\let\tm\tikzmarknode
-\begin{frame}{Hornerschema, \(b\) zu Dezimal}
-    \begin{itemize}[]
-        \item \pause Am Beispiel von $\h{\tm11\tm20\tm30\tm41}_{(\tm02)}$.
-        \pause\[((\h{\tm a1}\cdot \tm x2 + \h{\tm b0})\cdot\tm y2 + \h{\tm c0}) \cdot\tm z2 + \h{\tm d1} \pause = (2\cdot2 + \h{0}) \cdot 2 + \h{1} \pause = (6 \cdot 2) + \h{1} = 9_{(10)}.\]
-        \begin{tikzpicture}[remember picture,overlay]
-            \only<+(1)|handout:0>{\draw[-Kite,gray] (1.south) -- (a);}
-            \only<+(1)|handout:0>{\draw[-Kite,gray] (2.south) -- (b);}
-            \only<+(1)|handout:0>{\draw[-Kite,gray] (3.south) -- (c);}
-            \only<+(1)|handout:0>{\draw[-Kite,gray] (4.south) -- (d);}
-            \only<+(1)|handout:0>{\draw[-Kite,gray] (0.south) -- (x);}
-            \only<+(1)|handout:0>{\draw[-Kite,gray] (0.south) -- (y);}
-            \only<+(1)|handout:0>{\draw[-Kite,gray] (0.south) -- (z);}
-        \end{tikzpicture}
-        \item \pause Tabellarisch: \TikzHorner[13]{1,0,0,1}{2}
-    \end{itemize}
-\end{frame}
+\subsection{Aufwandsanalyse}
+\begin{frame}{TODO}
 
-\begin{frame}{Hornerschema, \(b\) zu Dezimal (II)}
-    \begin{itemize}[]
-        \item \pause Andere Basis: $\h{\tm11\tm20\tm30\tm41}_{(\tm05)}$.
-        \pause\[((\h{\tm a1}\cdot \tm x5 + \h{\tm b0})\cdot\tm y5 + \h{\tm c0}) \cdot\tm z5 + \h{\tm d1} \pause = (5\cdot5 + \h{0}) \cdot 5 + \h{1} \pause = (25 \cdot 5) + \h{1} = 126_{(10)}.\]
-        \begin{tikzpicture}[remember picture,overlay]
-            \only<+(1)|handout:0>{\draw[-Kite,gray] (0.south) -- (x);}
-            \only<+(1)|handout:0>{\draw[-Kite,gray] (0.south) -- (y);}
-            \only<+(1)|handout:0>{\draw[-Kite,gray] (0.south) -- (z);}
-        \end{tikzpicture}
-        \item \pause Tabellarisch: \TikzHorner[9]{1,0,0,1}{5}
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Hornerschema, Dezimal zu \(b\)}
-    \begin{itemize}[]
-        \item \pause \(126_{(10)}\) zurück zur Basis \(5\).
-        \item \pause Tabellarisch: \TikzHornerReverse[4]{1,0,0,1}{5}
-    \end{itemize}
 \end{frame}
 
 \subsection{Algorithmen}
@@ -427,16 +392,16 @@
 \begin{frame}[t]{Algorithmus --- Entwurf und Korrektheit}
     \begin{itemize}[<+(1)->]
         \item Algorithmenentwurf: \info{Annahme eines 0-indizierten Arrays mit Zugriff \T{a[$i$]} für das \(i\)-te Element \(t_i\).}\\
-        \begin{enumerate}\itemsep0pt
+        {\small\begin{enumerate}\itemsep0pt
             \item Setze \(max = \text{\T{a[$0$]}}\).
             \item Setze \(i = 1\).
             \item \label{alg:loop}Solange \(i < m\):\\
                 \pause{\quad Wenn (\(max < \text{\T{a[$i$]}}\)):}\pause{~~\(max = \text{\T{a[$i$]}}\).}\\
                 \pause{\quad Inkrementiere \(i\) um \(1\).}
             \item<+(1)-> Lösung ist \(max\).
-        \end{enumerate}
+        \end{enumerate}}
         \item Korrektheitsnachweis: \begin{description}[Partiell korrekt:]
-            \item[Terminiert:] Die Schleife aus \ref{alg:loop}. endet sicher, da \(i\) in jeder Iteration um \(1\) inkrementiert wird und damit streng monoton wächst, \onslide<+(1)->{also sicher irgendwann \(i < m\) mit \(m \geq 1\) nicht mehr erfüllt.}
+            \item[Terminiert:] Die Schleife aus \ref{alg:loop}. terminiert, da \(i\) pro Iteration um \(1\) inkrementiert wird und damit streng monoton wächst, \onslide<+(1)->{also sicher irgendwann \(i < m\) mit \(m \geq 1\) verletzt.}
             \item<+(1)->[Partiell korrekt:] Hier lässt sich leicht zeigen, dass für jeden Schritt in \ref{alg:loop}. gilt, dass \(max \geq (t_1, \ldots, t_i)\). \onslide<+(1)->{Für \(m = 1\) ist weiter \(max = \text{\T{a[$0$]}} = \max\bigl(t_0\bigr)\).}
         \end{description}
     \end{itemize}
