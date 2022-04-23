@@ -44,8 +44,8 @@ noanim_%-dark.pdf: $(SOURCES)
 # we only make use of temporary files to do not clutter
 define produce
 	echo "${__FILECONTENT}" > "${__FILENAME}"
-   sltxrc "${__FILENAME}"
-   rm "${__FILENAME}"
+	sltxrc "${__FILENAME}"
+	rm "${__FILENAME}"
 endef
 
 clean:
