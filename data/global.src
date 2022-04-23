@@ -181,8 +181,7 @@
 
 \newcommand<>\task[1]{\begin{uncoverenv}#2{\par\begingroup\footnotesize\textcolor{gray}{\itshape#1}\par\endgroup}\end{uncoverenv}}
 
-\AtBeginDocument{\def\O{\ensuremath{\mathcal{O}}}}
-
-\AtBeginDocument{\def\N{\mbox{I\kern-1pt\relax N}}}
+\AtBeginDocument{\def\O{\ensuremath{\mathcal{O}}}\def\N{\mbox{I\kern-1pt\relax N}}}
+\newsavebox\pinguA \newsavebox\pinguB
 
 \usepackage{setspace}

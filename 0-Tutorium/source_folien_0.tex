@@ -214,7 +214,8 @@
 \iffull
 \SetNextSectionText[.35\linewidth]{Avoid syntactic elements from the target programming language\\--- Steve McConnell, \cite[p.~54]{10.5555/151071}}
 \section{Bonus: Pseudocode}
-\def\tpingu{\raisebox{-1pt}{\scalebox{0.15}{\tikz{\pingu}}}}
+\setbox\pinguA=\hbox{\raisebox{-1pt}{\scalebox{.15}{\tikz{\pingu}}}}
+\def\tpingu{\copy\pinguA}
 \def\tagent{\pingu[sunglasses,wings wave,heart=paletteA,eyes wink]}
 {\SetAlgoVlined
 \begin{frame}[t]{How-To Pseudocode}
