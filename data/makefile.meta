@@ -9,7 +9,7 @@ SLIDES_VARIANTS_NOANIM := $(addprefix noanim_, ${SLIDES_BASE})
 # at the moment, i do not want an animated darkmode :>
 SLIDES_VARIANTS_ALL    := $(addsuffix -light,${SLIDES_VARIANTS_NOANIM}) $(addsuffix -dark,${SLIDES_VARIANTS_NOANIM}) $(addsuffix -light,${SLIDES_BASE})
 SLIDESPDF              := $(addsuffix .pdf,${SLIDES_VARIANTS_ALL})
-CLEANTARGETS           := log aux out ind bbl blg lof lot toc idx acn acr alg glg glo gls fls fdb_latexmk auxlock md5 SATZE ZSM UB TOP listing upa ilg TOPIC DEFS vrb snm nav atfi run.xml
+CLEANTARGETS           := log aux out ind bbl blg lof lot toc idx acn acr alg glg glo gls fls fdb_latexmk auxlock md5 SATZE ZSM UB TOP listing upa ilg TOPIC DEFS vrb snm nav atfi run.xml bcf
 
 # used internally for rule reuse
 __FILENAME    := ""
