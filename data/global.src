@@ -1,6 +1,8 @@
-\documentclass[aspectratio=169,usepdftitle=true,11pt,t]{beamer}
+\documentclass[aspectratio=169,usepdftitle=true,11pt,ngerman,t]{beamer}
 \errorcontextlines999999
 
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
 \usepackage{microtype}
 
 \usepackage{attachfile2}
@@ -11,17 +13,11 @@
     color=0.2 0.3647 0.4941, icon=Tag, mimetype=text/plain%
 }
 \usepackage{xcolor}
-% \usepackage[main=ngerman]{babel}
-\usepackage{polyglossia}
-\AtEndPreamble{\setmainlanguage{german}}
-% \usepackage{fontspec} % => fira otf automatically
-\setsansfont[BoldFont={Fira Sans}]{Fira Sans Light}
-\usepackage{firamath-otf}
+\usepackage[main=ngerman]{babel}
 
 \providecommand\btdmmode{lightmode-fill}
 \providecommand\btdmopts{}
 \usetheme[\btdmmode,\btdmopts]{digital-minimal}
-
 
 \newif\iffull
 \fulltrue
@@ -185,7 +181,7 @@
 
 \newcommand<>\task[1]{\begin{uncoverenv}#2{\par\begingroup\footnotesize\textcolor{gray}{\itshape#1}\par\endgroup}\end{uncoverenv}}
 
-\AtBeginDocument{\def\O{\ensuremath{\mathcal{O}}}\def\N{\mbox{I\kern-1pt\relax N}}}
+\AtBeginDocument{\def\O{\ensuremath{\mathcal{O}}}}
 \newsavebox\pinguA \newsavebox\pinguB
 
 \usepackage{setspace}

@@ -20,20 +20,22 @@
 \setbeamertemplate{enumerate item}{\alph{enumi})}
 \begin{frame}[c]{Präsenzaufgabe}
 \begin{aufgabe}{Das habe ich schon gesehen!}
-\vspace*{-.825\baselineskip}\null\hfill\smash{\raisebox{-\height+.15\baselineskip}{\only<4->{\tikz\node[draw=lightgray,rounded corners=2pt,fill=white,inner sep=5.5pt,very thick,outer sep=0pt]{\minipage{.55\linewidth}
+\vspace*{-.825\baselineskip}\null\hfill\smash{\raisebox{-\height+.15\baselineskip}{\only<4->{\tikz\node[draw=lightgray,rounded corners=2pt,fill=white,inner sep=5.5pt,very thick,outer sep=0pt]{\minipage{.6\linewidth}
 \itemize
+    \itemsep4pt
     \item<5-> \f ababababa->Nein\; \info{Enthält ein \T{b}}
     \item<6-> \f aaaaaaaaa->Ja\; \info{Hat \T{a} und kein \T{b}}
     \item<7-> \f cdefg->Nein\; \info{Enthält kein \T{a}}
     \item<8-> \f klmohna->Ja\; \info{Hat \T{a} und kein \T{b}}
 \enditemize
-\endminipage};}}\kern-2.75mm}\par{\setstretch{1.175}\only<-3|handout:0>{\parshape 1
-0pt \linewidth}\only<4->{\parshape 6
-0pt .4125\linewidth
-0pt .4125\linewidth
-0pt .4125\linewidth
-0pt .4125\linewidth
-0pt .4125\linewidth
+\endminipage};}}\kern-2.75mm}\par{\only<-3|handout:0>{\parshape 1
+0pt \linewidth}\only<4->{\parshape 7
+0pt .365\linewidth
+0pt .365\linewidth
+0pt .365\linewidth
+0pt .365\linewidth
+0pt .365\linewidth
+0pt .365\linewidth
 0pt \linewidth}
 % \raggedright
 \onslide<2->{Entwerfen Sie einen Algorithmus um herauszufinden, ob in einer Zeichenkette \(S\) das Zeichen \T{a}, aber nicht das Zeichen \T{b} vorkommt. Als Ergebnis soll der Algorithmus ausgeben, ob die Bedingung zutrifft (\say{Ja}) oder nicht (\say{Nein}).} \onslide<3->{Ein paar Beispiele\ldots}%
@@ -141,7 +143,7 @@
     \end{description}
 \end{enumerate}
 \tikzpicture[overlay,remember picture]
-    \onslide<2->{\node[below left,xshift=5mm,yshift=-1.35cm,scale=.85,align=center,gray] at(current page.north east) {\copy\presalgobox\\\itshape\small Eine verkürzte Version};}
+    \onslide<2->{\node[below left,xshift=2.5mm,yshift=-1.35cm,scale=.8,align=center,gray] at(current page.north east) {\copy\presalgobox\\\itshape\small Eine verkürzte Version};}
 \endtikzpicture
 \end{frame}
 \iffull
@@ -180,13 +182,13 @@
         \item<6-> Die Schleife in \(Z2\) enthält zwei Vergleiche und im schlechtesten Fall eine Zuweisung (so ist für \(\text{\T{a}} \neq \text{\T{b}}\) höchstens eine beider Bedingungen trifft zu).
         \item<7-> Die Schleife wird immer genau \(n\)-mal durchlaufen.
     \end{itemize}
-    \item<8-> So erhalten wir im besten (kein \(a\) und kein \(b\)), sowie im schlechtesten Fall (nur \(a\)'s und \(b\)'s):\vspace*{-3.5mm} \begin{align*}
+    \item<8-> So erhalten wir im best- (keine \(a\)'s und \(b\)'s) und worst-case (nur \(a\)'s und \(b\)'s):\vspace*{-3.5mm} \begin{align*}
         \onslide<9->{\text{best-case}} &\onslide<9->{= 2 + n \cdot (2 + 0) + 2 + 1 = 2n + 5 \in \O(n)}\\
         \onslide<10->{\text{worst-case}} &\onslide<10->{= 2 + n \cdot (2 + 1) + 2 + 1 = 3n + 5 \in \O(n)}
     \end{align*}
 \end{itemize}
 \tikzpicture[overlay,remember picture]
-    \onslide<2->{\node[below left,xshift=5mm,yshift=-1.35cm,scale=.85,align=center,gray] at(current page.north east) {\copy\presalgobox\\\itshape\small Eine verkürzte Version};}
+    \onslide<2->{\node[below left,xshift=2.5mm,yshift=-1.35cm,scale=.8,align=center,gray] at(current page.north east) {\copy\presalgobox\\\itshape\small Eine verkürzte Version};}
 \endtikzpicture
 \end{frame}
 }
@@ -356,8 +358,8 @@
         \item Information: Die Regeln zum Pseudocode gelten hier nach wie vor!
         \item Problemspezifikation:
         \begin{description}[Ganzzahliges Array:]
-            \item[Ganzzahliges Array:] Tupel der Größe \(m \geq 1\) mit: \(t = (t_1, t_2, \ldots, t_m) \in \Z^m\) \info{\(t_i \in \Z\) für alle \(t_i\)}
-            \item[Beliebig:] Die Elemente müssen nicht sortiert vorliegen. \info{Also z.B. nicht \(t_1 \leq \ldots \leq t_m\).}
+            \item[Ganzzahliges Array:] Tupel \(t = (t_1, t_2, \ldots, t_m) \in \Z^m\) der Größe \(m \geq 1\) mit \info{\(t_i \in \Z\) für alle \(t_i\)}
+            \item[Beliebig:] Die Elemente können unsortiert vorliegen \info{z.B. \(t_1 \leq t_2 > t_3\)}.
             \item[Größte:] Die größte, ganze Zahl \(z \in t\) mit \(z = \max(t)\).
         \end{description}
         \onslide<+(1)->{Ordentlich wäre rein mathematische\textor axiomatisch belegte Formalisierungen zu nutzen. \onslide<+(1)->{In dieser Veranstaltung beschreiten wir einen Mittelweg.}}
