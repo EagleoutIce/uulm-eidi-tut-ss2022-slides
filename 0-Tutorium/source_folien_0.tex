@@ -132,7 +132,7 @@
 \begin{frame}{Korrektheitsnachweis, Verifikation}
 \begin{enumerate}[<+(3)->]
     \setcounter{enumi}{3}
-    \item<3-> {\g Verifikation: Zeige die totale Korrektheit (der Algorithmus\\  terminiert und ist partiell Korrekt):}\smallskip
+    \item<3-> {\g Verifikation: Zeige die totale Korrektheit (der Algorithmus\\  terminiert und ist partiell Korrekt):}\medskip
     \begin{description}[Partiell Korrekt:]
         \itemsep8pt
         \item<4->[Termination:] \(Z1\) und \(Z3\)--\(Z6\) sind Elementaroperationen.\\ Diese Terminieren per Definition.\medskip\par
@@ -145,7 +145,7 @@
 \endtikzpicture
 \end{frame}
 \iffull
-\MakeThePinguExplainIt[text width=6.65cm,yshift=-1.75cm]{cap=!hide,halo,glasses=!hide,eyes shiny,heart=shadeA,body type=chubby,right item angle=-45}{Invarianten mögen vielleicht gruselig klingen, sind aber nur Aussagen, die zum Beispiel im Rahmen von Schleifen \say{immer} (also in jedem Durchlauf) gelten.}
+\MakeThePinguExplainIt[text width=6.65cm,yshift=-1.75cm]{cap=!hide,halo,glasses=!hide,eyes shiny,heart=shadeA,body type=chubby,right item angle=-52}{Invarianten mögen vielleicht gruselig klingen, sind aber nur Aussagen, die zum Beispiel im Rahmen von Schleifen \say{immer} (also in jedem Durchlauf) gelten.}
 \begin{frame}{Verifikation --- Eine kleine Vertiefung}
    \begin{itemize}[<+(1)->]
     \item Der Alternative, \say{weniger schwammige} Beweis der partiellen Korrektheit: \begin{itemize}
@@ -157,7 +157,7 @@
             \end{cases}} \qquad \onslide<5->{\b = \begin{cases}
                 Ja, & \exists j \in \{1, \ldots, i\}: s_j = \text{\T{b}}\\
                 Nein,\quad & \text{sonst.}
-            \end{cases}}\vspace*{-\topsep}
+            \end{cases}}\vspace*{-4mm}
         \end{equation*}
         \item<6-> Dies kann man beispielsweise mit vollständiger Induktion zeigen.
         \item<7-> Anschließend folgt der Beweis durch Abgleich der Bedingungen.
@@ -392,16 +392,17 @@
 \begin{frame}[t]{Algorithmus --- Entwurf und Korrektheit}
     \begin{itemize}[<+(1)->]
         \item Algorithmenentwurf: \info{Annahme eines 0-indizierten Arrays mit Zugriff \T{a[$i$]} für das \(i\)-te Element \(t_i\).}\\
-        {\small\begin{enumerate}\itemsep0pt
+        \begin{enumerate}\itemsep0pt
             \item Setze \(max = \text{\T{a[$0$]}}\).
             \item Setze \(i = 1\).
             \item \label{alg:loop}Solange \(i < m\):\\
                 \pause{\quad Wenn (\(max < \text{\T{a[$i$]}}\)):}\pause{~~\(max = \text{\T{a[$i$]}}\).}\\
                 \pause{\quad Inkrementiere \(i\) um \(1\).}
             \item<+(1)-> Lösung ist \(max\).
-        \end{enumerate}}
+        \end{enumerate}
         \item Korrektheitsnachweis: \begin{description}[Partiell korrekt:]
-            \item[Terminiert:] Die Schleife aus \ref{alg:loop}. terminiert, da \(i\) pro Iteration um \(1\) inkrementiert wird und damit streng monoton wächst, \onslide<+(1)->{also sicher irgendwann \(i < m\) mit \(m \geq 1\) verletzt.}
+            \itemsep3pt
+            \item[Terminiert:] Die Schleife aus \ref{alg:loop}. terminiert, da \(i\) pro Iteration um \(1\) inkrementiert wird und damit streng monoton wächst \onslide<+(1)->{\info{also sicher irgendwann \(i \geq m\)}.}
             \item<+(1)->[Partiell korrekt:] Hier lässt sich leicht zeigen, dass für jeden Schritt in \ref{alg:loop}. gilt, dass \(max \geq (t_1, \ldots, t_i)\). \onslide<+(1)->{Für \(m = 1\) ist weiter \(max = \text{\T{a[$0$]}} = \max\bigl(t_0\bigr)\).}
         \end{description}
     \end{itemize}
