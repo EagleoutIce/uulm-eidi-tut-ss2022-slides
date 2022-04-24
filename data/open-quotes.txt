@@ -6,6 +6,8 @@ Practice yourself, for heaven'S sake, in ltitel thins, and thence proceed to gre
 About 1000 instructions is a reasonable upper limit for the complexity of problems no envisioned. Herman Goldstine and John von Neumann (1946)
 
 
+% konnte ich nicht verifizieren:
+% https://learning.oreilly.com/library/view/art-of-computer/9780321635754/ch01.html#ch01lev1sec1
 An algorithm must be seen to be believed.\\--- Donald E. Knuth~\cite{knuth1997fundamental}
 
 @article{knuth1997fundamental,
