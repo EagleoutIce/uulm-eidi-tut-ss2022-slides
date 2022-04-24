@@ -27,7 +27,7 @@ compile: ${SLIDESPDF}
 
 # this are mere wrapper rules to be used with the common producer below
 # with $* we get the stem (whatever the '%' did expand to)
-noanim_%-light.pdf: __FILECONTENT = \\PassOptionsToClass{handout}{beamer}\\def\\btdmmode{lightmode-fill}\\input{source_$*.tex}
+noanim_%-light.pdf: __FILECONTENT = \\PassOptionsToClass{handout}{beamer}\\def\\btdmmode{lightmode}\\input{source_$*.tex}
 noanim_%-light.pdf: $(SOURCES)
 	$(produce)
 
