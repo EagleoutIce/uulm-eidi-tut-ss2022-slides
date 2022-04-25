@@ -213,7 +213,7 @@
 \def\b{\text{\textit{B}}}
 % ugly hell
 \makeatletter\def\boxlot#1#2{\text{{\@solLstHL{fill=#1,draw=#1}{#2}}}}
-\IfBtdmDarkmode{\def\boxme#1#2{\only<-12|handout:0>{#2}\only<13->{\boxlot{#1}{#2}}}}{\def\boxme#1#2{\only<-12|handout:0>{#2}\only<13->{\boxlot{#1!80!btdm@background}{#2}}}}
+\def\boxme#1#2{\only<-12|handout:0>{#2}\only<13->{\boxlot{#1!80!btdm@background}{#2}}}
 \begin{frame}{Alternativer Ansatz}
 \pause\begin{algorithm}[H]
 \PreCode
