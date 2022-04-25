@@ -212,8 +212,8 @@
 \def\a{\text{\textit{Answer}}}
 \def\b{\text{\textit{B}}}
 % ugly hell
-\makeatletter\def\boxlot#1#2{\text{{\@solLstHL{fill=#1,draw=#1}{#2}}}}
-\IfBtdmDarkmode{\def\boxme#1#2{\only<-12|handout:0>{\text{#2}}\only<13->{\boxlot{#1!12!btdm@background}{\text{#2}}}}}{\def\boxme#1#2{\only<-12|handout:0>{#2}\only<13->{\boxlot{#1}{#2}}}}
+\makeatletter\def\boxlot#1#2{\text{\phantom{#2}\llap{\@solLstHL{fill=#1,draw=#1}{#2}}}}
+\IfBtdmDarkmode{\def\boxme#1#2{\only<-12|handout:0>{\text{#2}}\only<13->{\boxlot{#1!12!btdm@background}{\text{\phantom{#2}\llap{#2}}}}}}{\def\boxme#1#2{\only<-12|handout:0>{#2}\only<13->{\boxlot{#1}{#2}}}}
 \begin{frame}{Alternativer Ansatz\hfill I}
 \pause\begin{algorithm}[H]
 \PreCode
@@ -232,15 +232,15 @@
 \end{algorithm}
 \begin{tikzpicture}[overlay,remember picture]
     \onslide<+(1)->{\node[above left,yshift=\btdmfootheight+5mm,xshift=-3.5mm,align=left,gray,font=\footnotesize\sffamily\slshape] at (current page.south east) {Die Laufzeit beläuft sich auf:\\% no cause this seems nicer align
-        \upshape\(\phantom{{}={}}3 + n \cdot \bigl(1 + \max(2 + 1 + 1,~~\boxme{shadeA}{$2$} {+} \boxme{lightgray!50!white!70!shadeB}{$1$} {+} \boxme{lightgray!90!btdm@background}{$2$}) \bigr) + 1\) \\
-        \({}={} 4 + n \cdot 6 \in \O(n)\)};}
+        \upshape\(\phantom{{}={}}3 + n \cdot \bigl(2 + \max(2 + 1 + 1,~~\boxme{shadeA}{$2$} {+} \boxme{lightgray!50!white!70!shadeB}{$1$} {+} \boxme{lightgray!90!btdm@background}{$2$}) \bigr) + 1\) \\
+        \({}={} 4 + n \cdot 7 \in \O(n)\)};}
 \end{tikzpicture}
 \end{frame}
 {\def\xs{.75cm}
 \def\BF#1{\only<-19|handout:0>{#1}\only<20->{\textbf{\color{paletteA}#1}}}
 \begin{frame}{Alternativer Ansatz\hfill II}
     \begin{center}
-        {\footnotesize\onslide<2->{\color{gray}Given the String \(S = s^0 s^1 s^2\ldots\)} and \onslide<3->{Let \(i \in \N\), \(Res \in \{\times, \checkmark\}\)}}\medskip
+        {\footnotesize\onslide<2->{\color{gray}Given the String \(S = s^0 s^1 s^2\ldots\)}\onslide<3->{ and let \(i \in \N\), \(Res \in \{\times, \checkmark\}\)}}\medskip
     \end{center}
 \centering\resizebox{.925\linewidth}!{\begin{tikzpicture}[rounded corners=1pt,mh/.style={minimum height=2\baselineskip+3mm,rounded corners=1pt,align=center,draw},m/.style={gray,font=\small\sffamily\slshape}]
     \onslide<4->{\node[rounded rectangle,draw] (s) {Start};}
@@ -284,7 +284,7 @@
 
     \onslide<12->{\node[mh,below=\xs-2mm] (10) at(6.south) {Increment \(i\) by \(1\)};%
         \draw[-Kite] (7) |- (10.5);
-        \onslide<19->{\node[below=-.5mm,m] at(10.south) {$\BF1$};}
+        \onslide<19->{\node[below=-.5mm,m] (di) at(10.south) {$\BF1$};}
     }
 
     \onslide<9->{
@@ -300,10 +300,20 @@
 \pause
 \begin{tikzpicture}[overlay,remember picture]
     \onslide<18->{\node[above left,yshift=\btdmfootheight+1mm,xshift=-3.5mm,align=left,gray,font=\footnotesize\sffamily\slshape] at (current page.south east) {\(2 + 1 + n \cdot (2 + 2) + 1  = 4 + n \cdot 4 \in \O(n)\)};}
-    \onslide<21->{\node[above right,yshift=\btdmfootheight,gray,text width=5cm] at(current bounding box.south west) {Je nach Definition zählt das Inkrement oder nicht. Deswegen ist die \(\O\)-Notation interessanter (diese wird später konkretisiert).};}
 \end{tikzpicture}
 % TODO: Note about increment und pingu mit wir mögen textuell mehr
 \end{frame}}
+
+\begin{frame}{Weiter Kommentare}
+    \begin{itemize}[<+(1)->]
+        \itemsep9.5pt
+        \item Ob wir das Inkrement mitzählen oder nicht, hängt von der Definition ab.
+        \item Analog könnte das Berechnen der Länge auch in \(\O(n)\) oder vergleichbar sein.
+        \item Deswegen wichtig: Annahmen in Textform festhalten!
+        \item Spielt das überhaupt eine Rolle?\pause \infoblock{Ja und nein. Im Allgemeinen Fall nein, weil es uns mehr darum geht ob die Algorithmen konstant (\(\O(1)\)), polynomiell (\(\O(n^2)\)) oder schlimmer sind (\(\O(2^n)\), \(\O(n!)\),~\ldots). Dennoch kann es sinnvoll sein um Algorithmen der gleichen Wachstumsklasse zu vergleichen oder um Randentscheidungen zu treffen (vergleiche \(2^n\) vs. \(n^{4000}\) für \(n = 10\)). Die Nützlichkeit der Definitionen hängt vom konkreten Fall ab.}
+        \item Wir präferieren strukturiert-textuelle Beschreibungen gegenüber Programmablaufplänen.
+    \end{itemize}
+\end{frame}
 }
 \fi
 
