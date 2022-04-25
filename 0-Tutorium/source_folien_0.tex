@@ -349,13 +349,18 @@
 \iffull
 \SetNextSectionText{Algorithmenentwurf und -analyse\\Abgabe: \DTMDate{2022-05-02}}
 \section{Aussicht: Übungsblatt 1}
+\MakeThePinguExplainIt[text width=6.65cm]{cap=!hide,headphones,glasses=!hide,cup=!hide,glasses round,eyes shiny,heart=shadeC,body type=legacy,right item angle=-52}{Mit der Zeit werden wir mehr Eigenschaften zur Charakterisierung betrachten.}
 \begin{frame}{Ein \say{Algorithmus}, was ist das?}
     \begin{itemize}[<+(1)->]
         \itemsep13pt
-        \item \emph{Eindeutige} Handlungsvorschrift zur Lösung eines Problems.
-        \item Endlich viele, \emph{wohldefinierte} \info{also nicht mehrdeutige} Einzelschritte.
-        \item Mit der Zeit werden wir mehr Eigenschaften zur Charakterisierung betrachten.% TODO: => Tutorium 1 (Determinismus, Korrektheit,\ldots)
+        \item \emph{Eindeutige} Handlungsvorschrift zur Lösung eines Problems.\pause\infoblock{Die ausführbar und reproduzierbar ist.}
+        \item Endlich viele, \emph{wohldefinierte} \info{also nicht mehrdeutige} und elementare Einzelschritte.
+        \item Der Algorithmus muss nach einer endlichen Zeit zum Ende kommen (\say{terminieren}).% \vfill
+        % \item Mit der Zeit werden wir mehr Eigenschaften zur Charakterisierung betrachten.% TODO: => Tutorium 1 (Determinismus, Korrektheit,\ldots)
     \end{itemize}
+\begin{tikzpicture}[overlay,remember picture]
+\onslide<6->{\node[above left,xshift=5mm,scale=.8,yshift=\btdmfootheight] at(current page.south east) {\copy\pinguexplainbox};}% copy for animations
+\end{tikzpicture}
 \end{frame}
 \begin{frame}{Die Spezifikation}
     \pause\begin{center}
