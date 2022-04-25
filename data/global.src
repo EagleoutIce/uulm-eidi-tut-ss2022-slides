@@ -151,6 +151,7 @@
 \def\SummaryFrame{%
 \IfBtdmDarkmode{\UpdateBtdmColor*{paletteC}{\colorlet{btdm@block}{paletteC!40!btdm@border@up}}}{\UpdateBtdmColor{paletteC}}\lstcolorhook
 }
+\def\AddonFrame{\IfBtdmDarkmode{\UpdateBtdmColor*{btdm@primary}{\colorlet{btdm@block}{btdm@block!20!btdm@border@up}}}{\UpdateBtdmColor{btdm@primary!68!btdm@background}}}
 
 \long\def\info#1{\textcolor{gray}{\scriptsize(#1)}}
 \long\def\infoblock#1{\par{\scriptsize\textcolor{gray}{(#1)}\par}}

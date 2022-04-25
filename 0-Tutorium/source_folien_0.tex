@@ -207,11 +207,35 @@
 \end{tikzpicture}
 \end{frame}
 
-% \iffull
-% \begin{frame}{Alternative Ansätze}
-
-% \end{frame}
-% \fi
+\iffull
+{\AddonFrame
+\def\a{\text{\textit{Antwort}}}
+\def\b{\text{\textit{B}}}
+\makeatletter\def\boxme#1#2{{{\only<13->{\@solLstHL{fill=#1,draw=#1}}{#2}}}}
+\begin{frame}{Alternativer Ansatz}
+\pause\begin{algorithm}[H]
+\PreCode
+    \KwIn{Zeichenkette $S$ mit Zeichen $S[i]$ und Länge \(N\)}\medskip
+\StartCode
+    \onslide<+(1)->{$i  = 0$\;}
+    \onslide<+(1)->{$\a = Falsch$\;}
+    \onslide<+(1)->{$\b = Falsch$\medskip\;}
+    \onslide<+(1)->{\While{$i \leq N$}{
+        \onslide<+(1)->{\lIf{\boxme{shadeA}{\(S[i]\)~\T{==}~\('a'\)} \KwAnd\ \boxme{shadeA}{\(\b\)~\T{==}~\(Falsch\)}}{$\a= Wahr$}}
+        \onslide<+(1)->{\lIf{{\boxme{shadeA}{\(S[i]\)~\T{==}~\('b'\)}}}{\boxme{shadeA}{$\b= Wahr$;} \boxme{shadeA}{$\a = Falsch$;} Breche Solange ab}}
+        \onslide<+(1)->{Erhöhe~\(i\) um \(1\)\;}
+    }}\medskip
+    \onslide<+(1)->{\lIf{\(\a = Wahr\)}{Gebe aus: \say{Ja}}}
+    \onslide<+(1)->{\lElse{Gebe aus: \say{Nein}}}
+\end{algorithm}
+\begin{tikzpicture}[overlay,remember picture]
+    \onslide<+(1)->{\node[above left,yshift=\btdmfootheight+5mm,xshift=-3.5mm,align=left,gray,font=\footnotesize\sffamily\slshape] at (current page.south east) {Die Laufzeit beläuft sich auf:\\% no cause this seems nicer align
+        \(\phantom{{}={}}3 + n \cdot \bigl(1 + \max(2 + 1 + 1, \text{\boxme{shadeA}{$2 + 1 + 2$}}) \bigr) + 1\) \\
+        \({}={} 4 + n \cdot 6 \in \O(n)\)};}
+\end{tikzpicture}
+\end{frame}
+}
+\fi
 
 \iffull
 \SetNextSectionText[.35\linewidth]{Avoid syntactic elements from the target programming language\\--- Steve McConnell, \cite[p.~54]{10.5555/151071}}
