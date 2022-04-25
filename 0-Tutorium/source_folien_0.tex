@@ -213,7 +213,7 @@
 \def\b{\text{\textit{B}}}
 % ugly hell
 \makeatletter\def\boxlot#1#2{\text{{\@solLstHL{fill=#1,draw=#1}{#2}}}}
-\def\boxme#1#2{\only<-12|handout:0>{#2}\only<13->{\boxlot{#1!80!btdm@background}{#2}}}
+\IfBtdmDarkmode{\def\boxme#1#2{\only<-12|handout:0>{#2}\only<13->{\boxlot{#1!12!btdm@background}{#2}}}}{\def\boxme#1#2{\only<-12|handout:0>{#2}\only<13->{\boxlot{#1}{#2}}}}
 \begin{frame}{Alternativer Ansatz}
 \pause\begin{algorithm}[H]
 \PreCode
@@ -224,7 +224,7 @@
     \onslide<+(1)->{$\b = false$\medskip\;}
     \onslide<+(1)->{\While{$i \leq N$}{
         \onslide<+(1)->{\lIf{\boxme{shadeA}{\(S[i]\)~\T{==}~\('a'\)} \KwAnd\ \boxme{shadeA}{\(\b\)~\T{==}~\(false\)}}{$\a= true$}}
-        \onslide<+(1)->{\lIf{{\boxme{lightgray!50!white!70!shadeB}{\(S[i]\)~\T{==}~\('b'\)}}}{\boxme{lightgray!95!darkgray}{$\b= true$; $\a = false$;} Exit while early}}
+        \onslide<+(1)->{\lIf{{\boxme{lightgray!50!white!70!shadeB}{\(S[i]\)~\T{==}~\('b'\)}}}{\boxme{lightgray!90!btdm@background}{$\b= true$; $\a = false$;} Exit while early}}
         \onslide<+(1)->{Erhöhe~\(i\) um \(1\)\;}
     }}\medskip
     \onslide<+(1)->{\lIf{\(\a\)~\T{==}~\(true\)}{Output: \say{Ja}}}
@@ -232,7 +232,7 @@
 \end{algorithm}
 \begin{tikzpicture}[overlay,remember picture]
     \onslide<+(1)->{\node[above left,yshift=\btdmfootheight+5mm,xshift=-3.5mm,align=left,gray,font=\footnotesize\sffamily\slshape] at (current page.south east) {Die Laufzeit beläuft sich auf:\\% no cause this seems nicer align
-        \(\phantom{{}={}}3 + n \cdot \bigl(1 + \max(2 + 1 + 1, \boxme{shadeA}{$2$} + \boxme{lightgray!50!white!70!shadeB}{$1$} + \boxme{lightgray!95!darkgray}{$2$}) \bigr) + 1\) \\
+        \(\phantom{{}={}}3 + n \cdot \bigl(1 + \max(2 + 1 + 1, \boxme{shadeA}{$2$} + \boxme{lightgray!50!white!70!shadeB}{$1$} + \boxme{lightgray!90!btdm@background}{$2$}) \bigr) + 1\) \\
         \({}={} 4 + n \cdot 6 \in \O(n)\)};}
 \end{tikzpicture}
 \end{frame}
