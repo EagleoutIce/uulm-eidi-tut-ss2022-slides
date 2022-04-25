@@ -218,14 +218,14 @@
     \KwIn{Zeichenkette $S$ mit Zeichen $S[i]$ und Länge \(N\)}\medskip
 \StartCode
     \onslide<+(1)->{$i  = 0$\;}
-    \onslide<+(1)->{$\a = Falsch$\;}
-    \onslide<+(1)->{$\b = Falsch$\medskip\;}
+    \onslide<+(1)->{$\a = false$\;}
+    \onslide<+(1)->{$\b = false$\medskip\;}
     \onslide<+(1)->{\While{$i \leq N$}{
-        \onslide<+(1)->{\lIf{\boxme{shadeA}{\(S[i]\)~\T{==}~\('a'\)} \KwAnd\ \boxme{shadeA}{\(\b\)~\T{==}~\(Falsch\)}}{$\a= Wahr$}}
-        \onslide<+(1)->{\lIf{{\boxme{shadeA}{\(S[i]\)~\T{==}~\('b'\)}}}{\boxme{shadeA}{$\b= Wahr$;} \boxme{shadeA}{$\a = Falsch$;} Breche Solange ab}}
+        \onslide<+(1)->{\lIf{\boxme{shadeA}{\(S[i]\)~\T{==}~\('a'\)} \KwAnd\ \boxme{shadeA}{\(\b\)~\T{==}~\(false\)}}{$\a= true$}}
+        \onslide<+(1)->{\lIf{{\boxme{shadeA}{\(S[i]\)~\T{==}~\('b'\)}}}{\boxme{shadeA}{$\b= true$;} \boxme{shadeA}{$\a = false$;} Breche Solange ab}}
         \onslide<+(1)->{Erhöhe~\(i\) um \(1\)\;}
     }}\medskip
-    \onslide<+(1)->{\lIf{\(\a\)~\T{==}~\(Wahr\)}{Gebe aus: \say{Ja}}}
+    \onslide<+(1)->{\lIf{\(\a\)~\T{==}~\(true\)}{Gebe aus: \say{Ja}}}
     \onslide<+(1)->{\lElse{Gebe aus: \say{Nein}}}
 \end{algorithm}
 \begin{tikzpicture}[overlay,remember picture]
@@ -469,11 +469,12 @@
     \item Für Pseudocode wünschen wir uns \begin{itemize}
         \item eine konsistente und menschenlesbare Notation,
         \item mathematische Definitionen,
-        \item aber nichts Sprachspezifisches (\bjava{int}) oder zu allgemeines (\say{löst Problem}).
+        \item aber nichts sprachspezifisches (\bjava{int}) oder zu allgemeines (\say{löst Problem}).
     \end{itemize}
     \item Bei der Algorithmuskonstruktion beachten: \begin{itemize}
         \item \def\t{~~\faAngleRight~~}Spezifikation\t Abstraktion\t Entwurf\t Verifikation\t Aufwandsanalyse
-        \item Als Frage für die Woche: Warum und wann sind all diese Schritte von Bedeutung?
+        \item Eine eindeutige, endliche Beschreibung wohldefinierte Elementaroperation, deren Ausführung durch einen Prozessor möglich ist nach endlich vielen Schritten endet.
+        % \item Als Frage für die Woche: Warum und wann sind all diese Schritte von Bedeutung?
     \end{itemize}
 \end{itemize}
 \end{frame}
