@@ -213,11 +213,11 @@
 \def\b{\text{\textit{B}}}
 % ugly hell
 \makeatletter\def\boxlot#1#2{\text{{\@solLstHL{fill=#1,draw=#1}{#2}}}}
-\IfBtdmDarkmode{\def\boxme#1#2{\only<-12|handout:0>{#2}\only<13->{\boxlot{#1!12!btdm@background}{#2}}}}{\def\boxme#1#2{\only<-12|handout:0>{#2}\only<13->{\boxlot{#1}{#2}}}}
-\begin{frame}{Alternativer Ansatz}
+\IfBtdmDarkmode{\def\boxme#1#2{\only<-12|handout:0>{\text{#2}}\only<13->{\boxlot{#1!12!btdm@background}{\text{#2}}}}}{\def\boxme#1#2{\only<-12|handout:0>{#2}\only<13->{\boxlot{#1}{#2}}}}
+\begin{frame}{Alternativer Ansatz\hfill I}
 \pause\begin{algorithm}[H]
 \PreCode
-    \KwIn{Zeichenkette $S$ mit Zeichen $S[i]$ und Länge \(N\)}\medskip
+    \KwIn{String $S$ of chars $S[i]$ and length $N$}\medskip
 \StartCode
     \onslide<+(1)->{$i  = 0$\;}
     \onslide<+(1)->{$\a = false$\;}
@@ -232,10 +232,78 @@
 \end{algorithm}
 \begin{tikzpicture}[overlay,remember picture]
     \onslide<+(1)->{\node[above left,yshift=\btdmfootheight+5mm,xshift=-3.5mm,align=left,gray,font=\footnotesize\sffamily\slshape] at (current page.south east) {Die Laufzeit beläuft sich auf:\\% no cause this seems nicer align
-        \(\phantom{{}={}}3 + n \cdot \bigl(1 + \max(2 + 1 + 1, \boxme{shadeA}{$2$} + \boxme{lightgray!50!white!70!shadeB}{$1$} + \boxme{lightgray!90!btdm@background}{$2$}) \bigr) + 1\) \\
+        \upshape\(\phantom{{}={}}3 + n \cdot \bigl(1 + \max(2 + 1 + 1,~~\boxme{shadeA}{$2$} {+} \boxme{lightgray!50!white!70!shadeB}{$1$} {+} \boxme{lightgray!90!btdm@background}{$2$}) \bigr) + 1\) \\
         \({}={} 4 + n \cdot 6 \in \O(n)\)};}
 \end{tikzpicture}
 \end{frame}
+{\def\xs{.75cm}
+\def\BF#1{\only<-19|handout:0>{#1}\only<20->{\textbf{\color{paletteA}#1}}}
+\begin{frame}{Alternativer Ansatz\hfill II}
+    \begin{center}
+        {\footnotesize\onslide<2->{\color{gray}Given the String \(S = s^0 s^1 s^2\ldots\)} and \onslide<3->{Let \(i \in \N\), \(Res \in \{\times, \checkmark\}\)}}\medskip
+    \end{center}
+\centering\resizebox{.925\linewidth}!{\begin{tikzpicture}[rounded corners=1pt,mh/.style={minimum height=2\baselineskip+3mm,rounded corners=1pt,align=center,draw},m/.style={gray,font=\small\sffamily\slshape}]
+    \onslide<4->{\node[rounded rectangle,draw] (s) {Start};}
+    \onslide<5->{\node[right=\xs,mh] (2) at(s.east) {Set \(i\) to \(1\)\\Set \(Res\) to $\times$}; \draw[-Kite] (s) -> (2); \onslide<19->{\node[below=-.5mm,m]  at(2.south) {$\BF2$};}}%
+    % rectangle split did not want to work
+    \onslide<6->{\node[align=center,right=\xs,inner xsep=5pt,mh] (3) at(2.east) {Calculate length\\of \(\abs{S}\) as \(N \in \N_0\)}; \draw([xshift=3pt]3.north west)--([xshift=3pt]3.south west); \draw([xshift=-3pt]3.north east)--([xshift=-3pt]3.south east); \draw[-Kite] (2) -> (3); \onslide<19->{\node[below=-.5mm,m]  at(3.south) {$\BF1$};}}
+
+    \onslide<7->{\node[right=\xs,mh,minimum width=2.5cm,diamond,aspect=1.5,draw] (4) at (3.east) {\strut\(i \leq N\)};\draw[-Kite] (3) -> (4); \onslide<19->{\pgfinterruptboundingbox\node[below right,m]  at(4.south) {$\BF1$};\node[above,m] at(4.north) {$\BF{n}$};\endpgfinterruptboundingbox}
+    }
+
+    \onslide<8->{\node[draw,trapezium,trapezium left angle = 80,trapezium right angle = 100,trapezium stretches,mh,right=\xs] (5) at(4.east) {Print \(\langle Res \rangle\):\\ \(\times\mapsto \text{\say{Nein}}\), \(\checkmark \mapsto \text{\say{Ja}}\)};
+        \node[above right,xshift=-1.33mm] at (4.east) {false};
+        \draw[-Kite] (4) -> (5);
+        \onslide<19->{\node[below=-.5mm,m]  at(5.south) {$\BF1$};}
+    }
+
+    \onslide<10->{\node[below=\xs-2mm,mh,minimum width=2.5cm,diamond,aspect=1.5,draw] (6) at (4.south) {\strut\(s^i = \text{\say{a}}\)};
+        \node[below left]  at (4.south) {true};
+        \draw[-Kite] (4) -> (6);
+        \onslide<19->{\node[below=-.5mm,m]  at(6.south) {$\BF1$};}
+    }
+
+    \onslide<11->{
+        \node[mh] (7) at(6.east-|5.south) {Set \(Res\) to $\checkmark$};%
+        \node[above right,xshift=-1.33mm] at (6.east) {true};
+        \draw[-Kite] (6) -> (7);
+        \onslide<19->{\node[below left,m] at (7.south) {$\BF1$};}
+    }
+
+    \onslide<14->{\node[mh,minimum width=2.5cm,diamond,aspect=1.5,draw] (8) at (6.west-|3.south) {\strut\(s^i = \text{\say{b}}\)};
+        \draw[-Kite] (6) -> (8);
+        \node[above left,xshift=1.33mm] at (6.west) {false};
+        \onslide<19->{\node[below right,m]  at(8.south) {$1$};}
+    }
+    \onslide<16->{
+        \node[mh] (9) at(8.west-|2.south) {Set \(Res\) to $\times$};%
+        \node[above left,xshift=1.33mm] at (8.west) {true};
+        \draw[-Kite] (8) -> (9);
+        \onslide<19->{\node[below left,m]  at(9.south) {$1$};}
+    }
+
+    \onslide<12->{\node[mh,below=\xs-2mm] (10) at(6.south) {Increment \(i\) by \(1\)};%
+        \draw[-Kite] (7) |- (10.5);
+        \onslide<19->{\node[below=-.5mm,m] at(10.south) {$\BF1$};}
+    }
+
+    \onslide<9->{
+        \node[rounded rectangle,draw,right=\xs] (e) at(5.east) {End};
+        \draw[-Kite] (5) -> (e);
+    }
+
+    \onslide<15->{\draw[-Kite] (8) |- (10);\node[below left] at (8.south) {false};}
+    \onslide<13->{\draw[-Kite] (10.-5) -- ([xshift=-3mm]5.east|-10.-5) |- ([yshift=5mm]7.north) -| (4.south east);}
+
+    \onslide<17->{\draw[-Kite] (9) |- ([yshift=-4mm]10.south) -| ([xshift=5mm]5.-11) -- (5.-11);}
+\end{tikzpicture}}
+\pause
+\begin{tikzpicture}[overlay,remember picture]
+    \onslide<18->{\node[above left,yshift=\btdmfootheight+1mm,xshift=-3.5mm,align=left,gray,font=\footnotesize\sffamily\slshape] at (current page.south east) {\(2 + 1 + n \cdot (2 + 2) + 1  = 4 + n \cdot 4 \in \O(n)\)};}
+    \onslide<21->{\node[above right,yshift=\btdmfootheight,gray,text width=5cm] at(current bounding box.south west) {Je nach Definition zählt das Inkrement oder nicht. Deswegen ist die \(\O\)-Notation interessanter (diese wird später konkretisiert).};}
+\end{tikzpicture}
+% TODO: Note about increment und pingu mit wir mögen textuell mehr
+\end{frame}}
 }
 \fi
 
