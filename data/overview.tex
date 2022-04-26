@@ -1,0 +1,236 @@
+\errorcontextlines99999
+\documentclass[landscape,ngerman]{article}
+\usepackage[active,tightpage]{preview}
+
+\usepackage[glows]{tikzpingus}
+\usepackage{fontawesome}
+\usepackage{mathtools,babel,microtype,amssymb,sfmath}
+\usetikzlibrary{arrows.meta,matrix}
+
+\tikzset{box/.style={draw=lightgray,line width=1.2pt,rectangle,rounded corners=2pt,fill=white,minimum width=.75cm,minimum height=.75cm}}
+
+\pgfdeclarelayer{u-gotta-ma-back}
+\pgfdeclarelayer{super-front}
+\pgfsetlayers{u-gotta-ma-back,very-background,background,main,middle,foreground,super-front}
+
+\def\onback{\pgfonlayer{u-gotta-ma-back}}
+\def\offback{\endpgfonlayer}
+
+
+\tikzset{decision/.style={diamond, draw,gray,
+    minimum width=3em, minimum height=1.5em, align=center, inner sep=0pt,aspect=1.2,outer sep=0pt},
+    block/.style={rectangle, draw, gray, minimum width=3em, align=center, rounded corners=2pt, minimum height=1.5em},
+    external/.style={draw,trapezium,gray,trapezium left angle = 80,trapezium right angle = 100,trapezium stretches,minimum width=3em, minimum height=1.5em},
+    K/.style={-{Kite[scale=.575]}}
+}
+
+\colorlet{background color}{white}
+\colorlet{theory}{purple!8!background color}
+\colorlet{basic}{cyan!8!background color}
+\colorlet{advanced}{green!8!background color}
+
+\newsavebox\slidecontentbox \setbox\slidecontentbox=\hbox{\begin{tikzpicture}[every path/.append style={line cap=round,line join=round,line width=.5mm}]
+\scope[rotate=90,gray]
+   \draw (0.5,0) -- (5,0) -- ++(0,-2.5)
+   (0,0) -- ++(0,-2.5) -- ++(4.5,0) (0,-1.5) -- ++(0.5,0)
+   (1,-.5) -- ++(-.5,0) -- ++(0,-.5) -- ++(1.5,0) -- ++(0,-.5) -- ++(-.5,0) -- ++(0,-.5) -- ++(-1,0) (1,-1) -- ++(0,-.5)
+   (1.5,0) -- ++(0,-1) (2,-2.5) -- ++(0,.5) (3,0) -- ++(0,-.5) (2,-.5) -- ++(0.5,0) -- ++(0,-.5) -- ++(.5,0) -- ++(0,-.5) -- ++(1,0) -- ++(0,1) -- ++(-.5,0) -- ++(0,-.5) (4,-.5) -- ++(.5,0) (2.5,-1.5) -- ++(0,-.5) -- ++(1,0) -- ++(0,.5)
+   (3,-2) -- ++(0,-.5) (4.5,-1.5) -- ++(0,.5) -- ++(0.5,0) (4,-2) -- ++(1,0);
+
+   \filldraw[lightgray] (.25,.2) -- ++(.1,-.3) -- ++(-.2,0) --cycle;
+   \filldraw[lightgray] (4.84,-2.7) -- ++(-.2,0) -- ++(.1,.3) --cycle;
+\endscope
+
+\scope[shift=(current bounding box.north east),xshift=3cm,thick,gray]
+   \node[block,below] (b) at(0,0) {};
+   \node[decision,below=3mm] (0) at(b.south) {};
+   \node[block,below left=3mm] (1) at (0.south) {};
+   \node[block,below right=3mm] (2) at (0.south) {};
+   \node[external,below=3mm] (3) at(1.south) {};
+
+   \node[decision,below=3mm] (4) at(2.south) {};
+   \node[block,below left=3mm] (5) at (4.south) {};
+   \node[block,below=3mm] (6) at (5.south) {};
+
+   \draw[K] (b) -- (0);
+   \draw[K] (0.south) -- ++(0,-.8mm) -| (1);
+   \draw[K] (0.south) -- ++(0,-.8mm) -| (2);
+   \draw[K] (1) -- (3);
+   \draw[K] (2) -- (4);
+   \draw[K] (4) |- (5);
+   \draw[K] (4) |- (6);
+\endscope
+\end{tikzpicture}}
+
+\def\mrgray{\selectcolormodel{gray}}
+\def\mrssteele{\selectcolormodel{natural}}
+\let\mrgray\mrssteele
+
+\def\t#1{\tikzpicture\mrgray#1\endtikzpicture}% assure layers
+\newsavebox\pinguA \setbox\pinguA=\hbox{\t{\pingu[:back,small,body=pingu@black!85!gray]}}
+\newsavebox\pinguB \setbox\pinguB=\hbox{\t{\pingu[:back,body=pingu@black!90!white]}}
+\newsavebox\pinguC \setbox\pinguC=\hbox{\t{\pingu[:back]}}
+\newsavebox\pinguD \setbox\pinguD=\hbox{\t{\pingu[:back,body=pingu@black,headband]}}
+\newsavebox\pinguE \setbox\pinguE=\hbox{\t{\pingu[:back,body=pingu@main!90!pingu@yellow,headphones]}}
+\newsavebox\pinguF \setbox\pinguF=\hbox{\t{\pingu[:back,body=pingu@main!95!pingu@purple!80!pingu@black!90!gray,large,lollipop right=pingu@purple,right item angle=-10]}}
+
+\newsavebox\topicA \setbox\topicA=\hbox{\begin{tikzpicture}
+   \mrgray
+   \scope[every path/.append style={line cap=round,line join=round}]
+   \node[draw=lightgray,line width=5pt,rounded corners=2pt,inner sep=1.95em, inner xsep=4.75em,fill=background color] (a) at(0,0) {\copy\slidecontentbox};
+   \pgfonlayer{background}
+   \draw[line width=7pt, lightgray] (a.220) -- ++(0,-3.15);
+   \draw[line width=7pt, lightgray] (a.320) -- ++(0,-3.15);
+   \endpgfonlayer
+   \endscope
+   \scope[xshift=6cm,yshift=-3.875cm,scale=2]
+   {\mrssteele
+   \pingu[right wing wave, eyes wink,tie,staff right,right item angle=-10,body type=chubby,hat]}
+   \endscope
+
+   \begin{scope}[shift=(current bounding box.south),xshift=-6.5cm,yshift=-7mm,scale=2,every node/.append style={transform shape}]
+      \node at(2,0) {\copy\pinguA};
+      \node at(0,0) {\copy\pinguB};
+      \node at(4.5,0) {\copy\pinguC};
+      \node at(.5,-1.25) {\copy\pinguD};
+      \node at(2.65,-1.25) {\copy\pinguE};
+      \node at(4,-1.5) {\copy\pinguF};
+   \end{scope}
+   \onback
+      \fill[theory] ([xshift=-8.5mm,yshift=2.5mm]current bounding box.center) circle[radius=11cm];
+   \offback
+\end{tikzpicture}}
+
+% -------------------------------------------------------------
+
+\setbox\pinguA=\hbox{\tikz{\mrgray\pingu[small,feet=sit,glasses round,eyes shiny,body type=legacy,left wing wave,name=pingu,princess crown 2d=pingu@yellow!96!pingu@main] \node[above,box] (b) at(pingu-wing-left-tip) {$x$}; \draw[lightgray,line width=1.2pt] ([xshift=-2pt,yshift=-1pt]b.north east) -- ++(-.75cm+4pt,.45cm);\pgfonlayer{background}\node[above=1.66mm,xshift=-1mm] at (b.center) {\large\sffamily\rotatebox{25}{5}};\endpgfonlayer}}
+\setbox\pinguB=\hbox{\tikz{\pingu[:back,left wing raise,body type=tilt-right,construction helmet,construction helmet padding=.255cm]}}
+\newsavebox\topicB
+\setbox\topicB=\hbox{\mrgray\begin{tikzpicture}[every path/.append style={line cap=round,line join=round}]
+   \pgfonlayer{background}
+   \matrix[matrix of math nodes,nodes={box,line width=2.4pt, scale=2,execute at begin node=\strut,outer sep=4pt},column sep=2mm,row sep=7mm] (m) at (-1.5,6,0) {
+      v & a & r &   &  & i & a_2   & & & & b\\
+      l & e & s   & a_3 &  &  r  &  & & & &\\
+      e_2 &     & g   & r_2  & e_2 & |[rotate=-4]|a_4    &     & & & & t \\
+   };
+   \draw[line width=8pt,lightgray] ([xshift=-3mm,yshift=-10cm]m-1-1.north west) -- ++(0,10cm) -- ([xshift=3mm]m-1-11.north east) coordinate (@) -- ++(0,-10cm)
+   ([xshift=-3mm,yshift=3pt]m-3-1.south west) coordinate (@a) -- (@|-@a)
+   ([xshift=-3mm,yshift=3pt]m-2-1.south west) coordinate (@a) -- (@|-@a)
+   ([xshift=-3mm,yshift=3pt]m-1-1.south west) coordinate (@a) -- (@|-@a);
+   % ladder
+   {\mrssteele
+   \draw[line width=7pt,pingu@bronze] (2,-1.5) coordinate (@) -- ++(-.1,8.85) ([xshift=2cm]@) -- ++(-.1,8.85) foreach \i in {10,20,...,90} {([xshift=-.1cm*\i/100,yshift={8.85cm*(\i/100)}]@) -- ++(2,0)};}
+
+   \node[scale=1.25] at (3-.025,3) {\copy\pinguB};
+
+
+   \endpgfonlayer
+
+   \scope[shift={(0,0,4)}]
+      \node[scale=2] at (-1.75,0) {\copy\pinguA};
+
+      % the stack
+      % \draw[line width=7pt,lightgray,rounded corners=2pt] (2.5,-.5,0) |- ++(-.5,-4.5+1.5)++(0,-1.5) coordinate (@l) -- ++(3.25+.5+.5,0) coordinate[pos=.5] (@) ++(0,1.5) coordinate (@r) -| ++(-.5,4.5-1.5);
+      \pgfonlayer{background}
+      \fill[lightgray!80!background color,rounded corners=2pt] (.25,-.5cm) |- ++(-5,-2.5) coordinate[pos=.75] (@l) -- ++(0,-3) to[bend right=8] ++(1.5,0) |- ++(4.5+4,1.5) -- ++(0,-1.5) to[bend right=8] ++(1.5,0) |- ++(-5,3) coordinate[pos=.75] (@r)  -- ++(0,2.5) to[bend left=8] cycle;
+      \draw[line width=7pt,lightgray,rounded corners=2pt] (.25,-.5cm) |- ++(-5,-2.5) -- ++(0,-3) ++(1.5,0) |- ++(4.5+4,1.5) -- ++(0,-1.5) ++(1.5,0) |- ++(-5,3) -- ++(0,2.5);
+      \scope[text=black,outer sep=0pt]
+         \node[yshift=-.75cm,scale=1.75,draw=lightgray,line width=2pt,fill=background color,minimum width=1cm] at (@l) {$> 9$};
+         \node[yshift=-.75cm,scale=1.75,draw=lightgray,line width=2pt,fill=background color,minimum width=1cm] at (@r) {$\leq 9$};
+         % \node[above,minimum width=3.25cm,minimum height=1.5cm,draw,rounded corners=1pt,fill=background color] (@) at(@) {\scalebox2{$b_2 = 8$}};
+         % \node[above,minimum width=3.25cm,minimum height=1.5cm,draw,rounded corners=1pt,fill=background color] (@) at(@.north) {\scalebox2{$y = 10$}};
+      \endscope
+      % \node[gray,left,yshift=1.5cm/2] at(@l) {\scalebox{1.5}{\(\mathbf{> 9}\)}};
+      % \node[gray,right,yshift=-1.5cm/2] at(@r) {\scalebox{1.5}{\(\mathbf{\leq 9}\)}};
+      \endpgfonlayer
+
+      \onback
+         \fill[basic] ([yshift=2.5mm]current bounding box.center) circle[radius=12cm];
+      \offback
+   \endscope
+\end{tikzpicture}}
+
+\newsavebox\topicC
+
+
+\setbox\pinguA=\hbox{\tikz{\pingu[left wing wave,right wing grab,eyes sad,bill=foreground,name=el-sado,feet=simple]\pgfonlayer{middle}\node[box,xshift=1mm,above=-.25mm] at(el-sado-wing-right-tip) {$+1$};\endpgfonlayer}}
+\setbox\pinguB=\hbox{\mrgray\tikz{\pingu[body=pingu@black,devil horns,devil fork right=pingu@purple,right eye devil,right wing wave,left eye angry,body type=chubby,name=pingu,sign post left=\faRepeat]\node[pingu@purple!60!pingu@white] at(pingu-belly-center) {\faWindows};}}
+\setbox\pinguC=\hbox{\mrgray\tikz{\pingu[wings grab,eyes wink,cup=pingu@blue]}}
+
+\setbox\topicC=\hbox{\begin{tikzpicture}
+\mrgray\node[scale=2] at(3,8.5) {\copy\pinguB};
+\scope[xshift=4cm,yshift=-3.5cm,scale=3]
+\color{gray}\clip[draw,rounded corners=2pt] (0,1/5) rectangle ++(1,.2*10);
+\foreach \i in {0,...,10} {
+   \draw[gray,ultra thick,fill=background color] (0,\i/5) rectangle ++(1,0.2) node[midway,centered] {\large\sffamily\bfseries\the\numexpr\i-1\relax};
+}
+\path[rounded corners=2pt,draw,gray,line width=3pt] (0,1/5) rectangle ++(1,.2*10);
+\endscope
+
+\scope[xshift=-5.5cm,yshift=-3.5cm,scale=3]
+\scope\color{gray}\clip[draw,rounded corners=2pt] (0,1/5) rectangle ++(-1,.2*6);
+\foreach \i in {0,...,6} {
+   \draw[gray,ultra thick,fill=background color] (0,\i/5) rectangle ++(-1,0.2) node[midway,centered] {\large\sffamily\bfseries\the\numexpr\i-1\relax};
+}
+\path[rounded corners=2pt,draw,gray,line width=3pt] (0,1/5) rectangle ++(-1,.2*6);
+\endscope
+\draw[gray,line width=1.5pt,line cap=round] (-.98,1/5)++(0,.2pt) -- ++(5.13,0);
+\endscope
+\node[scale=2] at(0,.05) {\copy\pinguA};
+
+% TODO: tag btdm@text
+\node[above left=-2.66mm,fill=background color,draw=lightgray,line width=4.5pt,rounded corners=2pt,text width=6.25cm,minimum height=1.5cm,text=pingu@black,inner sep=8pt,align=justify,font=\Large\sffamily] (a) at (-2.5,6.5) {\(0 \mapsto \{1, 2, 7\}\)\\[5pt]\(1 \mapsto [14, 19, 21, 42]\)\\[5pt]\(7 \mapsto \text{\dq {How to guuud Pengu}\dq}\)\\[5pt]\(8 \mapsto \resizebox*!{\baselineskip}{\raise-16pt\copy\pinguC}\)};
+\draw[line width=4.5pt, lightgray] (a.220) -- ++(0,-2.25);
+\draw[line width=4.5pt, lightgray] (a.320) -- ++(0,-2.25);
+
+\onback
+   \fill[basic] ([yshift=-3.5mm]current bounding box.center) circle[radius=12cm];
+\offback
+\end{tikzpicture}}
+
+\def\Table#1(#2)#3{\scope[shift={(#2)},xshift=1.75cm,yshift=1.75cm]\pingu[#1]\endscope\pgfonlayer{super-front}\draw[lightgray,line width=6pt,rounded corners=2pt,line cap=round](#2) |- ++(4.5,1.35) -- ++(0,-1.35);\fill[draw=lightgray,fill=background color,line width=3pt,rounded corners=2pt] (#2)++(3pt-1.5pt,-3pt+1.5pt+2mm) rectangle ++(1.15,1.15) node[midway,centered]{\Large$#3$};\endpgfonlayer}
+\newsavebox\topicD
+\setbox\pinguA=\hbox{\tikz{\pingu[santa hat,santa beard,eyes vertical,blush]}}
+\setbox\pinguB=\hbox{\mrgray\tikz{\pingu[:back,right wing wave,rook,rook hatch=false]}}
+\setbox\topicD=\hbox{\mrgray\begin{tikzpicture}
+\Table{right wing wave,horse right,crown, eyes wink, crown position={1:(-.1cm,-.255cm){1.33}}}(2.5,3.5){$f(x)$}
+\Table{right wing wave,eyes wink,shirt=gray,tie,blush}(0,0)+
+\Table{right wing wave,eyes vertical,cloak=gray,body type=legacy,cup,left wing grab,blush}(5,0)*
+
+\Table{right wing wave,left wing shock,eyes shock,halo=gray,heart=gray!40!pingu@white}(-2.5,-4)\div
+{\mrssteele
+\Table{right wing wave,cake-hat,eyes wink,flag right}(2.5,-4)\ln
+\pgfonlayer{super-front}
+\node[scale=.155,circle,fill=background color] at (a) {\copy\pinguA}; % a sets flag core
+\endpgfonlayer}
+\Table{right wing wave,vr-headset,vr-headset hair}(7.5,-4)\bmod
+
+\pgfonlayer{super-front}
+   \node[scale=2] at([yshift=-3.45cm]current bounding box.south) {\copy\pinguB};
+\endpgfonlayer
+\onback
+   \fill[basic] ([yshift=-3.5mm]current bounding box.center) circle[radius=12cm];
+\offback
+\end{tikzpicture}}
+
+\begin{document}
+\preview\def\xs{2cm}\relax
+\begin{tikzpicture}
+   % 2. Algorithmenkonstruktion
+   \node (a) at (0,0) {\copy\topicA};
+   % 3.-4. Programmieren im Kleinen
+   \node[right=\xs] (b) at(a.east) {\copy\topicB};
+   % 5.
+   \node[right=\xs] (c) at(b.east) {\copy\topicC};
+   % 6.
+   \node[right=\xs] (d) at(c.east) {\copy\topicD};
+   % TODO: Kreise drum rum und etwas hübscher machen, dann thmen text daneben und einen sat kurzzusammenfassung als themnnetz vorne einbauen, gesamtüebrscht über die Wochen,Update der Folien präfereiren
+
+   % TODO: 7. & 9.
+   % TODO: 8.
+   % TODO 10.
+   % TODO: 11.
+   % TODO: 12.
+\end{tikzpicture}
+\endpreview
+\end{document}
