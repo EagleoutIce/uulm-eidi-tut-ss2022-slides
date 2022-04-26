@@ -443,30 +443,31 @@
 \end{tikzpicture}
 \end{frame}
 \begin{frame}{Die Spezifikation}
-    \pause\begin{center}
+    \onslide<2->{\begin{center}
     \begin{tikzpicture}
         \IfBtdmDarkmode{% TODO
             \node[block,paletteA,draw,thick] (A) at(0,0) {Algorithmus};
         }{
             \node[block,text=paletteA,thick,draw=gray] (A) at(0,0) {\sbseries Algorithmus};
         }
-        \pause\node (V) at(-5,0) {Vorbedingung};
-        \draw[-Kite] (V) -- (A);
-        \pause\node (N) at(5,0) {Nachbedingung};
-        \draw[-Kite] (A) -- (N);
+        \onslide<3->{\node (V) at(-5,0) {Vorbedingung};
+        \draw[-Kite] (V) -- (A);}
+        \onslide<4->{\node (N) at(5,0) {Nachbedingung};
+        \draw[-Kite] (A) -- (N);}
+        \onslide<1->
     \end{tikzpicture}
-    \end{center}
-    \begin{itemize}[<+(1)->]
+    \end{center}}
+    \begin{itemize}
         \itemsep10.5pt
-        \item Suche die größte, ganze Zahl in einem beliebigen (ganzzahligen, nicht-leeren) Array.
-        \item Information: Die Regeln zum Pseudocode gelten hier nach wie vor!
-        \item Problemspezifikation:
+        \item<5-> Suche die größte, ganze Zahl in einem beliebigen (ganzzahligen, nicht-leeren) Array.
+        \item<6-> Information: Die Regeln zum Pseudocode gelten hier nach wie vor!
+        \item<7-> Problemspezifikation:
         \begin{description}[Ganzzahliges Array:]
-            \item[Ganzzahliges Array:] Tupel \(t = (t_1, t_2, \ldots, t_m) \in \Z^m\) der Größe \(m \geq 1\) mit \info{\(t_i \in \Z\) für alle \(t_i\)}
-            \item[Beliebig:] Die Elemente können unsortiert vorliegen \info{z.B. \(t_1 \leq t_2 > t_3\)}.
-            \item[Größte:] Die größte, ganze Zahl \(z \in t\) mit \(z = \max(t)\).
+            \item<8->[Ganzzahliges Array:] Tupel \(t = (t_1, t_2, \ldots, t_m) \in \Z^m\) der Größe \(m \geq 1\) mit \info{\(t_i \in \Z\) für alle \(t_i\)}
+            \item<9->[Beliebig:] Die Elemente können unsortiert vorliegen \info{z.B. \(t_1 \leq t_2 > t_3\)}.
+            \item<10->[Größte:] Die größte, ganze Zahl \(z \in t\) mit \(z = \max(t)\).
         \end{description}
-        \onslide<+(1)->{Ordentlich wäre rein mathematische\textor axiomatisch belegte Formalisierungen zu nutzen. \onslide<+(1)->{In dieser Veranstaltung beschreiten wir einen Mittelweg.}}
+        \onslide<11->{Ordentlich wäre rein mathematische\textor axiomatisch belegte Formalisierungen zu nutzen. \onslide<12->{In dieser Veranstaltung beschreiten wir einen Mittelweg.}}
     \end{itemize}
 \end{frame}
 
