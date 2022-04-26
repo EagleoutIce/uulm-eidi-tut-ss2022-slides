@@ -232,7 +232,7 @@
 \end{algorithm}
 \begin{tikzpicture}[overlay,remember picture]
     \onslide<+(1)->{\node[above left,yshift=\btdmfootheight+5mm,xshift=-3.5mm,align=left,gray,font=\footnotesize\sffamily\slshape] at (current page.south east) {Die Laufzeit beläuft sich auf:\\% no cause this seems nicer align
-        \upshape\(\phantom{{}={}}3 + n \cdot \bigl(2 + \max(2 + 1 + 1,~~\boxme{shadeA}{$2$} {+} \boxme{lightgray!50!white!70!shadeB}{$1$} {+} \boxme{lightgray!90!btdm@background}{$2$}) \bigr) + 1\) \\
+        \upshape\(\phantom{{}={}}3 + n \cdot \bigl(2 + \max(2 + 1 + 1,\quad \llap{\boxme{shadeA}{$2$}} {+} \boxme{lightgray!50!white!70!shadeB}{$1$} {+} \boxme{lightgray!90!btdm@background}{$2$}) \bigr) + 1\) \\
         \({}={} 4 + n \cdot 7 \in \O(n)\)};}
 \end{tikzpicture}
 \end{frame}
@@ -546,15 +546,17 @@
 \pause \printBibCommand
 \vfill\vfill % double fill for more fraction
 \begin{itemize}[<+(1)->]
-    \itemsep16pt
+    \itemsep14pt
     \item Für Pseudocode wünschen wir uns \begin{itemize}
+        \itemsep1pt
         \item eine konsistente und menschenlesbare Notation,
         \item mathematische Definitionen,
         \item aber nichts sprachspezifisches (\bjava{int}) oder zu allgemeines (\say{löst Problem}).
     \end{itemize}
-    \item Bei der Algorithmuskonstruktion beachten: \begin{itemize}
+    \item Algorithmen und deren Konstruktion: \begin{itemize}
+        \itemsep1pt
+        \item Eine eindeutige, endliche Beschreibung wohldefinierter Elementaroperationen, deren schrittweise Ausführung durch einen Prozessor möglich und endlich ist.
         \item \def\t{~~\faAngleRight~~}Spezifikation\t Abstraktion\t Entwurf\t Verifikation\t Aufwandsanalyse
-        \item Eine eindeutige, endliche Beschreibung wohldefinierte Elementaroperation, deren Ausführung durch einen Prozessor möglich ist nach endlich vielen Schritten endet.
         % \item Als Frage für die Woche: Warum und wann sind all diese Schritte von Bedeutung?
     \end{itemize}
 \end{itemize}
