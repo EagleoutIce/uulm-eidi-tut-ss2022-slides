@@ -201,9 +201,9 @@
         \item<4-> wir können die Zeichen \(s_i\) aus \(\Sigma\) vergleichen.
     \end{enumerate}}
     \vspace*{.65cm}
-    \onslide<5->{Ob \(Z5\) wirklich immer zwei Vergleiche hat, hängt davon ab, wie das logische \say{und} funktioniert. Wertet es für \say{\(\text{falsch} \land \langle?\rangle\)} den zweiten Operand nicht mehr aus, haben wir Falle eines \(S\) ohne \(a\)'s, einen Aufwand von \(2n + 4\).}
+    \onslide<5->{Ob \(Z5\) wirklich immer zwei Vergleiche hat, hängt davon ab, wie das logische \say{und} funktioniert. \onslide<6->{Wertet es für \say{\(\text{falsch} \land \langle?\rangle\)} den zweiten Operand nicht mehr aus, haben wir Falle eines \(S\) ohne \(a\)'s, einen Aufwand von \(2n + 4\).}}
 \begin{tikzpicture}[overlay,remember picture]
-\onslide<6->{\node[above left,xshift=5mm,scale=.8,yshift=\btdmfootheight] at(current page.south east) {\copy\pinguexplainbox};}% copy for animations
+\onslide<7->{\node[above left,xshift=5mm,scale=.8,yshift=\btdmfootheight] at(current page.south east) {\copy\pinguexplainbox};}% copy for animations
 \end{tikzpicture}
 \end{frame}
 
@@ -330,14 +330,14 @@
         \item \textbf{Konsistent bleiben}
         \item Menschenlesbare Notation \info{meist Programmiersprachen-Mathe-Gemisch}
         \item Solange \emph{klar} und \emph{eindeutig}, frei gestaltbar
-        \item Beispiel:\par\pause
+        \item Beispiel:\par
 % \setcounter{algocf}{2}
 \begin{algorithm}[H]
     \PreCode
-    \KwIn{Eingabe als Liste von $n$ Pingus: $\tpingu_1, \ldots \tpingu_n$}
+    \onslide<6->{\KwIn{Eingabe als Liste von $n$ Pingus: $\tpingu_1, \ldots \tpingu_n$}}
     \StartCode
-    \pause\Comment{Jeder Pinguin ist klasse!}
-    \pause$i \gets 1$\;
+    \onslide<7->{\Comment{Jeder Pinguin ist klasse!}
+    $i \gets 1$\;}
     \onslide<8->{\While{$i \leq n$}{
         \onslide<9->{\lIf{$\tpingu_i$ ist klasse!}{
             \onslide<10->{\KwRet{$\tpingu_i$}}
@@ -450,9 +450,10 @@
         }{
             \node[block,text=paletteA,thick,draw=gray] (A) at(0,0) {\sbseries Algorithmus};
         }
-        \node (V) at(-5,0) {Vorbedingung};
-        \node (N) at(5,0) {Nachbedingung};
-        \draw[-Kite] (V) edge (A) (A) edge (N);
+        \pause\node (V) at(-5,0) {Vorbedingung};
+        \draw[-Kite] (V) -- (A);
+        \pause\node (N) at(5,0) {Nachbedingung};
+        \draw[-Kite] (A) -- (N);
     \end{tikzpicture}
     \end{center}
     \begin{itemize}[<+(1)->]
