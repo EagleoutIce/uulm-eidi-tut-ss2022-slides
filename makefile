@@ -9,10 +9,14 @@ TUTS_CLEAN := $(TUTS:=-clean)
 TARGET_DIR := all_pdfs
 VERBOSE := 0
 
-.PHONY: all docker clean retrieve_pdfs retrieve_compact compact ${TUTS} ${TUTS_CLEAN}
+.PHONY: all docker clean retrieve_pdfs retrieve_compact compact overview ${TUTS} ${TUTS_CLEAN}
 
-all: retrieve_pdfs retrieve_compact
+all: overview retrieve_pdfs retrieve_compact
 	echo -e "\033[32mRun for: $(TUTS)\033[m"
+
+overview:
+	echo -e "Build the Overview"
+	+$(MAKE) --jobs=2 --directory="overview/" all
 
 retrieve_pdfs: ${TUTS}
 	# We want to retrieve the pdfs so we can split them afterwards

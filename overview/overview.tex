@@ -1,6 +1,6 @@
-% \errorcontextlines99999
-% \documentclass[landscape,ngerman]{article}
-% \usepackage[active,tightpage]{preview}
+\errorcontextlines99999
+\documentclass[landscape,ngerman]{article}
+\usepackage[active,tightpage]{preview}
 
 \usepackage[glows]{tikzpingus}
 \usepackage{fontawesome}
@@ -24,18 +24,24 @@
 }
 
 \colorlet{background color}{white}
-\colorlet{theory}{purple!8!background color}
-\colorlet{basic}{cyan!8!background color}
-\colorlet{advanced}{green!8!background color}
+% TODO: fix that for dark and others
+\definecolor{BASE}{RGB}{51,93,126}
+\colorlet{theory}{BASE!12!background color}
+\colorlet{basic}{BASE!12!background color}
+\colorlet{advanced}{BASE!12!background color}
 
 \def\mrgray{\selectcolormodel{gray}}
 \def\mrssteele{\selectcolormodel{natural}}
+\ifcsname ACTIVATE\endcsname
 \let\mrgray\mrssteele
+\fi
+
 \def\drakeorder{9}
 
-\newsavebox\pinguA \newsavebox\pinguB \newsavebox\pinguC \newsavebox\pinguCx
-\newsavebox\pinguD \newsavebox\pinguE \newsavebox\pinguF
-\newsavebox\pinguG \newsavebox\whitepingu
+\def\maymakebox#1{\ifcsname#1\endcsname\else\expandafter\newsavebox\csname#1\endcsname\fi}
+\maymakebox{pinguA} \maymakebox{pinguB} \maymakebox{pinguC} \maymakebox{pinguCx}
+\maymakebox{pinguD} \maymakebox{pinguE} \maymakebox{pinguF}
+\maymakebox{pinguG} \maymakebox{whitepingu}
 
 \newsavebox\slidecontentbox \setbox\slidecontentbox=\hbox{\begin{tikzpicture}[every path/.append style={line cap=round,line join=round,line width=.5mm}]
 \scope[rotate=90,gray]
@@ -496,27 +502,8 @@
 % \begin{document}
 %\preview
 
-\def\xs{2cm}\relax
-\begin{tikzpicture}
-   % 2. Algorithmenkonstruktion
-   \node (a) at (0,0) {\copy\topicA};
-   % 3.-4. Programmieren im Kleinen
-   \node[right=\xs] (b) at(a.east) {\copy\topicB};
-   % 5. Zeiger, Iterationen und Arrays
-   \node[right=\xs] (c) at(b.east) {\copy\topicC};
-   % 6. Strukturierter Entwurf und Unterprogramme
-   \node[right=\xs] (d) at(c.east) {\copy\topicD};
-   % TODO: Kreise drum rum und etwas hübscher machen, dann thmen text daneben und einen sat kurzzusammenfassung als themnnetz vorne einbauen, gesamtüebrscht über die Wochen,Update der Folien präfereiren
-   % 7. & 9. Objektorientierung
-   \node[below=\xs] (e) at(a.south) {\copy\topicE};
-   % 8. Dynamische Datenstrukturen
-   \node[right=\xs] (f) at(e.east) {\copy\topicF};
-   % 10. Rekursive Algorithmen
-   \node[right=\xs] (g) at(f.east) {\copy\topicG};
-   % 11. Laufzeitkomplexität
-   \node[right=\xs] (h) at(g.east) {\copy\topicH};
-   % 12. Suchen und Sortieren
-   \node[below=\xs] (i) at(e.south) {\copy\topicI};
-\end{tikzpicture}
+
 % \endpreview
 % \end{document}
+
+\def\dotopic#1{\preview\box#1\endpreview}

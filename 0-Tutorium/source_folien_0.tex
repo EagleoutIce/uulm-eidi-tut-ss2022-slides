@@ -10,9 +10,20 @@
 
 \pingudefaultsappend{eyes=shiny,wings=grab,glasses opacity=.97}
 
-\iffull\begin{document}\fi
+\iffull\begin{document}
+\begin{frame}[plain,c]
+\null\hfill\onslide<2->{\begin{minipage}{.8\linewidth}
+    \rule{0cm}{1.25cm}\llap{\color{gray}Theorie\quad}\only<-3|handout:0>{\LoadOverview{1}{}}\only<4->{\LoadOverview{1}{-active}}
+    \hfill
+    \onslide<11->{\LoadOverview{8}{}}\medskip\\
+    \llap{\color{gray}Grundlagen\quad}\LoadOverview{2}{}\LoadOverview{3}{}\LoadOverview{4}{}\medskip\\
+    \llap{\color{gray}Fortgeschritten\quad}\hfill\LoadOverview{5}{}}\hfill\LoadOverview{6}{}\LoadOverview{7}{}\hfill\LoadOverview{9}{}
+\end{minipage}}\par
+\end{frame}
 
 \titleframe
+\fi
+
 
 \SetNextSectionText{\say{My dear Watson, try a little analysis yourself,} said he, with a touch of impatience. \say{You know my methods. Apply them, and it will be instructive to compare results.}\\--- Conan Doyle~\cite[chp.~VI]{doyle2010sign}}
 \section{Präsenzaufgabe}
@@ -139,7 +150,7 @@
         \itemsep8pt
         \item<4->[Termination:] \(Z1\) und \(Z3\)--\(Z6\) sind Elementaroperationen.\\ Diese Terminieren per Definition.\medskip\par
         \onslide<5->{Die Schleife in \(Z2\) terminiert, da \(i\) streng monoton ansteigt und damit in endlicher Zeit \(i \leq n\) verletzt.}
-        \item<6->[Partiell Korrekt:] Wir merken uns mit \a\ und \b, ob der jeweilige Buchstabe gefunden wurde. \onslide<7->{Wir geben \say{Ja} nur dann aus, wenn wir ein \T{a}, aber kein \T{b} finden. Sonst geben wir \say{Nein} aus.}
+        \item<6->[Partiell Korrekt:] Wir merken uns mit \a\ und \b, ob der jeweilige Buchstabe gefunden wurde (\(Z2\)--\(Z4\)). \onslide<7->{Wir geben \say{Ja} nur dann aus, wenn wir ein \T{a}, aber kein \T{b} finden (\(Z5\)). Sonst geben wir \say{Nein} aus.}
     \end{description}
 \end{enumerate}
 \tikzpicture[overlay,remember picture]

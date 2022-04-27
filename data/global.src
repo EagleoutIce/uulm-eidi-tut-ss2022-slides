@@ -187,3 +187,5 @@
 \def\gend{\textcolor{gray}{\smaller:}}
 
 \usepackage{setspace}
+
+\def\LoadOverview#1#2{~~\raisebox{-\height/2+\baselineskip/2}{\includegraphics[height=2.5cm]{../overview/c#1#2.pdf}\llap{\smash{\raisebox{1mm}{\color{gray}\itshape#1}}}}~~}
