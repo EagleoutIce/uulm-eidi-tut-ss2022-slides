@@ -184,5 +184,6 @@
 
 \AtBeginDocument{\def\O{\ensuremath{\mathcal{O}}}}
 \newsavebox\pinguA \newsavebox\pinguB
+\def\gend{\textcolor{gray}{\smaller:}}
 
 \usepackage{setspace}
