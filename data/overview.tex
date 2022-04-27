@@ -1,11 +1,11 @@
-\errorcontextlines99999
-\documentclass[landscape,ngerman]{article}
-\usepackage[active,tightpage]{preview}
+% \errorcontextlines99999
+% \documentclass[landscape,ngerman]{article}
+% \usepackage[active,tightpage]{preview}
 
 \usepackage[glows]{tikzpingus}
 \usepackage{fontawesome}
 \usepackage{mathtools,babel,microtype,amssymb,sfmath}
-\usetikzlibrary{arrows.meta,matrix}
+\usetikzlibrary{arrows.meta,matrix,graphs,lindenmayersystems,spy}
 
 \tikzset{box/.style={draw=lightgray,line width=1.2pt,rectangle,rounded corners=2pt,fill=white,minimum width=.75cm,minimum height=.75cm}}
 
@@ -15,7 +15,6 @@
 
 \def\onback{\pgfonlayer{u-gotta-ma-back}}
 \def\offback{\endpgfonlayer}
-
 
 \tikzset{decision/.style={diamond, draw,gray,
     minimum width=3em, minimum height=1.5em, align=center, inner sep=0pt,aspect=1.2,outer sep=0pt},
@@ -28,6 +27,15 @@
 \colorlet{theory}{purple!8!background color}
 \colorlet{basic}{cyan!8!background color}
 \colorlet{advanced}{green!8!background color}
+
+\def\mrgray{\selectcolormodel{gray}}
+\def\mrssteele{\selectcolormodel{natural}}
+\let\mrgray\mrssteele
+\def\drakeorder{9}
+
+\newsavebox\pinguA \newsavebox\pinguB \newsavebox\pinguC \newsavebox\pinguCx
+\newsavebox\pinguD \newsavebox\pinguE \newsavebox\pinguF
+\newsavebox\pinguG \newsavebox\whitepingu
 
 \newsavebox\slidecontentbox \setbox\slidecontentbox=\hbox{\begin{tikzpicture}[every path/.append style={line cap=round,line join=round,line width=.5mm}]
 \scope[rotate=90,gray]
@@ -62,17 +70,13 @@
 \endscope
 \end{tikzpicture}}
 
-\def\mrgray{\selectcolormodel{gray}}
-\def\mrssteele{\selectcolormodel{natural}}
-\let\mrgray\mrssteele
-
 \def\t#1{\tikzpicture\mrgray#1\endtikzpicture}% assure layers
-\newsavebox\pinguA \setbox\pinguA=\hbox{\t{\pingu[:back,small,body=pingu@black!85!gray]}}
-\newsavebox\pinguB \setbox\pinguB=\hbox{\t{\pingu[:back,body=pingu@black!90!white]}}
-\newsavebox\pinguC \setbox\pinguC=\hbox{\t{\pingu[:back]}}
-\newsavebox\pinguD \setbox\pinguD=\hbox{\t{\pingu[:back,body=pingu@black,headband]}}
-\newsavebox\pinguE \setbox\pinguE=\hbox{\t{\pingu[:back,body=pingu@main!90!pingu@yellow,headphones]}}
-\newsavebox\pinguF \setbox\pinguF=\hbox{\t{\pingu[:back,body=pingu@main!95!pingu@purple!80!pingu@black!90!gray,large,lollipop right=pingu@purple,right item angle=-10]}}
+\setbox\pinguA=\hbox{\t{\pingu[:back,small,body=pingu@black!85!gray]}}
+\setbox\pinguB=\hbox{\t{\pingu[:back,body=pingu@black!90!white]}}
+\setbox\pinguC=\hbox{\t{\pingu[:back]}}
+\setbox\pinguD=\hbox{\t{\pingu[:back,body=pingu@black,headband]}}
+\setbox\pinguE=\hbox{\t{\pingu[:back,body=pingu@main!90!pingu@yellow,headphones]}}
+\setbox\pinguF=\hbox{\t{\pingu[:back,body=pingu@main!95!pingu@purple!80!pingu@black!90!gray,large,lollipop right=pingu@purple,right item angle=-10]}}
 
 \newsavebox\topicA \setbox\topicA=\hbox{\begin{tikzpicture}
    \mrgray
@@ -152,7 +156,6 @@
 
 \newsavebox\topicC
 
-
 \setbox\pinguA=\hbox{\tikz{\pingu[left wing wave,right wing grab,eyes sad,bill=foreground,name=el-sado,feet=simple]\pgfonlayer{middle}\node[box,xshift=1mm,above=-.25mm] at(el-sado-wing-right-tip) {$+1$};\endpgfonlayer}}
 \setbox\pinguB=\hbox{\mrgray\tikz{\pingu[body=pingu@black,devil horns,devil fork right=pingu@purple,right eye devil,right wing wave,left eye angry,body type=chubby,name=pingu,sign post left=\faRepeat]\node[pingu@purple!60!pingu@white] at(pingu-belly-center) {\faWindows};}}
 \setbox\pinguC=\hbox{\mrgray\tikz{\pingu[wings grab,eyes wink,cup=pingu@blue]}}
@@ -161,7 +164,7 @@
 \mrgray\node[scale=2] at(3,8.5) {\copy\pinguB};
 \scope[xshift=4cm,yshift=-3.5cm,scale=3]
 \color{gray}\clip[draw,rounded corners=2pt] (0,1/5) rectangle ++(1,.2*10);
-\foreach \i in {0,...,10} {
+\foreach \i in {1,...,10} {
    \draw[gray,ultra thick,fill=background color] (0,\i/5) rectangle ++(1,0.2) node[midway,centered] {\large\sffamily\bfseries\the\numexpr\i-1\relax};
 }
 \path[rounded corners=2pt,draw,gray,line width=3pt] (0,1/5) rectangle ++(1,.2*10);
@@ -169,7 +172,7 @@
 
 \scope[xshift=-5.5cm,yshift=-3.5cm,scale=3]
 \scope\color{gray}\clip[draw,rounded corners=2pt] (0,1/5) rectangle ++(-1,.2*6);
-\foreach \i in {0,...,6} {
+\foreach \i in {1,...,6} {
    \draw[gray,ultra thick,fill=background color] (0,\i/5) rectangle ++(-1,0.2) node[midway,centered] {\large\sffamily\bfseries\the\numexpr\i-1\relax};
 }
 \path[rounded corners=2pt,draw,gray,line width=3pt] (0,1/5) rectangle ++(-1,.2*6);
@@ -191,9 +194,9 @@
 \def\Table#1(#2)#3{\scope[shift={(#2)},xshift=1.75cm,yshift=1.75cm]\pingu[#1]\endscope\pgfonlayer{super-front}\draw[lightgray,line width=6pt,rounded corners=2pt,line cap=round](#2) |- ++(4.5,1.35) -- ++(0,-1.35);\fill[draw=lightgray,fill=background color,line width=3pt,rounded corners=2pt] (#2)++(3pt-1.5pt,-3pt+1.5pt+2mm) rectangle ++(1.15,1.15) node[midway,centered]{\Large$#3$};\endpgfonlayer}
 \newsavebox\topicD
 \setbox\pinguA=\hbox{\tikz{\pingu[santa hat,santa beard,eyes vertical,blush]}}
-\setbox\pinguB=\hbox{\mrgray\tikz{\pingu[:back,right wing wave,rook,rook hatch=false]}}
+\setbox\pinguB=\hbox{\mrgray\tikz{\pingu[:back,right wing wave,rook=pingu@silver!80!background color,rook hatch=false]}}
 \setbox\topicD=\hbox{\mrgray\begin{tikzpicture}
-\Table{right wing wave,horse right,crown, eyes wink, crown position={1:(-.1cm,-.255cm){1.33}}}(2.5,3.5){$f(x)$}
+\Table{right wing wave,horse right,crown, eyes wink, crown position={1:(-.1cm,-.255cm){1.33}}}(2.5,3.5){\text{\sffamily f}(x)}
 \Table{right wing wave,eyes wink,shirt=gray,tie,blush}(0,0)+
 \Table{right wing wave,eyes vertical,cloak=gray,body type=legacy,cup,left wing grab,blush}(5,0)*
 
@@ -201,7 +204,7 @@
 {\mrssteele
 \Table{right wing wave,cake-hat,eyes wink,flag right}(2.5,-4)\ln
 \pgfonlayer{super-front}
-\node[scale=.155,circle,fill=background color] at (a) {\copy\pinguA}; % a sets flag core
+\node[scale=.125,circle,fill=background color] at (a) {\rotatebox{13}{\copy\pinguA}}; % a sets flag core
 \endpgfonlayer}
 \Table{right wing wave,vr-headset,vr-headset hair}(7.5,-4)\bmod
 
@@ -213,24 +216,307 @@
 \offback
 \end{tikzpicture}}
 
-\begin{document}
-\preview\def\xs{2cm}\relax
+% todo: regroup that
+\setbox\pinguA=\hbox{\mrgray\tikz{%
+   \pingu[wings wave,name=pingu,eyes wink,body type=legacy,eye patch right]
+   \draw[line cap=round,lightgray,line width=1.5pt] (pingu-wing-right-tip) circle[radius=2mm];
+   \draw[line cap=round,lightgray,line width=1.5pt] (pingu-head-back-con-left) circle[radius=3mm];
+   \draw[line cap=round,lightgray,line width=1.5pt] (pingu-waist-right) circle[radius=4mm];
+   \draw[line cap=round,lightgray,line width=1.5pt] (pingu-foot-left) circle[radius=3.5mm];
+   \draw[line cap=round,lightgray,line width=1.5pt] (pingu-head) circle[radius=2.5mm];
+   \onback
+      \draw[line cap=round,-Kite,lightgray,line width=1.5pt] ([xshift=1mm,yshift=-1mm]pingu-wing-left-tip) to[bend left] ++(3mm,-1cm);
+      \draw[line cap=round,Kite-Kite,lightgray,line width=1.5pt] ([xshift=4mm]pingu-foot-left) -- ++(1cm,0);
+      \draw[line cap=round,Kite-Kite,lightgray,line width=1.5pt] ([yshift=-1.75cm]pingu-head-top)++(60:1.75cm and 2cm) arc(60:120:1.75cm and 2cm);
+   \offback
+}}
+\setbox\whitepingu=\hbox{\mrgray\tikz{\pingu[@block/.style={fill=pingu@white,draw=pingu@white},wings wave]}}
+\setbox\pinguB=\hbox{\mrgray\rlap{\kern2.8pt\box\whitepingu}\tikz{
+   \pingu[wings wave,:line,name=pingu]
+   \path[line width=1.5pt] (pingu-wing-right-tip) circle[radius=2mm];
+}}
+
+\setbox\pinguC=\hbox{\mrgray\tikz{\pingu[eyes shiny,hat, hat position={1:(0cm,-.09cm){1.33}}]}}
+\setbox\pinguD=\hbox{\mrgray\tikz{\pingu[eyes shiny,lightsaber right=pingu@purple,hat, hat position={1:(0cm,-.09cm){1.33}},right item angle=-13,medal]}}
+\setbox\pinguE=\hbox{\tikz{\pingu[eyes shiny,hat,cane left, hat position={1:(0cm,-.09cm){1.33}},left item angle=-13,tie,tie dots]}}
+\setbox\pinguF=\hbox{\mrgray\tikz{\pingu[eyes shiny,hat,cane left, hat position={1:(0cm,-.09cm){1.33}},left item angle=-13,shirt=gray,second shirt,bill=flat,tie,tie dots]}}
+
+\setbox\pinguG=\hbox{\mrgray\tikz{\pingu}}
+\newsavebox\topicE
+\setbox\topicE=\hbox{\mrgray\begin{tikzpicture}
+   \node[scale=2] (a) at(0,0) {\copy\pinguA};
+   \node[above=1.5cm,scale=2] at(a.north) {\small\copy\pinguB};
+
+   \node[right]  (x) at(7.5,8) {\copy\pinguC};
+   \node[below right=1cm](e) at(x.south) {\copy\pinguE};
+   \node[below left=1cm] (d)  at(x.south) {\copy\pinguD};
+   \node[below=1cm] (f) at(e.south) {\copy\pinguF};
+
+   \node[above left=1cm] (g) at(x.north) {\copy\pinguG};
+
+   \draw[lightgray,line width=3pt,-{Triangle[round,open,fill=background color,scale=1.42]}] (g) -- (x);
+   \draw[lightgray,line width=3pt,-{Triangle[round,open,fill=background color,scale=1.42]}] (x) -- (e);
+   \draw[lightgray,line width=3pt,-{Triangle[round,open,fill=background color,scale=1.42]}] (x) -- (d);
+   \draw[lightgray,line width=3pt,-{Triangle[round,open,fill=background color,scale=1.42]}] (e) -- (f);
+\onback
+   \fill[advanced] ([yshift=-3.5mm]current bounding box.center) circle[radius=12cm];
+\offback
+\end{tikzpicture}}
+
+
+\setbox\pinguA=\hbox{\tikz{\pingu[body type=tilt-left,right wing raise,eyes shock,small,pants=pingu@purple!50!pingu@blue,strawhat,strawhat position={-26.9:(-.185cm,.14cm){1.275}},lollipop left=pingu@blue,left item angle=-30]}}
+\setbox\pinguB=\hbox{\mrgray\tikz{\pingu[sunglasses round,tie=pingu@black,tie dots,cloak=pingu@black,left wing hug,eyes angry]}}
+\setbox\pinguC=\hbox{\mrgray\tikz{\pingu[sunglasses,tie=pingu@black,tie dots,cloak=pingu@black,right wing hug,eyes angry]}}
+\setbox\pinguD=\hbox{\mrgray\tikz{
+   \pingu[:back,wings raise,name=pingu,hair=gray,hair 2=pingu@blue]
+   \path[postaction={decorate},decoration={text along path, text={|\sffamily\bfseries|Safety},text align={fit to path},text color=white}] ([yshift=5mm]pingu-belly-center) ++ (270-75:22pt and 5pt) arc (270-75:270+75:22pt and 5pt);
+}}
+
+\newsavebox\topicF
+\setbox\topicF=\hbox{\mrgray\begin{tikzpicture}[W/.style={rounded corners,draw,lightgray,line width=4pt,minimum width=1.5cm,minimum height=.65cm,scale=2,font=\sffamily\Large,text=black,fill=background color},V/.style={-Kite,lightgray,line cap=round,line width=3.5pt}]
+   \node[W] (a) at(0,0) {7};
+   \node[W,above right=.5cm,xshift=.25cm] (b) at(a.east) {9};
+   \node[W,below right=.5cm,xshift=.25cm] (c) at(a.east) {-5};
+   \node[W,right=.75cm,yshift=-2mm] (d) at(b.east) {15};
+   \node[W,right=.75cm,yshift=2mm] (e) at(d.east) {17};
+
+   \node[W,below left=.5cm] (f) at(c.south) {-6};
+   \node[W,,opacity=.7,below right=.5cm] (g) at(c.south) {-2};
+
+   \node[W,below left=.5cm,xshift=-.25cm] (h) at(g.south) {-3};
+   \node[W,below right=.5cm,xshift=1cm] (i) at(g.south) {-1};
+
+   \node[below=-1.1cm] at(d.south) {\rotatebox{-50}{\copy\pinguA}};
+   \node[left=-3.5mm,yshift=2mm] at(h.west) {\copy\pinguB};
+   \node[right=-3.5mm,yshift=2mm] at(i.east) {\copy\pinguC};
+
+   \node[below=7.65cm,xshift=-1cm,scale=1.5] (k) at(d.south) {\copy\pinguD};
+
+   \graph[edges={V}]{(a) -> (b) -> (d) -> (e),(a) -> (c) -> {(f), (g)},(g) -> {(h),(i)}};
+
+   % Pfeil und Kachel auf dem Boden, "wurde entfernt" da dynamisch :D
+
+   \node[W,below left=4mm,rotate=-8] (ax) at(k.south) {-4};
+
+   \draw[V] ([xshift=-8mm,yshift=7mm]ax.north west) -- ++(2.45cm,6mm);
+
+   \onback
+   \fill[advanced] ([yshift=9.5mm]current bounding box.center) circle[radius=12cm];
+\offback
+\end{tikzpicture}}
+
+% parallel for gray and not gray card
+\def\pinguButtomLeft{\tikz{\foreach[count=\i from 0] \c in {green,blue,purple,yellow} {
+   \draw[pingu@\c,rotate=\i*90,rounded corners=2pt,ultra thick,scale=1.75,line cap=round] l-system [l-system={rule set={X -> X+YF+,Y->-FX-Y},axiom=FX,angle=90,order=\drakeorder,step=3.75pt}];
+}}}
+\setbox\pinguA=\hbox{\mrgray\pinguButtomLeft}
+\setbox\pinguF=\hbox{\pinguButtomLeft}
+
+% TODO: make this better or parallel
+\setbox\pinguB=\hbox{\mrgray\tikz{\pingu[eyes vertical,blush,wings shock,sheriff star=gray,body type=legacy,sheriff star content={},sheriff star lines=!hide]}}
+% levels of recursion
+\newcounter{pingusheriff-rec}
+\loop
+\setbox\pinguB=\hbox{\tikz{\pingu[eyes vertical,blush,wings shock,sheriff star=gray,body type=legacy,sheriff star content={\resizebox*!{.275cm}{\copy\pinguB}},sheriff star lines=!hide]}}
+\stepcounter{pingusheriff-rec}
+\ifnum\value{pingusheriff-rec}<4 \repeat
+
+\setbox\pinguG=\hbox{\mrgray\tikz{\pingu[eyes vertical,blush,wings shock,sheriff star=gray,body type=legacy,sheriff star content={},sheriff star lines=!hide]}}
+% levels of recursion
+\setcounter{pingusheriff-rec}{0} \loop
+\setbox\pinguG=\hbox{\tikz{\pingu[eyes vertical,blush,wings shock,sheriff star=gray,body type=legacy,sheriff star content={\resizebox*!{.275cm}{\copy\pinguG}},sheriff star lines=!hide]}}
+\stepcounter{pingusheriff-rec}
+\ifnum\value{pingusheriff-rec}<4 \repeat
+
+
+\setbox\pinguC=\hbox{\mrgray\tikz{\node[scale=.65,draw=lightgray,rounded corners=4pt,line width=7pt,fill=background color,inner sep=1.25cm] (a) at (0,0) {\copy\pinguA};
+\draw[line width=8pt,lightgray,line cap=round] (a.south) -- ++(0,-4cm);
+\node[right=3.25cm,yshift=-6.5cm,scale=2] at(0,0) {\copy\pinguB};}}
+\setbox\pinguC=\hbox{\mrgray\tikz{\node[draw=lightgray,rounded corners=4pt,line width=4pt,fill=background color,inner sep=.25cm] (a) at (0,0) {\copy\pinguC};}}
+
+% parallel for colors
+\setbox\pinguE=\hbox{\tikz{\node[scale=.65,draw=lightgray,rounded corners=4pt,line width=7pt,fill=background color,inner sep=1.25cm] (a) at (0,0) {\copy\pinguF};
+\draw[line width=8pt,lightgray,line cap=round] (a.south) -- ++(0,-4cm);
+\node[right=3.25cm,yshift=-6.5cm,scale=2] at(0,0) {\copy\pinguG};}}
+\setbox\pinguE=\hbox{\tikz{\node[draw=lightgray,rounded corners=4pt,line width=4pt,fill=background color,inner sep=.25cm] (a) at (0,0) {\copy\pinguE};}}
+
+\setbox\pinguD=\hbox{\mrgray\tikz{\pingu[eyes wink,mask,hat=pingu@white!80!gray,hat ribbon=pingu@black,hat coronal=pingu@black,heart=lightgray!20!white,monocle left,monocle left glass=orange,right wing wave,cane left]}}
+\newsavebox\topicG
+\setbox\topicG=\hbox{\mrgray\begin{tikzpicture}
+\foreach \i in {-.5,0,...,6.5} {
+   \node[scale={1/10+\i/10}] (a) at (0,-1*\i-\i/5) {\copy\pinguC};
+}
+\node[scale={1/10+7/10},rotate=-10] (a) at (3,-1*7-7/5) {\copy\pinguE};
+
+   \node[right=-10mm,scale=2.25] at(current bounding box.east) {\copy\pinguD};
+
+   \onback
+      \fill[advanced] ([yshift=-7.5mm,xshift=-7.5mm]current bounding box.center) circle[radius=12cm];
+   \offback
+\end{tikzpicture}}
+
+\def\blockcodeindent{.03}
+\def\RandomCodeFrag{% generate random "lines"
+% the inital curX
+\def\curX{\blockX}%
+\def\curXInit{\blockX}% we use this to store the line start
+\foreach \line in {0,...,\blockLimit} {
+    \pgfmathsetmacro\amount{int(abs(rand*6)+2)}
+    % we use the last curXInit in order to decide for a small shift
+    \pgfmathsetmacro\diff{\curXInit-\blockX}
+    \ifdim\diff pt>.1pt\relax
+        % only give it a chance to subtract
+        \pgfmathsetmacro\toss{random(1,3)}%
+        \ifnum\toss=1 % we increase dec chance
+            \let\curX\curXInit
+        \else
+            \pgfmathsetmacro\curX{\curXInit-\blockcodeindent}
+        \fi
+    \else\ifdim\diff pt<0pt\relax% only inc
+        \pgfmathsetmacro\toss{random(1,2)}%
+        \ifnum\toss=1
+            \pgfmathsetmacro\curX{\curXInit+\blockcodeindent}
+        \else
+            \let\curX\curXInit
+        \fi
+    \else
+        \pgfmathsetmacro\toss{random(1,3)}%
+        \ifnum\toss=1
+            \pgfmathsetmacro\curX{\curXInit-\blockcodeindent}
+        \else\ifnum\toss=2
+            \pgfmathsetmacro\curX{\curXInit+\blockcodeindent}
+        \else\let\curX\curXInit
+        \fi\fi
+    \fi\fi
+    \ifnum\i=1 \ifnum\line=0 \let\curX\blockX \fi\fi % not for the first line in the first block
+    \xdef\curXInit{\curX}
+    \foreach \lengths in {1,...,\amount} {
+        \pgfmathsetmacro\length{abs(rand)*.7/(\amount+1)+.14/\amount}
+        % \typeout{\lengths: in line \line: is \length. With \curX. [\curXInit]}
+        \colorlet{keyword color}{pingu@purple}
+        \pgfmathsetmacro\donumber{abs(rand)-\lengths/\amount*0.65 > 0.5}
+        \ifnum\donumber=1 \colorlet{@}{keyword color} \else \colorlet{@}{gray} \fi
+        \fill[@,fill opacity=.85,rounded corners=1.15mm] (\curX,\blockY-\line/22) rectangle ++(\length,.025);
+        \pgfmathsetmacro\curX{\curX+\length+.01}
+        \xdef\curX{\curX}
+}}}%
+
+\newsavebox\calculator
+\setbox\calculator=\hbox{\begin{tikzpicture}[e/.style={rectangle,rounded corners=1.8pt,fill=lightgray!85!white,minimum width=1.25em,minimum height=1.25em,font=\footnotesize\sffamily}]
+    \draw[rounded corners=4pt,fill=white] (0-0.15,-0.05) rectangle ++(2.6,3.5);
+    % cp xd
+    \node[e] at(0.25,0.33) {.};
+    \node[e] at(0.25+0.6,0.33) {0};
+    \node[e,fill=pingu@purple!10!background color] at(0.25+2*0.6,0.33) {=};
+    \node[e] at(0.25+3*0.6,0.33) {+};
+
+    \node[e] at(0.25,0.33+0.6) {1};
+    \node[e] at(0.25+0.6,0.33+0.6) {2};
+    \node[e] at(0.25+2*0.6,0.33+0.6) {3};
+    \node[e] at(0.25+3*0.6,0.33+0.6) {\raisebox{-1pt}{--}};
+
+    \node[e] at(0.25,0.33+2*0.6) {4};
+    \node[e] at(0.25+0.6,0.33+2*0.6) {5};
+    \node[e] at(0.25+2*0.6,0.33+2*0.6) {6};
+    \node[e] at(0.25+3*0.6,0.33+2*0.6) {$\times$};
+
+    \node[e] at(0.25,0.33+3*0.6) {7};
+    \node[e] at(0.25+0.6,0.33+3*0.6) {8};
+    \node[e] at(0.25+2*0.6,0.33+3*0.6) {9};
+    \node[e] at(0.25+3*0.6,0.33+3*0.6) {$\div$};
+
+    \node[e,fill=lightgray!20!white,minimum width=6em,minimum height=2em,above=1em] (field) at(0.25+1.5*0.6,0.33+3*0.6) {};
+    \node[below right,scale=0.7] at(field.north west) {{\textsf{isItComplex}(\textsf{Code});}};
+    \node[above left,scale=0.8] at(field.south east) {\textsf{Yes}};
+\end{tikzpicture}}
+
+\setbox\pinguA=\hbox{\tikz{%
+   \pingu[right wing wave,name=pingu,eyes wink,cape=pingu@purple,glow=background color,body type=legacy,devil horns]
+   \node[scale=.35] at (pingu-wing-right-tip) {\copy\calculator};
+}}
+
+\newsavebox\topicH
+\setbox\topicH=\hbox{\mrgray\begin{tikzpicture}
+   \scope[spy using outlines={circle, pingu@black, line width=10pt, magnification=5, size=5cm, connect spies}]
+      \scope[scale=9]
+         \pgfmathsetseed{1042}
+         \def\blockX{0}\def\blockY{1}\def\blockLimit{23}
+         \RandomCodeFrag
+         \def\blockX{.35}\def\blockY{-.3}\def\blockLimit{6}
+         \RandomCodeFrag
+      \endscope
+      \spy[size=5cm] on (1.8,3.5) in node (zoom) [left] at(12.5,6);
+      \node[right=4mm] at(12.5,6) {\Large\(\mathcal{O}(x) = x^2 + 3\cdot x\)};
+      \node[above left,scale=2,xshift=-1.15cm,yshift=.9cm] at(current bounding box.south east) {\copy\pinguA};
+   \endscope
+   \onback
+      \fill[advanced] (current bounding box.center) circle[radius=12cm];
+   \offback
+\end{tikzpicture}}
+
+\def\PinguBanner#1#2{\tikz{\pingu[wings wave, banner=#1, banner sticks length=3mm,banner bent=-42,banner raise=-3.55mm,banner font=\bfseries\Huge\sffamily,eyes wink,banner height=5.25mm,#2]}}
+
+\setbox\pinguA=\hbox{\mrgray\PinguBanner{1}{eyes shiny,santa hat}}
+\setbox\pinguB=\hbox{\mrgray\PinguBanner{2}{eyes shiny,construction helmet}}
+\setbox\pinguC=\hbox{\mrgray\PinguBanner{3}{eyes wink,glasses,halo,small}}
+\setbox\pinguC=\hbox{\mrgray\tikz{\node[outer sep=0] (C) {\box\pinguC}; \fill[pingu@bronze,rounded corners=2pt] ([yshift=-1.75mm/2]C.south west)rectangle ([yshift=2.75mm/2]C.south east);}}
+\setbox\pinguCx=\hbox{\PinguBanner{3}{eyes wink,glasses,halo,small}}
+\setbox\pinguCx=\hbox{\tikz{\node[outer sep=0] (C) {\box\pinguCx}; \fill[pingu@bronze,rounded corners=2pt] ([yshift=-1.75mm/2]C.south west)rectangle ([yshift=2.75mm/2]C.south east);}}
+\setbox\pinguD=\hbox{\mrgray\PinguBanner{4}{eyes shiny,headband}}
+\setbox\pinguE=\hbox{\mrgray\PinguBanner{5}{eyes shiny,headphones}}
+\setbox\pinguF=\hbox{\mrgray\PinguBanner{6}{eyes shiny,crown}}
+\setbox\pinguG=\hbox{\mrgray\PinguBanner{7}{right eye shiny,eye patch left}}
+
+
+\newsavebox\topicI
+\def\Row#1#2#3#4{\scope[transparency group,opacity=#3]\foreach[count=\i] \a in {#2} {
+   \if C\a
+   \node[above,scale=.75,outer sep=0pt] (#1-\a) at (2.5*\i,3.15*#1) {\expandafter\copy\csname pingu\a#4\endcsname};
+   \else
+   \node[above,scale=.75,outer sep=0pt] (#1-\a) at (2.5*\i,3.15*#1) {\expandafter\copy\csname pingu\a\endcsname};
+   \fi
+}\endscope}
+\setbox\topicI=\hbox{\mrgray\begin{tikzpicture}
+   \Row{0}{A,F,B,C,E,G,D}{.35}{}
+   \Row{-1}{A,B,F,C,E,G,D}{.55}{}
+   \Row{-2}{A,B,C,F,E,G,D}{1}{x}
+   \Row{-3}{A,B,C,E,F,G,D}{.55}{}
+   \Row{-4}{A,B,C,E,D,F,G}{.35}{}
+   \foreach[remember=\i as \li (initially 0)] \i in {-1,...,-4} {
+      \foreach \a in {A,...,G} {
+         \draw[-Kite,lightgray,very thick] (\li-\a.south) -- (\i-\a.north);
+      }
+   }
+   \onback
+      \fill[theory] ([yshift=-.5mm]current bounding box.center) circle[radius=12cm];
+      \node[left=5mm,yshift=-2.5mm,scale=2] at(-2-A.west) {\Huge\faAngleRight};
+   \offback
+\end{tikzpicture}}
+
+% \begin{document}
+%\preview
+
+\def\xs{2cm}\relax
 \begin{tikzpicture}
    % 2. Algorithmenkonstruktion
    \node (a) at (0,0) {\copy\topicA};
    % 3.-4. Programmieren im Kleinen
    \node[right=\xs] (b) at(a.east) {\copy\topicB};
-   % 5.
+   % 5. Zeiger, Iterationen und Arrays
    \node[right=\xs] (c) at(b.east) {\copy\topicC};
-   % 6.
+   % 6. Strukturierter Entwurf und Unterprogramme
    \node[right=\xs] (d) at(c.east) {\copy\topicD};
    % TODO: Kreise drum rum und etwas hübscher machen, dann thmen text daneben und einen sat kurzzusammenfassung als themnnetz vorne einbauen, gesamtüebrscht über die Wochen,Update der Folien präfereiren
-
-   % TODO: 7. & 9.
-   % TODO: 8.
-   % TODO 10.
-   % TODO: 11.
-   % TODO: 12.
+   % 7. & 9. Objektorientierung
+   \node[below=\xs] (e) at(a.south) {\copy\topicE};
+   % 8. Dynamische Datenstrukturen
+   \node[right=\xs] (f) at(e.east) {\copy\topicF};
+   % 10. Rekursive Algorithmen
+   \node[right=\xs] (g) at(f.east) {\copy\topicG};
+   % 11. Laufzeitkomplexität
+   \node[right=\xs] (h) at(g.east) {\copy\topicH};
+   % 12. Suchen und Sortieren
+   \node[below=\xs] (i) at(e.south) {\copy\topicI};
 \end{tikzpicture}
-\endpreview
-\end{document}
+% \endpreview
+% \end{document}
