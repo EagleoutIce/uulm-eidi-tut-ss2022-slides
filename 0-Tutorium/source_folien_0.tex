@@ -87,7 +87,7 @@
         \item {\g Abstraktion: Definiere die Eingabe und die gewünschte Ausgabe}
         \begin{description}[Gegeben:]
             \itemsep1.5pt
-            \item<+(1)->[Gegeben:] Eine Zeichenkette \(S = s_1, \ldots, s_n\)
+            \item<+(1)->[Gegeben:] Eine Zeichenkette \(S = (s_1, \ldots, s_n)\)
             \item<+(1)->[Gesucht:] Ausgabe \say{Ja} genau dann, wenn \(\exists i: s_i = \text{\T{a}}\) und \(\forall j: s_j \neq \text{\T{b}}\), sonst \say{Nein}
         \end{description}
     \end{enumerate}
@@ -108,7 +108,7 @@
 \setcounter{algocf}{0}
 \pause\begin{algorithm}[H]
 \PreCode
-    \KwIn{Eingabe als Zeichenkette $S$ mit Zeichen $S=s_1, \ldots, s_n$}\medskip
+    \KwIn{Eingabe als Zeichenkette $S$ mit Zeichen $S=(s_1, \ldots, s_n)$}\medskip
 \StartCode
     \onslide<3->{$\a \gets Nein$\;}
     \onslide<4->{$\b \gets Nein$\medskip\;}
