@@ -43,6 +43,8 @@
 \maymakebox{pinguD} \maymakebox{pinguE} \maymakebox{pinguF}
 \maymakebox{pinguG} \maymakebox{whitepingu}
 
+% all in one file to make it changeable in the future
+\def\DoTopicA{%
 \newsavebox\slidecontentbox \setbox\slidecontentbox=\hbox{\begin{tikzpicture}[every path/.append style={line cap=round,line join=round,line width=.5mm}]
 \scope[rotate=90,gray]
    \draw (0.5,0) -- (5,0) -- ++(0,-2.5)
@@ -76,7 +78,7 @@
 \endscope
 \end{tikzpicture}}
 
-\def\t#1{\tikzpicture\mrgray#1\endtikzpicture}% assure layers
+\def\t##1{\tikzpicture\mrgray##1\endtikzpicture}% assure layers
 \setbox\pinguA=\hbox{\t{\pingu[:back,small,body=pingu@black!85!gray]}}
 \setbox\pinguB=\hbox{\t{\pingu[:back,body=pingu@black!90!white]}}
 \setbox\pinguC=\hbox{\t{\pingu[:back]}}
@@ -109,19 +111,19 @@
    \onback
       \fill[theory] ([xshift=-8.5mm,yshift=2.5mm]current bounding box.center) circle[radius=11cm];
    \offback
-\end{tikzpicture}}
+\end{tikzpicture}}}
 
-% -------------------------------------------------------------
 
+\def\DoTopicB{
 \setbox\pinguA=\hbox{\tikz{\mrgray\pingu[small,feet=sit,glasses round,eyes shiny,body type=legacy,left wing wave,name=pingu,princess crown 2d=pingu@yellow!96!pingu@main] \node[above,box] (b) at(pingu-wing-left-tip) {$x$}; \draw[lightgray,line width=1.2pt] ([xshift=-2pt,yshift=-1pt]b.north east) -- ++(-.75cm+4pt,.45cm);\pgfonlayer{background}\node[above=1.66mm,xshift=-1mm] at (b.center) {\large\sffamily\rotatebox{25}{5}};\endpgfonlayer}}
 \setbox\pinguB=\hbox{\tikz{\pingu[:back,left wing raise,body type=tilt-right,construction helmet,construction helmet padding=.255cm]}}
 \newsavebox\topicB
 \setbox\topicB=\hbox{\mrgray\begin{tikzpicture}[every path/.append style={line cap=round,line join=round}]
    \pgfonlayer{background}
-   \matrix[matrix of math nodes,nodes={box,line width=2.4pt, scale=2,execute at begin node=\strut,outer sep=4pt},column sep=2mm,row sep=7mm] (m) at (-1.5,6,0) {
-      v & a & r &   &  & i & a_2   & & & & b\\
-      l & e & s   & a_3 &  &  r  &  & & & &\\
-      e_2 &     & g   & r_2  & e_2 & |[rotate=-4]|a_4    &     & & & & t \\
+   \matrix[matrix of math nodes,nodes={box,line width=2.4pt, scale=2,execute at begin node=\strut,outer sep=4pt},ampersand replacement=\&,column sep=2mm,row sep=7mm] (m) at (-1.5,6,0) {
+      v \& a \& r \&   \&  \& i \& a_2   \& \& \& \& b\\
+      l \& e \& s   \& a_3 \&  \&  r  \&  \& \& \& \&\\
+      e_2 \&     \& g   \& r_2  \& e_2 \& |[rotate=-4]|a_4    \&     \& \& \& \& t \\
    };
    \draw[line width=8pt,lightgray] ([xshift=-3mm,yshift=-10cm]m-1-1.north west) -- ++(0,10cm) -- ([xshift=3mm]m-1-11.north east) coordinate (@) -- ++(0,-10cm)
    ([xshift=-3mm,yshift=3pt]m-3-1.south west) coordinate (@a) -- (@|-@a)
@@ -159,7 +161,9 @@
       \offback
    \endscope
 \end{tikzpicture}}
+}
 
+\def\DoTopicC{
 \newsavebox\topicC
 
 \setbox\pinguA=\hbox{\tikz{\pingu[left wing wave,right wing grab,eyes sad,bill=foreground,name=el-sado,feet=simple]\pgfonlayer{middle}\node[box,xshift=1mm,above=-.25mm] at(el-sado-wing-right-tip) {$+1$};\endpgfonlayer}}
@@ -195,9 +199,10 @@
 \onback
    \fill[basic] ([yshift=-3.5mm]current bounding box.center) circle[radius=12cm];
 \offback
-\end{tikzpicture}}
+\end{tikzpicture}}}
 
-\def\Table#1(#2)#3{\scope[shift={(#2)},xshift=1.75cm,yshift=1.75cm]\pingu[#1]\endscope\pgfonlayer{super-front}\draw[lightgray,line width=6pt,rounded corners=2pt,line cap=round](#2) |- ++(4.5,1.35) -- ++(0,-1.35);\fill[draw=lightgray,fill=background color,line width=3pt,rounded corners=2pt] (#2)++(3pt-1.5pt,-3pt+1.5pt+2mm) rectangle ++(1.15,1.15) node[midway,centered]{\Large$#3$};\endpgfonlayer}
+\def\DoTopicD{
+\def\Table##1(##2)##3{\scope[shift={(##2)},xshift=1.75cm,yshift=1.75cm]\pingu[##1]\endscope\pgfonlayer{super-front}\draw[lightgray,line width=6pt,rounded corners=2pt,line cap=round](##2) |- ++(4.5,1.35) -- ++(0,-1.35);\fill[draw=lightgray,fill=background color,line width=3pt,rounded corners=2pt] (##2)++(3pt-1.5pt,-3pt+1.5pt+2mm) rectangle ++(1.15,1.15) node[midway,centered]{\Large$##3$};\endpgfonlayer}
 \newsavebox\topicD
 \setbox\pinguA=\hbox{\tikz{\pingu[santa hat,santa beard,eyes vertical,blush]}}
 \setbox\pinguB=\hbox{\mrgray\tikz{\pingu[:back,right wing wave,rook=pingu@silver!80!background color,rook hatch=false]}}
@@ -221,7 +226,9 @@
    \fill[basic] ([yshift=-3.5mm]current bounding box.center) circle[radius=12cm];
 \offback
 \end{tikzpicture}}
+}
 
+\def\DoTopicE{
 % todo: regroup that
 \setbox\pinguA=\hbox{\mrgray\tikz{%
    \pingu[wings wave,name=pingu,eyes wink,body type=legacy,eye patch right]
@@ -268,8 +275,9 @@
    \fill[advanced] ([yshift=-3.5mm]current bounding box.center) circle[radius=12cm];
 \offback
 \end{tikzpicture}}
+}
 
-
+\def\DoTopicF{
 \setbox\pinguA=\hbox{\tikz{\pingu[body type=tilt-left,right wing raise,eyes shock,small,pants=pingu@purple!50!pingu@blue,strawhat,strawhat position={-26.9:(-.185cm,.14cm){1.275}},lollipop left=pingu@blue,left item angle=-30]}}
 \setbox\pinguB=\hbox{\mrgray\tikz{\pingu[sunglasses round,tie=pingu@black,tie dots,cloak=pingu@black,left wing hug,eyes angry]}}
 \setbox\pinguC=\hbox{\mrgray\tikz{\pingu[sunglasses,tie=pingu@black,tie dots,cloak=pingu@black,right wing hug,eyes angry]}}
@@ -309,8 +317,9 @@
    \onback
    \fill[advanced] ([yshift=9.5mm]current bounding box.center) circle[radius=12cm];
 \offback
-\end{tikzpicture}}
+\end{tikzpicture}}}
 
+\def\DoTopicG{
 % parallel for gray and not gray card
 \def\pinguButtomLeft{\tikz{\foreach[count=\i from 0] \c in {green,blue,purple,yellow} {
    \draw[pingu@\c,rotate=\i*90,rounded corners=2pt,ultra thick,scale=1.75,line cap=round] l-system [l-system={rule set={X -> X+YF+,Y->-FX-Y},axiom=FX,angle=90,order=\drakeorder,step=3.75pt}];
@@ -360,7 +369,9 @@
       \fill[advanced] ([yshift=-7.5mm,xshift=-7.5mm]current bounding box.center) circle[radius=12cm];
    \offback
 \end{tikzpicture}}
+}
 
+\def\DoTopicH{
 \def\blockcodeindent{.03}
 \def\RandomCodeFrag{% generate random "lines"
 % the inital curX
@@ -459,8 +470,10 @@
       \fill[advanced] (current bounding box.center) circle[radius=12cm];
    \offback
 \end{tikzpicture}}
+}
 
-\def\PinguBanner#1#2{\tikz{\pingu[wings wave, banner=#1, banner sticks length=3mm,banner bent=-42,banner raise=-3.55mm,banner font=\bfseries\Huge\sffamily,eyes wink,banner height=5.25mm,#2]}}
+\def\DoTopicI{
+\def\PinguBanner##1##2{\tikz{\pingu[wings wave, banner=##1, banner sticks length=3mm,banner bent=-42,banner raise=-3.55mm,banner font=\bfseries\Huge\sffamily,eyes wink,banner height=5.25mm,##2]}}
 
 \setbox\pinguA=\hbox{\mrgray\PinguBanner{1}{eyes shiny,santa hat}}
 \setbox\pinguB=\hbox{\mrgray\PinguBanner{2}{eyes shiny,construction helmet}}
@@ -475,11 +488,11 @@
 
 
 \newsavebox\topicI
-\def\Row#1#2#3#4{\scope[transparency group,opacity=#3]\foreach[count=\i] \a in {#2} {
+\def\Row##1##2##3##4{\scope[transparency group,opacity=##3]\foreach[count=\i] \a in {##2} {
    \if C\a
-   \node[above,scale=.75,outer sep=0pt] (#1-\a) at (2.5*\i,3.15*#1) {\expandafter\copy\csname pingu\a#4\endcsname};
+   \node[above,scale=.75,outer sep=0pt] (##1-\a) at (2.5*\i,3.15*##1) {\expandafter\copy\csname pingu\a##4\endcsname};
    \else
-   \node[above,scale=.75,outer sep=0pt] (#1-\a) at (2.5*\i,3.15*#1) {\expandafter\copy\csname pingu\a\endcsname};
+   \node[above,scale=.75,outer sep=0pt] (##1-\a) at (2.5*\i,3.15*##1) {\expandafter\copy\csname pingu\a\endcsname};
    \fi
 }\endscope}
 \setbox\topicI=\hbox{\mrgray\begin{tikzpicture}
@@ -497,13 +510,6 @@
       \fill[theory] ([yshift=-.5mm]current bounding box.center) circle[radius=12cm];
       \node[left=5mm,yshift=-2.5mm,scale=2] at(-2-A.west) {\Huge\faAngleRight};
    \offback
-\end{tikzpicture}}
-
-% \begin{document}
-%\preview
-
-
-% \endpreview
-% \end{document}
+\end{tikzpicture}}}
 
 \def\dotopic#1{\preview\box#1\endpreview}
