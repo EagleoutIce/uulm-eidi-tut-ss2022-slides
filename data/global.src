@@ -188,4 +188,38 @@
 
 \usepackage{setspace}
 
-\def\LoadOverview#1#2{~~\raisebox{-\height/2+\baselineskip/2}{\includegraphics[height=2.5cm]{../overview/c#1#2.pdf}\llap{\smash{\raisebox{1mm}{\color{gray}\itshape#1}}}}~~}
+\newdimen\overviewheight \overviewheight=2.5cm
+\makeatletter
+\def\LoadOverview#1#2{\def\suff{#2}~~\raisebox{-\height/2+\baselineskip/2}{\includegraphics[height=\overviewheight]{../overview/c#1\suff.pdf}\llap{\smash{\raisebox{1mm}{\color{gray}\itshape\if\suff\@empty\else\expandafter\paletteA\fi{#1}}}}}~~}
+
+% #1 is the one to load
+\def\doonlyactiveoverview{\only<-2|handout:0>}
+\def\MayLoadActive#1{\ifnum\ActiveTopic=#1\relax\expandafter\doonlyactiveoverview\fi{\LoadOverview{#1}{}}\ifnum\ActiveTopic=#1\relax\only<3->{\LoadOverview{#1}{-active}}\fi}
+% #1 is the currently active topic number
+\def\TopicOverview#1{%
+\def\ActiveTopic{#1}%
+\begin{frame}[plain,c]
+\def\hl{\relax\only<3->{\sbseries}}%
+\null\vspace*{0pt plus 1filll}
+\null\hfill\onslide<2->{%
+\minipage{.8\linewidth}
+    % first we strut the line to guide the theory marker
+    \rule{0cm}{.5\overviewheight}%
+    \llap{\color{gray}%
+      \ifnum#1=1\hl\else\ifnum#1=8\hl\fi\fi Theorie\quad
+    }%
+    \MayLoadActive{1}%
+    \hfill
+    \MayLoadActive{8}\medskip\\
+    \llap{\color{gray}%
+      \ifnum#1>1\ifnum#1<5\hl\fi\fi Grundlagen\quad
+    }
+    \MayLoadActive{2}\MayLoadActive{3}\MayLoadActive{4}{}\medskip\\
+    \llap{\color{gray}%
+      \ifnum#1>4\ifnum#1<8\hl\fi\fi\ifnum#1=9\hl\fi Fortgeschritten\quad
+    }%
+    \hfill\LoadOverview{5}{}\hfill\MayLoadActive{6}\MayLoadActive{7}\hfill\MayLoadActive{9}
+\endminipage
+}\par
+\vspace*{0pt plus 1filll}\par
+\end{frame}}

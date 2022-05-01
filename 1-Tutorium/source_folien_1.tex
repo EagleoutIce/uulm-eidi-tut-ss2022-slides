@@ -1,0 +1,57 @@
+\InputIfFileExists{../data/global.src}\relax\relax
+
+\iffull
+\title[Erstes Tutorium -- Übungsblatt 1]{I've built this. With my bare hands!}
+\subtitle{Tutorium Eins}
+\date{KW 18}
+\addbibresource{references.bib}
+\fi
+\SetTutoriumNumber{1}
+
+\iffull\begin{document}
+\titleframe
+
+\TopicOverview{1}
+\fi
+
+
+\SetNextSectionText{Practice yourself, for heaven's sake in little things, and then proceed to greater.\\--- Epictetus~\cite[adapted, chp.~16]{epictetusdiscourses}}
+\section{Präsenzaufgabe}
+\begin{frame}[c]{Präsenzaufgabe}
+\begin{aufgabe}{Whats that number?}
+
+    \onslide<1->
+\end{aufgabe}
+\end{frame}
+
+
+
+\SetNextSectionText{He who chooses the beginning of a road chooses the place it leads to. It is the means that determine the end.\\--- Harry Emerson Fosdick, \cite[p.~111]{fosdick1941living}}
+\section{Abschließendes}
+{\SummaryFrame
+\begin{frame}[t]{Zusammenfassend}
+\pause \printBibCommand
+\vfill\vfill % double fill for more fraction
+\begin{itemize}[<+(1)->]
+    \itemsep14pt
+    \item Für Pseudocode wünschen wir uns \begin{itemize}
+        \itemsep1pt
+        \item eine konsistente und menschenlesbare Notation,
+        \item mathematische Definitionen,
+        \item aber nichts sprachspezifisches (\bjava{int}) oder zu allgemeines (\say{löst Problem}).
+    \end{itemize}
+    \item Algorithmen und deren Konstruktion: \begin{itemize}
+        \itemsep1pt
+        \item Eine eindeutige, endliche Beschreibung wohldefinierter Elementaroperationen, deren schrittweise Ausführung durch einen Prozessor möglich und endlich ist.
+        \item \def\t{~~\faAngleRight~~}Spezifikation\t Abstraktion\t Entwurf\t Verifikation\t Aufwandsanalyse
+        % \item Als Frage für die Woche: Warum und wann sind all diese Schritte von Bedeutung?
+    \end{itemize}
+\end{itemize}
+\end{frame}
+}
+
+\outro{\vskip6mm\centering\begin{tikzpicture}[scale=2.5]
+    \only<2->{\pingu[right wing grab,headband=purple!90!green,cup=purple!90!green,name=saphira, left eye wink,body type=chubby]}
+\end{tikzpicture}}
+
+\iffull\end{document}\fi
