@@ -190,11 +190,12 @@
 
 \newdimen\overviewheight \overviewheight=2.5cm
 \makeatletter
-\def\LoadOverview#1#2{\def\suff{#2}~~\raisebox{-\height/2+\baselineskip/2}{\includegraphics[height=\overviewheight]{../overview/c#1\suff.pdf}\llap{\smash{\raisebox{1mm}{\color{gray}\itshape\if\suff\@empty\else\expandafter\paletteA\fi{#1}}}}}~~}
+% #1 main number, #2 is potential active suffix, #3 is display numbers
+\def\LoadOverview#1#2#3{\def\suff{#2}~~\raisebox{-\height/2+\baselineskip/2}{\includegraphics[height=\overviewheight]{../overview/c#1\suff.pdf}\llap{\smash{\raisebox{1mm}{\color{gray}\itshape\if\suff\@empty\else\expandafter\paletteA\fi{\contourlength{.25ex}\contour{btdm@background}{#3}}}}}}~~}
 
 % #1 is the one to load
 \def\doonlyactiveoverview{\only<-2|handout:0>}
-\def\MayLoadActive#1{\ifnum\ActiveTopic=#1\relax\expandafter\doonlyactiveoverview\fi{\LoadOverview{#1}{}}\ifnum\ActiveTopic=#1\relax\only<3->{\LoadOverview{#1}{-active}}\fi}
+\def\MayLoadActive#1#2{\ifnum\ActiveTopic=#1\relax\expandafter\doonlyactiveoverview\fi{\LoadOverview{#1}{}{#2}}\ifnum\ActiveTopic=#1\relax\only<3->{\LoadOverview{#1}{-active}{#2}}\fi}
 % #1 is the currently active topic number
 \def\TopicOverview#1{%
 \def\ActiveTopic{#1}%
@@ -207,12 +208,12 @@
     \rule{0cm}{.5\overviewheight}%
     \color{gray}\ifnum#1=1\hl\else\ifnum#1=8\hl\fi\fi Theorie\quad
     %
-    & \MayLoadActive{1} & & & \MayLoadActive{8}\medskip\\
+    & \MayLoadActive{1}{2} & & & \MayLoadActive{8}{11}\medskip\\
     \color{gray}\ifnum#1>1\ifnum#1<5\hl\fi\fi Grundlagen\quad
     &
-    \MayLoadActive{2} & \MayLoadActive{3} & \MayLoadActive{4} & \medskip\\
+    \MayLoadActive{2}{3\,\&\,4} & \MayLoadActive{3}{5} & \MayLoadActive{4}{6} & \medskip\\
     \color{gray}\ifnum#1>4\ifnum#1<8\hl\fi\fi\ifnum#1=9\hl\fi Vertiefungen\quad
-    &\MayLoadActive{5}&\MayLoadActive{6}&\MayLoadActive{7}&\MayLoadActive{9}
+    &\MayLoadActive{5}{7\,\&\,9}&\MayLoadActive{6}{8}&\MayLoadActive{7}{10}&\MayLoadActive{9}{12}
 \endtabular
 }\par
 \vspace*{0pt plus 1filll}\null
