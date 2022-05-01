@@ -30,6 +30,7 @@
 \usepackage{tikz}
 \usepackage[glows]{tikzpingus}
 \usepackage{csquotes}
+\usepackage{xfrac}
 
 % TODO:
 \PassOptionsToPackage{defernumbers=true}{biblatex}% allows for split bibs
@@ -180,7 +181,7 @@
   \node[above left=-2.66mm,fill=pingu-board-back,draw=pingu@bronze!50!pingu@black!70!pingu@main!80!btdm@text,line width=.6mm,rounded corners=2pt,text width=5.25cm,minimum height=1.5cm,text=btdm@text,inner sep=8pt,align=justify,#1] at (pingu-staff-right-top) {\LstBoardStyle\topsep=0pt\ignorespaces#3};
 \endtikzpicture}}
 
-\newcommand<>\task[1]{\begin{uncoverenv}#2{\par\begingroup\footnotesize\textcolor{gray}{\itshape#1}\par\endgroup}\end{uncoverenv}}
+\newcommand<>\task[1]{\begin{uncoverenv}#2{\par\begingroup\footnotesize{\color{gray}\itshape#1}\par\endgroup}\end{uncoverenv}}
 
 \AtBeginDocument{\def\O{\ensuremath{\mathcal{O}}}}
 \newsavebox\pinguA \newsavebox\pinguB
@@ -220,3 +221,6 @@
 \vspace*{0pt plus 1filll}\null
 \end{frame}}
 \def\DoAnimations{\def\<##1>{\onslide<##1>}\lstset{mathescape,escapebegin={\<},escapeend={}}}
+
+\def\shortmathskip{\abovedisplayskip1pt \belowdisplayskip1pt
+\abovedisplayshortskip1pt \belowdisplayshortskip1pt}

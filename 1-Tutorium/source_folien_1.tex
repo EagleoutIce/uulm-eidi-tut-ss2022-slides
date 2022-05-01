@@ -127,15 +127,134 @@ $2->$}$1->$
             \draw[-Kite] (@c.north) to[out=80,in=260] (@d);
         }
     }
-    \only<15->{\node[above left,yshift=\btdmfootheight] at (current page.south east) {\textattachfile{BoolescheAusdruecke.java}{BoolescheAusdruecke.java}};}
+    \only<15->{\node[above left,yshift=\btdmfootheight] at (current page.south east) {\textattachfile{BoolescheAusdruecke.java}{BoolescheAusdruecke.java}\;};}
 \end{tikzpicture}\relax
 \end{frame}
 
 \SetNextSectionText{Algorithmenentwurf und -analyse\\Abgabe: \DTMDate{2022-05-02}}
 \section{Übungsblatt 1}
 \subsection{Aufgabe 1}
+{
+\setbeamertemplate{enumerate item}{\task{\alph{enumi})}}
 \begin{frame}[t]{Aufgabe 1: Aufwandsanalyse}
-    \task<2->{ABCDEFG}\vfill
+    \task<2->{\task{\onslide<2->{In der Vorlesung haben wir uns mit der Aufwandsanalyse von Algorithmen beschäftigt und uns angeschaut, wie viele
+    Operationen im schlechtesten Fall notwendig sind, um den Algorithmus durchzuführen. Im Folgenden wollen wir uns
+    nun anschauen, wie sich solche Aussagen (vereinfacht) auf Maschinenoperationen übetragen lassen.}
+
+    \onslide<3->{Bei einer Firma fällt im Produktionsprozess täglich ein Optimierungsproblem an, für dessen Lösung eine Stunde zur
+    Verfügung steht. Der Algorithmus zur Lösung des Optimierungsproblems muss bei Eingabe eines Problems der Größe \(n\) insgesamt \(100n^2\) viele Operationen durchführen.
+    Bisher verwendet die Firma zur Lösung einen Mikro-Rechner mit einem Prozessortakt von \(\qty{800}{\mega\hertz}\). Dieser kann in
+    jeder Sekunde \(\num{40000}\) der oben genannten Operationen berechnen.}
+    \begin{enumerate}
+            \item<4-> \task{Welche Problemgröße \(n\) dürfen die Probleme maximal haben, damit die Berechnung innerhalb der Frist
+            durchgeführt werden kann?}
+            \item<5-> \task{Nun soll auf einen schnelleren Rechner mit \(\qty{3200}{\mega\hertz}\) Taktfrequenz umgestiegen werden. Nehmen Sie an, die
+            höhere Taktfrequenz übersetze sich direkt in eine entsprechend höhere Rechengeschwindigkeit. Wie groß können
+            nun die Optimierungsprobleme sein?}
+            \item<6-> \task{Anstelle einer CPU mit einem, soll eine CPU mit 16 Kernen (jeweils mit \(\qty{3200}{\mega\hertz}\)) eingesetzt werden.
+            Glücklicherweise lässt sich das Optimierungsproblem leicht parallelisieren, so dass sich die Geschwindigkeit im
+            Vergleich zu einem Kern verneunfacht. Wie groß können nun die Optimierungsprobleme sein?}
+    \end{enumerate}}}
+\end{frame}
+
+\begin{frame}{Aufwandsobergrenze}
+\only<handout:0>{\task<2->{Tägliches Optimierungsproblem für dessen Lösung eine Stunde zur
+Verfügung steht. Der Algorithmus zur Lösung benötigt bei Eingabe eines Problems der Größe \(n\) insgesamt \(100n^2\) Operationen.
+Der Mikro-Rechner mit einem Prozessortakt von \(\qty{800}{\mega\hertz}\) kann in
+jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
+\begin{enumerate}
+    \item<3-> \task{Was ist die maximale Problemgröße \(n\) um in der Frist zu bleiben?}
+    \onslide<4->{In der Stunde haben wir \(60 \cdot 60\) Sekunden und damit \(60 \cdot 60 \cdot \num{40000}\) Operationen. Bei Problemgröße \(n\) benötigen wir \(100n^2\) Operationen:} \shortmathskip\begin{align*}
+        \onslide<5->{100n^2} &\onslide<5->{\leq 60 \cdot 60 \cdot \num{40000}}\\
+        \onslide<6->{100n^2} &\onslide<6->{\leq \num{144000000}}\\
+        \onslide<7->{n}      &\onslide<7->{\leq \sqrt{\num{1440000}}}\\
+        \onslide<8->{n}      &\onslide<8->{\leq 1200}
+     \end{align*}
+     \onslide<9->{\faAngleRight~Die Problemgröße \(n\) darf \(1200\) nicht übersteigen.}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Die Macht der Taktfrequenz}
+\only<handout:0>{\task<2->{Tägliches Optimierungsproblem für dessen Lösung eine Stunde zur
+Verfügung steht. Der Algorithmus zur Lösung benötigt bei Eingabe eines Problems der Größe \(n\) insgesamt \(100n^2\) Operationen.
+Der Mikro-Rechner mit einem Prozessortakt von \(\qty{800}{\mega\hertz}\) kann in
+jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
+\begin{enumerate}
+    \setcounter{enumi}{1}
+    \item<3-> \task{Angenommen, die
+    höhere Taktfrequenz übersetze sich direkt in eine entsprechend höhere Rechengeschwindigkeit. Wie groß können
+    die Optimierungsprobleme bei \(\qty{3200}{\mega\hertz}\) Taktfrequenz sein?}
+    \onslide<4->{Bisher schaffen wir \(\num{40000}\) Operationen, nun schaffen wir \(\num{40000} \cdot \sfrac{\qty{3200}{\mega\hertz}}{\qty{800}{\mega\hertz}}\):}
+    \shortmathskip\begin{align*}
+        \onslide<5->{100n^2} &\onslide<5->{\leq 60 \cdot 60 \cdot \num{40000} \cdot \frac{\num{3200}}{800}}\\
+        \onslide<6->{100n^2} &\onslide<6->{\leq \num{576000000}}\\
+        \onslide<7->{n}      &\onslide<7->{\leq \sqrt{\num{5760000}}}\\
+        \onslide<8->{n}      &\onslide<8->{\leq 2400}
+     \end{align*}
+     \onslide<9->{\faAngleRight~Die Problemgröße \(n\) darf nun \(2400\) nicht übersteigen.}
+     \onslide<10->{\infoblock{Ein vervierfachen der Leistung verdoppelt die mögliche Problemgröße aufgrund des quadratischen Wachstums.}}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Parallelisierungskosten}
+    \only<handout:0>{\task<2->{Tägliches Optimierungsproblem für dessen Lösung eine Stunde zur
+    Verfügung steht. Der Algorithmus zur Lösung benötigt bei Eingabe eines Problems der Größe \(n\) insgesamt \(100n^2\) Operationen.
+    Der Mikro-Rechner mit einem Prozessortakt von \(\qty{800}{\mega\hertz}\) kann in
+    jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
+    \begin{enumerate}
+        \setcounter{enumi}{2}
+        \item<3-> \task{Anstelle einer CPU mit einem, soll eine CPU mit 16 Kernen (jeweils mit \(\qty{3200}{\mega\hertz}\)) eingesetzt werden.
+        Glücklicherweise lässt sich das Optimierungsproblem leicht parallelisieren, so dass sich die Geschwindigkeit im
+        Vergleich zu einem Kern verneunfacht. Wie groß können nun die Optimierungsprobleme sein?}
+        \onslide<4->{Die Anzahl der Operationen verneunfacht sich direkt:}
+        \shortmathskip\begin{align*}
+            \onslide<5->{100n^2} &\onslide<5->{\leq 60 \cdot 60 \cdot \num{40000} \cdot \frac{\num{3200}}{800} \cdot 9} \\
+            \onslide<6->{100n^2} &\onslide<6->{\leq \num{5184000000}}\\
+            \onslide<7->{n}      &\onslide<7->{\leq \sqrt{\num{51840000}}}\\
+            \onslide<8->{n}      &\onslide<8->{\leq 7200}
+            \end{align*}
+            \onslide<9->{\faAngleRight~Die Problemgröße \(n\) darf nun \(7200\) nicht übersteigen.}
+    \end{enumerate}
+\end{frame}
+
+\iffull
+{\AddonFrame
+\begin{frame}{Laufzeitabschätzungen}
+    \begin{itemize}[<+(1)->]
+        \itemsep16pt
+        \item Wir bekommen in der Regel \info{leider} nichts geschenkt.
+        \begin{itemize}
+            \itemsep3.5pt
+            \item Parallelisierung ist beispielsweise mit Kosten verbunden.
+            \item So müssen wir die parallelen Abläufe beispielsweise koordinieren und abgleichen.
+            \item Je nach Optimierung und Problem kann mehr Parallelisierung sogar schädlich sein!
+            \item Auch kann man nie allen Code parallelisieren (Initialisierungen, Ausgaben,~\ldots).
+            \item Eine pessimistische Abschätzung liefert das \say{Amdahlsche Gesetz}~\info{\cite{amdahl1967amdahl}}.
+        \end{itemize}
+        \item Für die Skalierung hat \(n^2\) einen viel größeren Einfluss, als der Faktor \(100\) \begin{itemize}
+            \itemsep3.5pt
+            \item So vervielfachen 16 CPUs mit je vierfacher Leistung die Performanz um lediglich \(6\)!
+            \item Meist interessiert uns nur das Wachstumsverhalten (polynomiell, exponentiell,~\ldots)
+        \end{itemize}
+    \end{itemize}
+\end{frame}}
+\fi
+}
+
+\subsection{Aufgabe 2}
+\begin{frame}{Aufgabe 2: Korrektheit von Algorithmen}
+\parallelcontent[c]{
+\task<2->{Betrachten Sie die Anweisungsfolge. Handelt es sich hierbei um einen Algorithmus? Prüfen Sie \emph{alle} notwendigen Voraussetzungen.}
+}{% fake the design :)
+\task<3->{\begin{tabular}{r<{:}ll}
+    1 & Setze & \(x = 1\) \\
+    2 & \textbf{solange} & \(x \geq 0\) \textbf{wiederhole}\\
+    3 & & Verdopple \(x\) \\
+    4 & & Verringere \(x\) um \(1\) \\
+    5 & \textbf{ende} & \\
+\end{tabular}}
+}
+TODO: NÖ, aber alle zeigen!
 \end{frame}
 
 \SetNextSectionText{TODO: quote}
