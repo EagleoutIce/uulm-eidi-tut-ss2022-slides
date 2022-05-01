@@ -196,7 +196,11 @@
 
 % #1 is the one to load
 \def\doonlyactiveoverview{\only<-2|handout:0>}
-\def\MayLoadActive#1#2{\ifnum\ActiveTopic=#1\relax\expandafter\doonlyactiveoverview\fi{\LoadOverview{#1}{}{#2}}\ifnum\ActiveTopic=#1\relax\only<3->{\LoadOverview{#1}{-active}{#2}}\fi}
+\def\nodeoverviewcontainer#1{\tikz[inner sep=0pt,outer sep=0pt,align-half-base]{#1;}}
+\def\MayLoadActive#1#2{\ifnum\ActiveTopic=#1\relax\expandafter\doonlyactiveoverview\fi{%
+\setbox0=\hbox{\LoadOverview{#1}{}{#2}}%
+\nodeoverviewcontainer{\node[opacity=.75]{\box0}}}%
+\ifnum\ActiveTopic=#1\relax\only<3->{\nodeoverviewcontainer{\node{\LoadOverview{#1}{-active}{#2}}}}\fi}
 % #1 is the currently active topic number
 \def\TopicOverview#1{%
 \def\ActiveTopic{#1}%
