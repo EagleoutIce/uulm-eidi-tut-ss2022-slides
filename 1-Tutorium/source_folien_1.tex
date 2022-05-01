@@ -1,7 +1,7 @@
 \InputIfFileExists{../data/global.src}\relax\relax
 
 \iffull
-\title[Erstes Tutorium -- Übungsblatt 1]{I've built this. With my bare hands!}
+\title[Erstes Tutorium -- Übungsblatt 1]{I've built this. With my \textit{bare} hands!}
 \subtitle{Tutorium Eins}
 \date{KW 18}
 \addbibresource{references.bib}
@@ -17,16 +17,93 @@
 
 \SetNextSectionText{Practice yourself, for heaven's sake in little things, and then proceed to greater.\\--- Epictetus~\cite[adapted, chp.~16]{epictetusdiscourses}}
 \section{Präsenzaufgabe}
-\begin{frame}[c]{Präsenzaufgabe}
-\begin{aufgabe}{Whats that number?}
+\begin{frame}[fragile]{Präsenzaufgabe}
+\begin{aufgabe}{It's true, isn't it?}
+\columns[c,onlytextwidth]
+\column{.65\linewidth}
+\begin{uncoverenv}<2->
+\lstfs{10}\begin{plainjava}[aboveskip=-.65\baselineskip,belowskip=0pt]
+class BoolescheAusdruecke {
+   public static void main(String[] args) {
 
+   }
+}
+\end{plainjava}
+\end{uncoverenv}
+\column{.35\linewidth}
+    \onslide<3->{Erweitern Sie die Datei so, dass die benötigten Variablen initialisiert mit \say{beliebigen} Werten werden.}
+    \medskip
+\endcolumns
+\onslide<4->{Konstruieren Sie boolesche Ausdrücke, die folgendes abprüfen:\vspace*{-.5\topsep}}
+\begin{itemize}
+    \item<5-> Die Zimmertemperatur (\T{temperatur}) beträgt höchstens \num{22.5} Grad Celsius.
+    \item<6-> Eine Person (\T{alter}) ist nicht zwischen 13 und 18 Jahre alt.\vspace*{-.75\topsep}
+\end{itemize}
+\onslide<7->{Geben Sie die einzelnen Ergebnisse über \bjava{System.out.println(:lan:...:ran:)} aus.}
     \onslide<1->
 \end{aufgabe}
 \end{frame}
 
 
+\MakeThePinguExplainIt[text width=5.5cm]{cap=!hide,vr-headset,body type=legacy,cup=!hide,lollipop left,right item angle=27}{Einen generell korrekten Datentyp gibt es selten. Diverse Bedingungen hängen vom Kontext ab.\medskip\\Die Zahlen sind erstmal beliebig.}
+\begin{frame}[fragile,c]{Die Datentypen finden}
+\DoAnimations
+\begin{plainjava}
+$2->$class BoolescheAusdruecke {
+$2->$    public static void main(String[] args) {
+$2->$        $8->$float $3->$temperatur = $9->$18.0f$3->$;
+$2->$        $15->$short $10->$alter = $16->$15$10->$;
+$18->$        // ...
+$2->$    }
+$2->$}$1->$
+\end{plainjava}
+\begin{tikzpicture}[overlay,remember picture,every path/.append style={line cap=round}]
+    \onslide<4->{\node[above left,xshift=-1.75cm,yshift=1.5cm,yshift=\btdmfootheight] (t) at(current page.south east) {\strut Temperatur};}
+    \onslide<5->{\node[below left=1mm,yshift=-1mm] (g) at (t.south) {\only<7->{\color{gray}}Ganzzahl}; \draw[thick,rounded corners=2pt] (t.south) -- ++(0,-.5mm) -| (g.north);}
+    \onslide<6->{\node[below right=1mm,yshift=-1mm] (f) at (t.south) {Fließzahl}; \draw[thick,rounded corners=2pt] (t.south) -- ++(0,-.5mm) -| (f.north);}
+    \onslide<7->{\node[below left=1mm,yshift=-1mm] (j1) at (f.south) {\solGet{keywordB}{float}};
+        \node[below right=1mm,yshift=-1mm] (j2) at (f.south) {\only<8->{\color{gray}\ttfamily}\only<-7|handout:0>{\expandafter\solGet{keywordB}}{double}};
+        \draw[thick,rounded corners=2pt] (f.south) -- ++(0,-.5mm) -| (j1.north);
+        \draw[thick,rounded corners=2pt] (f.south) -- ++(0,-.5mm) -| (j2.north);
+    }
 
-\SetNextSectionText{He who chooses the beginning of a road chooses the place it leads to. It is the means that determine the end.\\--- Harry Emerson Fosdick, \cite[p.~111]{fosdick1941living}}
+    \onslide<11->{\node[above left,xshift=-6.1cm,yshift=1.5cm,yshift=\btdmfootheight] (t) at(current page.south east) {\strut Alter};}
+    \onslide<12->{\node[below left=1mm,yshift=-1mm] (g) at (t.south) {Ganzzahl}; \draw[thick,rounded corners=2pt] (t.south) -- ++(0,-.5mm) -| (g.north);}
+    \onslide<13->{\node[below right=1mm,yshift=-1mm] (f) at (t.south) {\only<14->{\color{gray}}Fließzahl}; \draw[thick,rounded corners=2pt] (t.south) -- ++(0,-.5mm) -| (f.north);}
+    \onslide<14->{\node[below left=1mm,xshift=-1.15cm,yshift=-1mm] (j1) at (g.south) {\only<15->{\color{gray}\ttfamily}\only<-14|handout:0>{\expandafter\solGet{keywordB}}{byte}};
+        \node[below left=1mm,xshift=2mm,yshift=-1mm] (j2) at (g.south) {\solGet{keywordB}{short}};
+        \node[below right=1mm,yshift=-1mm] (j3) at (g.south) {\only<15->{\color{gray}\ttfamily}\only<-14|handout:0>{\expandafter\solGet{keywordB}}{int}};
+        \node[below right=1mm,xshift=1.15cm,yshift=-1mm] (j4) at (g.south) {\only<15->{\color{gray}\ttfamily}\only<-14|handout:0>{\expandafter\solGet{keywordB}}{long}};
+        \draw[thick,rounded corners=2pt] (g.south) -- ++(0,-.5mm) -| (j1.north);
+        \draw[thick,rounded corners=2pt] (g.south) -- ++(0,-.5mm) -| (j2.north);
+        \draw[thick,rounded corners=2pt] (g.south) -- ++(0,-.5mm) -| (j3.north);
+        \draw[thick,rounded corners=2pt] (g.south) -- ++(0,-.5mm) -| (j4.north);
+    }
+    \onslide<17->{\node[left=-4mm,xshift=5mm,scale=.8,yshift=\btdmfootheight] at(current page.-10) {\copy\pinguexplainbox};}% copy for animations
+\end{tikzpicture}
+\end{frame}
+
+\begin{frame}[fragile,c]{Boolesche Ausdrücke konstruieren}
+    \DoAnimations
+\begin{itemize}
+    \item<3-> Die Zimmertemperatur (\T{temperatur}) beträgt höchstens \num{22.5} Grad Celsius.
+\end{itemize}
+\SetupLstHl
+% star uses only
+% TODO: gray it out
+\begin{plainjava}
+$2->$class BoolescheAusdruecke {
+$2->$    public static void main(String[] args) {
+$2->$        float temperatur = 18.0f;
+$2->$        |ihl|short alter = 15;|ihl|
+        $3->{\text{\solGet{basicsstyle}{\only<4->{{\solGet{keywordC}{System}.out.println(}}temperatur <= \solGet{numbers}{22.5}f\only<4->{);}}}}$
+$2->$    }
+$2->$}$1->$
+\end{plainjava}
+\end{frame}
+
+\iffalse
+\SetNextSectionText{TODO: quote}
 \section{Abschließendes}
 {\SummaryFrame
 \begin{frame}[t]{Zusammenfassend}
@@ -34,24 +111,14 @@
 \vfill\vfill % double fill for more fraction
 \begin{itemize}[<+(1)->]
     \itemsep14pt
-    \item Für Pseudocode wünschen wir uns \begin{itemize}
-        \itemsep1pt
-        \item eine konsistente und menschenlesbare Notation,
-        \item mathematische Definitionen,
-        \item aber nichts sprachspezifisches (\bjava{int}) oder zu allgemeines (\say{löst Problem}).
-    \end{itemize}
-    \item Algorithmen und deren Konstruktion: \begin{itemize}
-        \itemsep1pt
-        \item Eine eindeutige, endliche Beschreibung wohldefinierter Elementaroperationen, deren schrittweise Ausführung durch einen Prozessor möglich und endlich ist.
-        \item \def\t{~~\faAngleRight~~}Spezifikation\t Abstraktion\t Entwurf\t Verifikation\t Aufwandsanalyse
-        % \item Als Frage für die Woche: Warum und wann sind all diese Schritte von Bedeutung?
-    \end{itemize}
+    \item TODO
 \end{itemize}
 \end{frame}
 }
 
 \outro{\vskip6mm\centering\begin{tikzpicture}[scale=2.5]
-    \only<2->{\pingu[right wing grab,headband=purple!90!green,cup=purple!90!green,name=saphira, left eye wink,body type=chubby]}
+    \only<2->{TODO}
 \end{tikzpicture}}
+\fi
 
 \iffull\end{document}\fi
