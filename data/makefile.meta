@@ -2,8 +2,8 @@
 # therefore it may contain some dead code and cleanups
 
 SLIDES_TEX             := $(shell ls source_*.tex)
-DATAP_DEPENDENCIES     := $(shell ls ../data/*)
-DEPENDENCIES           := ${DATAP_DEPENDENCIES} ${SLIDES_TEX} $(shell [ -f *.java ] && ls *.java) $(shell [ -f *.bib ] && ls *.bib)
+OUTER_DEPENDENCIES     := $(shell ls ../data/*) $(shell ls ../overview/*.pdf)
+DEPENDENCIES           := ${OUTER_DEPENDENCIES} ${SLIDES_TEX} $(shell [ -f *.java ] && ls *.java) $(shell [ -f *.bib ] && ls *.bib)
 # for each 'source_*' we create n pdf versions which will be prepared here
 SLIDES_BASE            := $(basename $(SLIDES_TEX:source_%=%))
 SLIDES_VARIANTS_NOANIM := $(addprefix noanim_, ${SLIDES_BASE})
