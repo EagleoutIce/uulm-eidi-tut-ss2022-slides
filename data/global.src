@@ -192,15 +192,11 @@
 \makeatletter
 % #1 main number, #2 is potential active suffix, #3 is display numbers
 \def\HlCurrentOverview#1{\paletteA{\bfseries#1}}
-\def\LoadOverview#1#2#3{\def\suff{#2}~~\raisebox{-\height/2+\baselineskip/2}{\includegraphics[height=\overviewheight]{../overview/c#1\suff.pdf}\llap{\smash{\raisebox{1mm}{\color{gray}\itshape\if\suff\@empty\else\expandafter\HlCurrentOverview\fi{\tikz[outer sep=0pt,inner sep=1pt,baseline]{\node[circle,aspect=.75,fill=btdm@background]{\hskip2pt\smash{\raisebox{-.15pt}{#3}}};}}}}}}~~}
+\def\LoadOverview#1#2#3{\def\suff{#2}~~\raisebox{-\height/2+\baselineskip/2}{\includegraphics[height=\overviewheight]{../overview/c#1\suff.pdf}\llap{\smash{\raisebox{1mm}{\color{gray}\itshape\if\suff\@empty\else\expandafter\HlCurrentOverview\fi{#3}}}}}~~}
 
 % #1 is the one to load
 \def\doonlyactiveoverview{\only<-2|handout:0>}
-\def\nodeoverviewcontainer#1{\tikz[inner sep=0pt,outer sep=0pt,align-half-base]{#1;}}
-\def\MayLoadActive#1#2{\ifnum\ActiveTopic=#1\relax\expandafter\doonlyactiveoverview\fi{%
-\setbox0=\hbox{\LoadOverview{#1}{}{#2}}%
-\nodeoverviewcontainer{\node[opacity=.75]{\box0}}}%
-\ifnum\ActiveTopic=#1\relax\only<3->{\nodeoverviewcontainer{\node{\LoadOverview{#1}{-active}{#2}}}}\fi}
+\def\MayLoadActive#1#2{\ifnum\ActiveTopic=#1\relax\expandafter\doonlyactiveoverview\fi{\LoadOverview{#1}{}{#2}}\ifnum\ActiveTopic=#1\relax\only<3->{\LoadOverview{#1}{-active}{#2}}\fi}
 % #1 is the currently active topic number
 \def\TopicOverview#1{%
 \def\ActiveTopic{#1}%

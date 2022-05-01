@@ -473,8 +473,11 @@
          \RandomCodeFrag
       \endscope
       \spy[size=5cm] on (1.8,3.5) in node (zoom) [left] at(12.5,6);
-      \node[right=4mm] at(12.5,6) {\Large\(\mathcal{O}(x) = x^2 + 3\cdot x\)};
-      \node[above left,scale=2,xshift=-1.15cm,yshift=.9cm] at(current bounding box.south east) {\copy\pinguA};
+      \node[right=4mm,pingu@black] at(12.5,6) {\Large\(\mathcal{O}(x) = x^2 + 3\cdot x\)};
+      \node[above left,scale=2,xshift=-1.15cm,yshift=.9cm] (@) at(current bounding box.south east) {\copy\pinguA};
+      \pgfinterruptboundingbox
+      \node[below=6mm,xshift=3mm,scale=6,gray] at(@.south) {\Huge\(\mathcal{O}\)};
+      \endpgfinterruptboundingbox
    \endscope
    \onback
       \fill[advanced] (current bounding box.center) circle[radius=12cm];
