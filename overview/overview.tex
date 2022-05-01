@@ -26,10 +26,16 @@
 \colorlet{background color}{white}
 % TODO: fix that for dark and others
 \definecolor{BaseColorHl}{RGB}{51,93,126}
-\tikzset{basic/.style={
-      BaseColorHl!17!background color,
-      fill opacity=.5
-   },
+\ifcsname ACTIVATE\endcsname % allows for a finer control
+\tikzset{basic/.style={BaseColorHl!22!background color}}
+\else
+\tikzset{basic/.style={lightgray,opacity=.115}}
+% mix all with gray; manua
+\foreach \pingcol in {main,black,silver,bronze,yellow,lightblue,blue,green,red,purple} {
+   \xglobal\colorlet{pingu@\pingcol}{pingu@\pingcol!60!lightgray}
+}
+\fi
+\tikzset{
    theory/.style={basic},
    advanced/.style={basic}
 }
