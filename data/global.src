@@ -200,26 +200,20 @@
 \def\ActiveTopic{#1}%
 \begin{frame}[plain,c]
 \def\hl{\relax\only<3->{\sbseries}}%
-\null\vspace*{0pt plus 1filll}
-\null\hfill\onslide<2->{%
-\minipage{.8\linewidth}
+\vspace*{0pt plus 1filll}\relax
+\centering\onslide<2->{%
+\tabular{r@{\hskip1.33em}*4{c@{}}}
     % first we strut the line to guide the theory marker
     \rule{0cm}{.5\overviewheight}%
-    \llap{\color{gray}%
-      \ifnum#1=1\hl\else\ifnum#1=8\hl\fi\fi Theorie\quad
-    }%
-    \MayLoadActive{1}%
-    \hfill
-    \MayLoadActive{8}\medskip\\
-    \llap{\color{gray}%
-      \ifnum#1>1\ifnum#1<5\hl\fi\fi Grundlagen\quad
-    }
-    \MayLoadActive{2}\MayLoadActive{3}\MayLoadActive{4}{}\medskip\\
-    \llap{\color{gray}%
-      \ifnum#1>4\ifnum#1<8\hl\fi\fi\ifnum#1=9\hl\fi Fortgeschritten\quad
-    }%
-    \hfill\LoadOverview{5}{}\hfill\MayLoadActive{6}\MayLoadActive{7}\hfill\MayLoadActive{9}
-\endminipage
+    \color{gray}\ifnum#1=1\hl\else\ifnum#1=8\hl\fi\fi Theorie\quad
+    %
+    & \MayLoadActive{1} & & & \MayLoadActive{8}\medskip\\
+    \color{gray}\ifnum#1>1\ifnum#1<5\hl\fi\fi Grundlagen\quad
+    &
+    \MayLoadActive{2} & \MayLoadActive{3} & \MayLoadActive{4} & \medskip\\
+    \color{gray}\ifnum#1>4\ifnum#1<8\hl\fi\fi\ifnum#1=9\hl\fi Vertiefungen\quad
+    &\MayLoadActive{5}&\MayLoadActive{6}&\MayLoadActive{7}&\MayLoadActive{9}
+\endtabular
 }\par
-\vspace*{0pt plus 1filll}\par
+\vspace*{0pt plus 1filll}\null
 \end{frame}}
