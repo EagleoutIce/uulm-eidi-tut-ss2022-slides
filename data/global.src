@@ -131,13 +131,13 @@
 \makeatother
 
 % gray out:
-% \colorlet{codeouthl}{gray!75!white}
-% \makeatletter
-% \def\SetupLstHl{%
-% \lstcolorlet{highlight}{codeouthl}%
-% \sol@list@define@styles{%
-%  {highlight: \@declaredcolor{sol@colors@lst@highlight}\upshape},%
-% }}
+\colorlet{codeouthl}{gray!45!white}
+\makeatletter
+\def\SetupLstHl{%
+\lstcolorlet{highlight}{codeouthl}%
+\sol@list@define@styles{%
+ {highlight: \@declaredcolor{sol@colors@lst@highlight}\upshape},%
+}}
 
 \UsePalette{Tutorium}
 
@@ -219,18 +219,4 @@
 }\par
 \vspace*{0pt plus 1filll}\null
 \end{frame}}
-% we have to escape an if
-\def\animationsOnly{\only<\second>}
-\def\animationsOnslide{\onslide<\firststar\second>}
-% checking for star does not work
-\def\animationsOnchar{*}
-\def\animationsDecide#1#2>{\typeout{First: \TokenNext:'#1''#2'}\def\firststar{#1}\def\second{#2}%
-  \ifx\firststar\animationsOnchar
-    \expandafter\animationsOnly
-  \else
-    \expandafter\animationsOnslide
-  \fi
-}
-% we kill fi for listings skip
-\def\animationsDo#1>{{\def\fi{}\xdef\TokenNext{#1}}\expandafter\animationsDecide\TokenNext\@empty>}
-\def\DoAnimations{\let\<\animationsDo\lstset{mathescape,escapebegin={\<},escapeend={}}}
+\def\DoAnimations{\def\<##1>{\onslide<##1>}\lstset{mathescape,escapebegin={\<},escapeend={}}}

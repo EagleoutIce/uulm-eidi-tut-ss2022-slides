@@ -48,6 +48,9 @@ class BoolescheAusdruecke {
 \MakeThePinguExplainIt[text width=5.5cm]{cap=!hide,vr-headset,body type=legacy,cup=!hide,lollipop left,right item angle=27}{Einen generell korrekten Datentyp gibt es selten. Diverse Bedingungen hängen vom Kontext ab.\medskip\\Die Zahlen sind erstmal beliebig.}
 \begin{frame}[fragile,c]{Die Datentypen finden}
 \DoAnimations
+\begin{center}
+    \task<2->{Zimmertemperatur höchstens \num{22.5} Grad Celsius, Alter nicht zwischen 13 und 18 Jahren.}
+\end{center}
 \begin{plainjava}
 $2->$class BoolescheAusdruecke {
 $2->$    public static void main(String[] args) {
@@ -84,25 +87,57 @@ $2->$}$1->$
 \end{frame}
 
 \begin{frame}[fragile,c]{Boolesche Ausdrücke konstruieren}
-    \DoAnimations
-\begin{itemize}
-    \item<3-> Die Zimmertemperatur (\T{temperatur}) beträgt höchstens \num{22.5} Grad Celsius.
-\end{itemize}
+\DoAnimations
+\begin{center}
+    \task<2->{Zimmertemperatur \only<5|handout:0>{\textbf}{höchstens} \num{22.5} Grad Celsius, Alter \only<11|handout:0>{\textbf}{nicht} \only<10-11|handout:0>{\textbf}{zwischen 13 und 18 Jahren}.}
+\end{center}
 \SetupLstHl
 % star uses only
 % TODO: gray it out
+\def\donumber{\solGet{numbers}}
+\def\dokey{\solGet{keywordB}}
+\def\dokeyC{\solGet{keywordC}}
+\setbox0=\hbox{\solGet{basicsstyle}{\only<8-|handout:0>{\color{codeouthl}}temperatur~\onslide<5->{<=}~\only<-7>{\expandafter\donumber}{\slshape22.5}}}%
+\setbox1=\hbox{\solGet{basicsstyle}{\onslide<11->{!(}\only<-11>{\expandafter\donumber}{\slshape13} \onslide<10->{<=} alter \onslide<10->{\&\&} alter \onslide<10->{<=} \only<-11>{\expandafter\donumber}{\slshape18}\onslide<11->{)}}}%
 \begin{plainjava}
 $2->$class BoolescheAusdruecke {
 $2->$    public static void main(String[] args) {
-$2->$        float temperatur = 18.0f;
-$2->$        |ihl|short alter = 15;|ihl|
-        $3->{\text{\solGet{basicsstyle}{\only<4->{{\solGet{keywordC}{System}.out.println(}}temperatur <= \solGet{numbers}{22.5}f\only<4->{);}}}}$
+$2->$        $2->{\text{\solGet{basicstyle}{\only<8-13|handout:0>{\color{codeouthl}}\only<-7,14->{\expandafter\dokey}{float} temperatur = \only<-7,14->{\expandafter\donumber}{\slshape18.0}f;}}}$
+        $2->{\text{\solGet{basicstyle}{\only<3-7|handout:0>{\color{codeouthl}}\only<-2,8->{\expandafter\dokey}{short} alter = \only<-2,8->{\expandafter\donumber}{\slshape15};}}}$
+        $6->{\text{\solGet{basicsstyle}{\only<8-13|handout:0>{\color{codeouthl}}\only<7->{{\only<-7,14->{\expandafter\dokeyC}{System}.out.println(}}\tikzmarknode{SE-EQUALS-MAY-RISE}{\solGet{basicsstyle}{\only<8-13|handout:0>{\color{codeouthl}}temperatur <= \only<-7,14->{\expandafter\donumber}{\slshape22.5}f}}\only<7->{);}}}}$
+        $12->{\text{\solGet{basicsstyle}{\only<13->{{\dokeyC{System}.out.println(}}\tikzmarknode{BRAVE-NEW-WORLD}{\solGet{basicsstyle}{!(\donumber{13} <= alter \&\& alter <= \donumber{18})}}\only<13->{);}}}}$
 $2->$    }
 $2->$}$1->$
 \end{plainjava}
+\begin{tikzpicture}[overlay,remember picture,every path/.append style={line cap=round}]
+    \onslide<4-11|handout:0>{\node[above left=.5cm+\btdmfootheight] (@) at(current page.south east) {\box0};}
+    \onslide<9-13|handout:0>{\node[above left=.5cm+\btdmfootheight,xshift=-5cm] (@c) at(current page.south east) {\box1};}
+    \onslide<6-11|handout:0>{
+        \scope
+        \only<8-|handout:0>{\color{codeouthl}}
+        \draw[decoration={brace,amplitude=3pt},decorate] (SE-EQUALS-MAY-RISE.south east) to  coordinate[pos=.5,yshift=-2mm] (@b) (SE-EQUALS-MAY-RISE.south west);
+    \draw[-Kite] (@.north) to[out=140,in=320] (@b);
+    \endscope }
+    \onslide<12-13|handout:0>{
+        \draw[decoration={brace,amplitude=3pt},decorate] (BRAVE-NEW-WORLD.south east) to  coordinate[pos=.5,yshift=-2mm] (@d) (BRAVE-NEW-WORLD.south west);
+        \only<12|handout:0>{
+            \draw[-Kite] (@c.north) to[out=100,in=280] (@d);
+        }
+        \only<13->{
+            \draw[-Kite] (@c.north) to[out=80,in=260] (@d);
+        }
+    }
+    \only<15->{\node[above left,yshift=\btdmfootheight] at (current page.south east) {\textattachfile{BoolescheAusdruecke.java}{BoolescheAusdruecke.java}};}
+\end{tikzpicture}\relax
 \end{frame}
 
-\iffalse
+\SetNextSectionText{Algorithmenentwurf und -analyse\\Abgabe: \DTMDate{2022-05-02}}
+\section{Übungsblatt 1}
+\subsection{Aufgabe 1}
+\begin{frame}[t]{Aufgabe 1: Aufwandsanalyse}
+    \task<2->{ABCDEFG}\vfill
+\end{frame}
+
 \SetNextSectionText{TODO: quote}
 \section{Abschließendes}
 {\SummaryFrame
@@ -119,6 +154,5 @@ $2->$}$1->$
 \outro{\vskip6mm\centering\begin{tikzpicture}[scale=2.5]
     \only<2->{TODO}
 \end{tikzpicture}}
-\fi
 
 \iffull\end{document}\fi
