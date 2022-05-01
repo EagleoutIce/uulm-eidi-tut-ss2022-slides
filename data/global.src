@@ -192,7 +192,7 @@
 \makeatletter
 % #1 main number, #2 is potential active suffix, #3 is display numbers
 \def\HlCurrentOverview#1{\paletteA{\bfseries#1}}
-\def\LoadOverview#1#2#3{\def\suff{#2}~~\raisebox{-\height/2+\baselineskip/2}{\includegraphics[height=\overviewheight]{../overview/c#1\suff.pdf}\llap{\smash{\raisebox{1mm}{\color{gray}\itshape\if\suff\@empty\else\expandafter\HlCurrentOverview\fi{#3}}}}}~~}
+\def\LoadOverview#1#2#3{\def\suff{#2}~~\raisebox{-\height/2+\baselineskip/2}{\includegraphics[height=\overviewheight]{../overview/c#1\suff.pdf}\llap{\smash{\raisebox{1mm}{\color{gray}\itshape\if\suff\@empty\else\expandafter\HlCurrentOverview\fi{\contourlength{.33ex}\contour{btdm@background}{#3}}}}}}~~}
 
 % #1 is the one to load
 \def\doonlyactiveoverview{\only<-2|handout:0>}
