@@ -302,7 +302,6 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
 \end{description}
 \end{frame}}
 
-\iffalse
 \subsection{Aufgabe 3}
 % compensate for fat overflow
 \newcommand<>\hlkw[1]{{\savebox0{#1}\only#2{\bfseries\color{paletteA}}\makebox[\dimexpr\wd0+.285ex]{\strut#1}}}
@@ -326,12 +325,13 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
 {\def\g#1{{\only<2->{\color{black}}#1}}\def\k#1{{\savebox0{#1}\only<3->{\bfseries\color{paletteA}}\makebox[\dimexpr\wd0+.285ex]{\strut#1}}}
 \renewcommand<>\hlkw[1]{{\savebox0{#1}\makebox[\dimexpr\wd0+.285ex]{\strut#1}}}
 \renewcommand<>\hloutkw[1]{{\savebox0{#1}\makebox[\dimexpr\wd0+.285ex]{\strut#1}}}
+\def\gk#1{\g{\k{#1}}}
 \begin{frame}[c]{Aufgabe 3}
-    \centering \parbox{.65\linewidth}{\color{gray}\footnotesize Angenommen, Sie überlegen sich ein \g{neues Tablet} für die \g{Uni} zu kaufen.
+    \centering \parbox{.7\linewidth}{\color{gray}\footnotesize Angenommen, Sie überlegen sich ein \g{neues Tablet} für die \g{Uni} zu kaufen.
     Sie stellen jedoch fest, dass die \g{Preise für elektronische Geräte} durch den \g{Chipmangel} in \g{letzter Zeit} stark gestiegen sind.
     Nun haben Sie eine \g{Website} gefunden, die Ihnen die jeweiligen \g{\k{Tagespreise}} eines Tablets über die \g{letzten Monate} liefert.
-    Sie möchten nun den \g{\k{maximalen pro-}} \g{\k{zentualen Preisanstieg}} zwischen \g{\k{zwei aufeinanderfolgenden Tagen}} für dieses Tablet herausfinden.\bigskip\par
-    Entwickeln Sie einen \g{Algorithmus}, der aus einer \hlkw<4->{\g{\k{Liste von Tagespreisen}}} des Tablets den \hloutkw<4->{maximalen prozentualen Preisanstieg} von \hloutkw<4->{\g{\k{zwei aufein-}}} \hloutkw<4->{\g{\k{anderfolgenden Tagen}}} berechnet.}\qquad\parbox{.2\linewidth}{%
+    Sie möchten nun den \g{\k{maximalen pro\rlap{-}}} \g{\k{zentualen Preisanstieg}} zwischen \g{\k{zwei aufeinanderfolgenden Tagen}} für dieses Tablet herausfinden.\bigskip\par
+    Entwickeln Sie einen \g{Algorithmus}, der aus einer \hgk<4->{Liste} \hgk<4->{von} \hgk<4->{Tagespreisen} des Tablets den \hloutkw<4->{maximalen prozentualen Preisanstieg} von \hgk<4->{zwei} \hgk<4->{aufeinan\rlap{-}}\allowbreak\hgk<4->{derfolgenden} \hgk<4->{Tagen} berechnet.}\qquad\parbox{.2\linewidth}{%
         \centering\footnotesize Begriffe:\medskip\\
         \onslide<4->{Tagespreis\textcolor{gray}{liste}}\smallskip\\
         \onslide<5->{\textcolor{gray}{zwei auff.} Tage}\smallskip\\
@@ -340,26 +340,19 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
 \end{frame}
 }
 \fi
-\begin{frame}{Aufgabe 3 a) \& b)}
-    \begin{enumerate}[a)]
-        \itemsep8pt
-        \item\pause \strut Problemspezifikation: \begin{itemize}[<+(1)->]
-            \itemsep3pt
-            \item \emph{Tagespreis:} positive reelle Zahl. Dargestellt mit zwei Nachkommastellen.
-            \item \emph{Tagespreisliste:} chronologisch sortierte Liste an Tagespreisen \([p_1, \ldots, p_n]\) mit \(n \in \N_1\).
-            \item \emph{Tag:} natürlicher Index in Tagespreisliste.
-            \item \emph{Zwei aufeinanderfolgende Tage:} zwei aufeinanderfolgende Listenindizes: \(i\) und \(i + 1\) wobei \(i, i + 1 < n\).
-            \item \emph{Preisanstieg:} positive Veränderung einer reellen Zahl (dem Tagespreis): \(p_{i + 1} - p_i > 0\).
-            \item \emph{maximaler prozentualer Preisanstieg:} größter relativer Preisanstieg: \(\max_{1 \leq i < n} \frac{p_{i + 1} - p_i}{p_i} \cdot 100\).
-        \end{itemize}\pause
-        {\footnotesize\textbf{Wichtig:} Wir sind hier nicht in einer Programmiersprache: Typen wie \say{\T{int}} gibt es nicht $\Rightarrow$ mathematische Notation benutzen oder eigenen Typ definieren (wie Tupel, \ldots)!}
-        \item\pause Problemabstraktion: \begin{itemize}[<+(1)->]
-            \itemsep3pt
-            \item \emph{Gegeben:} Chronologisch sortierte Liste \([p_1, \ldots, p_n]\) positiver reeller Zahlen. Annahme: \(n > 1\) (\say{letzte Monate}).
-            \item \emph{Gesucht:} Positive reelle Zahl \(m = 100\cdot \max_{1 \leq i < n} \frac{p_{i + 1} - p_i}{p_i}\) (\(X\,\%~\widehat{=}~\frac{X}{100}\)).
-        \end{itemize}
-    \end{enumerate}
-\end{frame}
+{\setbeamerfont{description item}{shape=\itshape,series=\mdseries}
+\begin{frame}{Problemspezifikation}
+\begin{description}[Tag]
+    \itemsep8pt
+    \item<+(1)->[Tagespreis:] positive reelle Zahl. Dargestellt mit zwei Nachkommastellen.
+    \item<+(1)->[Tagespreisliste:] chronologisch sortierte Liste an Tagespreisen \([p_1, \ldots, p_n]\) mit \(n \in \N_1\).
+    \item<+(1)->[Tag:] natürlicher Index in Tagespreisliste.
+    \item<+(1)->[Zwei aufeinanderfolgende Tage:] zwei aufeinanderfolgende Listenindizes: \(i\) und \(i + 1\) wobei \(i, i + 1 < n\).
+    \item<+(1)->[Preisanstieg:] positive Veränderung einer reellen Zahl (dem Tagespreis): \(p_{i + 1} - p_i > 0\).
+    \item<+(1)->[maximaler prozentualer Preisanstieg:] größter relativer Preisanstieg: \(\max_{1 \leq i < n} \frac{p_{i + 1} - p_i}{p_i} \cdot 100\).
+\end{description}
+{\footnotesize\textbf{Wichtig:} Wir sind hier nicht in einer Programmiersprache: Typen wie \say{\T{int}} gibt es nicht $\Rightarrow$ mathematische Notation benutzen oder eigenen Typ definieren (wie Tupel, \ldots)!}
+\end{frame}}
 
 \begin{frame}[t]{Aufgabe 3 c) \& d)}
     \begin{enumerate}[a)]
@@ -468,7 +461,6 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
 \end{enumerate}
 \end{frame}
 
-\fi
 \SetNextSectionText{TODO: quote}
 \section{Abschließendes}
 {\SummaryFrame
