@@ -16,6 +16,7 @@
 
 
 \SetNextSectionText{Practice yourself, for heaven's sake in little things, and then proceed to greater.\\--- Epictetus~\cite[adapted, chp.~16]{epictetusdiscourses}}
+\setbox\pinguA=\hbox{\tikz{\pingu[right wing wave, laptop right,laptop right mid={\color{gray}\faLightbulbO},eyes wink,tie,glasses round,left wing grab]}}
 \section{Präsenzaufgabe}
 \begin{frame}[fragile]{Präsenzaufgabe}
 \begin{aufgabe}{It's true, isn't it?}
@@ -31,7 +32,7 @@ class BoolescheAusdruecke {
 \end{plainjava}
 \end{uncoverenv}
 \column{.35\linewidth}
-    \onslide<3->{Erweitern Sie die Datei so, dass die benötigten Variablen initialisiert mit \say{beliebigen} Werten werden.}
+    \onslide<3->{Erweitern Sie die Datei. Deklarieren und initialisieren sie benötigte Variablen mit \say{beliebigen} Werten.}
     \medskip
 \endcolumns
 \onslide<4->{Konstruieren Sie boolesche Ausdrücke, die folgendes abprüfen:\vspace*{-.5\topsep}}
@@ -39,9 +40,12 @@ class BoolescheAusdruecke {
     \item<5-> Die Zimmertemperatur (\T{temperatur}) beträgt höchstens \num{22.5} Grad Celsius.
     \item<6-> Eine Person (\T{alter}) ist nicht zwischen 13 und 18 Jahre alt.\vspace*{-.75\topsep}
 \end{itemize}
-\onslide<7->{Geben Sie die einzelnen Ergebnisse über \bjava{System.out.println(:lan:...:ran:)} aus.}
+\onslide<7->{Geben Sie die Ergebnisse über \bjava{System.out.println(:lan:...:ran:)} aus.}
     \onslide<1->
 \end{aufgabe}
+\begin{tikzpicture}[overlay,remember picture]
+    \onslide<8->{\node[above left,yshift=-2.525mm,xshift=2mm,scale=.85] at(current page.south east) {\copy\pinguA};}
+\end{tikzpicture}
 \end{frame}
 
 
@@ -129,6 +133,20 @@ $2->$}$1->$
     }
     \only<15->{\node[above left,yshift=\btdmfootheight] at (current page.south east) {\textattachfile{BoolescheAusdruecke.java}{BoolescheAusdruecke.java}\;};}
 \end{tikzpicture}\relax
+\end{frame}
+% 14. 4
+\begin{frame}{Deklarieren, Initialisieren und Zuweisen}
+    \begin{itemize}
+        \itemsep10pt
+        \item Die Begriffe sind leicht definiert:
+        \begin{description}[Initialisierung:]
+            \itemsep2pt
+            \item[Deklaration:] Reserviert einen Namen und setzt den Typ\hfill \bjava{int x, y;}
+            \item[Zuweisung:] Setzen/Ändern des Wertes einer Variable \bjava{x = 3;}
+            \item[Initialisierung:] Die \textit{erste} Zuweisung einer Variable
+        \end{description}
+        \item Wir betrachten einmal leicht verändert: TODO: beispiel an Programm TODO: OPerationen bei Rechnung mit eintragen TODO: aufwändigere Aufwandsanalyse ;) TODO: endlichkeit und halteproblem TODO: korrekt zitat von Knuth bei Verifikation  TODO: termiation: Länge ist fest
+    \end{itemize}
 \end{frame}
 
 \SetNextSectionText{Algorithmenentwurf und -analyse\\Abgabe: \DTMDate{2022-05-02}}
@@ -256,7 +274,7 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
 }
 TODO: NÖ, aber alle zeigen!
 \end{frame}
-
+\iffalse
 \subsection{Aufgabe 3}
 % compensate for fat overflow
 \newcommand<>\hlkw[1]{{\savebox0{#1}\only#2{\bfseries\color{paletteA}}\makebox[\dimexpr\wd0+.285ex]{\strut#1}}}
@@ -423,6 +441,7 @@ TODO: NÖ, aber alle zeigen!
 \end{frame}
 
 \SetNextSectionText{TODO: quote}
+\fi
 \section{Abschließendes}
 {\SummaryFrame
 \begin{frame}[t]{Zusammenfassend}
