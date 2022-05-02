@@ -45,7 +45,7 @@ class BoolescheAusdruecke {
 \end{frame}
 
 
-\MakeThePinguExplainIt[text width=5.5cm]{cap=!hide,vr-headset,body type=legacy,cup=!hide,lollipop left,right item angle=27}{Einen generell korrekten Datentyp gibt es selten. Diverse Bedingungen hängen vom Kontext ab.\medskip\\Die Zahlen sind erstmal beliebig.}
+\MakeThePinguExplainIt[text width=5.5cm]{cap=!hide,vr-headset,vr-headset hair,body type=legacy,cup=!hide,lollipop left,right item angle=27}{Einen generell korrekten Datentyp gibt es selten. Diverse Bedingungen hängen vom Kontext ab.\medskip\\Die Zahlen sind erstmal beliebig.}
 \begin{frame}[fragile,c]{Die Datentypen finden}
 \DoAnimations
 \begin{center}
@@ -61,7 +61,7 @@ $2->$    }
 $2->$}$1->$
 \end{plainjava}
 \begin{tikzpicture}[overlay,remember picture,every path/.append style={line cap=round}]
-    \onslide<4->{\node[above left,xshift=-1.75cm,yshift=1.5cm,yshift=\btdmfootheight] (t) at(current page.south east) {\strut Temperatur};}
+    \onslide<4->{\node[above left,xshift=-1.75cm,yshift=1.65cm,yshift=\btdmfootheight] (t) at(current page.south east) {\strut Temperatur};}
     \onslide<5->{\node[below left=1mm,yshift=-1mm] (g) at (t.south) {\only<7->{\color{gray}}Ganzzahl}; \draw[thick,rounded corners=2pt] (t.south) -- ++(0,-.5mm) -| (g.north);}
     \onslide<6->{\node[below right=1mm,yshift=-1mm] (f) at (t.south) {Fließzahl}; \draw[thick,rounded corners=2pt] (t.south) -- ++(0,-.5mm) -| (f.north);}
     \onslide<7->{\node[below left=1mm,yshift=-1mm] (j1) at (f.south) {\solGet{keywordB}{float}};
@@ -70,7 +70,7 @@ $2->$}$1->$
         \draw[thick,rounded corners=2pt] (f.south) -- ++(0,-.5mm) -| (j2.north);
     }
 
-    \onslide<11->{\node[above left,xshift=-6.1cm,yshift=1.5cm,yshift=\btdmfootheight] (t) at(current page.south east) {\strut Alter};}
+    \onslide<11->{\node[above left,xshift=-6.1cm,yshift=1.56cm,yshift=\btdmfootheight] (t) at(current page.south east) {\strut Alter};}
     \onslide<12->{\node[below left=1mm,yshift=-1mm] (g) at (t.south) {Ganzzahl}; \draw[thick,rounded corners=2pt] (t.south) -- ++(0,-.5mm) -| (g.north);}
     \onslide<13->{\node[below right=1mm,yshift=-1mm] (f) at (t.south) {\only<14->{\color{gray}}Fließzahl}; \draw[thick,rounded corners=2pt] (t.south) -- ++(0,-.5mm) -| (f.north);}
     \onslide<14->{\node[below left=1mm,xshift=-1.15cm,yshift=-1mm] (j1) at (g.south) {\only<15->{\color{gray}\ttfamily}\only<-14|handout:0>{\expandafter\solGet{keywordB}}{byte}};
@@ -82,7 +82,7 @@ $2->$}$1->$
         \draw[thick,rounded corners=2pt] (g.south) -- ++(0,-.5mm) -| (j3.north);
         \draw[thick,rounded corners=2pt] (g.south) -- ++(0,-.5mm) -| (j4.north);
     }
-    \onslide<17->{\node[left=-4mm,xshift=5mm,scale=.8,yshift=\btdmfootheight] at(current page.-10) {\copy\pinguexplainbox};}% copy for animations
+    \onslide<17->{\node[left=-4mm,xshift=5mm,scale=.8,yshift=\btdmfootheight] at(current page.-9) {\copy\pinguexplainbox};}% copy for animations
 \end{tikzpicture}
 \end{frame}
 
