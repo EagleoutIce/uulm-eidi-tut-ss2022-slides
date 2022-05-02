@@ -134,6 +134,20 @@ $2->$}$1->$
     \only<15->{\node[above left,yshift=\btdmfootheight] at (current page.south east) {\textattachfile{BoolescheAusdruecke.java}{BoolescheAusdruecke.java}\;};}
 \end{tikzpicture}\relax
 \end{frame}
+% 14. 4
+\begin{frame}{Deklarieren, Initialisieren und Zuweisen}
+    \begin{itemize}
+        \itemsep10pt
+        \item Die Begriffe sind leicht definiert:
+        \begin{description}[Initialisierung:]
+            \itemsep2pt
+            \item[Deklaration:] Reserviert einen Namen und setzt den Typ\hfill \bjava{int x, y;}
+            \item[Zuweisung:] Setzen/Ändern des Wertes einer Variable \bjava{x = 3;}
+            \item[Initialisierung:] Die \textit{erste} Zuweisung einer Variable
+        \end{description}
+        \item Wir betrachten einmal leicht verändert: TODO: beispiel an Programm TODO: OPerationen bei Rechnung mit eintragen TODO: aufwändigere Aufwandsanalyse ;) TODO: endlichkeit und halteproblem TODO: korrekt zitat von Knuth bei Verifikation  TODO: termiation: Länge ist fest
+    \end{itemize}
+\end{frame}
 
 \SetNextSectionText{Algorithmenentwurf und -analyse\\Abgabe: \DTMDate{2022-05-02}}
 \section{Übungsblatt 1}
@@ -260,7 +274,7 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
 }
 TODO: NÖ, aber alle zeigen!
 \end{frame}
-
+\iffalse
 \subsection{Aufgabe 3}
 % compensate for fat overflow
 \newcommand<>\hlkw[1]{{\savebox0{#1}\only#2{\bfseries\color{paletteA}}\makebox[\dimexpr\wd0+.285ex]{\strut#1}}}
@@ -427,6 +441,7 @@ TODO: NÖ, aber alle zeigen!
 \end{frame}
 
 \SetNextSectionText{TODO: quote}
+\fi
 \section{Abschließendes}
 {\SummaryFrame
 \begin{frame}[t]{Zusammenfassend}
