@@ -224,3 +224,4 @@
 
 \def\shortmathskip{\abovedisplayskip1pt \belowdisplayskip1pt
 \abovedisplayshortskip1pt \belowdisplayshortskip1pt}
+\def\DeltaMax{\Delta_{\text{max}}}
