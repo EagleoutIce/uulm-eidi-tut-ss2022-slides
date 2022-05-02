@@ -135,17 +135,35 @@ $2->$}$1->$
 \end{tikzpicture}\relax
 \end{frame}
 % 14. 4
-\begin{frame}{Deklarieren, Initialisieren und Zuweisen}
+\def\hlcode#1#2{\fill[paletteA,opacity=.2,rounded corners=1pt] ([shift={(-.5mm,1pt)}]#1.south west) rectangle ([shift={(.5mm,-1pt)}]#1.north east); \coordinate (#2) at (#1.east);}
+\begin{frame}[fragile]{Deklarieren, Initialisieren und Zuweisen}
     \begin{itemize}
         \itemsep10pt
         \item Die Begriffe sind leicht definiert:
         \begin{description}[Initialisierung:]
             \itemsep2pt
             \item[Deklaration:] Reserviert einen Namen und setzt den Typ\hfill \bjava{int x, y;}
-            \item[Zuweisung:] Setzen/Ändern des Wertes einer Variable \bjava{x = 3;}
+            \item[Zuweisung:] Setzen/Ändern des Wertes einer Variable\hfill\bjava{x = 3;}
             \item[Initialisierung:] Die \textit{erste} Zuweisung einer Variable
         \end{description}
-        \item Wir betrachten einmal leicht verändert: TODO: beispiel an Programm TODO: OPerationen bei Rechnung mit eintragen TODO: aufwändigere Aufwandsanalyse ;) TODO: endlichkeit und halteproblem TODO: korrekt zitat von Knuth bei Verifikation  TODO: termiation: Länge ist fest
+        \item Wir betrachten einmal leicht verändert:\lstfs{10}
+\begin{plainjava}[lineskip=2.25pt]
+public static void main(String[] args) {
+    !*\tikzmarknode{temperatur}{\solGet{basicstyle}{\solGet{keywordB}{float} \strut temperatur}}*!;
+    !*\tikzmarknode{alter}{\solGet{basicstyle}{\solGet{keywordB}{short} \strut alter = \solGet{numbers}{15}}}*!;
+    !*\tikzmarknode{temperatur2}{\solGet{basicstyle}{\strut temperatur = \solGet{numbers}{18.0}f}}*!;
+    System.out.println(temperatur <= 22.5f);
+    !*\tikzmarknode{alter2}{\solGet{basicstyle}{\strut alter = \solGet{numbers}{27}}}*!;
+    System.out.println(!(13 <= alter && alter <= 18));
+}
+\end{plainjava}
+\begin{tikzpicture}[overlay,remember picture]
+    \hlcode{temperatur}{@a} \node[right=3mm,gray,font=\itshape\sffamily\footnotesize] at(@a) {\textbf{Deklarierung} einer Variable \say{temperatur} vom Typ \solGet{keywordB}{float}};
+    \hlcode{alter}{@c} \node[right=3mm,gray,font=\itshape\sffamily\footnotesize] at(@c) {\textbf{Deklarierung} mit Typ \solGet{keywordB}{short} und \textbf{Initialisierung} mit dem Wert \solGet{numbers}{15}};
+    \hlcode{temperatur2}{@b} % TODO: initialisierung
+    \hlcode{alter2}{@d} % TODO: Zuweisung
+\end{tikzpicture}
+        % TODO: beispiel an Programm TODO: OPerationen bei Rechnung mit eintragen TODO: aufwändigere Aufwandsanalyse ;) TODO: endlichkeit und halteproblem TODO: korrekt zitat von Knuth bei Verifikation  TODO: termiation: Länge ist fest
     \end{itemize}
 \end{frame}
 
