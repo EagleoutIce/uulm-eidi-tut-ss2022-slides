@@ -139,16 +139,16 @@ $2->$}$1->$
 \begin{frame}[fragile]{Deklarieren, Initialisieren und Zuweisen}
     \begin{itemize}
         \itemsep10pt
-        \item Die Begriffe sind leicht definiert:
+        \item<2-> Die Begriffe sind leicht definiert:
         \begin{description}[Initialisierung:]
             \itemsep2pt
-            \item[Deklaration:] Reserviert einen Namen und setzt den Typ\hfill \bjava{int x, y;}
-            \item[Zuweisung:] Setzen/Ändern des Wertes einer Variable\hfill\bjava{x = 3;}
-            \item[Initialisierung:] Die \textit{erste} Zuweisung einer Variable
+            \item<3->[Deklaration:] Reserviert einen Namen und setzt den Typ\hfill \onslide<4->{\bjava{int x, y;}}
+            \item<5->[Zuweisung:] Setzen/Ändern des Wertes einer Variable\hfill\onslide<6->{\bjava{x = 3;}}
+            \item<7->[Initialisierung:] Die \textit{erste} Zuweisung einer Variable\hfill\onslide<8->{\info{Erst jetzt ist die Variable verwendbar}}
         \end{description}
-        \item Wir betrachten einmal leicht verändert:\lstfs{10}
+        \item<9-> Wir betrachten einmal leicht verändert:\lstfs{10}
 \begin{plainjava}[lineskip=2.25pt]
-public static void main(String[] args) {
+!*\onslide<10->*!public static void main(String[] args) {
     !*\tikzmarknode{temperatur}{\solGet{basicstyle}{\solGet{keywordB}{float} \strut temperatur}}*!;
     !*\tikzmarknode{alter}{\solGet{basicstyle}{\solGet{keywordB}{short} \strut alter = \solGet{numbers}{15}}}*!;
     !*\tikzmarknode{temperatur2}{\solGet{basicstyle}{\strut temperatur = \solGet{numbers}{18.0}f}}*!;
@@ -158,10 +158,10 @@ public static void main(String[] args) {
 }
 \end{plainjava}
 \begin{tikzpicture}[overlay,remember picture]
-    \hlcode{temperatur}{@a} \node[right=3mm,gray,font=\itshape\sffamily\footnotesize] at(@a) {\textbf{Deklarierung} einer Variable \say{temperatur} vom Typ \solGet{keywordB}{float}};
-    \hlcode{alter}{@c} \node[right=3mm,gray,font=\itshape\sffamily\footnotesize] at(@c) {\textbf{Deklarierung} mit Typ \solGet{keywordB}{short} und \textbf{Initialisierung} mit dem Wert \solGet{numbers}{15}};
-    \hlcode{temperatur2}{@b} % TODO: initialisierung
-    \hlcode{alter2}{@d} % TODO: Zuweisung
+    \onslide<11->{\hlcode{temperatur}{@a}} \onslide<12->{\node[right=3mm,gray,font=\itshape\sffamily\footnotesize] at(@a) {\textbf{Deklarierung} einer Variable \say{temperatur} vom Typ \solGet{keywordB}{float}};}
+    \onslide<11->{\hlcode{alter}{@c}} \onslide<13->{\node[right=3mm,gray,font=\itshape\sffamily\footnotesize] at(@c) {\textbf{Deklarierung} mit Typ \solGet{keywordB}{short} und \textbf{Initialisierung} mit dem Wert \solGet{numbers}{15}};}
+    \onslide<11->{\hlcode{temperatur2}{@b}} \onslide<14->{\node[right=3mm,gray,font=\itshape\sffamily\footnotesize] at(@b) {\textbf{Initialisierung} mit dem Wert \solGet{numbers}{18.0}f};}
+    \onslide<11->{\hlcode{alter2}{@d}} \onslide<15->{\node[right=3mm,gray,font=\itshape\sffamily\footnotesize] at(@d) {\textbf{Zuweisung} mit dem Wert \solGet{numbers}{27}};}
 \end{tikzpicture}
         % TODO: beispiel an Programm TODO: OPerationen bei Rechnung mit eintragen TODO: aufwändigere Aufwandsanalyse ;) TODO: endlichkeit und halteproblem TODO: korrekt zitat von Knuth bei Verifikation  TODO: termiation: Länge ist fest
     \end{itemize}
@@ -265,9 +265,9 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
             \item So müssen wir die parallelen Abläufe beispielsweise koordinieren und abgleichen.
             \item Je nach Optimierung und Problem kann mehr Parallelisierung sogar schädlich sein!
             \item Auch kann man nie allen Code parallelisieren (Initialisierungen, Ausgaben,~\ldots).
-            \item Eine pessimistische Abschätzung liefert das \say{Amdahlsche Gesetz}~\info{\cite{amdahl1967amdahl}}.
+            \item Eine pessimistische Abschätzung liefert das \say{Amdahlsche Gesetz}~\info{wer mag:~\cite{amdahl1967amdahl}}.
         \end{itemize}
-        \item Für die Skalierung hat \(n^2\) einen viel größeren Einfluss, als der Faktor \(100\) \begin{itemize}
+        \item Für die Skalierung hat \(n\)\raisebox{3pt}{\scriptsize2} einen viel größeren Einfluss, als der Faktor \(100\) \begin{itemize}
             \itemsep3.5pt
             \item So vervielfachen 16 CPUs mit je vierfacher Leistung die Performanz um lediglich \(6\)!
             \item Meist interessiert uns nur das Wachstumsverhalten (polynomiell, exponentiell,~\ldots)
@@ -278,20 +278,30 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
 }
 
 \subsection{Aufgabe 2}
+{\setbeamerfont{description item}{shape=\itshape,series=\mdseries}
 \begin{frame}{Aufgabe 2: Korrektheit von Algorithmen}
-\parallelcontent[c]{
+\columns[onlytextwidth,c]
+\column{.6\linewidth}
 \task<2->{Betrachten Sie die Anweisungsfolge. Handelt es sich hierbei um einen Algorithmus? Prüfen Sie \emph{alle} notwendigen Voraussetzungen.}
-}{% fake the design :)
-\task<3->{\begin{tabular}{r<{:}ll}
+\column{.4\linewidth}% fake the design :)
+\task<3->{\begin{tabular}{r<{:}@{\hskip1ex}ll}
     1 & Setze & \(x = 1\) \\
     2 & \textbf{solange} & \(x \geq 0\) \textbf{wiederhole}\\
     3 & & Verdopple \(x\) \\
     4 & & Verringere \(x\) um \(1\) \\
     5 & \textbf{ende} & \\
 \end{tabular}}
-}
-TODO: NÖ, aber alle zeigen!
-\end{frame}
+\endcolumns\bigskip
+\begin{description}[Terminiert:]
+    \itemsep6pt
+    \item<4->[Ausführ- und Reproduzierbarkeit:] \strut\onslide<5->{Ja, alle Schritte sind klar und umsetzbar.}
+    \item<6->[Von Prozessor schrittweise ausführbar:] \strut\onslide<7->{Ja, ein Mensch kann sie auf Papier durchführen.}
+    \item<8->[Nur Elementaroperationen \info{oder in solche übersetzbar}:] \strut\onslide<9->{Ja, für alle per Definition.}
+    \item<10->[Endliche Beschreibung:] \strut\onslide<11->{Ja, per der Beschreibungstext ist endlich.}
+    \item<12->[Terminiert:] \strut\onslide<13->{Nein, es handelt sich um eine Endlosschleife. Die Werte von \T{x} verhalten sich \(1 \to 2 \to 1 \to 2 \to \ldots\), damit ist nie \(x \geq 0\).}
+\end{description}
+\end{frame}}
+
 \iffalse
 \subsection{Aufgabe 3}
 % compensate for fat overflow
@@ -458,8 +468,8 @@ TODO: NÖ, aber alle zeigen!
 \end{enumerate}
 \end{frame}
 
-\SetNextSectionText{TODO: quote}
 \fi
+\SetNextSectionText{TODO: quote}
 \section{Abschließendes}
 {\SummaryFrame
 \begin{frame}[t]{Zusammenfassend}
@@ -473,7 +483,7 @@ TODO: NÖ, aber alle zeigen!
 }
 
 \outro{\vskip6mm\centering\begin{tikzpicture}[scale=2.5]
-    \only<2->{TODO}
+    \only<2->{\pingu[monocle left,laptop right,cane left,tie,body type=legacy,headphones=pingu@green!80!pingu@black]}
 \end{tikzpicture}}
 
 \iffull\end{document}\fi
