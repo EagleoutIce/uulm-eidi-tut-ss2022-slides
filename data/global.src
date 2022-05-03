@@ -6,6 +6,7 @@
 \usepackage{microtype}
 
 \usepackage{attachfile2}
+\usepackage{booktabs}
 
 % todo: update color to primary
 \attachfilesetup{%

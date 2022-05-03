@@ -193,7 +193,7 @@ $2->$}$1->$
     \end{enumerate}}}
 \end{frame}
 
-\begin{frame}{Aufwandsobergrenze}
+\begin{frame}[c]{Aufwandsobergrenze}
 \only<handout:0>{\task<2->{Tägliches Optimierungsproblem für dessen Lösung eine Stunde zur
 Verfügung steht. Der Algorithmus zur Lösung benötigt bei Eingabe eines Problems der Größe \(n\) insgesamt \(100n^2\) Operationen.
 Der Mikro-Rechner mit einem Prozessortakt von \(\qty{800}{\mega\hertz}\) kann in
@@ -210,7 +210,7 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Die Macht der Taktfrequenz}
+\begin{frame}[c]{Die Macht der Taktfrequenz}
 \only<handout:0>{\task<2->{Tägliches Optimierungsproblem für dessen Lösung eine Stunde zur
 Verfügung steht. Der Algorithmus zur Lösung benötigt bei Eingabe eines Problems der Größe \(n\) insgesamt \(100n^2\) Operationen.
 Der Mikro-Rechner mit einem Prozessortakt von \(\qty{800}{\mega\hertz}\) kann in
@@ -232,7 +232,7 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Parallelisierungskosten}
+\begin{frame}[c]{Parallelisierungskosten}
     \only<handout:0>{\task<2->{Tägliches Optimierungsproblem für dessen Lösung eine Stunde zur
     Verfügung steht. Der Algorithmus zur Lösung benötigt bei Eingabe eines Problems der Größe \(n\) insgesamt \(100n^2\) Operationen.
     Der Mikro-Rechner mit einem Prozessortakt von \(\qty{800}{\mega\hertz}\) kann in
@@ -277,7 +277,7 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
 }
 
 \subsection{Aufgabe 2}
-{\setbeamerfont{description item}{shape=\itshape,series=\mdseries}
+{\setbeamerfont{description item}{series=\sbseries}
 \begin{frame}{Aufgabe 2: Korrektheit von Algorithmen}
 \columns[onlytextwidth,c]
 \column{.6\linewidth}
@@ -346,7 +346,7 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
 \end{frame}
 }
 \fi
-{\setbeamerfont{description item}{shape=\itshape,series=\mdseries}
+{\setbeamerfont{description item}{series=\sbseries}
 \begin{frame}{Problemspezifikation}
 \begin{description}[Tag]
     \itemsep9pt
@@ -373,7 +373,7 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
 \end{frame}
 
 {
-\MakeThePinguExplainIt[text width=6.75cm]{cap=!hide,cup=!hide,silver medal,construction helmet,right item angle=30}{\(\DeltaMax = -\infty\) ist natürlich unpraktisch. Hier könnte man für \(\DeltaMax = 0\) argumentieren (da \say{Anstieg}). Wir können aber auch die erste Differenz als Maximum setzen!}
+\MakeThePinguExplainIt[text width=6.75cm]{cap=!hide,cup=!hide,silver medal,construction helmet,right item angle=30}{\(\DeltaMax = -\infty\) ist natürlich unpraktisch. Hier könnte man für \(\DeltaMax = 0\) argumentieren (da \say{Anstieg}). Wir können aber auch die erste Differenz als Maximum setzen! Das kommt TODO.}
 \begin{frame}[t]{Algorithmenentwurf}
 \setbeamercolor{itemize/enumerate subbody}{fg=black}%
 \begin{enumerate}[(1)]
@@ -382,7 +382,7 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
     \item<3-> Setze $i$ auf $1$.
     \item<4->\label{alg:st} Solange $(i < n)$, wiederhole:\smallskip\\
         \onslide<5->{\quad Setze \(test\) auf \(\sfrac{(p_{i + 1} - p_i)}{p_i}\).\smallskip}\\
-        \onslide<6->{\quad Wenn \(test > \DeltaMax\):~~Setze \(\DeltaMax\) auf \(test\).\smallskip}\\
+        \onslide<6->{\quad Wenn \((test > \DeltaMax)\):~~Setze \(\DeltaMax\) auf \(test\).\smallskip}\\
         \onslide<7->{\quad Erhöhe \(i\) um \(1\).}
     \item<8-> Ergebnis ist $100 \cdot \DeltaMax$.
 \end{enumerate}
@@ -391,95 +391,131 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
 \end{tikzpicture}
 \end{frame}}
 
-\begin{frame}{Korrektheitsnachweis, Verifikation}
-\begin{enumerate}[1.]
-    \item \pause Formale vollständige Induktion, oder:
-    \item \pause\say{Textbasiert}.\pause{} \(i\) wächst streng monoton an, die Schleife wird damit genau \(n - 1\) mal durchlaufen (\(n\) ist konstant).\pause{} Alle mathematischen Berechnungen terminieren per Konstruktion, ebenso die Zuweisungen. Der Algorithmus \textit{terminiert}.\medskip\pause
+\setbox\pinguA=\hbox{\setbox0=\hbox{\quad Wenn \(test > \DeltaMax\):~~\(\DeltaMax \gets test\).}\parbox{\dimexpr5mm+\wd0}{\setbeamercolor{itemize/enumerate body}{fg=gray}\setbeamercolor{enumerate item}{fg=gray}\begin{enumerate}[(1)]
+    \item $\DeltaMax \gets -\infty$.
+    \item $i \gets 1$.
+    \item Solange $i < n$:\\
+        \quad \(test \gets \sfrac{(p_{i + 1} - p_i)}{p_i}\).\\
+        \quad Wenn \(test > \DeltaMax\):~~\(\DeltaMax \gets test\).\\
+        \quad \(i \gets i + 1\).
+    \item Ergebnis ist $100 \cdot \DeltaMax$.
+\end{enumerate}}}
 
-    Zudem ist er \textit{partiell korrekt}. Die maximale prozentuale Änderung ist immer größte relative Differenz für alle \([p_1, \ldots, p_{i + 1}]\) im \(i\)-ten Durchlauf.\pause{} Nach \(n - 1\) Durchläufen: \([p_1, \ldots, p_n]\). Basisfall mit \(i = 2\), für Schritt \(i \to i + 1\).
+\begin{frame}{Korrektheitsnachweis, Verifikation}
+\onslide<2->{\vspace*{-1mm}\raggedleft\hfill\scalebox{.775}{\copy\pinguA}\vspace*{-4mm}\par}
+\begin{enumerate}[1.]
+    \item<3-> Eine formale, vollständige Induktion, oder:
+    \item<4-> \say{Textbasiert}: \onslide<5->{\(i\) wächst streng monoton an, die Schleife wird damit genau \(n - 1\) mal durchlaufen (\(n\) ist konstant).} \onslide<6->{Alle mathematischen Berechnungen terminieren per Konstruktion, ebenso die Zuweisungen. Der Algorithmus \textit{terminiert}.}\medskip
+
+    \onslide<7->{Zudem ist er \textit{partiell korrekt}.} \onslide<8->{Die maximale prozentuale Änderung ist immer die größte relative Differenz für alle \([p_1, \ldots, p_{i + 1}]\) im \(i\)-ten Durchlauf.} \onslide<9->{Nach \(n - 1\) Durchläufen: \([p_1, \ldots, p_n]\).} \onslide<10->{Basisfall mit \(i = 2\), für Schritt \(i \to i + 1\) \info{analog zum Maximumsalgorithmus}.}
 \end{enumerate}
 \end{frame}
 
 \begin{frame}{Notizen}
     \begin{itemize}[<+(1)->]
-        \item Totale Korrektheit erfordert zwei Komponenten! \begin{enumerate}
-            \item \textit{Terminiertheit}: Der Algorithmus terminiert für jede definierte Eingabe.
-            \item \textit{Partielle Korrektheit}: Der Algorithmus liefert für jede definierte Eingabe ein korrektes Ergebnis, sofern er terminiert.
-        \end{enumerate}
-        \medskip
-        \item Es reicht in der Regel nicht aus: \begin{itemize}
-            \item \say{Maximum ist sicher größer als alle betrachteten Alternativen}.\pause{} Es muss dann zum Beispiel auch gezeigt werden, dass alle relevanten Alternativen in Betracht gezogen werden.
-            \item \say{Der Algorithmus findet das gesuchte Ergebnis}.\pause{} Wir Beweisen zwar (noch) nicht ganz formal. Dennoch sollte ein ausreichendes Verständnis für den Beweis gezeigt werden.
-        \end{itemize}\medskip
-        \item Vollständige Induktion über \(i\) (meist bei Schleifen): \begin{itemize}
-            \item Achtet darauf klar anzugeben, über was die Induktion läuft\pause\ \info{Länge der Einladungs-, Bekannten- oder Bedingungsliste? Das Durchschnittsalter der Person?}
-            \item Achtet auf eine vollständige Behauptung. Ist die unvollständig, ist es auch der Prozess an sich.
-            \item Induktionsanfang: Wir zeigen, dass es für ein \(i \in \N\) gilt, in der Regel \(i = 0\) oder \(i = 1\).
-            \item Induktionshypothese: Die Behauptung gilt für (ein) \(n\).
-            \item Induktionsschritt: Gilt die Behauptung für \(n\), so gilt sie auch für \(n + 1\).\pause{} \info{Hier wird fast immer die Hypothese benutzt um den Fall \(n + 1\) auf \(n\) zurückzuführen.}
-        \end{itemize}
+        \itemsep18pt
+        \item Totale Korrektheit erfordert zwei Komponenten! \begin{description}[Partielle Korrektheit:]
+            \itemsep3pt
+            \item[Terminiertheit:] Der Algorithmus terminiert für jede definierte Eingabe.
+            \item[Partielle Korrektheit:] Wenn der Algorithmus für eine definierte Eingabe terminiert, ist das Ergebnis korrekt.
+        \end{description}
+        \item Formulierungen wie folgt reichen nicht aus: \begin{itemize}
+            \itemsep3pt
+            \item \say{Maximum ist sicher größer als alle betrachteten Alternativen}.\pause \infoblock{Es muss dann zum Beispiel auch gezeigt werden, dass alle relevanten Alternativen in Betracht gezogen werden.}
+            \item \say{Der Algorithmus findet das gesuchte Ergebnis}.\pause \infoblock{Wir Beweisen zwar nicht formal, dennoch sollte ein ausreichendes Verständnis fürs Beweisen gezeigt werden.}
+        \end{itemize}% \medskip
+        % \item Vollständige Induktion über \(i\) (meist bei Schleifen): \begin{itemize}
+        %     \item Achtet darauf klar anzugeben, über was die Induktion läuft\pause\ \info{Länge der Einladungs-, Bekannten- oder Bedingungsliste? Das Durchschnittsalter der Person?}
+        %     \item Achtet auf eine vollständige Behauptung. Ist die unvollständig, ist es auch der Prozess an sich.
+        %     \item Induktionsanfang: Wir zeigen, dass es für ein \(i \in \N\) gilt, in der Regel \(i = 0\) oder \(i = 1\).
+        %     \item Induktionshypothese: Die Behauptung gilt für (ein) \(n\).
+        %     \item Induktionsschritt: Gilt die Behauptung für \(n\), so gilt sie auch für \(n + 1\).\pause{} \info{Hier wird fast immer die Hypothese benutzt um den Fall \(n + 1\) auf \(n\) zurückzuführen.}
+        % \end{itemize}
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Aufgabe 3 d)\hfill Induktion}
+\iffull
+{\AddonFrame
+\begin{frame}{Verifikation mit Induktion}
 \parallelcontent[c]{\tiny
 \setbeamercolor{itemize/enumerate subbody}{fg=black}%
 \vspace*{-\baselineskip}\begin{enumerate}[(1)]
     \itemsep1.5pt
-    \item\label{algA:a} Setze $\DeltaMax = 0$.
-    \item\label{algA:b} Setze $i = 1$.
+    \item\label{algA:a} Setze $\DeltaMax$ auf $-\infty$.
+    \item\label{algA:b} Setze $i$ auf  $1$.
     \item\label{algA:c} Solange $(i < n)$, wiederhole:\smallskip\\
-            \quad Setze \(test = \sfrac{(p_{i + 1} - p_i)}{p_i}\).\smallskip\\
-            \quad Wenn \(test > \DeltaMax\):~~Setze \(\DeltaMax = test\).\smallskip\\
+            \quad Setze \(test\) auf \(\sfrac{(p_{i + 1} - p_i)}{p_i}\).\smallskip\\
+            \quad Wenn \((test > \DeltaMax)\):~~Setze \(\DeltaMax\) auf \(test\).\smallskip\\
             \quad Erhöhe \(i\) um \(1\).
     \item\label{algA:d} Ergebnis ist $100 \cdot \DeltaMax$.
 \end{enumerate}
-}{\onslide<2->{Wir zeigen die partielle Korrektheit und nehmen die Termination hier als gegeben.}}\medskip\small
+}{\onslide<2->{Wir zeigen die partielle Korrektheit und nehmen die Termination hier als gegeben.}}\medskip\par\small
     \onslide<3->{Für ein beliebiges aber festes \(n \in \N\) mit \(n \geq 2\) und der Eingabe \(p_1, \ldots, p_n\)} \onslide<4->{zeigen wir per vollständiger Induktion über \(i\),} \onslide<5->{dass in jedem Schritte gelte: \(\DeltaMax \geq \max_{1 \leq j \leq i}(\sfrac{(p_{j + 1} - p_j)}{p_j})\).}\footnotesize
     \begin{description}[xIA:]% Inudktionshypothese als Voraussetzung und Behauptung
         \itemsep0pt
-        \item<6->[IA:] Mit \(i = 1\) ist \(\DeltaMax = \frac{p_2 - p_1}{p_1}\) das triviale Maximum (\(1 \leq j \leq 1\)).
-        \item<7->[IH:] Es gilt \(\DeltaMax \geq \max_{1 \leq j \leq i}(\sfrac{(p_{j + 1} - p_j)}{p_j})\) für \(i\).
-        \item<8->[IS:] Wir zeigen, dass auch \(\DeltaMax \geq\allowbreak \max_{1 \leq j \leq i + 1}(\sfrac{(p_{j + 1} - p_j)}{p_j})\) gilt.
-        \onslide<9->{Das heißt, aktuell ist \(\DeltaMax \geq \max_{1 \leq j \leq i}(\sfrac{(p_{j + 1} - p_j)}{p_j})\) und in der weiteren Schleife gilt:}\begingroup\scriptsize
+        \item<6->[IA:] Mit \(i = 1\) ist \(\DeltaMax = (p_2 - p_1)/p_1\) das triviale Maximum (\(1 \leq j \leq 1\)).
+        \item<7->[IH:] Es gilt \(\DeltaMax \geq \max_{1 \,\leq\, j \,\leq\, i}(\sfrac{(p_{j + 1} - p_j)}{p_j})\) für \(i\).
+        \item<8->[IS:] Wir zeigen, dass auch \(\DeltaMax \geq\allowbreak \max_{1\, \leq\, j \,\leq\, i + 1}(\sfrac{(p_{j + 1} - p_j)}{p_j})\) gilt.
+        \onslide<9->{Das heißt, aktuell ist \(\DeltaMax \geq \max_{1 \,\leq\, j \,\leq\, i}(\sfrac{(p_{j + 1} - p_j)}{p_j})\) und in der weiteren Schleife gilt:}\begingroup\scriptsize
         \begin{enumerate}
             \item<10-> \color{gray}\(test > \DeltaMax\): Durch die Bedingung wird \(\DeltaMax\) aktualisiert. Es gilt: \(\DeltaMax = test \geq \max_{1 \leq j \leq i + 1}(\sfrac{(p_{j + 1} - p_j)}{p_j})\).
             \item<11-> \color{gray}\(test \leq \DeltaMax\): Das neue Glied durch \(i + 1\) ist kein neues Maximum. Es gilt: \(\DeltaMax \geq \max_{1 \leq j \leq i + 1}(\sfrac{(p_{j + 1} - p_j)}{p_j}) \geq test\).
         \end{enumerate}\endgroup
     \end{description}
     \onslide<12->{Nach \(n-1\) Schritten durch die Begrenzung \(i < n\), wurden alle \(p_1, \ldots, p_n\) betrachtet.} \onslide<13->{\(\DeltaMax\) ist Maximum aller.}
+\end{frame}}
+\fi
+
+\begin{frame}{Aufwandsanalyse}
+\parallelcontent[c]{\tiny
+\onslide<2->{\setbeamercolor{itemize/enumerate subbody}{fg=black}%
+\vspace*{-\baselineskip}\begin{enumerate}[(1)]
+    \itemsep1.5pt
+    \item\label{algB:a} Setze $\DeltaMax$ auf $-\infty$.
+    \item\label{algB:b} Setze $i$ auf $1$.
+    \item\label{algB:c} Solange $(i < n)$, wiederhole:\smallskip\\
+            \quad Setze \(test\) auf \(\sfrac{(p_{i + 1} - p_i)}{p_i}\).\smallskip\\
+            \quad Wenn \((test > \DeltaMax)\):~~Setze \(\DeltaMax\) auf \(test\).\smallskip\\
+            \quad Erhöhe \(i\) um \(1\).
+    \item\label{algB:d} Ergebnis ist $100 \cdot \DeltaMax$.
+\end{enumerate}}
+}{\tiny\vspace*{-1mm}\quad\onslide<3->{\begin{tabular}{lcc}
+    \toprule
+    \onslide<3->{Anweisung} & \onslide<3->{Aufwand} & \onslide<3->{Wie oft?} \\
+    \midrule
+    \onslide<4->{Setze $\DeltaMax$ auf $-\infty$} & \onslide<4->{1\,E} & \onslide<4->{\(1\)} \\
+    \onslide<4->{Setze $i$ auf $1$} & \onslide<4->{1\,E} & \onslide<4->{\(1\)} \\
+    \onslide<5->{Solange $(i < n)$, wiederhole} & \onslide<5->{1\,E} & \onslide<5->{\(n\)} \\
+    \onslide<6->{~~~Setze \(test\) auf \(\sfrac{(p_{i + 1} - p_i)}{p_i}\)} & \onslide<6->{3\,E} & \onslide<6->{\(n - 1\)} \\
+    \onslide<7->{~~~Wenn \((test > \DeltaMax)\)} & \onslide<7->{1\,E} & \onslide<7->{\(n - 1\)} \\
+    \onslide<7->{~~~~~~Setze \(\DeltaMax\) auf \(test\)} & \onslide<7->{1\,E} & \onslide<7->{max. \(n - 1\)} \\
+    \onslide<8->{Ergebnis ist $100 \cdot \DeltaMax$} & \onslide<8->{2\,E} & \onslide<8->{\(1\)} \\
+    \bottomrule
+\end{tabular}}}\vfill
+\begin{enumerate}[1.]
+    \item<9-> \say{Textbasiert}. Wir betrachten Stückweise: \begin{itemize}
+        \item<10-> Die ersten Zuweisungen \ref{algB:a} \& \ref{algB:b} sind zwei Elementaroperation.
+        \item<11-> Die äußere Schleife in \ref{algB:c} wird genau \(n - 1\) mal durchlaufen. \begin{itemize}
+        \item<12-> Die Erste Schleifenanweisung hat drei Elementaroperationen: Subtraktion, Division \& Zuweisung.
+        \item<13-> Zweite Schleifenanweisung ist ein Vergleich und maximal eine Zuweisung.
+        \item<14-> Dritte Schleifenanweisung ist eine Elementaroperation (je nach Definition auch zwei).
+        \end{itemize}
+        \item<15-> Das Endergebnis ist eine Multiplikation (und je nach Definition eine Zuweisung).
+    \end{itemize}
+    \item<16-> Damit erhalten wir: \(2 + (n - 1) \cdot ( 3+ 2 + 1) + 2 + 2 = 6n - 2\) (also \(\O(n)\)).
+\end{enumerate}
 \end{frame}
 
-\begin{frame}{Aufgabe 3 e)}
-{}{\tiny
-    \setbeamercolor{itemize/enumerate subbody}{fg=black}%
-    \vspace*{-.9\baselineskip}\begin{enumerate}[(1)]
-        \itemsep1.5pt
-        \item\label{algB:a} Setze $\DeltaMax = 0$.
-        \item\label{algB:b} Setze $i = 1$.
-        \item\label{algB:c} Solange $(i < n)$, wiederhole:\smallskip\\
-                \quad Setze \(test = \sfrac{(p_{i + 1} - p_i)}{p_i}\).\smallskip\\
-                \quad Wenn \(test > \DeltaMax\):~~Setze \(\DeltaMax = test\).\smallskip\\
-                \quad Erhöhe \(i\) um \(1\).
-        \item\label{algB:d} Ergebnis ist $100 \cdot \DeltaMax$.
-    \end{enumerate}
-}
-\begin{enumerate}[a)]
-    \setcounter{enumi}{4}
-    \item \pause Aufwandsanalyse: \begin{enumerate}[1.]
-                \item \pause Tabellarisch, siehe Vorlesung, oder:
-                \item \pause \say{Textbasiert}. Wir betrachten Stückweise: \begin{itemize}[<+(1)->]
-                    \item Die ersten Zuweisungen \ref{algB:a} \& \ref{algB:b} sind  exakt zwei Elementaroperation.
-                    \item Die äußere Schleife in \ref{algB:c} wird genau \(n - 1\) mal durchlaufen. \begin{description}[\textbullet\space]
-                    \item[\textbullet] Erste Schleifenanweisung bedarf dreier Elementaroperationen: Subtraktion, Division \& Zuweisung.
-                    \item[\textbullet] Zweite Schleifenanweisung ist ein Vergleich und maximal eine Zuweisung.
-                    \item[\textbullet] Dritte Schleifenanweisung ist eine Elementaroperation (je nach Definition auch zwei).
-                    \end{description}
-                    \item Das Endergebnis ist eine Multiplikation (und je nach Definition eine Zuweisung).
-                \end{itemize}
-                \item\pause Damit erhalten wir: \(2 + (n - 1) \cdot ( 3+ 2 + 1) + 2 + 2 = 6n - 2\)\pause{} (also \(\mathcal{O}(n)\)).
-            \end{enumerate}
-\end{enumerate}
+\begin{frame}{Alternativen}
+    TODO: erst diffs, dann max
+    TODO: Variante die das Maximum aus der Menge nimmt?
+\end{frame}
+
+
+\SetNextSectionText{Algorithmen, Datentypen, Boolesche Ausdrücke\\Abgabe: \DTMDate{2022-05-09}}
+\section{Aussicht: Übungsblatt 2}
+\begin{frame}
+
 \end{frame}
 
 \SetNextSectionText{TODO: quote}
@@ -490,6 +526,7 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
 \vfill\vfill % double fill for more fraction
 \begin{itemize}[<+(1)->]
     \itemsep14pt
+    \item Initialisierung USW variablen TODO
     \item TODO
 \end{itemize}
 \end{frame}
