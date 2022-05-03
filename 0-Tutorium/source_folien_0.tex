@@ -513,7 +513,7 @@
         \end{enumerate}
         \item Korrektheitsnachweis: \begin{description}[Partiell korrekt:]
             \itemsep3pt
-            \item[Terminiert:] Die Schleife aus \ref{alg:loop}. terminiert, da \(i\) pro Iteration um \(1\) inkrementiert wird und damit streng monoton wächst \onslide<+(1)->{\info{also sicher irgendwann \(i \geq m\)}.}
+            \item[Terminiert:] Die Schleife aus \ref{alg:loop}. terminiert, da \(i\) pro Iteration um \(1\) inkrementiert wird und damit streng monoton wächst. \onslide<+(1)->{\infoblock{Es ist sicher irgendwann \(i \geq m\), da Länge \(m\) konstant.}}
             \item<+(1)->[Partiell korrekt:] Hier lässt sich leicht zeigen, dass für jeden Schritt in \ref{alg:loop}. gilt, dass \(max \geq (t_1, \ldots, t_i)\). \onslide<+(1)->{Für \(m = 1\) ist weiter \(max = \text{\T{a[$0$]}} = \max\bigl(t_0\bigr)\).}
         \end{description}
     \end{itemize}
