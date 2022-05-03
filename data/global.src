@@ -225,3 +225,11 @@
 \def\shortmathskip{\abovedisplayskip\medskipamount \belowdisplayskip\medskipamount
 \abovedisplayshortskip\medskipamount \belowdisplayshortskip\medskipamount}
 \def\DeltaMax{\Delta_{\text{max}}}
+
+
+\let\oldO\O \let\emptyset\varnothing
+% \AtEndPreamble{\AtEndPreamble{\RequirePackage{amssymb}}}
+% \AtBeginDocument{\def\O{\ensuremath{\mathcal{O}}}}
+\DeclareSymbolFont{cmsymbols}{OMS}{cmsy}{m}{n}
+\SetSymbolFont{cmsymbols}{bold}{OMS}{cmsy}{b}{n}
+\DeclareSymbolFontAlphabet{\mathcal}{cmsymbols}
