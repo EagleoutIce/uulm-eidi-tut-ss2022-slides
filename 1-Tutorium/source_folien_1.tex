@@ -222,7 +222,7 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
     die Optimierungsprobleme bei \(\qty{3200}{\mega\hertz}\) Taktfrequenz sein?}
     \onslide<4->{Bisher schaffen wir \(\num{40000}\) Operationen, nun schaffen wir \(\num{40000} \cdot \sfrac{\qty{3200}{\mega\hertz}}{\qty{800}{\mega\hertz}}\):}
     \shortmathskip\begin{align*}
-        \onslide<5->{100n^2} &\onslide<5->{\leq 60 \cdot 60 \cdot \num{40000} \cdot \frac{\num{3200}}{800}}\\
+        \onslide<5->{100n^2} &\onslide<5->{\leq 60 \cdot 60 \cdot \num{40000} \cdot \frac{\qty{3200}{\mega\hertz}}{\qty{800}{\mega\hertz}}}\\
         \onslide<6->{100n^2} &\onslide<6->{\leq \num{576000000}}\\
         \onslide<7->{n}      &\onslide<7->{\leq \sqrt{\num{5760000}}}\\
         \onslide<8->{n}      &\onslide<8->{\leq 2400}
@@ -257,15 +257,14 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
 {\AddonFrame
 \begin{frame}{Laufzeitabschätzungen}
     \begin{itemize}[<+(1)->]
-        \itemsep16pt
+        \itemsep17pt
         \item Wir bekommen in der Regel \info{leider} nichts geschenkt.
         \begin{itemize}
             \itemsep3.5pt
-            \item Parallelisierung ist beispielsweise mit Kosten verbunden.
-            \item So müssen wir die parallelen Abläufe beispielsweise koordinieren und abgleichen.
+            \item Parallelisierung ist mit Kosten verbunden.
+            \item Wir müssen die parallelen Abläufe koordinieren, abgleichen,~\ldots
             \item Je nach Optimierung und Problem kann mehr Parallelisierung sogar schädlich sein!
-            \item Auch kann man nie allen Code parallelisieren (Initialisierungen, Ausgaben,~\ldots).
-            \item Eine pessimistische Abschätzung liefert das \say{Amdahlsche Gesetz}~\info{wer mag:~\cite{amdahl1967amdahl}}.
+            \item Auch ist nie alles parallelisierbar (Initialisierungen, Ausgaben,~\ldots).\onslide<+(1)->{\infoblock{Eine pessimistische Abschätzung liefert das \say{Amdahlsche Gesetz}~(wer mag:~\cite{amdahl1967amdahl}).}}
         \end{itemize}
         \item Für die Skalierung hat \(n\)\raisebox{3pt}{\scriptsize2} einen viel größeren Einfluss, als der Faktor \(100\) \begin{itemize}
             \itemsep3.5pt
@@ -301,6 +300,13 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
     \item<12->[Terminiert:] \strut\onslide<13->{Nein, es handelt sich um eine Endlosschleife. Die Werte von \T{x} verhalten sich \(1 \to 2 \to 1 \to 2 \to \ldots\), damit ist nie \(x \geq 0\).}
 \end{description}
 \end{frame}}
+\iffull
+{\AddonFrame
+\begin{frame}{Die Sache mit dem Terminieren}
+    TODO: Ausflug: Halteproblem
+\end{frame}
+}
+\fi
 
 \subsection{Aufgabe 3}
 % compensate for fat overflow
@@ -312,10 +318,10 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
 \iffull
 \begin{frame}[c]{Aufgabe 3: Algorithmenkonstruktion}
     \pause\centering \parbox{.7\linewidth}{%
-    \footnotesize\only<3->{\color{gray}}Angenommen, Sie überlegen sich ein \g{neues Tablet} für die \g{Uni} zu kaufen.
+    \footnotesize\color{gray}\footnotesize Angenommen, Sie überlegen sich ein \g{neues Tablet} für die \g{Uni} zu kaufen.
     Sie stellen jedoch fest, dass die \g{Preise für elektronische Geräte} durch den \g{Chipmangel} in \g{letzter Zeit} stark gestiegen sind.
     Nun haben Sie eine \g{Website} gefunden, die Ihnen die jeweiligen \g{\k{Tagespreise}} eines Tablets über die \g{letzten Monate} liefert.
-    Sie möchten nun den \gk{maximalen} \gk{prozentualen} \gk{Preisanstieg} zwischen \gk{zwei} \gk{aufeinanderfolgenden} \gk{Tagen} für dieses Tablet herausfinden.\bigskip\par
+    Sie möchten nun den \g{\k{maximalen prozentualen Preisanstieg}} zwischen \g{\k{zwei aufeinanderfolgenden Tagen}} für dieses Tablet herausfinden.\bigskip\par
     Entwickeln Sie einen \g{Algorithmus}, der aus einer \hgk<4->{Liste} \hgk<4->{von} \hgk<4->{Tagespreisen} des Tablets den \hloutkw<4->{maximalen prozentualen Preisanstieg} von \hgk<4->{zwei} \hgk<4->{aufeinan\rlap{-}}\allowbreak\hgk<4->{derfolgenden} \hgk<4->{Tagen} berechnet.}\only<5->{\qquad\parbox{.2\linewidth}{%
         \centering\footnotesize \onslide<6->{\paletteA{Liste von Tagespreise}\\{\color{gray}\((p_1,\;\ldots,\;p_n)_{n\in\N}\)}\medskip\par
         \onslide<7->{\faCaretDown\medskip\par \paletteB{Max. \% Preisanstieg}\\{\color{gray}\(\DeltaMax\)}}}
@@ -330,7 +336,7 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
     \centering \parbox{.7\linewidth}{\color{gray}\footnotesize Angenommen, Sie überlegen sich ein \g{neues Tablet} für die \g{Uni} zu kaufen.
     Sie stellen jedoch fest, dass die \g{Preise für elektronische Geräte} durch den \g{Chipmangel} in \g{letzter Zeit} stark gestiegen sind.
     Nun haben Sie eine \g{Website} gefunden, die Ihnen die jeweiligen \g{\k{Tagespreise}} eines Tablets über die \g{letzten Monate} liefert.
-    Sie möchten nun den \g{\k{maximalen pro\rlap{-}}} \g{\k{zentualen Preisanstieg}} zwischen \g{\k{zwei aufeinanderfolgenden Tagen}} für dieses Tablet herausfinden.\bigskip\par
+    Sie möchten nun den \g{\k{maximalen prozentualen Preisanstieg}} zwischen \g{\k{zwei aufeinanderfolgenden Tagen}} für dieses Tablet herausfinden.\bigskip\par
     Entwickeln Sie einen \g{Algorithmus}, der aus einer \hgk<4->{Liste} \hgk<4->{von} \hgk<4->{Tagespreisen} des Tablets den \hloutkw<4->{maximalen prozentualen Preisanstieg} von \hgk<4->{zwei} \hgk<4->{aufeinan\rlap{-}}\allowbreak\hgk<4->{derfolgenden} \hgk<4->{Tagen} berechnet.}\qquad\parbox{.2\linewidth}{%
         \centering\footnotesize Begriffe:\medskip\\
         \onslide<4->{Tagespreis\textcolor{gray}{liste}}\smallskip\\
@@ -343,51 +349,58 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
 {\setbeamerfont{description item}{shape=\itshape,series=\mdseries}
 \begin{frame}{Problemspezifikation}
 \begin{description}[Tag]
-    \itemsep8pt
+    \itemsep9pt
     \item<+(1)->[Tagespreis:] positive reelle Zahl. Dargestellt mit zwei Nachkommastellen.
     \item<+(1)->[Tagespreisliste:] chronologisch sortierte Liste an Tagespreisen \([p_1, \ldots, p_n]\) mit \(n \in \N_1\).
     \item<+(1)->[Tag:] natürlicher Index in Tagespreisliste.
-    \item<+(1)->[Zwei aufeinanderfolgende Tage:] zwei aufeinanderfolgende Listenindizes: \(i\) und \(i + 1\) wobei \(i, i + 1 < n\).
+    \item<+(1)->[Zwei aufeinanderfolgende Tage:] zwei Listenindizes: \(i\) und \(i + 1\) \info{wobei \(i, i + 1 < n\)}.
     \item<+(1)->[Preisanstieg:] positive Veränderung einer reellen Zahl (dem Tagespreis): \(p_{i + 1} - p_i > 0\).
-    \item<+(1)->[maximaler prozentualer Preisanstieg:] größter relativer Preisanstieg: \(\max_{1 \leq i < n} \frac{p_{i + 1} - p_i}{p_i} \cdot 100\).
+    \item<+(1)->[Maximaler prozentualer Preisanstieg:] größter relativer Preisanstieg: \(\max_{1 \leq i < n} \frac{p_{i + 1} - p_i}{p_i} \cdot 100\).\medskip
 \end{description}
-\infoblock{\textbf{Wichtig:} Wir sind hier nicht in einer Programmiersprache: Typen wie \say{\bjava{int}} gibt es nicht $\implies$ mathematische Notation benutzen oder eigenen Typ definieren (wie Tupel, \ldots)!}
+\onslide<+(1)->{\infoblock{\textbf{Wichtig:} Wir sind hier nicht in einer Programmiersprache: Typen wie \say{\bjava{int}} gibt es nicht $\implies$ mathematische Notation benutzen oder eigenen Typ definieren (wie Tupel, \ldots)!}}
 \end{frame}}
 
 \begin{frame}{Problemabstraktion}
-    \begin{itemize}[<+(1)->]
-        \itemsep3pt
-        \item \emph{Gegeben:} Chronologisch sortierte Liste \([p_1, \ldots, p_n]\) positiver reeller Zahlen. Annahme: \(n > 1\) (\say{letzte Monate}).
-        \item \emph{Gesucht:} Positive reelle Zahl \(m = 100\cdot \max_{1 \leq i < n} \frac{p_{i + 1} - p_i}{p_i}\) (\(X\,\%~\widehat{=}~\frac{X}{100}\)).
-     \end{itemize}
+\begin{center}
+    \centering\footnotesize \onslide<2->{\paletteA{Liste von Tagespreise}\\{\color{gray}\((p_1,\;\ldots,\;p_n)_{n\in\N}\)}\medskip\par
+    \onslide<2->{\faCaretDown\medskip\par \paletteB{Max. \% Preisanstieg}\\{\color{gray}\(\DeltaMax\)}}}
+\end{center}
+    \begin{description}[Gegeben:]
+        \itemsep10pt
+        \item<3->[Gegeben:] Chronologisch sortierte Liste \([p_1, \ldots, p_n]\) positiver reeller Zahlen. Annahme: \(n > 1\) (\say{letzte Monate}).
+        \item<4->[Gesucht:] Positive reelle Zahl \(m = 100\cdot \max_{1 \leq i < n} \frac{p_{i + 1} - p_i}{p_i}\) (\(X\,\%~\widehat{=}~\frac{X}{100}\)).
+     \end{description}
 \end{frame}
 
-\begin{frame}[t]{Aufgabe 3 c) \& d)}
-    \begin{enumerate}[a)]
-        \setcounter{enumi}{2}
-        \item \strut Algorithmenentwurf:
-        \setbeamercolor{itemize/enumerate subbody}{fg=black}%
-        \begin{enumerate}[(1)]
-            \itemsep3pt
-            \item\pause Setze $\DeltaMax = 0$.
-            \item\pause Setze $i = 1$.
-            \item\label{alg:st}\pause Solange $(i < n)$, wiederhole:\smallskip\\
-                \pause \quad Setze \(test = \sfrac{(p_{i + 1} - p_i)}{p_i}\).\smallskip\\
-                \pause \quad Wenn \(test > \DeltaMax\):~~Setze \(\DeltaMax = test\).\smallskip\\
-                \pause \quad Erhöhe \(i\) um \(1\).
-            \item\pause Ergebnis ist $100 \cdot \DeltaMax$.
-        \end{enumerate}
-        \medskip% Wir können Optimieren: einfach von oben herab
-        \item\pause Korrektheitsnachweis, Verifikation:\begin{enumerate}[1.]
-                  \item \pause Formale vollständige Induktion, oder:
-                  \item \pause\say{Textbasiert}.\pause{} \(i\) wächst streng monoton an, die Schleife wird damit genau \(n - 1\) mal durchlaufen.\pause{} Alle mathematischen Berechnungen terminieren per Konstruktion, ebenso die Zuweisungen. Der Algorithmus \textit{terminiert}.\medskip\pause
+{
+\MakeThePinguExplainIt[text width=6.75cm]{cap=!hide,cup=!hide,silver medal,construction helmet,right item angle=30}{\(\DeltaMax = -\infty\) ist natürlich unpraktisch. Hier könnte man für \(\DeltaMax = 0\) argumentieren (da \say{Anstieg}). Wir können aber auch die erste Differenz als Maximum setzen!}
+\begin{frame}[t]{Algorithmenentwurf}
+\setbeamercolor{itemize/enumerate subbody}{fg=black}%
+\begin{enumerate}[(1)]
+    \itemsep5pt
+    \item<2-> Setze $\DeltaMax$ auf $-\infty$.
+    \item<3-> Setze $i$ auf $1$.
+    \item<4->\label{alg:st} Solange $(i < n)$, wiederhole:\smallskip\\
+        \onslide<5->{\quad Setze \(test\) auf \(\sfrac{(p_{i + 1} - p_i)}{p_i}\).\smallskip}\\
+        \onslide<6->{\quad Wenn \(test > \DeltaMax\):~~Setze \(\DeltaMax\) auf \(test\).\smallskip}\\
+        \onslide<7->{\quad Erhöhe \(i\) um \(1\).}
+    \item<8-> Ergebnis ist $100 \cdot \DeltaMax$.
+\end{enumerate}
+\begin{tikzpicture}[overlay,remember picture]
+    \onslide<9->{\node[left=-4mm,xshift=5mm,scale=.8,yshift=\btdmfootheight] at(current page.-13) {\copy\pinguexplainbox};}% copy for animations
+\end{tikzpicture}
+\end{frame}}
 
-                  Zudem ist er \textit{partiell korrekt}. Die maximale prozentuale Änderung ist immer größte relative Differenz für alle \([p_1, \ldots, p_{i + 1}]\) im \(i\)-ten Durchlauf.\pause{} Nach \(n - 1\) Durchläufen: \([p_1, \ldots, p_n]\). Basisfall mit \(i = 2\), für Schritt \(i \to i + 1\).
-              \end{enumerate}
-    \end{enumerate}
+\begin{frame}{Korrektheitsnachweis, Verifikation}
+\begin{enumerate}[1.]
+    \item \pause Formale vollständige Induktion, oder:
+    \item \pause\say{Textbasiert}.\pause{} \(i\) wächst streng monoton an, die Schleife wird damit genau \(n - 1\) mal durchlaufen (\(n\) ist konstant).\pause{} Alle mathematischen Berechnungen terminieren per Konstruktion, ebenso die Zuweisungen. Der Algorithmus \textit{terminiert}.\medskip\pause
+
+    Zudem ist er \textit{partiell korrekt}. Die maximale prozentuale Änderung ist immer größte relative Differenz für alle \([p_1, \ldots, p_{i + 1}]\) im \(i\)-ten Durchlauf.\pause{} Nach \(n - 1\) Durchläufen: \([p_1, \ldots, p_n]\). Basisfall mit \(i = 2\), für Schritt \(i \to i + 1\).
+\end{enumerate}
 \end{frame}
 
-\begin{frame}{Aufgabe 3\hfill Notizen}
+\begin{frame}{Notizen}
     \begin{itemize}[<+(1)->]
         \item Totale Korrektheit erfordert zwei Komponenten! \begin{enumerate}
             \item \textit{Terminiertheit}: Der Algorithmus terminiert für jede definierte Eingabe.
@@ -483,7 +496,8 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
 }
 
 \outro{\vskip6mm\centering\begin{tikzpicture}[scale=2.5]
-    \only<2->{\pingu[monocle left,laptop right,cane left,tie,body type=legacy,headphones=pingu@green!80!pingu@black]}
+    \only<2->{\pingu[monocle left,right eye wink,left eye vertical,laptop right,cane left,tie,body type=legacy,headphones=pingu@green!80!pingu@black]}
 \end{tikzpicture}}
+
 
 \iffull\end{document}\fi
