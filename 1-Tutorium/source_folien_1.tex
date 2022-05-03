@@ -351,8 +351,16 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
     \item<+(1)->[Preisanstieg:] positive Veränderung einer reellen Zahl (dem Tagespreis): \(p_{i + 1} - p_i > 0\).
     \item<+(1)->[maximaler prozentualer Preisanstieg:] größter relativer Preisanstieg: \(\max_{1 \leq i < n} \frac{p_{i + 1} - p_i}{p_i} \cdot 100\).
 \end{description}
-{\footnotesize\textbf{Wichtig:} Wir sind hier nicht in einer Programmiersprache: Typen wie \say{\T{int}} gibt es nicht $\Rightarrow$ mathematische Notation benutzen oder eigenen Typ definieren (wie Tupel, \ldots)!}
+\infoblock{\textbf{Wichtig:} Wir sind hier nicht in einer Programmiersprache: Typen wie \say{\bjava{int}} gibt es nicht $\implies$ mathematische Notation benutzen oder eigenen Typ definieren (wie Tupel, \ldots)!}
 \end{frame}}
+
+\begin{frame}{Problemabstraktion}
+    \begin{itemize}[<+(1)->]
+        \itemsep3pt
+        \item \emph{Gegeben:} Chronologisch sortierte Liste \([p_1, \ldots, p_n]\) positiver reeller Zahlen. Annahme: \(n > 1\) (\say{letzte Monate}).
+        \item \emph{Gesucht:} Positive reelle Zahl \(m = 100\cdot \max_{1 \leq i < n} \frac{p_{i + 1} - p_i}{p_i}\) (\(X\,\%~\widehat{=}~\frac{X}{100}\)).
+     \end{itemize}
+\end{frame}
 
 \begin{frame}[t]{Aufgabe 3 c) \& d)}
     \begin{enumerate}[a)]
