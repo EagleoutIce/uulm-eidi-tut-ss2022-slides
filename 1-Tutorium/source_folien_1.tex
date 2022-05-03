@@ -199,7 +199,7 @@ Verfügung steht. Der Algorithmus zur Lösung benötigt bei Eingabe eines Proble
 Der Mikro-Rechner mit einem Prozessortakt von \(\qty{800}{\mega\hertz}\) kann in
 jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
 \begin{enumerate}
-    \item<3-> \task{Was ist die maximale Problemgröße \(n\) um in der Frist zu bleiben?\bigskip}
+    \item<3-> \task{Was ist die maximale Problemgröße \(n\) um in der Frist zu bleiben?\medskip}
     \onslide<4->{In der Stunde haben wir \(60 \cdot 60\) Sekunden und damit \(60 \cdot 60 \cdot \num{40000}\) Operationen. Bei Problemgröße \(n\) benötigen wir \(100n^2\) Operationen:} \shortmathskip\begin{align*}
         \onslide<5->{100n^2} &\onslide<5->{\leq 60 \cdot 60 \cdot \num{40000}}\\
         \onslide<6->{100n^2} &\onslide<6->{\leq \num{144000000}}\\
@@ -219,7 +219,7 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
     \setcounter{enumi}{1}
     \item<3-> \task{Angenommen, die
     höhere Taktfrequenz übersetze sich direkt in eine entsprechend höhere Rechengeschwindigkeit. Wie groß können
-    die Optimierungsprobleme bei \(\qty{3200}{\mega\hertz}\) Taktfrequenz sein?\bigskip}
+    die Optimierungsprobleme bei \(\qty{3200}{\mega\hertz}\) Taktfrequenz sein?\medskip}
     \onslide<4->{Bisher schaffen wir \(\num{40000}\) Operationen, nun schaffen wir \(\num{40000} \cdot \sfrac{\qty{3200}{\mega\hertz}}{\qty{800}{\mega\hertz}}\):}
     \shortmathskip\begin{align*}
         \onslide<5->{100n^2} &\onslide<5->{\leq 60 \cdot 60 \cdot \num{40000} \cdot \frac{\qty{3200}{\mega\hertz}}{\qty{800}{\mega\hertz}}}\\
@@ -241,7 +241,7 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
         \setcounter{enumi}{2}
         \item<3-> \task{Anstelle einer CPU mit einem, soll eine CPU mit 16 Kernen (jeweils mit \(\qty{3200}{\mega\hertz}\)) eingesetzt werden.
         Glücklicherweise lässt sich das Optimierungsproblem leicht parallelisieren, so dass sich die Geschwindigkeit im
-        Vergleich zu einem Kern verneunfacht. Wie groß können nun die Optimierungsprobleme sein?\bigskip}
+        Vergleich zu einem Kern verneunfacht. Wie groß können nun die Optimierungsprobleme sein?\medskip}
         \onslide<4->{Die Anzahl der Operationen verneunfacht sich direkt:}
         \shortmathskip\begin{align*}
             \onslide<5->{100n^2} &\onslide<5->{\leq 60 \cdot 60 \cdot \num{40000} \cdot \frac{\qty{3200}{\mega\hertz}}{\qty{800}{\mega\hertz}}} \\
