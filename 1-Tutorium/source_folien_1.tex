@@ -193,13 +193,13 @@ $2->$}$1->$
     \end{enumerate}}}
 \end{frame}
 
-\begin{frame}[c]{Aufwandsobergrenze}
+\begin{frame}{Aufwandsobergrenze}
 \only<handout:0>{\task<2->{Tägliches Optimierungsproblem für dessen Lösung eine Stunde zur
 Verfügung steht. Der Algorithmus zur Lösung benötigt bei Eingabe eines Problems der Größe \(n\) insgesamt \(100n^2\) Operationen.
 Der Mikro-Rechner mit einem Prozessortakt von \(\qty{800}{\mega\hertz}\) kann in
 jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
 \begin{enumerate}
-    \item<3-> \task{Was ist die maximale Problemgröße \(n\) um in der Frist zu bleiben?}
+    \item<3-> \task{Was ist die maximale Problemgröße \(n\) um in der Frist zu bleiben?\bigskip}
     \onslide<4->{In der Stunde haben wir \(60 \cdot 60\) Sekunden und damit \(60 \cdot 60 \cdot \num{40000}\) Operationen. Bei Problemgröße \(n\) benötigen wir \(100n^2\) Operationen:} \shortmathskip\begin{align*}
         \onslide<5->{100n^2} &\onslide<5->{\leq 60 \cdot 60 \cdot \num{40000}}\\
         \onslide<6->{100n^2} &\onslide<6->{\leq \num{144000000}}\\
@@ -210,7 +210,7 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
 \end{enumerate}
 \end{frame}
 
-\begin{frame}[c]{Die Macht der Taktfrequenz}
+\begin{frame}{Die Macht der Taktfrequenz}
 \only<handout:0>{\task<2->{Tägliches Optimierungsproblem für dessen Lösung eine Stunde zur
 Verfügung steht. Der Algorithmus zur Lösung benötigt bei Eingabe eines Problems der Größe \(n\) insgesamt \(100n^2\) Operationen.
 Der Mikro-Rechner mit einem Prozessortakt von \(\qty{800}{\mega\hertz}\) kann in
@@ -219,7 +219,7 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
     \setcounter{enumi}{1}
     \item<3-> \task{Angenommen, die
     höhere Taktfrequenz übersetze sich direkt in eine entsprechend höhere Rechengeschwindigkeit. Wie groß können
-    die Optimierungsprobleme bei \(\qty{3200}{\mega\hertz}\) Taktfrequenz sein?}
+    die Optimierungsprobleme bei \(\qty{3200}{\mega\hertz}\) Taktfrequenz sein?\bigskip}
     \onslide<4->{Bisher schaffen wir \(\num{40000}\) Operationen, nun schaffen wir \(\num{40000} \cdot \sfrac{\qty{3200}{\mega\hertz}}{\qty{800}{\mega\hertz}}\):}
     \shortmathskip\begin{align*}
         \onslide<5->{100n^2} &\onslide<5->{\leq 60 \cdot 60 \cdot \num{40000} \cdot \frac{\qty{3200}{\mega\hertz}}{\qty{800}{\mega\hertz}}}\\
@@ -232,7 +232,7 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
 \end{enumerate}
 \end{frame}
 
-\begin{frame}[c]{Parallelisierungskosten}
+\begin{frame}{Parallelisierungskosten}
     \only<handout:0>{\task<2->{Tägliches Optimierungsproblem für dessen Lösung eine Stunde zur
     Verfügung steht. Der Algorithmus zur Lösung benötigt bei Eingabe eines Problems der Größe \(n\) insgesamt \(100n^2\) Operationen.
     Der Mikro-Rechner mit einem Prozessortakt von \(\qty{800}{\mega\hertz}\) kann in
@@ -241,10 +241,10 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
         \setcounter{enumi}{2}
         \item<3-> \task{Anstelle einer CPU mit einem, soll eine CPU mit 16 Kernen (jeweils mit \(\qty{3200}{\mega\hertz}\)) eingesetzt werden.
         Glücklicherweise lässt sich das Optimierungsproblem leicht parallelisieren, so dass sich die Geschwindigkeit im
-        Vergleich zu einem Kern verneunfacht. Wie groß können nun die Optimierungsprobleme sein?}
+        Vergleich zu einem Kern verneunfacht. Wie groß können nun die Optimierungsprobleme sein?\bigskip}
         \onslide<4->{Die Anzahl der Operationen verneunfacht sich direkt:}
         \shortmathskip\begin{align*}
-            \onslide<5->{100n^2} &\onslide<5->{\leq 60 \cdot 60 \cdot \num{40000} \cdot \frac{\num{3200}}{800} \cdot 9} \\
+            \onslide<5->{100n^2} &\onslide<5->{\leq 60 \cdot 60 \cdot \num{40000} \cdot \frac{\qty{3200}{\mega\hertz}}{\qty{800}{\mega\hertz}}} \\
             \onslide<6->{100n^2} &\onslide<6->{\leq \num{5184000000}}\\
             \onslide<7->{n}      &\onslide<7->{\leq \sqrt{\num{51840000}}}\\
             \onslide<8->{n}      &\onslide<8->{\leq 7200}
