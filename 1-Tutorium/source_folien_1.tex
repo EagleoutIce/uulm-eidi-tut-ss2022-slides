@@ -373,7 +373,7 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
 \end{frame}
 
 {
-\MakeThePinguExplainIt[text width=6.75cm]{cap=!hide,cup=!hide,silver medal,construction helmet,right item angle=30}{\(\DeltaMax = -\infty\) ist natürlich unpraktisch. Hier könnte man für \(\DeltaMax = 0\) argumentieren (da \say{Anstieg}). Wir können aber auch die erste Differenz als Maximum setzen! Das kommt TODO.}
+\MakeThePinguExplainIt[text width=6.75cm]{cap=!hide,cup=!hide,silver medal,construction helmet,right item angle=30}{\(\DeltaMax = -\infty\) ist natürlich unpraktisch. Hier könnte man für \(\DeltaMax = 0\) argumentieren (da \say{Anstieg}). Wir können aber auch die erste Differenz als Maximum setzen! Das kommt auf Folie \pageref{alternate-approach-u1t3}.}
 \begin{frame}[t]{Algorithmenentwurf}
 \setbeamercolor{itemize/enumerate subbody}{fg=black}%
 \begin{enumerate}[(1)]
@@ -493,7 +493,7 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
     \bottomrule
 \end{tabular}}}\vfill
 \begin{enumerate}[1.]
-    \item<9-> \say{Textbasiert}. Wir betrachten Stückweise: \begin{itemize}
+    \item<9-> \say{Textbasiert}. Wir betrachten stückweise: \begin{itemize}
         \item<10-> Die ersten Zuweisungen \ref{algB:a} \& \ref{algB:b} sind zwei Elementaroperation.
         \item<11-> Die äußere Schleife in \ref{algB:c} wird genau \(n - 1\) mal durchlaufen. \begin{itemize}
         \item<12-> Die Erste Schleifenanweisung hat drei Elementaroperationen: Subtraktion, Division \& Zuweisung.
@@ -506,9 +506,26 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Alternativen}
-    TODO: erst diffs, dann max
-    TODO: Variante die das Maximum aus der Menge nimmt?
+\begin{frame}[fragile]{Eine Alternative}
+    \hypertarget<1>{alternate-approach-u1t3}{}\begin{itemize}
+        \item Wir können erst alle Preisanstiege berechnen und dann darin das Maximum suchen:\lstcolorlet{keywordA}{darkgray}\lstcolorlet{keywordB}{darkgray}\lstfs{10}%
+\begin{plainvoid}[morekeywords={given,let,be,when,is,then,and,stop,make,list,of,size,indexable,by,for,each,from,to,inclusive,assert},morekeywords={[2]{output,days,prices}},morestring={[b]"},morecomment={[s]{[}{]}},mathescape]
+given days $1, \ldots, n$ and prices $p_1, \ldots, p_n$ indexable by $p_i$
+when $n < 2$ then output "Ein Preisanstieg braucht mind. 2 Tage" and stop
+
+make list $L = (l_1, \ldots, l_{n-1})$ of size $n - 1$ indexable by $l_i$
+for each $d$ from $1$ to inclusive $n-1$
+    $\bullet$ let $l_d$ be $(p_{d + 1} - p_d)/p_d \cdot 100$
+
+[Jetzt hält $\color{sol@colors@lst@comments}l_i$ den Preisanstieg an Tag $\color{sol@colors@lst@comments}i$ und hat $\color{sol@colors@lst@comments}n - 1 \geq 1$ Elemente]
+let $max\_diff$ be $l_1$
+for each $diff$ from $1$ to inclusive $n-1$
+    when $diff > max\_diff$ then let $max\_diff$ be $diff$
+
+output "Der Maximale Preisanstieg ist $diff$"
+\end{plainvoid}
+    \item TODO: HIER MARKER MIT TIKZMARK DIE ANGEBEN: das is optional für XXX und usw... auf Folie 24 ansprechen warum die Dvison hier als 3 gerechnet wird und wieder auf komplexität zu sprechen zu kommen...
+    \end{itemize}
 \end{frame}
 
 
