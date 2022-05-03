@@ -222,6 +222,6 @@
 \end{frame}}
 \def\DoAnimations{\def\<##1>{\onslide<##1>}\lstset{mathescape,escapebegin={\<},escapeend={}}}
 
-\def\shortmathskip{\abovedisplayskip1pt \belowdisplayskip1pt
-\abovedisplayshortskip1pt \belowdisplayshortskip1pt}
+\def\shortmathskip{\abovedisplayskip\medskipamount \belowdisplayskip\medskipamount
+\abovedisplayshortskip\medskipamount \belowdisplayshortskip\medskipamount}
 \def\DeltaMax{\Delta_{\text{max}}}
