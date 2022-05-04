@@ -215,7 +215,7 @@
 \def\a{\text{\textit{Answer}}}
 \def\b{\text{\textit{B}}}
 % ugly hell
-\makeatletter\def\boxlot#1#2{\text{\phantom{#2}\llap{\@solLstHL{fill=#1,draw=#1}{#2}}}}
+\makeatletter\def\boxlot#1#2{\text{\phantom{#2}\llap{\@solLstHL{fill=#1,draw=#1,inner xsep=1pt}{#2}}}}
 \IfBtdmDarkmode{\def\boxme#1#2{\only<-12|handout:0>{\text{#2}}\only<13->{\boxlot{#1!12!btdm@background}{\text{\phantom{#2}\llap{#2}}}}}}{\def\boxme#1#2{\only<-12|handout:0>{#2}\only<13->{\boxlot{#1}{#2}}}}
 \begin{frame}{Alternativer Ansatz\hfill I}
 \pause\begin{algorithm}[H]
