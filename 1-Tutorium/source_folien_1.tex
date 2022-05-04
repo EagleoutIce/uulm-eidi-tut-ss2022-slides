@@ -354,8 +354,8 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
     \item<+(1)->[Tag:] natürlicher Index in Tagespreisliste.
     \item<+(1)->[Zwei aufeinanderfolgende Tage:] zwei Listenindizes: \(i\) und \(i + 1\) \info{wobei \(i, i + 1 < n\)}.
     \item<+(1)->[Preisanstieg:] positive Veränderung einer reellen Zahl (dem Tagespreis): \(p_{i + 1} - p_i > 0\).
-    \item<+(1)->[Maximaler prozentualer Preisanstieg:] größter relativer Preisanstieg: \(\displaystyle\max_{1 \leq i < n} \frac{p_{i + 1} - p_i}{p_i} \cdot 100\).\medskip
-\end{description}
+    \item<+(1)->[Maximaler prozentualer Preisanstieg:] größter relativer Preisanstieg: {\footnotesize\(\displaystyle\max_{1 \leq i < n} \frac{p_{i + 1} - p_i}{p_i} \cdot 100\)}.\medskip
+\end{description}\vfill
 \onslide<+(1)->{\infoblock{\textbf{Wichtig:} Wir sind hier nicht in einer Programmiersprache: Typen wie \say{\bjava{int}} gibt es nicht $\implies$ mathematische Notation benutzen oder eigenen Typ definieren (wie Tupel, \ldots)!}}
 \end{frame}}
 
@@ -436,10 +436,11 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
 \iffull
 {\AddonFrame
 \begin{frame}{Verifikation mit Induktion}
-\parallelcontent[c]{\tiny
+\columns[c,onlytextwidth]
+\column{.425\linewidth}
+\scriptsize
 \setbeamercolor{itemize/enumerate subbody}{fg=black}%
 \onslide<2->{\vspace*{-\baselineskip}\begin{enumerate}[(1)]
-    \itemsep1.5pt
     \item Setze $\DeltaMax$ auf $-\infty$.
     \item Setze $i$ auf  $1$.
     \item Solange $(i < n)$, wiederhole:\smallskip\\
@@ -448,26 +449,29 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
             \quad Erhöhe \(i\) um \(1\).
     \item Ergebnis ist $100 \cdot \DeltaMax$.
 \end{enumerate}}
-}{\onslide<2->{Wir zeigen die partielle Korrektheit (\say{Verifikation}) und nehmen die Termination hier als gegeben.}}\medskip\par\small
-    \onslide<3->{Für ein beliebiges aber festes \(n \in \N\) mit \(n \geq 2\) und der Eingabe \(p_1, \ldots, p_n\)} \onslide<4->{zeigen wir per vollständiger Induktion über \(i\),} \onslide<5->{dass in jedem Schritte gelte: \(\DeltaMax \geq \max_{1 \leq j \leq i}(\sfrac{(p_{j + 1} - p_j)}{p_j})\).}\footnotesize
+\column{.575\linewidth}
+\onslide<2->{Wir zeigen nur die partielle Korrektheit \info{\say{Verifikation}}.}\medskip\par
+\small\onslide<3->{Für ein beliebiges aber festes \(n \in \N\) mit \(n \geq 2\) und der Eingabe \(p_1, \ldots, p_n\)} \onslide<4->{zeigen wir per vollständiger Induktion über \(i\),} \onslide<5->{dass in jedem Schritte gelte:\smallskip\par \centerline{\(\displaystyle\DeltaMax \geq M(i) \qquad M(i) = \max_{1 \leq j \leq i}\left\{\frac{(p_{j + 1} - p_j)}{p_j}\right\}\)}}
+\endcolumns\medskip\par
+\small
     \begin{description}[xIA:]% Inudktionshypothese als Voraussetzung und Behauptung
         \itemsep0pt
-        \item<6->[IA:] Mit \(i = 1\) ist \(\DeltaMax = (p_2 - p_1)/p_1\) das triviale Maximum (\(1 \leq j \leq 1\)).
-        \item<7->[IH:] Es gilt \(\DeltaMax \geq \max_{1 \,\leq\, j \,\leq\, i}(\sfrac{(p_{j + 1} - p_j)}{p_j})\) für \(i\).
-        \item<8->[IS:] Wir zeigen, dass auch \(\DeltaMax \geq\allowbreak \max_{1\, \leq\, j \,\leq\, i + 1}(\sfrac{(p_{j + 1} - p_j)}{p_j})\) gilt.
-        \onslide<9->{Das heißt, aktuell ist \(\DeltaMax \geq \max_{1 \,\leq\, j \,\leq\, i}(\sfrac{(p_{j + 1} - p_j)}{p_j})\) und in der weiteren Schleife gilt:}\begingroup\scriptsize
+        \item<6->[IA:] Mit \(i = 1\) ist \(\DeltaMax = (p_2 - p_1)/p_1\) das triviale Maximum.
+        \item<7->[IH:] Die Aussage \(\DeltaMax \geq M(i)\) gilt für ein \(i\).
+        \item<8->[IS:] Es gilt \(\DeltaMax \geq M(i)\) für \(i\) (\textit{IH}). \onslide<9->{Wir zeigen, dass auch \(\DeltaMax \geq M(i + 1)\) gilt:}
+        \begingroup\footnotesize
         \begin{enumerate}
-            \item<10-> \color{gray}\(test > \DeltaMax\): Durch die Bedingung wird \(\DeltaMax\) aktualisiert. Es gilt: \(\DeltaMax = test \geq \max_{1 \leq j \leq i + 1}(\sfrac{(p_{j + 1} - p_j)}{p_j})\).
-            \item<11-> \color{gray}\(test \leq \DeltaMax\): Das neue Glied durch \(i + 1\) ist kein neues Maximum. Es gilt: \(\DeltaMax \geq \max_{1 \leq j \leq i + 1}(\sfrac{(p_{j + 1} - p_j)}{p_j}) \geq test\).
+            \item<9-> \(test > \DeltaMax\): Durch die Bedingung wird \(\DeltaMax\) aktualisiert. Es gilt: \(\DeltaMax = test \geq M(i + 1)\).
+            \item<10-> \(test \leq \DeltaMax\): Der Anstieg durch \(i + 1\) ist kein neues Maximum. Es gilt: \(\DeltaMax \geq M(i + 1) \geq test\).
         \end{enumerate}\endgroup
     \end{description}
-    \onslide<12->{Nach \(n-1\) Schritten durch die Begrenzung \(i < n\), wurden alle \(p_1, \ldots, p_n\) betrachtet.} \onslide<13->{\(\DeltaMax\) ist Maximum aller.}
+    \onslide<12->{Nach \(n-1\) Schritten \info{durch \(i < n\)}, werden alle \(p_1, \ldots, p_n\) betrachtet} \onslide<13->{~\(\implies\DeltaMax\) ist Maximum aller.}
 \end{frame}}
 \fi
 
 {
-\MakeThePinguExplainIt[text width=4.75cm,xshift=1.5cm,yshift=.15cm]{cap=!hide,cup=!hide,strawhat}{Ob Division und Subtraktion als Elementaroperation zählen, kommt auf die Definition an.}
-\begin{frame}{Aufwandsanalyse --- Textbasiert}
+\MakeThePinguExplainIt[text width=4.75cm]{cap=!hide,cup=!hide,strawhat,right item angle=-35}{Ob Division und Subtraktion als Elementaroperation zählen, kommt auf die Definition an.}
+\begin{frame}{Textbasierte Aufwandsanalyse}
 {}{}{\scriptsize
 \onslide<2->{\setbeamercolor{itemize/enumerate subbody}{fg=black}%
 \vspace*{-.5\baselineskip}\begin{enumerate}[(1)]
@@ -479,7 +483,7 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
             \quad Erhöhe \(i\) um \(1\).
     \item\only<2>{\label{algB:d}} Ergebnis ist $100 \cdot \DeltaMax$.
 \end{enumerate}}
-\par\medskip}
+\par\bigskip}
 \begin{itemize}
     \item<3-> Die 1. Zuweisungen \ref{algB:a} \& \ref{algB:b} sind 2 Elementaroperationen.
     \item<4-> Die äußere Schleife in \ref{algB:c} wird genau \(n - 1\) mal durchlaufen. \begin{itemize}
@@ -488,18 +492,21 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
     \item<7-> 3. Schleifenanweisung ist 1 Elementaroperation (je nach Definition auch 2).
     \end{itemize}
     \item<8-> Das Endergebnis ist eine Multiplikation (und je nach Definition 1 Zuweisung).\smallskip
-    \item<9-> Damit erhalten wir: \(2 + (n - 1) \cdot ( 3+ 2 + 1) + 2 + 2 = 6n - 2\) (also \(\O(n)\)).
+    \item<9-> Im worst-case haben wir so: \(2 + (n - 1) \cdot ( 3+ 2 + 1) + 2 = 6n - 2\) (also \(\O(n)\)).
 \end{itemize}
 \begin{tikzpicture}[remember picture,overlay]
-    \onslide<17->{\node[left=-4mm,xshift=5mm,scale=.8,yshift=\btdmfootheight] at(current page.-3) {\copy\pinguexplainbox};}% copy for animations
+    \onslide<17->{\node[left=-4mm,xshift=5mm,scale=.8,yshift=\btdmfootheight] at(current page.4) {\copy\pinguexplainbox};}% copy for animations
 \end{tikzpicture}
 \end{frame}}
 
 \iffull
+{
 \AddonFrame
-\begin{frame}[c]{Aufwandsanalyse}
+\def\incr{\(+\llap{\smash{\raisebox{1.5pt}{$+$}}\kern-3pt}\kern2pt\)}
+\MakeThePinguExplainIt[text width=4.75cm,yshift=-4mm,xshift=7mm]{cap=!hide,cup=!hide,lightsaber left=paletteA,headband=paletteA,right item angle=-15,right eye angry,left eye vertical}{Aktuell verschmelzen wir den Vergleich der for-Schleife mit dessen Inkrement (\incr).}
+\begin{frame}[c]{Tabellarische Aufwandsanalyse}
     \columns[c,onlytextwidth]
-    \column{.4\linewidth}
+    \column{.45\linewidth}
     \onslide<2->{\scriptsize\setbeamercolor{itemize/enumerate subbody}{fg=black}%
     \vspace*{-\baselineskip}\begin{enumerate}[(1)]
         \itemsep1.5pt
@@ -511,22 +518,36 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
                 \quad Erhöhe \(i\) um \(1\).
         \item Ergebnis ist $100 \cdot \DeltaMax$.
     \end{enumerate}}
-    \column{.6\linewidth}
-    \raggedleft\footnotesize\quad\onslide<3->{\begin{tabular}{lcc}
+    \column{.55\linewidth}
+    \scriptsize\onslide<3->{\begin{tabular}{lccl}
         \toprule
-        \onslide<3->{Anweisung} & \onslide<3->{Aufwand} & \onslide<3->{Wie oft?} \\
+        \onslide<3->{Anweisung} & \onslide<3->{Aufwand} & \onslide<3->{Wie oft?} & \onslide<3->{Was?} \\
         \midrule
-        \onslide<4->{Setze $\DeltaMax$ auf $-\infty$} & \onslide<4->{1\,E} & \onslide<4->{\(1\)} \\
-        \onslide<4->{Setze $i$ auf $1$} & \onslide<4->{1\,E} & \onslide<4->{\(1\)} \\
-        \onslide<5->{Solange $(i < n)$, wiederhole} & \onslide<5->{1\,E} & \onslide<5->{\(n\)} \\
-        \onslide<6->{~~~Setze \(test\) auf \(\sfrac{(p_{i + 1} - p_i)}{p_i}\)} & \onslide<6->{3\,E} & \onslide<6->{\(n - 1\)} \\
-        \onslide<7->{~~~Wenn \((test > \DeltaMax)\)} & \onslide<7->{1\,E} & \onslide<7->{\(n - 1\)} \\
-        \onslide<7->{~~~~~~Setze \(\DeltaMax\) auf \(test\)} & \onslide<7->{1\,E} & \onslide<7->{max. \(n - 1\)} \\
-        \onslide<8->{Ergebnis ist $100 \cdot \DeltaMax$} & \onslide<8->{2\,E} & \onslide<8->{\(1\)} \\
+        \onslide<4->{Setze $\DeltaMax$ auf $-\infty$} & \onslide<4->{1\,E} & \onslide<4->{\(1\)} & \onslide<4->{\(\gets\)}\\
+        \onslide<4->{Setze $i$ auf $1$} & \onslide<4->{1\,E} & \onslide<4->{\(1\)} & \onslide<4->{\(\gets\)}\\
+        \onslide<5->{Solange $(i < n)$, wiederhole} & \onslide<5->{\color{gray}1\,E} & \onslide<5->{\color{gray}\(n\)} & \onslide<5->{\color{gray}\(<\)}\\
+        \onslide<6->{~~~Setze \(test\) auf \(\sfrac{(p_{i + 1} - p_i)}{p_i}\)} & \onslide<6->{3\,E} & \onslide<6->{\(n - 1\)} & \onslide<6->{\(-\), \(\div\), \(\gets\)}\\
+        \onslide<7->{~~~Wenn \((test > \DeltaMax)\)} & \onslide<7->{1\,E} & \onslide<7->{\(n - 1\)} & \onslide<7->{\(>\)}\\
+        \onslide<7->{~~~~~~Setze \(\DeltaMax\) auf \(test\)} & \onslide<7->{1\,E} & \onslide<7->{max. \(n - 1\)} & \onslide<7->{\(\gets\)}\\
+        \onslide<8->{~~~Erhöhe \(i\) um \(1\)} & \onslide<8->{1\,E} & \onslide<8->{\(n - 1\)} & \onslide<8->{\incr} \\
+        \onslide<9->{Ergebnis ist $100 \cdot \DeltaMax$} & \onslide<9->{2\,E} & \onslide<9->{\(1\)} & \onslide<9->{\(\cdot, \color{gray}\rightarrow\)}  \\
         \bottomrule
     \end{tabular}}
-    \endcolumns
+    \endcolumns\nomathskip\vspace*{7mm}
+    \begin{itemize}
+        \item<9-> So kommen wir auf den selben worst-case: \begin{equation*}
+            1\,E + 1\,E + (n - 1) \cdot (3\,E + 2\,E + 1\,E) + 2\,E = (6n - 2)\,E
+        \end{equation*}
+        \item<10-> Der best-case führt die bedingte Anweisung \(0\) mal aus:
+        \begin{equation*}
+            1\,E + 1\,E + (n - 1) \cdot (3\,E + 2\,E + 0\,E) + 2\,E = (5n - 1)\,E
+        \end{equation*}
+    \end{itemize}
+    \begin{tikzpicture}[overlay,remember picture]
+        \onslide<0|handout:1>{\node[left=-4mm,xshift=4mm,scale=.8,yshift=\btdmfootheight] at(current page.-21) {\copy\pinguexplainbox};}% copy for animations
+    \end{tikzpicture}
 \end{frame}
+}
 \fi
 
 \begin{frame}[fragile]{Eine Alternative}
