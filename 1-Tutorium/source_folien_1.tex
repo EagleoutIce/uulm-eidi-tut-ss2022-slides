@@ -379,7 +379,7 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
     \itemsep5pt
     \item<2-> Setze $\DeltaMax$ auf $-\infty$.
     \item<3-> Setze $i$ auf $1$.
-    \item<4->\label{alg:st} Solange $(i < n)$, wiederhole:\smallskip\\
+    \item<4->\only<4>{\label{alg:st}} Solange $(i < n)$, wiederhole:\smallskip\\
         \onslide<5->{\quad Setze \(test\) auf \(\sfrac{(p_{i + 1} - p_i)}{p_i}\).\smallskip}\\
         \onslide<6->{\quad Wenn \((test > \DeltaMax)\):~~Setze \(\DeltaMax\) auf \(test\).\smallskip}\\
         \onslide<7->{\quad Erhöhe \(i\) um \(1\).}
@@ -439,16 +439,16 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
 \begin{frame}{Verifikation mit Induktion}
 \parallelcontent[c]{\tiny
 \setbeamercolor{itemize/enumerate subbody}{fg=black}%
-\vspace*{-\baselineskip}\begin{enumerate}[(1)]
+\onslide<2->{\vspace*{-\baselineskip}\begin{enumerate}[(1)]
     \itemsep1.5pt
-    \item\label{algA:a} Setze $\DeltaMax$ auf $-\infty$.
-    \item\label{algA:b} Setze $i$ auf  $1$.
-    \item\label{algA:c} Solange $(i < n)$, wiederhole:\smallskip\\
+    \item Setze $\DeltaMax$ auf $-\infty$.
+    \item Setze $i$ auf  $1$.
+    \item Solange $(i < n)$, wiederhole:\smallskip\\
             \quad Setze \(test\) auf \(\sfrac{(p_{i + 1} - p_i)}{p_i}\).\smallskip\\
             \quad Wenn \((test > \DeltaMax)\):~~Setze \(\DeltaMax\) auf \(test\).\smallskip\\
             \quad Erhöhe \(i\) um \(1\).
-    \item\label{algA:d} Ergebnis ist $100 \cdot \DeltaMax$.
-\end{enumerate}
+    \item Ergebnis ist $100 \cdot \DeltaMax$.
+\end{enumerate}}
 }{\onslide<2->{Wir zeigen die partielle Korrektheit und nehmen die Termination hier als gegeben.}}\medskip\par\small
     \onslide<3->{Für ein beliebiges aber festes \(n \in \N\) mit \(n \geq 2\) und der Eingabe \(p_1, \ldots, p_n\)} \onslide<4->{zeigen wir per vollständiger Induktion über \(i\),} \onslide<5->{dass in jedem Schritte gelte: \(\DeltaMax \geq \max_{1 \leq j \leq i}(\sfrac{(p_{j + 1} - p_j)}{p_j})\).}\footnotesize
     \begin{description}[xIA:]% Inudktionshypothese als Voraussetzung und Behauptung
@@ -472,13 +472,13 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
 {}{}{\scriptsize
 \onslide<2->{\setbeamercolor{itemize/enumerate subbody}{fg=black}%
 \vspace*{-.5\baselineskip}\begin{enumerate}[(1)]
-    \item\label{algB:a} Setze $\DeltaMax$ auf $-\infty$.
-    \item\label{algB:b} Setze $i$ auf $1$.
-    \item\label{algB:c} Solange $(i < n)$, wiederhole:\smallskip\\
+    \item\only<2>{\label{algB:a}} Setze $\DeltaMax$ auf $-\infty$.
+    \item\only<2>{\label{algB:b}} Setze $i$ auf $1$.
+    \item\only<2>{\label{algB:c}} Solange $(i < n)$, wiederhole:\smallskip\\
             \quad Setze \(test\) auf \(\sfrac{(p_{i + 1} - p_i)}{p_i}\).\smallskip\\
             \quad Wenn \((test > \DeltaMax)\):~~Setze \(\DeltaMax\) auf \(test\).\smallskip\\
             \quad Erhöhe \(i\) um \(1\).
-    \item\label{algB:d} Ergebnis ist $100 \cdot \DeltaMax$.
+    \item\only<2>{\label{algB:d}} Ergebnis ist $100 \cdot \DeltaMax$.
 \end{enumerate}}
 \par\medskip}
 \begin{itemize}
@@ -504,13 +504,13 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
     \onslide<2->{\scriptsize\setbeamercolor{itemize/enumerate subbody}{fg=black}%
     \vspace*{-\baselineskip}\begin{enumerate}[(1)]
         \itemsep1.5pt
-        \item\label{algB:a} Setze $\DeltaMax$ auf $-\infty$.
-        \item\label{algB:b} Setze $i$ auf $1$.
-        \item\label{algB:c} Solange $(i < n)$, wiederhole:\smallskip\\
+        \item Setze $\DeltaMax$ auf $-\infty$.
+        \item Setze $i$ auf $1$.
+        \item Solange $(i < n)$, wiederhole:\smallskip\\
                 \quad Setze \(test\) auf \(\sfrac{(p_{i + 1} - p_i)}{p_i}\).\smallskip\\
                 \quad Wenn \((test > \DeltaMax)\):~~Setze \(\DeltaMax\) auf \(test\).\smallskip\\
                 \quad Erhöhe \(i\) um \(1\).
-        \item\label{algB:d} Ergebnis ist $100 \cdot \DeltaMax$.
+        \item Ergebnis ist $100 \cdot \DeltaMax$.
     \end{enumerate}}
     \column{.6\linewidth}
     \raggedleft\footnotesize\quad\onslide<3->{\begin{tabular}{lcc}
