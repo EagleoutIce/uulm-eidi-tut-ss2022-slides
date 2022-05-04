@@ -1,4 +1,4 @@
-\documentclass[aspectratio=169,usepdftitle=true,11pt,ngerman,t]{beamer}
+\documentclass[aspectratio=169,usepdftitle=true,11pt,fleqn,ngerman,t]{beamer}
 \errorcontextlines999999
 
 \usepackage[T1]{fontenc}
@@ -224,6 +224,8 @@
 
 \def\shortmathskip{\abovedisplayskip\medskipamount \belowdisplayskip\medskipamount
 \abovedisplayshortskip\medskipamount \belowdisplayshortskip\medskipamount}
+\def\nomathskip{\abovedisplayskip0pt \belowdisplayskip0pt
+\abovedisplayshortskip0pt \belowdisplayshortskip0pt}
 \def\DeltaMax{\Delta_{\text{max}}}
 
 
@@ -233,3 +235,7 @@
 \DeclareSymbolFont{cmsymbols}{OMS}{cmsy}{m}{n}
 \SetSymbolFont{cmsymbols}{bold}{OMS}{cmsy}{b}{n}
 \DeclareSymbolFontAlphabet{\mathcal}{cmsymbols}
+
+% get sffamily units
+\sisetup{unit-font-command=\mathsf}
+\usepackage{mathastext} % load it here for upshape again :D
