@@ -201,7 +201,7 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
     \item<3-> \task{Was ist die maximale Problemgröße \(n\) um in der Frist zu bleiben?\medskip}
     \onslide<4->{In der Stunde haben wir \(60 \cdot 60\) Sekunden und damit \(60 \cdot 60 \cdot \num{40000}\) Operationen. Bei Problemgröße \(n\) benötigen wir \(100n^2\) Operationen:} \shortmathskip\begin{align*}
         \onslide<5->{100n^2} &\onslide<5->{\leq 60 \cdot 60 \cdot \num{40000}}\\
-        \onslide<6->{100n^2} &\onslide<6->{\leq \num{144000000}}\\
+        \onslide<6->{100n^2} &\onslide<6->{\leq \num{144000000}} && \mid {}\cdot{} \sfrac1{100}\quad \mid \sqrt{\phantom{a:}}\\
         \onslide<7->{n}      &\onslide<7->{\leq \sqrt{\num{1440000}}}\\
         \onslide<8->{n}      &\onslide<8->{\leq 1200}
      \end{align*}
@@ -221,8 +221,8 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
     die Optimierungsprobleme bei \(\qty{3200}{\mega\hertz}\) Taktfrequenz sein?\medskip}
     \onslide<4->{Bisher schaffen wir \(\num{40000}\) Operationen, nun schaffen wir \(\num{40000} \cdot \sfrac{\qty{3200}{\mega\hertz}}{\qty{800}{\mega\hertz}}\):}
     \shortmathskip\begin{align*}
-        \onslide<5->{100n^2} &\onslide<5->{\leq 60 \cdot 60 \cdot \num{40000} \cdot \frac{\qty{3200}{\mega\hertz}}{\qty{800}{\mega\hertz}}}\\
-        \onslide<6->{100n^2} &\onslide<6->{\leq \num{576000000}}\\
+        \onslide<5->{100n^2} &\onslide<5->{\leq 60 \cdot 60 \cdot \num{40000} \cdot \sfrac{\qty{3200}{\mega\hertz}}{\qty{800}{\mega\hertz}}}\\
+        \onslide<6->{100n^2} &\onslide<6->{\leq \num{576000000}} && \mid {}\cdot{} \sfrac1{100}\quad \mid \sqrt{\phantom{a:}}\\
         \onslide<7->{n}      &\onslide<7->{\leq \sqrt{\num{5760000}}}\\
         \onslide<8->{n}      &\onslide<8->{\leq 2400}
      \end{align*}
@@ -243,8 +243,8 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
         Vergleich zu einem Kern verneunfacht. Wie groß können nun die Optimierungsprobleme sein?\medskip}
         \onslide<4->{Die Anzahl der Operationen verneunfacht sich direkt:}
         \shortmathskip\begin{align*}
-            \onslide<5->{100n^2} &\onslide<5->{\leq 60 \cdot 60 \cdot \num{40000} \cdot \frac{\qty{3200}{\mega\hertz}}{\qty{800}{\mega\hertz}}} \\
-            \onslide<6->{100n^2} &\onslide<6->{\leq \num{5184000000}}\\
+            \onslide<5->{100n^2} &\onslide<5->{\leq 60 \cdot 60 \cdot \num{40000} \cdot \sfrac{\qty{3200}{\mega\hertz}}{\qty{800}{\mega\hertz}}} \\
+            \onslide<6->{100n^2} &\onslide<6->{\leq \num{5184000000}} && \mid {}\cdot{} \sfrac1{100}\quad \mid \sqrt{\phantom{a:}}\\
             \onslide<7->{n}      &\onslide<7->{\leq \sqrt{\num{51840000}}}\\
             \onslide<8->{n}      &\onslide<8->{\leq 7200}
             \end{align*}
