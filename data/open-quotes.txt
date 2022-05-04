@@ -18,11 +18,6 @@ An algorithm must be seen to be believed.\\--- Donald E. Knuth~\cite{knuth1997fu
 }
 
 
-The White Rabbit put on his spectacles. 'Where shall I begin, please your Majesty?' he asked.
-'Begin at the beginning,' the King said gravely, 'and go on till you come to the end: then stop.'
-
-    Lewis Carroll, Alice's Adventures in Wonderland (1865).
-
 
 There is no real ending. It’s just the place where you stop the story.
 

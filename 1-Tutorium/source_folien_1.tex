@@ -300,11 +300,12 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
 \end{description}
 \end{frame}}
 \iffull
-% {\AddonFrame
-% \begin{frame}{Die Sache mit dem Terminieren}
-%     TODO: Ausflug: Halteproblem
-% \end{frame}
-% }
+{\AddonFrame
+% TODO: Ausflug: Halteproblem | Die Sache mit dem Terminieren
+\begin{frame}{Algorithmuseigenschaften}
+TODO:
+\end{frame}
+}
 \fi
 
 \subsection{Aufgabe 3}
@@ -539,7 +540,7 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
         \item<9-> So kommen wir auf den selben worst-case: \begin{equation*}
             1\,E + 1\,E + (n - 1) \cdot (3\,E + 2\,E + 1\,E) + 2\,E = (6n - 2)\,E
         \end{equation*}
-        \item<10-> Der best-case führt die bedingte Anweisung \(0\) mal aus:
+        \item<10-> Der best-case führt die bedingte Anweisung nie aus:
         \begin{equation*}
             1\,E + 1\,E + (n - 1) \cdot (3\,E + 2\,E + 0\,E) + 2\,E = (5n - 1)\,E
         \end{equation*}
@@ -586,7 +587,7 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
 \def\to{~\raisebox{1pt}{\;\tikz\draw[gray!80!pingu@black,-{Kite[scale=1.05]},line cap=round,line width=.925pt] (0,0) -- (6mm,0);}~}%
 \begin{frame}{Allgemeines}
     \begin{itemize}
-        \itemsep10pt
+        \itemsep12pt
         \item<2-> Der \textit{Algorithmenentwurf} ist nur ein Schritt der Algorithmenkonstruktion
         \item<3-> Annahmen festhalten
         \item<4-> Auch die Präzedenzregeln sind sicherlich hilfreich. Die wichtigsten:
@@ -601,7 +602,7 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
     \end{itemize}
 \end{frame}
 }
-\SetNextSectionText{TODO: quote}
+\SetNextSectionText[.6\linewidth]{The White Rabbit put on his spectacles. \say{Where shall I begin, please your Majesty?} he asked. \say{Begin at the beginning,} the King said gravely, \say{and go on till you come to the end: then stop.}\\--- Lewis Carroll~\cite[chp.~12]{carroll1865}.}
 \section{Abschließendes}
 {\SummaryFrame
 \begin{frame}[t]{Zusammenfassend}
@@ -610,11 +611,11 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
 \begin{itemize}[<+(1)->]
     \itemsep14pt
     \item Wir haben die Geburt von Variablen sowie ihre Wachstumsphase kennengelernt: \begin{itemize}
-        \item Die \textit{Deklaration} \bjava{int x} reserviert einen Namen samt Charakteristika (Typ,~\ldots)
-        \item Die \textit{Initialisierung} \bjava{int x; x = 5} beschreibt die erste Wertzuweisung (sie macht die Variable verwendbar)
-        \item Eine \textit{(Wert-)Zuweisung} \bjava{x = 3} ist jede weitere Änderung des gespeicherten Wertes.
+        \item Die \textit{Deklaration} (\bjava{int x}) reserviert einen Namen samt Charakteristika (Typ,~\ldots)
+        \item Die \textit{Initialisierung} (\bjava{int x; x = 5}) beschreibt die erste Wertzuweisung
+        \item Eine \textit{(Wert-)Zuweisung} (\bjava{x = 3}) ist jede weitere Änderung des gespeicherten Wertes
     \end{itemize}
-    \item In die Wahl des richtigen Datentyps fließen viele Informationen mit ein.
+    \item In die Wahl des \say{richtigen\texttrademark} Datentyps fließen viele Informationen mit ein.
 \end{itemize}
 \end{frame}
 }
