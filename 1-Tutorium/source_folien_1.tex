@@ -472,9 +472,9 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
 {}{}{\scriptsize
 \onslide<2->{\setbeamercolor{itemize/enumerate subbody}{fg=black}%
 \vspace*{-.5\baselineskip}\begin{enumerate}[(1)]
-    \item\only<2>{\label{algB:a}} Setze $\DeltaMax$ auf $-\infty$.
-    \item\only<2>{\label{algB:b}} Setze $i$ auf $1$.
-    \item\only<2>{\label{algB:c}} Solange $(i < n)$, wiederhole:\smallskip\\
+    \item\label{algB:a} Setze $\DeltaMax$ auf $-\infty$.
+    \item\label{algB:b} Setze $i$ auf $1$.
+    \item\label{algB:c} Solange $(i < n)$, wiederhole:\smallskip\\
             \quad Setze \(test\) auf \(\sfrac{(p_{i + 1} - p_i)}{p_i}\).\smallskip\\
             \quad Wenn \((test > \DeltaMax)\):~~Setze \(\DeltaMax\) auf \(test\).\smallskip\\
             \quad Erhöhe \(i\) um \(1\).
