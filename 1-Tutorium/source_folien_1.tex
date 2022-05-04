@@ -44,12 +44,12 @@ class BoolescheAusdruecke {
     \onslide<1->
 \end{aufgabe}
 \begin{tikzpicture}[overlay,remember picture]
-    \onslide<8->{\node[above left,yshift=-2.525mm,xshift=2mm,scale=.85] at(current page.south east) {\copy\pinguA};}
+    \onslide<8->{\node[above left,yshift=-2.525mm,xshift=2mm,scale=.95] at(current page.south east) {\copy\pinguA};}
 \end{tikzpicture}
 \end{frame}
 
 
-\MakeThePinguExplainIt[text width=5.5cm]{cap=!hide,vr-headset,vr-headset hair,body type=legacy,cup=!hide,lollipop left,right item angle=27}{Einen generell korrekten Datentyp gibt es selten. Diverse Bedingungen hängen vom Kontext ab.\medskip\\Die Zahlen sind erstmal beliebig.}
+\MakeThePinguExplainIt[text width=5.5cm,yshift=-5mm]{cap=!hide,vr-headset,vr-headset hair,body type=legacy,cup=!hide,lollipop left,right item angle=27}{Einen generell korrekten Datentyp gibt es selten. Diverse Bedingungen hängen vom Kontext ab.\medskip\\Die Zahlen sind erstmal beliebig.}
 \begin{frame}[fragile,c]{Die Datentypen finden}
 \DoAnimations
 \begin{center}
@@ -86,7 +86,7 @@ $2->$}$1->$
         \draw[thick,rounded corners=2pt] (g.south) -- ++(0,-.5mm) -| (j3.north);
         \draw[thick,rounded corners=2pt] (g.south) -- ++(0,-.5mm) -| (j4.north);
     }
-    \onslide<17->{\node[left=-4mm,xshift=5mm,scale=.8,yshift=\btdmfootheight] at(current page.-9) {\copy\pinguexplainbox};}% copy for animations
+    \onslide<0|handout:1>{\node[left=-4mm,xshift=5mm,scale=.8,yshift=\btdmfootheight] at(current page.-8) {\copy\pinguexplainbox};}% copy for animations
 \end{tikzpicture}
 \end{frame}
 
@@ -135,7 +135,7 @@ $2->$}$1->$
 \end{tikzpicture}\relax
 \end{frame}
 % 14. 4
-\def\hlcode#1#2{\fill[paletteA,opacity=.2,rounded corners=1pt] ([shift={(-.5mm,1pt)}]#1.south west) rectangle ([shift={(.5mm,-1pt)}]#1.north east); \coordinate (#2) at (#1.east);}
+\def\hlcode#1#2{\fill[paletteA,opacity=.2,rounded corners=1pt] ([shift={(-.5mm,2pt)}]#1.south west) rectangle ([shift={(.5mm,-2pt)}]#1.north east); \coordinate (#2) at (#1.east);}
 \begin{frame}[fragile]{Deklarieren, Initialisieren und Zuweisen}
     \begin{itemize}
         \itemsep10pt
@@ -143,28 +143,27 @@ $2->$}$1->$
         \begin{description}[Initialisierung:]
             \itemsep2pt
             \item<3->[Deklaration:] Reserviert einen Namen und setzt den Typ\hfill \onslide<4->{\bjava{int x, y;}}
-            \item<5->[Zuweisung:] Setzen/Ändern des Wertes einer Variable\hfill\onslide<6->{\bjava{x = 3;}}
             \item<7->[Initialisierung:] Die \textit{erste} Zuweisung einer Variable\hfill\onslide<8->{\info{Erst jetzt ist die Variable verwendbar}}
+            \item<5->[Zuweisung:] Setzen/Ändern des Wertes einer Variable\hfill\onslide<6->{\bjava{x = 3;}}
         \end{description}
-        \item<9-> Wir betrachten einmal leicht verändert:\lstfs{10}
-\begin{plainjava}[lineskip=2.25pt]
+    \end{itemize}\vspace*{6mm}
+\lstfs{10}
+\begin{plainjava}[lineskip=4.35pt]
 !*\onslide<10->*!public static void main(String[] args) {
-    !*\tikzmarknode{temperatur}{\solGet{basicstyle}{\solGet{keywordB}{float} \strut temperatur}}*!;
-    !*\tikzmarknode{alter}{\solGet{basicstyle}{\solGet{keywordB}{short} \strut alter = \solGet{numbers}{15}}}*!;
-    !*\tikzmarknode{temperatur2}{\solGet{basicstyle}{\strut temperatur = \solGet{numbers}{18.0}f}}*!;
-    System.out.println(temperatur <= 22.5f);
-    !*\tikzmarknode{alter2}{\solGet{basicstyle}{\strut alter = \solGet{numbers}{27}}}*!;
-    System.out.println(!(13 <= alter && alter <= 18));
+    !*\tikzmarknode{temperatur}{\solGet{basicstyle}{\solGet{keywordB}{int} \strut apfelsine}}*!;
+    !*\tikzmarknode{alter}{\solGet{basicstyle}{\solGet{keywordB}{char} \strut zeichen = \solGet{literals}{'x'}}}*!;
+    !*\tikzmarknode{temperatur2}{\solGet{basicstyle}{\strut apfelsine = \solGet{numbers}{42}}}*!;
+    if(apfelsine % 2 == 0)    !*\tikzmarknode{rightmark}{}*!
+        !*\tikzmarknode{alter2}{\solGet{basicstyle}{\strut zeichen = \solGet{literals}{'k'}}}*!;
 }
 \end{plainjava}
-\begin{tikzpicture}[overlay,remember picture]
-    \onslide<11->{\hlcode{temperatur}{@a}} \onslide<12->{\node[right=3mm,gray,font=\itshape\sffamily\footnotesize] at(@a) {\textbf{Deklarierung} einer Variable \say{temperatur} vom Typ \solGet{keywordB}{float}};}
-    \onslide<11->{\hlcode{alter}{@c}} \onslide<13->{\node[right=3mm,gray,font=\itshape\sffamily\footnotesize] at(@c) {\textbf{Deklarierung} mit Typ \solGet{keywordB}{short} und \textbf{Initialisierung} mit dem Wert \solGet{numbers}{15}};}
-    \onslide<11->{\hlcode{temperatur2}{@b}} \onslide<14->{\node[right=3mm,gray,font=\itshape\sffamily\footnotesize] at(@b) {\textbf{Initialisierung} mit dem Wert \solGet{numbers}{18.0}f};}
-    \onslide<11->{\hlcode{alter2}{@d}} \onslide<15->{\node[right=3mm,gray,font=\itshape\sffamily\footnotesize] at(@d) {\textbf{Zuweisung} mit dem Wert \solGet{numbers}{27}};}
+\begin{tikzpicture}[overlay,remember picture,T/.style={sol@colors@lst@comments,font=\itshape\sffamily\footnotesize}]
+    \onslide<11->{\hlcode{temperatur}{@a}} \onslide<12->{\node[right=3mm,T] at(@a-|rightmark.east) {\textbf{Deklarierung} einer Variable \say{apfelsine} vom Typ \T{int}};}
+    \onslide<11->{\hlcode{alter}{@c}} \onslide<13->{\node[right=3mm,T] at(@c-|rightmark.east) {\textbf{Deklarierung} mit Typ \T{char} und \textbf{Initialisierung} mit dem Wert \T{'x'}};}
+    \onslide<11->{\hlcode{temperatur2}{@b}} \onslide<14->{\node[right=3mm,T] at(@b-|rightmark.east) {\textbf{Initialisierung} mit dem Wert \T{42}};}
+    \onslide<11->{\hlcode{alter2}{@d}} \onslide<15->{\node[right=3mm,T] at(@d-|rightmark.east) {\textbf{Zuweisung} des Wertes \T{'k'}};}
 \end{tikzpicture}
         % TODO: beispiel an Programm TODO: OPerationen bei Rechnung mit eintragen TODO: aufwändigere Aufwandsanalyse ;) TODO: endlichkeit und halteproblem TODO: korrekt zitat von Knuth bei Verifikation  TODO: termiation: Länge ist fest
-    \end{itemize}
 \end{frame}
 
 \SetNextSectionText{Algorithmenentwurf und -analyse\\Abgabe: \DTMDate{2022-05-02}}
