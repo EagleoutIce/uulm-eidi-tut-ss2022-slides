@@ -373,7 +373,6 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
 \end{frame}
 
 {
-\MakeThePinguExplainIt[text width=6.75cm]{cap=!hide,cup=!hide,silver medal,construction helmet,right item angle=30}{\(\DeltaMax = -\infty\) ist natürlich unpraktisch. Hier könnte man für \(\DeltaMax = 0\) argumentieren (da \say{Anstieg}). Wir können aber auch die erste Differenz als Maximum setzen! Das kommt auf Folie \pageref{alternate-approach-u1t3}.}
 \begin{frame}[t]{Algorithmenentwurf}
 \setbeamercolor{itemize/enumerate subbody}{fg=black}%
 \begin{enumerate}[(1)]
@@ -386,9 +385,10 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
         \onslide<7->{\quad Erhöhe \(i\) um \(1\).}
     \item<8-> Ergebnis ist $100 \cdot \DeltaMax$.
 \end{enumerate}
-\begin{tikzpicture}[overlay,remember picture]
-    \onslide<9->{\node[left=-4mm,xshift=5mm,scale=.8,yshift=\btdmfootheight] at(current page.-13) {\copy\pinguexplainbox};}% copy for animations
-\end{tikzpicture}
+% no overlay for links
+\null\hfill\smash{\raisebox{-.5cm}{\scalebox{0.8}{\begin{tikzpicture}% [overlay,remember picture]
+    \onslide<9->{\pinguexplain{text width=6.75cm}{cap=!hide,cup=!hide,silver medal,construction helmet,right item angle=30}{\(\DeltaMax = -\infty\) ist natürlich unpraktisch. Hier könnte man für \(\DeltaMax = 0\) argumentieren (da \say{Anstieg}). Wir können aber auch die erste Differenz als Maximum setzen! Das kommt~\hyperlink{alternate-approach-u1t3}{später}.}}% copy for animations
+\end{tikzpicture}}\hskip-1.33cm}}
 \end{frame}}
 
 \setbox\pinguA=\hbox{\setbox0=\hbox{\quad Wenn \(test > \DeltaMax\):~~\(\DeltaMax \gets test\).}\parbox{\dimexpr5mm+\wd0}{\setbeamercolor{itemize/enumerate body}{fg=gray}\setbeamercolor{enumerate item}{fg=gray}\begin{enumerate}[(1)]
@@ -413,7 +413,7 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
 
 \begin{frame}{Notizen}
     \begin{itemize}[<+(1)->]
-        \itemsep18pt
+        \itemsep20pt
         \item Totale Korrektheit erfordert zwei Komponenten! \begin{description}[Partielle Korrektheit:]
             \itemsep3pt
             \item[Terminiertheit:] Der Algorithmus terminiert für jede definierte Eingabe.
@@ -466,11 +466,12 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
 \end{frame}}
 \fi
 
-\begin{frame}{Aufwandsanalyse}
-\parallelcontent[c]{\tiny
+{
+\MakeThePinguExplainIt[text width=4.75cm,xshift=1.5cm,yshift=.15cm]{cap=!hide,cup=!hide,strawhat}{Ob Division und Subtraktion als Elementaroperation zählen, kommt auf die Definition an.}
+\begin{frame}{Aufwandsanalyse --- Textbasiert}
+{}{}{\scriptsize
 \onslide<2->{\setbeamercolor{itemize/enumerate subbody}{fg=black}%
-\vspace*{-\baselineskip}\begin{enumerate}[(1)]
-    \itemsep1.5pt
+\vspace*{-.5\baselineskip}\begin{enumerate}[(1)]
     \item\label{algB:a} Setze $\DeltaMax$ auf $-\infty$.
     \item\label{algB:b} Setze $i$ auf $1$.
     \item\label{algB:c} Solange $(i < n)$, wiederhole:\smallskip\\
@@ -479,53 +480,82 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
             \quad Erhöhe \(i\) um \(1\).
     \item\label{algB:d} Ergebnis ist $100 \cdot \DeltaMax$.
 \end{enumerate}}
-}{\tiny\vspace*{-1mm}\quad\onslide<3->{\begin{tabular}{lcc}
-    \toprule
-    \onslide<3->{Anweisung} & \onslide<3->{Aufwand} & \onslide<3->{Wie oft?} \\
-    \midrule
-    \onslide<4->{Setze $\DeltaMax$ auf $-\infty$} & \onslide<4->{1\,E} & \onslide<4->{\(1\)} \\
-    \onslide<4->{Setze $i$ auf $1$} & \onslide<4->{1\,E} & \onslide<4->{\(1\)} \\
-    \onslide<5->{Solange $(i < n)$, wiederhole} & \onslide<5->{1\,E} & \onslide<5->{\(n\)} \\
-    \onslide<6->{~~~Setze \(test\) auf \(\sfrac{(p_{i + 1} - p_i)}{p_i}\)} & \onslide<6->{3\,E} & \onslide<6->{\(n - 1\)} \\
-    \onslide<7->{~~~Wenn \((test > \DeltaMax)\)} & \onslide<7->{1\,E} & \onslide<7->{\(n - 1\)} \\
-    \onslide<7->{~~~~~~Setze \(\DeltaMax\) auf \(test\)} & \onslide<7->{1\,E} & \onslide<7->{max. \(n - 1\)} \\
-    \onslide<8->{Ergebnis ist $100 \cdot \DeltaMax$} & \onslide<8->{2\,E} & \onslide<8->{\(1\)} \\
-    \bottomrule
-\end{tabular}}}\vfill
-\begin{enumerate}[1.]
-    \item<9-> \say{Textbasiert}. Wir betrachten stückweise: \begin{itemize}
-        \item<10-> Die ersten Zuweisungen \ref{algB:a} \& \ref{algB:b} sind zwei Elementaroperation.
-        \item<11-> Die äußere Schleife in \ref{algB:c} wird genau \(n - 1\) mal durchlaufen. \begin{itemize}
-        \item<12-> Die Erste Schleifenanweisung hat drei Elementaroperationen: Subtraktion, Division \& Zuweisung.
-        \item<13-> Zweite Schleifenanweisung ist ein Vergleich und maximal eine Zuweisung.
-        \item<14-> Dritte Schleifenanweisung ist eine Elementaroperation (je nach Definition auch zwei).
-        \end{itemize}
-        \item<15-> Das Endergebnis ist eine Multiplikation (und je nach Definition eine Zuweisung).
+\par\medskip}
+\begin{itemize}
+    \item<3-> Die 1. Zuweisungen \ref{algB:a} \& \ref{algB:b} sind 2 Elementaroperationen.
+    \item<4-> Die äußere Schleife in \ref{algB:c} wird genau \(n - 1\) mal durchlaufen. \begin{itemize}
+    \item<5-> Die 1. Schleifenanweisung hat 3 Elementaroperationen: Subtraktion, Division \& Zuweisung.
+    \item<6-> 2. Schleifenanweisung ist 1 Vergleich und maximal 1 Zuweisung.
+    \item<7-> 3. Schleifenanweisung ist 1 Elementaroperation (je nach Definition auch 2).
     \end{itemize}
-    \item<16-> Damit erhalten wir: \(2 + (n - 1) \cdot ( 3+ 2 + 1) + 2 + 2 = 6n - 2\) (also \(\O(n)\)).
-\end{enumerate}
+    \item<8-> Das Endergebnis ist eine Multiplikation (und je nach Definition 1 Zuweisung).\smallskip
+    \item<9->[\paletteA{\mdseries\faAngleRight}] Damit erhalten wir: \(2 + (n - 1) \cdot ( 3+ 2 + 1) + 2 + 2 = 6n - 2\) (also \(\O(n)\)).
+\end{itemize}
+\begin{tikzpicture}[remember picture,overlay]
+    \onslide<17->{\node[left=-4mm,xshift=5mm,scale=.8,yshift=\btdmfootheight] at(current page.-3) {\copy\pinguexplainbox};}% copy for animations
+\end{tikzpicture}
+\end{frame}}
+
+\iffull
+\AddonFrame
+\begin{frame}[c]{Aufwandsanalyse}
+    \columns[c,onlytextwidth]
+    \column{.4\linewidth}
+    \onslide<2->{\scriptsize\setbeamercolor{itemize/enumerate subbody}{fg=black}%
+    \vspace*{-\baselineskip}\begin{enumerate}[(1)]
+        \itemsep1.5pt
+        \item\label{algB:a} Setze $\DeltaMax$ auf $-\infty$.
+        \item\label{algB:b} Setze $i$ auf $1$.
+        \item\label{algB:c} Solange $(i < n)$, wiederhole:\smallskip\\
+                \quad Setze \(test\) auf \(\sfrac{(p_{i + 1} - p_i)}{p_i}\).\smallskip\\
+                \quad Wenn \((test > \DeltaMax)\):~~Setze \(\DeltaMax\) auf \(test\).\smallskip\\
+                \quad Erhöhe \(i\) um \(1\).
+        \item\label{algB:d} Ergebnis ist $100 \cdot \DeltaMax$.
+    \end{enumerate}}
+    \column{.6\linewidth}
+    \raggedleft\footnotesize\quad\onslide<3->{\begin{tabular}{lcc}
+        \toprule
+        \onslide<3->{Anweisung} & \onslide<3->{Aufwand} & \onslide<3->{Wie oft?} \\
+        \midrule
+        \onslide<4->{Setze $\DeltaMax$ auf $-\infty$} & \onslide<4->{1\,E} & \onslide<4->{\(1\)} \\
+        \onslide<4->{Setze $i$ auf $1$} & \onslide<4->{1\,E} & \onslide<4->{\(1\)} \\
+        \onslide<5->{Solange $(i < n)$, wiederhole} & \onslide<5->{1\,E} & \onslide<5->{\(n\)} \\
+        \onslide<6->{~~~Setze \(test\) auf \(\sfrac{(p_{i + 1} - p_i)}{p_i}\)} & \onslide<6->{3\,E} & \onslide<6->{\(n - 1\)} \\
+        \onslide<7->{~~~Wenn \((test > \DeltaMax)\)} & \onslide<7->{1\,E} & \onslide<7->{\(n - 1\)} \\
+        \onslide<7->{~~~~~~Setze \(\DeltaMax\) auf \(test\)} & \onslide<7->{1\,E} & \onslide<7->{max. \(n - 1\)} \\
+        \onslide<8->{Ergebnis ist $100 \cdot \DeltaMax$} & \onslide<8->{2\,E} & \onslide<8->{\(1\)} \\
+        \bottomrule
+    \end{tabular}}
+    \endcolumns
 \end{frame}
+\fi
 
 \begin{frame}[fragile]{Eine Alternative}
     \hypertarget<1>{alternate-approach-u1t3}{}\begin{itemize}
-        \item Wir können erst alle Preisanstiege berechnen und dann darin das Maximum suchen:\lstcolorlet{keywordA}{darkgray}\lstcolorlet{keywordB}{darkgray}\lstfs{10}%
-\begin{plainvoid}[morekeywords={given,let,be,when,is,then,and,stop,make,list,of,size,indexable,by,for,each,from,to,inclusive,assert},morekeywords={[2]{output,days,prices}},morestring={[b]"},morecomment={[s]{[}{]}},mathescape]
-given days $1, \ldots, n$ and prices $p_1, \ldots, p_n$ indexable by $p_i$
-when $n < 2$ then output "Ein Preisanstieg braucht mind. 2 Tage" and stop
+        \item<2-> Wir können erst alle Preisanstiege berechnen und dann darin das Maximum suchen:\smallskip\lstcolorlet{keywordA}{darkgray}\lstcolorlet{keywordB}{darkgray}\lstfs{10}%
+\begin{plainvoid}[morekeywords={given,let,be,when,is,in,then,and,stop,make,list,of,size,indexable,by,for,each,from,to,inclusive,steps,output},morekeywords={[2]{days,prices}},morestring={[b]"},morecomment={[s]{[}{]}},mathescape,lineskip=1pt]
+!*\onslide<3->*!given days $1, \ldots, n$ and prices $(p_1, \ldots, p_n)$ indexable by $p_i$
+!*\onslide<4->*!when $n < 2$ then !*\onslide<5->*!output "$\tikzmarknode{preisanstieg}{\text{\solGet{literals}{Ein Preisanstieg braucht mind. 2 Tage}}}$" and stop
 
-make list $L = (l_1, \ldots, l_{n-1})$ of size $n - 1$ indexable by $l_i$
-for each $d$ from $1$ to inclusive $n-1$
-    $\bullet$ let $l_d$ be $(p_{d + 1} - p_d)/p_d \cdot 100$
 
-[Jetzt hält $\color{sol@colors@lst@comments}l_i$ den Preisanstieg an Tag $\color{sol@colors@lst@comments}i$ und hat $\color{sol@colors@lst@comments}n - 1 \geq 1$ Elemente]
-let $max\_diff$ be $l_1$
-for each $diff$ from $1$ to inclusive $n-1$
-    when $diff > max\_diff$ then let $max\_diff$ be $diff$
+!*\onslide<6->*!make list $L = (l_1, \ldots, l_{n-1})$ of size $n - 1$ indexable by $\tikzmarknode{list-start}{l_i}$
+!*\onslide<7->*!for each $d$ from $1$ to inclusive $n-1$ in steps of $1$
+!*\onslide<8->*!    $\bullet$ let $l_d$ be $(p_{d + 1} - p_d)/p_d \cdot \tikzmarknode{list-end}{100}$
 
-output "Der Maximale Preisanstieg ist $diff$"
+!*\onslide<9->*![Jetzt hält $\color{sol@colors@lst@comments}l_i$ den Preisanstieg an Tag $\color{sol@colors@lst@comments}i$ und hat $\color{sol@colors@lst@comments}n - 1 \geq 1$ Elemente]
+!*\onslide<10->*!let $max\_diff$ be $\tikzmarknode{second-start}{l_1}$
+!*\onslide<11->*!for each $diff$ from $2$ to inclusive $n-1$ in steps of $\tikzmarknode{second-longest}{1}$
+!*\onslide<12->*!    $\bullet$ when $diff > max\_diff$ then let $max\_diff$ be $\tikzmarknode{second-end}{diff}$
+
+!*\onslide<13->*!output "Der Maximale Preisanstieg ist $diff$"
 \end{plainvoid}
-    \item TODO: HIER MARKER MIT TIKZMARK DIE ANGEBEN: das is optional für XXX und usw... auf Folie 24 ansprechen warum die Dvison hier als 3 gerechnet wird und wieder auf komplexität zu sprechen zu kommen...
     \end{itemize}
+\begin{tikzpicture}[overlay,remember picture,K/.style={sol@colors@lst@comments,font=\itshape\sffamily\footnotesize,align=center}]
+    \onslide<14->{\draw[Kite-,sol@colors@lst@comments] ([yshift=-.5mm]preisanstieg.250) to[out=350,in=170] ++(2.5,-.1) node[below left,xshift=2cm,K] {Optional: Robust gegenüber zu wenig Tagen.};}
+    \onslide<15->{\draw[decoration=brace,decorate,sol@colors@lst@comments] ([yshift=.5mm,xshift=4mm]list-start.north east-|second-longest.east) to[edge node={node[right=1.5mm, K, align=left] {Berechne den Preisanstieg\\an Tag \(d\) für alle Tage.}}] ([yshift=-.5mm,xshift=4mm]list-end.south east-|second-longest.east);}
+
+    \onslide<16->{\draw[decoration=brace,decorate,sol@colors@lst@comments] ([yshift=.5mm,xshift=4mm]second-start.north east-|second-longest.east) to[edge node={node[right=1.5mm, K, align=left] {Normale Suche nach\\dem Maximum.}}] ([yshift=-.5mm,xshift=4mm]second-end.south east-|second-longest.east);}
+\end{tikzpicture}
 \end{frame}
 
 

@@ -175,12 +175,11 @@
 
 % [node] | pingu | text
 \newcommand\MakeThePinguExplainIt[3][]{%
-\setbox\pinguexplainbox=\hbox{%
-\tikzpicture
+\setbox\pinguexplainbox=\hbox{\tikzpicture\pinguexplain{#1}{#2}{#3}\endtikzpicture}}
+\def\pinguexplain#1#2#3{
   \pingu[body=pingu@black!70!pingu@main,glasses,right wing wave,staff right,left wing grab,cup=pingu@green!80!pingu@black,right item angle=-10,right eye wink,staff right length=23mm,cap=pingu@bronze!50!pingu@black!70!pingu@main, cap extra height=1.125mm,name=pingu,#2]
 
-  \node[above left=-2.66mm,fill=pingu-board-back,draw=pingu@bronze!50!pingu@black!70!pingu@main!80!btdm@text,line width=.6mm,rounded corners=2pt,text width=5.25cm,minimum height=1.5cm,text=btdm@text,inner sep=8pt,align=justify,#1] at (pingu-staff-right-top) {\LstBoardStyle\topsep=0pt\ignorespaces#3};
-\endtikzpicture}}
+  \node[above left=-2.66mm,fill=pingu-board-back,draw=pingu@bronze!50!pingu@black!70!pingu@main!80!btdm@text,line width=.6mm,rounded corners=2pt,text width=5.25cm,minimum height=1.5cm,text=btdm@text,inner sep=8pt,align=justify,#1] at (pingu-staff-right-top) {\LstBoardStyle\topsep=0pt\ignorespaces#3};}
 
 \newcommand<>\task[1]{\begin{uncoverenv}#2{\par\begingroup\footnotesize{\color{gray}\itshape#1}\par\endgroup}\end{uncoverenv}}
 
