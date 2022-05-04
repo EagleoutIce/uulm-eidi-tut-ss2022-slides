@@ -449,7 +449,7 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
             \quad Erhöhe \(i\) um \(1\).
     \item Ergebnis ist $100 \cdot \DeltaMax$.
 \end{enumerate}}
-}{\onslide<2->{Wir zeigen die partielle Korrektheit und nehmen die Termination hier als gegeben.}}\medskip\par\small
+}{\onslide<2->{Wir zeigen die partielle Korrektheit (\say{Verifikation}) und nehmen die Termination hier als gegeben.}}\medskip\par\small
     \onslide<3->{Für ein beliebiges aber festes \(n \in \N\) mit \(n \geq 2\) und der Eingabe \(p_1, \ldots, p_n\)} \onslide<4->{zeigen wir per vollständiger Induktion über \(i\),} \onslide<5->{dass in jedem Schritte gelte: \(\DeltaMax \geq \max_{1 \leq j \leq i}(\sfrac{(p_{j + 1} - p_j)}{p_j})\).}\footnotesize
     \begin{description}[xIA:]% Inudktionshypothese als Voraussetzung und Behauptung
         \itemsep0pt
