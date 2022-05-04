@@ -582,10 +582,25 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
 
 \SetNextSectionText{Algorithmen, Datentypen, Boolesche Ausdrücke\\Abgabe: \DTMDate{2022-05-09}}
 \section{Aussicht: Übungsblatt 2}
-\begin{frame}
-
+{\def\ms#1{{\color{darkgray}\mathbf{#1}}}
+\def\to{~\raisebox{1pt}{\;\tikz\draw[gray!80!pingu@black,-{Kite[scale=1.05]},line cap=round,line width=.925pt] (0,0) -- (6mm,0);}~}%
+\begin{frame}{Allgemeines}
+    \begin{itemize}
+        \itemsep10pt
+        \item<2-> Der \textit{Algorithmenentwurf} ist nur ein Schritt der Algorithmenkonstruktion
+        \item<3-> Annahmen festhalten
+        \item<4-> Auch die Präzedenzregeln sind sicherlich hilfreich. Die wichtigsten:
+        \begin{alignat*}{4}
+            \onslide<5->{\ms{a\text{++},~~a\text{-\,-}}}&\onslide<6->{\to~\ms{!a,~~ -a,~~ \text{++}a,~~\text{-\,-}a}}&&\onslide<7->{\pause\to~\ms{a~*~b,~~a~/~b,~~a~\%~b}} \\
+            &\onslide<8->{\to~\ms{a+b,~~a-b}}&& \onslide<9->{\to~\ms{a==b,~~a<b,~~\ldots}}\\
+            & \onslide<10->{\to~\ms{a~\mbox{\textasciicircum}~b}}&&\onslide<11->{\to~\ms{a~\&\&~b}}\\
+            & \onslide<12->{\to~\ms{a~||~b}}
+            \onslide<1->
+         \end{alignat*}
+        % TODO: nächstes Blatt implizite Typkonvetierung
+    \end{itemize}
 \end{frame}
-
+}
 \SetNextSectionText{TODO: quote}
 \section{Abschließendes}
 {\SummaryFrame
