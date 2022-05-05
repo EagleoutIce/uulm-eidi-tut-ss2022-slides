@@ -1,8 +1,25 @@
 \InputIfFileExists{../data/global.src}\relax\relax
 
 \iffull
-\titlesuffix{Jeah}
-\title[Erstes Tutorium -- Übungsblatt 2]{\texorpdfstring{Diese Worte \tikz[baseline=(x.base)]{\node[font=\usebeamerfont{title},inner xsep=0pt] (x) {getauscht}} ich habe}{Diese Worte getauscht ich habe}}
+\setbox\pinguA=\hbox{\tikz\pingu[cloak,lightsaber right=pingu@green,lightsaber right length=1.35cm,shirt=pingu@bronze!70!pingu@black,small,eyes wink,cane left];} % TODO: ,cane left length=3mm
+\titlesuffix{\tikzpicture[overlay,remember picture]
+    \node[above left,yshift=\btdmfootheight] at(current page.south east) {\copy\pinguA};
+\endtikzpicture}
+\def\packtitlenode#1#2{\node[font=\usebeamerfont{title},inner xsep=0pt,opacity=#1,outer ysep=2pt] (#2) {getauscht};}
+\title[Erstes Tutorium -- Übungsblatt 2]{\texorpdfstring{Diese Worte \tikz[baseline=(k.base)]{%
+\packtitlenode0k
+\scope[yshift=4pt,xshift=-3.75pt]\packtitlenode0x
+\clip (x.south west)--(x.300)--(x.120)-| cycle;
+\packtitlenode1x
+\endscope
+\scope[yshift=-4pt,xshift=3.75pt]
+\packtitlenode0y
+\clip (y.south east)--(y.300)--(y.120)-| cycle;
+\packtitlenode1y
+\endscope
+% cutline
+\filldraw[paletteA,rounded corners=1pt] (y.300)--++(-3.75pt,0)--(x.120)--++(3.75pt,0)--cycle;
+} ich habe}{Diese Worte getauscht ich habe}}
 \subtitle{Tutorium Zwei}
 \date{KW 19}
 \addbibresource{references.bib}
