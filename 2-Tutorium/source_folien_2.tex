@@ -36,11 +36,45 @@
 \TopicOverview{2}
 \fi
 
+\iffull{\SummaryFrame
+\def\sub#1#2{\node[font=\tiny\sffamily\slshape,align=center,gray,below=-3mm] at(#1.south) {\strut#2\strut};}
+\begin{frame}[fragile,c]{Kurzwiederholung}
+    \begin{itemize}[<+(1)->]
+        \itemsep14pt
+        \item Algorithmenkonstruktion\smallskip\par \centerline{%
+            \begin{tikzpicture}
+                \onslide<+(1)->\node (0) at(0,0) {\strut Spezifikation};
+                \sub0{Begriffe mit\\Problemrelevanz}
+                \foreach[count=\i,remember =\i as \li (initially 0)] \a/\t in {Abstraktion/{Gegeben \& Gesucht},{\sbseries Entwurf}/{Algorithmus},Verifikation/{Termination \&\\partielle Korrektheit},Aufwandsanalyse/{Laufzeitverhalten}} {
+                    \onslide<+(1)->\node[right=.5mm] (k\i) at(\li.east) {\strut\faAngleRight};
+                    \node[right=.5mm] (\i) at (k\i.east) {\strut\a};
+                    \sub\i{\t}
+                }
+            \end{tikzpicture}}\vspace*{-\medskipamount}
+        \item Kerneigenschaften eines Algorithmus: \begin{itemize}
+            \item Von einem Prozessor \info{Mensch,~\ldots} in endlich vielen Schritten Ausführ- und Reproduzierbar
+            \item Eine endliche Beschreibung in Elementaroperationen.
+        \end{itemize}
+        \item Abstrakte Variablenoperationen:
+\begin{plainjava}
+!*\onslide<12->*!long x; !*\tikzmarknode{@1}{\phantom{Ig}}*!
+!*\onslide<12->*!x = 21; !*\tikzmarknode{@2}{\phantom{Ig}}*!
+!*\onslide<12->*!x = 42; !*\tikzmarknode{@3}{\phantom{Ig}}*!
+\end{plainjava}
+    \end{itemize}
+\begin{tikzpicture}[overlay,remember picture,T/.style={sol@colors@lst@comments,font=\itshape\sffamily\footnotesize}]
+\onslide<13->{\node[right,T] at(@1.east) {\textbf{Deklaration} --- Reservieren von Namen mit Typ long};}
+\onslide<14->{\node[right,T] at(@2.east) {\textbf{Initialisierung} --- Erste Wertzuweisung, macht die Variable verwendbar};}
+\onslide<15->{\node[right,T] at(@3.east) {\textbf{Wertzuweisung} --- Überschreiben/Ändern des vorherigen Wertes};}
+\end{tikzpicture}
+\end{frame}
+}\fi
 
-% \SetNextSectionText{Practice yourself, for heaven's sake in little things, and then proceed to greater.\\--- Epictetus~\cite[adapted, chp.~16]{epictetusdiscourses}}
+
+\SetNextSectionText{TODO}
 \section{Präsenzaufgabe}
 \begin{frame}[fragile]{Präsenzaufgabe}
-\begin{aufgabe}{It's true, isn't it?}
+\begin{aufgabe}{TODO}
 \end{aufgabe}
 \end{frame}
 
@@ -62,7 +96,8 @@
 }
 
 \outro{\vskip6mm\centering\begin{tikzpicture}[scale=2.5]
-    \only<2->{\pingu[monocle left,right eye wink,left eye vertical,laptop right,cane left,tie,body type=legacy,headphones=pingu@green!80!pingu@black]}
+    % \only<2->{\pingu[monocle left,right eye wink,left eye vertical,laptop right,cane left,tie,body type=legacy,headphones=pingu@green!80!pingu@black]}
+    % TODO
 \end{tikzpicture}}
 
 
