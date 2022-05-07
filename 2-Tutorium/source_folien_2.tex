@@ -70,49 +70,65 @@
 \end{frame}
 }\fi
 
-\SetNextSectionText{\say{Machs Farbig}\\--- Isabell Bannweg}
+\SetNextSectionText{\say{Machs farbig}\\--- Isabell Bannweg}
 \def\HStrut{\vphantom{\{\}}}
 \section{Exkurs: Parameter}
 \begin{frame}[fragile]{M-Array me und andere Zukunftsträume}
     \begin{itemize}[<+(1)->]
-        \itemsep8pt
+        \itemsep9pt
         \item Arrays werden später genauer behandelt.
         \item Arrays sind Listen fester Größe die Elemente des gleichen Datentyps beinhalten.
         \item Wir notieren sie mit \T{[]}:
-\begin{plainjava}[lineskip=1.25pt]
-!*\onslide<5->*!int!*\tikzmarknode{@}{\solGet{basicstyle}{\HStrut[]}}*! arr = {42, !*\tikzmarknode{@2}{\solGet{basicstyle}{\solGet{numbers}{\HStrut-7}}}*!,  !*\tikzmarknode{@4}{\solGet{basicstyle}{\solGet{numbers}{\HStrut13}}}*!};
+\begin{plainjava}[lineskip=2pt]
+!*\onslide<5->*!int!*\tikzmarknode{@}{\sbasic{\HStrut[]}}*! arr = {!*\tikzmarknode{@0}{\snum{\HStrut42}}*!, !*\tikzmarknode{@2}{\snum{\HStrut-7}}*!,  !*\tikzmarknode{@4}{\snum{\HStrut13}}*!};
 
-!*\onslide<7->*!System.out.println(!*\tikzmarknode{@3}{\solGet{basicstyle}{arr[\solGet{numbers}{\HStrut1}]}}*!);!*\onslide<9->*! // :yields: -7
+!*\onslide<7->*!System.out.println(!*\tikzmarknode{@3}{\sbasic{arr[\snum{\HStrut1}]}}*!);!*\onslide<9->*! // :yields: -7
 
-!*\onslide<10->*!System.out.println(!*\tikzmarknode{@5}{\solGet{basicstyle}{arr[arr.length - \solGet{numbers}{\HStrut1}]}}*!); !*\onslide<12->*!// :yields: 13
+!*\onslide<10->*!System.out.println(!*\tikzmarknode{@5}{\sbasic{\HStrut arr.length}}*!);!*\onslide<12->*! // :yields: 3
+
+!*\onslide<13->*!System.out.println(!*\tikzmarknode{@6}{\sbasic{arr[arr.length - \snum{\HStrut1}]}}*!); !*\onslide<14->*!// :yields: 13
 \end{plainjava}
     \end{itemize}
 \begin{tikzpicture}[overlay,remember picture,codeouthl]
     \def\hlhs{0mm}
     \onslide<6->{
         \hlcode[-.35pt]{@}{array}
-        \draw[Kite-] (@.south) to[out=290,in=180] ++(1,-.35) node[right] {\small\itshape Ein Array an Integern.};
+        \draw[Kite-] ([yshift=-.2mm]@.south) to[out=290,in=180] ++(1,-.35) node[right] {\small\itshape Ein Array an Integern};
     }
     \onslide<8->{
         \def\hlopa{.6}
         \def\hlcolor{pingu@yellow}\hlcode[-.35pt]{@2}{-7}
         \hlcode[-.35pt]{@3}{1}
-        \node at(@2) {\solGet{basicstyle}{\solGet{numbers}{\HStrut-7}}};
-        \node at(@3) {\solGet{basicstyle}{\HStrut arr[\solGet{numbers}{1}]}};
+        \node at(@2) {\snum{\HStrut-7}};
+        \node at(@3) {\sbasic{\HStrut arr[\snum{1}]}};
     }
-    \onslide<9->{\draw[Kite-] (@3.330) to[out=240,in=0] ++(-1,-.25) node[left] {Beginnt bei \(0\)};}
-    \onslide<11->{
+    \onslide<9->{\draw[Kite-] ([yshift=-.2mm]@3.330) to[out=240,in=0] ++(-1,-.25) node[left] {Beginnt bei \(0\)};}
+    \onslide<13->{
         \def\hlopa{.6}
         \def\hlcolor{pingu@green}\hlcode[-.35pt]{@4}{13}
-        \hlcode[-.35pt]{@5}{1}
-        \node at(@4) {\solGet{basicstyle}{\solGet{numbers}{\HStrut13}}};
-        \node at(@5) {\solGet{basicstyle}{\HStrut arr[arr.length - \solGet{numbers}{1}]}};
+        \hlcode[-.35pt]{@6}{1}
+        \node at(@4) {\snum{\HStrut13}};
+        \node at(@6) {\sbasic{\HStrut arr[arr.length - \snum{1}]}};
     }
-    \onslide<12->{\draw[Kite-] (@5.280) to[out=240,in=0] ++(-1,-.3) node[left] {Liefert die Array-Größe (3)};}
+    \onslide<11->{
+        \def\hlopa{.6}\def\hlcolor{pingu@red}
+        \hlcode[-.35pt]{@5}{1}
+        \node at(@5) {\sbasic{\HStrut arr.length}};
+        \node[above=-1.25mm,opacity=.6,pingu@red] at(@0.north) {\textbullet};
+        \node[above=-1.25mm,opacity=.6,pingu@red] at(@2.north) {\textbullet};
+        \node[above=-1.25mm,opacity=.6,pingu@red] at(@4.north) {\textbullet};
+    }
+    \onslide<12->{\draw[Kite-] ([yshift=-.2mm]@5.335) to[out=240,in=0] ++(-1,-.3) node[left] {Liefert die Array-Größe};}
 \end{tikzpicture}
 \end{frame}
 
-\begin{frame}{Die Sache mit dem \T{String[] args}}
+\begin{frame}[fragile]{Die Sache mit dem \T{\bfseries String[] args}}
+% I am not using \SetupLstHl because i want the fade out... of course i do... :c
+\begin{plainjava}
+|ihl|public static void main(|ihl|String[] args|ihl|) {|ihl|
+
+|ihl|}|ihl|
+\end{plainjava}
  % TODO: arrays,
  % TODO: Kommandozeilenparameter
  % TODO: AAAAAAAAAAAAAH

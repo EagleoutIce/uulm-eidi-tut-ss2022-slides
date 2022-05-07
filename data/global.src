@@ -242,3 +242,6 @@
 \def\hlcolor{paletteA}
 \def\hlopa{0.2}\def\hlhs{.4mm}
 \newcommand\hlcode[3][1.9pt]{\fill[\hlcolor,opacity=\hlopa,rounded corners=1pt] ([shift={(-\hlhs,#1)}]#2.south west) rectangle ([shift={(\hlhs,#1)}]#2.north east); \coordinate (#3) at (#2.east);}
+
+\def\sbasic#1{\solGet{basicstyle}{#1}}
+\def\snum#1{\solGet{basicstyle}{\solGet{numbers}{#1}}}
