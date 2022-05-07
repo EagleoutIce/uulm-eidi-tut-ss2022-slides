@@ -43,36 +43,36 @@
         \itemsep14pt
         \item Algorithmenkonstruktion\smallskip\par \centerline{%
             \begin{tikzpicture}
-                \onslide<+(1)->\node (0) at(0,0) {\strut Spezifikation};
-                \sub0{Begriffe mit\\Problemrelevanz}
-                \foreach[count=\i,remember =\i as \li (initially 0)] \a/\t in {Abstraktion/{Gegeben \& Gesucht},{\sbseries Entwurf}/{Algorithmus},Verifikation/{Termination \&\\partielle Korrektheit},Aufwandsanalyse/{Laufzeitverhalten}} {
-                    \onslide<+(1)->\node[right=.5mm] (k\i) at(\li.east) {\strut\faAngleRight};
+                \onslide<+(1)->{\node (0) at(0,0) {\strut Spezifikation};
+                \sub0{Begriffe mit\\Problemrelevanz}}
+                \foreach[count=\i,remember =\i as \li (initially 0)] \a/\t in {Abstraktion/{Gegeben \& Gesucht},{\makebox[14mm]{\only<8->{\sbseries}Entwurf}}/{Algorithmus},Verifikation/{Termination \&\\partielle Korrektheit},Aufwandsanalyse/{Laufzeitverhalten}} {
+                    \onslide<+(1)->{\node[right=.5mm] (k\i) at(\li.east) {\strut\faAngleRight};
                     \node[right=.5mm] (\i) at (k\i.east) {\strut\a};
-                    \sub\i{\t}
+                    \sub\i{\t}}
                 }
             \end{tikzpicture}}\vspace*{-\medskipamount}
-        \item Kerneigenschaften eines Algorithmus: \begin{itemize}
-            \item Von einem Prozessor \info{Mensch,~\ldots} in endlich vielen Schritten Ausführ- und Reproduzierbar
-            \item Eine endliche Beschreibung in Elementaroperationen.
+        \item<9-> Kerneigenschaften eines Algorithmus: \begin{itemize}
+            \item<10-> Von einem Prozessor \info{Mensch,~\ldots} in endlich vielen Schritten Ausführ- und Reproduzierbar
+            \item<11-> Eine endliche Beschreibung in Elementaroperationen.
         \end{itemize}
-        \item Abstrakte Variablenoperationen:
+        \item<12-> Abstrakte Variablenoperationen:
 \begin{plainjava}
-!*\onslide<12->*!long x; !*\tikzmarknode{@1}{\phantom{Ig}}*!
-!*\onslide<12->*!x = 21; !*\tikzmarknode{@2}{\phantom{Ig}}*!
-!*\onslide<12->*!x = 42; !*\tikzmarknode{@3}{\phantom{Ig}}*!
+!*\onslide<13->*!long x; !*\tikzmarknode{@1}{\phantom{Ig}}*!
+!*\onslide<13->*!x = 21; !*\tikzmarknode{@2}{\phantom{Ig}}*!
+!*\onslide<13->*!x = 42; !*\tikzmarknode{@3}{\phantom{Ig}}*!
 \end{plainjava}
     \end{itemize}
 \begin{tikzpicture}[overlay,remember picture,T/.style={sol@colors@lst@comments,font=\itshape\sffamily\footnotesize}]
-\onslide<13->{\node[right,T] at(@1.east) {\textbf{Deklaration} --- Reservieren von Namen mit Typ long};}
-\onslide<14->{\node[right,T] at(@2.east) {\textbf{Initialisierung} --- Erste Wertzuweisung, macht die Variable verwendbar};}
-\onslide<15->{\node[right,T] at(@3.east) {\textbf{Wertzuweisung} --- Überschreiben/Ändern des vorherigen Wertes};}
+\onslide<14->{\node[right,T] at(@1.east) {\textbf{Deklaration} --- Reservieren von Namen mit Typ long};}
+\onslide<15->{\node[right,T] at(@2.east) {\textbf{Initialisierung} --- Erste Wertzuweisung, macht die Variable verwendbar};}
+\onslide<16->{\node[right,T] at(@3.east) {\textbf{Wertzuweisung} --- Überschreiben/Ändern des vorherigen Wertes};}
 \end{tikzpicture}
+\onslide<1->
 \end{frame}
 }\fi
 
 \SetNextSectionText{\say{Machs farbig}\\--- Isabell Bannweg}
-\def\HStrut{\vphantom{\{\}}}
-\section{Exkurs: Parameter}
+\section{Exkurs: Kommandozeilenparameter}
 \begin{frame}[fragile]{M-Array me und andere Zukunftsträume}
     \begin{itemize}[<+(1)->]
         \itemsep9pt
@@ -86,7 +86,8 @@
 
 !*\onslide<10->*!System.out.println(!*\tikzmarknode{@5}{\sbasic{\HStrut arr.length}}*!);!*\onslide<12->*! // :yields: 3
 
-!*\onslide<13->*!System.out.println(!*\tikzmarknode{@6}{\sbasic{arr[arr.length - \snum{\HStrut1}]}}*!); !*\onslide<14->*!// :yields: 13
+!*\onslide<13->*!System.out.println(!*\tikzmarknode{@6}{\sbasic{arr[arr.length - \snum{\HStrut1}]}}*!); !*\onslide<15->*!// :yields: 13
+!*\onslide<1->*!
 \end{plainjava}
     \end{itemize}
 \begin{tikzpicture}[overlay,remember picture,codeouthl]
@@ -103,7 +104,7 @@
         \node at(@3) {\sbasic{\HStrut arr[\snum{1}]}};
     }
     \onslide<9->{\draw[Kite-] ([yshift=-.2mm]@3.330) to[out=240,in=0] ++(-1,-.25) node[left] {Beginnt bei \(0\)};}
-    \onslide<13->{
+    \onslide<14->{
         \def\hlopa{.6}
         \def\hlcolor{pingu@green}\hlcode[-.35pt]{@4}{13}
         \hlcode[-.35pt]{@6}{1}
@@ -124,14 +125,84 @@
 
 \begin{frame}[fragile]{Die Sache mit dem \T{\bfseries String[] args}}
 % I am not using \SetupLstHl because i want the fade out... of course i do... :c
-\begin{plainjava}
-|ihl|public static void main(|ihl|String[] args|ihl|) {|ihl|
-
-|ihl|}|ihl|
+\begin{uncoverenv}<2->
+\begin{plainjava}[lineskip=4pt]
+!*\only<2|handout:0>{\sbasic{\skA{public class} Example \{}}\only<3->{\sbasic{\color{codeouthl}public class Example \{}}*!
+    !*\only<2|handout:0>{\sbasic{\skA{public} \skB{static void} main(}}\only<3->{\sbasic{\color{codeouthl}public static void main(}}*!String[] args!*\only<2|handout:0>{\sbasic{) \{}}\only<3->{\sbasic{\color{codeouthl}) \{}}*!
+        !*\onslide<6->*!System.out.println(args.length);!*\onslide<1->*!
+    !*\only<2|handout:0>{\sbasic{\}}}\only<3->{\sbasic{\color{codeouthl}\}}}*!
+!*\only<2|handout:0>{\sbasic{\}}}\only<3->{\sbasic{\color{codeouthl}\}}}*!
 \end{plainjava}
- % TODO: arrays,
- % TODO: Kommandozeilenparameter
- % TODO: AAAAAAAAAAAAAH
+\end{uncoverenv}
+\begin{itemize}[<+(1)->]
+    \itemsep6pt
+    \item<4-> Hier haben wir ein Array von Strings.
+    \item<5-> Dieses wird von der Java Virtual Machine gefüllt.
+    \item<7-> Beim Programmstart mit \cbash{java Example}, können wir Argumente übergeben.
+\end{itemize}
+\end{frame}
+
+\iffull
+\MakeThePinguExplainIt[text width=3.25cm]{cap=!hide,eye patch right,eye patch left,headband=paletteA,bill=flat,lollipop left,right item angle=-30,cup=!hide,glasses=!hide,body type=legacy}{Fürs erste werden wir es dabei belassen.}
+\begin{frame}[fragile,c]{Ein wunderbares Beispiel}
+\SetupLstHl
+\begin{plainjava}[lineskip=4.5pt]
+!*\onslide<2->*!|ihl|public class Example {|ihl|
+!*\onslide<2->*!    |ihl|public static void main(|ihl|String[] !*\tikzmarknode{args}{\sbasic{\HStrut args}}*!|ihl|) {|ihl|
+
+!*\onslide<3->*!        for(int !*\tikzmarknode{i}{\sbasic{\HStrut i}}*! = 0; !*\tikzmarknode{i4}{\sbasic{\HStrut i}}*! < !*\tikzmarknode{args-length}{\sbasic{\HStrut args.length}}*!; !*\tikzmarknode{i2}{\sbasic{\HStrut i}}*!++) {
+!*\onslide<4->*!            System.out.println(!*\tikzmarknode{args-a}{\sbasic{\HStrut args[}\kern-1pt}\kern1pt\tikzmarknode{i3}{\sbasic{\HStrut i}}\kern1pt\tikzmarknode{args-b}{\kern-1pt\sbasic{\HStrut ]}}*!);
+!*\onslide<3->*!        }
+
+!*\onslide<2->*!    |ihl|}|ihl|
+!*\onslide<2->*!|ihl|}|ihl|
+\end{plainjava}
+\begin{tikzpicture}[overlay,remember picture,T/.style={sol@colors@lst@comments,font=\itshape\sffamily\footnotesize}]
+    \onslide<5->{\node[below left,xshift=-5mm,yshift=-1.65cm,outer sep=0pt, inner sep=0pt] (@) at(current page.north east) {\bbash{Hermeline mögen Mäuse}};
+    \node[left=0pt,outer sep=0pt, inner sep=0pt] (@2) at(@.west) {\bbash{java Example}\T{~}\null};}
+    \def\hlhs{.1mm}
+    \onslide<6->{
+        \draw[decoration={brace,aspect=.85},decorate] (@.south east) to coordinate[pos=.85] (@3) (@.south west);
+        \draw[-Kite] ([yshift=-4pt]@3.south) to[out=220,in=40] ([yshift=3pt]args.north);
+    }
+    \onslide<7->{
+        \def\hlopa{.5}
+        \def\hlcolor{pingu@blue}\hlcode[-.35pt]{args}{@args}
+        \node at(args) {\sbasic{\HStrut args}};
+        \node[T,below right] at(args.south) {args = \{\T{\dq}Hermeline\T{\dq}, \T{\dq}mögen\T{\dq}, \T{\dq}Mäuse\T{\dq}\}};
+    }
+    \onslide<8->{
+        \def\hlopa{.5}
+        \def\hlcolor{pingu@blue}\hlcode[-.35pt]{args-length}{@args}
+        \node at(args-length) {\sbasic{\HStrut args.length}};
+        \node[above,pingu@blue] at (args-length.north) {\sbseries\itshape 3};
+    }
+    \onslide<10->{{
+        \def\hlopa{.5}
+        \def\hlcolor{pingu@blue}
+        \hlcode[-.35pt]{args-a}{@args}\node at(args-a) {\sbasic{\HStrut args[\kern-1pt}};
+        \hlcode[-.35pt]{args-b}{@args}\node at(args-b) {\sbasic{\kern-1pt\HStrut ]}};
+    }}
+    \onslide<9->{
+        \def\hlopa{.275}
+        \def\hlcolor{pingu@yellow}
+        \hlcode[-.35pt]{i}{@i}\node at(i) {\sbasic{\HStrut i}};
+        \hlcode[-.35pt]{i2}{@i}\node at(i2) {\sbasic{\HStrut i}};
+        \hlcode[-.35pt]{i3}{@i}\node at(i3) {\sbasic{\HStrut i}};
+        \hlcode[-.35pt]{i4}{@i}\node at(i4) {\sbasic{\HStrut i}};
+    }
+    \onslide<11->{ \node[below right,yshift=-1mm] (@a) at (i3.south) {\T{Hermeline}}; \draw[very thick,pingu@blue!50!btdm@background,-Kite,rounded corners=2pt] (args-a.south) |- (@a); \node[left=1cm,pingu@yellow] at (@a.west) {\T{\sbseries i\,=\,0}};}
+    \onslide<12->{ \node[below right,yshift=-.635cm] (@b) at (i3.south) {\T{mögen}}; \draw[very thick,pingu@blue!50!btdm@background,-Kite,rounded corners=2pt] (args-a.south) |- (@b); \node[left=1cm,pingu@yellow] at (@b.west) {\T{\sbseries i\,=\,1}}; }
+    \onslide<13->{ \node[below right,yshift=-1.2cm] (@c) at (i3.south) {\T{Mäuse}}; \draw[very thick,pingu@blue!50!btdm@background,-Kite,rounded corners=2pt] (args-a.south) |- (@c); \node[left=1cm,pingu@yellow] at (@c.west) {\T{\sbseries i\,=\,2}};}
+    \onslide<0|handout:1>{\node[left=-2mm,xshift=5mm,scale=.8,yshift=\btdmfootheight] at(current page.-16) {\copy\pinguexplainbox};}% copy for animations
+\end{tikzpicture}
+\end{frame}
+\fi
+
+%     \item<8-> Mit \bbash{java Example Hermeline mögen Mäuse} ist \bjava{args = \{"Hermeline", "mögen", "Mäuse"\}}.
+
+\begin{frame}
+    TODO: Wrapper-klassen für Integer-parseInt und so
 \end{frame}
 
 \SetNextSectionText{Es gibt keine if-Schleifen, sondern nur if-Abfragen!\\--- \href{http://if-schleife.de/}{if-schleife.de}}

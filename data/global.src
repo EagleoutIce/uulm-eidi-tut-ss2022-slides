@@ -245,3 +245,7 @@
 
 \def\sbasic#1{\solGet{basicstyle}{#1}}
 \def\snum#1{\solGet{basicstyle}{\solGet{numbers}{#1}}}
+\def\skA#1{\solGet{basicstyle}{\solGet{keywordA}{#1}}}
+\def\skB#1{\solGet{basicstyle}{\solGet{keywordB}{#1}}}
+\def\skC#1{\solGet{basicstyle}{\solGet{keywordC}{#1}}}
+\def\HStrut{\vphantom{\{\}g}}
