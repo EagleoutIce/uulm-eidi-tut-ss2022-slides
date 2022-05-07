@@ -7,10 +7,10 @@
 \titlesuffix{\tikzpicture[overlay,remember picture]
     \node[above left,yshift=\btdmfootheight-1mm] at(current page.south east) {\copy\pinguA};
 \endtikzpicture}
-\def\packtitlenode#1#2{\node[font=\usebeamerfont{title},inner xsep=0pt,opacity=#1,outer ysep=2pt] (#2) {Diese Worte getauscht ich habe};}
-\title[Erstes Tutorium -- Übungsblatt 2]{\texorpdfstring{\tikz[baseline=(k.base)]{%
+\def\packtitlenode#1#2{\node[font=\usebeamerfont{title},inner xsep=0pt,opacity=#1,outer ysep=2pt] (#2) {getauscht};}
+\title[Erstes Tutorium -- Übungsblatt 2]{Diese Worte \texorpdfstring{\,\setbox0=\hbox{getau\kern5pt\relax scht}\phantom{\copy0}\llap{\tikz[baseline=(k.base)]{%
 \packtitlenode0k
-\def\kA{310}\def\kB{130}\def\kS{5.25pt}
+\def\kA{310}\def\kB{130}\def\kS{-.5\wd0-5pt}
 \scope[xshift=-\kS]\packtitlenode0x
 \clip (x.south west)--(x.\kA)--(x.\kB)-| cycle;
 \packtitlenode1x
@@ -21,8 +21,9 @@
 \packtitlenode1y
 \endscope
 % cutline
-\fill[btdm@border@down,rounded corners=1pt] (y.\kA)--++(-\kS,0)--(x.\kB)--++(\kS,0)--cycle;
-}}{Diese Worte getauscht ich habe}}
+\fill[btdm@border@down,rounded corners=1.5pt] ([yshift=4pt,xshift=1.5pt]y.\kA)--([yshift=-4pt]y.\kB)--++(-3pt,0)--([xshift=-1.5pt,yshift=4pt]y.\kA) -- cycle;
+\fill[btdm@border@down,rounded corners=1.5pt] ([yshift=4pt,xshift=-1.5pt]x.\kA)--([yshift=-4pt,xshift=-1.5pt]x.\kB)--++(3pt,0)--([xshift=1.5pt,yshift=4pt]x.\kA) -- cycle;
+}\kern-.5\wd0}\;~}{getauscht} ich habe}
 \subtitle{Tutorium Zwei}
 \date{KW 19}
 \addbibresource{references.bib}
