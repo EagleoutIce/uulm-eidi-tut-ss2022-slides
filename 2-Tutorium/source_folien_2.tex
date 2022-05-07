@@ -1,25 +1,28 @@
 \InputIfFileExists{../data/global.src}\relax\relax
 
 \iffull
-\setbox\pinguA=\hbox{\tikz\pingu[cloak,lightsaber right=pingu@green,lightsaber right length=1.35cm,shirt=pingu@bronze!70!pingu@black,small,eyes wink,cane left];} % TODO: ,cane left length=3mm
+\definecolor{@joda}{RGB}{204, 186, 157}
+\definecolor{@joda@}{RGB}{78, 68, 66}
+\setbox\pinguA=\hbox{\tikz\pingu[body=pingu@green!52!pingu@black,body front=pingu@green!52!pingu@black!5!pingu@white,cloak=@joda,cloak cap=@joda,lightsaber right=pingu@green,lightsaber right length=1.4cm,shirt=@joda@,shirt no buttons,small,eyes wink,cane left=pingu@bronze!80!pingu@black,cane left length=11mm,cane left raise=1mm,right item angle=-30];}
 \titlesuffix{\tikzpicture[overlay,remember picture]
-    \node[above left,yshift=\btdmfootheight] at(current page.south east) {\copy\pinguA};
+    \node[above left,yshift=\btdmfootheight-1mm] at(current page.south east) {\copy\pinguA};
 \endtikzpicture}
-\def\packtitlenode#1#2{\node[font=\usebeamerfont{title},inner xsep=0pt,opacity=#1,outer ysep=2pt] (#2) {getauscht};}
-\title[Erstes Tutorium -- Übungsblatt 2]{\texorpdfstring{Diese Worte \tikz[baseline=(k.base)]{%
+\def\packtitlenode#1#2{\node[font=\usebeamerfont{title},inner xsep=0pt,opacity=#1,outer ysep=2pt] (#2) {Diese Worte getauscht ich habe};}
+\title[Erstes Tutorium -- Übungsblatt 2]{\texorpdfstring{\tikz[baseline=(k.base)]{%
 \packtitlenode0k
-\scope[yshift=4pt,xshift=-3.75pt]\packtitlenode0x
-\clip (x.south west)--(x.300)--(x.120)-| cycle;
+\def\kA{310}\def\kB{130}\def\kS{5.25pt}
+\scope[xshift=-\kS]\packtitlenode0x
+\clip (x.south west)--(x.\kA)--(x.\kB)-| cycle;
 \packtitlenode1x
 \endscope
-\scope[yshift=-4pt,xshift=3.75pt]
+\scope[xshift=\kS]
 \packtitlenode0y
-\clip (y.south east)--(y.300)--(y.120)-| cycle;
+\clip (y.south east)--(y.\kA)--(y.\kB)-| cycle;
 \packtitlenode1y
 \endscope
 % cutline
-\filldraw[paletteA,rounded corners=1pt] (y.300)--++(-3.75pt,0)--(x.120)--++(3.75pt,0)--cycle;
-} ich habe}{Diese Worte getauscht ich habe}}
+\fill[btdm@border@down,rounded corners=1pt] (y.\kA)--++(-\kS,0)--(x.\kB)--++(\kS,0)--cycle;
+}}{Diese Worte getauscht ich habe}}
 \subtitle{Tutorium Zwei}
 \date{KW 19}
 \addbibresource{references.bib}
