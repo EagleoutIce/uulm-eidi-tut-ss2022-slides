@@ -3,7 +3,7 @@
 
 SLIDES_TEX             := $(shell ls source_*.tex)
 OUTER_DEPENDENCIES     := $(shell ls ../data/*) $(shell ls ../overview/*.pdf)
-DEPENDENCIES           := ${OUTER_DEPENDENCIES} ${SLIDES_TEX} $(shell [ -f *.java ] && ls *.java) $(shell [ -f *.bib ] && ls *.bib)
+DEPENDENCIES           := ${OUTER_DEPENDENCIES} ${SLIDES_TEX} $(shell ls *.java) $(shell ls *.bib)
 # for each 'source_*' we create n pdf versions which will be prepared here
 SLIDES_BASE            := $(basename $(SLIDES_TEX:source_%=%))
 SLIDES_VARIANTS_NOANIM := $(addprefix noanim_, ${SLIDES_BASE})
