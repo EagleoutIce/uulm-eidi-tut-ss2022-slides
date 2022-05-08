@@ -167,19 +167,19 @@
     }
     \onslide<7->{
         \def\hlopa{.5}
-        \def\hlcolor{pingu@blue}\hlcode[-.35pt]{args}{@args}
+        \def\hlcolor{pingu@green}\hlcode[-.35pt]{args}{@args}
         \node at(args) {\sbasic{\HStrut args}};
         \node[T,below right] at(args.south) {args = \{\T{\dq}Hermeline\T{\dq}, \T{\dq}mögen\T{\dq}, \T{\dq}Mäuse\T{\dq}\}};
     }
     \onslide<8->{
         \def\hlopa{.5}
-        \def\hlcolor{pingu@blue}\hlcode[-.35pt]{args-length}{@args}
+        \def\hlcolor{pingu@green}\hlcode[-.35pt]{args-length}{@args}
         \node at(args-length) {\sbasic{\HStrut args.length}};
-        \node[above,pingu@blue] at (args-length.north) {\sbseries\itshape 3};
+        \node[above,pingu@green] at (args-length.north) {\sbseries\itshape 3};
     }
     \onslide<10->{{
         \def\hlopa{.5}
-        \def\hlcolor{pingu@blue}
+        \def\hlcolor{pingu@green}
         \hlcode[-.35pt]{args-a}{@args}\node at(args-a) {\sbasic{\HStrut args[\kern-1pt}};
         \hlcode[-.35pt]{args-b}{@args}\node at(args-b) {\sbasic{\kern-1pt\HStrut ]}};
     }}
@@ -191,9 +191,9 @@
         \hlcode[-.35pt]{i3}{@i}\node at(i3) {\sbasic{\HStrut i}};
         \hlcode[-.35pt]{i4}{@i}\node at(i4) {\sbasic{\HStrut i}};
     }
-    \onslide<11->{ \node[below right,yshift=-1mm] (@a) at (i3.south) {\T{Hermeline}}; \draw[very thick,pingu@blue!50!btdm@background,-Kite,rounded corners=2pt] (args-a.south) |- (@a); \node[left=1cm,pingu@yellow] at (@a.west) {\T{\sbseries i\,=\,0}};}
-    \onslide<12->{ \node[below right,yshift=-.635cm] (@b) at (i3.south) {\T{mögen}}; \draw[very thick,pingu@blue!50!btdm@background,-Kite,rounded corners=2pt] (args-a.south) |- (@b); \node[left=1cm,pingu@yellow] at (@b.west) {\T{\sbseries i\,=\,1}}; }
-    \onslide<13->{ \node[below right,yshift=-1.2cm] (@c) at (i3.south) {\T{Mäuse}}; \draw[very thick,pingu@blue!50!btdm@background,-Kite,rounded corners=2pt] (args-a.south) |- (@c); \node[left=1cm,pingu@yellow] at (@c.west) {\T{\sbseries i\,=\,2}};}
+    \onslide<11->{ \node[below right,yshift=-1mm] (@a) at (i3.south) {\T{Hermeline}}; \draw[very thick,pingu@green!50!btdm@background,-Kite,rounded corners=2pt] (args-a.south) |- (@a); \node[left=1cm,pingu@yellow] at (@a.west) {\T{\sbseries i\,=\,0}};}
+    \onslide<12->{ \node[below right,yshift=-.635cm] (@b) at (i3.south) {\T{mögen}}; \draw[very thick,pingu@green!50!btdm@background,-Kite,rounded corners=2pt] (args-a.south) |- (@b); \node[left=1cm,pingu@yellow] at (@b.west) {\T{\sbseries i\,=\,1}}; }
+    \onslide<13->{ \node[below right,yshift=-1.2cm] (@c) at (i3.south) {\T{Mäuse}}; \draw[very thick,pingu@green!50!btdm@background,-Kite,rounded corners=2pt] (args-a.south) |- (@c); \node[left=1cm,pingu@yellow] at (@c.west) {\T{\sbseries i\,=\,2}};}
     \onslide<0|handout:1>{\node[left=-2mm,xshift=5mm,scale=.8,yshift=\btdmfootheight] at(current page.-16) {\copy\pinguexplainbox};}% copy for animations
 \end{tikzpicture}
 \end{frame}
@@ -201,8 +201,38 @@
 
 %     \item<8-> Mit \bbash{java Example Hermeline mögen Mäuse} ist \bjava{args = \{"Hermeline", "mögen", "Mäuse"\}}.
 
-\begin{frame}
-    TODO: Wrapper-klassen für Integer-parseInt und so
+\iffull
+\begin{frame}[c]{}
+    \strut\bigskip\par\centering\scalebox{.8}{\begin{tikzpicture}
+        \only<2->{\pingu[right wing shock,tie=paletteA,halo,name=pingu-a,left wing wave]
+        \node[ellipse callout,draw,callout absolute pointer={([yshift=2mm,xshift=-4mm]pingu-a-wing-left-tip)},above right=6mm,align=center] at(pingu-a-wing-left-tip) {Zahlen als Parameter\\werden leider auch\\zu \bjava{String}.};}
+
+        \scope[shift={(current bounding box.east)},yshift=-6mm,xshift=1cm]
+            \only<3->{\pingu[eyes hearts,eyes color=paletteC!20!pingu@black,wings raise,halo,name=pingu-b,shirt=pingu@blue!80!pingu@white,second shirt=pingu@purple!70!pingu@white]
+            \node[ellipse callout,draw,callout absolute pointer={([yshift=2mm,xshift=-2mm]pingu-b-wing-left-tip)},above right=6mm,align=center] at(pingu-b-wing-left-tip) {Wir machen\\einen eigenen\\Zahlenkonverter.};}
+        \endscope
+    \end{tikzpicture}}\bigskip
+    \begin{center}
+        \onslide<4->{\textit{Leider} nein.}\quad \onslide<5->{Wir greifen \say{nur} vor\ldots}\qquad \onslide<6->{\scalebox{.8}{\begin{tikzpicture}[align-half-base]
+            \pingu[body type=legacy,eyes sad,wings grab,feet sit]
+        \end{tikzpicture}}}
+    \end{center}
+    % TODO: Wrapper-klassen für Integer-parseInt und so
+\end{frame}
+\fi
+
+\begin{frame}{\T{\sbseries int}? Wie primitiv!}
+    \begin{itemize}
+        \itemsep14pt
+        \item<2-> Für jeden primitiven Datentyp existiert eine \say{Wrapper-Klasse}\onslide<3->{\clap{\smash{\raisebox{-.4\height}{\rotatebox{10}{\textbf{KLASSE??}}}}}}
+        \item<4-> Wie \bjava{System}, welches uns \bjava{out.println} liefert, gibt es \bjava{Integer} für \bjava{int} \begin{itemize}
+            \itemsep4pt
+            \item<5-> \bjava{Integer.parseInt(...)}, \bjava{Double.parseDouble(...)},~\ldots\ konvertieren \bjava{\"42\"} zu \bjava{42}
+            \item<6-> Genauer liefert \bjava{Integer.parseInt(\"42\")} die Zahl {42} zurück
+            \item<7-> Wir gehen hier zunächst nur von gültigen Eingaben (Zahlen) aus
+        \end{itemize}
+        \item<8-> Nun sind wir gewappnet für die Präsenzaufgabe!
+    \end{itemize}
 \end{frame}
 
 \SetNextSectionText{Es gibt keine if-Schleifen, sondern nur if-Abfragen!\\--- \href{http://if-schleife.de/}{if-schleife.de}}
@@ -212,15 +242,80 @@
     \onslide<2->{Legen Sie eine Java Datei namens \T{ErsteSchleife.java} an \info{oder bearbeiten Sie die Aufgabe auf einem Blatt Papier}.} \onslide<3->{Lesen Sie in der main Methode eine \bjava{int} Variable namens \(n\) über die Kommandozeilenparameter ein und implementieren Sie eine for Schleife, die jede dritte Zahl von \(1\) bis einschließlich \(n\) ausgibt.}
     \onslide<4->Beispiel:
 \begin{plainjava}
-n = 13 !*\onslide<+(1)->*!// :yields: 1 4 7 10 13
+n = 13 !*\onslide<5->*!// :yields: 1 4 7 10 13
 \end{plainjava}
 \onslide<1->
 \end{aufgabe}
 \end{frame}
 
-\begin{frame}{}
-
+\begin{frame}[fragile]{Ein Schleifenzähler}
+    \DoAnimations
+    \begin{itemize}
+        \item<2-> Mit dem Vorwissen ist es an sich nur Einsetzen:
+\begin{plainjava}[lineskip=2pt]
+$3->$public class ErsteSchleife {
+$4->$    public static void main(String[] args) {
+$5->$        int n = Integer.parseInt(args[0]);$5->\tikzmarknode{robust}{\HStrut}$
+$6->$        for(int i = 1; i <= n; i = i + 3){
+$7->$            System.out.$7->\tikzmarknode{println}{\text{\sbasic{println}}}$(i);
+$6->$        }
+$4->$    }
+$3->$}
+\end{plainjava}
+    \end{itemize}
+\begin{tikzpicture}[overlay,remember picture]
+    \onslide<8->{
+        \draw[thick,paletteA,opacity=.3,decoration={snake,amplitude=1.25pt},decorate] ([yshift=-1pt]println.south east) to coordinate[pos=.5] (@) ([yshift=-1pt]println.south west);
+    }
+    \onslide<9->{
+        \draw[Kite-,gray] ([yshift=-2pt]@) to[out=270,in=180] ++(1,-.5) node[right,align=left] (@2) {Das Beispiel der Aufgabe hatte keine neuen Zeilen!};
+    }
+    \onslide<10->{
+        \node[below right,yshift=1mm,gray] at (@2.south west) {Dafür gibt es \say{print} anstelle von \say{print \textbf{l}i\textbf{n}e}.};
+    }
+    \onslide<11->{
+        \draw[Kite-,gray] (robust) to[out=0,in=180] ++(.5,-.15) node[below right,align=left,yshift=.6\baselineskip] {Was, wenn es keine\\Argumente gibt? Hier\\hilft eine if-Abfrage};
+    }
+    \only<12->{\node[above left,yshift=\btdmfootheight] at (current page.south east) {\textattachfile{\curpath ErsteSchleife.java}{ErsteSchleife.java}\;};}
+\end{tikzpicture}
 \end{frame}
+
+\iffull
+\begin{frame}[fragile]{In the Mean-While}
+\DoAnimations
+\begin{itemize}
+    \itemsep4pt
+    \item<2-> Wir können dies aber auch mit einer \bjava{while}-Schleife machen (links)
+\columns[onlytextwidth,c]
+\column{.475\linewidth}
+\begin{plainjava}
+$3->$int i = 1;
+$4->$while(i <= n) {
+$5->$    System.out.print(i + " ");
+$6->$    i += 3;
+$4->$}$1->$
+\end{plainjava}
+\column{.525\linewidth}
+\begin{plainjava}
+$8->$int i = 1;
+$9->$if(n > 0) {$9->\tikzmarknode{check}{\HStrut}$
+$10->$    do {
+$11->$        System.out.print(i + " ");
+$12->$        i += 3;
+$10->$    } while (i <= n)$10->\tikzmarknode{semi}{\text{\sbasic{;}}}$
+$9->$}$1->$
+\end{plainjava}
+\endcolumns
+    \item<7-> Oder mit einer \bjava{do}-\bjava{while}-Schleife (rechts)
+    \item<15-> \say{\bbash{java ErsteSchleife 12}} liefert die Ausgabe \say{\bbash{1 4 7 10 }}
+\end{itemize}
+\begin{tikzpicture}[overlay,remember picture,T/.style={sol@colors@lst@comments,font=\itshape\sffamily\footnotesize}]
+    \onslide<13->{\node[right,T] at(semi.east) {\say{;}~Nicht vergessen!};}
+    \onslide<14->{\node[right,T] (@) at(check.east) {Soll die Schleife überhaupt}; \node[below right,yshift=1.35mm,T] at(@.south west) {einmal laufen?};}
+    \only<16->{\node[above left,yshift=\btdmfootheight] at (current page.south east) {\textattachfile{\curpath ErsteSchleifeWhile.java}{ErsteSchleifeWhile.java}, \textattachfile{\curpath ErsteSchleifeDoWhile.java}{ErsteSchleifeDoWhile.java}\;};}
+\end{tikzpicture}
+\end{frame}
+\fi
 
 \section{Abschließendes}
 {\SummaryFrame
@@ -229,12 +324,7 @@ n = 13 !*\onslide<+(1)->*!// :yields: 1 4 7 10 13
 \vfill\vfill % double fill for more fraction
 \begin{itemize}[<+(1)->]
     \itemsep14pt
-    \item Wir haben die Geburt von Variablen sowie ihre Wachstumsphase kennengelernt: \begin{itemize}
-        \item Die \textit{Deklaration} (\bjava{int x}) reserviert einen Namen samt Charakteristika (Typ,~\ldots)
-        \item Die \textit{Initialisierung} (\bjava{int x; x = 5}) beschreibt die erste Wertzuweisung
-        \item Eine \textit{(Wert-)Zuweisung} (\bjava{x = 3}) ist jede weitere Änderung des gespeicherten Wertes
-    \end{itemize}
-    \item In die Wahl des \say{richtigen\texttrademark} Datentyps fließen viele Informationen mit ein.
+    \item TODO
 \end{itemize}
 \end{frame}
 }
