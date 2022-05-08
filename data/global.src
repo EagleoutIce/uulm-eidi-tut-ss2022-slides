@@ -109,10 +109,15 @@
 }{
 \DefinePalette{Tutorium}
   {Blau,bläulich: RGB(51, 93, 126)}
-  {Hellblau,hellbläulich: RGB(51, 93, 126)}
+  {Blau,bläulich: RGB(51, 93, 126)}
+  % {Orange, orangenfarben: RGB(249, 159, 1)}
+  % {Gelb,gelblich: RGB(245,147,72)}
+  % {Grün,grünlich: RGB(65,112,70)}
+  % {Hellblau,hellbläulich: RGB(80, 147, 198)}
+  % {Hellblau,hellbläulich: RGB(85, 177, 172)}
+  % {Rot,rötlich: RGB(220,43,70)}
   {Rot,rötlich: RGB(220,43,70)}
   {Dunkelblau,dunkelbläulich: RGB(31, 56, 76)}
-\colorlet{paletteC}{paletteC!75!paletteA}
 }
 \makeatletter
 \sol@list@define@styles{%
@@ -128,6 +133,8 @@
 \lstcolorlet{comments}{lightgray!80!btdm@text}%
 \lstcolorlet{highlight}{paletteD!90!black}%
 \lstcolorlet{command}{paletteB!90!black}%
+% mixin
+\IfBtdmDarkmode{}{\colorlet{paletteC}{paletteC!70!paletteA}}%
 }}
 \def\lstcolorhook{\sol@cpalette@hook}%
 \makeatother
