@@ -305,6 +305,7 @@ $12->$        i += 3;
 $10->$    } while (i <= n)$10->\tikzmarknode{semi}{\text{\sbasic{;}}}$
 $9->$}$1->$
 \end{plainjava}
+\smallskip
 \endcolumns
     \item<7-> Oder mit einer \bjava{do}-\bjava{while}-Schleife (rechts)
     \item<15-> \say{\bbash{java ErsteSchleife 12}} liefert die Ausgabe \say{\bbash{1 4 7 10 }}
@@ -313,6 +314,24 @@ $9->$}$1->$
     \onslide<13->{\node[right,T] at(semi.east) {\say{;}~Nicht vergessen!};}
     \onslide<14->{\node[right,T] (@) at(check.east) {Soll die Schleife überhaupt}; \node[below right,yshift=1.35mm,T] at(@.south west) {einmal laufen?};}
     \only<16->{\node[above left,yshift=\btdmfootheight] at (current page.south east) {\textattachfile{\curpath ErsteSchleifeWhile.java}{ErsteSchleifeWhile.java}, \textattachfile{\curpath ErsteSchleifeDoWhile.java}{ErsteSchleifeDoWhile.java}\;};}
+\end{tikzpicture}
+\end{frame}
+
+\begin{frame}[fragile]{Essen für die Reste!}
+\DoAnimations
+\begin{itemize}[<+(1)->]
+    \itemsep4pt
+    \item Anstelle von \(i \gets i + 3\) können wir beispielsweise auch Modulo-Rechnen:
+\begin{plainjava}
+$3->$for (int i = 0; i <= n; i++) {
+$4->$    if(i % 3 == 1)
+$5->$        System.out.print(i + " ");
+$3->$}
+\end{plainjava}
+    \item<6-> Es gibt eigentlich immer etliche Möglichkeiten\ldots
+\end{itemize}
+\begin{tikzpicture}[overlay,remember picture]
+    \only<7->{\node[above left,yshift=\btdmfootheight] at (current page.south east) {\textattachfile{\curpath ErsteSchleifeModulo.java}{ErsteSchleifeModulo.java}\;};}
 \end{tikzpicture}
 \end{frame}
 \fi
@@ -348,14 +367,15 @@ $9->$}$1->$
 \column{.5875\linewidth}
 \onslide<3->{Gehen Sie zur Sortierung nach folgendem Schema vor.\medskip}
 
-\onslide<4->{Seien \(l_1, \ldots, l_N\) die Werte einer Liste \(L\) der Länge \(N\). Für \textit{jedes} \(i \in \{1, \ldots, N - 1\}\) betrachte der Reihe nach \textit{jedes} \(l_j\) mit \(j \in \{i + 1, \ldots, N\}\) und vergleiche \(l_i\) mit \(l_j\). Falls \(l_i > l_j\) vertausche \(l_i\) und \(l_j\) und fahre mit dem nächsten \(j\) fort.}\bigskip
-\onslide<6->{So sortiert der beschriebene Algorithmus die Liste \(\{5, 8, 4, 0\}\) aufsteigend zu \(\{0, 4, 5, 8\}\). Die beiden\;~~~\C{Markierungen} je Zeile geben an, welche Elemente in dem jeweiligen Schritt verglichen werden.}
+\onslide<4->{Seien \(l_1, \ldots, l_N\) die Werte einer Liste \(L\) der Länge \(N\). Für \textit{jedes} \(i \in \{1, \ldots, N - 1\}\) betrachte der Reihe nach \textit{jedes} \(l_j\) mit \(j \in \{i + 1, \ldots, N\}\) und vergleiche \(l_i\) mit \(l_j\). Falls \(l_i > l_j\) vertausche \(l_i\) und \(l_j\) und fahre mit dem nächsten \(j\) fort.}\bigskip\par
+\onslide<6->{So sortiert der beschriebene Algorithmus die Liste \((5, 8, 4, 0)\) aufsteigend zu \((0, 4, 5, 8)\). Die beiden\;~~~\C{Markierungen} je Zeile geben an, welche Elemente in dem jeweiligen Schritt verglichen werden.}
 \endcolumns
     }
 \end{frame}}
 
 {\setbeamertemplate{enumerate item}{\task{\alph{enumi})}}
-\MakeThePinguExplainIt[text width=6.5cm]{cap=!hide,pumpkin-hat,cup=paletteC,right item angle=-50}{In der Aufgabe stand etwas von \say{größer als~1}, aber wie wir Listen indizieren ist nicht standardisiert.}
+\SetAlgoVlined
+\MakeThePinguExplainIt[text width=5cm]{cap=!hide,pumpkin-hat,cup=paletteC,right item angle=-10}{In der Aufgabe stand etwas von \say{größer als~1}, aber wie wir Listen indizieren ist nicht von uns standardisiert.}
 \begin{frame}{Elemente Vertauschen}
 \begin{enumerate}
     \item \task<2->{Entwerfen Sie einen Algorithmus, der gegeben einer Liste und zwei Indizes die entsprechenden Elemente
@@ -371,13 +391,36 @@ Länge der Liste sind. Stellen Sie zudem sicher, dass die Länge der Liste minde
         stop program\;}
     }}
 
-    \onslide<6->{make \(t\) have value \(l_i\)\;}
+    \onslide<6->{make new \(t\) have value \(l_i\)\;}
     \onslide<7->{make \(l_i\) have value \(l_j\)\;}
     \onslide<8->{make \(l_j\) have value \(t\)\;}
 \end{algorithm}}
 \begin{tikzpicture}[overlay,remember picture]
-    \onslide<0|handout:1>{\node[left=-2mm,xshift=5mm,scale=.8,yshift=\btdmfootheight] at(current page.-18) {\copy\pinguexplainbox};}% copy for animations
+    \onslide<0|handout:1>{\node[left=-2mm,xshift=5mm,scale=.8,yshift=\btdmfootheight] at(current page.-16) {\copy\pinguexplainbox};}% copy for animations
 \end{tikzpicture}
+\end{enumerate}
+\end{frame}
+\begin{frame}{Sich den Tag schön-sortieren}
+\begin{enumerate}
+    \setcounter{enumi}{1}
+    \item<2-> \task{Entwerfen Sie einen Algorithmus, der genau nach dem angegebenen Schema eine Liste sortiert. Stellen Sie auch hier sicher, dass die Liste mindestens zwei Elemente hat. Falls Sie Teilaufgabe~a) nicht bearbeitet haben, können Sie annehmen, dass der Algorithmus \T{vertausche(L, i, j)} zur Verfügung steht.}\medskip
+{\small\begin{algorithm}[H]
+\PreCode
+    \KwIn{List \(L = (l_1, \ldots, l_N)\)}\medskip
+\StartCode
+\If{\(N < 2\)}{
+    \onslide<5->{print \say{Eingabe ungültig!} to output device and stop program\;}
+}
+Make new \(i\) have value \(1\)\;
+\While{\(i < N\)}{
+    Make new \(j\) have the value \(i + 1\)\;
+    \While{\(j \leq N\)}{
+        \lIf{\(l_i > l_j\)}{call \T{vertausche(L, i, j)}}
+        Increment \(j\) by \(1\)\;
+    }
+    Increment \(i\) by \(1\)\;
+}
+\end{algorithm}}
 \end{enumerate}
 \end{frame}
 }
