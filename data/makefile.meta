@@ -1,3 +1,5 @@
+SHELL := /usr/bin/env bash
+
 # This is the meta makefile included in all slides it is a modified variant of a standard makefile which i've used for several years.
 # therefore it may contain some dead code and cleanups
 
