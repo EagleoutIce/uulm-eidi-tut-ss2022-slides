@@ -484,7 +484,7 @@ Make new \(i\) have value \(1\);\SW6{\quad\J1}\medskip
 }
 \end{algorithm}}}
 \begin{tikzpicture}[overlay,remember picture,T/.style={sol@colors@lst@comments,font=\itshape\sffamily\footnotesize}]
-    \onslide<16->{\node[above left,T,align=left,text width=6cm,yshift=\btdmfootheight+1.85cm] at(current page.south east) {Angenommen \(N\) sei \(5\), dann gilt für die Anzahl innerer Schleifendurchläufe:\smallskip\\
+    \onslide<16->{\node[above left,T,align=left,text width=6cm,yshift=\btdmfootheight+1.95cm] at(current page.south east) {Angenommen \(N\) sei \(5\), dann gilt für die Anzahl innerer Schleifendurchläufe:\smallskip\\
     \columns[onlytextwidth,c]
     \only<17->{\column{.3\linewidth}\begin{tabular}{ll}
         i & \# \\
@@ -499,8 +499,8 @@ Make new \(i\) have value \(1\);\SW6{\quad\J1}\medskip
     \endcolumns
     };}
     \onslide<21->{\node[above left,yshift=\btdmfootheight,text width=.6\linewidth] at(current page.south east) {\sbseries\footnotesize\begin{align*}
-        \rightarrow~&1\E + 1\E + (N - 1) \cdot (2\E + 1\E) + \frac{N^2 - N}{2} (1\E + 8\E + 1\E) \\[-.5mm]
-        \color{btdm@text}\only<22->{={}& \color{btdm@text}-1\E + 3\cdot N\E + 5\cdot N^2\E - 5\cdot N\E}\strut \\[-.25mm]
+        \rightarrow~&1\E + 1\E + (N - 1) \cdot (2\E + 1\E) + \frac{N^2 - N}{2} (1\E + 8\E + 1\E) \HStrut\\[-.5mm]
+        \color{btdm@text}\only<22->{={}& \color{btdm@text}-1\E + 3\cdot N\E + 5\cdot N^2\E - 5\cdot N\E}\strut \HStrut\\[-.25mm]
         \color{btdm@text}\only<23->{={}& \color{btdm@text}5\cdot N^2\E - 2\cdot N\E - 1\E} \only<23->{\quad \in \O(N^2)}
     \end{align*}};}
 \end{tikzpicture}
@@ -531,13 +531,13 @@ Make new \(i\) have value \(1\);\SW6{\quad\J1}\medskip
 \begin{itemize}
     \itemsep9pt
     \item<4-> Eine eindeutig richtige Antwort gibt es nicht \info{Begründungen!}.
-    \item<5-> Begründungen wie \say{weniger Speicherplatz} sind problematisch(er). \begin{itemize}
+    \item<5-> Begründungen wie \say{weniger Speicherplatz} sind problematisch(er) \begin{itemize}
         \itemsep1pt
-        \item<6-> Java kann für ein \bjava{byte} auch \qty{32}\bit\ oder mehr (z.B. \qty{64}\bit) reservieren.
-        \item<7-> Analog wird \bjava{boolean} oft als \bjava{byte} umgesetzt \info{\link{https://docs.oracle.com/javase/specs/jvms/se17/html/jvms-2.html\#jvms-2.3.4}{JVMS17~2.3.4}}.
+        \item<6-> Java kann für ein \bjava{byte} auch \qty{32}\bit\ oder mehr (\qty{64}\bit,~\ldots) reservieren
+        \item<7-> Analog wird \bjava{boolean} oft als \bjava{byte} umgesetzt \info{\link{https://docs.oracle.com/javase/specs/jvms/se17/html/jvms-2.html\#jvms-2.3.4}{JVMS17~2.3.4}}
         \item<8-> Das hat mit Geschwindigkeit, Parallelisierung, Sicherheit,~\ldots\ zu tun.
-        \item<9-> Bei Arrays sieht das wieder anders aus\ldots
-        \item<10-> Für uns in EidI sind die Details nicht wichtig.
+        %% \item<9-> Bei Arrays sieht das wieder anders aus\ldots
+        \item<9-> Für uns in EidI sind die Details nicht wichtig.
     \end{itemize}
 \end{itemize}
 \end{frame}
@@ -546,7 +546,7 @@ Make new \(i\) have value \(1\);\SW6{\quad\J1}\medskip
 \iffull
 {\AddonFrame
 \def\dt#1{{\large\bfseries\skB{\HStrut#1}}}
-\MakeThePinguExplainIt[text width=6cm,opacity=.6,yshift=-.75cm]{cap=!hide,cup=!hide,@block/.append style={fill=#1!40!pingu@white},@draw/.append style={draw=#1!40!pingu@white},glasses=!hide,glasses round,eyes wink,small,hat,body type=chubby}{Das sind \textit{alle} \say{impliziten Typkonvertierungen} in Java.\medskip\\String hat da nichts zu suchen.}
+\MakeThePinguExplainIt[text width=6cm,opacity=.6,yshift=-1cm]{cap=!hide,cup=!hide,@block/.append style={fill=#1!40!pingu@white},@draw/.append style={draw=#1!40!pingu@white},glasses=!hide,glasses round,eyes wink,small,hat,body type=chubby}{Das sind \textit{alle} \say{impliziten Typkonvertierungen} in Java.\smallskip\\String hat da nichts zu suchen.}
 \setbox\pinguA=\hbox{\tikz{\pingu[@block/.append style={fill=#1!40!pingu@white},@draw/.append style={draw=#1!40!pingu@white},wings grab,eyes shiny,headband=pingu@green,feet=sit]}}
 \begin{frame}[c]{Ein wenig mehr über primitive Datentypen}
 \centering\begin{tikzpicture}[scale=3,every path/.append style={line cap=round}]
@@ -587,9 +587,9 @@ Make new \(i\) have value \(1\);\SW6{\quad\J1}\medskip
 \end{tikzpicture}
 % TODO: pingu der sagt, dass das alles ist und alle immpliziten Konvertieungen. Noch ein Wort zu String und void
 \begin{tikzpicture}[overlay,remember picture,T/.style={sol@colors@lst@comments,font=\itshape\sffamily\footnotesize}]
-    \onslide<10->{\node[left=-1mm,xshift=5mm,scale=.8,yshift=\btdmfootheight] at(current page.-24) {\copy\pinguexplainbox};}% copy for animations
+    \onslide<10->{\node[left=-3mm,xshift=7mm,scale=.8,yshift=\btdmfootheight] at(current page.-26) {\copy\pinguexplainbox};}% copy for animations
     \onslide<11->{
-        \node[left=-6mm,scale=.7] (@) at(current page.16) {\rotatebox{90}{\copy\pinguA}};
+        \node[left=-10.5mm,scale=.7] (@) at(current page.16) {\rotatebox{90}{\copy\pinguA}};
         \node[left,T,align=right] at(@.west)  {\T{void} ist in Java kein Datentyp!\\\link{https://docs.oracle.com/javase/specs/jls/se17/html/jls-4.html\#jls-4.2}{JLS17~$4.2$}\;\&\;\link{https://docs.oracle.com/javase/specs/jls/se17/html/jls-14.html\#jls-14.8}{$14.8$}};
     }
 \end{tikzpicture}
