@@ -462,6 +462,7 @@ Länge der Liste sind. Stellen Sie zudem sicher, dass die Länge der Liste minde
 \def\SW#1#2{\only<-\the\numexpr#1-1\relax|handout:0>{\;}\only<#1->{#2\;}}
 \def\L#1{\textbf{\paletteA{\small\itshape#1}}}
 \def\K#1{\textbf{\paletteC{\small\itshape\only<19->{\color{codeouthl}}#1}}}% update anim slide
+\def\MM#1{\textbf{\paletteC{\small\itshape\only<21-|handout:1>{\color{codeouthl}}#1}}}% update anim slide
 \begin{frame}[c]{Du kriegsts' nicht raus? Better Call Gauß!\hfill The Sequel!}
 \onslide<2->{{\small\begin{algorithm}[H]
 \DontPrintSemicolon
@@ -473,9 +474,9 @@ Länge der Liste sind. Stellen Sie zudem sicher, dass die Länge der Liste minde
     {\only<20->{\color{codeouthl}}print \say{Eingabe ungültig!} to output device and stop program;\SW5{\quad\K2}}
 }
 Make new \(i\) have value \(1\);\SW6{\quad\J1}\medskip
-\While(\only<14->{\quad\L{N\({}-{}\)1}}){\smash{\(\overset{\only<7->{\J1}}{i < N}\)}}{
+\While(\only<14->{\quad\L{N\({}-{}\)1}}){\smash{\(\overset{\only<7->{\MM1}}{i < N}\)}}{
     Make new \(j\) have the value \(i + 1\);\SW8{\quad\J2}\medskip
-    \While(\only<15->{\quad\tikzmarknode{inner-loop}{\smash{\L{?\only<19->{\({}= \frac{\text{N\/}^2 - \text{N}}{\text{2}}\)}}}}}){\smash{\(\overset{\only<9->{\J1}}{j \leq N}\)}}{\vskip\dimexpr\medskipamount+3pt\relax
+    \While(\only<15->{\quad\tikzmarknode{inner-loop}{\smash{\L{\only<1-|handout:0>{?}\only<19->{\(\only<1-|handout:0>{{}={}} \frac{\text{N\/}^2 - \text{N}}{\text{2}}\)}}}}}){\smash{\(\overset{\only<9->{\MM1}}{j \leq N}\)}}{\vskip\dimexpr\medskipamount+3pt\relax
         \If{\smash{\(\overset{\only<10->{\J1}}{l_i > l_j}\)}}{call \T{vertausche(L, i, j)};\SW{11}{\quad\J8}}
         Increment \(j\) by \(1\);\SW{12}{\quad\J1}
     }
@@ -531,7 +532,7 @@ Make new \(i\) have value \(1\);\SW6{\quad\J1}\medskip
     \itemsep9pt
     \item<4-> Eine eindeutig richtige Antwort gibt es nicht \info{Begründungen!}.
     \item<5-> Begründungen wie \say{weniger Speicherplatz} sind problematisch(er). \begin{itemize}
-        \itemsep3pt
+        \itemsep1pt
         \item<6-> Java kann für ein \bjava{byte} auch \qty{32}\bit\ oder mehr (z.B. \qty{64}\bit) reservieren.
         \item<7-> Analog wird \bjava{boolean} oft als \bjava{byte} umgesetzt \info{\link{https://docs.oracle.com/javase/specs/jvms/se17/html/jvms-2.html\#jvms-2.3.4}{JVMS17~2.3.4}}.
         \item<8-> Das hat mit Geschwindigkeit, Parallelisierung, Sicherheit,~\ldots\ zu tun.
@@ -545,6 +546,8 @@ Make new \(i\) have value \(1\);\SW6{\quad\J1}\medskip
 \iffull
 {\AddonFrame
 \def\dt#1{{\large\bfseries\skB{\HStrut#1}}}
+\MakeThePinguExplainIt[text width=6cm,opacity=.6,yshift=-.75cm]{cap=!hide,cup=!hide,@block/.append style={fill=#1!40!pingu@white},@draw/.append style={draw=#1!40!pingu@white},glasses=!hide,glasses round,eyes wink,small,hat,body type=chubby}{Das sind \textit{alle} \say{impliziten Typkonvertierungen} in Java.\medskip\\String hat da nichts zu suchen.}
+\setbox\pinguA=\hbox{\tikz{\pingu[@block/.append style={fill=#1!40!pingu@white},@draw/.append style={draw=#1!40!pingu@white},wings grab,eyes shiny,headband=pingu@green,feet=sit]}}
 \begin{frame}[c]{Ein wenig mehr über primitive Datentypen}
 \centering\begin{tikzpicture}[scale=3,every path/.append style={line cap=round}]
    \onslide<2->{\node[right] (boolean) at(0,0)             {\dt{boolean}};}
@@ -565,8 +568,8 @@ Make new \(i\) have value \(1\);\SW6{\quad\J1}\medskip
 \onslide<6->{
     \path[rounded corners=2pt] (char) -| (int) coordinate[pos=.3] (join);
 \pgfonlayer{background}
-\node[below right,xshift=5mm,yshift=-1mm,codeouthl] (join-d) at (join) {UTF-16};
-\path[codeouthl,line cap=round] (join.east) to[bend right] (join-d.west);
+\onslide<6->{\node[below right,xshift=5mm,yshift=-1mm,codeouthl] (join-d) at (join) {UTF-16};
+\path[codeouthl,line cap=round] (join.east) to[bend right] (join-d.west);}
 \endpgfonlayer
 }
 \onslide<7->{
@@ -582,7 +585,14 @@ Make new \(i\) have value \(1\);\SW6{\quad\J1}\medskip
 \onslide<9->{\draw[decoration={brace,mirror,amplitude=3pt},decorate,codeouthl,-] ([yshift=1pt]byte.south west) -- ([yshift=1pt]short.south east) node[pos=.5,below=4.5pt] {\sbseries \(+\),~~\(/\),~~\ldots~~\(\longrightarrow\)~~\T{int}};}
 \end{scope}
 \end{tikzpicture}
-TODO: pingu der sagt, dass das alles ist und alle immpliziten Konvertieungen. Noch ein Wort zu String und void
+% TODO: pingu der sagt, dass das alles ist und alle immpliziten Konvertieungen. Noch ein Wort zu String und void
+\begin{tikzpicture}[overlay,remember picture,T/.style={sol@colors@lst@comments,font=\itshape\sffamily\footnotesize}]
+    \onslide<10->{\node[left=-1mm,xshift=5mm,scale=.8,yshift=\btdmfootheight] at(current page.-24) {\copy\pinguexplainbox};}% copy for animations
+    \onslide<11->{
+        \node[left=-6mm,scale=.7] (@) at(current page.16) {\rotatebox{90}{\copy\pinguA}};
+        \node[left,T,align=right] at(@.west)  {\T{void} ist in Java kein Datentyp!\\\link{https://docs.oracle.com/javase/specs/jls/se17/html/jls-4.html\#jls-4.2}{JLS17~$4.2$}\;\&\;\link{https://docs.oracle.com/javase/specs/jls/se17/html/jls-14.html\#jls-14.8}{$14.8$}};
+    }
+\end{tikzpicture}
 \end{frame}
 }
 \fi
