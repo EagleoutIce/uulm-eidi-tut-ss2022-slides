@@ -229,7 +229,7 @@
         \item<4-> Wie \bjava{System}, welches uns \bjava{out.println} liefert, gibt es \bjava{Integer} für \bjava{int} \begin{itemize}
             \itemsep4pt
             \item<5-> \bjava{Integer.parseInt(...)}, \bjava{Double.parseDouble(...)},~\ldots\ konvertieren \bjava{\"42\"} zu \bjava{42}
-            \item<6-> Genauer liefert \bjava{Integer.parseInt(\"42\")} die Zahl {42} zurück
+            \item<6-> Genauer liefert \bjava{Integer.parseInt(\"42\")} die Zahl \bjava{42} zurück
             \item<7-> Wir gehen hier zunächst nur von gültigen Eingaben (Zahlen) aus
         \end{itemize}
         \item<8-> Nun sind wir gewappnet für die Präsenzaufgabe!
@@ -237,7 +237,7 @@
 \end{frame}
 \fi
 
-\SetNextSectionText{Es gibt keine if-Schleifen, sondern nur if-Abfragen!\\--- \href{http://if-schleife.de/}{if-schleife.de}}
+\SetNextSectionText{Es gibt keine if-Schleifen, sondern nur if-Abfragen!\\--- \IfBtdmDarkmode{}{\def\fancyulbackground{btdm@primary}}\link{http://if-schleife.de/}{if-schleife.de}}
 \section{Präsenzaufgabe}
 \begin{frame}[fragile,c]{Präsenzaufgabe}
 \begin{aufgabe}{Wenn\ldots\ Ja wenn nur die Schleife nicht wär\ldots}
@@ -509,15 +509,84 @@ Make new \(i\) have value \(1\);\SW6{\quad\J1}\medskip
 \subsection{Aufgabe 2}
 {\setbeamertemplate{enumerate item}{\task{\alph{enumi})}}
 \begin{frame}{Aufgabe 2: Datentypen}
-    \task<2->{Welchen Datentyp würden Sie wählen um folgende Daten zu speichern? \only<3->{\textbf}{Begründen Sie Ihre Antwort!}}
+    \task<2->{Welchen Datentyp würden Sie wählen um folgende Daten zu speichern? \only<3->{\textbf}{Begründen Sie Ihre Antwort!}}\smallskip
     \begin{enumerate}
-        \itemsep8pt
+        \itemsep12pt
         \item<4-> \task{Die Email-Adresse einer Person}
-        \item<5-> \task{Den Akkustand eines Smartphones}
-        \item<6-> \task{Den Notendurchschnitt einer Prüfung}
-        \item<7-> \task{Ein Satzzeichen}
+            \onslide<5->{Email-Adressen sind lange Zeichenketten welche auch Sonderzeichen enthalten. Daher ist \bjava{String} naheliegend.}
+        \item<6-> \task{Den Akkustand eines Smartphones}
+            \onslide<7->{Ein Akkustand wird für gewöhnlich als Ganzzahl angegeben (\(\rightarrow\) \bjava{byte}, \bjava{short}, \bjava{int} und \bjava{long}). Der Akkustand reicht dabei meist von \qtyrange{0}{100}\percent\ \(\rightarrow\) \bjava{byte}.}
+        \item<8-> \task{Den Notendurchschnitt einer Prüfung}
+            \onslide<9->{Die Noten einer Prüfung ist meist eine Fließkommazahl (\(\rightarrow\) \bjava{float}, \bjava{double}), deren Wertebereich klein mit geringer Auflösung an Nachkommastellen ist (z.B.~1--6 mit einer Nachkommastelle). Deswegen wählen wir hier \bjava{float}.}
     \end{enumerate}
-\end{frame}}
+\end{frame}
+\begin{frame}{Aufgabe 2: Datentypen\hfill II}
+\begin{enumerate}
+    \setcounter{enumi}{3}
+    \itemsep12pt
+    \item<2-> \task{Ein Satzzeichen}
+    \onslide<3->{Wir gehen hier von einem Satzzeichen aus, welches durch eine einzige UTF-16 Einheit dargestellt werden kann. In diesem Fall reicht ein \bjava{char} (sonst \bjava{String} das ist aber schon wieder Overkill).}
+\end{enumerate}\vfill
+\begin{itemize}
+    \itemsep9pt
+    \item<4-> Eine eindeutig richtige Antwort gibt es nicht \info{Begründungen!}.
+    \item<5-> Begründungen wie \say{weniger Speicherplatz} sind problematisch(er). \begin{itemize}
+        \itemsep3pt
+        \item<6-> Java kann für ein \bjava{byte} auch \qty{32}\bit\ oder mehr (z.B. \qty{64}\bit) reservieren.
+        \item<7-> Analog wird \bjava{boolean} oft als \bjava{byte} umgesetzt \info{\link{https://docs.oracle.com/javase/specs/jvms/se17/html/jvms-2.html\#jvms-2.3.4}{JVMS17~2.3.4}}.
+        \item<8-> Das hat mit Geschwindigkeit, Parallelisierung, Sicherheit,~\ldots\ zu tun.
+        \item<9-> Bei Arrays sieht das wieder anders aus\ldots
+        \item<10-> Für uns in EidI sind die Details nicht wichtig.
+    \end{itemize}
+\end{itemize}
+\end{frame}
+}
+
+\iffull
+{\AddonFrame
+\def\dt#1{{\large\bfseries\skB{\HStrut#1}}}
+\begin{frame}[c]{Ein wenig mehr über primitive Datentypen}
+\centering\begin{tikzpicture}[scale=3,every path/.append style={line cap=round}]
+   \onslide<2->{\node[right] (boolean) at(0,0)             {\dt{boolean}};}
+   \onslide<3->{\node[right] (byte) at(0,-1.66*1/2.65)     {\dt{byte}};}
+   \onslide<3->{\node[right=6.5mm] (short) at(byte.east)   {\dt{short}};}
+   \onslide<4->{\node[below=1.35cm] (char) at(short.south) {\dt{char}};}
+   \onslide<3->{\node[right=6.5mm] (int) at(short.east)    {\dt{int}};}
+   \onslide<3->{\node[right=6.5mm] (long) at(int.east)     {\dt{long}};}
+   \onslide<3->{\node[right=6.5mm] (float) at(long.east)   {\dt{float}};}
+   \onslide<3->{\node[right=6.5mm] (double) at(float.east) {\dt{double}};}
+
+\begin{scope}[every path/.append style={draw,-Kite}]
+\onslide<5->{\path (byte) -- (short);
+\path (short) -- (int);
+\path (int) -- (long);
+\path (long) -- (float);
+\path (float) -- (double);}
+\onslide<6->{
+    \path[rounded corners=2pt] (char) -| (int) coordinate[pos=.3] (join);
+\pgfonlayer{background}
+\node[below right,xshift=5mm,yshift=-1mm,codeouthl] (join-d) at (join) {UTF-16};
+\path[codeouthl,line cap=round] (join.east) to[bend right] (join-d.west);
+\endpgfonlayer
+}
+\onslide<7->{
+   \node[codeouthl,above] at (byte.north) {8};
+   \node[codeouthl,above] at (short.north) {16};
+   \node[codeouthl,above] at (int.north) {32};
+   \node[codeouthl,above] at (long.north) {64};
+   \node[codeouthl,above] at (float.north) {32};
+   \node[codeouthl,above] at (double.north) {64};
+   \node[codeouthl,above] at (char.north) {16};
+}
+\onslide<8->{\draw[decoration={brace,mirror,amplitude=3pt},decorate,codeouthl,-] ([yshift=1pt]float.south west) -- ([yshift=1pt]double.south east) node[pos=.5,below=4.5pt] {\sbseries Rundungsproblem!};}
+\onslide<9->{\draw[decoration={brace,mirror,amplitude=3pt},decorate,codeouthl,-] ([yshift=1pt]byte.south west) -- ([yshift=1pt]short.south east) node[pos=.5,below=4.5pt] {\sbseries \(+\),~~\(/\),~~\ldots~~\(\longrightarrow\)~~\T{int}};}
+\end{scope}
+\end{tikzpicture}
+TODO: pingu der sagt, dass das alles ist und alle immpliziten Konvertieungen. Noch ein Wort zu String und void
+\end{frame}
+}
+\fi
+
 
 \subsection{Aufgabe 3}
 \begin{frame}{Aufgabe 3: Boolesche Ausdrücke}
