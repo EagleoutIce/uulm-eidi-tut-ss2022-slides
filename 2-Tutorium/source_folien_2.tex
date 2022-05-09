@@ -72,6 +72,7 @@
 }\fi
 
 \SetNextSectionText{\say{Machs farbig}\\--- Isabell Bannweg}
+\iffull
 \section[Programmparameter]{Exkurs: Kommandozeilenparameter}
 \begin{frame}[fragile]{M-Array me und andere Zukunftsträume}
     \begin{itemize}[<+(1)->]
@@ -234,6 +235,7 @@
         \item<8-> Nun sind wir gewappnet für die Präsenzaufgabe!
     \end{itemize}
 \end{frame}
+\fi
 
 \SetNextSectionText{Es gibt keine if-Schleifen, sondern nur if-Abfragen!\\--- \href{http://if-schleife.de/}{if-schleife.de}}
 \section{Präsenzaufgabe}
@@ -426,7 +428,7 @@ Länge der Liste sind. Stellen Sie zudem sicher, dass die Länge der Liste minde
 {\def\G#1{\textcolor{gray}{#1}}
 \def\J#1{\textbf{\paletteC{\small\itshape#1}}}
 \def\K#1{\textbf{\paletteC{\small\itshape\only<18->{\color{codeouthl}}#1}}}% special waste :D
-\def\E{\,{\color{gray}E}}
+\def\E{\,{\color{gray}E}\color{btdm@text}}% fix grouping bug-raise in compactmode
 \begin{frame}{Du kriegsts' nicht raus? Better Call Gauß!}
 \begin{enumerate}
     \setcounter{enumi}{2}
@@ -497,8 +499,8 @@ Make new \(i\) have value \(1\);\SW6{\quad\J1}\medskip
     };}
     \onslide<21->{\node[above left,yshift=\btdmfootheight,text width=.6\linewidth] at(current page.south east) {\sbseries\footnotesize\begin{align*}
         \rightarrow~&1\E + 1\E + (N - 1) \cdot (2\E + 1\E) + \frac{N^2 - N}{2} (1\E + 8\E + 1\E) \\[-.5mm]
-        \only<22->{=& -1\E + 3\cdot N\E + 5\cdot N^2\E - 5\cdot N\E}\strut \\[-.25mm]
-        \only<23->{=& 5\cdot N^2\E - 2\cdot N\E - 1\E} \only<23->{\quad \in \O(N^2)}
+        \color{btdm@text}\only<22->{={}& \color{btdm@text}-1\E + 3\cdot N\E + 5\cdot N^2\E - 5\cdot N\E}\strut \\[-.25mm]
+        \color{btdm@text}\only<23->{={}& \color{btdm@text}5\cdot N^2\E - 2\cdot N\E - 1\E} \only<23->{\quad \in \O(N^2)}
     \end{align*}};}
 \end{tikzpicture}
 \end{frame}
