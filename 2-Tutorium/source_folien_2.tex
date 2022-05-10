@@ -62,7 +62,7 @@
 !*\onslide<13->*!x = 42; !*\tikzmarknode{@3}{\phantom{Ig}}*!
 \end{plainjava}
     \end{itemize}
-\begin{tikzpicture}[overlay,remember picture,T/.style={sol@colors@lst@comments,font=\itshape\sffamily\footnotesize}]
+\begin{tikzpicture}[overlay,remember picture]
 \onslide<14->{\node[right,T] at(@1.east) {\textbf{Deklaration} --- Reservieren von Namen mit Typ long};}
 \onslide<15->{\node[right,T] at(@2.east) {\textbf{Initialisierung} --- Erste Wertzuweisung, macht die Variable verwendbar};}
 \onslide<16->{\node[right,T] at(@3.east) {\textbf{Wertzuweisung} --- Überschreiben/Ändern des vorherigen Wertes};}
@@ -158,7 +158,7 @@
 !*\onslide<2->*!    |ihl|}|ihl|
 !*\onslide<2->*!|ihl|}|ihl|
 \end{plainjava}
-\begin{tikzpicture}[overlay,remember picture,T/.style={sol@colors@lst@comments,font=\itshape\sffamily\footnotesize}]
+\begin{tikzpicture}[overlay,remember picture]
     \onslide<5->{\node[below left,xshift=-5mm,yshift=-1.65cm,outer sep=0pt, inner sep=0pt] (@) at(current page.north east) {\bbash{Hermeline mögen Mäuse}};
     \node[left=0pt,outer sep=0pt, inner sep=0pt] (@2) at(@.west) {\bbash{java Example}\T{~}\null};}
     \def\hlhs{.1mm}
@@ -312,7 +312,7 @@ $9->$}$1->$
     \item<7-> Oder mit einer \bjava{do}-\bjava{while}-Schleife (rechts)
     \item<15-> \say{\bbash{java ErsteSchleife 12}} liefert die Ausgabe \say{\bbash{1 4 7 10 }}
 \end{itemize}
-\begin{tikzpicture}[overlay,remember picture,T/.style={sol@colors@lst@comments,font=\itshape\sffamily\footnotesize}]
+\begin{tikzpicture}[overlay,remember picture]
     \onslide<13->{\node[right,T] at(semi.east) {\say{;}~Nicht vergessen!};}
     \onslide<14->{\node[right,T] (@) at(check.east) {Soll die Schleife überhaupt}; \node[below right,yshift=1.35mm,T] at(@.south west) {einmal laufen?};}
     \only<16->{\node[above left,yshift=\btdmfootheight] at (current page.south east) {\textattachfile{\curpath ErsteSchleifeWhile.java}{ErsteSchleifeWhile.java}, \textattachfile{\curpath ErsteSchleifeDoWhile.java}{ErsteSchleifeDoWhile.java}\;};}
@@ -483,7 +483,7 @@ Make new \(i\) have value \(1\);\SW6{\quad\J1}\medskip
     Increment \(i\) by \(1\);\SW{13}{\quad\J1}
 }
 \end{algorithm}}}
-\begin{tikzpicture}[overlay,remember picture,T/.style={sol@colors@lst@comments,font=\itshape\sffamily\footnotesize}]
+\begin{tikzpicture}[overlay,remember picture]
     \onslide<16->{\node[above left,T,align=left,text width=6cm,yshift=\btdmfootheight+1.95cm] at(current page.south east) {Angenommen \(N\) sei \(5\), dann gilt für die Anzahl innerer Schleifendurchläufe:\smallskip\\
     \columns[onlytextwidth,c]
     \only<17->{\column{.3\linewidth}\begin{tabular}{ll}
@@ -506,6 +506,14 @@ Make new \(i\) have value \(1\);\SW6{\quad\J1}\medskip
 \end{tikzpicture}
 \end{frame}
 }}
+
+\iffull
+{\AddonFrame
+\begin{frame}{Unterprogramm -dadamm}
+
+\end{frame}
+}
+\fi
 
 \subsection{Aufgabe 2}
 {\setbeamertemplate{enumerate item}{\task{\alph{enumi})}}
@@ -586,7 +594,7 @@ Make new \(i\) have value \(1\);\SW6{\quad\J1}\medskip
 \end{scope}
 \end{tikzpicture}
 % TODO: pingu der sagt, dass das alles ist und alle immpliziten Konvertieungen. Noch ein Wort zu String und void
-\begin{tikzpicture}[overlay,remember picture,T/.style={sol@colors@lst@comments,font=\itshape\sffamily\footnotesize}]
+\begin{tikzpicture}[overlay,remember picture]
     \onslide<10->{\node[left=-3mm,xshift=7mm,scale=.8,yshift=\btdmfootheight] at(current page.-26) {\copy\pinguexplainbox};}% copy for animations
     \onslide<11->{
         \node[left=-10.5mm,scale=.7] (@) at(current page.16) {\rotatebox{90}{\copy\pinguA}};
@@ -601,22 +609,43 @@ Make new \(i\) have value \(1\);\SW6{\quad\J1}\medskip
 \subsection{Aufgabe 3}
 {
 \def\ms#1{{\color{lightgray}\mathbf{#1}}}
-\def\to{~\raisebox{1pt}{\;\tikz\draw[lightgray,-{Kite[scale=1.05]},line cap=round,line width=.925pt] (0,0) -- (6mm,0);}~}%
+\def\to{~{\color{lightgray}\longrightarrow}~}%
+\def\Aspect{.5}
+\def\true{\sliteral{true}}
+\def\false{\sliteral{false}}
+
+\newcommand*\tfu[3][0pt]{\draw[decoration={brace,aspect=\Aspect},decorate,-] ([yshift=#1]#2.north) -- ([yshift=#1]#2@.north) node[above,pos=\Aspect] {\scriptsize\itshape#3};}
+\def\tfd#1#2{\draw[decoration={brace,aspect={1-\Aspect}},decorate,-] (#1@.south) -- (#1.south) node[below,pos={1-\Aspect}] {\scriptsize\itshape#2};}
 \begin{frame}[fragile]{Aufgabe 3: Boolesche Ausdrücke}
     \task<2->{Betrachten Sie den folgenden Java Code-Ausschnitt. Werten Sie die folgenden Ausdrücke in der Reihenfolge, in der sie ausgeführt werden (d.h. von oben nach unten), aus. Geben Sie dazu für jede Zeile (beginnend mit der zweiten Zeile) den neuen Wert der Variablen \T{b} an.\vspace*{-\medskipamount}}
-\begin{plainjava}[lineskip=15pt]
+\begin{plainjava}[lineskip=13.5pt]
 !*\onslide<3->*!boolean b = true;
-!*\onslide<4->*!b = !(true || false) || b;
-!*\onslide<5->*!b = !(true && false);
-!*\onslide<6->*!b = (!(true && true) || (false || false));
-!*\onslide<7->*!b = !b;
+!*\onslide<4->*!b = !*\bnode{or2}{\bnode{not1}{!(\bnode{or1}{\true\ || \false})} || \bnode{b1}{b}}*!; !*\tikzmarknode{R1}\HStrut*!
+!*\onslide<5->*!b = !*\bnode{not2}{!(\bnode{and1}{\true\ \&\& \false})}*!; !*\tikzmarknode{R2}\HStrut*!
+!*\onslide<6->*!b = (!*\bnode{or3}{\bnode{not3}{!(\bnode{and2}{\true\ \&\& \true})} || (\bnode{or4}{\false\ || \false})}*!); !*\tikzmarknode{R3}\HStrut*!
+!*\onslide<7->*!b = !*\bnode{not4}{!\bnode{b2}{b}}*!; !*\tikzmarknode{R4}\HStrut*!
 \end{plainjava}
 \begin{tikzpicture}[overlay,remember picture]
-    \node[above left,yshift=\btdmfootheight,text width=15.5cm,scale=.65] at(current page.south east) {\begin{alignat*}{5}
-        \ms{a\text{++},~~a\text{-\,-}}&\to~\ms{!a,~~ -a,~~ \text{++}a,~~\text{-\,-}a}&&\to~\ms{a~*~b,~~a~/~b,~~a~\%~b} && \to~\ms{a+b,~~a-b} \\
-        &\to~\ms{a==b,~~a<b,~~\ldots} && \to~\ms{a~\mbox{\textasciicircum}~b}&&\to~\ms{a~\&\&~b}\\
-        & \to~\ms{a~||~b}
-     \end{alignat*}};
+    \onslide<8->{\node[above left,yshift=\btdmfootheight,text width=15.5cm,scale=.6] at(current page.south east) {\begin{alignat*}{5}
+        \ms{a\text{++},~~a\text{-\,-}}&\to~\ms{\textcolor{gray}{!a},~~ -a,~~ \text{++}a,~~\text{-\,-}a}&&\to~\ms{a~*~b,~~a~/~b,~~a~\%~b} && \to~\ms{a+b,~~a-b} \\
+        &\to~\ms{a==b,~~a<b,~~\ldots} && \to~\ms{a~\mbox{\textasciicircum}~b}&&\to~\ms{\textcolor{gray}{a~\&\&~b}}\\
+        & \to~\ms{\textcolor{gray}{a~||~b}} &&\to \ms{\ldots} &&\to \ms{\textcolor{gray}{\textbf{(}\;\textbf{)}}}
+     \end{alignat*}};}
+    \color{lightgray}
+    \onslide<9->{\tfu{or1}{true}}
+    \onslide<10->{{\only<13->{\def\Aspect{.25}}\tfd{not1}{false}}}
+    \onslide<11->{\tfd{b1}{true}}
+    \onslide<12->{\node[right,T] at(R1.east) {b ist \textbf{\T{true}}};}
+    \onslide<13->{{\def\Aspect{.75}\tfu{and1}{false}}}
+    \onslide<14->{{\only<16->{\def\Aspect{.25}}\tfd{not2}{true}}}
+    \onslide<15->{\node[right,T] at(R2.east-|R1.south) {b ist \textbf{\T{true}}};}
+    \onslide<16->{{\def\Aspect{.75}\tfu{and2}{true}}}
+    \onslide<17->{\tfd{not3}{false}}
+    \onslide<18->{\tfd{or4}{false}}
+    \onslide<19->{\node[right,T] at(R3.east) {b ist \textbf{\T{false}}};}
+    \onslide<20->{\tfu{b2}{false}}
+    \onslide<21->{\tfd{not4}{true}}
+    \onslide<22->{\node[right,T] at(R4.east) {b ist \textbf{\T{true}}};}
 \end{tikzpicture}
 \end{frame}
 }

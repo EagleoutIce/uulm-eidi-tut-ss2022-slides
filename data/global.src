@@ -251,8 +251,13 @@
 \newcommand\hlcode[3][1.9pt]{\fill[\hlcolor,opacity=\hlopa,rounded corners=1pt] ([shift={(-\hlhs,#1)}]#2.south west) rectangle ([shift={(\hlhs,#1)}]#2.north east); \coordinate (#3) at (#2.east);}
 
 \def\sbasic#1{\solGet{basicstyle}{#1}}
+\def\sliteral#1{\solGet{literals}{#1}}
 \def\snum#1{\solGet{basicstyle}{\solGet{numbers}{#1}}}
 \def\skA#1{\solGet{basicstyle}{\solGet{keywordA}{#1}}}
 \def\skB#1{\solGet{basicstyle}{\solGet{keywordB}{#1}}}
 \def\skC#1{\solGet{basicstyle}{\solGet{keywordC}{#1}}}
 \def\HStrut{\vphantom{\{\}g}}
+% we do not nest inside tikzmarknode as this is not possible
+\def\bnode#1#2{\tikzmarknode{#1}\HStrut\sbasic{#2}\tikzmarknode{#1@}\HStrut}
+
+\tikzset{T/.style={sol@colors@lst@comments,font=\itshape\sffamily\footnotesize}}
