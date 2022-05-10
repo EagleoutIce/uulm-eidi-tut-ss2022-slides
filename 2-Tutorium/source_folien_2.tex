@@ -600,8 +600,8 @@ Make new \(i\) have value \(1\);\SW6{\quad\J1}\medskip
 
 \subsection{Aufgabe 3}
 {
-\def\ms#1{{\color{darkgray}\mathbf{#1}}}
-\def\to{~\raisebox{1pt}{\;\tikz\draw[gray!80!pingu@black,-{Kite[scale=1.05]},line cap=round,line width=.925pt] (0,0) -- (6mm,0);}~}%
+\def\ms#1{{\color{lightgray}\mathbf{#1}}}
+\def\to{~\raisebox{1pt}{\;\tikz\draw[lightgray,-{Kite[scale=1.05]},line cap=round,line width=.925pt] (0,0) -- (6mm,0);}~}%
 \begin{frame}[fragile]{Aufgabe 3: Boolesche Ausdrücke}
     \task<2->{Betrachten Sie den folgenden Java Code-Ausschnitt. Werten Sie die folgenden Ausdrücke in der Reihenfolge, in der sie ausgeführt werden (d.h. von oben nach unten), aus. Geben Sie dazu für jede Zeile (beginnend mit der zweiten Zeile) den neuen Wert der Variablen \T{b} an.\vspace*{-\medskipamount}}
 \begin{plainjava}[lineskip=15pt]
@@ -612,10 +612,9 @@ Make new \(i\) have value \(1\);\SW6{\quad\J1}\medskip
 !*\onslide<7->*!b = !b;
 \end{plainjava}
 \begin{tikzpicture}[overlay,remember picture]
-    \node[above left,yshift=\btdmfootheight,text width=14cm,scale=.8] at(current page.south east) {\begin{alignat*}{4}
-        \ms{a\text{++},~~a\text{-\,-}}&\to~\ms{!a,~~ -a,~~ \text{++}a,~~\text{-\,-}a}&&\to~\ms{a~*~b,~~a~/~b,~~a~\%~b} \\
-        & \to~\ms{a+b,~~a-b}&&\to~\ms{a==b,~~a<b,~~\ldots}\\
-        & \to~\ms{a~\mbox{\textasciicircum}~b}&&\to~\ms{a~\&\&~b}\\
+    \node[above left,yshift=\btdmfootheight,text width=15.5cm,scale=.65] at(current page.south east) {\begin{alignat*}{5}
+        \ms{a\text{++},~~a\text{-\,-}}&\to~\ms{!a,~~ -a,~~ \text{++}a,~~\text{-\,-}a}&&\to~\ms{a~*~b,~~a~/~b,~~a~\%~b} && \to~\ms{a+b,~~a-b} \\
+        &\to~\ms{a==b,~~a<b,~~\ldots} && \to~\ms{a~\mbox{\textasciicircum}~b}&&\to~\ms{a~\&\&~b}\\
         & \to~\ms{a~||~b}
      \end{alignat*}};
 \end{tikzpicture}
