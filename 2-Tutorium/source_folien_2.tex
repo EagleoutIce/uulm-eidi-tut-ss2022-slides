@@ -715,8 +715,14 @@ $3->\text{\only<-4|handout:0>{\sbasic{\}}}\only<5->{\sbasic{\color{codeouthl}\}}
 
 \SetNextSectionText{Kontrollstrukturen\\Abgabe: \DTMDate{2022-05-16}}
 \section{Aussicht: Übungsblatt 3}
-\begin{frame}
+\begin{frame}{Allgemeines}
+\begin{itemize}
+    \item Wenn wir Java-Code möchten, steht das da \info{ab jetzt wird das der Standardfall sein.}
+\end{itemize}
+\end{frame}
 
+\begin{frame}
+    TODO: Rundungsproblem
 \end{frame}
 
 \section{Abschließendes}
@@ -726,7 +732,13 @@ $3->\text{\only<-4|handout:0>{\sbasic{\}}}\only<5->{\sbasic{\color{codeouthl}\}}
 \vfill\vfill % double fill for more fraction
 \begin{itemize}[<+(1)->]
     \itemsep14pt
-    \item TODO
+    \item Kommandozeilenparameter landen im \bjava{args}-Array (als \bjava{String})
+    \item \bjava{Integer.parseInt("13")} liefert die vom \bjava{String} beschriebene Ganzzahl (\bjava{13})
+    \item Unteralgorithmen sind ein elementarer Programmiermechanismus
+    \item Javas implizite Typkonvertierungen existieren nur für primitive Datentypen \begin{itemize}
+        \item \bjava{byte}~\(\to\)~\bjava{short}~\(\to\)~\bjava{int}~\(\to\)~\bjava{long}~\(\to\)~\bjava{long}~\(\to\)~\bjava{double}\quad und \bjava{char}~\(\to\)~\bjava{int}
+        \item \say{Zahlen von klein nach groß, \bjava{char} zu \bjava{int}}
+    \end{itemize}
 \end{itemize}
 \end{frame}
 }
