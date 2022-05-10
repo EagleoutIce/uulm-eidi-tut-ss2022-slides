@@ -375,7 +375,7 @@ $3->$}
     }
 \end{frame}}
 
-{\setbeamertemplate{enumerate item}{\task{\alph{enumi})}}
+{\taskenum
 \SetAlgoVlined
 \MakeThePinguExplainIt[text width=5cm]{cap=!hide,pumpkin-hat,cup=paletteC,right item angle=-10}{In der Aufgabe stand etwas von \say{größer als~1}, aber wie wir Listen indizieren ist nicht von uns standardisiert.}
 \begin{frame}{Elemente vertauschen}
@@ -526,7 +526,7 @@ Make new \(i\) have value \(1\);\SW6{\quad\J1}\medskip
 \fi
 
 \subsection{Aufgabe 2}
-{\setbeamertemplate{enumerate item}{\task{\alph{enumi})}}
+{\taskenum
 \begin{frame}{Aufgabe 2: Datentypen}
     \task<2->{Welchen Datentyp würden Sie wählen um folgende Daten zu speichern? \only<3->{\textbf}{Begründen Sie Ihre Antwort!}}\smallskip
     \begin{enumerate}
@@ -553,9 +553,9 @@ Make new \(i\) have value \(1\);\SW6{\quad\J1}\medskip
         \itemsep1pt
         \item<6-> Java kann für ein \bjava{byte} auch \qty{32}\bit\ oder mehr (\qty{64}\bit,~\ldots) reservieren
         \item<7-> Analog wird \bjava{boolean} oft als \bjava{byte} umgesetzt \info{\link{https://docs.oracle.com/javase/specs/jvms/se17/html/jvms-2.html\#jvms-2.3.4}{JVMS17~2.3.4}}
-        \item<8-> Das hat mit Geschwindigkeit, Parallelisierung, Sicherheit,~\ldots\ zu tun.
+        \item<8-> Das hat mit Geschwindigkeit, Parallelisierung, Sicherheit,~\ldots\ zu tun
         %% \item<9-> Bei Arrays sieht das wieder anders aus\ldots
-        \item<9-> Für uns in EidI sind die Details nicht wichtig.
+        \item<9-> Für uns in EidI sind die Details nicht wichtig
     \end{itemize}
 \end{itemize}
 \end{frame}
@@ -661,9 +661,57 @@ Make new \(i\) have value \(1\);\SW6{\quad\J1}\medskip
 }
 
 \subsection{Aufgabe 4}
-\begin{frame}{Aufgabe 4: Varablen anlegen und verarbeiten}
+\begin{frame}[fragile]{Aufgabe 4: Varablen anlegen und verarbeiten}
+    \begin{taskblock}<2->
+        In der Vorlesung haben Sie gelernt, wie in Java Variablen deklariert und initialisiert werden. Nun sollen Sie in einem kleinen Beispiel diese Konzepte selbst umsetzen. Betrachten Sie die \T{.java}-Datei namens \T{Variablen.java} mit folgendem Inhalt:\smallskip\begin{uncoverenv}<3->
+\begingroup\subdue
+class Variablen \{
+    public static void main(String[] args) \{
 
+    \}
+\}\smallskip
+\endgroup
+\end{uncoverenv}
+\begin{enumerate}
+    \itemsep6pt
+    \item<4-> Erweitern Sie den Code so, dass zwei int Variablen deklariert werden. Initialisieren Sie diese \only<6->{\textbf}{anschließend} mit
+    einem beliebigen gültigen Wert und addieren Sie sie. Das Ergebnis dieser Addition soll in eine neue dritte int
+    Variable gespeichert werden. Geben Sie das Ergebnis dann über den Aufruf System.out.println(name) aus,
+    wobei Sie name entsprechend ersetzen.
+    \item<5-> Geben Sie als Kommentar im Java Code aus Teilaufgabe~a) jeweils an, ob es ich bei dieser Zeile um eine Deklaration, Initialisierung oder Zuweisung handelt.
+\end{enumerate}
+\end{taskblock}
 \end{frame}
+
+{\taskenum
+\DoAnimations
+\MakeThePinguExplainIt[text width=8cm]{cap=!hide,cup=!hide,straw hat,german flag left,body type=legacy,right item angle=-160}{Ist es wichtig, dass die letzte Initialisierung mit einer Summe ist? Nö. Es ist einfach nur der erste Wert, den \T{Ergebnis} erhält.}
+\begin{frame}[fragile]{Simple Adds and Stuff}
+\begin{enumerate}
+    \item<2-> \task{Erweitern Sie den Code (Deklarieren, Initialisieren, Addieren und Ausgeben)}
+    \item<10-> \task{Geben Sie an, wo Deklarationen, Initialisierungen und Zuweisungen stattfinden.}
+\end{enumerate}
+\begin{plainjava}
+$3->\text{\only<-4|handout:0>{\sbasic{\skA{class} Variablen \{}}\only<5->{\sbasic{\color{codeouthl}class Variablen \{}}}$
+$4->$    $4->\text{\only<-4|handout:0>{\sbasic{\skA{public static} \skB{void} main(\skB{String}[] args) \{}}\only<5->{\sbasic{\color{codeouthl}public static void main(String[] args) \{}}}$
+$6->$       int zahl1, zahl2, ergebnis; $6->\text{\Snode{R1}}$
+$7->$       zahl1 = 40; $7->\text{\Snode{R2}}$
+$7->$       zahl2 =  2; $7->\text{\Snode{R3}}$
+$8->$       ergebnis = zahl1 + zahl2; $8->\text{\Snode{R4}}$
+$9->$       System.out.println(ergebnis); $9->\text{\Snode{R5}}$
+$4->$    $4->\text{\only<-4|handout:0>{\sbasic{\}}}\only<5->{\sbasic{\color{codeouthl}\}}}}$
+$3->\text{\only<-4|handout:0>{\sbasic{\}}}\only<5->{\sbasic{\color{codeouthl}\}}}}$
+\end{plainjava}
+\begin{tikzpicture}[overlay,remember picture]
+\onslide<11->{\node[right,T] at(R1.east) {Alle drei Variablen werden \textbf{deklariert}};}
+\onslide<12->{\node[right,T] at(R2.east) {Eine \textbf{Initialisierung} mit Wert \T{40}};}
+\onslide<13->{\node[right,T] at(R3.east) {Eine \textbf{Initialisierung} mit Wert \T{2}};}
+\onslide<14->{\node[right,T] (@) at(R4.east) {Eine \textbf{Initialisierung} mit dem Ergebnis der Summe};}
+\onslide<15->{\node[right,T] at(R5.east) {Eine Ausgabe (für die~b irrelevant)};}
+\onslide<16->{\node[left=-3mm,xshift=7mm,scale=.8,yshift=\btdmfootheight] at(current page.-22) {\copy\pinguexplainbox};}% copy for animations
+\end{tikzpicture}
+\end{frame}
+}
 
 \SetNextSectionText{Kontrollstrukturen\\Abgabe: \DTMDate{2022-05-16}}
 \section{Aussicht: Übungsblatt 3}

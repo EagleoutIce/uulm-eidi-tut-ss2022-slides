@@ -188,7 +188,6 @@
 
   \node[above left=-2.66mm,fill=pingu-board-back,draw=pingu@bronze!50!pingu@black!70!pingu@main!80!btdm@text,line width=.6mm,rounded corners=2pt,text width=5.25cm,minimum height=1.5cm,text=btdm@text,inner sep=8pt,align=justify,#1] at (pingu-staff-right-top) {\LstBoardStyle\topsep=0pt\ignorespaces#3};}
 
-\newcommand<>\task[1]{\begin{uncoverenv}#2{\par\begingroup\footnotesize{\color{gray}\itshape#1}\par\endgroup}\end{uncoverenv}}
 
 \AtBeginDocument{\def\O{\ensuremath{\mathcal{O}}}}
 \newsavebox\pinguA \newsavebox\pinguB
@@ -258,6 +257,16 @@
 \def\skC#1{\solGet{basicstyle}{\solGet{keywordC}{#1}}}
 \def\HStrut{\vphantom{\{\}g}}
 % we do not nest inside tikzmarknode as this is not possible
-\def\bnode#1#2{\tikzmarknode{#1}\HStrut\sbasic{#2}\tikzmarknode{#1@}\HStrut}
+\def\Snode#1{\tikzmarknode{#1}\HStrut}
+\def\bnode#1#2{\Snode{#1}\sbasic{#2}\Snode{#1@}}
 
 \tikzset{T/.style={sol@colors@lst@comments,font=\itshape\sffamily\footnotesize}}
+
+\def\taskenum{\setbeamertemplate{enumerate item}{\task{\alph{enumi})}}}
+\newenvironment<>{taskblock}{\begin{uncoverenv}#1\par\begingroup\footnotesize\color{gray}\itshape
+  \taskenum\setbeamercolor{itemize/enumerate body}{fg=gray}\setbeamerfont{itemize/enumerate body}{size=\footnotesize,shape=\itshape}}{\par\endgroup\end{uncoverenv}}
+\newcommand<>\task[1]{\taskblock#1\endtaskblock}
+
+{\obeyspaces\catcode `\^^M\active
+\gdef\subdue{\obeyspaces\catcode `\^^M\active \def {\mbox{\space}}\def^^M{\leavevmode\\}}% keep it real :P we def space ad newline to block
+}
