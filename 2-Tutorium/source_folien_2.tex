@@ -715,15 +715,44 @@ $3->\text{\only<-4|handout:0>{\sbasic{\}}}\only<5->{\sbasic{\color{codeouthl}\}}
 
 \SetNextSectionText{Kontrollstrukturen\\Abgabe: \DTMDate{2022-05-16}}
 \section{Aussicht: Übungsblatt 3}
-\begin{frame}{Allgemeines}
+\begin{frame}{Ein kleiner Schwenk}
 \begin{itemize}
-    \item Wenn wir Java-Code möchten, steht das da \info{ab jetzt wird das der Standardfall sein.}
+    \itemsep8pt
+    \item<2-> Wenn wir Java-Code möchten, steht das da \info{ab jetzt wird das der Standardfall sein.}
+    \item<3-> In Aufgabe~1 suchen wir \textit{einen} booleschen Ausdruck der das Programm abbildet. \onslide<2->{\infoblock{Vergleiche hierzu die Präsenzaufgabe von letzter Woche.}}
+    \item<5-> Für die Schleifen der 2\textsuperscript{ten} Aufgabe, kann man sich die Alternativen dieser Präsenzaufgabe nochmal ansehen.
+    \item<6-> Aufgaben~3 und~4 sind da schon interessanter\ldots
+    \item<7-> Allgemein gilt: Wenn Pseudocode oder ein Ansatz gegeben ist, soll der Algorithmus auch diesen Verwenden oder darauf aufbauen!
 \end{itemize}
 \end{frame}
 
-\begin{frame}
-    TODO: Rundungsproblem
+\begin{frame}{Aufgabe 3: Algorithmen in Java implementieren}
+    \begin{itemize}[<+(1)->]
+        \itemsep12pt
+        \item Eine abstrakte Notation wird konkret.
+        \item Viele einzelne Punkte werden nun kollektiv Wichtig \begin{itemize}
+            \itemsep5pt
+            \item Einhalten der Java-Syntax
+            \item Welcher Datentyp passt am besten?
+            \item Welche Art von Schleife, Fallunterscheidung,~\ldots\ eignet sich?
+            \item Was drückt der Pseudocode implizit aus, ist aber in Java explizit notwendig?
+            \item Und umgekehrt: was müssen wir in Java nicht schreiben?
+            \item \ldots
+        \end{itemize}
+        \item Kommentare empfehlen sich da, wo der Gedanke des Algorithmus hinter Java-\allowbreak Gebrabbel verschwindet. \info{If you are interested, consider looking up literate programming~\cite{knuth1984literate}}
+    \end{itemize}
 \end{frame}
+
+\begin{frame}{Aufgabe 4: Iterative Wurzelberechnung}
+    \begin{itemize}
+        \item TODO; nochmal parseDouble ansprechen und zwei-elementiges Array
+        \item Auch wirklich Formel verwenden und nicht irgendwas anderes fancy-ges
+    \end{itemize}
+\end{frame}
+
+% \begin{frame}
+%     TODO: Rundungsproblem
+% \end{frame}
 
 \section{Abschließendes}
 {\SummaryFrame
@@ -743,9 +772,8 @@ $3->\text{\only<-4|handout:0>{\sbasic{\}}}\only<5->{\sbasic{\color{codeouthl}\}}
 \end{frame}
 }
 
-\outro{\vskip6mm\centering\begin{tikzpicture}[scale=2.5]
-    % \only<2->{\pingu[monocle left,right eye wink,left eye vertical,laptop right,cane left,tie,body type=legacy,headphones=pingu@green!80!pingu@black]}
-    % TODO
+\outro{\vskip6mm\centering\begin{tikzpicture}[scale=1.5]
+    \only<2->{\pingu[wings=shock,body type=chubby,eyes hearts=pingu@red!10!pingu@black, santa hat, santa beard]}
 \end{tikzpicture}}
 
 
