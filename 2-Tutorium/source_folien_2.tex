@@ -53,7 +53,7 @@
             \end{tikzpicture}}\vspace*{-\medskipamount}
         \item<9-> Kerneigenschaften eines Algorithmus: \begin{itemize}
             \item<10-> Von einem Prozessor \info{Mensch,~\ldots} in endlich vielen Schritten Ausführ- und Reproduzierbar
-            \item<11-> Eine endliche Beschreibung in Elementaroperationen.
+            \item<11-> Eine endliche Beschreibung in Elementaroperationen
         \end{itemize}
         \item<12-> Abstrakte Variablenoperationen:
 \begin{plainjava}
@@ -77,8 +77,8 @@
 \begin{frame}[fragile]{M-Array me und andere Zukunftsträume}
     \begin{itemize}[<+(1)->]
         \itemsep9pt
-        \item Arrays werden später genauer behandelt.
-        \item Arrays sind Listen fester Größe die Elemente des gleichen Datentyps beinhalten.
+        \item Arrays werden später genauer behandelt
+        \item Arrays sind Listen fester Größe die Elemente des gleichen Datentyps beinhalten
         \item Wir notieren sie mit \T{[]}:
 \begin{plainjava}[lineskip=2pt]
 !*\onslide<5->*!int!*\tikzmarknode{@}{\sbasic{\HStrut[]}}*! arr = {!*\tikzmarknode{@0}{\snum{\HStrut42}}*!, !*\tikzmarknode{@2}{\snum{\HStrut-7}}*!,  !*\tikzmarknode{@4}{\snum{\HStrut13}}*!};
@@ -137,9 +137,9 @@
 \end{uncoverenv}
 \begin{itemize}[<+(1)->]
     \itemsep6pt
-    \item<4-> Hier haben wir ein Array von Strings.
-    \item<5-> Dieses wird von der Java Virtual Machine gefüllt.
-    \item<7-> Beim Programmstart mit \cbash{java Example}, können wir Argumente übergeben.
+    \item<4-> Hier haben wir ein Array von Strings
+    \item<5-> Dieses wird von der Java Virtual Machine gefüllt
+    \item<7-> Beim Programmstart mit \cbash{java Example}, können wir Argumente übergeben
 \end{itemize}
 \end{frame}
 
@@ -258,7 +258,7 @@ n = 13 !*\onslide<5->*!// :yields: 1 4 7 10 13
 $3->$public class ErsteSchleife {
 $4->$    public static void main(String[] args) {
 $5->$        int n = Integer.parseInt(args[0]);$5->\tikzmarknode{robust}{\HStrut}$
-$6->$        for(int i = 1; i <= n; i = i + 3){
+$6->$        for(int i = 1; i <= n; i = i + 3) {
 $7->$            System.out.$7->\tikzmarknode{println}{\text{\sbasic{println}}}$(i);
 $6->$        }
 $4->$    }
@@ -276,7 +276,7 @@ $3->$}
         \node[below right,yshift=1mm,gray] at (@2.south west) {Dafür gibt es \say{print} anstelle von \say{print \textbf{l}i\textbf{n}e}.};
     }
     \onslide<11->{
-        \draw[Kite-,gray] (robust) to[out=0,in=180] ++(.5,-.15) node[below right,align=left,yshift=.6\baselineskip] {Was, wenn es keine\\Argumente gibt? Hier\\hilft eine if-Abfrage};
+        \draw[Kite-,gray] (robust) to[out=0,in=180] ++(.5,-.15) node[below right,align=left,yshift=.6\baselineskip] {Was, wenn es keine\\Argumente gibt? Hier\\hilft eine if-Abfrage.};
     }
     \only<12->{\node[above left,yshift=\btdmfootheight] at (current page.south east) {\textattachfile{\curpath ErsteSchleife.java}{ErsteSchleife.java}\;};}
 \end{tikzpicture}
@@ -313,7 +313,7 @@ $9->$}$1->$
     \item<15-> \say{\bbash{java ErsteSchleife 12}} liefert die Ausgabe \say{\bbash{1 4 7 10 }}
 \end{itemize}
 \begin{tikzpicture}[overlay,remember picture]
-    \onslide<13->{\node[right,T] at(semi.east) {\say{;}~Nicht vergessen!};}
+    \onslide<13->{\node[right,T] at(semi.east) {Das \T{\textbf{;}}~nicht vergessen!};}
     \onslide<14->{\node[right,T] (@) at(check.east) {Soll die Schleife überhaupt}; \node[below right,yshift=1.35mm,T] at(@.south west) {einmal laufen?};}
     \only<16->{\node[above left,yshift=\btdmfootheight] at (current page.south east) {\textattachfile{\curpath ErsteSchleifeWhile.java}{ErsteSchleifeWhile.java}, \textattachfile{\curpath ErsteSchleifeDoWhile.java}{ErsteSchleifeDoWhile.java}\;};}
 \end{tikzpicture}
@@ -380,7 +380,7 @@ $3->$}
 \MakeThePinguExplainIt[text width=5cm]{cap=!hide,pumpkin-hat,cup=paletteC,right item angle=-10}{In der Aufgabe stand etwas von \say{größer als~1}, aber wie wir Listen indizieren ist nicht von uns standardisiert.}
 \begin{frame}{Elemente vertauschen}
 \begin{enumerate}
-    \item \task<2->{Entwerfen Sie einen Algorithmus, der gegeben einer Liste und zwei Indizes die entsprechenden Elemente
+    \item<2-> \task{Entwerfen Sie einen Algorithmus, der gegeben einer Liste und zwei Indizes die entsprechenden Elemente
 vertauscht. Stellen Sie sicher, dass die Indizes \(i\) und \(j\) gültig sind, d.h. dass sie \only<9->{\expandafter\textbf}{größer als \(1\)} und kleiner als die
 Länge der Liste sind. Stellen Sie zudem sicher, dass die Länge der Liste mindestens \(2\) beträgt. Der Algorithmus soll für den Fall der Ungültigkeit mit einer Fehlermeldung abbrechen.}\medskip
 \onslide<3->{\begin{algorithm}[H]
@@ -528,7 +528,7 @@ Make new \(i\) have value \(1\);\SW6{\quad\J1}\medskip
 \subsection{Aufgabe 2}
 {\taskenum
 \begin{frame}{Aufgabe 2: Datentypen}
-    \task<2->{Welchen Datentyp würden Sie wählen um folgende Daten zu speichern? \only<3->{\textbf}{Begründen Sie Ihre Antwort!}}\smallskip
+    \task<2->{Welchen Datentyp würden Sie wählen um folgende Daten zu speichern? \only<3->{\expandafter\textbf}{Begründen Sie Ihre Antwort!}}\smallskip
     \begin{enumerate}
         \itemsep12pt
         \item<4-> \task{Die Email-Adresse einer Person}
@@ -674,7 +674,7 @@ class Variablen \{
 \end{uncoverenv}
 \begin{enumerate}
     \itemsep6pt
-    \item<4-> Erweitern Sie den Code so, dass zwei int Variablen deklariert werden. Initialisieren Sie diese \only<6->{\textbf}{anschließend} mit
+    \item<4-> Erweitern Sie den Code so, dass zwei int Variablen deklariert werden. Initialisieren Sie diese \only<6->{\expandafter\textbf}{anschließend} mit
     einem beliebigen gültigen Wert und addieren Sie sie. Das Ergebnis dieser Addition soll in eine neue dritte int
     Variable gespeichert werden. Geben Sie das Ergebnis dann über den Aufruf System.out.println(name) aus,
     wobei Sie name entsprechend ersetzen.
@@ -719,7 +719,7 @@ $3->\text{\only<-4|handout:0>{\sbasic{\}}}\only<5->{\sbasic{\color{codeouthl}\}}
 \begin{itemize}
     \itemsep8pt
     \item<2-> Wenn wir Java-Code möchten, steht das da \info{ab jetzt wird das der Standardfall sein.}
-    \item<3-> In Aufgabe~1 suchen wir \textit{einen} booleschen Ausdruck der das Programm abbildet. \onslide<2->{\infoblock{Vergleiche hierzu die Präsenzaufgabe von letzter Woche.}}
+    \item<3-> In Aufgabe~1 suchen wir \textit{einen} booleschen Ausdruck der das Programm abbildet. \onslide<4->{\infoblock{Vergleiche hierzu die Präsenzaufgabe von letzter Woche.}}
     \item<5-> Für die Schleifen der 2.~Aufgabe, kann man sich die Alternativen dieser Präsenzaufgabe nochmal ansehen.
     % \item<6-> Aufgaben~3 und~4 sind da schon interessanter\ldots
     \item<6-> Allgemein gilt: Wenn Pseudocode oder ein Ansatz gegeben ist, soll der Algorithmus auch diesen Verwenden oder darauf aufbauen!
@@ -744,7 +744,7 @@ $3->\text{\only<-4|handout:0>{\sbasic{\}}}\only<5->{\sbasic{\color{codeouthl}\}}
 \end{frame}
 
 \begin{frame}{Aufgabe 4: Iterative Wurzelberechnung}
-    \begin{itemize}
+    \begin{itemize}[<+(1)->]
         \itemsep10pt
         \item Für die Fließkommazahl gibt es \bjava{Float.parseFloat} oder \bjava{Double.parseDouble}
         \item Verwendet das Heron-Verfahren wie angegeben \info{keine alternative Wurzelberechnung}
