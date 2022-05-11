@@ -65,7 +65,9 @@
 % forbid additional loading:
 \renewcommand*\usepackage[2][]{\typeout{gobble: ##1|##2}}
 \renewcommand*\RequirePackage[2][]{\typeout{gobble: ##1|##2}}
-\def\printBibCommand{\let\vfill\relax}%
+% only fill if there is something?
+\let\oldprintbibcommand\printBibCommand
+\def\printBibCommand{\setbox0=\vbox{\oldprintbibcommand}\ifdim\wd0<3mm\relax \let\vfill\relax\else \box0\fi}%
 \let\titleframe\relax % no extra titlepage
 % get the date:
 \typeout{Loading: #3/source_folien_#4.tex}
