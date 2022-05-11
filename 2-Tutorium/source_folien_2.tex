@@ -612,6 +612,37 @@ Make new \(i\) have value \(1\);\SW6{\quad\J1}\medskip
     }
 \end{tikzpicture}
 \end{frame}
+\def\rr#1#2#3#4{[\(\overset{{\text{\scriptsize$\color{codeouthl}#3$}}}{\num{#1}}\) bis \(\overset{{\text{\scriptsize$\color{codeouthl}#4$}}}{\num{#2}}\)]}
+\def\r#1--#2[#3]{\rr{-#1}{#2}{-2^{#3}}{2^{#3}-1}}%
+\def\appr#1#2{\num{#1} Sekunden sind \(\approx\num{#2}\) Stunden}
+\def\apprJ#1#2{\num{#1} Sekunden sind \(\approx\num{#2}\) Jahre}
+\begin{frame}{Primitives Fassungsvermögen\hfill Ganzzahlwerte}
+\begin{itemize}[<+(1)->]
+    % \item Wir vermerken (die Grenzen sind inklusiv)
+    \itemsep4pt
+    \item \bjava{byte}\pause\ fasst \r128--127[7]\pause\infoblock{Das reicht aus, um alle Primzahlen zwischen \num{2000} und \num{3000} zu zählen. \appr{127}{0.035}.}
+    \item \bjava{short}\pause\ fasst \r32768--32767[15]\pause\infoblock{\appr{32767}{9.1}.}
+    \item \bjava{char}\pause\ fasst \rr{0}{65535}{0}{2^{16}-1}\pause\infoblock{Das reicht für alle Code Units von UTF-8!}
+    \item \bjava{int}\pause\ fasst \r2147483648--2147483647[31]\pause\infoblock{\apprJ{2147483647}{68.05}.}
+    \item \bjava{long}\pause\ fasst \r9223372036854775808--9223372036854775807[63]\pause\infoblock{\apprJ{9223372036854775807}{292271023045.3} \(\approx 658\) Millionen mal \say{älter}, als das Universum.}
+\end{itemize}
+\begin{tikzpicture}[overlay,remember picture]
+    \onslide<17->{\node[above left,yshift=\btdmfootheight,codeouthl] at(current page.south east) {\footnotesize\link{https://docs.oracle.com/javase/specs/jls/se17/html/jls-4.html\#jls-4.2.1}{JLS17 4.2.1}, \link{https://docs.oracle.com/javase/specs/jvms/se17/html/jvms-2.html\#jvms-2.3.1}{JVMS17 2.3.1}};}
+\end{tikzpicture}
+\end{frame}
+\begin{frame}{Primitives Fassungsvermögen\hfill Fließkommawerte}
+\begin{itemize}[<+(1)->]
+    % \item Wir vermerken (die Grenzen sind inklusiv)
+    \itemsep10pt
+    \item \bjava{float}\pause\ schweift zwischen \(\pm 2^{-126}\) bis zu \((2 - 2^{-23}) \cdot 2^{127}\)\pause\infoblock{Joa\ldots Das sind mehr als \(5 \cdot 10^{30}\) Jahre.}
+    \item \bjava{double}\pause\ schweift zwischen \(\pm 2^{-\num{1022}}\) bis zu \((2 - 2^{-52}) \cdot 2^{\num{1023}}\)\pause\infoblock{So zählen sie sich leicht, die Atome des Universums!}\bigskip
+    \item Dabei sollten wir die Rundungsprobleme aber nicht außer Acht lassen
+    \item Jenseits des Primitiven liefert Java natürlich mehr \begin{itemize}
+        \item \solGet{keywordB}{\link{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/math/BigInteger.html}{BigInteger}} begrenzt die Anzahl Bits durch einen \bjava{int}
+        \item \solGet{keywordB}{\link{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/math/BigDecimal.html}{BigDecimal}} erlaubt Skalieren durch \bjava{int} und volle Kontrolle übers Runden
+    \end{itemize}
+\end{itemize}
+\end{frame}
 }
 \fi
 
