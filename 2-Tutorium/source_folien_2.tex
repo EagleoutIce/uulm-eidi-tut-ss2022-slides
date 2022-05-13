@@ -8,7 +8,7 @@
     \node[above left,yshift=\btdmfootheight-1mm] at(current page.south east) {\copy\pinguA};
 \endtikzpicture}
 \def\packtitlenode#1#2{\node[font=\usebeamerfont{title},inner xsep=0pt,opacity=#1,outer ysep=2pt] (#2) {getauscht};}
-\title[Erstes Tutorium -- Übungsblatt 2]{Diese Worte \texorpdfstring{\,\setbox0=\hbox{getau\kern5pt\relax scht}\phantom{\copy0}\llap{\tikz[baseline=(k.base)]{%
+\title{Diese Worte \texorpdfstring{\,\setbox0=\hbox{getau\kern5pt\relax scht}\phantom{\copy0}\llap{\tikz[baseline=(k.base)]{%
 \packtitlenode0k
 \def\kA{310}\def\kB{130}\def\kS{-.5\wd0-5pt}
 \scope[xshift=-\kS]\packtitlenode0x
@@ -801,7 +801,7 @@ $3->\text{\only<-4|handout:0>{\sbasic{\}}}\only<5->{\sbasic{\color{codeouthl}\}}
     \item \bjava{Integer.parseInt("13")} liefert die vom \bjava{String} beschriebene Ganzzahl (\snum{13})
     \item Unteralgorithmen sind ein elementarer Programmiermechanismus
     \item Javas implizite Typkonvertierungen existieren nur für primitive Datentypen \begin{itemize}
-        \item \bjava{byte}~\(\to\)~\bjava{short}~\(\to\)~\bjava{int}~\(\to\)~\bjava{long}~\(\to\)~\bjava{long}~\(\to\)~\bjava{double}~~und~~\bjava{char}~\(\to\)~\bjava{int}
+        \item \bjava{byte}~\(\to\)~\bjava{short}~\(\to\)~\bjava{int}~\(\to\)~\bjava{long}~\(\to\)~\bjava{double}~~und~~\bjava{char}~\(\to\)~\bjava{int}
         \item \say{Zahlen von klein nach groß, \bjava{char} zu \bjava{int}}
     \end{itemize}
 \end{itemize}
