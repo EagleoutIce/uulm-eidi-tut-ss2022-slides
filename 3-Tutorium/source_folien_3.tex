@@ -1,0 +1,60 @@
+\InputIfFileExists{../data/global.src}\relax\relax
+
+\iffull
+\title{Crossover Zahnbehandlungen}
+\subtitle{Wurzelziehen Drei}
+\date{KW 20}
+\addbibresource{references.bib}
+\fi
+\SetTutoriumNumber{3}
+
+\iffull\begin{document}
+\titleframe
+
+\TopicOverview{3}
+\fi
+
+\iffull{\SummaryFrame
+\def\k{\textcolor{gray}{\(\rightarrow\)}}
+\def\K{\textcolor{gray}{\(\longrightarrow\)}}
+\def\a{\textcolor{codeouthl}{a}}
+\def\b{\textcolor{codeouthl}{b}}
+\setbeamerfont{description item}{shape=\itshape,series=\mdseries,size=\footnotesize}
+\setbeamerfont{description body}{size=\footnotesize}
+\setbeamerfont{itemize/enumerate subbody}{size=\footnotesize}
+\begin{frame}[fragile,c]{Kurzwiederholung}
+    \begin{itemize}[<+(1)->]
+        \itemsep8pt
+        \item Algorithmen können wir auf diverse Eigenschaften untersuchen: \begin{description}[Totale Korrektheit:]
+            \item[Determiniertheit:] die gleiche Eingabe erzeugt immer die gleiche Ausgabe\hfill\tikz[align-half-base,every path/.append style={line cap=round},gray]{\node[circle,scale=.4,fill] (a) at (0,0) {}; \node[circle,scale=.4,fill] (b) at (.7,0) {}; \pgfonlayer{background}\draw[codeouthl](a) to[bend left=30.5] (b); \draw[codeouthl](a) to[bend right=30.5] (b); \draw[codeouthl](a) to[bend left=10] (b); \draw[codeouthl](a) to[bend right=10] (b); \endpgfonlayer\node[scale=.85,circle,fill=white,opacity=.3,text opacity=1,inner sep=0pt] at(current bounding box.center) {?};}
+            \item[Determinismus:] bei gleicher Eingabe folgt stets die gleiche Schrittfolge \info{\textcolor{gray}{~\(\Rightarrow\)~Determiniert}}\hfill\tikz[align-half-base,every path/.append style={line cap=round},gray]{\node[circle,scale=.4,fill] (a) at (0,0) {}; \node[circle,scale=.4,fill] (b) at (.7,0) {}; \pgfonlayer{background}\draw[codeouthl](a) to[bend left=30.5] (b); \draw[codeouthl](a) to[bend right=30.5] (b); \draw[gray](a) to[bend left=10] (b); \draw[codeouthl](a) to[bend right=10] (b);\endpgfonlayer}
+            \item[Totale Korrektheit:] Terminiert und partiell korrekt \info{\(\text{Terminiert} \implies \text{gewünschte Ausgabe}\)}
+        \end{description}
+        \item Manche von Javas primitive Datentypen können implizit konvertiert werden. \begin{itemize}
+            \item \bjava{byte}~\k~\bjava{short}~\k~\bjava{int}~\k~\bjava{long}~\k~\bjava{double}~~und~~\bjava{char}~\k~\bjava{int}
+        \end{itemize}
+        \item Javas Präzedenzregeln geben an, wie Operatoren implizit geklammert werden \begin{itemize}
+            \item \textcolor{codeouthl}{(stark)}~~~\T{\a++}~\K~\T{!\a}, \T{++\a}~\K~\T{\a\,/\,\b}, \T{\a\,*\,\b}~\K~\T{\a\,+\,\b}, \T{\a\,-\,\b}~\K~\T{\a\,==\,\b}~\K~\T{\a\,\&\&\,\b}~\K~\T{\a\,|\!|\,\b}~~~\textcolor{codeouthl}{(schwach)}%\smallskip
+            \item Bei Ganzzahldivisionen werden Nachkommastelle abgeschnitten \info{\bjava{5/2} ergibt \bjava{2}}
+            \item Bei unterschiedlichen Typen (\bjava{5.0/2}) wird der \say{kleinere} implizit \say{angehoben} (\bjava{5.0/2.0})
+            \item \bjava{byte} oder \bjava{short} werden dabei immer mindestens zu \bjava{int} \info{\say{promoted}/widening, \link{https://docs.oracle.com/javase/specs/jls/se17/html/jls-5.html\#jls-5.6}{JLS17~5.6}}
+        \end{itemize}
+        % für Ganzzahlen (\bjava{byte}, \bjava{short}, \bjava{int}, \bjava{long}), Fließkommazahlen (\bjava{float}, \bjava{double}), Zeichen (\bjava{char}) und Wahrheitswerte (\bjava{boolean})
+%        \begin{itemize}
+% TODO:            \item Variablen dekl, init, zws
+%        \end{itemize}
+        \item Wenn verschachtelte Schleifen voneinander abhängen, hilft Gauß \info{\raisebox{1.5pt}{\(\scriptstyle\sum_{i = \text{1}}^N i\;{}={} \frac{N \cdot (N + \text{1})}{\text{2}}\)}}% TODO: Schleifen die voneinander abhängen
+% \item TODO: Kommandozeilenparameter
+    \end{itemize}
+    \onslide<1->
+\end{frame}
+}\fi
+
+\SetNextSectionText{TODO}
+\section{Buh}
+
+\outro{\vskip6mm\centering\begin{tikzpicture}[scale=1.85]
+\end{tikzpicture}}
+
+
+\iffull\end{document}\fi
