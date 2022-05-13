@@ -461,7 +461,7 @@ Länge der Liste sind. Stellen Sie zudem sicher, dass die Länge der Liste minde
 
 \def\SW#1#2{\only<-\the\numexpr#1-1\relax|handout:0>{\;}\only<#1->{#2\;}}
 \def\L#1{\textbf{\paletteA{\small\itshape#1}}}
-\def\K#1{\textbf{\paletteC{\small\itshape\only<19->{\color{codeouthl}}#1}}}% update anim slide
+\def\K#1{\textbf{\paletteC{\small\itshape\only<20->{\color{codeouthl}}#1}}}% update anim slide
 \def\MM#1{\textbf{\paletteC{\small\itshape\only<21-|handout:1>{\color{codeouthl}}#1}}}% update anim slide
 \begin{frame}[c]{Du kriegsts' nicht raus? Better Call Gauß!\hfill The Sequel!}
 \onslide<2->{{\small\begin{algorithm}[H]
@@ -622,7 +622,7 @@ Make new \(i\) have value \(1\);\SW6{\quad\J1}\medskip
     \itemsep4pt
     \item \bjava{byte}\pause\ fasst \r128--127[7]\pause\infoblock{Das reicht aus, um alle Primzahlen zwischen~\num{2000} und~\num{3000} zu zählen. \appr{127}{0.035}.}
     \item \bjava{short}\pause\ fasst \r32768--32767[15]\pause\infoblock{\appr{32767}{9.1}.}
-    \item \bjava{char}\pause\ fasst \rr{0}{65535}{0}{2^{16}-1}\pause\infoblock{Das reicht für alle Code Units von UTF-8!}
+    \item \bjava{char}\pause\ fasst \rr{0}{65535}{0}{2^{16}-1}\pause\infoblock{Das reicht für alle Code Units von UTF-16!}
     \item \bjava{int}\pause\ fasst \r2147483648--2147483647[31]\pause\infoblock{\apprJ{2147483647}{68.05}.}
     \item \bjava{long}\pause\ fasst \r9223372036854775808--9223372036854775807[63]\pause\infoblock{\apprJ{9223372036854775807}{292271023045.3} \(\approx 658\) Millionen mal \say{älter}, als das Universum.}
 \end{itemize}
