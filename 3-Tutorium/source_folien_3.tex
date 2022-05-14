@@ -30,7 +30,7 @@
             \item[Determinismus:] bei gleicher Eingabe folgt stets die gleiche Schrittfolge \info{\textcolor{gray}{~\(\Rightarrow\)~Determiniert}}\hfill\tikz[align-half-base,every path/.append style={line cap=round},gray]{\node[circle,scale=.4,fill] (a) at (0,0) {}; \node[circle,scale=.4,fill] (b) at (.7,0) {}; \pgfonlayer{background}\draw[codeouthl](a) to[bend left=30.5] (b); \draw[codeouthl](a) to[bend right=30.5] (b); \draw[gray](a) to[bend left=10] (b); \draw[codeouthl](a) to[bend right=10] (b);\endpgfonlayer}
             \item[Totale Korrektheit:] Terminiert und partiell korrekt \info{\(\text{Terminiert} \implies \text{gewünschte Ausgabe}\)}
         \end{description}
-        \item Manche von Javas primitive Datentypen können implizit konvertiert werden. \begin{itemize}
+        \item Manche von Javas primitiven Datentypen können implizit konvertiert werden \begin{itemize}
             \item \bjava{byte}~\k~\bjava{short}~\k~\bjava{int}~\k~\bjava{long}~\k~\bjava{double}~~und~~\bjava{char}~\k~\bjava{int}
         \end{itemize}
         \item Javas Präzedenzregeln geben an, wie Operatoren implizit geklammert werden \begin{itemize}
