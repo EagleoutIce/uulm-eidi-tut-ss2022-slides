@@ -24,7 +24,7 @@
 \setbeamerfont{itemize/enumerate subbody}{size=\footnotesize}
 \begin{frame}[fragile,c]{Kurzwiederholung}
     \begin{itemize}[<+(1)->]
-        \itemsep8pt
+        \itemsep9.25pt
         \item Algorithmen können wir auf diverse Eigenschaften untersuchen: \begin{description}[Totale Korrektheit:]
             \item[Determiniertheit:] die gleiche Eingabe erzeugt immer die gleiche Ausgabe\hfill\tikz[align-half-base,every path/.append style={line cap=round},gray]{\node[circle,scale=.4,fill] (a) at (0,0) {}; \node[circle,scale=.4,fill] (b) at (.7,0) {}; \pgfonlayer{background}\draw[codeouthl](a) to[bend left=30.5] (b); \draw[codeouthl](a) to[bend right=30.5] (b); \draw[codeouthl](a) to[bend left=10] (b); \draw[codeouthl](a) to[bend right=10] (b); \endpgfonlayer\node[scale=.85,circle,fill=white,opacity=.3,text opacity=1,inner sep=0pt] at(current bounding box.center) {?};}
             \item[Determinismus:] bei gleicher Eingabe folgt stets die gleiche Schrittfolge \info{\textcolor{gray}{~\(\Rightarrow\)~Determiniert}}\hfill\tikz[align-half-base,every path/.append style={line cap=round},gray]{\node[circle,scale=.4,fill] (a) at (0,0) {}; \node[circle,scale=.4,fill] (b) at (.7,0) {}; \pgfonlayer{background}\draw[codeouthl](a) to[bend left=30.5] (b); \draw[codeouthl](a) to[bend right=30.5] (b); \draw[gray](a) to[bend left=10] (b); \draw[codeouthl](a) to[bend right=10] (b);\endpgfonlayer}
@@ -50,8 +50,110 @@
 \end{frame}
 }\fi
 
-\SetNextSectionText{TODO}
-\section{Buh}
+\SetNextSectionText[.55\linewidth]{My volition shrinks from the painful task of recalling my humiliation; yet, like a second Prometheus, I will endure this and worse, if by any means I may arouse in the interiors of Plane and Solid Humanity a spirit of rebellion against the Conceit which would limit our Dimensions to Two or Three or any number short of Infinity.\\---~Edwin A. Abbott~\cite{abbott1987flatland}}
+\section{Präsenzaufgabe}
+\begin{frame}[fragile,c]{Präsenzaufgabe}
+\begin{aufgabe}{Von doppelten Methoden}
+    \small\onslide<2->{Mehrdimensionale Arrays, also Arrays, deren Elemente wiederum Arrays sein können, können wir als Matrizen interpretieren, beispielsweise ist \bjava{array[1][3]} das Element der zweiten Zeile in der vierten Spalte.} \onslide<3->{Legen Sie eine Java Datei namens \T{PositiveEintraege.java} an und implementieren Sie folgende Teilaufgaben innerhalb dieser Datei \info{oder bearbeiten Sie die Aufgabe auf einem Blatt Papier}.}
+\begin{enumerate}
+    \itemsep-2pt
+    \item<4-> Initialisieren Sie ein zweidimensionales Array mit \(3 \times 3\) Elementen vom Typ \bjava{double} mit gültigen Werten in der \bjava{main}-Methode.
+    \item<5-> Implementieren Sie eine Methode \bjava{public static int anzahlPositive}\allowbreak\bjava{(double[][] matrix)}, die die Anzahl der positiven Eintrage (\(> 0\)) bestimmt und zurückgibt. Für ungültige Matrizen soll die Methode \bjava{-1.0} zurückgeben.
+    \item<6->[\color{gray}3.] \color{gray}Testen Sie die Implementierung aus b) mit ihrem Array aus a).
+\end{enumerate}
+\onslide<1->
+\end{aufgabe}
+\end{frame}
+
+\begin{frame}[c,fragile]{An Array a day}
+\begin{itemize}
+    \item<2-> Wir basteln uns eine Klasse und Initialisieren froh umher.
+\end{itemize}
+\DoAnimations
+\begin{plainjava}
+$3->$public class PositiveEintraege {
+$4->$    public static void main(String[] args) {
+$5->$        double[][] mat = {
+$6->$              { -1.0, 21.0, 3.0 }, $7->\text{\tikzmarknode{r1}{\T{\HStrut}}}$
+$6->$              $6->\text{\tikzmarknode{@1}{\sbasic{\HStrut\{ \snum{-1.0}, \snum{42.0}, \snum{3.0} \}}}}$, $8->\text{\tikzmarknode{r2}{\T{\HStrut}}}$
+$6->$              { -1.0, 84.0, 3.0 }  $9->\text{\tikzmarknode{r3}{\T{\HStrut}}}$
+$5->$       };
+$4->$     }
+$3->$}
+\end{plainjava}
+\begin{tikzpicture}[overlay,remember picture]
+    \onslide<7->{
+        \node[T,right,yshift=1pt] at(r1.east) {\T{mat[0]}~\(\to\) \T{\{-1.0, 21.0, 3.0\}}};
+    }
+    \onslide<8->{
+        \hlcode[.5pt]{@1}{@K1}
+        \node at(@1) {\sbasic{\HStrut\{ \snum{-1.0}, \snum{42.0}, \snum{3.0} \}}};
+        \node[T,right,outer xsep=0pt,inner sep=0pt] (@r) at(r2.east) {\sbasic{\normalsize\HStrut}\T{mat[1]}};
+        \node[T,right,outer xsep=0pt,inner sep=0pt] at (@r.east) {\sbasic{\normalsize\HStrut}\T{[2]}\(\to\) \T{3.0}};
+        \pgfonlayer{background}
+        \hlcode[.5pt]{@r}{@K2}
+        \endpgfonlayer
+    }
+\end{tikzpicture}
+\end{frame}
+
+{\MakeThePinguExplainIt[text width=5.75cm,yshift=-5mm]{cap=!hide,cup=!hide,construction helmet=btdm@primary!60!btdm@background}{Was heißt \say{ungültig?} Das werden wir voerst zurückstellen!}
+\begin{frame}[c,fragile]{Hey guy's, i did some methods}
+\task<2->{Implementieren Sie eine Methode \T{anzahlPositive(double[][])}, die die Anzahl der positiven Eintrage (\(> 0\)) bestimmt und zurückgibt. Für \only<3->{\expandafter\textbf}{ungültige} Matrizen soll die Methode \T{-1.0} zurückgeben.}
+\DoAnimations\SetupLstHl
+\begin{plainjava}
+$5->$public class PositiveEintraege {
+$5->$    |ihl|public static void main(String[] args) { $6->$:ldots:$5->$ }|ihl|
+$7->$    public static int anzahlPositive(double[][] matrix) {
+$8->$        int anzahl = 0;
+$9->$        for(int row = 0; row < matrix.length; row++) {
+$10->$            for(int col = 0; col < matrix[row].length; col++) {
+$11->$                if(matrix[row][col] > 0)  anzahl = anzahl + 1;
+$8->$            }
+$9->$        }
+$12->$        return anzahl;
+$7->$   }
+$5->$}
+\end{plainjava}
+\begin{tikzpicture}[overlay,remember picture]
+    \onslide<4->{\node[left=-4mm,xshift=4mm,scale=.8,yshift=\btdmfootheight] at(current page.-29) {\copy\pinguexplainbox};}% copy for animations
+\end{tikzpicture}
+\end{frame}
+}
+
+\begin{frame}{Complex Guardians}
+\begin{itemize}
+    \itemsep5pt
+    \item Arrays sind in Java \emph{komplexe} Datentypen \info{vs. den primitiven Datentypen}
+    \item Solche sind Referenzdatentypen \info{dazu später mehr!}
+    \item Neben einem \say{gültigen} Wert, können diese auch den Wert \bjava{null} haben. \begin{itemize}
+        \item Mit \bjava{double[][] matrix = null;} liefert z.B. \bjava{matrix[1]} eine \bjava{NullPointerException}
+        \item Prüfen können wir dies beispielsweise mit \bjava{matrix == null}
+    \end{itemize}
+    \item Allgemein sollte nie \bjava{null} übergeben oder zurückgegeben werden.
+    \item Neben
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+    TODO: MEthoden
+    TODO: komplexe Datentypen (prüfen auf null)
+    TODO: for-each anstelle von for-loop
+\end{frame}
+
+\section{Abschließendes}
+{\SummaryFrame
+\begin{frame}[t]{Zusammenfassend}
+\pause \printBibCommand
+\vfill\vfill % double fill for more fraction
+\begin{itemize}[<+(1)->]
+    \itemsep11pt
+    % \item TODO: get bib to work here
+    \item
+\end{itemize}
+\end{frame}
+}
 
 \outro{\vskip6mm\centering\begin{tikzpicture}[scale=1.85]
 \end{tikzpicture}}
