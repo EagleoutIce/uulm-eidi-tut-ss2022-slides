@@ -52,9 +52,10 @@
 
 \SetNextSectionText[.55\linewidth]{My volition shrinks from the painful task of recalling my humiliation; yet, like a second Prometheus, I will endure this and worse, if by any means I may arouse in the interiors of Plane and Solid Humanity a spirit of rebellion against the Conceit which would limit our Dimensions to Two or Three or any number short of Infinity.\\---~Edwin A. Abbott~\cite{abbott1987flatland}}
 \section{Präsenzaufgabe}
+\subsection{The simple solution}
 \begin{frame}[fragile,c]{Präsenzaufgabe}
 \begin{aufgabe}{Von doppelten Methoden}
-    \small\onslide<2->{Mehrdimensionale Arrays, also Arrays, deren Elemente wiederum Arrays sein können, können wir als Matrizen interpretieren, beispielsweise ist \bjava{array[1][3]} das Element der zweiten Zeile in der vierten Spalte.} \onslide<3->{Legen Sie eine Java Datei namens \T{PositiveEintraege.java} an und implementieren Sie folgende Teilaufgaben innerhalb dieser Datei \info{oder bearbeiten Sie die Aufgabe auf einem Blatt Papier}.}
+    \small\onslide<2->{Mehrdimensionale Arrays, also Arrays, deren Elemente selbst wiederum Arrays sein können, können wir als Matrizen interpretieren, beispielsweise ist \bjava{array[1][3]} das Element der zweiten Zeile in der vierten Spalte.} \onslide<3->{Legen Sie eine Java Datei namens \T{PositiveEintraege.java} an und implementieren Sie folgende Teilaufgaben innerhalb dieser Datei \info{oder bearbeiten Sie die Aufgabe auf einem Blatt Papier}.}
 \begin{enumerate}
     \itemsep-2pt
     \item<4-> Initialisieren Sie ein zweidimensionales Array mit \(3 \times 3\) Elementen vom Typ \bjava{double} mit gültigen Werten in der \bjava{main}-Methode.
@@ -91,7 +92,7 @@ $3->$}
         \node[T,right,outer xsep=0pt,inner sep=0pt] (@r) at(r2.east) {\sbasic{\normalsize\HStrut}\T{mat[1]}};
         \node[T,right,outer xsep=0pt,inner sep=0pt] at (@r.east) {\sbasic{\normalsize\HStrut}\T{[2]}\(\to\) \T{3.0}};
         \pgfonlayer{background}
-        \hlcode[.5pt]{@r}{@K2}
+            \onslide<8->{\hlcode[.5pt]{@r}{@K2}}
         \endpgfonlayer
     }
 \end{tikzpicture}
@@ -109,11 +110,11 @@ $8->$        int anzahl = 0;
 $9->$        for(int row = 0; row < matrix.length; row++) {
 $10->$            for(int col = 0; col < matrix[row].length; col++) {
 $11->$                if(matrix[row][col] > 0)  anzahl = anzahl + 1;
-$8->$            }
+$10->$            }
 $9->$        }
 $12->$        return anzahl;
 $7->$   }
-$5->$}
+$5->$}$1->$
 \end{plainjava}
 \begin{tikzpicture}[overlay,remember picture]
     \onslide<4->{\node[left=-4mm,xshift=4mm,scale=.8,yshift=\btdmfootheight] at(current page.-29) {\copy\pinguexplainbox};}% copy for animations
@@ -122,23 +123,51 @@ $5->$}
 }
 
 \begin{frame}{Complex Guardians}
-\begin{itemize}
-    \itemsep5pt
-    \item Arrays sind in Java \emph{komplexe} Datentypen \info{vs. den primitiven Datentypen}
-    \item Solche sind Referenzdatentypen \info{dazu später mehr!}
-    \item Neben einem \say{gültigen} Wert, können diese auch den Wert \bjava{null} haben. \begin{itemize}
-        \item Mit \bjava{double[][] matrix = null;} liefert z.B. \bjava{matrix[1]} eine \bjava{NullPointerException}
+\begin{itemize}[<+(1)->]
+    \itemsep11pt
+    \item Arrays sind in Java \emph{komplexe} Datentypen \info{vs. Javas primitiver Datentypen}
+    % \item Solche sind Referenzdatentypen \info{dazu später mehr!}
+    \item Neben einem \say{gültigen} Wert, können diese auch den Wert \bjava{null} haben \begin{itemize}
+        \item Mit \bjava{double[][] matrix = null;} liefert \bjava{matrix[1]} eine \bjava{NullPointerException}
         \item Prüfen können wir dies beispielsweise mit \bjava{matrix == null}
     \end{itemize}
-    \item Allgemein sollte nie \bjava{null} übergeben oder zurückgegeben werden.
-    \item Neben
+    \item Allgemein sollte nie \bjava{null} übergeben oder zurückgegeben werden
+    \item Neben \bjava{null}, könnte man auch noch weitere Dinge abprüfen \begin{itemize}
+        \item Gibt es überhaupt eine Zeile \bjava{matrix.length == 0}?
+        \item Gibt es überhaupt eine Spalte \bjava{matrix[row].length == 0}?
+        \item Und viele mehr\ldots\ In jedem Fall sollte man diese mit einem Kommentar absichern
+    \end{itemize}
+    \item Mit komplexen Datentypen werden wir später noch viel Freude haben!
 \end{itemize}
 \end{frame}
 
+\begin{frame}[c,fragile]{Die Suche nach der positiven Anzahl}
+\DoAnimations\lstfs{10}
+\begin{plainjava}
+$2->$public static int anzahlPositive(double[][] matrix) {
+$4->$    if (matrix == null || matrix.length == 0) {
+$5->$        System.out.println("Matrix ungültig!");
+$6->$        return -1;
+$4->$    }
 
+$3->$    int anzahl = 0;
+$3->$    for (int row = 0; row < matrix.length; row++) {
+$3->$        for (int col = 0; col < matrix[row].length; col++) {
+$3->$            if (matrix[row][col] > 0)
+$3->$                anzahl = anzahl + 1;
+$3->$        }
+$3->$    }
+$3->$    return anzahl;
+$2->$}
+\end{plainjava}
+\begin{tikzpicture}[overlay,remember picture]
+    \only<7->{\node[above left,yshift=\btdmfootheight] at (current page.south east) {\textattachfile{\curpath PositiveEintraege.java}{PositiveEintraege.java}\;};}
+\end{tikzpicture}
+\end{frame}
+
+\subsection{The crazy overengineer}
 \begin{frame}
     TODO: MEthoden
-    TODO: komplexe Datentypen (prüfen auf null)
     TODO: for-each anstelle von for-loop
 \end{frame}
 
