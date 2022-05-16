@@ -75,9 +75,9 @@
 $3->$public class PositiveEintraege {
 $4->$    public static void main(String[] args) {
 $5->$        double[][] mat = {
-$6->$              { -1.0, 21.0, 3.0 }, $7->\text{\tikzmarknode{r1}{\T{\HStrut}}}$
-$6->$              $6->\text{\tikzmarknode{@1}{\sbasic{\HStrut\{ \snum{-1.0}, \snum{42.0}, \snum{3.0} \}}}}$, $8->\text{\tikzmarknode{r2}{\T{\HStrut}}}$
-$6->$              { -1.0, 84.0, 3.0 }  $9->\text{\tikzmarknode{r3}{\T{\HStrut}}}$
+$6->$              { -1.0, :ws:21.0, :ws:3.0 }, $7->\text{\tikzmarknode{r1}{\T{\HStrut}}}$
+$6->$              $6->\text{\tikzmarknode{@1}{\sbasic{\HStrut\{ \snum{~1.0}, ~\snum{42.0},~-\snum{3.0} \}}}}$, $8->\text{\tikzmarknode{r2}{\T{\HStrut}}}$
+$6->$              { :ws:1.0, -84.0, :ws:3.0 }  $9->\text{\tikzmarknode{r3}{\T{\HStrut}}}$
 $5->$       };
 $4->$     }
 $3->$}
@@ -88,9 +88,9 @@ $3->$}
     }
     \onslide<8->{
         \hlcode[.5pt]{@1}{@K1}
-        \node at(@1) {\sbasic{\HStrut\{ \snum{-1.0}, \snum{42.0}, \snum{3.0} \}}};
+        \node at(@1) {\sbasic{\HStrut\{ \snum{~1.0}, ~\snum{42.0}, -\snum{3.0} \}}};
         \node[T,right,outer xsep=0pt,inner sep=0pt] (@r) at(r2.east) {\sbasic{\normalsize\HStrut}\T{mat[1]}};
-        \node[T,right,outer xsep=0pt,inner sep=0pt] at (@r.east) {\sbasic{\normalsize\HStrut}\T{[2]}\(\to\) \T{3.0}};
+        \node[T,right,outer xsep=0pt,inner sep=0pt] at (@r.east) {\sbasic{\normalsize\HStrut}\T{[2]}~\(\to\) \T{-3.0}};
         \pgfonlayer{background}
             \onslide<8->{\hlcode[.5pt]{@r}{@K2}}
         \endpgfonlayer
@@ -122,6 +122,8 @@ $5->$}$1->$
 \end{frame}
 }
 
+\iffull
+{\AddonFrame
 \begin{frame}{Complex Guardians}
 \begin{itemize}[<+(1)->]
     \itemsep11pt
@@ -140,6 +142,7 @@ $5->$}$1->$
     \item Mit komplexen Datentypen werden wir später noch viel Freude haben!
 \end{itemize}
 \end{frame}
+}\fi
 
 \begin{frame}[c,fragile]{Die Suche nach der positiven Anzahl}
 \DoAnimations\lstfs{10}
@@ -160,16 +163,55 @@ $3->$    }
 $3->$    return anzahl;
 $2->$}
 \end{plainjava}
+\end{frame}
+
+\begin{frame}[fragile]{Testen des Algorithmus}
+\DoAnimations\SetupLstHl
+\begin{itemize}[<+(1)->]
+    \item Wir kehren in die \bjava{main}-Methode zurück:
+\begin{plainjava}
+$3->$|ihl|public class PositiveEintraege {|ihl|
+$5->$    public static void main(String[] args) {
+$6->$        double[][] mat = {{-1, 21, 3}, {1, 42, -3}, {1, -84, 3}};
+$7->$        int anzahl = anzahlPositive(mat);
+$8->$        System.out.println("erwartet: 6, erhalten: " + anzahl);
+$5->$    }
+
+$4->$    |ihl|public static int anzahlPositive(double[][] matrix) { :ldots: }|ihl|
+$3->$|ihl|}|ihl|$1->$
+\end{plainjava}
+\end{itemize}
 \begin{tikzpicture}[overlay,remember picture]
-    \only<7->{\node[above left,yshift=\btdmfootheight] at (current page.south east) {\textattachfile{\curpath PositiveEintraege.java}{PositiveEintraege.java}\;};}
+    \only<9->{\node[above left,yshift=\btdmfootheight] at (current page.south east) {\textattachfile{\curpath PositiveEintraege.java}{PositiveEintraege.java}\;};}
 \end{tikzpicture}
 \end{frame}
 
-\subsection{The crazy overengineer}
+\iffull{\AddonFrame
+\begin{frame}[fragile]{Assertions und Tests}
+    \begin{itemize}[<+(1)->]
+        \itemsep10pt
+        \item Natürlich können wir einfach mit \bjava{if} prüfen ob wir das geforderte Ergebnis erhalten.
+        \item Von Haus aus liefert Java \bjava{assert :lan:Bedingung:ran:} \begin{itemize}
+            \item Dieses liefert einen Fehler, wenn die Bedingung nicht erfüllt ist:
+\begin{plainjava}
+int i = 0;
+assert i > 0;  // :yields: Fehler!
+\end{plainjava}
+            \item Damit assertions ausgeführt werden, benötigt java \bbash{-ea} als Argument: \bbash{java -ea Example}\infoblock{Das steht hier für \say{enable assertions}}
+            \item Assertions sollten immer nur zusätzlich zu Bedingungen verwendet werden.
+        \end{itemize}
+        \item Für \say{richtige} Tests gibt es Pakete wie JUnit [TODO: link]
+        \item Allgemein ist Testen ein aufwändiger und wichtiger Teil der Programmierarbeit! TODO: eventuelle Vertieung anschneiden.
+    \end{itemize}
+\end{frame}
+}
+\fi
+
+\subsection{The crazy Over-Engineer}
 \begin{frame}
-    TODO: 3. Aufgabe mit Beispielcode
     TODO: MEthoden
     TODO: for-each anstelle von for-loop
+    TODO: System: Format
 \end{frame}
 
 \section{Abschließendes}
