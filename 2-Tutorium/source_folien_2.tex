@@ -651,12 +651,9 @@ Make new \(i\) have value \(1\);\SW6{\quad\J1}\medskip
 {
 \def\ms#1{{\color{lightgray}\mathbf{#1}}}
 \def\to{~{\color{lightgray}\longrightarrow}~}%
-\def\Aspect{.5}
 \def\true{\sliteral{true}}
 \def\false{\sliteral{false}}
 
-\newcommand*\tfu[3][0pt]{\draw[decoration={brace,aspect=\Aspect},decorate,-] ([yshift=#1]#2.north) -- ([yshift=#1]#2@.north) node[above,pos=\Aspect] {\scriptsize\itshape#3};}
-\def\tfd#1#2{\draw[decoration={brace,aspect={1-\Aspect}},decorate,-] (#1@.south) -- (#1.south) node[below,pos={1-\Aspect}] {\scriptsize\itshape#2};}
 \begin{frame}[fragile]{Aufgabe 3: Boolesche Ausdrücke}
     \task<2->{Betrachten Sie den folgenden Java Code-Ausschnitt. Werten Sie die folgenden Ausdrücke in der Reihenfolge, in der sie ausgeführt werden (d.h. von oben nach unten), aus. Geben Sie dazu für jede Zeile (beginnend mit der zweiten Zeile) den neuen Wert der Variablen \T{b} an.\vspace*{-\medskipamount}}
 \begin{plainjava}[lineskip=13.5pt]
@@ -670,7 +667,7 @@ Make new \(i\) have value \(1\);\SW6{\quad\J1}\medskip
     \onslide<8->{\node[above left,yshift=\btdmfootheight,text width=15.5cm,scale=.6] at(current page.south east) {\begin{alignat*}{5}
         \ms{a\text{++},~~a\text{-\,-}}&\to~\ms{\textcolor{gray}{!a},~~ -a,~~ \text{++}a,~~\text{-\,-}a}&&\to~\ms{a~*~b,~~a~/~b,~~a~\%~b} && \to~\ms{a+b,~~a-b} \\
         &\to~\ms{a==b,~~a<b,~~\ldots} && \to~\ms{a~\mbox{\textasciicircum}~b}&&\to~\ms{\textcolor{gray}{a~\&\&~b}}\\
-        & \to~\ms{\textcolor{gray}{a~||~b}} &&\to \ms{\ldots} &&\to \ms{\textcolor{gray}{\textbf{(}\;\textbf{)}}}
+        & \to~\ms{\textcolor{gray}{a~||~b}} &&\to \ms{\ldots}
      \end{alignat*}};}
     \color{lightgray}
     \onslide<9->{\tfu{or1}{true}}
