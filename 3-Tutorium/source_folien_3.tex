@@ -48,14 +48,42 @@
     \end{itemize}
     \onslide<1->
 \end{frame}
+
+\begin{frame}[c]{Zum Warmwerden}
+\colorlet{tskcolor}{btdm@primary!20!black!50!white}%
+\colorlet{tskcolorA}{btdm@primary}%
+\colorlet{tskcolorB}{btdm@primary}%
+\begin{aufgabe}{Ich bin der Klammeraffen Typ}
+    \small\onslide<2->{Drücken Sie im Folgenden die Präzedenzregeln \textit{explizit} durch Klammern aus, so dass die unten stehenden Ausdrücke auch ohne Präzedenzregeln in der gleichen Reihenfolge ausgeführt werden.} \onslide<3->{Geben Sie weiter den Typ des gesamten Ausdrucks an (\bjava{int i;}, \bjava{short a;} und \bjava{float f}).} \onslide<4->{Werten Sie die Ausdrücke \textit{nicht} aus.}
+\begin{enumerate}
+    \itemsep8pt
+    \item<5-> \bjava{i + 3 * s++ + (-2 - 4)}
+    \item<6-> \bjava{true && 3 > 4 || 2 - f++ != 5}
+\end{enumerate}
+\onslide<1->
+\end{aufgabe}
+\end{frame}
+
+\let\NOl\relax
+\let\NOr\relax
+\newcommand<>\b[2]{\only#3{$\mathtt{\color{gray}\csname #2l\endcsname(}$}#1\only#3{$\mathtt{\color{gray}\csname #2r\endcsname)}$}}
+
+\begin{frame}{Klammeraffenfreude}
+\begin{enumerate}
+    \item<2-> Wir klammern:
+\begin{center}
+    \T{i + \b<3->{\b<4->{3 * \b<5->{a++}{NO}}{big} + (\b<6->{-2}{NO} - 4)}{Big}}
+\end{center}
+\end{enumerate}
+\end{frame}
 }\fi
 
 \SetNextSectionText[.55\linewidth]{My volition shrinks from the painful task of recalling my humiliation; yet, like a second Prometheus, I will endure this and worse, if by any means I may arouse in the interiors of Plane and Solid Humanity a spirit of rebellion against the Conceit which would limit our Dimensions to Two or Three or any number short of Infinity.\\---~Edwin A. Abbott~\cite{abbott1987flatland}}
 \section{Präsenzaufgabe}
 \subsection{The simple solution}
-\begin{frame}[fragile,c]{Präsenzaufgabe}
+\begin{frame}[c]{Präsenzaufgabe}
 \begin{aufgabe}{Von doppelten Methoden}
-    \small\onslide<2->{Mehrdimensionale Arrays, also Arrays, deren Elemente selbst wiederum Arrays sein können, können wir als Matrizen interpretieren, beispielsweise ist \bjava{array[1][3]} das Element der zweiten Zeile in der vierten Spalte.} \onslide<3->{Legen Sie eine Java Datei namens \T{PositiveEintraege.java} an und implementieren Sie folgende Teilaufgaben innerhalb dieser Datei \info{oder bearbeiten Sie die Aufgabe auf einem Blatt Papier}.}
+    \small\onslide<2->{Mehrdimensionale Arrays, also solche Arrays, bei denen die Elemente selbst wiederum Arrays sein können, können wir als Matrizen interpretieren, beispielsweise ist \bjava{array[1][3]} das Element der zweiten Zeile in der vierten Spalte.} \onslide<3->{Legen Sie eine Java Datei namens \T{PositiveEintraege.java} an und implementieren Sie folgende Teilaufgaben innerhalb dieser Datei \info{oder bearbeiten Sie die Aufgabe auf einem Blatt Papier}.}
 \begin{enumerate}
     \itemsep-2pt
     \item<4-> Initialisieren Sie ein zweidimensionales Array mit \(3 \times 3\) Elementen vom Typ \bjava{double} mit gültigen Werten in der \bjava{main}-Methode.
@@ -208,11 +236,67 @@ assert i > 0;  // :yields: Fehler!
 \fi
 
 \subsection{The crazy Over-Engineer}
+\iffull
+{\AddonFrame
+\setbox\pinguA=\hbox{\tikz\pingu[wings shock,eyes shock,body=pingu@black];}
+\begin{frame}[fragile]{Wait. What was that?}
+\SetupLstHl
+\begin{itemize}[<+(1)->]
+    \itemsep9pt
+    \item Wir haben eine eigene Methode erschaffen. \onslide<3->{Oder gar eine \setbox\pinguB=\hbox{Funktioooon}\copy\pinguB?}\onslide<4->{\llap{\smash{$\underset{\textit{\color{gray}pssssst}}{\raisebox{-.25\height}{\resizebox*!{6mm}{\copy\pinguA}}}$}\hskip.5\wd\pinguB\relax}}
+    \item<5-> Wir rekapitulieren:\medskip\lstfs{10}
+\begin{plainjava}
+!*\onslide<5->*!|ihl|public class PositiveEintraege {|ihl|
+!*\onslide<6->*!    !*\bnode{vismod}{\bnode{public}{\skA{public}} \bnode{static}{\skA{static}}}*! !*\bnode{int}{\skB{int}}*! !*\bnode{anzahlPositive}{\sbasic{anzahlPositive}}*!(!*\bnode{params}{\bnode{double-arr}{\skB{double}[][]} matrix}*!) { !*\Snode{@s}*!
+!*\onslide<7->*!        |ihl|if (...) {|ihl|
+!*\onslide<7->*!            |ihl|...|ihl|
+!*\onslide<7->*!            !*\tikzmarknode{return1}{\skA{return}}*! |ihl|...;|ihl|
+!*\onslide<7->*!        |ihl|}|ihl|
+!*\onslide<7->*!
+!*\onslide<7->*!        |ihl|...|ihl|
+!*\onslide<7->*!        !*\tikzmarknode{return2}{\skA{return}}*! |ihl|...;|ihl|
+!*\onslide<6->*!    } !*\Snode{@e}*!
+!*\onslide<5->*!|ihl|}|ihl|
+\end{plainjava}
+\end{itemize}
+\begin{tikzpicture}[overlay,remember picture]
+    % \hlbcode[.5pt]{vismod}{@}
+    \only<8->{\tfd{vismod}{Modifikatoren}}
+    \only<9->{\tfd{int}{Rück-\\gabetyp}}
+    \only<10->{\tfd{anzahlPositive}{Name}}
+    \only<11->{\tfd{params}{Parameter}}
+    \only<12->{
+        \draw[decorate,decoration=brace] (@s.north east) to[edge node={node[right] {\scriptsize\itshape Body}}] (@e.south east-|@s.north east);
+    }
+    \only<13->{
+        \path (params.north east) -- (params@.north west) coordinate[pos=.5] (@t);
+        \draw[Kite-] ([yshift=1mm]@t) to[out=70,in=250] ++(1,.5) node[above=-1mm] {Eingabedaten};
+    }
+    \only<14->{
+        \path (int.north east) -- (int@.north west) coordinate[pos=.5] (@i);
+        \draw[-Kite] ([yshift=1mm]@i) to[out=70,in=250] ++(1,.5) node[above=-1mm] {Ausgabetyp};
+    }
+    \only<15->{
+        \draw[-Kite] ([yshift=-1mm]return1.south) to[out=290,in=182] ++(1,-.25) node[right] (@out) {Ausgabedaten};
+    }
+    \only<16->{
+        \draw[-Kite] ([yshift=1mm]return2.north) to[out=40,in=230] ([yshift=1mm]@out.south);
+    }
+    \only<17->{
+        \node[below right,T,text width=5.65cm,xshift=-1cm,yshift=1.5mm] at (@out.south east) {Wenn an der Stelle des Rückgabetyps \textit{nicht} das Keyword \T{void} steht, \textit{muss} (in Java und abseits Exceptions) jeder Ausführungspfad Ausgabedaten vom angegebenen Typ zurückliefern!};
+    }
+\end{tikzpicture}
+\end{frame}
+}
+\fi
 \begin{frame}
-    TODO: MEthoden
     TODO: Präzedenzreglen und klammern kleine Aufagbe
     TODO: for-each anstelle von for-loop
     TODO: System: Format
+\end{frame}
+\SetNextSectionText{Schleifen, Arrays, Methoden\\Abgabe: \DTMDate{2022-05-23}}
+\section{Aussicht: Übungsblatt 4}
+\begin{frame}{Ein kleiner Schwenk}
 \end{frame}
 
 \section{Abschließendes}
@@ -223,7 +307,7 @@ assert i > 0;  // :yields: Fehler!
 \begin{itemize}[<+(1)->]
     \itemsep11pt
     % \item TODO: get bib to work here
-    \item
+    \item TODO: nächste Woche
 \end{itemize}
 \end{frame}
 }

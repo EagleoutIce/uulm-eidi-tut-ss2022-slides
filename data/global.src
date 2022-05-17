@@ -267,6 +267,7 @@
 \def\hlcolor{paletteA}
 \def\hlopa{0.2}\def\hlhs{.4mm}
 \newcommand\hlcode[3][1.9pt]{\fill[\hlcolor,opacity=\hlopa,rounded corners=1pt] ([shift={(-\hlhs,-#1)}]#2.south west) rectangle ([shift={(\hlhs,#1)}]#2.north east); \coordinate (#3) at (#2.east);}
+\newcommand\hlbcode[3][1.9pt]{\fill[\hlcolor,opacity=\hlopa,rounded corners=1pt] ([shift={(-\hlhs,-#1)}]#2.south west) rectangle ([shift={(\hlhs,#1)}]#2@.north east); \coordinate (#3) at (#2@.east);}
 
 \def\sbasic#1{\solGet{basicstyle}{#1}}
 \def\sliteral#1{\solGet{literals}{#1}}
@@ -280,7 +281,7 @@
 \def\Snode#1{\tikzmarknode{#1}\HStrut}
 \def\bnode#1#2{\Snode{#1}\sbasic{#2}\Snode{#1@}}
 
-\tikzset{T/.style={sol@colors@lst@comments,font=\itshape\sffamily\footnotesize}}
+\tikzset{T/.style={sol@colors@lst@comments,font=\footnotesize\itshape\sffamily}}
 
 \def\taskenum{\setbeamertemplate{enumerate item}{\task{\alph{enumi})}}}
 \newenvironment<>{taskblock}{\begin{uncoverenv}#1\par\begingroup\footnotesize\color{gray}\itshape
@@ -290,3 +291,7 @@
 {\obeyspaces\catcode `\^^M\active
 \gdef\subdue{\obeyspaces\catcode `\^^M\active \def {\mbox{\space}}\def^^M{\leavevmode\\}}% keep it real :P we def space ad newline to block
 }
+
+\newcommand*\tfu[3][0pt]{\draw[decoration={brace,aspect=\Aspect},decorate,-] ([yshift=#1]#2.north) -- ([yshift=#1]#2@.north) node[above,pos=\Aspect] {\scriptsize\itshape#3};}
+\def\tfd#1#2{\draw[decoration={brace,aspect={1-\Aspect}},decorate,-] (#1@.south) -- (#1.south) node[below,align=center,font=\scriptsize\itshape\sffamily,pos={1-\Aspect}] {\strut#2\strut};}
+\def\Aspect{.5}
