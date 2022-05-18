@@ -468,6 +468,34 @@ for(int row = 0; row < matrix.length; row++) \{^^J
     \onslide<9->{\node[above left, T,yshift=\btdmfootheight] at(current page.south east) {Genau genommen kann man für eine spezifische Version und Programmstruktur\ldots};}
 \end{tikzpicture}
 \end{frame}
+\iffull
+\begin{frame}[c]{}
+\centering\only<2->{\global\dmfootfalse}
+\begin{tikzpicture}[overlay,remember picture]
+\onslide<2->{
+    \fill[pingu@black] (current page.south east) rectangle (current page.north west);
+}
+\end{tikzpicture}
+\scalebox{3}{\begin{tikzpicture}
+    \onslide<3->{\pingu[:hide,left eye devil,left eye second color=pingu@black!80!pingu@white]}
+\end{tikzpicture}}\\
+\smash{\raisebox{1cm}{\onslide<4->{\huge\color{pingu@white}We love that. Don't we.}}}
+\end{frame}
+\dmfoottrue
+\fi
+
+\subsection{Aufgabe 2}
+{\taskenum
+\begin{frame}{Aufgabe 2: Schleifen}
+\task<2->{Erstellen Sie die Java Datei \T{Schleifen.java} und implementieren Sie die folgenden Teilaufgaben innerhalb der \T{main} Methode (sog. Programmeinstiegspunkt) dieser Datei. \begin{enumerate}
+    \item Lesen Sie über die Kommandozeilenparameter eine Variable vom Typ \T{int} ein, die wir im Folgenden mit \T{n}
+    bezeichnen. Implementieren Sie anschließend die folgenden Schleifen, deren Verhalten von \T{n} abhängen soll.
+    \item Implementieren Sie eine \T{for}-Schleife, die alle ganzen Zahlen von \T{n} bis \T{1} durchläuft und diese ausgibt.\\
+    \textup{Beispiel:} \T{n = 5} gibt \T{5 4 3 2 1} aus.
+    \item Implementieren Sie eine \T{do-while-Schleife}, die alle ungeraden ganzen Zahlen von \T{1} bis einschließlich \T{n} ausgibt.\quad \textup{Beispiel:} \T{n = 14} gibt \T{1 3 5 7 9 11 13} aus und \T{n = 5} gibt \T{1 3 5} aus.
+\end{enumerate}}
+\end{frame}
+}
 
 \SetNextSectionText{Schleifen, Arrays, Methoden\\Abgabe: \DTMDate{2022-05-23}}
 \section{Aussicht: Übungsblatt 4}
