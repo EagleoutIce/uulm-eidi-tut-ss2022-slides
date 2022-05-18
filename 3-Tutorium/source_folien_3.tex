@@ -58,23 +58,32 @@
 \begin{enumerate}
     \itemsep8pt
     \item<5-> \bjava{i + 3 * s++ + (-2 - 4)}
-    \item<6-> \bjava{true && 3 > 4 || 2 - f++ != 5}
+    \item<6-> \bjava{true && 3 > 4d || 2 - f != 5}
 \end{enumerate}
 \onslide<1->
 \end{aufgabe}
 \end{frame}
 
-\let\NOl\relax
-\let\NOr\relax
-\newcommand<>\b[2]{\only#3{$\mathtt{\color{gray}\csname #2l\endcsname(}$}#1\only#3{$\mathtt{\color{gray}\csname #2r\endcsname)}$}}
-
+\def\NOl{}
+\def\NOr{}
+\newcommand<>\b[2]{{\only#3{$\mathtt{\color{gray}\csname #2l\endcsname(}$}}#1{\only#3{$\mathtt{\color{gray}\csname #2r\endcsname)}$}}}
+\newcommand<>\u[2]{$\underbrace{\text{#1}}_{\only#3{\smash{\clap{\text{\solGet{keywordB}{\scriptsize\HStrut#2}}}}}}$}
+\newcommand<>\o[2]{$\overbrace{\text{#1}}^{\only#3{\clap{\text{\solGet{keywordB}{\scriptsize\HStrut#2}}}}}$}
 \begin{frame}{Klammeraffenfreude}
 \begin{enumerate}
-    \item<2-> Wir klammern:
+    \itemsep14pt
+    \item<2-> Wir klammern\only<11->{~und erhalten den Typ \bjava{int}}:
 \begin{center}
-    \T{i + \b<3->{\b<4->{3 * \b<5->{a++}{NO}}{big} + (\b<6->{-2}{NO} - 4)}{Big}}
+    \T{\u<7->{i}{int} + \u<10->{\b<3->{\u<9->{\b<4->{\u<7->{\snum{3}}{int} * \b<5->{\o<8->{\u<7->{s}{short}++}{short}}{NO}}{big}}{int} + \u<9->{(\b<6->{\o<8->{-\u<7->{\snum{2}}{int}}{int}}{NO} - \u<7->{\snum{4}}{int})}{int}}{Big}}{int}}
+\end{center}
+    \item<12-> Wir klammern erneut\only<18->{~und erhalten den Typ \bjava{boolean}}:
+\begin{center}
+    \T{\u<17->{\b<13->{\u<15->{true}{boolean} \&\& \o<16->{\b<14->{\u<15->{\snum{3}}{int} > \u<15->{\snum{4}d}{double}}{NO}}{boolean}}{big}}{boolean} || \u<17->{\b<13->{\o<16->{\b<14->{\u<15->{\snum{2}}{int} - \u<15->{f}{float}}{NO}}{float} != \u<15->{\snum{5}}{int}}{big}}{boolean}}
 \end{center}
 \end{enumerate}
+\begin{tikzpicture}[overlay,remember picture]
+    \onslide<19->{\node[T,below left,yshift=-1.4cm,text width=8cm,scale=.75] at(current page.north east) {Interaktiv kann dies in der \link{https://docs.oracle.com/javase/9/jshell/introduction-jshell.htm}{jshell} ausprobiert werden. Definiert einfach eine Methode wie \T{void give(Object o) { System.out.println(o.getClass());}}. Dann gibt z.B.~\T{give(3 + 2d);} den Typ des Ausdrucks aus.};}
+\end{tikzpicture}
 \end{frame}
 }\fi
 
