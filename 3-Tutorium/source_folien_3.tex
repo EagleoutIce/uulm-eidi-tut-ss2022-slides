@@ -120,7 +120,7 @@ $4->$    public static void main(String[] args) {
 $5->$        double[][] mat = {
 $6->$              { -1.0, :ws:21.0, :ws:3.0 }, $7->\text{\tikzmarknode{r1}{\T{\HStrut}}}$
 $6->$              $6->\text{\tikzmarknode{@1}{\sbasic{\HStrut\{ \snum{~1.0}, ~\snum{42.0},~-\snum{3.0} \}}}}$, $8->\text{\tikzmarknode{r2}{\T{\HStrut}}}$
-$6->$              { :ws:1.0, -84.0, :ws:3.0 }  $9->\text{\tikzmarknode{r3}{\T{\HStrut}}}$
+$6->$              { :ws:1.0, -84.0, :ws:3.0 }
 $5->$       };
 $4->$     }
 $3->$}
@@ -336,13 +336,13 @@ for(int row = 0; row < matrix.length; row++) \{^^J
 !*\onslide<4->*!    for(double cell : row) {
 !*\onslide<5->*!        if (cell > 0) |ihl|...|ihl|
 !*\onslide<4->*!    }
-!*\onslide<3->*!}
+!*\onslide<3->*!}!*\onslide<1->*!
 \end{plainjava}
     \item<7-> Ein Nachteil? Wir verlieren die Information, das wie-vielte Element das ist. \onslide<8->{\infoblock{Weiter können wir durch \T{cell} die Matrix nicht mehr verändern. Das kommt später.}}
     \item<9-> Dafür ist es meist (viel) kompakter!
 \end{itemize}
 \begin{tikzpicture}[remember picture,overlay]
-\node[above left,yshift=\btdmfootheight,scale=.7] at(current page.south east) {\copy\codebox};
+\onslide<6->{\node[above left,yshift=\btdmfootheight,scale=.7] at(current page.south east) {\copy\codebox};}
 \end{tikzpicture}
 \end{frame}
 }
@@ -434,8 +434,8 @@ for(int row = 0; row < matrix.length; row++) \{^^J
 \end{frame}
 
 \begin{frame}[fragile]{Ein Mini-Kommentar über die Korrektheit}
-\begin{itemize}[<+(1)->]
-    \item Das hatte quasi jeder und die Mehrheit hat Recht!\medskip
+\begin{itemize}
+    \item<2-> Das hatte quasi jeder und die Mehrheit hat Recht!\medskip
 \columns[onlytextwidth,c]
 \column{.35\linewidth}
 \begin{plainjava}
@@ -477,7 +477,7 @@ for(int row = 0; row < matrix.length; row++) \{^^J
 }
 \end{tikzpicture}
 \scalebox{3}{\begin{tikzpicture}
-    \onslide<3->{\pingu[:hide,left eye devil,left eye second color=pingu@black!80!pingu@white]}
+    \only<3->{\pingu[:hide,left eye devil,left eye second color=pingu@black!80!pingu@white]}
 \end{tikzpicture}}\\
 \smash{\raisebox{1cm}{\onslide<4->{\huge\color{pingu@white}We love that. Don't we.}}}
 \end{frame}
@@ -497,27 +497,27 @@ for(int row = 0; row < matrix.length; row++) \{^^J
 \end{frame}
 
 \begin{frame}[fragile]{Making Loops}
-\begin{itemize}[<+(1)->]
-    \item Wir haben dies bereits letzte Woche analysiert, deswegen hier ein wenig schneller.\smallskip
+\begin{itemize}
+    \item<2-> Wir haben dies bereits letzte Woche analysiert, deswegen hier ein wenig schneller.\smallskip
 \end{itemize}\lstfs{9}
 \begin{plainjava}[lineskip=3pt]
-!*\onslide<5->*!int n = Integer.parseInt(args[0]);
+!*\onslide<3->*!int n = Integer.parseInt(args[0]);
 
-!*\onslide<6->*!for (int i = n; i >= 1; i--) {
-!*\onslide<7->*!    System.out.println(i); // oder System.out.print(...)
-!*\onslide<6->*!}
+!*\onslide<4->*!for (int i = n; i >= 1; i--) {
+!*\onslide<5->*!    System.out.println(i); // oder System.out.print(...)
+!*\onslide<4->*!}
 
-!*\onslide<12->*!if(n >= 1) {
-!*\onslide<8->*!    int j = 1;
-!*\onslide<9->*!    do {
-!*\onslide<11->*!        if (j % 2 == 1) // ungerade
-!*\onslide<11->*!            System.out.println(j);
-!*\onslide<10->*!        j = j + 1;
-!*\onslide<9->*!    } while (j <= n);
-!*\onslide<12->*!}
+!*\onslide<10->*!if(n >= 1) {
+!*\onslide<6->*!    int j = 1;
+!*\onslide<7->*!    do {
+!*\onslide<9->*!        if (j % 2 == 1) // ungerade
+!*\onslide<9->*!            System.out.println(j);
+!*\onslide<8->*!        j = j + 1;
+!*\onslide<7->*!    } while (j <= n);
+!*\onslide<10->*!}
 \end{plainjava}
 \begin{tikzpicture}[overlay,remember picture]
-    \only<13->{\node[above left,yshift=\btdmfootheight] at (current page.south east) {\textattachfile{\curpath Schleifen.java}{Schleifen.java}\;};}
+    \only<11->{\node[above left,yshift=\btdmfootheight] at (current page.south east) {\textattachfile{\curpath Schleifen.java}{Schleifen.java}\;};}
 \end{tikzpicture}
 \end{frame}
 }
@@ -575,8 +575,8 @@ dazu eine Java Datei namens \T{Quersumme.java} an und implementieren Sie den fol
 \end{frame}
 \def\KN#1{\llap{\scriptsize\sffamily\color{gray}\ifnum#1<10 0\fi#1:~}}
 \begin{frame}[fragile]{Eine Implementation übernehmen}
-\begin{itemize}[<+(1)->]
-    \item Abseits der Datentypentscheidung ist die Java-Syntax das größte Hindernis:\lstfs{10}
+\begin{itemize}
+    \item<2-> Abseits der Datentypentscheidung ist die Java-Syntax das größte Hindernis:\lstfs{10}
 \begin{plainjava}
 !*\onslide<4->*!int zahl = Integer.parseInt(args[0]);
 !*\onslide<5->*!!*\KN1*!if (zahl < 0) {
@@ -591,7 +591,7 @@ dazu eine Java Datei namens \T{Quersumme.java} an und implementieren Sie den fol
 !*\onslide<12->*!!*\KN8*!    quersumme = quersumme + divRest;
 !*\onslide<13->*!!*\KN9*!    zahl = zahl / 10;!*\Snode{round}*!
 !*\onslide<10->*!}
-!*\onslide<14->*!!*\KN{10}*!System.out.println(quersumme);
+!*\onslide<14->*!!*\KN{10}*!System.out.println(quersumme);!*\onslide<1->*!
 \end{plainjava}
 \end{itemize}
 \begin{tikzpicture}[overlay,remember picture]
@@ -664,7 +664,7 @@ dargestellt werden können, brechen wir ab, wenn \(\abs{y_{n+1} - y_n} < 10^{-8}
 !*\onslide<5->*!    }
 
 !*\onslide<9->*!    double y = x;
-!*\onslide<13->*!   |ihl|...|ihl|
+!*\onslide<13->*!    |ihl|...|ihl|
 !*\onslide<2->*!}
 \end{plainjava}
 \begin{tikzpicture}[overlay,remember picture]
@@ -689,13 +689,13 @@ dargestellt werden können, brechen wir ab, wenn \(\abs{y_{n+1} - y_n} < 10^{-8}
 !*\onslide<6->*!        y = ((k-1) * Math.pow(y, k) + x) / (k * Math.pow(y, k-1));
 !*\onslide<4->*!    } while (Math.abs(oldY - y) > 1!*\snum{E-}*!8);
 
-!*\onslide<6->*!    System.out.println(y);
+!*\onslide<7->*!    System.out.println(y);
 !*\onslide<1->*!}
 \end{plainjava}
 \begin{tikzpicture}[overlay,remember picture]
     \node[below left,yshift=-1.5cm,T] (@) at(current page.north east) {Eingabe: \(k \in \N\), \(k > 1\) und \(x \in \R\), \(x > 0\)~~~};
     % \node[below right,yshift=1mm,T] (@) at(@.south west) {Ausgabe: \(y =\sqrt[k]{x}\)};
-    \node[below right,T] (@) at(@.south west) {Mit \(y_0 = x\)\only<10->{, \(y_{n + 1} = \frac{(k - 1) y_n^k + x}{k \cdot y_n^{k - 1}}\)}};
+    \node[below right,T] (@) at(@.south west) {Mit \(y_0 = x\), \(y_{n + 1} = \frac{(k - 1) y_n^k + x}{k \cdot y_n^{k - 1}}\)};
     \node[below right,yshift=2mm,T] (@) at(@.south west) {Abbruch wenn \(\abs{y_{n + 1} - y_n} < 10^{-8}\)};
     \node[below right,yshift=1mm,align=left,T] (@) at(@.south west) {Da wir für die Abbruchbedingung ein\\\(y_{n + 1}\) benötigen, eignet sich \T{do}-\T{while}};
 \end{tikzpicture}
@@ -742,6 +742,7 @@ Heap und Stack
 
 \end{frame}
 
+\SetNextSectionText{There is no real ending. It's just the place where you stop the story.\\--- Frank Herbert~\link{http://www.sinanvural.com/seksek/inien/tvd/tvd2.htm}{online}}
 \section{Abschließendes}
 {\SummaryFrame
 \begin{frame}[t]{Zusammenfassend}
@@ -767,7 +768,7 @@ Heap und Stack
     }
 \end{tikzpicture}\begin{tikzpicture}[scale=1.85]
     \only<3|handout:0>{\pingu[:hide,left eye devil,left eye second color=pingu@black!80!pingu@white]}
-    \only<4->{\pingu[devil-horns,right eye devil, left eye angry, devil wings,wings wave,feet simple]}
+    \only<4->{\pingu[devil-horns,left eye devil, right eye angry, devil wings,wings wave,feet simple]}
 \end{tikzpicture}}
 
 
