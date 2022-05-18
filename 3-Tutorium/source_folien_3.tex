@@ -37,7 +37,7 @@
             \item \textcolor{codeouthl}{(stark)}~~~\T{\a++}~\K~\T{!\a}, \T{++\a}~\K~\T{\a\,/\,\b}, \T{\a\,*\,\b}~\K~\T{\a\,+\,\b}, \T{\a\,-\,\b}~\K~\T{\a\,==\,\b}~\K~\T{\a\,\&\&\,\b}~\K~\T{\a\,|\!|\,\b}~~~\textcolor{codeouthl}{(schwach)}%\smallskip
             \item Bei Ganzzahldivisionen werden Nachkommastelle abgeschnitten \info{\bjava{5/2} ergibt \bjava{2}}
             \item Bei unterschiedlichen Typen (\bjava{5.0/2}) wird der \say{kleinere} implizit \say{angehoben} (\bjava{5.0/2.0})
-            \item \bjava{byte} oder \bjava{short} werden dabei immer mindestens zu \bjava{int} \info{\say{promoted}/widening, \link{https://docs.oracle.com/javase/specs/jls/se17/html/jls-5.html\#jls-5.6}{JLS17~5.6}}
+            \item \bjava{byte} oder \bjava{short} werden dabei immer mindestens zu \bjava{int} \info{\say{promoted}/widening, \link{https://docs.oracle.com/javase/specs/jls/se17/html/jls-5.html\#jls-5.6}{JLS17~$5.6$}}
         \end{itemize}
         % für Ganzzahlen (\bjava{byte}, \bjava{short}, \bjava{int}, \bjava{long}), Fließkommazahlen (\bjava{float}, \bjava{double}), Zeichen (\bjava{char}) und Wahrheitswerte (\bjava{boolean})
 %        \begin{itemize}
@@ -495,11 +495,251 @@ for(int row = 0; row < matrix.length; row++) \{^^J
     \item Implementieren Sie eine \T{do-while-Schleife}, die alle ungeraden ganzen Zahlen von \T{1} bis einschließlich \T{n} ausgibt.\quad \textup{Beispiel:} \T{n = 14} gibt \T{1 3 5 7 9 11 13} aus und \T{n = 5} gibt \T{1 3 5} aus.
 \end{enumerate}}
 \end{frame}
+
+\begin{frame}[fragile]{Making Loops}
+\begin{itemize}[<+(1)->]
+    \item Wir haben dies bereits letzte Woche analysiert, deswegen hier ein wenig schneller.\smallskip
+\end{itemize}\lstfs{9}
+\begin{plainjava}[lineskip=3pt]
+!*\onslide<5->*!int n = Integer.parseInt(args[0]);
+
+!*\onslide<6->*!for (int i = n; i >= 1; i--) {
+!*\onslide<7->*!    System.out.println(i); // oder System.out.print(...)
+!*\onslide<6->*!}
+
+!*\onslide<12->*!if(n >= 1) {
+!*\onslide<8->*!    int j = 1;
+!*\onslide<9->*!    do {
+!*\onslide<11->*!        if (j % 2 == 1) // ungerade
+!*\onslide<11->*!            System.out.println(j);
+!*\onslide<10->*!        j = j + 1;
+!*\onslide<9->*!    } while (j <= n);
+!*\onslide<12->*!}
+\end{plainjava}
+\begin{tikzpicture}[overlay,remember picture]
+    \only<13->{\node[above left,yshift=\btdmfootheight] at (current page.south east) {\textattachfile{\curpath Schleifen.java}{Schleifen.java}\;};}
+\end{tikzpicture}
+\end{frame}
 }
+
+\subsection{Aufgabe 3}
+{\taskenum
+% linenumbers leading zero
+\def\NlSty#1{{\tiny\ifnum#1<10 0\fi#1:\space}}
+\SetKwIF{If}{ElseIf}{Else}{falls}{:\quad}{}{sonst:}{}
+\SetKwFor{While}{solange}{:}{}
+\DontPrintSemicolon\LinesNotNumbered\SetAlgoNoEnd\SetAlgoNoLine
+\begin{frame}[fragile]{Aufgabe 3: Algorithmen in Java implementieren}
+\task<2->{In dieser Aufgabe sollen Sie einen vorgegebenen Algorithmus in ein identisches Java Programm umwandeln. Achten Sie insbesondere auf eine passende Auswahl der Datentypen der Variablen und die Art der Schleife. Legen Sie
+dazu eine Java Datei namens \T{Quersumme.java} an und implementieren Sie den folgenden Algorithmus in der \T{main} Methode.\medskip\par}
+\columns[onlytextwidth,c]
+\column{.5\linewidth}
+\task{\begin{algorithm}[H]
+\PreCode
+    \onslide<3->{\KwSty{Eingabe:} Ganze Zahl $\rnode{zahl}{zahl}$}\;
+\StartCode
+\onslide<4->{\nl\If{$zahl<0$}{
+\nl    Gebe \say{Eingabe ungültig!} aus\;
+\nl    \KwSty{beende Algorithmus vorzeitig}\;
+}}
+\onslide<5->{\nl Setze \(\rnode{quersumme}{quersumme} = 0\)\;
+\nl Setze \(\rnode{divRest}{divRest} = 0\)\;}
+\onslide<6->{\nl\While{$zahl > 0$} {
+\nl    $divRest = zahl~\%~10$\;
+\nl    $quersumme = quersumme + divRest$\;
+\nl    $zahl = \text{\rnode{ganzzahligAbrunden}{ganzzahligAbrunden}}(zahl~/~10)$\;
+}}
+\onslide<7->{\nl Gebe $quersumme$ aus\;
+\nl\KwSty{ende}}
+\end{algorithm}}
+\column{.5\linewidth}
+\begin{itemize}
+    \itemsep6.5pt
+    \item<8-> Zunächst das Grundgerüst
+    \item<10-> Doch welche Datentypen?
+    \item<13-> Hier genügt \bjava{int} für alles.
+    \item<14-> Abrunden? \onslide<16->{\bjava{int} is 'nuff}\medskip
+\end{itemize}\vfill\lstfs{9}
+\begin{plainjava}
+!*\onslide<9->*!public static void main(String[] args) {
+!*\onslide<12->*!    int !*\onslide<9->*!zahl = !*\onslide<12->*!Integer.parseInt!*\onslide<9->*!(args[0]);
+!*\onslide<9->*!}
+\end{plainjava}
+\endcolumns
+\begin{tikzpicture}[overlay,remember picture]
+    \onslide<11->{\hlbcodeframe[0pt]{zahl}{@z}
+    \hlbcodeframe[0pt]{quersumme}{@q}
+    \hlbcodeframe[0pt]{divRest}{@d}}
+    \onslide<15->{\hlbcodeframe[0pt]{ganzzahligAbrunden}{@a}}
+\end{tikzpicture}
+\end{frame}
+\def\KN#1{\llap{\scriptsize\sffamily\color{gray}\ifnum#1<10 0\fi#1:~}}
+\begin{frame}[fragile]{Eine Implementation übernehmen}
+\begin{itemize}[<+(1)->]
+    \item Abseits der Datentypentscheidung ist die Java-Syntax das größte Hindernis:\lstfs{10}
+\begin{plainjava}
+!*\onslide<4->*!int zahl = Integer.parseInt(args[0]);
+!*\onslide<5->*!!*\KN1*!if (zahl < 0) {
+!*\onslide<6->*!!*\KN2*!    System.!*\tikzmarknode{out}{out}*!.println("Eingabe ungültig!");
+!*\onslide<7->*!!*\KN3*!    return;
+!*\onslide<5->*!}
+
+!*\onslide<8->*!!*\KN4*!int quersumme = !*\tikzmarknode{z1}{\snum{0}}*!;
+!*\onslide<9->*!!*\KN5*!int divRest = 0;!*\Snode{z2}*!
+!*\onslide<10->*!!*\KN6*!while (zahl > 0) {
+!*\onslide<11->*!!*\KN7*!    divRest = zahl % 10;
+!*\onslide<12->*!!*\KN8*!    quersumme = quersumme + divRest;
+!*\onslide<13->*!!*\KN9*!    zahl = zahl / 10;!*\Snode{round}*!
+!*\onslide<10->*!}
+!*\onslide<14->*!!*\KN{10}*!System.out.println(quersumme);
+\end{plainjava}
+\end{itemize}
+\begin{tikzpicture}[overlay,remember picture]
+\onslide<3->{\node[above left,yshift=\btdmfootheight+.65cm,text width=7.85cm,scale=.48] at(current page.south east) {\begin{algorithm}[H]
+\PreCode
+    \KwSty{Eingabe:} Ganze Zahl $\rnode{zahl}{zahl}$\;
+\StartCode
+\nl\If{$zahl<0$}{
+\nl    Gebe \say{Eingabe ungültig!} aus\;
+\nl    \KwSty{beende Algorithmus vorzeitig}\;
+}
+\nl Setze \(\rnode{quersumme}{quersumme} = 0\)\;
+\nl Setze \(\rnode{divRest}{divRest} = 0\)\;
+\nl\While{$zahl > 0$} {
+\nl    $divRest = zahl~\%~10$\;
+\nl    $quersumme = quersumme + divRest$\;
+\nl    $zahl = \text{\rnode{ganzzahligAbrunden}{ganzzahligAbrunden}}(zahl~/~10)$\;
+}
+\nl Gebe $quersumme$ aus\;
+\nl\KwSty{ende}
+\end{algorithm}};}
+\onslide<15->{\draw[Kite-,T] (out.300) to[out=300,in=160] ++(1,-.35) node[right,T] {Alternativ auch \T{System.err.println}};}
+\onslide<16->{\draw[Kite-,T] ([above right=.5mm]z1.40) to[out=40,in=190] ++(1,.35) node[right,T] {Initialisierung notwendig? Ja, wegen \say{08}};}
+\onslide<17->{\node[right,T] at(z2) {Initialisierung notwendig? Nein, da \say{07} überschreibt};}
+\onslide<18->{\node[right,T] at(round) {Ganzzahldivision schneidet Nachkommastellen ab};}
+\only<19->{\node[above left,yshift=\btdmfootheight] at (current page.south east) {\textattachfile{\curpath Quersumme.java}{Quersumme.java}\;};}
+\end{tikzpicture}
+\end{frame}
+}
+\iffull{\AddonFrame
+\begin{frame}{Ein paar Kommentare}
+\begin{itemize}[<+(1)->]
+    \itemsep10pt
+    \item Je nach Pseudocode-\say{Stil} und Problem ist die Implementation in Java problematisch. \begin{itemize}
+        \itemsep8pt
+        \item Manchmal hat eine unsaubere Übernahme von Algorithmen katastrophale Folgen\infoblock{mal was sehr Java-aktuelles: \link{https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-21449}{CVE}, \link{https://neilmadden.blog/2022/04/19/psychic-signatures-in-java/}{blog}, \link{https://www.youtube.com/watch?v=502iGDxuiRk}{{\faYoutubePlay} Computerphile}. Auch wenn hier von C++ portiert wurde.}
+        \item Ein formale Analyse bringt wenig, bei einer problematischen Implementation
+    \end{itemize}
+    \item Mit weiteren Konzepte werden wir Java weiter erkunden.\bigskip
+
+    \item Funktioniert Javas \say{\bjava{\%}} wie das mathematische Modulo?\par
+    \onslide<+(1)->{Nicht ganz, einfach mal mit negativen, sowie Fließkommazahlen spielen (\link{https://docs.oracle.com/javase/specs/jls/se17/html/jls-15.html\#jls-15.17.3}{JLS17~$15.17.3$})}
+\end{itemize}
+\end{frame}
+}\fi
+
+\subsection{Aufgabe 4}
+\begin{frame}{Aufgabe 4: Iterative Wurzelberechnung}
+\task<2->{In dieser Aufgabe sollen Sie einen Algorithmus der als Berechnungsvorschrift gegeben ist implementieren. Im Gegensatz zu Aufgabe~3 ist der Algorithmus also nicht vollständig entwickelt sondern nur in der einfachsten Form angegeben. Das Heron-Verfahren ist ein numerisches Verfahren zur Approximation der \(k\)-ten (\(k \in \N\), \(k > 1\)) Wurzel einer Zahl \(\sqrt{x} \in \R\), \(x > 0\), d.h. wir suchen \(y = \sqrt[k]{x}\).} \task<3->{Wir beginnen mit dem Startwert \begin{equation*}
+    y_0 = x
+\end{equation*}
+und fahren für \(n \geq 1\) nach der folgenden Iterationsvorschrift fort: \begin{equation*}
+    y_{n + 1} = \frac{(k - 1)y_n^k + x}{k \cdot y_n^{k - 1}}
+\end{equation*}
+wobei \(y_n\) die Approximation nach \(n\) Berechnungsschritten sei. Da einige Wurzelzahlen (z.B.~\(\sqrt{2}\)) nur näherungsweise
+dargestellt werden können, brechen wir ab, wenn \(\abs{y_{n+1} - y_n} < 10^{-8}\) erfüllt ist.}\par
+\task<4->{Erstellen Sie eine Java Datei namens \T{Heron.java} und implementieren Sie dieses Verfahren wie oben beschrieben. Lesen Sie die Werte für \(k\) und \(x\) über die Kommandozeilenparameter ein.}
+\end{frame}
+
+\begin{frame}[fragile]{Iterative Berechnung}
+\SetupLstHl
+\begin{plainjava}[lineskip=1pt]
+!*\onslide<2->*!public static void main(String[] args) {
+!*\onslide<4->*!    double x = Double.parseDouble(args[0]);
+!*\onslide<4->*!    int k = Integer.parseInt(args[1]);
+
+!*\onslide<5->*!    if (x <= 0 || k <= 1) {
+!*\onslide<6->*!        System.err.println("Eingaben ungültig!");
+!*\onslide<7->*!        return;
+!*\onslide<5->*!    }
+
+!*\onslide<9->*!    double y = x;
+!*\onslide<13->*!   |ihl|...|ihl|
+!*\onslide<2->*!}
+\end{plainjava}
+\begin{tikzpicture}[overlay,remember picture]
+    \onslide<3->{\node[below left,yshift=-1.5cm,T] (@) at(current page.north east) {Eingabe: \(k \in \N\), \(k > 1\) und \(x \in \R\), \(x > 0\)~~~};}
+    % \node[below right,yshift=1mm,T] (@) at(@.south west) {Ausgabe: \(y =\sqrt[k]{x}\)};
+    \onslide<8->{\node[below right,T] (@) at(@.south west) {Mit \(y_0 = x\)\only<10->{, \(y_{n + 1} = \frac{(k - 1) y_n^k + x}{k \cdot y_n^{k - 1}}\)}};}
+    \onslide<11->{\node[below right,yshift=2mm,T] (@) at(@.south west) {Abbruch wenn \(\abs{y_{n + 1} - y_n} < 10^{-8}\)};}
+    \onslide<12->{\node[below right,yshift=1mm,align=left,T] (@) at(@.south west) {Da wir für die Abbruchbedingung ein\\\(y_{n + 1}\) benötigen, eignet sich \T{do}-\T{while}};}
+\end{tikzpicture}
+\end{frame}
+
+\begin{frame}[fragile,c]{Iterative Berechnung}
+\SetupLstHl
+\begin{plainjava}[lineskip=2pt]
+!*\onslide<1->*!public static void main(String[] args) {
+!*\onslide<2->*!    |ihl|double x; int k; ...|ihl|
+!*\onslide<2->*!    double y = x;
+
+!*\onslide<3->*!    double oldy;
+!*\onslide<4->*!    do {
+!*\onslide<5->*!        oldY = y;
+!*\onslide<6->*!        y = ((k-1) * Math.pow(y, k) + x) / (k * Math.pow(y, k-1));
+!*\onslide<4->*!    } while (Math.abs(oldY - y) > 1!*\snum{E-}*!8);
+
+!*\onslide<6->*!    System.out.println(y);
+!*\onslide<1->*!}
+\end{plainjava}
+\begin{tikzpicture}[overlay,remember picture]
+    \node[below left,yshift=-1.5cm,T] (@) at(current page.north east) {Eingabe: \(k \in \N\), \(k > 1\) und \(x \in \R\), \(x > 0\)~~~};
+    % \node[below right,yshift=1mm,T] (@) at(@.south west) {Ausgabe: \(y =\sqrt[k]{x}\)};
+    \node[below right,T] (@) at(@.south west) {Mit \(y_0 = x\)\only<10->{, \(y_{n + 1} = \frac{(k - 1) y_n^k + x}{k \cdot y_n^{k - 1}}\)}};
+    \node[below right,yshift=2mm,T] (@) at(@.south west) {Abbruch wenn \(\abs{y_{n + 1} - y_n} < 10^{-8}\)};
+    \node[below right,yshift=1mm,align=left,T] (@) at(@.south west) {Da wir für die Abbruchbedingung ein\\\(y_{n + 1}\) benötigen, eignet sich \T{do}-\T{while}};
+\end{tikzpicture}
+\end{frame}
+
+\iffull
+{\AddonFrame
+\begin{frame}[fragile]{Vorbedingungen, Nachbedingungen und Ausgaben}
+    \begin{itemize}[<+(1)->]
+        \itemsep14pt
+        \item Jeder (Unter-)Algorithmus wird Vor- und Nachbedingungen haben \begin{itemize}
+            \item Große Teile werden bereits vom Typsystem abgedeckt
+            \item Dennoch lohnt es sich \textit{immer}, über die Bedingungen nachzudenken
+            \item Oftmals gibt es eine Menge abzuwägen
+            \item Ein (cooles) dies verinnerlichendes Konzept ist Design by contract~\cite{meyer1986dbc,meyer1992applying}
+        \end{itemize}
+        \item Ausgaben können in Java auch mit \T{\link{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/PrintStream.html\#printf(java.lang.String,java.lang.Object...)}{printf}}/\T{\link{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/PrintStream.html\#format(java.lang.String,java.lang.Object...)}{format}} formatiert werden \begin{itemize}
+            \item Hier gibt es eine eigene \link{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Formatter.html\#syntax}{Formatter-Syntax}
+            \item Formatierungshilfen natürlich auch in vielen anderen Sprachen (auch in komfortabler)
+            \item Beispielsweise:
+\begin{plainjava}
+!*\onslide<+(1)->*!System.out.printf("Die %d-te Wurzel von !*\sliteral{\skB{\%.3f}}*! ist !*\sliteral{\skB{\%.3f}}*!\n", k, x, y);
+\end{plainjava}
+            \item Hier besteht auch Unterstützung für Zeiten! \info{\link{https://commons.apache.org/proper/commons-text/apidocs/org/apache/commons/text/StringSubstitutor.html}{String-Interpolation} kann aber mehr}
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+}\fi
 
 \SetNextSectionText{Schleifen, Arrays, Methoden\\Abgabe: \DTMDate{2022-05-23}}
 \section{Aussicht: Übungsblatt 4}
-\begin{frame}{Ein kleiner Schwenk}
+\subsection{Aufgabe 1}
+\begin{frame}{Heap und Stack}
+Heap und Stack
+\end{frame}
+
+\subsection{Aufgabe 2}
+\begin{frame}{Höhere Dimensionen}
+
+\end{frame}
+
+\subsection{Aufgabe 3}
+\begin{frame}{Die Welt der Methoden}
+
 \end{frame}
 
 \section{Abschließendes}
@@ -511,11 +751,23 @@ for(int row = 0; row < matrix.length; row++) \{^^J
     \itemsep11pt
     % \item TODO: get bib to work here
     \item TODO: nächste Woche
+    \item Methoden, For-Each,
+    \item Algorithmen übernehmen
+    \item heap und Stack
 \end{itemize}
 \end{frame}
 }
 
-\outro{\vskip6mm\centering\begin{tikzpicture}[scale=1.85]
+\outro{\vskip6mm\centering\only<2->{\global\dmfootfalse}\begin{tikzpicture}[overlay,remember picture]
+    \onslide<2-3|handout:0>{
+        \fill[pingu@black] (current page.south east) rectangle (current page.north west);
+    }
+    \onslide<4->{
+        \fill[pingu@black!50!btdm@background] (current page.south east) rectangle (current page.north west);
+    }
+\end{tikzpicture}\begin{tikzpicture}[scale=1.85]
+    \only<3|handout:0>{\pingu[:hide,left eye devil,left eye second color=pingu@black!80!pingu@white]}
+    \only<4->{\pingu[devil-horns,right eye devil, left eye angry, devil wings,wings wave,feet simple]}
 \end{tikzpicture}}
 
 
