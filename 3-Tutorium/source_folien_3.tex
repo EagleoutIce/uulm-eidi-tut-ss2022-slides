@@ -728,21 +728,199 @@ dargestellt werden können, brechen wir ab, wenn \(\abs{y_{n+1} - y_n} < 10^{-8}
 \SetNextSectionText{Schleifen, Arrays, Methoden\\Abgabe: \DTMDate{2022-05-23}}
 \section{Aussicht: Übungsblatt 4}
 \subsection{Aufgabe 1}
-\begin{frame}{Heap und Stack}
-Heap und Stack
+% \begin{frame}{Heap und Stack}
+% Heap und Stack
+% \end{frame}
+{
+\makeatletter
+\newcommand*\md{\@ifstar{\@md}{\@md{0}}}% with star we can set handout state
+\def\@md#1#2{\only<#2|handout:#1>{\llap{\color{shadeA}\textbullet~}}}
+\newcommand*\mb[2][0]{\only<#2|handout:#1>{\rlap{\smash{\raisebox{-.66\baselineskip}{\color{shadeA}\textbullet}}}}}
+\newcommand*\mh[2][0]{\only<#2|handout:#1>{\color{shadeA}\textbullet}}
+\newcommand*\mdl[2][0]{\only<#2|handout:#1>{\llap{\smash{\raisebox{-.5\baselineskip}{\tikz{\fill[shadeA,rounded corners=1pt] (0,-.65mm) rectangle ++(2.15\p@,\baselineskip+.65mm);}}~}}}}
+% config takeover :D
+\lstfs{10}\lstset{lineskip=5.5pt}
+\colorlet{lgray}{lightgray!48!white}
+\tikzset{ldesc/.style={gray,font=\sffamily\sbseries},lrel/.style={fill=white,rounded corners,minimum width=28mm,minimum height=7.5mm,align=center},lrel2/.style={fill=white,rounded corners,minimum width=28mm,minimum height=7.5mm*2,align=center},lsf/.style={fill=white,rounded corners,minimum width=28mm,minimum height=7.5mm*2,align=center, rectangle split, rectangle split parts=2}}
+\begin{frame}[fragile,c]{Javas' Speicherverwaltung}
+\centering\pause%
+\begin{columns}[c]%
+\begin{column}{.45\linewidth}%
+\begin{plainjava}
+!*\md4*!int x = 0;
+!*\md5*!byte y = 12;
+!*\md6*!String f = "Hallo Welt";
+!*\md7*!char[] c = {2, 3, 4};
+\end{plainjava}
+\end{column} \begin{column}{.45\linewidth}
+\resizebox{\linewidth}!{\begin{tikzpicture}
+    \onslide<3->{\fill[lgray,rounded corners] (0,0) rectangle ++(3,5.5);
+    \fill[lgray,rounded corners] (3.5,0) rectangle ++(3,5.5);
+    \node[ldesc,below] at (1.5,0) {Stack};
+    \node[ldesc,below] at (5,0) {Heap};
+    \node[lrel] at (1.5,5) {\ldots};
+    \node[lrel] at (5,5) {\ldots};
+    }
+    \onslide<4->{\node[lrel] at (1.5,5-.85) {\bjava{int x = 0}};}
+    \onslide<5->{\node[lrel] at (1.5,5-.85*2) {\bjava{byte y = 12}};}
+    \onslide<6->{
+        \node[lrel] (fg) at (1.5,5-.85*3) {\bjava{String f =\ }\raisebox{-1pt}\faGenderless};
+        \node[lrel] (ft) at (5,5-.85-.425) {\bjava{\"Hallo Welt\"}};
+        \draw[lightgray,very thick,-Kite]  (fg.east) to[out=0,in=180] (ft.west);
+    }
+    \onslide<7->{
+        \node[lrel] (cg) at (1.5,5-.85*4) {\bjava{char[] c =\ }\raisebox{-1pt}\faGenderless};
+        \node[lrel] (ct) at (5,5-.85*4) {\bjava{\{2, 3, 4\}}};
+        \draw[lightgray,very thick,-Kite]  (cg.east) -- (ct.west);
+    }
+\end{tikzpicture}}
+\end{column}
+\end{columns}
 \end{frame}
 
-\subsection{Aufgabe 2}
-\begin{frame}{Höhere Dimensionen}
+\savebox\pinguA{\tikz{\pingu[wings hug,eyes wink,hairs=paletteA!80!white,hair 3=paletteA]}}%
+\savebox\pinguB{\tikz{\pingu[glasses round, left wing shock, eyes shock, right wing grab,tie=paletteB]}}%
+\savebox\pinguC{\tikz{\pingu[wings wave,right eye wink,halo,small]}}%
+\begin{frame}[fragile,c]{Stack-Frames}
+\centering\pause\vspace*{-1.75em}% space fine tuning
+\begin{columns}[c]%
+\begin{column}{.5\linewidth}%
+\begin{plainjava}[escapeinside={!}{!}]
+!\md{11}!void f(char c) {
+!\md{12}!  int x = 4;
+!\md*{5}{17}!  System.out.print(!\mb{13}!b(c+x)!\mh{16}!);!\mh{18}!
+}
+!\md*{2,4}{5,14}!String b(int n) {
+!\md{6-7,15}!  return "" + (n % 9);
+}
 
+!\md{10}!f(!\mb4!b(42)!\rlap{\!\mb{8}}!.!\rlap{~~\thinspace\mb[3]{9}}!charAt(0));!\mh[6]{19}!
+\end{plainjava}
+\end{column} \begin{column}{.415\linewidth}
+\centering\resizebox{\linewidth}!{\begin{tikzpicture}
+    \onslide<3->{\fill[lgray,rounded corners] (0,0) rectangle ++(3,5.5);
+    \node[ldesc,below] at (1.5,0) {Stack};
+    \node[lrel] (d) at (1.5,5) {\ldots};
+    \fill[lgray,rounded corners] (3.5,0) rectangle ++(3,5.5);
+    \node[ldesc,below] at (5,0) {Heap};
+    \node[lrel] (d2) at (5,5) {\ldots};}
+    \onslide<5-7|handout:2>{\node[lsf,below=1mm] (s) at(d.south) {%
+        \T{b}
+        \nodepart{second}
+        \bjava{int n = 42}%
+    };
+    \draw[ultra thick,lgray] (s.text split west) -- (s.text split east);
+    }
+    \onslide<8-9|handout:3>{%
+        \node[lrel,below=1mm] (br) at (d.south) {\bjava{<ret-b> =\ }\raisebox{-1pt}\faGenderless};
+        \node[lrel,below=8mm] (br2) at (d2.south) {\bjava{\"6\"}};
+        \draw[lightgray,very thick,-Kite]  (br.east) to[out=0,in=180] (br2.west);
+    }
+    \onslide<10-|handout:4->{
+        \node[lrel,below=8mm] (br2) at (d2.south) {\bjava[stringstyle={\color{gray}}]{\"6\"}};
+    }
+    \onslide<9|handout:3>{%
+        \node[lsf,below=1mm] (ca) at (br.south) {\resizebox{25.4mm}!{\textit{\color{gray}\bjava{String::charAt}}}\nodepart{second} \scriptsize\textit{omitted}};
+        \draw[ultra thick,lgray] (ca.text split west) -- (ca.text split east);
+        \draw[lightgray,very thick,-Kite]  ([yshift=-3.5mm]ca.east) to[out=0,in=180] (br2.west);
+    }
+    \onslide<10|handout:0>{%
+        \node[lrel,below=1mm] (rca) at (d.south) {\resizebox{25.4mm}!{\bjava{<ret-cA> = '6'}}};
+    }
+    \onslide<11|handout:0>{%
+        \node[lsf,below=1mm] (fs) at (d.south) {%
+            \T{f}
+            \nodepart{second}
+            \bjava{char c = '6'}%
+        };
+        \draw[ultra thick,lgray] (fs.text split west) -- (fs.text split east);
+    }
+    \onslide<12-18|handout:4-5>{%
+        \node[lsf,below=1mm] (fs) at (d.south) {%
+            \T{f}
+            \nodepart{second}
+            \bjava{char c = '6'}\\
+            \bjava{int x = 4}%
+        };
+        \draw[ultra thick,lgray] (fs.text split west) -- (fs.text split east);
+    }
+    \onslide<14-15|handout:4>{%
+        \node[lsf,below=1mm] (bs) at (fs.south) {%
+            \T{b}
+            \nodepart{second}
+            \bjava{char n = 58}
+        };
+        \draw[ultra thick,lgray] (bs.text split west) -- (bs.text split east);
+        \node[above=1mm,scale=.65] (pingu2) at (5,0) {\usebox\pinguA};
+        \node[above=2mm,lrel,draw=gray,minimum width=0mm,minimum height=0mm] at(pingu2.south) {\bjava{'6' = 54}};
+    }
+    \onslide<16|handout:0>{%
+        \node[lrel,below=1mm] (rbs) at (fs.south) {\resizebox{25.4mm}!{\bjava{<ret-b> =\ }\raisebox{-1pt}\faGenderless}};
+        \node[lrel,below=11mm] (br3) at (br2.south) {\bjava{\"4\"}};
+        \draw[lightgray,very thick,-Kite]  (rbs.east) to[out=-15,in=165] (br3.west);
+    }
+    \onslide<17|handout:5>{\node[lrel,below=11mm] (br3) at (br2.south) {\bjava{\"4\"}};}
+    \onslide<18-|handout:6->{%
+        \node[lrel,below=11mm] (br3) at (br2.south) {\bjava[stringstyle={\color{gray}}]{\"4\"}};
+    }
+    \onslide<17|handout:5>{%
+        \node[lsf,below=1mm] (print) at (fs.south) {\resizebox{25.4mm}!{\textit{\color{gray}\bjava{PrintStream::print}}}\nodepart{second} \scriptsize\textit{omitted}};
+        \draw[ultra thick,lgray] (print.text split west) -- (print.text split east);
+        \draw[lightgray,very thick,-Kite]  ([yshift=-2.5mm]print.east) to[out=-15,in=165] (br3.west);
+    }
+    \onslide<19-|handout:6->{%
+        \node[above=1mm,scale=.65] (pingu3) at (1.5,0) {\usebox\pinguC};
+        % tiny is still too fat :C
+        \node[above=1mm,lrel,draw=gray,text width=1/.6*25.3mm,minimum height=0mm,font=\sffamily\small,scale=.6] at(pingu3.north) {Die grauen Zeichenketten auf dem Heap können bereits vom Garbage-Collector entfernt worden sein!};
+    }
+\end{tikzpicture}}%
+\vspace*{-1.25em}%
+\end{column}
+\end{columns}
+% \begin{tikzpicture}[overlay,remember picture]
+%     \onslide<7-|handout:2->{%
+%         \node[above left=.25cm,yshift=\btdmfootheight,scale=.6] (pingu) at (current page.south east) {\usebox\pinguB};
+%         \node[left,scale=.6,text width=6.75cm,align=center,yshift=-.33cm] at (pingu.west) {Wir werden Rückgabemechanismen sträflich vereinfachen!};
+%     }
+% \end{tikzpicture}%
+\end{frame}
+% TODO: Epsiode Links
+}
+
+\begin{frame}{Ein paar Kommentare}
+    \begin{itemize}[<+(1)->]
+        \itemsep10pt
+        \item Referenzdatentypen werden wir noch einige Male begegnen
+        \item Die Animationen hier entstammen meiner Präsentation über \link{https://github.com/EagleoutIce/Episode-Recursion}{Rekursion}.
+        \item Allgemein gibt es aber ein paar Dinge festzuhalten: \begin{itemize}
+            \itemsep1.5pt
+            \item Heap und Stack haben erstmal nichts mit den gleichnamigen Datenstrukturen zu tun
+            \item Dies Speichermodell hilft bei Lebenszyklen, \bjava{final}, \bjava{==},~\ldots
+            \item Ich werde öfters auf Heap und Stack zurückgreifen
+        \end{itemize}
+        \item Referenzdatentypen sind \bjava{null}, wenn sie auf dem Stack liegen, aber auf kein Element zeigen.
+        \item Wir sprechen bei Java von Referenzen, nicht von Zeigern!
+    \end{itemize}
 \end{frame}
 
-\subsection{Aufgabe 3}
-\begin{frame}{Die Welt der Methoden}
-
+\subsection{Aufgaben 2 \& 3}
+\begin{frame}{Höhere Dimensionen und Methoden}
+    \begin{itemize}[<+(1)->]
+        \itemsep12pt
+        \item Arrays von Arrays sind nichts besonderes~--- wenn man das versteht, sind sie zahm
+        \item Hier hilft ein Blick auf die Präsenzaufgabe
+        \item Wo wir eben noch keine Methoden hatten, kommen nun unzählige\begin{itemize}
+            \item Unteralgorithmen sind omnipräsent
+            \item Wir versuchen alle sinnvoll auslagerbaren Schritte auszulagern
+            \item Dies verbessert auch die Lesbarkeit (\bjava{a + b} vs. \bjava{addVisualPadding(a, b)})
+            \item Weiter erlaubt es dies, Unteralgorithmen wiederzuverwenden!
+        \end{itemize}
+        \item Probiert euch gerne aus und formuliert eure Annahmen!
+    \end{itemize}
 \end{frame}
 
-\SetNextSectionText{There is no real ending. It's just the place where you stop the story.\\--- Frank Herbert~\link{http://www.sinanvural.com/seksek/inien/tvd/tvd2.htm}{online}}
+
+\SetNextSectionText{There is no real ending. It's just the place where you stop the story.\\--- Frank Herbert~\IfBtdmDarkmode{}{\def\fancyulbackground{btdm@primary}}\link{http://www.sinanvural.com/seksek/inien/tvd/tvd2.htm}{online}}
 \section{Abschließendes}
 {\SummaryFrame
 \begin{frame}[t]{Zusammenfassend}

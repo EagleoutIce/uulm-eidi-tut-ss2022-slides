@@ -209,7 +209,7 @@
 
 
 \AtBeginDocument{\def\O{\ensuremath{\mathcal{O}}}}
-\newsavebox\pinguA \newsavebox\pinguB
+\newsavebox\pinguA \newsavebox\pinguB \newsavebox\pinguC
 \def\gend{\textcolor{gray}{\smaller:}}
 
 \usepackage{setspace}
