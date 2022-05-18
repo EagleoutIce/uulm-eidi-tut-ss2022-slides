@@ -653,7 +653,7 @@ dargestellt werden können, brechen wir ab, wenn \(\abs{y_{n+1} - y_n} < 10^{-8}
 
 \begin{frame}[fragile]{Iterative Berechnung}
 \SetupLstHl
-\begin{plainjava}[lineskip=1pt]
+\begin{plainjava}[lineskip=1.5pt]
 !*\onslide<2->*!public static void main(String[] args) {
 !*\onslide<4->*!    double x = Double.parseDouble(args[0]);
 !*\onslide<4->*!    int k = Integer.parseInt(args[1]);
@@ -734,18 +734,18 @@ dargestellt werden können, brechen wir ab, wenn \(\abs{y_{n+1} - y_n} < 10^{-8}
 {
 \makeatletter
 \newcommand*\md{\@ifstar{\@md}{\@md{0}}}% with star we can set handout state
-\def\@md#1#2{\only<#2|handout:#1>{\llap{\color{shadeA}\textbullet~}}}
-\newcommand*\mb[2][0]{\only<#2|handout:#1>{\rlap{\smash{\raisebox{-.66\baselineskip}{\color{shadeA}\textbullet}}}}}
-\newcommand*\mh[2][0]{\only<#2|handout:#1>{\color{shadeA}\textbullet}}
-\newcommand*\mdl[2][0]{\only<#2|handout:#1>{\llap{\smash{\raisebox{-.5\baselineskip}{\tikz{\fill[shadeA,rounded corners=1pt] (0,-.65mm) rectangle ++(2.15\p@,\baselineskip+.65mm);}}~}}}}
+\def\@md#1#2{\only<#2|handout:#1>{\llap{\color{btdm@primary}\faAngleRight~}}}
+\newcommand*\mb[2][0]{\only<#2|handout:#1>{\rlap{\smash{\raisebox{-.66\baselineskip}{\color{btdm@primary}\faAngleUp}}}}}
+\newcommand*\mh[2][0]{\only<#2|handout:#1>{\;\color{btdm@primary}\faAngleLeft}}
+\newcommand*\mdl[2][0]{\only<#2|handout:#1>{\llap{\smash{\raisebox{-.5\baselineskip}{\tikz{\fill[btdm@primary,rounded corners=1pt] (0,-.65mm) rectangle ++(2.15\p@,\baselineskip+.65mm);}}~}}}}
 % config takeover :D
 \lstfs{10}\lstset{lineskip=5.5pt}
 \colorlet{lgray}{lightgray!48!white}
 \tikzset{ldesc/.style={gray,font=\sffamily\sbseries},lrel/.style={fill=white,rounded corners,minimum width=28mm,minimum height=7.5mm,align=center},lrel2/.style={fill=white,rounded corners,minimum width=28mm,minimum height=7.5mm*2,align=center},lsf/.style={fill=white,rounded corners,minimum width=28mm,minimum height=7.5mm*2,align=center, rectangle split, rectangle split parts=2}}
 \begin{frame}[fragile,c]{Javas' Speicherverwaltung}
 \centering\pause%
-\begin{columns}[c]%
-\begin{column}{.45\linewidth}%
+\begin{columns}[c,onlytextwidth]%
+\begin{column}{.5\linewidth}%
 \begin{plainjava}
 !*\md4*!int x = 0;
 !*\md5*!byte y = 12;
@@ -753,7 +753,7 @@ dargestellt werden können, brechen wir ab, wenn \(\abs{y_{n+1} - y_n} < 10^{-8}
 !*\md7*!char[] c = {2, 3, 4};
 \end{plainjava}
 \end{column} \begin{column}{.45\linewidth}
-\resizebox{\linewidth}!{\begin{tikzpicture}
+\resizebox{.925\linewidth}!{\begin{tikzpicture}
     \onslide<3->{\fill[lgray,rounded corners] (0,0) rectangle ++(3,5.5);
     \fill[lgray,rounded corners] (3.5,0) rectangle ++(3,5.5);
     \node[ldesc,below] at (1.5,0) {Stack};
@@ -782,8 +782,8 @@ dargestellt werden können, brechen wir ab, wenn \(\abs{y_{n+1} - y_n} < 10^{-8}
 \savebox\pinguB{\tikz{\pingu[glasses round, left wing shock, eyes shock, right wing grab,tie=paletteB]}}%
 \savebox\pinguC{\tikz{\pingu[wings wave,right eye wink,halo,small]}}%
 \begin{frame}[fragile,c]{Stack-Frames}
-\centering\pause\vspace*{-1.75em}% space fine tuning
-\begin{columns}[c]%
+\centering\pause
+\begin{columns}[c,onlytextwidth]%
 \begin{column}{.5\linewidth}%
 \begin{plainjava}[escapeinside={!}{!}]
 !\md{11}!void f(char c) {
@@ -796,8 +796,8 @@ dargestellt werden können, brechen wir ab, wenn \(\abs{y_{n+1} - y_n} < 10^{-8}
 
 !\md{10}!f(!\mb4!b(42)!\rlap{\!\mb{8}}!.!\rlap{~~\thinspace\mb[3]{9}}!charAt(0));!\mh[6]{19}!
 \end{plainjava}
-\end{column} \begin{column}{.415\linewidth}
-\centering\resizebox{\linewidth}!{\begin{tikzpicture}
+\end{column} \begin{column}{.45\linewidth}
+\centering\resizebox{.925\linewidth}!{\begin{tikzpicture}
     \onslide<3->{\fill[lgray,rounded corners] (0,0) rectangle ++(3,5.5);
     \node[ldesc,below] at (1.5,0) {Stack};
     \node[lrel] (d) at (1.5,5) {\ldots};
@@ -898,7 +898,7 @@ dargestellt werden können, brechen wir ab, wenn \(\abs{y_{n+1} - y_n} < 10^{-8}
             \item Dies Speichermodell hilft bei Lebenszyklen, \bjava{final}, \bjava{==},~\ldots
             \item Ich werde öfters auf Heap und Stack zurückgreifen
         \end{itemize}
-        \item Referenzdatentypen sind \bjava{null}, wenn sie auf dem Stack liegen, aber auf kein Element zeigen.
+        \item Referenzdaten sind \bjava{null}, wenn sie auf dem Stack liegen, aber auf kein Element \say{zeigen}.
         \item Wir sprechen bei Java von Referenzen, nicht von Zeigern!
     \end{itemize}
 \end{frame}
