@@ -927,21 +927,28 @@ dargestellt werden können, brechen wir ab, wenn \(\abs{y_{n+1} - y_n} < 10^{-8}
 \pause \printBibCommand
 \vfill\vfill % double fill for more fraction
 \begin{itemize}[<+(1)->]
-    \itemsep11pt
+    \itemsep6pt
     % \item TODO: get bib to work here
-    \item TODO: nächste Woche
-    \item Methoden, For-Each,
-    \item Algorithmen übernehmen
-    \item heap und Stack
+    \item \textbf{Der nächste Donnerstag ist ein Feiertag!}
+    \item Arrays sind komplexe Datentypen, die auf dem Heap verwaltet werden. \begin{itemize}
+        \item Damit können sie \bjava{null} sein (keine Referenz auf den Heap)
+        \item Übergeben wir ein Array einer Methode, wird die Referenz \info{Stack} kopiert \info{$\to$~selbes Array}
+    \end{itemize}
+    % \item Algorithmen verstehen und implementieren ist ein Grundpfeiler der praktischen Informatik
+    \item Es gibt viele kleine Tricks und Kniffe, die man primär durch \info{selbst} ausprobieren lernt
+    \item Eure Lösungen und Ansätze werden sich wahrscheinlich immer mehr unterscheiden\begin{itemize}
+        \item Je mehr Mühe ihr euch gebt, desto ausführlicher das individuelle Feedback
+        \item Formuliert gerne auch Fragen\textor Ideen\textor \ldots\quad und kommentiert fleißig
+    \end{itemize}
 \end{itemize}
 \end{frame}
 }
 
 \outro{\vskip6mm\centering\only<2->{\global\dmfootfalse}\begin{tikzpicture}[overlay,remember picture]
-    \onslide<2-3|handout:0>{
+    \onslide<2-4|handout:0>{
         \fill[pingu@black] (current page.south east) rectangle (current page.north west);
     }
-    \onslide<4->{
+    \onslide<5->{
         \fill[pingu@black!50!btdm@background] (current page.south east) rectangle (current page.north west);
     }
 \end{tikzpicture}\begin{tikzpicture}[scale=1.85]
