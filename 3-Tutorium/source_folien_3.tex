@@ -66,29 +66,29 @@
 
 \def\NOl{}
 \def\NOr{}
-\newcommand<>\b[2]{{\only#3{$\mathtt{\color{gray}\csname #2l\endcsname(}$}}#1{\only#3{$\mathtt{\color{gray}\csname #2r\endcsname)}$}}}
+\newcommand<>\b[2]{{\onslide#3{$\mathtt{\color{gray}\csname #2l\endcsname(}$}}#1{\onslide#3{$\mathtt{\color{gray}\csname #2r\endcsname)}$}}}
 % there is somewhat of a problem when nesting braces
 % after some tries, this boxout strat seems to cut it
-\newcommand<>\Tunderbrace[2]{\setbox0=\hbox{#1}$\only#3{\expandafter\underbrace}{\copy0}\only#3{_{#2}}$}
+\newcommand<>\Tunderbrace[2]{\setbox0=\hbox{#1}$\only#3{\expandafter\underbrace}{\copy0}_{\onslide#3{#2}}$}
 \newcommand<>\u[2]{\Tunderbrace#3{#1}{\smash{\clap{\solGet{keywordB}{\scriptsize\HStrut#2}}}}}
-\newcommand<>\Toverbrace[2]{\setbox0=\hbox{#1}$\only#3{\expandafter\overbrace}{\copy0}\only#3{^{#2}}$}
-\newcommand<>\o[2]{\Toverbrace#3{\text{#1}}{\only#3{\clap{\text{\solGet{keywordB}{\scriptsize\HStrut#2}}}}}}
-\begin{frame}[b]{Klammeraffenfreude}
+\newcommand<>\Toverbrace[2]{\setbox0=\hbox{#1}$\only#3{\expandafter\overbrace}{\copy0}^{\onslide#3{#2}}$}
+\newcommand<>\o[2]{\Toverbrace#3{\text{#1}}{\clap{\text{\solGet{keywordB}{\scriptsize\HStrut#2}}}}}
+\begin{frame}[t]{Klammeraffenfreude}
 \begin{enumerate}
     \itemsep14pt
-    \item<2-> Wir klammern\only<11->{~und erhalten den Typ \bjava{int}}:\smallskip
+    \item<2-> Wir klammern\strut\only<11->{~und erhalten den Typ \bjava{int}}:\smallskip
 %{\tracingall
 \begin{center}
     \T{\u<7->{i}{int} + \o<10->{\b<3->{\u<9->{\b<4->{\u<7->{\snum{3}}{int} * \b<5->{\o<8->{\u<7->{s}{short}++}{short}}{NO}}{big}}{int} + \u<9->{(\b<6->{\o<8->{-\u<7->{\snum{2}}{int}}{int}}{NO} - \u<7->{\snum{4}}{int})}{int}}{Big}}{int}}
 \end{center}
 %}
-    \item<12-> Wir klammern erneut\only<18->{~und erhalten den Typ \bjava{boolean}}:\smallskip
-
+    \item<12-> Wir klammern \strut erneut\only<18->{~und erhalten den Typ \bjava{boolean}}:\smallskip
+\begin{center}% spacing around 4d fixing brace font bug
     \T{\u<17->{\b<13->{\u<15->{true}{boolean} \&\& \o<16->{\b<14->{\u<15->{\snum{3}}{int} > \u<15->{\,\snum{4}d\,}{double}}{NO}}{boolean}}{big}}{boolean} || \u<17->{\b<13->{\o<16->{\b<14->{\u<15->{\snum{2}}{int} - \u<15->{f}{float}}{NO}}{float} != \u<15->{\snum{5}}{int}}{big}}{boolean}}
 \end{center}
 \end{enumerate}
 \begin{tikzpicture}[overlay,remember picture]
-    \onslide<19->{\node[T,below left,yshift=-1.4cm,text width=8cm,scale=.75] at(current page.north east) {Interaktiv kann dies in der \link{https://docs.oracle.com/javase/9/jshell/introduction-jshell.htm}{jshell} ausprobiert werden. Definiert einfach eine Methode wie \T{void give(Object o) { System.out.println(o.getClass());}}. Dann gibt z.B.~\T{give(3 + 2d);} den Typ des Ausdrucks aus.};}
+    \onslide<19->{\node[T,below left,yshift=-1.4cm,text width=8cm,scale=.75] at(current page.north east) {Interaktiv kann dies in der \link{https://docs.oracle.com/javase/9/jshell/introduction-jshell.htm}{JShell} ausprobiert werden. Definiert einfach eine Methode wie \T{void give(Object o) { System.out.println(o.getClass());}}. Dann gibt z.B.~\T{give(3 + 2d);} den Typ des Ausdrucks aus.};}
 \end{tikzpicture}
 \end{frame}
 }\fi
