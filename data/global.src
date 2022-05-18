@@ -269,13 +269,14 @@
 \newcommand\hlcode[3][1.9pt]{\fill[\hlcolor,opacity=\hlopa,rounded corners=1pt] ([shift={(-\hlhs,-#1)}]#2.south west) rectangle ([shift={(\hlhs,#1)}]#2.north east); \coordinate (#3) at (#2.east);}
 \newcommand\hlbcode[3][1.9pt]{\fill[\hlcolor,opacity=\hlopa,rounded corners=1pt] ([shift={(-\hlhs,-#1)}]#2.south west) rectangle ([shift={(\hlhs,#1)}]#2@.north east); \coordinate (#3) at (#2@.east);}
 
-\def\sbasic#1{\solGet{basicstyle}{#1}}
-\def\sliteral#1{\solGet{literals}{#1}}
+\makeatletter % adapt fontsize
+\def\sbasic#1{\solGet{basicstyle}{\sol@font@fs@normal#1}}
+\def\sliteral#1{\solGet{literals}{\sol@font@fs@normal#1}}
 
-\def\snum#1{\solGet{numbers}{#1}}
-\def\skA#1{\solGet{keywordA}{#1}}
-\def\skB#1{\solGet{keywordB}{#1}}
-\def\skC#1{\solGet{keywordC}{#1}}
+\def\snum#1{\solGet{numbers}{\sol@font@fs@normal#1}}
+\def\skA#1{\solGet{keywordA}{\sol@font@fs@normal#1}}
+\def\skB#1{\solGet{keywordB}{\sol@font@fs@normal#1}}
+\def\skC#1{\solGet{keywordC}{\sol@font@fs@normal#1}}
 \def\HStrut{\vphantom{\{\}g}}
 % we do not nest inside tikzmarknode as this is not possible
 \def\Snode#1{\tikzmarknode{#1}\HStrut}
@@ -295,3 +296,5 @@
 \newcommand*\tfu[3][0pt]{\draw[decoration={brace,aspect=\Aspect},decorate,-] ([yshift=#1]#2.north) -- ([yshift=#1]#2@.north) node[above,pos=\Aspect] {\scriptsize\itshape#3};}
 \def\tfd#1#2{\draw[decoration={brace,aspect={1-\Aspect}},decorate,-] (#1@.south) -- (#1.south) node[below,align=center,font=\scriptsize\itshape\sffamily,pos={1-\Aspect}] {\strut#2\strut};}
 \def\Aspect{.5}
+
+\newsavebox\codebox

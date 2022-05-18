@@ -197,8 +197,8 @@ $6->$        return -1;
 $4->$    }
 
 $3->$    int anzahl = 0;
-$3->$    for (int row = 0; row < matrix.length; row++) {
-$3->$        for (int col = 0; col < matrix[row].length; col++) {
+$3->$    for(int row = 0; row < matrix.length; row++) {
+$3->$        for(int col = 0; col < matrix[row].length; col++) {
 $3->$            if (matrix[row][col] > 0)
 $3->$                anzahl = anzahl + 1;
 $3->$        }
@@ -302,13 +302,173 @@ assert i > 0;  // :yields: Fehler!
     }
 \end{tikzpicture}
 \end{frame}
+\begin{frame}[fragile]{Das ist nicht gut, bis ich es nicht fein-Schleif}
+\SetupLstHl
+\begin{itemize}[<+(1)->]
+    \item Werfen wir noch einmal einen Blick auf die Hauptschleife:
+\begin{plainjava}
+!*\onslide<3->*!for(int row = 0; row < matrix.length; row++) {
+!*\onslide<4->*!    for(int col = 0; col < matrix[row].length; col++) {
+!*\onslide<5->*!        if (matrix[row][col] > 0) |ihl|...|ihl|
+!*\onslide<4->*!    }
+!*\onslide<3->*!}
+\end{plainjava}
+    \item<6-> Über diverse Daten in Java \info{Arrays,~\ldots}, können wir \say{iterieren}
+    \item<7-> Dafür bietet java ein wenig \textit{syntactic-sugar} mit \say{for-each}!
+\end{itemize}
+\end{frame}
+\savebox\codebox{\SetupLstHl\begin{minipage}{12.5cm}
+\begin{plainjava}^^J
+for(int row = 0; row < matrix.length; row++) \{^^J
+:ws::ws::ws::ws:for(int col = 0; col < matrix[row].length; col++) \{^^J
+:ws::ws::ws::ws::ws::ws::ws::ws:if (matrix[row][col] > 0) |ihl|...|ihl|^^J
+:ws::ws::ws::ws:\}^^J
+\}^^J
+\end{plainjava}
+\end{minipage}}
+
+\begin{frame}[fragile]{Zucker und weitere tolle Dinge}
+\SetupLstHl
+\begin{itemize}[<+(1)->]
+    \item \say{for-each} ist kein Keyword, sondern eine Alternative \bjava{for}-Schleife:
+\begin{plainjava}
+!*\onslide<3->*!for(double[] row : matrix) {
+!*\onslide<4->*!    for(double cell : row) {
+!*\onslide<5->*!        if (cell > 0) |ihl|...|ihl|
+!*\onslide<4->*!    }
+!*\onslide<3->*!}
+\end{plainjava}
+    \item<7-> Ein Nachteil? Wir verlieren die Information, das wie-vielte Element das ist. \onslide<8->{\infoblock{Weiter können wir durch \T{cell} die Matrix nicht mehr verändern. Das kommt später.}}
+    \item<9-> Dafür ist es meist (viel) kompakter!
+\end{itemize}
+\begin{tikzpicture}[remember picture,overlay]
+\node[above left,yshift=\btdmfootheight,scale=.7] at(current page.south east) {\copy\codebox};
+\end{tikzpicture}
+\end{frame}
 }
 \fi
-\begin{frame}
-    TODO: Präzedenzreglen und klammern kleine Aufagbe
-    TODO: for-each anstelle von for-loop
-    TODO: System: Format
+% \begin{frame}
+%     % TODO: System: Format
+% \end{frame}
+
+\SetNextSectionText{Kontrollstrukturen\\Abgabe: \DTMDate{2022-05-16}}
+\section{Übungsblatt 3}
+\subsection{Aufgabe 1}
+\begin{frame}[fragile]{Aufgabe 1: Bedingte Anweisungen und Boolesche Ausdrücke}
+    \lstfs{10}%
+    \task<2->{Betrachten Sie den folgenden Java Code-Ausschnitt. Vereinfachen Sie die verschachtelten \T{if}/\T{else} Blöcke so, dass die korrekte Zuweisung der Variablen \T{z} \emph{ohne} Kontrollstrukturen (\T{if}, \T{else}, \T{switch}, \T{while}, \T{do-while}, \T{for}, ternärer Operator) in einer Zeile verarbeitet wird, d.h. direkt über eine Zuweisung mithilfe eines Booleschen Ausdrucks.
+    Gehen Sie davon aus, dass die Variablen \T{x} und \T{y} vom Typ \T{int} und \T{z} vom Typ \T{boolean} sind und alle Variablen
+    gültige Werte besitzen.}
+\columns[onlytextwidth,c]
+\column{.5\linewidth}
+\begin{plainjava}
+!*\onslide<3->*!if(x >= 0){!*\Snode{@a}*!
+!*\onslide<3->*!    if(y <= 0) {!*\Snode{@b}*!
+!*\onslide<3->*!        !*\tikzmarknode{1}{\sbasic{\HStrut z = \sliteral{true}}}*!;
+!*\onslide<3->*!    } else {:ws::ws::ws:!*\Snode{@c}*!
+!*\onslide<3->*!        if(y == 1) { !*\tikzmarknode{2}{\sbasic{\HStrut z = \sliteral{true}}}*!; }
+!*\onslide<3->*!    }
+!*\onslide<3->*!} else {
+!*\onslide<3->*!    !*\tikzmarknode{3}{\sbasic{\HStrut z = \sliteral{false}}}*!;
+!*\onslide<3->*!}
+\end{plainjava}
+\column{.5\linewidth}
+\onslide<5->{\T{z} ist nur \bjava{true}, wenn}
+\updateitemize{\;\textbullet}%
+\begin{itemize}
+    \item<7->[\textcolor{btdm@primary}{\textbullet}] \bjava{x >= 0 && y <= 0}
+\end{itemize}
+\onslide<9->{\textit{Oder:}}
+\begin{itemize}
+    \item<9->[\textcolor{gray}{\textbullet}] \bjava{x >= 0 && !(y <= 0) && y == 1}
+\end{itemize}
+\onslide<10->{Kombiniert kommen wir auf:}
+\begin{plainjava}
+!*\onslide<11->*!z = (x >= 0 && y <= 0) || (x >= 0 && !(y <= 0) && y == 1);
+!*\onslide<1->*!
+\end{plainjava}
+% \onslide<12->{\textbf{Done}}~\onslide<13->{\ldots?}
+\endcolumns
+\begin{tikzpicture}[overlay,remember picture]
+\onslide<4->{
+    \hlcode{1}{@1}
+    \node at (1) {\sbasic{\HStrut z = \sliteral{true}}};
+    \hlcode{2}{@2}
+    \node at (2) {\sbasic{\HStrut z = \sliteral{true}}};
+    \hlcode{3}{@2}
+    \node at (3) {\sbasic{\HStrut z = \sliteral{false}}};
+}
+\onslide<6->{
+    \node[right,btdm@primary] at(@a) {\raisebox{1pt}{\textbullet}};
+    \node[right,btdm@primary] at(@b) {\raisebox{1pt}{\textbullet}};
+}
+\onslide<8->{
+    \node[right=4mm,gray] at(@b) {\raisebox{1pt}{\textbullet}};
+    \node[above=-3mm,gray] at(@c) {\raisebox{1pt}{\textbullet}};
+}
+\end{tikzpicture}
 \end{frame}
+
+\begin{frame}[fragile]{Ausdrücke vereinfachen}
+\begin{itemize}[<+(1)->]
+    \item Wir hatten einen recht langen Ausdruck:
+\begin{plainjava}
+!*\onslide<3->*!z = (x >= 0 && y <= 0) || (x >= 0 && !(y <= 0) && y == 1);!*\onslide<1->*!
+\end{plainjava}
+    \item<4-> Zunächst ist \bjava{!(y <= 0)} redundant, wenn \bjava{y == 1} gilt:
+\begin{plainjava}
+!*\onslide<5->*!z = (x >= 0 && y <= 0) || (x >= 0 && y == 1);!*\onslide<1->*!
+\end{plainjava}
+    \item<6-> In beiden Fällen muss \bjava{x >= 0} gelten:
+\begin{plainjava}
+!*\onslide<7->*!z = (x >= 0) && (y <= 0 || y == 1);!*\onslide<1->*!
+\end{plainjava}
+    \item<8-> Nun ist \bjava{y} ein \bjava{int}, zwischen \bjava{0} und \bjava{1} ist nichts:
+\begin{plainjava}
+!*\onslide<9->*!z = (x >= 0) && (y <= 1);!*\onslide<1->*!
+\end{plainjava}
+\end{itemize}
+\begin{tikzpicture}[overlay,remember picture]
+    \onslide<10->{\node[above left, T,yshift=\btdmfootheight] at(current page.south east) {Welche dieser Klammern sind optional?};}
+\end{tikzpicture}
+\end{frame}
+
+\begin{frame}[fragile]{Ein Mini-Kommentar über die Korrektheit}
+\begin{itemize}[<+(1)->]
+    \item Das hatte quasi jeder und die Mehrheit hat Recht!\medskip
+\columns[onlytextwidth,c]
+\column{.35\linewidth}
+\begin{plainjava}
+!*\onslide<3->*!if(x >= 0){
+!*\onslide<3->*!    if(y <= 0) {
+!*\onslide<3->*!        z = true;
+!*\onslide<3->*!    } else {
+!*\onslide<3->*!        if(y == 1) {
+!*\onslide<3->*!            z = true;
+!*\onslide<3->*!        }
+!*\onslide<3->*!    }
+!*\onslide<3->*!} else {
+!*\onslide<3->*!    z = false;
+!*\onslide<3->*!}
+\end{plainjava}
+\column{.65\linewidth}
+\onslide<4->{Sei \(\text{\T{x}} \geq 0\) und \(\text{\T{y}} > 1\). Welchen Wert hat \T{z}?}
+\begin{itemize}
+    \item<5-> Na ja, den Alten!\SetupLstHl
+\begin{plainjava}
+!*\onslide<6->*!z = |ihl|x >= 0 &&|ihl| (|ihl|y <= 1|ihl| || z);
+\end{plainjava}
+    \item<7-> Das Problem? Was, wenn \T{z} davor nicht initialisiert wurde?
+    \item<8-> Dann ist das ohne Kontrollstrukturen unmöglich
+    \item<10-> Korrekt wäre: \textbf{die Aufgabe ist \info{mit EidI-Wissen} unmöglich}
+\end{itemize}
+\endcolumns
+\end{itemize}
+\begin{tikzpicture}[overlay,remember picture]
+    \onslide<9->{\node[above left, T,yshift=\btdmfootheight] at(current page.south east) {Genau genommen kann man für eine spezifische Version und Programmstruktur\ldots};}
+\end{tikzpicture}
+\end{frame}
+
 \SetNextSectionText{Schleifen, Arrays, Methoden\\Abgabe: \DTMDate{2022-05-23}}
 \section{Aussicht: Übungsblatt 4}
 \begin{frame}{Ein kleiner Schwenk}
