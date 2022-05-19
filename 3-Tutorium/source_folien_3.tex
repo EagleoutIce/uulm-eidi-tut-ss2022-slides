@@ -877,12 +877,12 @@ dargestellt werden können, brechen wir ab, wenn \(\abs{y_{n+1} - y_n} < 10^{-8}
 \vspace*{-1.25em}%
 \end{column}
 \end{columns}
-% \begin{tikzpicture}[overlay,remember picture]
-%     \onslide<7-|handout:2->{%
-%         \node[above left=.25cm,yshift=\btdmfootheight,scale=.6] (pingu) at (current page.south east) {\usebox\pinguB};
-%         \node[left,scale=.6,text width=6.75cm,align=center,yshift=-.33cm] at (pingu.west) {Wir werden Rückgabemechanismen sträflich vereinfachen!};
-%     }
-% \end{tikzpicture}%
+\begin{tikzpicture}[overlay,remember picture]
+    \onslide<7-|handout:2->{%
+        \node[below left=.25cm,yshift=.7cm,scale=.6] (pingu) at (current page.north east) {\rotatebox[origin=c]{180}{\usebox\pinguB}};
+        \node[left,scale=.6,text width=6.75cm,align=center,yshift=-.33cm,pingu@white] at (pingu.west) {Wir werden Rückgabemechanismen sträflich vereinfachen!};
+    }
+\end{tikzpicture}%
 \end{frame}
 % TODO: Epsiode Links
 }
