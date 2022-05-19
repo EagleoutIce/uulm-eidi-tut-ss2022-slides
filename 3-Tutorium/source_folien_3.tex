@@ -726,7 +726,7 @@ dargestellt werden können, brechen wir ab, wenn \(\abs{y_{n+1} - y_n} < 10^{-8}
     \end{itemize}
 \end{frame}
 }\fi
-
+\iffull
 \SetNextSectionText{Schleifen, Arrays, Methoden\\Abgabe: \DTMDate{2022-05-23}}
 \section{Aussicht: Übungsblatt 4}
 \subsection{Aufgabe 1}
@@ -920,7 +920,7 @@ dargestellt werden können, brechen wir ab, wenn \(\abs{y_{n+1} - y_n} < 10^{-8}
         \item Probiert euch gerne aus und formuliert eure Annahmen!
     \end{itemize}
 \end{frame}
-
+\fi
 
 \SetNextSectionText{There is no real ending. It's just the place where you stop the story.\\--- Frank Herbert~\IfBtdmDarkmode{}{\def\fancyulbackground{btdm@primary}}\link{http://www.sinanvural.com/seksek/inien/tvd/tvd2.htm}{online}}
 \section{Abschließendes}
@@ -931,7 +931,7 @@ dargestellt werden können, brechen wir ab, wenn \(\abs{y_{n+1} - y_n} < 10^{-8}
 \begin{itemize}[<+(1)->]
     \itemsep6.5pt
     % \item TODO: get bib to work here
-    \item \textbf{Der nächste Donnerstag ist ein Feiertag!}
+    \iffull\item \textbf{Der nächste Donnerstag ist ein Feiertag!}\fi
     \item Arrays sind komplexe Datentypen, die auf dem Heap verwaltet werden. \begin{itemize}
         \item Damit können sie \bjava{null} sein (keine Referenz auf den Heap)
         \item Übergeben wir ein Array einer Methode, wird die Referenz \info{Stack} kopiert \info{$\to$~selbes Array}
