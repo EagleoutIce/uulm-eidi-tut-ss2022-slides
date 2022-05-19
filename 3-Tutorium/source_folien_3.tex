@@ -31,7 +31,7 @@
             \item[Totale Korrektheit:] Terminiert und partiell korrekt \info{\(\text{Terminiert} \implies \text{gewünschte Ausgabe}\)}
         \end{description}
         \item Manche von Javas primitiven Datentypen können implizit konvertiert werden \begin{itemize}
-            \item \bjava{byte}~\k~\bjava{short}~\k~\bjava{int}~\k~\bjava{long}~\k~\bjava{double}~~und~~\bjava{char}~\k~\bjava{int}
+            \item \bjava{byte}~\k~\bjava{short}~\k~\bjava{int}~\k~\bjava{long}~\k~\bjava{float}~\k~\bjava{double}~~und~~\bjava{char}~\k~\bjava{int}
         \end{itemize}
         \item Javas Präzedenzregeln geben an, wie Operatoren implizit geklammert werden \begin{itemize}
             \item \textcolor{codeouthl}{(stark)}~~~\T{\a++}~\K~\T{!\a}, \T{++\a}~\K~\T{\a\,/\,\b}, \T{\a\,*\,\b}~\K~\T{\a\,+\,\b}, \T{\a\,-\,\b}~\K~\T{\a\,==\,\b}~\K~\T{\a\,\&\&\,\b}~\K~\T{\a\,|\!|\,\b}~~~\textcolor{codeouthl}{(schwach)}%\smallskip
@@ -54,7 +54,7 @@
 \colorlet{tskcolorA}{btdm@primary}%
 \colorlet{tskcolorB}{btdm@primary}%
 \begin{aufgabe}{Ich bin der Klammeraffen Typ}
-    \small\onslide<2->{Drücken Sie im Folgenden die Präzedenzregeln \textit{explizit} durch Klammern aus, so dass die unten stehenden Ausdrücke auch ohne Präzedenzregeln in der gleichen Reihenfolge ausgeführt werden.} \onslide<3->{Geben Sie weiter den Typ des gesamten Ausdrucks an (\bjava{int i}, \bjava{short a} und \bjava{float f}).} \onslide<4->{Werten Sie die Ausdrücke \textit{nicht} aus.}
+    \small\onslide<2->{Drücken Sie im Folgenden die Präzedenzregeln \textit{explizit} durch Klammern aus, so dass die unten stehenden Ausdrücke auch ohne Präzedenzregeln in der gleichen Reihenfolge ausgeführt werden.} \onslide<3->{Geben Sie weiter den Typ des gesamten Ausdrucks an (\bjava{int i}, \bjava{short s} und \bjava{float f}).} \onslide<4->{Werten Sie die Ausdrücke \textit{nicht} aus.}
 \begin{enumerate}
     \itemsep8pt
     \item<5-> \bjava{i + 3 * s++ + (-2 - 4)}
@@ -74,6 +74,7 @@
 \newcommand<>\Toverbrace[2]{\setbox0=\hbox{#1}$\only#3{\expandafter\overbrace}{\copy0}^{\onslide#3{#2}}$}
 \newcommand<>\o[2]{\Toverbrace#3{\text{#1}}{\clap{\text{\solGet{keywordB}{\scriptsize\HStrut#2}}}}}
 \begin{frame}[t]{Klammeraffenfreude}
+\medskip
 \begin{enumerate}
     \itemsep14pt
     \item<2-> Wir klammern\strut\only<11->{~und erhalten den Typ \bjava{int}}:\smallskip
@@ -848,7 +849,7 @@ dargestellt werden können, brechen wir ab, wenn \(\abs{y_{n+1} - y_n} < 10^{-8}
         \node[lsf,below=1mm] (bs) at (fs.south) {%
             \T{b}
             \nodepart{second}
-            \bjava{char n = 58}
+            \bjava{int n = 58}
         };
         \draw[ultra thick,lgray] (bs.text split west) -- (bs.text split east);
         \node[above=1mm,scale=.65] (pingu2) at (5,0) {\usebox\pinguA};
