@@ -302,3 +302,14 @@
 \def\Aspect{.5}
 
 \newsavebox\codebox
+
+\makeatletter
+\newcommand*\md{\@ifstar{\@md}{\@md{0}}}% with star we can set handout state
+\def\@md#1#2{\only<#2|handout:#1>{\llap{\color{btdm@primary}\faAngleRight~}}}
+\newcommand*\mb[2][0]{\only<#2|handout:#1>{\rlap{\smash{\raisebox{-.66\baselineskip}{\color{btdm@primary}\faAngleUp}}}}}
+\newcommand*\mh[2][0]{\only<#2|handout:#1>{\;\color{btdm@primary}\faAngleLeft}}
+\newcommand*\mdl[2][0]{\only<#2|handout:#1>{\llap{\smash{\raisebox{-.5\baselineskip}{\tikz{\fill[btdm@primary,rounded corners=1pt] (0,-.65mm) rectangle ++(2.15\p@,\baselineskip+.65mm);}}~}}}}
+% config takeover :D
+\lstfs{10}\lstset{lineskip=5.5pt}
+\colorlet{lgray}{lightgray!48!white}
+\tikzset{ldesc/.style={gray,font=\sffamily\sbseries},lrel/.style={fill=white,rounded corners,minimum width=28mm,minimum height=7.5mm,align=center},lrel2/.style={fill=white,rounded corners,minimum width=28mm,minimum height=7.5mm*2,align=center},lsf/.style={fill=white,rounded corners,minimum width=28mm,minimum height=7.5mm*2,align=center, rectangle split, rectangle split parts=2}}
