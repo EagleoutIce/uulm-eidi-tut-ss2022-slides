@@ -15,6 +15,19 @@
 \fi
 
 \iffull{\SummaryFrame
+\setbox\pinguA=\hbox{\scalebox{.5}{\tikzpicture
+\fill[lgray,rounded corners] (0,1.65) rectangle ++(3,3.85);
+\fill[lgray,rounded corners] (3.5,1.65) rectangle ++(3,3.85);
+\node[ldesc,above] at (1.5,5.5) {Stack};
+\node[ldesc,above] at (5,5.5) {Heap};
+\node[lrel] at (1.5,5) {\ldots};
+\node[lrel] at (5,5) {\ldots};
+\node[lrel] at (1.5,5-.85) {\bjava{byte b = 7}};
+\node[lrel] at (1.5,5-.85*2) {\bjava{char c = '?'}};
+\node[lrel] (fg) at (1.5,5-.85*3) {\bjava{int[] i =\ }\raisebox{-1pt}\faGenderless};
+\node[lrel] (ft) at (5,5-.85-.425) {\bjava{\{1, 9, 0\}}};
+\draw[lightgray,very thick,-Kite]  (fg.east) to[out=0,in=180] (ft.west);
+\endtikzpicture}}
 \begin{frame}[fragile,c]{Kurzwiederholung}
     \begin{itemize}[<+(1)->]
         \itemsep9.25pt
@@ -23,29 +36,30 @@
             \item Methoden haben Vor- \info{Parameter} und Nachbedingungen \info{Rückgabetyp}.
             \item Parameter und lokale Variablen sind nur in ihrer Methode sichtbar.
         \end{itemize}
-        \item Für Arrays haben wir for-each
+        \item<6-> Für Arrays haben wir for-each\vspace*{-\medskipamount}
 \columns[onlytextwidth,c]
 \column{.45\linewidth}
 \begin{plainjava}
-!*\onslide<4->*!int[] arr = { 1, 9, -2, 3 };
-!*\onslide<5->*!for(int elem : arr)
-!*\onslide<6->*!    System.out.println(elem);!*\onslide<1->*!
+!*\onslide<7->*!int[] arr = { 1, 9, -2, 3 };
+!*\onslide<8->*!for(int elem : arr)
+!*\onslide<9->*!    System.out.println(elem);!*\onslide<1->*!
 \end{plainjava}
 \column{.55\linewidth}
 \begin{plainjava}
-!*\onslide<7->*!int[] arr = new int[4];
-!*\onslide<8->*!for(int i = 0; i < arr.length; i++)
-!*\onslide<9->*!    System.out.println(arr[i]);
+!*\onslide<10->*!int[] arr = new !*\tikzmarknode{@}{\sbasic{\skB{int}[\snum{5}]}}*!;
+!*\onslide<11->*!for(int i = 0; i < arr.length; i++)
+!*\onslide<12->*!    System.out.println(arr[i]);!*\onslide<1->*!
 \end{plainjava}
-\endcolumns
-        \item<10-> Java verwaltet Daten auf dem Stack \info{Primitiv} und Heap \info{Komplex} \begin{itemize}
-            \item Java kopiert, vergleicht, schützt\ldots\ Stackelemente
-            \item Bei der Ablage auf dem Heap wird auf dem Stack eine Referenz\\zu diesem Element abgelegt \info{\bjava{null} für die \say{leere} Referenz} TODO: P aufgabe zahlen zu chars
+\endcolumns\medskip
+        \item<14-> Java verwaltet Daten auf dem Stack \info{Primitiv} und Heap \info{Komplex} \begin{itemize}
+            \item<15-> Java kopiert, vergleicht, schützt, verwirft,\ldots\ Stackelemente
+            \item<16-> Bei der Ablage auf dem Heap wird auf dem Stack eine Referenz\\zu diesem Element abgelegt \info{\bjava{null} für die \say{leere} Referenz}
         \end{itemize}
     \end{itemize}
     \onslide<1->
 \begin{tikzpicture}[overlay,remember picture]
-    \node[above left, yshift=\btdmfootheight] at (current page.south east) {TODO: STACK};
+    \onslide<13->{\draw[Kite-,gray] (@)++(.2,.3) to[out=50,in=230] ++(.45,.3) node[above,T] {Initialisiert automatisch mit \T{\{0, 0, 0, 0, 0\}}};}
+    \onslide<17->{\node[above left, yshift=\btdmfootheight] at (current page.south east) {\copy\pinguA};}
 \end{tikzpicture}
 \end{frame}
 }\fi
@@ -56,14 +70,14 @@
 \onslide<1->\task<2->{Implementieren Sie die folgenden zwei Methoden, welche beide ein char-Array als Parameter übernehmen und alle
 darin enthaltenen Kleinbuchstaben zu Großbuchstaben, und alle Großbuchstaben zu Kleinbuchstaben machen.} \task<3->{Sie finden die Datei auf unserer Moodle Seite \info{auf Papier genügt es, nur den benötigten Code zu schreiben}.}
 \begin{plainjava}
-x
+x TODO: P aufgabe zahlen zu chars
 \end{plainjava}
 \end{aufgabe}
 \end{frame}
 
 \subsection{Kopie-Me}
 \begin{frame}
-
+TODO: Animationsdurchläufe Heap Stack für Referenzvariablen
 \end{frame}
 
 \outro{\vskip6mm\centering X}
