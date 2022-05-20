@@ -33,8 +33,8 @@
         \itemsep9.25pt
         \item Wir haben uns Methoden angesehen \begin{itemize}
             \item Methoden mit einem Rückgabetyp \say{$\neq$~\bjava{void}} müssen für jeden Pfad diesen Typ liefern
-            \item Methoden haben Vor- \info{Parameter} und Nachbedingungen \info{Rückgabetyp}.
-            \item Parameter und lokale Variablen sind nur in ihrer Methode sichtbar.
+            \item Methoden haben Vor- \info{Parameter} und Nachbedingungen \info{Rückgabetyp}
+            \item Parameter und lokale Variablen sind nur in ihrer Methode sichtbar
         \end{itemize}
         \item<6-> Für Arrays haben wir for-each\vspace*{-\medskipamount}
 \columns[onlytextwidth,c]
@@ -68,15 +68,39 @@
 \begin{frame}[fragile,c]{Präsenzaufgabe}
 \begin{aufgabe}{TODO}
 \onslide<1->\task<2->{Implementieren Sie die folgenden zwei Methoden, welche beide ein char-Array als Parameter übernehmen und alle
-darin enthaltenen Kleinbuchstaben zu Großbuchstaben, und alle Großbuchstaben zu Kleinbuchstaben machen.} \task<3->{Sie finden die Datei auf unserer Moodle Seite \info{auf Papier genügt es, nur den benötigten Code zu schreiben}.}
+darin enthaltenen Kleinbuchstaben zu Großbuchstaben, und alle Großbuchstaben zu Kleinbuchstaben machen.} \task<3->{Sie finden die Datei auf unserer Moodle Seite \info{auf Papier genügt es, nur den bei \T{// TODO} benötigten Code zu schreiben}.}
 \begin{plainjava}
-x TODO: P aufgabe zahlen zu chars
+public class Praesenzaufgabe {
+    public static void flipInPlace(char[] flipBuchstaben) {
+        // TODO
+    }
+
+    public static char[] flipInCopy(char[] flipBuchstaben) {
+        // TODO
+    }
+
+    public static void main(String[] args) {
+        String s = "DieSeR SatZ HaT EinE merKwüRdige Groß- und KleinschreibunG.";
+        System.out.println(s);
+
+        char[] flipBuchstaben = s.toCharArray();
+
+        String inCopy = String.valueOf(flipInCopy(flipBuchstaben));
+        System.out.println(inCopy);
+
+        flipInPlace(flipBuchstaben);
+        String inPlace = String.valueOf(flipBuchstaben);
+        System.out.println(inPlace);
+    }
+}
 \end{plainjava}
 \end{aufgabe}
 \end{frame}
 
 \subsection{Kopie-Me}
 \begin{frame}
+TODO: P aufgabe zahlen zu chars
+
 TODO: Animationsdurchläufe Heap Stack für Referenzvariablen
 \end{frame}
 
