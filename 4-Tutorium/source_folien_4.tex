@@ -18,19 +18,52 @@
 \begin{frame}[fragile,c]{Kurzwiederholung}
     \begin{itemize}[<+(1)->]
         \itemsep9.25pt
-        \item
+        \item Wir haben uns Methoden angesehen \begin{itemize}
+            \item Methoden mit einem Rückgabetyp \say{$\neq$~\bjava{void}} müssen für jeden Pfad diesen Typ liefern
+            \item Methoden haben Vor- \info{Parameter} und Nachbedingungen \info{Rückgabetyp}.
+            \item Parameter und lokale Variablen sind nur in ihrer Methode sichtbar.
+        \end{itemize}
+        \item Für Arrays haben wir for-each
+\columns[onlytextwidth,c]
+\column{.45\linewidth}
+\begin{plainjava}
+!*\onslide<4->*!int[] arr = { 1, 9, -2, 3 };
+!*\onslide<5->*!for(int elem : arr)
+!*\onslide<6->*!    System.out.println(elem);!*\onslide<1->*!
+\end{plainjava}
+\column{.55\linewidth}
+\begin{plainjava}
+!*\onslide<7->*!int[] arr = new int[4];
+!*\onslide<8->*!for(int i = 0; i < arr.length; i++)
+!*\onslide<9->*!    System.out.println(arr[i]);
+\end{plainjava}
+\endcolumns
+        \item<10-> Java verwaltet Daten auf dem Stack \info{Primitiv} und Heap \info{Komplex} \begin{itemize}
+            \item Java kopiert, vergleicht, schützt\ldots\ Stackelemente
+            \item Bei der Ablage auf dem Heap wird auf dem Stack eine Referenz\\zu diesem Element abgelegt \info{\bjava{null} für die \say{leere} Referenz}
+        \end{itemize}
     \end{itemize}
     \onslide<1->
+\begin{tikzpicture}[overlay,remember picture]
+    \node[above left, yshift=\btdmfootheight] at (current page.south east) {TODO: STACK};
+\end{tikzpicture}
 \end{frame}
 }\fi
-
 \SetNextSectionText[.55\linewidth]{}
 \section{Präsenzaufgabe}
-\subsection{The simple solution}
-\begin{frame}[c]{Präsenzaufgabe}
+\begin{frame}[fragile,c]{Präsenzaufgabe}
 \begin{aufgabe}{TODO}
-\onslide<1->
+\onslide<1->\task<2->{Implementieren Sie die folgenden zwei Methoden, welche beide ein char-Array als Parameter übernehmen und alle
+darin enthaltenen Kleinbuchstaben zu Großbuchstaben, und alle Großbuchstaben zu Kleinbuchstaben machen.} \task<3->{Sie finden die Datei auf unserer Moodle Seite \info{auf Papier genügt es, nur den benötigten Code zu schreiben}.}
+\begin{plainjava}
+x
+\end{plainjava}
 \end{aufgabe}
+\end{frame}
+
+\subsection{Kopie-Me}
+\begin{frame}
+
 \end{frame}
 
 \outro{\vskip6mm\centering X}
