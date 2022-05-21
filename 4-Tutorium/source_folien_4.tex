@@ -69,8 +69,8 @@
 \setbox\pinguB=\hbox{\tikz{\pingu[devil horns,eyes sad,pants=btdm@primary]}}
 \begin{frame}[fragile,c]{Präsenzaufgabe}
 \begin{aufgabe}{Flip-em till 'ya hit-em}
-\onslide<2->{Implementieren Sie die folgenden zwei Methoden, welche beide ein char-Array als Parameter übernehmen und alle
-darin enthaltenen Kleinbuchstaben zu Großbuchstaben, und alle Großbuchstaben zu Kleinbuchstaben machen.} \onslide<3->{Sie finden die Datei auf unserer Moodle Seite \info{auf Papier genügt es, nur den bei \say{\T{// TODO}} benötigten Code zu schreiben}.}
+\only<2-10|handout:0>{Implementieren Sie die folgenden zwei Methoden, welche beide ein \bjava{char}-Array als Parameter übernehmen und alle
+darin enthaltenen Kleinbuchstaben zu Großbuchstaben, und alle Großbuchstaben zu Kleinbuchstaben machen.} \only<2-10|handout:0>{Sie finden die Datei auf unserer Moodle Seite \info{auf Papier genügt es, nur den bei \say{\T{// TODO}} benötigten Code zu schreiben}.}
 \begin{onlyenv}<4-10|handout:0>
 \only<5>{\lstfs{9}}\only<6>{\lstfs{5}\lstset{multicols=2,lineskip=2pt}}
 \only<7->{\lstfs{4}\lstset{multicols=2,lineskip=-1pt}}
@@ -103,6 +103,17 @@ public class Praesenzaufgabe {
 Kopie des Arrays arbeiten und diese Kopie dann zurückgeben. Überlegen Sie sich, welche Vor- und Nachteile die
 jeweiligen Implementierungen haben.
 [TODO: Hinweise, aber das sieht hier ja niemand heheheee]}
+\end{onlyenv}
+\begin{onlyenv}<11->
+    \begin{columns}[onlytextwidth,c]
+\column{.5\linewidth}
+\small \onslide<12->{Implementieren Sie beide Methoden, welche  alle im übergebenen \bjava{char}-Array enthaltenen Klein- zu Großbuchstaben, und alle Groß- zu Kleinbuchstaben machen.}\medskip
+
+\onslide<13->{\T{flipInPlace} soll diese Änderungen direkt im übergebenen Array vornehmen, \T{flipInCopy} soll auf einer
+Kopie des Arrays arbeiten und diese zurückgeben.~}\onslide<14->{Überlegen Sie sich, welche Vor- und Nachteile die
+jeweiligen Implementierungen haben.}
+\column{.5\linewidth}
+\end{columns}
 \end{onlyenv}
 % TODO: Rest, TODO: devil pingu
 \end{aufgabe}
