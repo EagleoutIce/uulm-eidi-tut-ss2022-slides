@@ -65,10 +65,15 @@
 }\fi
 \SetNextSectionText[.55\linewidth]{}
 \section{Präsenzaufgabe}
+{\setbox\pinguA=\hbox{\tikz{\pingu[devil horns,eyes angry,pants=btdm@primary,wings raise]}}
+\setbox\pinguB=\hbox{\tikz{\pingu[devil horns,eyes sad,pants=btdm@primary]}}
 \begin{frame}[fragile,c]{Präsenzaufgabe}
-\begin{aufgabe}{TODO}
+\begin{aufgabe}{Flip-em till 'ya hit-em}
 \onslide<2->{Implementieren Sie die folgenden zwei Methoden, welche beide ein char-Array als Parameter übernehmen und alle
-darin enthaltenen Kleinbuchstaben zu Großbuchstaben, und alle Großbuchstaben zu Kleinbuchstaben machen.} \onslide<3->{Sie finden die Datei auf unserer Moodle Seite \info{auf Papier genügt es, nur den bei \T{// TODO} benötigten Code zu schreiben}.}
+darin enthaltenen Kleinbuchstaben zu Großbuchstaben, und alle Großbuchstaben zu Kleinbuchstaben machen.} \onslide<3->{Sie finden die Datei auf unserer Moodle Seite \info{auf Papier genügt es, nur den bei \say{\T{// TODO}} benötigten Code zu schreiben}.}
+\begin{onlyenv}<4-10|handout:0>
+\only<5>{\lstfs{9}}\only<6>{\lstfs{5}\lstset{multicols=2,lineskip=2pt}}
+\only<7->{\lstfs{4}\lstset{multicols=2,lineskip=-1pt}}
 \begin{plainjava}
 public class Praesenzaufgabe {
     public static void flipInPlace(char[] flipBuchstaben) {
@@ -94,12 +99,24 @@ public class Praesenzaufgabe {
     }
 }
 \end{plainjava}
+\only<8->{Die erste Methode soll diese Änderungen direkt im übergebenen Array vornehmen, die zweite Methode soll auf einer
+Kopie des Arrays arbeiten und diese Kopie dann zurückgeben. Überlegen Sie sich, welche Vor- und Nachteile die
+jeweiligen Implementierungen haben.
+[TODO: Hinweise, aber das sieht hier ja niemand heheheee]}
+\end{onlyenv}
+% TODO: Rest, TODO: devil pingu
 \end{aufgabe}
+\begin{tikzpicture}[overlay,remember picture]
+    \only<9>{\node[yshift=-2.5cm,above,scale=1.33] at (current page.center) {\copy\pinguA};}
+    \only<10>{\node[yshift=-2.5cm,above,scale=1.33] at (current page.center) {\copy\pinguB};}
+\end{tikzpicture}
 \end{frame}
-
+}
 \subsection{Kopie-Me}
 \begin{frame}
+    TODO: letztes Semester Blatt 5 im join P7
 TODO: P aufgabe zahlen zu chars
+TODO: clone escapade
 
 TODO: Animationsdurchläufe Heap Stack für Referenzvariablen
 \end{frame}
