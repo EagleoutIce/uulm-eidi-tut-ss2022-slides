@@ -113,6 +113,32 @@ jeweiligen Implementierungen haben.
 Kopie des Arrays arbeiten und diese zurückgeben.~}\onslide<14->{Überlegen Sie sich, welche Vor- und Nachteile die
 jeweiligen Implementierungen haben.}
 \column{.5\linewidth}
+\begin{onlyenv}<14->
+\begin{plainjava}
+public class Praesenzaufgabe {
+    public static void flipInPlace(char[] flipBuchstaben) {
+        // TODO
+    }
+
+    public static char[] flipInCopy(char[] flipBuchstaben) {
+        // TODO
+    }
+
+    public static void main(String[] args) {
+        String s = "DieSeR SatZ HaT EinE merKwüRdige Groß- und KleinschreibunG.";
+        System.out.println(s);
+        char[] flipBuchstaben = s.toCharArray();
+
+        String inCopy = String.valueOf(flipInCopy(flipBuchstaben));
+        System.out.println(inCopy);
+
+        flipInPlace(flipBuchstaben);
+        String inPlace = String.valueOf(flipBuchstaben);
+        System.out.println(inPlace);
+    }
+}
+\end{plainjava}
+\end{onlyenv}
 \end{columns}
 \end{onlyenv}
 % TODO: Rest, TODO: devil pingu
