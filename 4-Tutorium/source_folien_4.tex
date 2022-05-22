@@ -134,8 +134,8 @@ public class Praesenzaufgabe {
 % TODO: Rest, TODO: devil pingu
 \end{aufgabe}
 \begin{tikzpicture}[overlay,remember picture]
-    \only<9>{\node[yshift=-2.5cm,above,scale=1.33] at (current page.center) {\copy\pinguA};}
-    \only<10>{\node[yshift=-2.5cm,above,scale=1.33] at (current page.center) {\copy\pinguB};}
+    \only<9|handout:0>{\node[yshift=-2.5cm,above,scale=1.33] at (current page.center) {\copy\pinguA};}
+    \only<10|handout:0>{\node[yshift=-2.5cm,above,scale=1.33] at (current page.center) {\copy\pinguB};}
 \end{tikzpicture}
 \end{frame}
 }
