@@ -105,31 +105,27 @@ jeweiligen Implementierungen haben.
 [TODO: Hinweise, aber das sieht hier ja niemand heheheee]}
 \end{onlyenv}
 \begin{onlyenv}<11->
+\vspace*{-\baselineskip}
     \begin{columns}[onlytextwidth,c]
-\column{.5\linewidth}
-\small \onslide<12->{Implementieren Sie beide Methoden, welche  alle im übergebenen \bjava{char}-Array enthaltenen Klein- zu Großbuchstaben, und alle Groß- zu Kleinbuchstaben machen.}\medskip
-
-\onslide<13->{\T{flipInPlace} soll diese Änderungen direkt im übergebenen Array vornehmen, \T{flipInCopy} soll auf einer
-Kopie des Arrays arbeiten und diese zurückgeben.~}\onslide<14->{Überlegen Sie sich, welche Vor- und Nachteile die
-jeweiligen Implementierungen haben.}
-\column{.5\linewidth}
+\column{.3\linewidth}
+\small \onslide<12->{Implementieren Sie beide Methoden, welche  alle im übergebenen \bjava{char}-Array enthaltenen Klein- zu Großbuchstaben, und alle Groß- zu Kleinbuchstaben machen.}
+\column{.675\linewidth}
 \begin{onlyenv}<14->
-\SetupLstHl
+\SetupLstHl\lstfs{9}
 \begin{plainjava}
 public class Praesenzaufgabe {
-    public static void flipInPlace(char[] flipBuchstaben) {
-        // TODO
-    }
-
-    public static char[] flipInCopy(char[] flipBuchstaben) {
-        // TODO
-    }
-
+    public static void
+        flipInPlace(char[] c) { /* TODO */ }
+    public static char[]
+        flipInCopy(char[] c) { /* TODO */ }
     |ihl|public static void main(String[] args) { ... }|ihl|
 }
 \end{plainjava}
 \end{onlyenv}
 \end{columns}
+\onslide<13->{\T{flipInPlace} soll diese Änderungen direkt im übergebenen Array vornehmen, \T{flipInCopy} soll auf einer
+Kopie des Arrays arbeiten und diese zurückgeben.~}\onslide<14->{Überlegen Sie sich, welche Vor- und Nachteile die
+jeweiligen Implementierungen haben.}
 \end{onlyenv}
 % TODO: Rest, TODO: devil pingu
 \end{aufgabe}
