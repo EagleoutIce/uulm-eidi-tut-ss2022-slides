@@ -1,22 +1,3 @@
-\makeatletter
-% this is one ugly big hack for current bug https://stackoverflow.com/questions/72270593/r-markdown-beamer-presentation-returning-undefined-control-sequence
-\newcommand\addtobeamertemplate[3]{%
-  \long\def\beamer@temp{#2}%
-  \expandafter\def\expandafter\beamer@@temp\expandafter{\expandafter\long\expandafter\def\csname beamer@@tmpl@#1\endcsname}%
-  \expandafter\expandafter\expandafter\long%
-  \expandafter\expandafter\expandafter\def%
-  \expandafter\expandafter\expandafter\beamer@@addtemplate%
-  \expandafter\expandafter\expandafter{\csname beamer@@tmpl@#1\endcsname}%
-  \expandafter\expandafter\expandafter\beamer@@temp%
-  \expandafter\expandafter\expandafter{\expandafter\beamer@temp\beamer@@addtemplate#3}%
-  \global\let\addtobeamertemplate\relax
-}
-\long\def\beamer@descriptionitem#1{%
-  \GetTitleString{#1}%
-  \let\@currentlabelname\GetTitleStringResult
-  \def\insertdescriptionitem{#1}%
-  \hfil\hspace\labelsep{\usebeamertemplate**{description item}}}
-\makeatother
 \documentclass[aspectratio=169,usepdftitle=true,11pt,fleqn,ngerman,t]{beamer}
 \errorcontextlines999999
 
