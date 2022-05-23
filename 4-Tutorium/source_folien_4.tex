@@ -393,12 +393,12 @@ public static char[] flipInCopy(char[] flipBuchstaben) {
 \SetupLstHl
 \begin{uncoverenv}<3->
 \begin{plainjava}
-|ihl|public static char[] flipInCopy(char[] flipBuchstaben) {|ihl|
+!*\onslide<1->*!|ihl|public static char[] flipInCopy(char[] flipBuchstaben) {|ihl|
 !*\onslide<4->*!    char[] arrayKopie = new char[flipBuchstaben.length];
 !*\onslide<5->*!    for(int i = 0; i < arrayKopie.length; i++)
 !*\onslide<6->*!        arrayKopie[i] = flipBuchstaben[i]
 
-    |ihl|flipInPlace(arrayKopie);|ihl|
+!*\onslide<1->*!|ihl|flipInPlace(arrayKopie);|ihl|
     |ihl|return arrayKopie;|ihl|
 |ihl|}|ihl|
 \end{plainjava}
@@ -411,6 +411,12 @@ public static char[] flipInCopy(char[] flipBuchstaben) {
 \end{frame}
 
 \subsection{Allgemeine Fragen}
+\begin{frame}{Allgemeines}
+    \begin{itemize}
+        \item \T{Clone} widmen wir uns gleich nochmal\ldots
+        \item
+    \end{itemize}
+\end{frame}
 \begin{frame}
     TODO. kann man auch foreach benutzen?
     TODO: letztes Semester Blatt 5 im join P7
