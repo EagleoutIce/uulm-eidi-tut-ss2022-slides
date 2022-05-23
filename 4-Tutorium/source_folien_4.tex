@@ -67,6 +67,7 @@
 \section{Präsenzaufgabe}
 {\setbox\pinguA=\hbox{\tikz{\pingu[devil horns,eyes angry,pants=btdm@primary,wings raise]}}
 \setbox\pinguB=\hbox{\tikz{\pingu[devil horns,eyes sad,pants=btdm@primary]}}
+\MakeThePinguExplainIt[text width=2.23cm]{cap=!hide,cup=!hide,straw hat,body type=chubby,cake-hat,right item angle=16}{A--Z~\(\widehat{=}\) 65--90\\a--z~\(\widehat{=}\) 97--122}
 \begin{frame}[fragile,c]{Präsenzaufgabe}
 \begin{aufgabe}{Flip-em till 'ya hit-em}
 \only<2-10|handout:0>{Implementieren Sie die folgenden zwei Methoden, welche beide ein \bjava{char}-Array als Parameter übernehmen und alle
@@ -132,6 +133,7 @@ jeweiligen Implementierungen haben.}
 \begin{tikzpicture}[overlay,remember picture]
     \only<9|handout:0>{\node[yshift=-2.5cm,above,scale=1.33] at (current page.center) {\copy\pinguA};}
     \only<10|handout:0>{\node[yshift=-2.5cm,above,scale=1.33] at (current page.center) {\copy\pinguB};}
+    \onslide<15->{\node[left=-3mm,xshift=7mm,scale=.8,yshift=2mm] at(current page.0) {\copy\pinguexplainbox};}% copy for animations
 \end{tikzpicture}
 \end{frame}
 }
