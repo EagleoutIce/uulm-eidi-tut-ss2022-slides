@@ -70,37 +70,37 @@
 \MakeThePinguExplainIt[text width=2.23cm]{cap=!hide,cup=!hide,straw hat,body type=chubby,cake-hat,right item angle=16}{A--Z~\(\widehat{=}\) 65--90\\a--z~\(\widehat{=}\) 97--122}
 \begin{frame}[fragile,c]{Präsenzaufgabe}
 \begin{aufgabe}{Flip-em till 'ya hit-em}
-\only<2-10|handout:0>{Implementieren Sie die folgenden zwei Methoden, welche beide ein \bjava{char}-Array als Parameter übernehmen und alle
-darin enthaltenen Kleinbuchstaben zu Großbuchstaben, und alle Großbuchstaben zu Kleinbuchstaben machen.} \only<2-10|handout:0>{Sie finden die Datei auf unserer Moodle Seite \info{auf Papier genügt es, nur den bei \say{\T{// TODO}} benötigten Code zu schreiben}.}
-\begin{onlyenv}<4-10|handout:0>
+\begin{onlyenv}<2-10|handout:0>%
+\onslide<2-10|handout:0>{Implementieren Sie die folgenden zwei Methoden, welche beide ein \bjava{char}-Array als Parameter übernehmen und alle
+darin enthaltenen Kleinbuchstaben zu Großbuchstaben, und alle Großbuchstaben zu Kleinbuchstaben machen.} \onslide<3-10|handout:0>{Sie finden die Datei auf unserer Moodle Seite \info{auf Papier genügt es, nur den bei \say{\T{// TODO}} benötigten Code zu schreiben}.}\vspace*{-3mm}
 \only<5>{\lstfs{9}}\only<6>{\lstfs{5}\lstset{multicols=2,lineskip=2pt}}
 \only<7->{\lstfs{4}\lstset{multicols=2,lineskip=-1pt}}
 \begin{plainjava}
-public class Praesenzaufgabe {
-    public static void flipInPlace(char[] flipBuchstaben) {
-        // TODO
-    }
-
-    public static char[] flipInCopy(char[] flipBuchstaben) {
-        // TODO
-    }
-
-    public static void main(String[] args) {
-        String s = "DieSeR SatZ HaT EinE merKwüRdige Groß- und KleinschreibunG.";
-        System.out.println(s);
-
-        char[] flipBuchstaben = s.toCharArray();
-
-        String inCopy = String.valueOf(flipInCopy(flipBuchstaben));
-        System.out.println(inCopy);
-
-        flipInPlace(flipBuchstaben);
-        String inPlace = String.valueOf(flipBuchstaben);
-        System.out.println(inPlace);
-    }
-}
+!*\onslide<4->*!public class Praesenzaufgabe {
+!*\onslide<4->*!    public static void flipInPlace(char[] flipBuchstaben) {
+!*\onslide<4->*!        // TODO
+!*\onslide<4->*!    }
+!*\onslide<4->*!
+!*\onslide<4->*!    public static char[] flipInCopy(char[] flipBuchstaben) {
+!*\onslide<4->*!        // TODO
+!*\onslide<4->*!    }
+!*\onslide<4->*!
+!*\onslide<4->*!    public static void main(String[] args) {
+!*\onslide<4->*!        String s = "DieSeR SatZ HaT EinE merKwüRdige Groß- und KleinschreibunG.";
+!*\onslide<4->*!        System.out.println(s);
+!*\onslide<4->*!
+!*\onslide<4->*!        char[] flipBuchstaben = s.toCharArray();
+!*\onslide<4->*!
+!*\onslide<4->*!        String inCopy = String.valueOf(flipInCopy(flipBuchstaben));
+!*\onslide<4->*!        System.out.println(inCopy);
+!*\onslide<4->*!
+!*\onslide<4->*!        flipInPlace(flipBuchstaben);
+!*\onslide<4->*!        String inPlace = String.valueOf(flipBuchstaben);
+!*\onslide<4->*!        System.out.println(inPlace);
+!*\onslide<4->*!    }
+!*\onslide<4->*!}!*\onslide<1->*!
 \end{plainjava}
-\only<8->{Die erste Methode soll diese Änderungen direkt im übergebenen Array vornehmen, die zweite Methode soll auf einer
+\onslide<8->{Die erste Methode soll diese Änderungen direkt im übergebenen Array vornehmen, die zweite Methode soll auf einer
 Kopie des Arrays arbeiten und diese Kopie dann zurückgeben. Überlegen Sie sich, welche Vor- und Nachteile die
 jeweiligen Implementierungen haben.
 [TODO: Hinweise, aber das sieht hier ja niemand heheheee]}
@@ -111,7 +111,7 @@ jeweiligen Implementierungen haben.
 \column{.3\linewidth}
 \small \onslide<12->{Implementieren Sie beide Methoden, welche  alle im übergebenen \bjava{char}-Array enthaltenen Klein- zu Großbuchstaben, und alle Groß- zu Kleinbuchstaben machen.}
 \column{.675\linewidth}
-\begin{onlyenv}<14->
+\begin{uncoverenv}<13->
 \SetupLstHl\lstfs{9}
 \begin{plainjava}
 public class Praesenzaufgabe {
@@ -122,10 +122,10 @@ public class Praesenzaufgabe {
     |ihl|public static void main(String[] args) { ... }|ihl|
 }
 \end{plainjava}
-\end{onlyenv}
+\end{uncoverenv}
 \end{columns}
-\onslide<13->{\T{flipInPlace} soll diese Änderungen direkt im übergebenen Array vornehmen, \T{flipInCopy} soll auf einer
-Kopie des Arrays arbeiten und diese zurückgeben.~}\onslide<14->{Überlegen Sie sich, welche Vor- und Nachteile die
+\onslide<14->{\T{flipInPlace} soll diese Änderungen direkt im übergebenen Array vornehmen, \T{flipInCopy} soll auf einer
+Kopie des Arrays arbeiten und diese zurückgeben.~}\onslide<15->{Überlegen Sie sich, welche Vor- und Nachteile die
 jeweiligen Implementierungen haben.}
 \end{onlyenv}
 % TODO: Rest, TODO: devil pingu
@@ -133,18 +133,297 @@ jeweiligen Implementierungen haben.}
 \begin{tikzpicture}[overlay,remember picture]
     \only<9|handout:0>{\node[yshift=-2.5cm,above,scale=1.33] at (current page.center) {\copy\pinguA};}
     \only<10|handout:0>{\node[yshift=-2.5cm,above,scale=1.33] at (current page.center) {\copy\pinguB};}
-    \onslide<15->{\node[left=-3mm,xshift=7mm,scale=.8,yshift=2mm] at(current page.0) {\copy\pinguexplainbox};}% copy for animations
+    \onslide<16->{\node[left=-3mm,xshift=7mm,scale=.8,yshift=2mm] at(current page.0) {\copy\pinguexplainbox};}% copy for animations
 \end{tikzpicture}
 \end{frame}
 }
-\subsection{Kopie-Me}
+\iffull
+\subsection{Flip in Place}
+{\renewcommand\K[2][]{\tikzmarknode{@#2#1}{\snum{\HStrut#2}}}
+\begin{frame}[fragile,c]{Flip in Place}
+\begin{plainjava}
+!*\onslide<2->*!public static void flipInPlace(char[] flipBuchstaben) {
+!*\onslide<3->*!    for(int i = 0; i < flipBuchstaben.length; i++) {
+!*\onslide<4->*!        if (flipBuchstaben[i] >= !*\K{65}*! && flipBuchstaben[i] <= !*\K{90}*!) {
+!*\onslide<5->*!            flipBuchstaben[i] += !*\K{32}*!;
+!*\onslide<4->*!        } !*\onslide<6->*!else if (flipBuchstaben[i] >= !*\K{97}*! && flipBuchstaben[i] <= !*\K{122}*!) {
+!*\onslide<7->*!            flipBuchstaben[i] -= !*\K[b]{32}*!;
+!*\onslide<6->*!        }
+!*\onslide<3->*!    }
+!*\onslide<2->*!}
+\end{plainjava}
+\begin{tikzpicture}[remember picture,overlay]
+    \onslide<8->{
+        \foreach \K in {65,90,32,97,122,32b} {
+            \node[btdm@primary!70!btdm@background,draw,ellipse,minimum width=6.5mm, minimum height=4.5mm] (@@\K) at (@\K) {};
+        }
+    }
+    \onslide<10->{
+        \node[above left=1cm,yshift=1.25cm,T,align=left] (@) at(current page.south east) {Wer soll das mit den Zahlen verstehen?}; % \\Was, wenn es nur von g--s gehen soll?
+    }
+    \onslide<9->{
+        \foreach \K in {65,90,32,97,122,32b} {
+            \draw[-Kite,lightgray] (@@\K) to[bend left] (@);
+        }
+    }
+    \onslide<11->{
+        \node[below,align=center] at(@.south) {Wir können benannte Konstanten einführen!\\\bjava{public static final int A = 65;}\\\ldots};
+    }
+\end{tikzpicture}
+\end{frame}
+\begin{frame}[fragile,c]{Flip in Place with Constants}
+\begin{onlyenv}<1|handout:0>
+\begin{plainjava}
+public static void flipInPlace(char[] flipBuchstaben) {
+    for(int i = 0; i < flipBuchstaben.length; i++) {
+        if (flipBuchstaben[i] >= !*\K{65}*! && flipBuchstaben[i] <= !*\K{90}*!) {
+            flipBuchstaben[i] += !*\K{32}*!;
+        } else if (flipBuchstaben[i] >= !*\K{97}*! && flipBuchstaben[i] <= !*\K{122}*!) {
+            flipBuchstaben[i] -= !*\K[b]{32}*!;
+        }
+    }
+}
+\end{plainjava}
+\end{onlyenv}
+\SetupLstHl
+\begin{onlyenv}<2-3|handout:0>
+\begin{plainjava}
+!*\onslide<3->*!public static final int A = 65;  public static final int a = 97;
+!*\onslide<3->*!public static final int Z = 90;  public static final int z = 122;
+!*\onslide<3->*!
+!*\onslide<1->*!|ihl|public static void flipInPlace(char[] flipBuchstaben) {|ihl|
+|ihl|    for(int i = 0; i < flipBuchstaben.length; i++) {|ihl|
+|ihl|        if (flipBuchstaben[i] >= !*\K{65}*! && flipBuchstaben[i] <= !*\K{90}*!) {|ihl|
+|ihl|            flipBuchstaben[i] += !*\K{32}*!;|ihl|
+|ihl|        } else if (flipBuchstaben[i] >= !*\K{97}*! && flipBuchstaben[i] <= !*\K{122}*!) {|ihl|
+|ihl|            flipBuchstaben[i] -= !*\K[b]{32}*!;|ihl|
+|ihl|        }|ihl|
+|ihl|    }|ihl|
+|ihl|}|ihl|
+\end{plainjava}
+\end{onlyenv}
+\begin{onlyenv}<4|handout:0>
+\begin{plainjava}
+public static final int A = 65;  public static final int a = 97;
+public static final int Z = 90;  public static final int z = 122;
+
+|ihl|public static void flipInPlace(char[] flipBuchstaben) {|ihl|
+|ihl|    for(int i = 0; i < flipBuchstaben.length; i++) {|ihl|
+|ihl|        if (flipBuchstaben[i] >= |ihl|A|ihl| && flipBuchstaben[i] <= |ihl|Z|ihl|) {|ihl|
+|ihl|            flipBuchstaben[i] += !*\K{32}*!;|ihl|
+|ihl|        } else if (flipBuchstaben[i] >= |ihl|a|ihl| && flipBuchstaben[i] <= |ihl|z|ihl|) {|ihl|
+|ihl|            flipBuchstaben[i] -= !*\K[b]{32}*!;|ihl|
+|ihl|        }|ihl|
+|ihl|    }|ihl|
+|ihl|}|ihl|
+\end{plainjava}
+\end{onlyenv}
+\begin{onlyenv}<5->
+\begin{plainjava}
+public static final int A = 65;  public static final int a = 97;
+public static final int Z = 90;  public static final int z = 122;
+
+|ihl|public static void flipInPlace(char[] flipBuchstaben) {|ihl|
+|ihl|    for(int i = 0; i < flipBuchstaben.length; i++) {|ihl|
+|ihl|        if (flipBuchstaben[i] >= |ihl|A|ihl| && flipBuchstaben[i] <= |ihl|Z|ihl|) {|ihl|
+|ihl|            flipBuchstaben[i] += |ihl|a - A|ihl|;|ihl|
+|ihl|        } else if (flipBuchstaben[i] >= |ihl|a|ihl| && flipBuchstaben[i] <= |ihl|z|ihl|) {|ihl|
+|ihl|            flipBuchstaben[i] -= |ihl|a - A|ihl|;|ihl|
+|ihl|        }|ihl|
+|ihl|    }|ihl|
+|ihl|}|ihl|
+\end{plainjava}
+\end{onlyenv}% copy for animations
+\begin{tikzpicture}[overlay,remember picture]
+    \onslide<6->{\node[above left=5mm,T,align=center] at(current page.south east) {What, if there would be a better way?\\What, if we want to check only for characters g--m};}
+\end{tikzpicture}
+\end{frame}
+}
+\fi
+{
+    \setbox\pinguA=\hbox{\tikz\pingu[eyes shock,wings shock];}
+\begin{frame}[fragile,c]{Flip in Place with Java-Magic}
+\SetupLstHl
+\begin{onlyenv}<1|handout:0>
+\begin{plainjava}
+public static final int A = 65;  public static final int a = 97;
+public static final int Z = 90;  public static final int z = 122;
+
+|ihl|public static void flipInPlace(char[] flipBuchstaben) {|ihl|
+|ihl|    for(int i = 0; i < flipBuchstaben.length; i++) {|ihl|
+|ihl|        if (flipBuchstaben[i] >= |ihl|A|ihl| && flipBuchstaben[i] <= |ihl|Z|ihl|) {|ihl|
+|ihl|            flipBuchstaben[i] += |ihl|a - A|ihl|;|ihl|
+|ihl|        } else if (flipBuchstaben[i] >= |ihl|a|ihl| && flipBuchstaben[i] <= |ihl|z|ihl|) {|ihl|
+|ihl|            flipBuchstaben[i] -= |ihl|a - A|ihl|;|ihl|
+|ihl|        }|ihl|
+|ihl|    }|ihl|
+|ihl|}|ihl|
+\end{plainjava}
+\end{onlyenv}
+\begin{onlyenv}<2|handout:0>
+\begin{plainjava}
+|ihl|public static final int A = 65;  public static final int a = 97;|ihl|
+|ihl|public static final int Z = 90;  public static final int z = 122;|ihl|
+
+|ihl|public static void flipInPlace(char[] flipBuchstaben) {|ihl|
+|ihl|    for(int i = 0; i < flipBuchstaben.length; i++) {|ihl|
+|ihl|        if (flipBuchstaben[i] >= A && flipBuchstaben[i] <= Z) {|ihl|
+|ihl|            flipBuchstaben[i] += a - A;|ihl|
+|ihl|        } else if (flipBuchstaben[i] >= a && flipBuchstaben[i] <= z) {|ihl|
+|ihl|            flipBuchstaben[i] -= a - A;|ihl|
+|ihl|        }|ihl|
+|ihl|    }|ihl|
+|ihl|}|ihl|
+\end{plainjava}
+\end{onlyenv}
+\begin{onlyenv}<3-4|handout:0>
+\begin{plainjava}
+|ihl|public static final int A = |ihl|'A'|ihl|;  public static final int a = 97;|ihl|
+|ihl|public static final int Z = 90;  public static final int z = 122;|ihl|
+
+|ihl|public static void flipInPlace(char[] flipBuchstaben) {|ihl|
+|ihl|    for(int i = 0; i < flipBuchstaben.length; i++) {|ihl|
+|ihl|        if (flipBuchstaben[i] >= A && flipBuchstaben[i] <= Z) {|ihl|
+|ihl|            flipBuchstaben[i] += a - A;|ihl|
+|ihl|        } else if (flipBuchstaben[i] >= a && flipBuchstaben[i] <= z) {|ihl|
+|ihl|            flipBuchstaben[i] -= a - A;|ihl|
+|ihl|        }|ihl|
+|ihl|    }|ihl|
+|ihl|}|ihl|
+\end{plainjava}
+\end{onlyenv}
+\begin{onlyenv}<5|handout:0>
+\begin{plainjava}
+|ihl|public static final int A = |ihl|'A'|ihl|;  public static final int a = |ihl|'a'|ihl|;|ihl|
+|ihl|public static final int Z = |ihl|'Z'|ihl|;  public static final int z = |ihl|'z'|ihl|;|ihl|
+
+|ihl|public static void flipInPlace(char[] flipBuchstaben) {|ihl|
+|ihl|    for(int i = 0; i < flipBuchstaben.length; i++) {|ihl|
+|ihl|        if (flipBuchstaben[i] >= A && flipBuchstaben[i] <= Z) {|ihl|
+|ihl|            flipBuchstaben[i] += a - A;|ihl|
+|ihl|        } else if (flipBuchstaben[i] >= a && flipBuchstaben[i] <= z) {|ihl|
+|ihl|            flipBuchstaben[i] -= a - A;|ihl|
+|ihl|        }|ihl|
+|ihl|    }|ihl|
+|ihl|}|ihl|
+\end{plainjava}
+\end{onlyenv}
+\begin{onlyenv}<6-7|handout:0>
+\begin{plainjava}
+|ihl|public static void flipInPlace(char[] flipBuchstaben) {|ihl|
+|ihl|    for(int i = 0; i < flipBuchstaben.length; i++) {|ihl|
+|ihl|        if (flipBuchstaben[i] >= |ihl|'A'|ihl| && flipBuchstaben[i] <= |ihl|'Z'|ihl|) {|ihl|
+|ihl|            flipBuchstaben[i] += |ihl|'a' - 'A'|ihl|;|ihl|
+|ihl|        } else if (flipBuchstaben[i] >= |ihl|'a'|ihl| && flipBuchstaben[i] <= |ihl|'z'|ihl|) {|ihl|
+|ihl|            flipBuchstaben[i] -= |ihl|'a' - 'A'|ihl|;|ihl|
+|ihl|        }|ihl|
+|ihl|    }|ihl|
+|ihl|}|ihl|
+\end{plainjava}
+\end{onlyenv}
+\begin{onlyenv}<8>
+\begin{plainjava}
+|ihl|public static void flipInPlace(char[] flipBuchstaben) {|ihl|
+    int shift = 'a' - 'A';
+|ihl|    for(int i = 0; i < flipBuchstaben.length; i++) {|ihl|
+|ihl|        if (flipBuchstaben[i] >= |ihl|'A'|ihl| && flipBuchstaben[i] <= |ihl|'Z'|ihl|) {|ihl|
+|ihl|            flipBuchstaben[i] += |ihl|shift|ihl|;|ihl|
+|ihl|        } else if (flipBuchstaben[i] >= |ihl|'a'|ihl| && flipBuchstaben[i] <= |ihl|'z'|ihl|) {|ihl|
+|ihl|            flipBuchstaben[i] -= |ihl|shift|ihl|;|ihl|
+|ihl|        }|ihl|
+|ihl|    }|ihl|
+|ihl|}|ihl|
+\end{plainjava}
+\end{onlyenv}
+\begin{tikzpicture}[overlay,remember picture]
+    \onslide<4->{
+        \node[above left=5mm,scale=.75] (@) at(current page.south east) {\copy\pinguA};
+        \node[T,left=2mm,align=right] at(@.west) {Implizite\\Typkonvertierung!\\\T{char}~$\to$~\T{int}};
+    }
+    \onslide<7-8|handout:0>{
+        \node[above=\btdmfootheight+2mm,T] at(current page.south) {Aber welche Logik steckt hinter \T{'a' - 'A'}?};
+    }
+\end{tikzpicture}
+\end{frame}
+}
+
+\subsection{Flip in Copy}
+\iffull
+\begin{frame}[fragile,c]{Flip in Copy, Na\"\i ve Please}
+\begin{center}
+    \color{gray}\onslide<2->{There is a \T{clone} for every \cancel{Object} \say{Referenzvariable}}
+\end{center}
+\begin{onlyenv}<3-4|handout:0>
+\begin{plainjava}
+public static char[] flipInCopy(char[] flipBuchstaben) {
+    char[] arrayKopie = flipBuchstaben.clone();
+    int shift = 'a' - 'A'; !*\Snode{@start}*!
+    for(int i = 0; i < arrayKopie.length; i++) {
+        if (arrayKopie[i] >= 'A' && arrayKopie[i] <= 'Z')
+            arrayKopie[i] += shift;
+        else if (arrayKopie[i] >= 'a' && arrayKopie[i] <= 'z')!*\Snode{@wide}*!
+            arrayKopie[i] -= shift;
+    }!*\Snode{@end}*!
+    return arrayKopie;
+}
+\end{plainjava}
+\end{onlyenv}
+\begin{onlyenv}<5->
+\begin{plainjava}
+public static char[] flipInCopy(char[] flipBuchstaben) {
+    char[] arrayKopie = flipBuchstaben.clone();
+    flipInPlace(arrayKopie);
+    return arrayKopie;
+}
+\end{plainjava}
+\end{onlyenv}
+\begin{tikzpicture}[overlay, remember picture]
+    \onslide<4|handout:0>{\draw[decoration=brace,decorate] ([xshift=2mm]@start-|@wide) to[edge node={node[right=1mm] {hmmm\ldots}}] ([xshift=2mm]@end-|@wide);}
+    \onslide<6-|handout:0>{
+        \node[above=\btdmfootheight+2mm,T] at(current page.south) {Das ist ein weirdes Englisch-Deutsch-Gemisch};
+    }
+\end{tikzpicture}
+\end{frame}
+\fi
+
+\begin{frame}[fragile,c]{Flip in Copy --- Custom Mode}
+\begin{center}
+    \color{gray}\onslide<2->{Ich kannte \T{clone} gaaar niiischt. Unnu? Ist das nicht böse?}
+\end{center}
+\SetupLstHl
+\begin{uncoverenv}<3->
+\begin{plainjava}
+|ihl|public static char[] flipInCopy(char[] flipBuchstaben) {|ihl|
+!*\onslide<4->*!    char[] arrayKopie = new char[flipBuchstaben.length];
+!*\onslide<5->*!    for(int i = 0; i < arrayKopie.length; i++)
+!*\onslide<6->*!        arrayKopie[i] = flipBuchstaben[i]
+
+    |ihl|flipInPlace(arrayKopie);|ihl|
+    |ihl|return arrayKopie;|ihl|
+|ihl|}|ihl|
+\end{plainjava}
+\end{uncoverenv}
+\begin{tikzpicture}[overlay, remember picture]
+    \onslide<7->{
+        \node[above=\btdmfootheight+2mm,T] at(current page.south) {Werte primitiver Datentypen werden bei Zuweisung kopiert.};
+    }
+\end{tikzpicture}
+\end{frame}
+
+\subsection{Allgemeine Fragen}
 \begin{frame}
+    TODO. kann man auch foreach benutzen?
     TODO: letztes Semester Blatt 5 im join P7
 TODO: P aufgabe zahlen zu chars
 TODO: clone escapade
 TODO: berechne TtrapezFlaeche prüfe auf < 0 und so optional, je nachdem wi eman es betrachtet (eigenständig, nicht....)
-
+TODO: gesamte Lösung für P aufgabe einbetten
 TODO: Animationsdurchläufe Heap Stack für Referenzvariablen
+\end{frame}
+
+\section{Clone-Wars}
+\begin{frame}
+
 \end{frame}
 
 \outro{\vskip6mm\centering X}

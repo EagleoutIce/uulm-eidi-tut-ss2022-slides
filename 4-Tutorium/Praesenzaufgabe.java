@@ -10,15 +10,15 @@ public class Praesenzaufgabe {
    }
 
    public static char[] flipInCopy(char[] flipBuchstaben) {
-       char[] array_kopie = flipBuchstaben.clone();
-       for(int i = 0; i < array_kopie.length; i++) {
-           if (array_kopie[i] >= 65 && array_kopie[i] <= 90) {
-               array_kopie[i] += 32;
-           } else if (array_kopie[i] >= 97 && array_kopie[i] <= 122) {
-               array_kopie[i] -= 32;
+       char[] arrayKopie = flipBuchstaben.clone();
+       for(int i = 0; i < arrayKopie.length; i++) {
+           if (arrayKopie[i] >= 65 && arrayKopie[i] <= 90) {
+               arrayKopie[i] += 32;
+           } else if (arrayKopie[i] >= 97 && arrayKopie[i] <= 122) {
+               arrayKopie[i] -= 32;
            }
        }
-       return array_kopie;
+       return arrayKopie;
    }
 
    public static void main(String[] args) {
