@@ -63,7 +63,7 @@
 \end{tikzpicture}
 \end{frame}
 }\fi
-\SetNextSectionText[.55\linewidth]{TODO: quote}
+\SetNextSectionText[.55\linewidth]{We can face our problem. We can arrange such facts as we have with order and method.\\--- Agatha Christie~\cite{chrsitie1934}}
 \section{Präsenzaufgabe}
 {\setbox\pinguA=\hbox{\tikz{\pingu[devil horns,eyes angry,pants=btdm@primary,wings raise]}}
 \setbox\pinguB=\hbox{\tikz{\pingu[devil horns,eyes sad,pants=btdm@primary]}}
@@ -575,7 +575,7 @@ class X {
 {
 \setbeamercolor{background canvas}{bg=black}
 \begin{frame}[c,plain]{}
-\vspace*{1.5em}\centering
+\vspace*{4.5em}\centering
 \begin{tikzpicture}
     \pgfinterruptboundingbox% to avoid clanky changes
     \only<2|handout:0>{
@@ -863,7 +863,7 @@ public static double berechneZeilensummennorm(double[][] mat) {
 % TODO grafik?
 \end{frame}
 
-\begin{frame}[fragile]{a)~Daten Einlesen und b)~\T{\bfseries berechneF}}
+\begin{frame}[fragile]{a)~Daten Einlesen und b)~\T{\bfseries berechneF(double)}}
     \begin{itemize}[<+(1)->]
         \item Das Einlesen erfolgt hier leicht:
 \begin{plainjava}[aboveskip=0pt]
@@ -873,7 +873,7 @@ public static double berechneZeilensummennorm(double[][] mat) {
             \item Den wollen wir dann aber auch immer schließen!
             \item Uns reichen Kommandozeilenparameter
         \end{itemize}
-        \item Und nun noch berechnen \info{}\(f(x) = \exp(-x^2)\):
+        \item Und nun noch berechnen \info{\(f(x) = \exp(-x^2)\)}:
 \begin{plainjava}
 !*\onslide<8->*!public static double berechneF(double x){
 !*\onslide<9->*!    return Math.exp(-(x*x));
@@ -883,8 +883,72 @@ public static double berechneZeilensummennorm(double[][] mat) {
     \end{itemize}
 \end{frame}
 
-\begin{frame}
-    \textattachfile{\curpath NumerischeIntegration.java}{NumerischeIntegration.java}
+\begin{frame}[fragile]{c)~\T{\bfseries berechneTrapezFlaeche(double, double)}}
+    \begin{itemize}[<+(1)->]
+        \item Ein ungültiger Eckpunkt liegt vor, wenn \(x_2 < x_1\):
+\begin{plainjava}
+!*\onslide<3->*!public static double berechneTrapezFlaeche(double x1, double x2){
+!*\onslide<4->*!    if(x2 < x1)
+!*\onslide<5->*!        return 0;
+!*\onslide<4->*!    else
+!*\onslide<6->*!        return (x2 - x1) * ((berechneF(x1) + berechneF(x2)) / 2.0);
+!*\onslide<3->*!}
+\end{plainjava}
+        \item Auch hier handelt es sich um unspektakuläres übernehmen der Aufgabenstellung
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{d)~\T{\bfseries trapezVerfahren(int)}}
+    \SetupLstHl\begin{itemize}[<+(1)->]
+        \item Wir können hier über die Schritte (\(i < n\)) oder über \T{x} terminieren.\infoblock{Das Verhalten Umsetzung unterscheidet sich bei Rundungsfehlern!}
+\begin{plainjava}
+!*\onslide<3->*!public static double trapezVerfahren(int n) {
+!*\onslide<4->*!    if (n < 1) {
+!*\onslide<5->*!        System.err.println("Eingabe ungültig");
+!*\onslide<6->*!        return -1.0;
+!*\onslide<4->*!    }
+!*\onslide<7->*!    |ihl|...|ihl|
+!*\onslide<3->*!}
+\end{plainjava}
+    \end{itemize}
+\end{frame}
+
+
+\savebox\codebox{\SetupLstHl\LstBoardStyle\topsep0pt\lstfs{9}\begin{minipage}{11cm}
+\begin{plainjava}^^J
+for(double x = 0; x <= 1 - schrittweite; x += schrittweite) \{^^J
+:ws::ws::ws::ws:|ihl|...|ihl|^^J
+\}^^J
+\end{plainjava}
+\end{minipage}}
+\MakeThePinguExplainIt[text width=11cm]{cap=!hide,headphones,glasses=!hide,cup=!hide,sunglasses,eyes hearts,body type=chubby,lollipop right,right item angle=-52}{Auch möglich wäre soetwas:\\\copy\codebox}
+\begin{frame}[fragile,c]{d)~\T{\bfseries trapezVerfahren(int)}\hfill II}
+\begin{plainjava}
+!*\onslide<1->*!public static double trapezVerfahren(int n) {
+!*\onslide<1->*!    |ihl|...|ihl|
+!*\onslide<2->*!    double schrittweite = 1.0 / n;
+!*\onslide<3->*!    double x = 0.0;
+!*\onslide<4->*!    double A = 0.0;
+!*\onslide<5->*!    while (x <= 1.0 - schrittweite) {
+!*\onslide<6->*!        A = A + berechneTrapezFlaeche(x, x + schrittweite);
+!*\onslide<7->*!        x = x + schrittweite;
+!*\onslide<5->*!    }
+!*\onslide<8->*!    return A;
+!*\onslide<1->*!}
+\end{plainjava}
+\begin{tikzpicture}[@O]
+    \onslide<9->{\node[left=-4mm,xshift=4mm,scale=.8,yshift=\btdmfootheight] at(current page.-29) {\copy\pinguexplainbox};}% copy for animations
+\end{tikzpicture}
+\end{frame}
+
+\begin{frame}[fragile]{e)~\T{\bfseries Ausgabe}}
+\begin{itemize}[<+(1)->]
+    \item Wieder eine fancy Ausgabe!
+\begin{plainjava}
+!*\onslide<3->*!System.out.println(trapezVerfahren(n));
+\end{plainjava}
+    \item Der gesamte Code mit alternativen befindet sich auch hier:~\only<4->{\textattachfile{\curpath NumerischeIntegration.java}{NumerischeIntegration.java}}
+\end{itemize}
 \end{frame}
 
 \iffull
@@ -913,13 +977,17 @@ Aufgabe 3 Extra mit KLassenentwurf
 \begin{itemize}[<+(1)->]
     \itemsep6.5pt
     \item TODO: Defaultwete
+    \item Signaturen
+    \item Heap- und Stack (nochmal)
+    \item Array-Defaults
+    \item Clone
 \end{itemize}
 \end{frame}
 }
 
-\outro{\vskip6mm\centering \onslide<2->{\begin{tikzpicture}
-    \pingu[cloak=pingu@bronze!80!pingu@black,left wing grab, lightsaber left=pingu@blue,eyes wink]
-\end{tikzpicture}}}
+\outro{\vskip9mm\centering \onslide<2->{\scalebox{1.35}{\begin{tikzpicture}
+    \pingu[cloak=pingu@bronze!80!pingu@black,right wing wave, lightsaber right=pingu@blue,eyes wink]
+\end{tikzpicture}}}}
 
 
 \iffull\end{document}\fi
