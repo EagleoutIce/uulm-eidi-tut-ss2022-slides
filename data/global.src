@@ -261,6 +261,10 @@
 \def\skA#1{\solGet{keywordA}{\sol@font@fs@normal#1}}
 \def\skB#1{\solGet{keywordB}{\sol@font@fs@normal#1}}
 \def\skC#1{\solGet{keywordC}{\sol@font@fs@normal#1}}
+% hacky switches
+\def\SolInlineSize{\sol@lst@style@inlinesize@true}
+\def\SolNoInlineSize{\sol@lst@style@inlinesize@false}
+
 \def\HStrut{\vphantom{\{\}g}}
 % we do not nest inside tikzmarknode as this is not possible
 \def\Snode#1{\tikzmarknode{#1}\HStrut}

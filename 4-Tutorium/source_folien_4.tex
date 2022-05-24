@@ -1,7 +1,7 @@
 \InputIfFileExists{../data/global.src}\relax\relax
 
 \iffull
-\title{Integral refs in higher dimensions}
+\title{Integral Refs in Higher Dimensions}
 \subtitle{Tutorium vier}
 \date{KW 21}
 \addbibresource{references.bib}
@@ -15,7 +15,7 @@
 \fi
 
 \iffull{\SummaryFrame
-\setbox\pinguA=\hbox{\scalebox{.5}{\tikzpicture
+\setbox\pinguA=\hbox{\SolNoInlineSize\scalebox{.5}{\tikzpicture
 \fill[lgray,rounded corners] (0,1.65) rectangle ++(3,3.85);
 \fill[lgray,rounded corners] (3.5,1.65) rectangle ++(3,3.85);
 \node[ldesc,above] at (1.5,5.5) {Stack};
@@ -353,22 +353,22 @@ public static final int Z = 90;  public static final int z = 122;
 \begin{center}
     \color{gray}\onslide<2->{There is a \T{clone} for every \cancel{Object} \say{Referenzvariable}}
 \end{center}
-\begin{onlyenv}<3-4|handout:0>
+\begin{onlyenv}<3-7|handout:0>
 \begin{plainjava}
-public static char[] flipInCopy(char[] flipBuchstaben) {
-    char[] arrayKopie = flipBuchstaben.clone();
-    int shift = 'a' - 'A'; !*\Snode{@start}*!
-    for(int i = 0; i < arrayKopie.length; i++) {
-        if (arrayKopie[i] >= 'A' && arrayKopie[i] <= 'Z')
-            arrayKopie[i] += shift;
-        else if (arrayKopie[i] >= 'a' && arrayKopie[i] <= 'z')!*\Snode{@wide}*!
-            arrayKopie[i] -= shift;
-    }!*\Snode{@end}*!
-    return arrayKopie;
-}
+!*\onslide<3->*!public static char[] flipInCopy(char[] flipBuchstaben) {
+!*\onslide<4->*!    char[] arrayKopie = flipBuchstaben.clone();
+!*\onslide<5->*!    int shift = 'a' - 'A'; !*\Snode{@start}*!
+!*\onslide<5->*!    for(int i = 0; i < arrayKopie.length; i++) {
+!*\onslide<5->*!        if (arrayKopie[i] >= 'A' && arrayKopie[i] <= 'Z')
+!*\onslide<5->*!            arrayKopie[i] += shift;
+!*\onslide<5->*!        else if (arrayKopie[i] >= 'a' && arrayKopie[i] <= 'z')!*\Snode{@wide}*!
+!*\onslide<5->*!            arrayKopie[i] -= shift;
+!*\onslide<5->*!    }!*\Snode{@end}*!
+!*\onslide<6->*!    return arrayKopie;
+!*\onslide<3->*!}
 \end{plainjava}
 \end{onlyenv}
-\begin{onlyenv}<5->
+\begin{onlyenv}<8->
 \begin{plainjava}
 public static char[] flipInCopy(char[] flipBuchstaben) {
     char[] arrayKopie = flipBuchstaben.clone();
@@ -378,8 +378,8 @@ public static char[] flipInCopy(char[] flipBuchstaben) {
 \end{plainjava}
 \end{onlyenv}
 \begin{tikzpicture}[overlay, remember picture]
-    \onslide<4|handout:0>{\draw[decoration=brace,decorate] ([xshift=2mm]@start-|@wide) to[edge node={node[right=1mm] {hmmm\ldots}}] ([xshift=2mm]@end-|@wide);}
-    \onslide<6-|handout:0>{
+    \onslide<7|handout:0>{\draw[decoration=brace,decorate] ([xshift=2mm]@start-|@wide) to[edge node={node[right=1mm] {hmmm\ldots}}] ([xshift=2mm]@end-|@wide);}
+    \onslide<9-|handout:0>{
         \node[above=\btdmfootheight+2mm,T] at(current page.south) {Das ist ein weirdes Englisch-Deutsch-Gemisch};
     }
 \end{tikzpicture}
@@ -407,7 +407,7 @@ public static char[] flipInCopy(char[] flipBuchstaben) {
     \onslide<7->{
         \node[above=\btdmfootheight,T,xshift=-3.75cm] at(current page.south) {\strut Werte primitiver Datentypen werden bei Zuweisung kopiert.};
 
-        \node[above left,yshift=\btdmfootheight,T] at(current page.south east) {\strut\textattachfile{\curpath Praesenzaufgabe.java}{Praesenzaufgabe.java}, \textattachfile{\curpath PraesenzaufgabeNaiv.java}{PraesenzaufgabeNaiv.java}\;};
+        \only<8->{\node[above left,yshift=\btdmfootheight,T] at(current page.south east) {\strut\textattachfile{\curpath Praesenzaufgabe.java}{Praesenzaufgabe.java}, \textattachfile{\curpath PraesenzaufgabeNaiv.java}{PraesenzaufgabeNaiv.java}\;};}
     }
 \end{tikzpicture}
 \end{frame}
@@ -419,11 +419,13 @@ public static char[] flipInCopy(char[] flipBuchstaben) {
         \iffull\item \T{Clone} widmen wir uns gleich nochmal\ldots\fi
         \item \task{Überlegen Sie sich, welche Vor- und Nachteile die jeweiligen Implementierungen haben.}
         \begin{itemize}[<+(1)->]
-            \item Vorteile einer Kopie (gegenüber in-place): Nebeneffekte von Methoden sind generell schlecht! \say{out-Parameter} sollten vermieden werden (wo nicht unbedingt notwendig).
-            \item Nachteile einer Kopie (gegenüber in-place): Der benötigte Speicher wird verdoppelt (was, wenn das Array riesig ist?)
+            \itemsep4.5pt
+            \item Vorteile einer Kopie \info{gegenüber in-place}: Nebeneffekte von Methoden sind generell schlecht! \say{out-Parameter} sollten vermieden werden (wo nicht unbedingt notwendig).
+            \item Nachteile einer Kopie \info{gegenüber in-place}: Der benötigte Speicher wird verdoppelt (was, wenn das Array riesig ist?)
         \end{itemize}
         \item Was ist nun besser?
                 \begin{itemize}
+                    \itemsep4.5pt
                     \item In der Regel die Variante mit Kopie. Die unerwarteten/ungewollten Seiteneffekte können Kaskaden schwer zu findender Fehler verursachen.
                     \item Sollten wirklich große Arrays erwartet werden, sollte man sich unter Umständen ein grundlegend anderes System überlegen.
                 \end{itemize}
@@ -450,7 +452,6 @@ public static char[] flipInCopy(char[] flipBuchstaben) {
 \iffull
 \SetNextSectionText[.55\linewidth]{Have you ever heard the tragedy of Darth Clon\textbf{e}able the wise? Well, then prepare yourself for\ldots\ something at least.\\--- Florian}
 \section{Clone-Wars}
-\subsection{Interlude Cloneable}
 \fi
 {
 \setbeamercolor{background canvas}{bg=black}
@@ -490,7 +491,7 @@ public static char[] flipInCopy(char[] flipBuchstaben) {
 \begin{frame}[t,fragile]{Kopien}
     \begin{itemize}[<+(1)->]
         \itemsep10pt
-        \item Da die Variable eines Objekts in Java nur eine Referenz auf das eigentliche Objekt enthält, erzeugen wir durch den folgenden Code \emph{keine} Kopie:\pause{}
+        \item Da die Variable eines Objekts in Java nur eine Referenz auf das eigentliche Objekt enthält, erzeugen wir durch den folgenden Code \textit{keine} Kopie:\pause{}
 \begin{plainjava}
 Scanner a = new Scanner(System.in);
 Scanner b = a;
@@ -509,10 +510,10 @@ Scanner b = a;
 \begin{frame}[t,fragile]{Kopie-Varianten}
     \begin{itemize}[<+(1)->]
         \itemsep10pt
-        \item Deswegen unterscheiden wir zwei Arten von Kopien: \emph{shallow} und \emph{deep}.
-            \infoblock{Genau genommen gibt es noch viel mehr, wie zum Beispiel \emph{lazy}, aber das soll uns hier nicht weiter stören.}
-        \item Eine \emph{shallow copy} kopiert \say{so wenig wie möglich}. Oder auch nur \say{die erste Hierarchieebene.}
-        \item Eine \emph{deep copy} kopiert das komplette Objekt, sowie alle Objekt-Referenzen die dieses Objekt wieder besitzt und so weiter.
+        \item Deswegen unterscheiden wir zwei Arten von Kopien: \textit{shallow} und \textit{deep}.
+            \infoblock{Genau genommen gibt es noch viel mehr, wie zum Beispiel \textit{lazy}, aber das soll uns hier nicht weiter stören.}
+        \item Eine \textit{shallow copy} kopiert \say{so wenig wie möglich}. Oder auch nur \say{die erste Hierarchieebene.}
+        \item Eine \textit{deep copy} kopiert das komplette Objekt, sowie alle Objekt-Referenzen die dieses Objekt wieder besitzt und so weiter.
         \item Während shallow copies meist von Hand geschrieben werden,\pause{} wird eine deep copy meistens durch (De-)Serialisierung gelöst.\pause{}\infoblock{Sonst müssten bei einer deep copy auch alle vom Objekt verwendeten Ressourcen wieder deep-copyable sein.\pause{} Das Verfahren hat allerdings ebenfalls Nachteile. Stichwort: \solGet{keywordA}{\link{https://docs.oracle.com/en/java/javase/17/jfapi/exclude-fields-being-persisted-transient-keyword.html}{transient}}.}
     \end{itemize}
 \end{frame}
@@ -529,8 +530,8 @@ class X {
     Z z;
 }
 \end{plainjava}
-        \item Eine \emph{shallow copy} würde ein neues \bjava{X}-Objekt erzeugen und die Attribute durch \say{\bjava{=}} zuweisen.\pause{} Damit wird \bjava{a} kopiert, \bjava{y} und \bjava{z} referenzieren aber (je) dasselbe Objekt.
-        \item Eine \emph{deep copy} würde rekursiv auch neue Objekte von \bjava{Y} und \bjava{Z} erzeugen.\pause{} \infoblock{Quizfrage: was passiert oder besser, was kann alles passieren, wenn \bjava{Y} wieder eine Referenz auf \bjava{X} enthält?}
+        \item Eine \textit{shallow copy} würde ein neues \bjava{X}-Objekt erzeugen und die Attribute durch \say{\bjava{=}} zuweisen.\pause{} Damit wird \bjava{a} kopiert, \bjava{y} und \bjava{z} referenzieren aber (je) dasselbe Objekt.
+        \item Eine \textit{deep copy} würde rekursiv auch neue Objekte von \bjava{Y} und \bjava{Z} erzeugen.\pause{} \infoblock{Quizfrage: was passiert oder besser, was kann alles passieren, wenn \bjava{Y} wieder eine Referenz auf \bjava{X} enthält?}
         \item Und was davon macht jetzt \bjava{Object::clone()}?\pause{} Spoiler: Nobody knows.
     \end{itemize}
 \end{frame}
@@ -539,12 +540,12 @@ class X {
 \begin{frame}[t,fragile]{Cloneable}
     \begin{itemize}[<+(1)->]
         \itemsep8pt
-        \item Das Interface Cloneable \emph{fordert nichts} von einer gegebene Klasse.
+        \item Das Interface Cloneable \textit{fordert nichts} von einer gegebene Klasse.
         \item Es ist ein sogenanntes \say{Marker} interface.\pause{} Wer es implementiert, sorgt dafür, dass gewisse Methoden sich einem gewissen Vertrag unterwerfen.\smallskip\pause\par\infoblock{Diese Erklärung ist an sich nachträglich entstanden. Die komplette Geschichte um das \bjava{Cloneable}-Interface ist eine einzige Tragödie.}
-        \item Aus dem \link{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Cloneable.html}{Java-Vertrag}:\par\pause
-        \textit{[\ldots]~Note that this interface does not contain the clone method.
+        \item Aus der \link{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Cloneable.html}{Java-Dokumentation} \info{\say{contract}}:\par\pause
+        \textit{\textcolor{lightgray}{[}\ldots\textcolor{lightgray}{]}~Note that this interface does not contain the clone method.
         Therefore, it is not possible to clone an object merely by virtue of the
-        fact that it implements this interface. \onslide<+(1)->{Even if the clone method is invoked \link{https://www.oracle.com/technical-resources/articles/java/javareflection.html}{reflectively}, there is no guarantee that it will succeed. [\ldots]}}
+        fact that it implements this interface. \onslide<+(1)->{Even if the clone method is invoked \link{https://www.oracle.com/technical-resources/articles/java/javareflection.html}{reflectively}, there is no guarantee that it will succeed. \textcolor{lightgray}{[}\ldots\textcolor{lightgray}{]}}}
     \end{itemize}
 \end{frame}
 
@@ -552,7 +553,7 @@ class X {
     \begin{itemize}[<+(1)->]
         \itemsep9pt
         \item Das Interface widerspricht der sonstigen Schreibweise.\pause{} \info{Clonable vs. Cloneable.}
-        \item Es fordert keine Methode und kann theoretisch von jeder Klasse implementiert werden.
+        \item Es fordert nichts und kann theoretisch von jeder Klasse implementiert werden.
         \item Es liefert keine weiteren Informationen über die Kopie.
         \item Es stellt keine Anforderungen an die Java-Syntax (Sichtbarkeit), die nicht gleichermaßen geprüft werden können.
         \item Der Rückgabewert der \bjava{Object::clone}-Methode ist stets \bjava{Object}, wir brauchen also einen expliziten Cast.\pause{} \info{Beispielsweise bei \bjava{(Date) birthday.clone()}.}
@@ -564,7 +565,7 @@ class X {
     \begin{itemize}[<+(1)->]
         \itemsep12pt
         \item Manche Java Klassen implementieren \bjava{Cloneable} korrekt.\pause{} \info{Wie \bjava{Date}.}
-        \item Bei Arrays sind die Kopien mit \bjava{clone} immer shallow.
+        \item Bei Arrays sind die Kopien mit \bjava{clone} immer \textit{shallow}.
         \item Ansonsten haben sich andere Prinzipien durchgesetzt. So beispielsweise Copy-Konstruktoren.
         % \item Diesen werden noch später im Semester begegnen.
     \end{itemize}
@@ -598,13 +599,53 @@ class X {
 }
 \fi
 
+\SetNextSectionText{Schleifen, Arrays, Methoden\\Abgabe: \DTMDate{2022-05-23}}
+\section{Übungsblatt 4}
+\subsection{Aufgabe 1}
+\begin{frame}{Aufgabe 1: Referenzvariablen}
 
+\end{frame}
 \begin{frame}
     TODO: letztes Semester Blatt 5 im join P7
 TODO: clone escapade
 TODO: berechne TtrapezFlaeche prüfe auf < 0 und so optional, je nachdem wi eman es betrachtet (eigenständig, nicht....)
 TODO: Animationsdurchläufe Heap Stack für Referenzvariablen
 \end{frame}
+
+\subsection{Aufgabe 2}
+\begin{frame}{Aufgabe 2: Mehrdimensionale Arrays}
+
+\end{frame}
+
+\subsection{Aufgabe 3}
+\begin{frame}{Aufgabe 3: Numerische Integration}
+
+\end{frame}
+
+
+\iffull
+\SetNextSectionText{Methoden und OOP\\Abgabe: \DTMDate{2022-05-30}}
+\section{Aussicht: Übungsblatt 5}
+\subsection{Aufgabe 1}
+\begin{frame}
+TODO
+\end{frame}
+
+\fi
+
+
+\SetNextSectionText{TODO: Quote}
+\section{Abschließendes}
+{\SummaryFrame
+\begin{frame}[t]{Zusammenfassend}
+\pause \printBibCommand
+\vfill\vfill % double fill for more fraction
+\begin{itemize}[<+(1)->]
+    \itemsep6.5pt
+    \item TODO:
+\end{itemize}
+\end{frame}
+}
 
 \outro{\vskip6mm\centering X}
 
