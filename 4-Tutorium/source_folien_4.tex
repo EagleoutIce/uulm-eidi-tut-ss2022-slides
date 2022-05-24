@@ -543,9 +543,9 @@ class X {
         \item Das Interface Cloneable \textit{fordert nichts} von einer gegebene Klasse.
         \item Es ist ein sogenanntes \say{Marker} interface.\pause{} Wer es implementiert, sorgt dafür, dass gewisse Methoden sich einem gewissen Vertrag unterwerfen.\smallskip\pause\par\infoblock{Diese Erklärung ist an sich nachträglich entstanden. Die komplette Geschichte um das \bjava{Cloneable}-Interface ist eine einzige Tragödie.}
         \item Aus der \link{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Cloneable.html}{Java-Dokumentation} \info{\say{contract}}:\par\pause
-        \textit{\textcolor{lightgray}{[}\ldots\textcolor{lightgray}{]}~Note that this interface does not contain the clone method.
+        \textit{\textcolor{codeouthl}{[}\ldots\textcolor{codeouthl}{]}~Note that this interface does not contain the clone method.
         Therefore, it is not possible to clone an object merely by virtue of the
-        fact that it implements this interface. \onslide<+(1)->{Even if the clone method is invoked \link{https://www.oracle.com/technical-resources/articles/java/javareflection.html}{reflectively}, there is no guarantee that it will succeed. \textcolor{lightgray}{[}\ldots\textcolor{lightgray}{]}}}
+        fact that it implements this interface. \onslide<+(1)->{Even if the clone method is invoked \link{https://www.oracle.com/technical-resources/articles/java/javareflection.html}{reflectively}, there is no guarantee that it will succeed. \textcolor{codeouthl}{[}\ldots\textcolor{codeouthl}{]}}}
     \end{itemize}
 \end{frame}
 
@@ -602,14 +602,75 @@ class X {
 \SetNextSectionText{Schleifen, Arrays, Methoden\\Abgabe: \DTMDate{2022-05-23}}
 \section{Übungsblatt 4}
 \subsection{Aufgabe 1}
-\begin{frame}{Aufgabe 1: Referenzvariablen}
+{\taskenum
+\begin{frame}[fragile]{Aufgabe 1: Referenzvariablen}
+\task<2->{Betrachten Sie den folgenden Java Code~(\only<2->{\textattachfile{\curpath Referenzvariablen.java}{Referenzvariablen.java}}):}\vspace*{-4mm}
+\lstfs{8}
+\begin{plainjava}[multicols=2,lineskip=-.5pt,prebreak={},numbers=left,numbersep=2pt]
+public class Referenzvariablen {
+  public static void setzeElementVielleicht(int[] array, int idx, int ele) {
+    if (array == null || idx >= array.length || ele <= 0) {
+      System.out.println("Eingabe ungültig!");
+      return;
+    }
+    array[idx] = ele;
+    ele = 4;
+    array = null;
+  }
 
+  public static void main(String[] args) {
+    int ele = 1;
+    int idx = ele;
+    ele = 2;
+    int[] array = new int[3];
+    setzeElementVielleicht(array, idx, ele);
+    System.out.println(ele);
+    System.out.println(idx);
+    if (array != null) {
+      for (int wert : array) {
+        System.out.println(wert);
+      }
+    } else {
+      System.out.println("Array ungültig!");
+    }
+  }
+}
+\end{plainjava}
+\vspace*{-4mm}\begin{enumerate}
+    \item<3-> \task{Welche Ausgaben erzeugen die Zeilen~18 und~19? Begründen Sie Ihre Antwort.}
+    \item<4-> \task{Welche Ausgaben erzeugen die Zeilen~20--26? Begründen Sie Ihre Antwort.}
+\end{enumerate}
 \end{frame}
+{\def\n{\textcolor{codeouthl}{\textbackslash n}\,}
+\def\Z#1;{\textit{Z#1}}
+\begin{frame}{Ein schneller Blick auf knappe Antworten}
+\begin{enumerate}[<+(1)->]
+    \itemsep10pt
+    \item {\intask Welche Ausgaben erzeugen die Zeilen~18 und~19?}\hfill\pause\Z18; liefert~2, und~\Z19;~1.\smallskip\\*
+    Zuerst die Ausgabe von \T{ele}, dieses wird in~\Z13; mit~1 initialisiert und in~\Z15; mit~2 überschrieben. \pause Der Parameter \T{ele} in~\Z2; besitzt einen anderen Sichtbarkeits- und Gültigkeitsbereich, zudem wird der Wert durch \textit{Call-by-Value} kopiert. Damit hat das Unterprogramm keinen Einfluss auf den wert in \T{ele} aus \T{main}. \pause Auf \T{ele} findet kein weiterer Zugriff statt, es ist~2.\smallskip\par\pause
+    Analog argumentiert es sich für \T{idx}, welches in~\Z14; mit dem dortigen Wert von \T{ele} (ist~1) initialisiert wird (da es ein primitiver Datentyp ist, wird hier auch mit \textit{Call-by-Value} der Wert kopiert). \pause Anschließend findet kein verändernder Zugriff statt und \T{idx} ist~1.
+    \item \task{Welche Ausgaben erzeugen die Zeilen~20--26?}\par
+    \pause Sie erzeugen \say{\T{0\n2\n0}} \info{wobei \T{\textbackslash n} ein neue Zeile darstellt}.\\*
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Ein schneller Blick auf knappe Antworten\hfill II}
+\begin{enumerate}[<+(1)->]
+    \itemsep10pt
+    \item {\intask Welche Ausgaben erzeugen die Zeilen~18 und~19?}\hfill\Z18; liefert~2, und~\Z19;~1.
+    \item \task{Welche Ausgaben erzeugen die Zeilen~20--26?}\par
+    \pause Sie erzeugen \say{\T{0\n2\n0}} \info{wobei \T{\textbackslash n} ein neue Zeile darstellt}.\smallskip\\*
+    Die Zielen befassen sich mit der Ausgabe von \T{array}. Dieses wird in~\Z16; Java initialisiert hier direkt mit \bjava{\{0, 0, 0\}}. Das Unterprogramm erfüllt nun in~\Z2; die Referenz zu \T{array} als Kopie \info{das ist \textit{Call-by-Value}, verhält sich aber wie \textit{Call-by-Reference}}, das \bjava{if} in~\Z3; scheitert, da \T{array} auf \bjava{\{0, 0, 0\}}  verweist und \bjava{idx = 1}, \bjava{ele = 2} (aus vorheriger Antwort).
+   ~\Z7; ändert damit das gemeinsame Array zu \bjava{\{0, 2, 0\}} \info{Seiteneffekt}, die Neuzuweisung in~\Z9; überschreibt lediglich die in den Parameter kopierte Referenz.
+    Damit löst das \bjava{if} in~\Z20; aus und es erfolgt besagte Ausgabe.
+\end{enumerate}
+\end{frame}
+}
+}
+
 \begin{frame}
-    TODO: letztes Semester Blatt 5 im join P7
-TODO: clone escapade
-TODO: berechne TtrapezFlaeche prüfe auf < 0 und so optional, je nachdem wi eman es betrachtet (eigenständig, nicht....)
-TODO: Animationsdurchläufe Heap Stack für Referenzvariablen
+    Der Spannende Teil [TODO: Animation]
+    TODO: Animationsdurchläufe Heap Stack für Referenzvariablen
 \end{frame}
 
 \subsection{Aufgabe 2}
@@ -619,6 +680,7 @@ TODO: Animationsdurchläufe Heap Stack für Referenzvariablen
 
 \subsection{Aufgabe 3}
 \begin{frame}{Aufgabe 3: Numerische Integration}
+    TODO: berechne TtrapezFlaeche prüfe auf < 0 und so optional, je nachdem wi eman es betrachtet (eigenständig, nicht....)
 
 \end{frame}
 
