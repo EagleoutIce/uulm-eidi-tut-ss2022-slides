@@ -1,21 +1,23 @@
 public class Praesenzaufgabe {
    public static void flipInPlace(char[] flipBuchstaben) {
-       final int shift = 'a' - 'A'; // der shift ändert sich ja nicht :D
        for(int i = 0; i < flipBuchstaben.length; i++) {
-           if ('A' <= flipBuchstaben[i] && flipBuchstaben[i] <= 'Z') {
-               flipBuchstaben[i] += shift;
-           } else if ('a' <= flipBuchstaben[i] && flipBuchstaben[i] <= 'z') {
-               flipBuchstaben[i] -= shift;
+           if (flipBuchstaben[i] >= 65 && flipBuchstaben[i] <= 90) {
+               flipBuchstaben[i] += 32;
+           } else if (flipBuchstaben[i] >= 97 && flipBuchstaben[i] <= 122) {
+               flipBuchstaben[i] -= 32;
            }
        }
    }
 
    public static char[] flipInCopy(char[] flipBuchstaben) {
-        char[] arrayKopie = new char[flipBuchstaben.length];
-        for(int i = 0; i < arrayKopie.length; i++)
-        arrayKopie[i] = flipBuchstaben[i]
-
-       flipInCopy(arrayKopie);
+       char[] arrayKopie = flipBuchstaben.clone();
+       for(int i = 0; i < arrayKopie.length; i++) {
+           if (arrayKopie[i] >= 65 && arrayKopie[i] <= 90) {
+               arrayKopie[i] += 32;
+           } else if (arrayKopie[i] >= 97 && arrayKopie[i] <= 122) {
+               arrayKopie[i] -= 32;
+           }
+       }
        return arrayKopie;
    }
 

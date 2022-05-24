@@ -63,7 +63,7 @@
 \end{tikzpicture}
 \end{frame}
 }\fi
-\SetNextSectionText[.55\linewidth]{}
+\SetNextSectionText[.55\linewidth]{TODO: quote}
 \section{Präsenzaufgabe}
 {\setbox\pinguA=\hbox{\tikz{\pingu[devil horns,eyes angry,pants=btdm@primary,wings raise]}}
 \setbox\pinguB=\hbox{\tikz{\pingu[devil horns,eyes sad,pants=btdm@primary]}}
@@ -398,38 +398,212 @@ public static char[] flipInCopy(char[] flipBuchstaben) {
 !*\onslide<5->*!    for(int i = 0; i < arrayKopie.length; i++)
 !*\onslide<6->*!        arrayKopie[i] = flipBuchstaben[i]
 
-!*\onslide<1->*!|ihl|flipInPlace(arrayKopie);|ihl|
+!*\onslide<1->*!    |ihl|flipInPlace(arrayKopie);|ihl|
     |ihl|return arrayKopie;|ihl|
 |ihl|}|ihl|
 \end{plainjava}
 \end{uncoverenv}
 \begin{tikzpicture}[overlay, remember picture]
     \onslide<7->{
-        \node[above=\btdmfootheight+2mm,T] at(current page.south) {Werte primitiver Datentypen werden bei Zuweisung kopiert.};
+        \node[above=\btdmfootheight,T,xshift=-3.75cm] at(current page.south) {\strut Werte primitiver Datentypen werden bei Zuweisung kopiert.};
+
+        \node[above left,yshift=\btdmfootheight,T] at(current page.south east) {\strut\textattachfile{\curpath Praesenzaufgabe.java}{Praesenzaufgabe.java}, \textattachfile{\curpath PraesenzaufgabeNaiv.java}{PraesenzaufgabeNaiv.java}\;};
     }
 \end{tikzpicture}
 \end{frame}
 
 \subsection{Allgemeine Fragen}
 \begin{frame}{Allgemeines}
-    \begin{itemize}
-        \item \T{Clone} widmen wir uns gleich nochmal\ldots
-        \item
+    \begin{itemize}[<+(1)->]
+        \itemsep13pt
+        \iffull\item \T{Clone} widmen wir uns gleich nochmal\ldots\fi
+        \item \task{Überlegen Sie sich, welche Vor- und Nachteile die jeweiligen Implementierungen haben.}
+        \begin{itemize}[<+(1)->]
+            \item Vorteile einer Kopie (gegenüber in-place): Nebeneffekte von Methoden sind generell schlecht! \say{out-Parameter} sollten vermieden werden (wo nicht unbedingt notwendig).
+            \item Nachteile einer Kopie (gegenüber in-place): Der benötigte Speicher wird verdoppelt (was, wenn das Array riesig ist?)
+        \end{itemize}
+        \item Was ist nun besser?
+                \begin{itemize}
+                    \item In der Regel die Variante mit Kopie. Die unerwarteten/ungewollten Seiteneffekte können Kaskaden schwer zu findender Fehler verursachen.
+                    \item Sollten wirklich große Arrays erwartet werden, sollte man sich unter Umständen ein grundlegend anderes System überlegen.
+                \end{itemize}
     \end{itemize}
 \end{frame}
-\begin{frame}
-    TODO. kann man auch foreach benutzen?
-    TODO: letztes Semester Blatt 5 im join P7
-TODO: P aufgabe zahlen zu chars
-TODO: clone escapade
-TODO: berechne TtrapezFlaeche prüfe auf < 0 und so optional, je nachdem wi eman es betrachtet (eigenständig, nicht....)
-TODO: gesamte Lösung für P aufgabe einbetten
-TODO: Animationsdurchläufe Heap Stack für Referenzvariablen
+
+\begin{frame}[fragile]{Alternativen?}
+    \begin{itemize}[<+(1)->]
+        \item Hätte man hier auch \say{for-each} für flip in place nutzen können?\vspace*{-1mm}
+\begin{plainjava}
+!*\onslide<3->*!for(int i = 0; i < flipBuchstaben.length; i++) {
+!*\onslide<3->*!    if ('A' <= flipBuchstaben[i] && flipBuchstaben[i] <= 'Z') {
+!*\onslide<3->*!        flipBuchstaben[i] += shift;
+!*\onslide<3->*!    } else if ('a' <= flipBuchstaben[i] && flipBuchstaben[i] <= 'z') {
+!*\onslide<3->*!        flipBuchstaben[i] -= shift;
+!*\onslide<3->*!    }
+!*\onslide<3->*!}!*\onslide<1->*!
+\end{plainjava}
+    \item<4-> Nein, so könnten wir nicht mehr \bjava{flipBuchstaben} an der Stelle \T{i} verändern.
+    \item<5-> Mit \bjava{for(char c : flipBuchstaben)} ist \T{c} jeweils eine Kopie \info{primitiver Datentyp} und nicht mehr eine Referenz auf die Stelle im Array!
+    \end{itemize}
 \end{frame}
 
+\iffull
+\SetNextSectionText[.55\linewidth]{Have you ever heard the tragedy of Darth Clon\textbf{e}able the wise? Well, then prepare yourself for\ldots\ something at least.\\--- Florian}
 \section{Clone-Wars}
-\begin{frame}
+\subsection{Interlude Cloneable}
+\fi
+{
+\setbeamercolor{background canvas}{bg=black}
+\begin{frame}[c,plain]{}
+\vspace*{1.5em}\centering
+\begin{tikzpicture}[overlay,remember picture]
+    \pgfinterruptboundingbox% to avoid clanky changes
+    \only<2|handout:0>{\pingu[eyes wink]}
+    \only<3|handout:0>{\pingu[right wing grab, lightsaber right, lightsaber right disabled]}
+    \only<4|handout:0>{\pingu[right wing grab, eyes angry, lightsaber right=purple]}
+    \only<5|handout:0>{\pingu[right wing wave, eyes angry, lightsaber right=purple]}
+    \only<6|handout:0>{\pingu[right wing wave, eyes angry, lightsaber right=purple,right item angle=-70],bill angry}
+    \only<7|handout:0>{\pingu[right wing wave, eyes angry, lightsaber right=purple,lightsaber right double,right item angle=-70],bill angry}
+    \pgfonlayer{background}
+    \only<9->{\node[white!14!black,scale=9] at(current page.center) {\Large\textsc{clone}};}
+    \endpgfonlayer
+    \only<8-9|handout:0>{\pingu[right wing grab, eyes angry, lightsaber right=purple,lightsaber right double,right item angle=-70,bill angry,right item angle=-80,lightsaber right yshift=-.45mm]}
+    \only<10->{\pingu[right wing grab, eyes angry, lightsaber right=purple,lightsaber right double,right item angle=-70,bill angry,right item angle=-80,lightsaber right yshift=-.45mm,left eye devil]}
+    \endpgfinterruptboundingbox
+\end{tikzpicture}~~~~~~~~~~~~~~
+\end{frame}
+}
+{
+\iffull
+\AddonFrame
+\begin{frame}[t,fragile]{Die Object Klasse}
+    \begin{itemize}[<+(1)->]
+        \itemsep10pt
+        \item \bjava{Object} ist die Klasse, welche die grundlegenden Eigenschaften für jede andere Klassen zur Verfügung stellt.
+        \item Wir werden sie später im Rahmen von Vererbung genauer kennen lernen.\par
+            Bis da hin: \bjava{toString} stammt beispielsweise dort her.
+        \item Diese Klasse \bjava{Object} liefert auch die Methode \bjava{clone}, die auf jedem Objekt aufgerufen werden kann\pause\ldots\pause{} \ldots\pause{} \ldots
+        \item \bjava{clone} muss aber von jeder Klasse selbst und individuell implementiert werden, wenn es denn unterstützt werden soll.
+    \end{itemize}
+\end{frame}
 
+\begin{frame}[t,fragile]{Kopien}
+    \begin{itemize}[<+(1)->]
+        \itemsep10pt
+        \item Da die Variable eines Objekts in Java nur eine Referenz auf das eigentliche Objekt enthält, erzeugen wir durch den folgenden Code \emph{keine} Kopie:\pause{}
+\begin{plainjava}
+Scanner a = new Scanner(System.in);
+Scanner b = a;
+\end{plainjava}
+        \item Oft stellen sich auch Fragen wie:
+         \begin{itemize}
+            \itemsep6pt
+             \item Was soll kopiert werden?
+             \item Funktioniert eine Kopie überhaupt?
+             \item Was ist, wenn das zu kopierende Objekt selbst wieder (zum Beispiel in den Attributen) Referenzen auf andere Objekte enthält?
+             \item Was, wenn diese Referenzen zirkulär sind?
+         \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{Kopie-Varianten}
+    \begin{itemize}[<+(1)->]
+        \itemsep10pt
+        \item Deswegen unterscheiden wir zwei Arten von Kopien: \emph{shallow} und \emph{deep}.
+            \infoblock{Genau genommen gibt es noch viel mehr, wie zum Beispiel \emph{lazy}, aber das soll uns hier nicht weiter stören.}
+        \item Eine \emph{shallow copy} kopiert \say{so wenig wie möglich}. Oder auch nur \say{die erste Hierarchieebene.}
+        \item Eine \emph{deep copy} kopiert das komplette Objekt, sowie alle Objekt-Referenzen die dieses Objekt wieder besitzt und so weiter.
+        \item Während shallow copies meist von Hand geschrieben werden,\pause{} wird eine deep copy meistens durch (De-)Serialisierung gelöst.\pause{}\infoblock{Sonst müssten bei einer deep copy auch alle vom Objekt verwendeten Ressourcen wieder deep-copyable sein.\pause{} Das Verfahren hat allerdings ebenfalls Nachteile. Stichwort: \solGet{keywordA}{\link{https://docs.oracle.com/en/java/javase/17/jfapi/exclude-fields-being-persisted-transient-keyword.html}{transient}}.}
+    \end{itemize}
+\end{frame}
+
+\begingroup
+\lstset{add to literate={X}{{{\solGet{keywordC}{X}}}}1 {Y}{{{\solGet{keywordC}{Y}}}}1 {Z}{{{\solGet{keywordC}{Z}}}}1}
+\begin{frame}[t,fragile]{Kopien, ein Beispiel}
+    \begin{itemize}[<+(1)->]
+        \item Betrachten wir die folgende Klasse (\bjava{Y} und \bjava{Z} seien ebenfalls gegeben):\pause
+\begin{plainjava}
+class X {
+    int a;
+    Y y;
+    Z z;
+}
+\end{plainjava}
+        \item Eine \emph{shallow copy} würde ein neues \bjava{X}-Objekt erzeugen und die Attribute durch \say{\bjava{=}} zuweisen.\pause{} Damit wird \bjava{a} kopiert, \bjava{y} und \bjava{z} referenzieren aber (je) dasselbe Objekt.
+        \item Eine \emph{deep copy} würde rekursiv auch neue Objekte von \bjava{Y} und \bjava{Z} erzeugen.\pause{} \infoblock{Quizfrage: was passiert oder besser, was kann alles passieren, wenn \bjava{Y} wieder eine Referenz auf \bjava{X} enthält?}
+        \item Und was davon macht jetzt \bjava{Object::clone()}?\pause{} Spoiler: Nobody knows.
+    \end{itemize}
+\end{frame}
+\endgroup
+
+\begin{frame}[t,fragile]{Cloneable}
+    \begin{itemize}[<+(1)->]
+        \itemsep8pt
+        \item Das Interface Cloneable \emph{fordert nichts} von einer gegebene Klasse.
+        \item Es ist ein sogenanntes \say{Marker} interface.\pause{} Wer es implementiert, sorgt dafür, dass gewisse Methoden sich einem gewissen Vertrag unterwerfen.\smallskip\pause\par\infoblock{Diese Erklärung ist an sich nachträglich entstanden. Die komplette Geschichte um das \bjava{Cloneable}-Interface ist eine einzige Tragödie.}
+        \item Aus dem \link{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Cloneable.html}{Java-Vertrag}:\par\pause
+        \textit{[\ldots]~Note that this interface does not contain the clone method.
+        Therefore, it is not possible to clone an object merely by virtue of the
+        fact that it implements this interface. \onslide<+(1)->{Even if the clone method is invoked \link{https://www.oracle.com/technical-resources/articles/java/javareflection.html}{reflectively}, there is no guarantee that it will succeed. [\ldots]}}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{Cloneable, Schadensbericht}
+    \begin{itemize}[<+(1)->]
+        \itemsep9pt
+        \item Das Interface widerspricht der sonstigen Schreibweise.\pause{} \info{Clonable vs. Cloneable.}
+        \item Es fordert keine Methode und kann theoretisch von jeder Klasse implementiert werden.
+        \item Es liefert keine weiteren Informationen über die Kopie.
+        \item Es stellt keine Anforderungen an die Java-Syntax (Sichtbarkeit), die nicht gleichermaßen geprüft werden können.
+        \item Der Rückgabewert der \bjava{Object::clone}-Methode ist stets \bjava{Object}, wir brauchen also einen expliziten Cast.\pause{} \info{Beispielsweise bei \bjava{(Date) birthday.clone()}.}
+        \item \ldots\pause{} \ldots\pause{} \ldots
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{Long story short}
+    \begin{itemize}[<+(1)->]
+        \itemsep12pt
+        \item Manche Java Klassen implementieren \bjava{Cloneable} korrekt.\pause{} \info{Wie \bjava{Date}.}
+        \item Bei Arrays sind die Kopien mit \bjava{clone} immer shallow.
+        \item Ansonsten haben sich andere Prinzipien durchgesetzt. So beispielsweise Copy-Konstruktoren.
+        % \item Diesen werden noch später im Semester begegnen.
+    \end{itemize}
+\end{frame}
+}
+
+{
+\setbeamercolor{background canvas}{bg=black}
+\begin{frame}[c,plain]{}
+\vspace*{1.5em}\centering
+\begin{tikzpicture}
+    \pgfinterruptboundingbox% to avoid clanky changes
+    \only<2|handout:0>{
+        \pingu[xshift=-3cm,yshift=.5cm]
+        \pingu[xshift=3cm,yshift=.5cm]
+        \pingu[]
+    }
+    \only<3|handout:0>{
+        \pingu[xshift=-3cm,yshift=.5cm,right wing grab, lightsaber right, lightsaber right disabled,eyes wink]
+        \pingu[xshift=3cm,yshift=.5cm,left wing grab, lightsaber left, lightsaber left disabled,eyes wink]
+        \pingu[right wing grab, lightsaber right, lightsaber right disabled, eyes shiny,left wing wave, lightsaber left, lightsaber left disabled,right item angle=-80,lightsaber right yshift=-.5mm,left item angle=75]
+    }
+    \only<4->{
+        \pingu[xshift=-3cm,yshift=.5cm,right wing grab, lightsaber right=orange,eyes wink]
+        \pingu[xshift=3cm,yshift=.5cm,left wing grab, lightsaber left=orange,eyes wink]
+        \pingu[right wing grab, lightsaber right=pingu@blue, eyes shiny,left wing wave, lightsaber left=green,right item angle=-80,lightsaber right double,lightsaber right yshift=-.5mm,left item angle=75]
+    }
+    \endpgfinterruptboundingbox
+\end{tikzpicture}~~~~~~~~~~~~~~
+\end{frame}
+}
+\fi
+
+
+\begin{frame}
+    TODO: letztes Semester Blatt 5 im join P7
+TODO: clone escapade
+TODO: berechne TtrapezFlaeche prüfe auf < 0 und so optional, je nachdem wi eman es betrachtet (eigenständig, nicht....)
+TODO: Animationsdurchläufe Heap Stack für Referenzvariablen
 \end{frame}
 
 \outro{\vskip6mm\centering X}
