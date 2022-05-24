@@ -396,7 +396,7 @@ public static char[] flipInCopy(char[] flipBuchstaben) {
 !*\onslide<1->*!|ihl|public static char[] flipInCopy(char[] flipBuchstaben) {|ihl|
 !*\onslide<4->*!    char[] arrayKopie = new char[flipBuchstaben.length];
 !*\onslide<5->*!    for(int i = 0; i < arrayKopie.length; i++)
-!*\onslide<6->*!        arrayKopie[i] = flipBuchstaben[i]
+!*\onslide<6->*!        arrayKopie[i] = flipBuchstaben[i];
 
 !*\onslide<1->*!    |ihl|flipInPlace(arrayKopie);|ihl|
     |ihl|return arrayKopie;|ihl|
@@ -677,6 +677,10 @@ public class Referenzvariablen {
     TODO: hier brauch ich signaturen für das beispiel danach :D
 \end{frame}
 
+\begin{frame}{Sprechen über Signaturen}
+TODO: zumindest ein Pingu :C
+\end{frame}
+
 % \paragraph{Eine alte Heap-Stack-Freude}
 \makeatletter
 \lhns@elemwidth3cm
@@ -794,11 +798,11 @@ public class Referenzvariablen {
 \end{plainjava}
 \end{itemize}
 \begin{tikzpicture}[@O]
-\onslide<8->{\node[T,right=-1pt] at(@1.east) {\faCheck~\T{m1} ist noch nicht initialisiert};}
-\onslide<10->{\node[T,right=-1pt,align=left] at(@2.east) {\faFlash~Java \textup{muss} das Array initialisieren~\(\to\) braucht dessen Größe};}
-\onslide<12->{\node[T,right=-1pt] at(@3.east) {\faCheck~\T{m3} ist \T{\{ null, null \}} (Default-Wert für \T{double[]})};}
-\onslide<14->{\node[T,right=-1pt] at(@4.east) {\faCheck~\T{m4} ist \T{\{\;\{ 0, 0, 0 \}\;\}} (Default-Wert für \T{int})};}
-\onslide<16->{\node[T,below right,xshift=-1pt,yshift=.6\baselineskip,align=left] at(@5.east) {\faFlash~\T{null} und \T{\{\}} \info{leer} sind valide \T{double[]},\\\phantom{\faFlash}~\T{\{ null \}} aber nicht, da \T{double} nicht \T{null}\\\phantom{\faFlash}~sein kann.};}
+\onslide<8->{\node[T,right=-1pt,scale=.9] at(@1.east) {\faCheck~\T{m1} ist noch nicht initialisiert};}
+\onslide<10->{\node[T,right=-1pt,align=left,scale=.9] at(@2.east) {\faFlash~Java \textup{muss} das Array initialisieren~\(\to\) braucht dessen Größe};}
+\onslide<12->{\node[T,right=-1pt,scale=.9] at(@3.east) {\faCheck~\T{m3} ist \T{\{ null, null \}} (Default-Wert für \T{double[]})};}
+\onslide<14->{\node[T,right=-1pt,scale=.9] at(@4.east) {\faCheck~\T{m4} ist \T{\{\;\{ 0, 0, 0 \}\;\}} (Default-Wert für \T{int})};}
+\onslide<16->{\node[T,below right,xshift=-1pt,yshift=.6\baselineskip,align=left,scale=.9] at(@5.east) {\faFlash~\T{null} und \T{\{\}} \info{leer} sind valide \T{double[]},\\\phantom{\faFlash}~\T{\{ null \}} aber nicht, da \T{double} nicht \T{null}\\\phantom{\faFlash}~sein kann.};}
 \end{tikzpicture}
 \end{frame}
 
@@ -828,7 +832,7 @@ public static double berechneZeilensummennorm(double[][] mat) {
     double max = Double.MIN_VALUE;
     for (double[] array : mat) {
         double norm = berechneBetragssumme(array);
-        if (norm == -1.0):ws::ws::ws::ws::ws::ws::ws::ws:return -1.0; // Fehler in Unteralgorithmus
+        if (norm == -1.0):ws::ws::ws::ws::ws:return -1.0; // Fehler in Unteralgorithmus?
         else if (norm > max) max = norm;
     }
     return max;
@@ -850,19 +854,51 @@ public static double berechneZeilensummennorm(double[][] mat) {
 
 \subsection{Aufgabe 3}
 \begin{frame}{Aufgabe 3: Numerische Integration}
-    TODO: berechne TtrapezFlaeche prüfe auf < 0 und so optional, je nachdem wie man es betrachtet (eigenständig, nicht....)
+\task<2->{In dieser Aufgabe sollen Sie ein einfaches Verfahren zur numerischen Integration implementieren. Legen Sie dazu eine Java Datei namens \T{NumerischeIntegration.java} an und implementieren Sie alle folgenden Teilaufgaben innerhalb dieser Datei. \onslide<3->{Die Funktion \(f(x) = \exp(-x^2)\) besitzt \link{https://www.wolframalpha.com/input?i=integral+e\%5E\%28-x\%5E2\%29+from+0+to+1}{keine Stammfunktion bestehend nur aus elementaren Funktionen}, was eine Berechnung schwierig macht. Man ist jedoch an guten Approximationen interessiert. Wir beschränken uns auf das Intervall \([0, 1]\), suchen also möglichst genaue Approximationen für das folgende Integral: \(A_f = \int_0^1 \exp(-x^2) \mathrm{d}x\)}\medskip% no \d here :D
 
+\onslide<4->{Eine bekannte Methode ist die Approximation des Integrals durch eine Summe von Trapezflächen. Dazu zerlegt man das Intervall \([0, 1]\) in \(n \geq 1\) Segmente~\([x_i, x_{i + 1}]\) mit \(9 = x_1 < x_2 < \ldots < x_{n - 1} < x_n = 1.\)}\medskip
+
+\onslide<5->{Die Fläche auf dem Intervall~\([x_i, x_{i + 1}]\) erhält man dann durch ein Trapez mit Eckpunkten \(a = (x_i, 0)\), \(b = (x_{i + 1}, 0)\), \(c = (c_{i + x}, f(x_{i + 1}))\) und \(d = (x_i, f(x_i))\). Die Fläche \(A_i\) eines derartigen Trapezes kann für \(x_{i + 1} \geq x_i\) durch \(A_i = (x_{i + 1} - x_i) \bigl(f(x_i) + f(x_{i + 1})\bigr) / 2\) berechnet werden. Die Approximation des Integrals ergibt sich dann durch Summierung der einzelnen Trapezflächen: \(A_f \approx A_f(n) = \sum_{i = 1}^n A_i.\)}
+}
+% TODO grafik?
 \end{frame}
 
-\begin{frame}{Sprechen über Signaturen}
-
+\begin{frame}[fragile]{a)~Daten Einlesen und b)~\T{\bfseries berechneF}}
+    \begin{itemize}[<+(1)->]
+        \item Das Einlesen erfolgt hier leicht:
+\begin{plainjava}[aboveskip=0pt]
+!*\onslide<3->*!int n = Integer.parseInt(args[0]);
+\end{plainjava}
+        \item Ein \link{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Scanner.html}{Scanner} kann hier theoretisch auch möglich sein. \begin{itemize}
+            \item Den wollen wir dann aber auch immer schließen!
+            \item Uns reichen Kommandozeilenparameter
+        \end{itemize}
+        \item Und nun noch berechnen \info{}\(f(x) = \exp(-x^2)\):
+\begin{plainjava}
+!*\onslide<8->*!public static double berechneF(double x){
+!*\onslide<9->*!    return Math.exp(-(x*x));
+!*\onslide<8->*!}
+\end{plainjava}
+        \item<10-> Natürlich kann man hier auch \bjava{Math.pow(x, 2.0)} oder so benutzen.
+    \end{itemize}
 \end{frame}
+
+\begin{frame}
+    \textattachfile{\curpath NumerischeIntegration.java}{NumerischeIntegration.java}
+\end{frame}
+
 \iffull
 \SetNextSectionText{Methoden und OOP\\Abgabe: \DTMDate{2022-05-30}}
 \section{Aussicht: Übungsblatt 5}
 \subsection{Aufgabe 1}
 \begin{frame}
 TODO
+
+Hinweisen auf Char Trick
+
+Quersumme: UB3 Aufgabe 3 jetzt nur nochmal mit einer Metaebene :d
+
+Aufgabe 3 Extra mit KLassenentwurf
 \end{frame}
 
 \fi
@@ -881,7 +917,9 @@ TODO
 \end{frame}
 }
 
-\outro{\vskip6mm\centering X}
+\outro{\vskip6mm\centering \onslide<2->{\begin{tikzpicture}
+    \pingu[cloak=pingu@bronze!80!pingu@black,left wing grab, lightsaber left=pingu@blue,eyes wink]
+\end{tikzpicture}}}
 
 
 \iffull\end{document}\fi

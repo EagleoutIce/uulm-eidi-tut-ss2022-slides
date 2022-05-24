@@ -1,4 +1,4 @@
-public class Praesenzaufgabe {
+public class PraesenzaufgabeNaiv {
    public static void flipInPlace(char[] flipBuchstaben) {
        for(int i = 0; i < flipBuchstaben.length; i++) {
            if (flipBuchstaben[i] >= 65 && flipBuchstaben[i] <= 90) {

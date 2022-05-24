@@ -13,7 +13,7 @@ public class Praesenzaufgabe {
    public static char[] flipInCopy(char[] flipBuchstaben) {
         char[] arrayKopie = new char[flipBuchstaben.length];
         for(int i = 0; i < arrayKopie.length; i++)
-        arrayKopie[i] = flipBuchstaben[i]
+            arrayKopie[i] = flipBuchstaben[i];
 
        flipInCopy(arrayKopie);
        return arrayKopie;
