@@ -914,19 +914,20 @@ public static double berechneZeilensummennorm(double[][] mat) {
 \end{frame}
 
 
-\savebox\codebox{\SetupLstHl\LstBoardStyle\topsep0pt\lstfs{9}\begin{minipage}{11cm}
+\savebox\codebox{\SetupLstHl\LstBoardStyle\topsep0pt\lstfs{9}\begin{minipage}{11.33cm}
 \begin{plainjava}^^J
 for(double x = 0; x <= 1 - schrittweite; x += schrittweite) \{^^J
 :ws::ws::ws::ws:|ihl|...|ihl|^^J
 \}^^J
 \end{plainjava}
 \end{minipage}}
-\MakeThePinguExplainIt[text width=11cm]{cap=!hide,headphones,glasses=!hide,cup=!hide,sunglasses,eyes hearts,body type=chubby,lollipop right,right item angle=-52}{Auch möglich wäre soetwas:\\\copy\codebox}
+\MakeThePinguExplainIt[text width=11.33cm]{cap=!hide,headphones,glasses=!hide,cup=!hide,sunglasses,eyes hearts,body type=chubby,lollipop left,right item angle=-52}{Auch möglich wäre soetwas:\\\copy\codebox}
 \begin{frame}[fragile,c]{d)~\T{\bfseries trapezVerfahren(int)}\hfill II}
+\SetupLstHl
 \begin{plainjava}
 !*\onslide<1->*!public static double trapezVerfahren(int n) {
 !*\onslide<1->*!    |ihl|...|ihl|
-!*\onslide<2->*!    double schrittweite = 1.0 / n;
+!*\onslide<2->*!    double schrittweite = 1.0 / n; !*\Snode{@1}*!
 !*\onslide<3->*!    double x = 0.0;
 !*\onslide<4->*!    double A = 0.0;
 !*\onslide<5->*!    while (x <= 1.0 - schrittweite) {
@@ -937,7 +938,13 @@ for(double x = 0; x <= 1 - schrittweite; x += schrittweite) \{^^J
 !*\onslide<1->*!}
 \end{plainjava}
 \begin{tikzpicture}[@O]
-    \onslide<9->{\node[left=-4mm,xshift=4mm,scale=.8,yshift=\btdmfootheight] at(current page.-29) {\copy\pinguexplainbox};}% copy for animations
+    \onslide<9->{\node[left=-4mm,xshift=4mm,scale=.8,yshift=\btdmfootheight] at(current page.-27) {\copy\pinguexplainbox};}% copy for animations
+    \onslide<10->{
+        \node[right,T] (@) at(@1.east) {Ginge hier auch nur \T{1/n}?};
+    }
+    \onslide<11->{
+        \node[below right,yshift=1mm,T] at(@.south west) {Nö, dann wäre das mit \(\text{\T{n}} > 1\) immer 0 (da Ganzzahldivison).};
+    }
 \end{tikzpicture}
 \end{frame}
 
@@ -947,7 +954,7 @@ for(double x = 0; x <= 1 - schrittweite; x += schrittweite) \{^^J
 \begin{plainjava}
 !*\onslide<3->*!System.out.println(trapezVerfahren(n));
 \end{plainjava}
-    \item Der gesamte Code mit alternativen befindet sich auch hier:~\only<4->{\textattachfile{\curpath NumerischeIntegration.java}{NumerischeIntegration.java}}
+    \item Der gesamte Code befindet sich hier:~\only<4->{\textattachfile{\curpath NumerischeIntegration.java}{NumerischeIntegration.java}}
 \end{itemize}
 \end{frame}
 
@@ -955,16 +962,40 @@ for(double x = 0; x <= 1 - schrittweite; x += schrittweite) \{^^J
 \SetNextSectionText{Methoden und OOP\\Abgabe: \DTMDate{2022-05-30}}
 \section{Aussicht: Übungsblatt 5}
 \subsection{Aufgabe 1}
-\begin{frame}
-TODO
-
-Hinweisen auf Char Trick
-
-Quersumme: UB3 Aufgabe 3 jetzt nur nochmal mit einer Metaebene :d
-
-Aufgabe 3 Extra mit KLassenentwurf
+\begin{frame}{Aufgabe 1: Methoden mit einer variablen Parameterzahl}
+\begin{itemize}[<+(1)->]
+    \itemsep9pt
+    \item Hier helfen \link{https://docs.oracle.com/javase/8/docs/technotes/guides/language/varargs.html}{varargs}! \begin{itemize}
+        \item Einfach nur Arrays aber in \info{un-}gruselig!
+    \end{itemize}
+    \item Sonst haben wir ja schonmal was mit einer Quersumme gemacht \info{Übungsblatt~3, Aufgabe~3}
+    \item Mehr Tipps kann ich dazu auch nicht geben\ldots
+\end{itemize}
 \end{frame}
 
+\subsection{Aufgabe 2}
+\begin{frame}{Aufgabe 2: Globale Variablen}
+\begin{itemize}[<+(1)->]
+    \itemsep9pt
+    \item Da haben wir heute ja schon was mit Zeichen gemacht!
+    \item Die Aufgabe lässt sich schön elegant lösen.
+\end{itemize}
+\end{frame}
+
+\subsection{Aufgabe 3}
+\begin{frame}{Aufgabe 3: Objektorientierung: Klassenentwurf }
+\begin{itemize}[<+(1)->]
+    \itemsep9pt
+    \item Wir möchten einen \textit{Klassenentwurf}
+    \item Gerne von Hand (dann aber sehr deutlich): \begin{itemize}
+        \itemsep3pt
+        \item Sonst gibt es \link{https://app.diagrams.net/}{draw.io}
+        \item Man kann das aber auch mit \LaTeX\ machen
+        \item Oder mit anderen Zeichenprogrammen\ldots
+        \item Generierte Klassenentwürfe sind aber verboten!
+    \end{itemize}
+\end{itemize}
+\end{frame}
 \fi
 
 
