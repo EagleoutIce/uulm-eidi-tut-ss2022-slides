@@ -57,7 +57,7 @@
         \end{itemize}
     \end{itemize}
     \onslide<1->
-\begin{tikzpicture}[overlay,remember picture]
+\begin{tikzpicture}[@O]
     \onslide<13->{\draw[Kite-,gray] (@)++(.2,.3) to[out=50,in=230] ++(.45,.3) node[above,T] {Initialisiert automatisch mit \T{\{0, 0, 0, 0, 0\}}};}
     \onslide<17->{\node[above left, yshift=\btdmfootheight] at (current page.south east) {\copy\pinguA};}
 \end{tikzpicture}
@@ -130,7 +130,7 @@ jeweiligen Implementierungen haben.}
 \end{onlyenv}
 % TODO: Rest, TODO: devil pingu
 \end{aufgabe}
-\begin{tikzpicture}[overlay,remember picture]
+\begin{tikzpicture}[@O]
     \only<9|handout:0>{\node[yshift=-2.5cm,above,scale=1.33] at (current page.center) {\copy\pinguA};}
     \only<10|handout:0>{\node[yshift=-2.5cm,above,scale=1.33] at (current page.center) {\copy\pinguB};}
     \onslide<16->{\node[left=-3mm,xshift=7mm,scale=.8,yshift=2mm] at(current page.0) {\copy\pinguexplainbox};}% copy for animations
@@ -152,7 +152,7 @@ jeweiligen Implementierungen haben.}
 !*\onslide<3->*!    }
 !*\onslide<2->*!}
 \end{plainjava}
-\begin{tikzpicture}[remember picture,overlay]
+\begin{tikzpicture}[@O]
     \onslide<8->{
         \foreach \K in {65,90,32,97,122,32b} {
             \node[btdm@primary!70!btdm@background,draw,ellipse,minimum width=6.5mm, minimum height=4.5mm] (@@\K) at (@\K) {};
@@ -234,7 +234,7 @@ public static final int Z = 90;  public static final int z = 122;
 |ihl|}|ihl|
 \end{plainjava}
 \end{onlyenv}% copy for animations
-\begin{tikzpicture}[overlay,remember picture]
+\begin{tikzpicture}[@O]
     \onslide<6->{\node[above left=5mm,T,align=center] at(current page.south east) {What, if there would be a better way?\\What, if we want to check only for characters g--m};}
 \end{tikzpicture}
 \end{frame}
@@ -335,7 +335,7 @@ public static final int Z = 90;  public static final int z = 122;
 |ihl|}|ihl|
 \end{plainjava}
 \end{onlyenv}
-\begin{tikzpicture}[overlay,remember picture]
+\begin{tikzpicture}[@O]
     \onslide<4->{
         \node[above left=5mm,scale=.75] (@) at(current page.south east) {\copy\pinguA};
         \node[T,left=2mm,align=right] at(@.west) {Implizite\\Typkonvertierung!\\\T{char}~$\to$~\T{int}};
@@ -377,7 +377,7 @@ public static char[] flipInCopy(char[] flipBuchstaben) {
 }
 \end{plainjava}
 \end{onlyenv}
-\begin{tikzpicture}[overlay, remember picture]
+\begin{tikzpicture}[@O]
     \onslide<7|handout:0>{\draw[decoration=brace,decorate] ([xshift=2mm]@start-|@wide) to[edge node={node[right=1mm] {hmmm\ldots}}] ([xshift=2mm]@end-|@wide);}
     \onslide<9-|handout:0>{
         \node[above=\btdmfootheight+2mm,T] at(current page.south) {Das ist ein weirdes Englisch-Deutsch-Gemisch};
@@ -403,7 +403,7 @@ public static char[] flipInCopy(char[] flipBuchstaben) {
 |ihl|}|ihl|
 \end{plainjava}
 \end{uncoverenv}
-\begin{tikzpicture}[overlay, remember picture]
+\begin{tikzpicture}[@O]
     \onslide<7->{
         \node[above=\btdmfootheight,T,xshift=-3.75cm] at(current page.south) {\strut Werte primitiver Datentypen werden bei Zuweisung kopiert.};
 
@@ -457,7 +457,7 @@ public static char[] flipInCopy(char[] flipBuchstaben) {
 \setbeamercolor{background canvas}{bg=black}
 \begin{frame}[c,plain]{}
 \vspace*{1.5em}\centering
-\begin{tikzpicture}[overlay,remember picture]
+\begin{tikzpicture}[@O]
     \pgfinterruptboundingbox% to avoid clanky changes
     \only<2|handout:0>{\pingu[eyes wink]}
     \only<3|handout:0>{\pingu[right wing grab, lightsaber right, lightsaber right disabled]}
@@ -660,31 +660,87 @@ public class Referenzvariablen {
     \item {\intask Welche Ausgaben erzeugen die Zeilen~18 und~19?}\hfill\Z18; liefert~2, und~\Z19;~1.
     \item \task{Welche Ausgaben erzeugen die Zeilen~20--26?}\par
     \pause Sie erzeugen \say{\T{0\n2\n0}} \info{wobei \T{\textbackslash n} ein neue Zeile darstellt}.\smallskip\\*
-    Die Zielen befassen sich mit der Ausgabe von \T{array}. Dieses wird in~\Z16; Java initialisiert hier direkt mit \bjava{\{0, 0, 0\}}. Das Unterprogramm erfüllt nun in~\Z2; die Referenz zu \T{array} als Kopie \info{das ist \textit{Call-by-Value}, verhält sich aber wie \textit{Call-by-Reference}}, das \bjava{if} in~\Z3; scheitert, da \T{array} auf \bjava{\{0, 0, 0\}}  verweist und \bjava{idx = 1}, \bjava{ele = 2} (aus vorheriger Antwort).
-   ~\Z7; ändert damit das gemeinsame Array zu \bjava{\{0, 2, 0\}} \info{Seiteneffekt}, die Neuzuweisung in~\Z9; überschreibt lediglich die in den Parameter kopierte Referenz.
+    \pause Die Zielen befassen sich mit der Ausgabe von \T{array}. Dieses wird in~\Z16; Java initialisiert hier direkt mit \bjava{\{0, 0, 0\}}. \pause Das Unterprogramm erfüllt nun in~\Z2; die Referenz zu \T{array} als Kopie \info{das ist \textit{Call-by-Value}, verhält sich aber wie \textit{Call-by-Reference}}, \pause das \bjava{if} in~\Z3; scheitert, da \T{array} auf \bjava{\{0, 0, 0\}}  verweist und \bjava{idx = 1}, \bjava{ele = 2} (aus vorheriger Antwort). \pause
+   \Z7; ändert damit das gemeinsame Array zu \bjava{\{0, 2, 0\}} \info{Seiteneffekt}, die Neuzuweisung in~\Z9; überschreibt lediglich die in den Parameter kopierte Referenz. \pause
     Damit löst das \bjava{if} in~\Z20; aus und es erfolgt besagte Ausgabe.
 \end{enumerate}
 \end{frame}
 }
 }
-
+\iffull
+{\AddonFrame
 \begin{frame}
     Der Spannende Teil [TODO: Animation]
     TODO: Animationsdurchläufe Heap Stack für Referenzvariablen
 \end{frame}
+}
+\fi
 
 \subsection{Aufgabe 2}
+{\taskenum
 \begin{frame}{Aufgabe 2: Mehrdimensionale Arrays}
+    \task<2->{Im Folgenden sollen Methoden zum Verarbeiten von mehrdimensionalen Arrays (Matrizen) implementiert werden.
+    Legen Sie dazu eine Java Datei \T{Matrix.java} an.
+    Im Folgenden sei~\(n\) die Anzahl der Zeilen,~\(m\) die Anzahl der Spalten,~\(i\) und~\(j\) die jeweiligen Indizes, sowie \(a_{ij}\) das Element in der \(i\)-ten Zeile und \(j\)-ten Spalte. Die \link{https://de.wikipedia.org/wiki/Zeilensummennorm}{Zeilensummennorm} ist in der Mathematik die von der Summennorm abgeleitete natürliche Matrixnorm. Die Zeilensummennorm \(\dist{A}_\infty\) einer Matrix~\(A\) entspricht der maximalen Betragssumme aller ihrer Zeilen:\nomathskip
+\begin{columns}[onlytextwidth,c]
+\column{.3\linewidth}
+\begin{equation*}
+    \dist{A}_\infty =\max_{i = 1, \ldots, n} \sum_{j = 1}^n \abs{a_{ij}}
+\end{equation*}
+\column{.7\linewidth}
+\textbf{Beispiel:} Die Zeilensummennorm der Matrix~\(A = \left(\begin{smallmatrix}
+    1 & -2 & -3 \\
+    2 & 4 & -1
+\end{smallmatrix}\right)\) is gegeben durch \(\dist{A}_\infty = \max\{\abs{1} + \abs{-2} + \abs{-3},\;\allowbreak \abs{2} + \abs{4} + \abs{-1}\} = \max\{6, 7\} = 7\).
+\end{columns}
+\begin{enumerate}
+    \item \label{tsk:a}Legen Sie ein 2-D Array mit~\(3 \times 3\) Elementen vom Typ double an und füllen Sie es mit gültigen Werten.
+    \item Implementieren Sie eine Methode \T{public static double berechneBetragssumme(double[] arr)}, die die Betragsnorm von \T{arr}, d.h. die Summe der Beträge der Elemente, berechnet und zurückgibt. Für ungültige Eingaben (\T{arr} ist \T{null} oder hat die Länge~\(0\)) soll \T{-1.0} zurückgegeben werden.
+    \item \label{tsk:c}Implementieren Sie eine Methode \T{public static double berechneZeilensummennorm(\allowbreak double[][] \allowbreak mat)}, die ein 2-D Array als Argument annimmt, die Zeilensummennorm berechnet und diese zurückgibt. Für ungültige Eingaben (mat ist null oder hat die Länge~\(0\)) soll \T{-1.0} zurückgegeben werden.
+    \item Rufen Sie die Methode aus Teilaufgabe~\ref{tsk:c} mit ihrer Matrix aus und geben Sie das Ergebnis auf die Konsole aus.
+\end{enumerate}
+}
+\end{frame}
+}
 
+\begin{frame}[fragile]{Ein Array Anlegen}
+\SetupLstHl
+\begin{itemize}[<+(1)->]
+    \item Hier mal etwas beliebiges
+\begin{plainjava}
+!*\onslide<3->*!double[][] matrix = { { 1.5, -2, 1 }, { -5, 1, 6.1 }, { -2, -4, 1 } };
+\end{plainjava}
+    \item<4-> Hier haben wir übrigens~--- Java sei dank~--- stark abgekürzt:
+\begin{plainjava}
+!*\onslide<5->*!double[][] matrix = new double[][] { new double[] { |ihl|:ldots:|ihl| }, |ihl|:ldots:|ihl| };
+\end{plainjava}
+    \item<6-> Quiz! Sind diese Statements gültig? Wenn ja, welchen Wert hat \T{m1}, \T{m2},~\ldots? \info{Warum?}
+\begin{plainjava}
+!*\onslide<7->*!double[][] m1; !*\Snode{@1}*!
+!*\onslide<9->*!double[][] m2 = new double[][]; !*\Snode{@2}*!
+!*\onslide<11->*!double[][] m3 = new double[3][]; !*\Snode{@3}*!
+!*\onslide<13->*!double[][] m4 = new double[1][2]; !*\Snode{@4}*!
+!*\onslide<15->*!double[][] m5 = { null, {}, { null } }; !*\Snode{@5}*!
+\end{plainjava}
+\end{itemize}
+\begin{tikzpicture}[@O]
+
+\end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Jeay}
+    \textattachfile{\curpath Matrix.java}{Matrix.java}
 \end{frame}
 
 \subsection{Aufgabe 3}
 \begin{frame}{Aufgabe 3: Numerische Integration}
-    TODO: berechne TtrapezFlaeche prüfe auf < 0 und so optional, je nachdem wi eman es betrachtet (eigenständig, nicht....)
+    TODO: berechne TtrapezFlaeche prüfe auf < 0 und so optional, je nachdem wie man es betrachtet (eigenständig, nicht....)
 
 \end{frame}
 
+\begin{frame}{Sprechen über Signaturen}
 
+\end{frame}
 \iffull
 \SetNextSectionText{Methoden und OOP\\Abgabe: \DTMDate{2022-05-30}}
 \section{Aussicht: Übungsblatt 5}

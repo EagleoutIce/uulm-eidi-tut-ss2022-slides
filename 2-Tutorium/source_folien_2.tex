@@ -4,7 +4,7 @@
 \definecolor{@joda}{RGB}{204, 186, 157}
 \definecolor{@joda@}{RGB}{78, 68, 66}
 \setbox\pinguA=\hbox{\tikz\pingu[body=pingu@green!52!pingu@black,body front=pingu@green!52!pingu@black!5!pingu@white,cloak=@joda,cloak cap=@joda,lightsaber right=pingu@green,lightsaber right length=1.4cm,shirt=@joda@,shirt no buttons,small,eyes wink,cane left=pingu@bronze!80!pingu@black,cane left length=11mm,cane left raise=1mm,right item angle=-30];}
-\titlesuffix{\tikzpicture[overlay,remember picture]
+\titlesuffix{\tikzpicture[@O]
     \node[above left,yshift=\btdmfootheight-1mm] at(current page.south east) {\copy\pinguA};
 \endtikzpicture}
 \def\packtitlenode#1#2{\node[font=\usebeamerfont{title},inner xsep=0pt,opacity=#1,outer ysep=2pt] (#2) {getauscht};}
@@ -62,7 +62,7 @@
 !*\onslide<13->*!x = 42; !*\tikzmarknode{@3}{\phantom{Ig}}*!
 \end{plainjava}
     \end{itemize}
-\begin{tikzpicture}[overlay,remember picture]
+\begin{tikzpicture}[@O]
 \onslide<14->{\node[right,T] at(@1.east) {\textbf{Deklaration} --- Reservieren von Namen mit Typ long};}
 \onslide<15->{\node[right,T] at(@2.east) {\textbf{Initialisierung} --- Erste Wertzuweisung, macht die Variable verwendbar};}
 \onslide<16->{\node[right,T] at(@3.east) {\textbf{Wertzuweisung} --- Überschreiben/Ändern des vorherigen Wertes};}
@@ -91,7 +91,7 @@
 !*\onslide<1->*!
 \end{plainjava}
     \end{itemize}
-\begin{tikzpicture}[overlay,remember picture,codeouthl]
+\begin{tikzpicture}[@O,codeouthl]
     \def\hlhs{0mm}
     \onslide<6->{
         \hlcode[-.35pt]{@}{array}
@@ -158,7 +158,7 @@
 !*\onslide<2->*!    |ihl|}|ihl|
 !*\onslide<2->*!|ihl|}|ihl|
 \end{plainjava}
-\begin{tikzpicture}[overlay,remember picture]
+\begin{tikzpicture}[@O]
     \onslide<5->{\node[below left,xshift=-5mm,yshift=-1.65cm,outer sep=0pt, inner sep=0pt] (@) at(current page.north east) {\bbash{Hermeline mögen Mäuse}};
     \node[left=0pt,outer sep=0pt, inner sep=0pt] (@2) at(@.west) {\bbash{java Example}\T{~}\null};}
     \def\hlhs{.1mm}
@@ -265,7 +265,7 @@ $4->$    }
 $3->$}
 \end{plainjava}
     \end{itemize}
-\begin{tikzpicture}[overlay,remember picture]
+\begin{tikzpicture}[@O]
     \onslide<8->{
         \draw[thick,paletteA,opacity=.3,decoration={snake,amplitude=1.25pt},decorate] ([yshift=-1pt]println.south east) to coordinate[pos=.5] (@) ([yshift=-1pt]println.south west);
     }
@@ -312,7 +312,7 @@ $9->$}$1->$
     \item<7-> Oder mit einer \bjava{do}-\bjava{while}-Schleife (rechts)
     \item<15-> \say{\bbash{java ErsteSchleife 12}} liefert die Ausgabe \say{\bbash{1 4 7 10 }}
 \end{itemize}
-\begin{tikzpicture}[overlay,remember picture]
+\begin{tikzpicture}[@O]
     \onslide<13->{\node[right,T] at(semi.east) {Das \T{\textbf{;}}~nicht vergessen!};}
     \onslide<14->{\node[right,T] (@) at(check.east) {Soll die Schleife überhaupt}; \node[below right,yshift=1.35mm,T] at(@.south west) {einmal laufen?};}
     \only<16->{\node[above left,yshift=\btdmfootheight] at (current page.south east) {\textattachfile{\curpath ErsteSchleifeWhile.java}{ErsteSchleifeWhile.java}, \textattachfile{\curpath ErsteSchleifeDoWhile.java}{ErsteSchleifeDoWhile.java}\;};}
@@ -332,7 +332,7 @@ $3->$}
 \end{plainjava}
     \item<6-> Es gibt eigentlich immer etliche Möglichkeiten\ldots
 \end{itemize}
-\begin{tikzpicture}[overlay,remember picture]
+\begin{tikzpicture}[@O]
     \only<7->{\node[above left,yshift=\btdmfootheight] at (current page.south east) {\textattachfile{\curpath ErsteSchleifeModulo.java}{ErsteSchleifeModulo.java}\;};}
 \end{tikzpicture}
 \end{frame}
@@ -396,7 +396,7 @@ Länge der Liste sind. Stellen Sie zudem sicher, dass die Länge der Liste minde
     \onslide<7->{make \(l_i\) have value \(l_j\)\;}
     \onslide<8->{make \(l_j\) have value \(t\)\;}
 \end{algorithm}}
-\begin{tikzpicture}[overlay,remember picture]
+\begin{tikzpicture}[@O]
     \onslide<10-|handout:1>{\node[left=-2mm,xshift=5mm,scale=.8,yshift=\btdmfootheight] at(current page.-16) {\copy\pinguexplainbox};}% copy for animations
 \end{tikzpicture}
 \end{enumerate}
@@ -450,7 +450,7 @@ Länge der Liste sind. Stellen Sie zudem sicher, dass die Länge der Liste minde
     make \(l_j\) have value \(t\);     \only<-14|handout:0>{\;}\only<15->{\quad\J1\tikzmarknode{3-end}{\HStrut}\;}
 \end{algorithm}}
 \end{enumerate}
-\begin{tikzpicture}[overlay,remember picture]
+\begin{tikzpicture}[@O]
     % only because the markers are placed with only
     \only<16->{{\only<18->{\color{codeouthl}}\draw[decoration=brace,decorate] ([xshift=4mm]2-start.north east) to[edge node={node[right=2pt] {\K2 \only<18->{\color{codeouthl} (Nur schlechtester Pfad)}}}] ([xshift=4mm]2-end.south east-|2-start.north east);}}
 
@@ -483,7 +483,7 @@ Make new \(i\) have value \(1\);\SW6{\quad\J1}\medskip
     Increment \(i\) by \(1\);\SW{13}{\quad\J1}
 }
 \end{algorithm}}}
-\begin{tikzpicture}[overlay,remember picture]
+\begin{tikzpicture}[@O]
     \onslide<16->{\node[above left,T,align=left,text width=6cm,yshift=\btdmfootheight+1.95cm] at(current page.south east) {Angenommen \(N\) sei \(5\), dann gilt für die Anzahl innerer Schleifendurchläufe:\smallskip\\
     \columns[onlytextwidth,c]
     \only<17->{\column{.3\linewidth}\begin{tabular}{ll}
@@ -604,7 +604,7 @@ Make new \(i\) have value \(1\);\SW6{\quad\J1}\medskip
 \end{scope}
 \end{tikzpicture}
 % TODO: pingu der sagt, dass das alles ist und alle immpliziten Konvertieungen. Noch ein Wort zu String und void
-\begin{tikzpicture}[overlay,remember picture]
+\begin{tikzpicture}[@O]
     \onslide<10->{\node[left=-3mm,xshift=7mm,scale=.8,yshift=\btdmfootheight] at(current page.-26) {\copy\pinguexplainbox};}% copy for animations
     \onslide<11->{
         \node[left=-10.5mm,scale=.7] (@) at(current page.16) {\rotatebox{90}{\copy\pinguA}};
@@ -626,7 +626,7 @@ Make new \(i\) have value \(1\);\SW6{\quad\J1}\medskip
     \item \bjava{int}\pause\ fasst \r2147483648--2147483647[31]\pause\infoblock{\apprJ{2147483647}{68.05}.}
     \item \bjava{long}\pause\ fasst \r9223372036854775808--9223372036854775807[63]\pause\infoblock{\apprJ{9223372036854775807}{292271023045.3} \(\approx 658\) Millionen mal \say{älter}, als das Universum.}
 \end{itemize}
-\begin{tikzpicture}[overlay,remember picture]
+\begin{tikzpicture}[@O]
     \onslide<17->{\node[above left,yshift=\btdmfootheight,codeouthl] at(current page.south east) {\footnotesize\link{https://docs.oracle.com/javase/specs/jls/se17/html/jls-4.html\#jls-4.2.1}{JLS17~$4.2.1$}, \link{https://docs.oracle.com/javase/specs/jvms/se17/html/jvms-2.html\#jvms-2.3.1}{JVMS17 2.3.1}};}
 \end{tikzpicture}
 \end{frame}
@@ -663,7 +663,7 @@ Make new \(i\) have value \(1\);\SW6{\quad\J1}\medskip
 !*\onslide<6->*!b = (!*\bnode{or3}{\bnode{not3}{!(\bnode{and2}{\true\ \&\& \true})} || (\bnode{or4}{\false\ || \false})}*!); !*\tikzmarknode{R3}\HStrut*!
 !*\onslide<7->*!b = !*\bnode{not4}{!\bnode{b2}{b}}*!; !*\tikzmarknode{R4}\HStrut*!
 \end{plainjava}
-\begin{tikzpicture}[overlay,remember picture]
+\begin{tikzpicture}[@O]
     \onslide<8->{\node[above left,yshift=\btdmfootheight,text width=15.5cm,scale=.6] at(current page.south east) {\begin{alignat*}{5}
         \ms{a\text{++},~~a\text{-\,-}}&\to~\ms{\textcolor{gray}{!a},~~ -a,~~ \text{++}a,~~\text{-\,-}a}&&\to~\ms{a~*~b,~~a~/~b,~~a~\%~b} && \to~\ms{a+b,~~a-b} \\
         &\to~\ms{a==b,~~a<b,~~\ldots} && \to~\ms{a~\mbox{\textasciicircum}~b}&&\to~\ms{\textcolor{gray}{a~\&\&~b}}\\
@@ -730,7 +730,7 @@ $9->$       System.out.println(ergebnis); $9->\text{\Snode{R5}}$
 $4->$    $4->\text{\only<-4|handout:0>{\sbasic{\}}}\only<5->{\sbasic{\color{codeouthl}\}}}}$
 $3->\text{\only<-4|handout:0>{\sbasic{\}}}\only<5->{\sbasic{\color{codeouthl}\}}}}$
 \end{plainjava}
-\begin{tikzpicture}[overlay,remember picture]
+\begin{tikzpicture}[@O]
 \onslide<11->{\node[right,T] at(R1.east) {Alle drei Variablen werden \textbf{deklariert}};}
 \onslide<12->{\node[right,T] at(R2.east) {Eine \textbf{Initialisierung} mit Wert \T{40}};}
 \onslide<13->{\node[right,T] at(R3.east) {Eine \textbf{Initialisierung} mit Wert \T{2}};}

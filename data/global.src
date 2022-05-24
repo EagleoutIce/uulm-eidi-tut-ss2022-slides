@@ -271,7 +271,7 @@
 \def\bnode#1#2{\rnode{#1}{\sbasic{#2}}}%
 \def\rnode#1#2{\Snode{#1}#2\Snode{#1@}}
 
-\tikzset{T/.style={sol@colors@lst@comments,font=\footnotesize\itshape\sffamily}}
+\tikzset{T/.style={sol@colors@lst@comments,font=\footnotesize\itshape\sffamily},@O/.style={overlay, remember picture}}
 
 \def\taskenum{\setbeamertemplate{enumerate item}{\task{\alph{enumi})}}}
 \def\intask{\footnotesize\color{gray}\itshape

@@ -145,7 +145,7 @@
         \item<6->[Partiell Korrekt:] Wir merken uns mit \a\ und \b, ob der jeweilige Buchstabe gefunden wurde (\(Z2\)--\(Z4\)). \onslide<7->{Wir geben \say{Ja} nur dann aus, wenn wir ein \T{a}, aber kein \T{b} finden (\(Z5\)). Sonst geben wir \say{Nein} aus.}
     \end{description}
 \end{enumerate}
-\tikzpicture[overlay,remember picture]
+\tikzpicture[@O]
     \onslide<2->{\node[below left,xshift=2.5mm,yshift=-1.35cm,scale=.8,align=center,gray] at(current page.north east) {\copy\presalgobox\\\itshape\small Eine verkürzte Version};}
 \endtikzpicture
 \end{frame}
@@ -168,7 +168,7 @@
         \item<7-> Anschließend folgt der Beweis durch Abgleich der Bedingungen.
     \end{itemize}
    \end{itemize}
-   \begin{tikzpicture}[overlay,remember picture]
+   \begin{tikzpicture}[@O]
     \onslide<8->{\node[above left,xshift=5mm,scale=.8,yshift=\btdmfootheight] at(current page.south east) {\copy\pinguexplainbox};}% copy for animations
     \end{tikzpicture}
 \end{frame}
@@ -190,7 +190,7 @@
         \onslide<10->{\text{worst-case}} &\onslide<10->{= 2 + n \cdot (2 + 1) + 2 + 1 = 3n + 5 \in \O(n)}
     \end{align*}
 \end{itemize}
-\tikzpicture[overlay,remember picture]
+\tikzpicture[@O]
     \onslide<2->{\node[below left,xshift=2.5mm,yshift=-1.35cm,scale=.8,align=center,gray] at(current page.north east) {\copy\presalgobox\\\itshape\small Eine verkürzte Version};}
 \endtikzpicture
 \end{frame}
@@ -205,7 +205,7 @@
     \end{enumerate}}
     \vspace*{.65cm}
     \onslide<5->{Ob \(Z5\) wirklich immer zwei Vergleiche hat, hängt davon ab, wie das logische \say{und} funktioniert. \onslide<6->{Wertet es für \say{\(\text{falsch} \land \langle?\rangle\)} den zweiten Operand nicht mehr aus, haben wir Falle eines \(S\) ohne \(a\)'s, einen Aufwand von \(2n + 4\).}}
-\begin{tikzpicture}[overlay,remember picture]
+\begin{tikzpicture}[@O]
 \onslide<7->{\node[above left,xshift=5mm,scale=.8,yshift=\btdmfootheight] at(current page.south east) {\copy\pinguexplainbox};}% copy for animations
 \end{tikzpicture}
 \end{frame}
@@ -233,7 +233,7 @@
     \onslide<+(1)->{\lIf{\(\a\)~\T{==}~\(true\)}{Output: \say{Ja}}}
     \onslide<+(1)->{\lElse{Output: \say{Nein}}}
 \end{algorithm}
-\begin{tikzpicture}[overlay,remember picture]
+\begin{tikzpicture}[@O]
     \onslide<+(1)->{\node[above left,yshift=\btdmfootheight+5mm,xshift=-3.5mm,align=left,gray,font=\footnotesize\sffamily\slshape] at (current page.south east) {Die Laufzeit beläuft sich auf:\\% no cause this seems nicer align
         \upshape\(\phantom{{}={}}3 + n \cdot \bigl(2 + \max(2 + 1 + 1,\quad \llap{\boxme{shadeA}{$2$}} {+} \boxme{lightgray!50!white!70!shadeB}{$1$} {+} \boxme{lightgray!90!btdm@background}{$2$}) \bigr) + 1\) \\
         \({}={} 4 + n \cdot 7 \in \O(n)\)};}
@@ -301,7 +301,7 @@
     \onslide<17->{\draw[-Kite] (9) |- ([yshift=-4mm]10.south) -| ([xshift=5mm]5.-11) -- (5.-11);}
 \end{tikzpicture}}
 \pause
-\begin{tikzpicture}[overlay,remember picture]
+\begin{tikzpicture}[@O]
     \onslide<18->{\node[above left,yshift=\btdmfootheight+1mm,xshift=-3.5mm,align=left,gray,font=\footnotesize\sffamily\slshape] at (current page.south east) {\(2 + 1 + n \cdot (2 + 2) + 1  = 4 + n \cdot 4 \in \O(n)\)};}
 \end{tikzpicture}
 % TODO: Note about increment und pingu mit wir mögen textuell mehr
@@ -441,7 +441,7 @@
         \item Der Algorithmus muss nach einer endlichen Zeit zum Ende kommen (\say{terminieren}).% \vfill
         % \item Mit der Zeit werden wir mehr Eigenschaften zur Charakterisierung betrachten.% TODO: => Tutorium 1 (Determinismus, Korrektheit,\ldots)
     \end{itemize}
-\begin{tikzpicture}[overlay,remember picture]
+\begin{tikzpicture}[@O]
 \onslide<6->{\node[above left,xshift=5mm,scale=.8,yshift=\btdmfootheight] at(current page.south east) {\copy\pinguexplainbox};}% copy for animations
 \end{tikzpicture}
 \end{frame}

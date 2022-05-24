@@ -43,7 +43,7 @@ class BoolescheAusdruecke {
 \onslide<7->{Geben Sie die Ergebnisse über \bjava{System.out.println(:lan:...:ran:)} aus.}
     \onslide<1->
 \end{aufgabe}
-\begin{tikzpicture}[overlay,remember picture]
+\begin{tikzpicture}[@O]
     \onslide<8->{\node[above left,yshift=-2.525mm,xshift=2mm,scale=.95] at(current page.south east) {\copy\pinguA};}
 \end{tikzpicture}
 \end{frame}
@@ -64,7 +64,7 @@ $18->$        // ...
 $2->$    }
 $2->$}$1->$
 \end{plainjava}
-\begin{tikzpicture}[overlay,remember picture,every path/.append style={line cap=round}]
+\begin{tikzpicture}[@O,every path/.append style={line cap=round}]
     \onslide<4->{\node[above left,xshift=-1.75cm,yshift=1.65cm,yshift=\btdmfootheight] (t) at(current page.south east) {\strut Temperatur};}
     \onslide<5->{\node[below left=1mm,yshift=-1mm] (g) at (t.south) {\only<7->{\color{gray}}Ganzzahl}; \draw[thick,rounded corners=2pt] (t.south) -- ++(0,-.5mm) -| (g.north);}
     \onslide<6->{\node[below right=1mm,yshift=-1mm] (f) at (t.south) {Fließzahl}; \draw[thick,rounded corners=2pt] (t.south) -- ++(0,-.5mm) -| (f.north);}
@@ -113,7 +113,7 @@ $2->$        $2->{\text{\solGet{basicstyle}{\only<8-13|handout:0>{\color{codeout
 $2->$    }
 $2->$}$1->$
 \end{plainjava}
-\begin{tikzpicture}[overlay,remember picture,every path/.append style={line cap=round}]
+\begin{tikzpicture}[@O,every path/.append style={line cap=round}]
     \onslide<4-11|handout:0>{\node[above left=.5cm+\btdmfootheight] (@) at(current page.south east) {\box0};}
     \onslide<9-13|handout:0>{\node[above left=.5cm+\btdmfootheight,xshift=-5cm] (@c) at(current page.south east) {\box1};}
     \onslide<6-11|handout:0>{
@@ -156,7 +156,7 @@ $2->$}$1->$
         !*\tikzmarknode{alter2}{\solGet{basicstyle}{\strut zeichen = \solGet{literals}{'k'}}}*!;
 }
 \end{plainjava}
-\begin{tikzpicture}[overlay,remember picture,T/.style={sol@colors@lst@comments,font=\itshape\sffamily\footnotesize}]
+\begin{tikzpicture}[@O,T/.style={sol@colors@lst@comments,font=\itshape\sffamily\footnotesize}]
     \onslide<10->{\hlcode[-1.9pt]{temperatur}{@a}} \onslide<11->{\node[right=3mm,T] at(@a-|rightmark.east) {\textbf{Deklarierung} einer Variable \say{apfelsine} vom Typ \T{int}};}
     \onslide<10->{\hlcode[-1.9pt]{alter}{@c}} \onslide<12->{\node[right=3mm,T] at(@c-|rightmark.east) {\textbf{Deklarierung} mit Typ \T{char} und \textbf{Initialisierung} mit dem Wert \T{'x'}};}
     \onslide<10->{\hlcode[-1.9pt]{temperatur2}{@b}} \onslide<13->{\node[right=3mm,T] at(@b-|rightmark.east) {\textbf{Initialisierung} mit dem Wert \T{42}};}
@@ -389,7 +389,7 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
     \item<8-> Ergebnis ist $100 \cdot \DeltaMax$.
 \end{enumerate}
 % no overlay for links
-\null\hfill\smash{\raisebox{-.5cm}{\scalebox{0.8}{\onslide<9->{\begin{tikzpicture}% [overlay,remember picture]
+\null\hfill\smash{\raisebox{-.5cm}{\scalebox{0.8}{\onslide<9->{\begin{tikzpicture}% [@O]
     \pinguexplain{text width=6.75cm}{cap=!hide,cup=!hide,silver medal,construction helmet,right item angle=30}{\(\DeltaMax = -\infty\) ist natürlich unpraktisch. Hier könnte man für \(\DeltaMax = 0\) argumentieren (da \say{Anstieg}). Wir können aber auch die erste Differenz als Maximum setzen! Das kommt~\hyperlink{alternate-approach-u1t3}{später}.}% copy for animations
 \end{tikzpicture}}\hskip-1.33cm}}}
 \end{frame}}
@@ -498,7 +498,7 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
     \item<8-> Das Endergebnis ist eine Multiplikation (und je nach Definition 1 Zuweisung).\smallskip
     \item<9-> Im worst-case haben wir so: \(2 + (n - 1) \cdot ( 3+ 2 + 1) + 2 = 6n - 2\) (also \(\O(n)\)).
 \end{itemize}
-\begin{tikzpicture}[remember picture,overlay]
+\begin{tikzpicture}[@O]
     \onslide<10->{\node[left=-4mm,xshift=5mm,scale=.8,yshift=\btdmfootheight] at(current page.4) {\copy\pinguexplainbox};}% copy for animations
 \end{tikzpicture}
 \end{frame}}
@@ -548,7 +548,7 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
             1\,E + 1\,E + (n - 1) \cdot (3\,E + 2\,E + 0\,E) + 2\,E = (5n - 1)\,E
         \end{equation*}
     \end{itemize}
-    \begin{tikzpicture}[overlay,remember picture]
+    \begin{tikzpicture}[@O]
         \onslide<0|handout:1>{\node[left=-4mm,xshift=4mm,scale=.8,yshift=\btdmfootheight] at(current page.-21) {\copy\pinguexplainbox};}% copy for animations
     \end{tikzpicture}
 \end{frame}
@@ -575,7 +575,7 @@ jeder Sekunde \(\num{40000}\) obiger Operationen berechnen.}}
 !*\onslide<13->*!output "Der Maximale Preisanstieg ist $diff$"
 \end{plainvoid}
     \end{itemize}
-\begin{tikzpicture}[overlay,remember picture,K/.style={sol@colors@lst@comments,font=\itshape\sffamily\footnotesize,align=center}]
+\begin{tikzpicture}[@O,K/.style={sol@colors@lst@comments,font=\itshape\sffamily\footnotesize,align=center}]
     \onslide<14->{\draw[Kite-,sol@colors@lst@comments] ([yshift=-.5mm]preisanstieg.250) to[out=350,in=170] ++(2.5,-.1) node[below left,xshift=2cm,K] {Optional: Robust gegenüber zu wenig Tagen.};}
     \onslide<15->{\draw[decoration=brace,decorate,sol@colors@lst@comments] ([yshift=.5mm,xshift=4mm]list-start.north east-|second-longest.east) to[edge node={node[right=1.5mm, K, align=left] {Berechne den Preisanstieg\\an Tag \(d\) für alle Tage.}}] ([yshift=-.5mm,xshift=4mm]list-end.south east-|second-longest.east);}
 
