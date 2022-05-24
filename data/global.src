@@ -49,7 +49,7 @@
 ]{lithie-util}
 
 \usepackage{cancel}
-\usepackage{lecture-runtimes,lecture-personal-tikz,lecture-personal-extra-units,tikzsymbols}
+\usepackage{lecture-runtimes,lecture-personal-tikz,lecture-personal-resize,lecture-personal-extra-units,tikzsymbols}
 \usepackage{tikz-qr}
 % adapt
 \def\qrcolor{paletteA!60!btdm@background}
@@ -299,3 +299,21 @@
 \lstfs{10}\lstset{lineskip=5.5pt}
 \colorlet{lgray}{lightgray!48!white}
 \tikzset{ldesc/.style={gray,font=\sffamily\sbseries},lrel/.style={fill=white,rounded corners,minimum width=28mm,minimum height=7.5mm,align=center},lrel2/.style={fill=white,rounded corners,minimum width=28mm,minimum height=7.5mm*2,align=center},lsf/.style={fill=white,rounded corners,minimum width=28mm,minimum height=7.5mm*2,align=center, rectangle split, rectangle split parts=2}}
+
+
+\usepackage{lecture-heap-n-stack}
+\def\lhnselementformat#1{\texttt{#1}}
+\def\lhnsielementformat#1{\textbf{\vphantom{A}#1}}
+\long\def\lhnselementbox#1#2{\parbox{#1}{\centering#2}}%
+\makeatletter
+\lhns@minborderheight=5.4cm
+% local fleqn
+\def\Fleqn{\@fleqntrue
+\@mathmargin=-1sp\relax
+\let\mathindent=\@mathmargin
+\@mathmargin10pt\relax % custom left margin
+}
+\makeatother
+
+\tikzset{lhns@impstyle/.style={}}%
+\newcommand<>{\mark}[1]{{\only#2{\color{black}}#1}}

@@ -672,6 +672,75 @@ public class Referenzvariablen {
 \begin{frame}
     Der Spannende Teil [TODO: Animation]
     TODO: Animationsdurchläufe Heap Stack für Referenzvariablen
+    Mehrdimensionale Arrays!
+
+    TODO: hier brauch ich signaturen für das beispiel danach :D
+\end{frame}
+
+% \paragraph{Eine alte Heap-Stack-Freude}
+\makeatletter
+\lhns@elemwidth3cm
+\lhns@minborderheight8cm
+\makeatother
+\newcommand<>\lm[1][]{\only#2{#1\llap{\faAngleRight~}}}
+\newcommand<>\rm[1][]{\only#2{#1\rlap{~\faAngleLeft}}}
+\begin{frame}[c,fragile]{Der Swap-Stack-Heap-Durchlauf}
+\vspace*{-.15\topsep}\begin{columns}[onlytextwidth,c]
+\lstfs{8}\column{.6\linewidth}
+\begin{plainjava}[lineskip=1pt]
+!*\onslide<2->*!public class SwapFunction {
+!*\onslide<2->*!    !*\lm<10|handout:0>*!public static void swap(int a, int b) {
+!*\onslide<2->*!        !*\lm<11|handout:1>*!int tmp = b; b = a; a = tmp;
+!*\onslide<2->*!    }!*\medskip*!
+!*\onslide<2->*!    !*\lm<15-16|handout:3>*!public static void swap(int[] a, int[] b) {
+!*\onslide<2->*!        !*\lm<17|handout:0>*!if(a.length != b.length) return;
+!*\onslide<2->*!        !*\lm<18,21,23,25|handout:0>*!for(int i = 0; i < a.length; i++) {
+!*\onslide<2->*!            !*\lm<19-20,22,24|handout:0>*!int tmp = b[i]; b[i] = a[i]; a[i] = tmp;
+!*\onslide<2->*!        }!*\lm<26|handout:4>[~~]*!
+!*\onslide<2->*!    }!*\medskip*!
+!*\onslide<2->*!    !*\lm<3|handout:0>*!public static void main(String[] args) {
+!*\onslide<2->*!        !*\lm<4|handout:0>*!int a = 21; int b = 42;
+!*\onslide<2->*!        !*\lm<5-6|handout:0>*!int[] c = {1, 2, 3};
+!*\onslide<2->*!        !*\lm<7|handout:0>*!int[] d = {4, 5, 6};
+!*\onslide<2->*!        !*\lm<8-9|handout:0>*!swap(a, b);!*\rm<12|handout:2>[~~]*!!*\onslide<9|handout:1>*! // :yields: swap(int, int)
+!*\onslide<2->*!        !*\lm<13-14|handout:0>*!swap(c, d);!*\rm<27|handout:0>[~~]*!!*\onslide<14|handout:3>*! // :yields: swap(int[], int[])
+!*\onslide<2->*!    }
+!*\onslide<2->*!}
+\end{plainjava}
+\column{.4\linewidth}
+\vspace*{-\baselineskip}\centering
+\downsize\linewidth{\begin{tikzpicture}[lhns@basestyle/.append style={execute at begin node=\strut,font=\ttfamily},lhns@blockstyle/.append style={draw=gray,thick}]
+\begin{heap-n-stack}{}
+
+\heap{\only<-5|handout:0>{-heapland-}\only<6->{\,\{\only<-19|handout:-3>{1}\only<20-|handout:4->{4}, \only<-21|handout:-3>{2}\only<22-|handout:4->{5}, \only<-23|handout:-3>{3}\only<24-|handout:4->{6}\}}}
+\only<7->{\heap{\,\{\only<-19|handout:-3>{4}\only<20-|handout:4->{1}, \only<-21|handout:-3>{5}\only<22-|handout:4->{2}, \only<-23|handout:-3>{6}\only<24-|handout:4->{3}\}}}
+\renderheap
+
+\only<3->{\stack{\textbf{main}}}
+\only<4->{\stack{a = 21}}
+\only<4->{\stack{b = 42}}
+\only<5->{\stack{c}}
+\only<7->{\stack{d}}
+\only<10-11|handout:1>{\stack{\small\textbf{swap(int, int)}}
+\stack{a = \only<10|handout:0>{21}\only<11>{42}}
+\stack{b = \only<10|handout:0>{42}\only<11>{21}}
+\only<11>{\stack{tmp = 42}}}
+\only<15-26|handout:3>{\stack{\scriptsize\textbf{swap(int[], int[])}}
+\stack{a}
+\stack{b}
+\only<16->{\draw[lhns] (stack-6.east) -- ++(.5,0) to[out=0,in=180] (heap-0.west);
+\draw[lhns] (stack-7.east) -- ++(.5,0) to[out=0,in=192] (heap-1.west);}
+}
+\only<18-25|handout:0>{\stack{i = \only<18-20|handout:0>{0}\only<21-22|handout:0>{1}\only<23-24|handout:0>{2}\only<25|handout:0>{3}}}
+\only<19-20,22,24|handout:0>{\stack{tmp = \only<19-20>{4}\only<22>{5}\only<24>{6}}}
+\renderstack
+
+\only<6->{\draw[lhns] (stack-3.east) to[out=0,in=180] (heap-0.west);}
+\only<7->{\draw[lhns] (stack-4.east) to[out=0,in=180] (heap-1.west);}
+
+\end{heap-n-stack}
+\end{tikzpicture}}
+\end{columns}
 \end{frame}
 }
 \fi
@@ -703,33 +772,80 @@ public class Referenzvariablen {
 \end{frame}
 }
 
-\begin{frame}[fragile]{Ein Array Anlegen}
+\begin{frame}[fragile]{a)~Ein Array Anlegen}
 \SetupLstHl
 \begin{itemize}[<+(1)->]
+    \itemsep8pt
     \item Hier mal etwas beliebiges
-\begin{plainjava}
+\begin{plainjava}[aboveskip=0pt]
 !*\onslide<3->*!double[][] matrix = { { 1.5, -2, 1 }, { -5, 1, 6.1 }, { -2, -4, 1 } };
 \end{plainjava}
     \item<4-> Hier haben wir übrigens~--- Java sei dank~--- stark abgekürzt:
-\begin{plainjava}
+\begin{plainjava}[aboveskip=0pt]
 !*\onslide<5->*!double[][] matrix = new double[][] { new double[] { |ihl|:ldots:|ihl| }, |ihl|:ldots:|ihl| };
 \end{plainjava}
     \item<6-> Quiz! Sind diese Statements gültig? Wenn ja, welchen Wert hat \T{m1}, \T{m2},~\ldots? \info{Warum?}
-\begin{plainjava}
+\begin{plainjava}[aboveskip=0pt,lineskip=3pt]
 !*\onslide<7->*!double[][] m1; !*\Snode{@1}*!
 !*\onslide<9->*!double[][] m2 = new double[][]; !*\Snode{@2}*!
-!*\onslide<11->*!double[][] m3 = new double[3][]; !*\Snode{@3}*!
-!*\onslide<13->*!double[][] m4 = new double[1][2]; !*\Snode{@4}*!
+!*\onslide<11->*!double[][] m3 = new double[2][]; !*\Snode{@3}*!
+!*\onslide<13->*!int[][]:ws::ws::ws::ws:m4 = new int[1][3]; !*\Snode{@4}*!
 !*\onslide<15->*!double[][] m5 = { null, {}, { null } }; !*\Snode{@5}*!
 \end{plainjava}
 \end{itemize}
 \begin{tikzpicture}[@O]
-
+\onslide<8->{\node[T,right=-1pt] at(@1.east) {\faCheck~\T{m1} ist noch nicht initialisiert};}
+\onslide<10->{\node[T,right=-1pt,align=left] at(@2.east) {\faFlash~Java \textup{muss} das Array initialisieren~\(\to\) braucht dessen Größe};}
+\onslide<12->{\node[T,right=-1pt] at(@3.east) {\faCheck~\T{m3} ist \T{\{ null, null \}} (Default-Wert für \T{double[]})};}
+\onslide<14->{\node[T,right=-1pt] at(@4.east) {\faCheck~\T{m4} ist \T{\{\;\{ 0, 0, 0 \}\;\}} (Default-Wert für \T{int})};}
+\onslide<16->{\node[T,below right,xshift=-1pt,yshift=.6\baselineskip,align=left] at(@5.east) {\faFlash~\T{null} und \T{\{\}} \info{leer} sind valide \T{double[]},\\\phantom{\faFlash}~\T{\{ null \}} aber nicht, da \T{double} nicht \T{null}\\\phantom{\faFlash}~sein kann.};}
 \end{tikzpicture}
 \end{frame}
 
-\begin{frame}{Jeay}
-    \textattachfile{\curpath Matrix.java}{Matrix.java}
+\begin{frame}[fragile,c]{b)~\T{\bfseries berechneBetragssumme(double[])}}
+\begin{plainjava}[lineskip=2pt]
+!*\onslide<2->*!public static double berechneBetragssumme(double[] arr) {
+!*\onslide<3->*!    if (arr == null || arr.length == 0) {
+!*\onslide<4->*!        System.out.println("Eingabe ungültig!");
+!*\onslide<4->*!        return -1.0;
+!*\onslide<3->*!    }
+!*\onslide<5->*!    double norm = 0;
+!*\onslide<6->*!    for (double element : arr) {
+!*\onslide<7->*!        norm = norm + Math.abs(element);
+!*\onslide<6->*!    }
+!*\onslide<8->*!    return norm;
+!*\onslide<2->*!}
+\end{plainjava}
+\end{frame}
+
+\begin{frame}[fragile,c]{c)~\T{\bfseries berechneZeilensummennorm(double[][])}}
+\begin{plainjava}[lineskip=2pt]
+public static double berechneZeilensummennorm(double[][] mat) {
+    if (mat == null || mat.length == 0) {
+        System.out.println("Eingabe ungültig!");
+        return -1.0;
+    }
+    double max = Double.MIN_VALUE;
+    for (double[] array : mat) {
+        double norm = berechneBetragssumme(array);
+        if (norm == -1.0):ws::ws::ws::ws::ws::ws::ws::ws:return -1.0; // Fehler in Unteralgorithmus
+        else if (norm > max) max = norm;
+    }
+    return max;
+}
+\end{plainjava}
+\end{frame}
+
+\begin{frame}[fragile]{d)~Ausgabe}
+\begin{itemize}[<+(1)->]
+    \itemsep8pt
+    \item Ein super kompliziertes Aufrufchen \info{für zwei Punkte!}:
+\begin{plainjava}[aboveskip=0pt]
+!*\onslide<3->*!System.out.println(berechneZeilensummennorm(matrix));
+\end{plainjava}
+    \item<4-> Der gesamte Code findet sich in \only<4->{\textattachfile{\curpath Matrix.java}{Matrix.java}}
+    % \item     TODO: daruaf eingehen ob es besser ist in for ouder außerhalb von for zu initialisiern
+\end{itemize}
 \end{frame}
 
 \subsection{Aufgabe 3}
@@ -760,7 +876,7 @@ TODO
 \vfill\vfill % double fill for more fraction
 \begin{itemize}[<+(1)->]
     \itemsep6.5pt
-    \item TODO:
+    \item TODO: Defaultwete
 \end{itemize}
 \end{frame}
 }
