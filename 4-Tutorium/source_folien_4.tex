@@ -869,17 +869,17 @@ public static double berechneZeilensummennorm(double[][] mat) {
 \begin{plainjava}[aboveskip=0pt]
 !*\onslide<3->*!int n = Integer.parseInt(args[0]);
 \end{plainjava}
-        \item Ein \link{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Scanner.html}{Scanner} kann hier theoretisch auch möglich sein. \begin{itemize}
+        \item Ein \link{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Scanner.html}{Scanner} kann hier theoretisch auch möglich sein \begin{itemize}
             \item Den wollen wir dann aber auch immer schließen!
             \item Uns reichen Kommandozeilenparameter
         \end{itemize}
         \item Und nun noch berechnen \info{\(f(x) = \exp(-x^2)\)}:
 \begin{plainjava}
-!*\onslide<8->*!public static double berechneF(double x){
+!*\onslide<8->*!public static double berechneF(double x) {
 !*\onslide<9->*!    return Math.exp(-(x*x));
 !*\onslide<8->*!}
 \end{plainjava}
-        \item<10-> Natürlich kann man hier auch \bjava{Math.pow(x, 2.0)} oder so benutzen.
+        \item<10-> Natürlich kann man hier auch \bjava{Math.pow(x, 2.0)} oder so benutzen
     \end{itemize}
 \end{frame}
 
@@ -887,7 +887,7 @@ public static double berechneZeilensummennorm(double[][] mat) {
     \begin{itemize}[<+(1)->]
         \item Ein ungültiger Eckpunkt liegt vor, wenn \(x_2 < x_1\):
 \begin{plainjava}
-!*\onslide<3->*!public static double berechneTrapezFlaeche(double x1, double x2){
+!*\onslide<3->*!public static double berechneTrapezFlaeche(double x1, double x2) {
 !*\onslide<4->*!    if(x2 < x1)
 !*\onslide<5->*!        return 0;
 !*\onslide<4->*!    else
@@ -961,29 +961,50 @@ for(double x = 0; x <= 1 - schrittweite; x += schrittweite) \{^^J
 \iffull
 \SetNextSectionText{Methoden und OOP\\Abgabe: \DTMDate{2022-05-30}}
 \section{Aussicht: Übungsblatt 5}
-\subsection{Aufgabe 1}
-\begin{frame}{Aufgabe 1: Methoden mit einer variablen Parameterzahl}
+\subsection{Aufgabe 1 und 2}
+\begin{frame}{Aufgaben 1\; und 2}
 \begin{itemize}[<+(1)->]
     \itemsep9pt
     \item Hier helfen \link{https://docs.oracle.com/javase/8/docs/technotes/guides/language/varargs.html}{varargs}! \begin{itemize}
         \item Einfach nur Arrays aber in \info{un-}gruselig!
+        \item Und in Punktig! \info{Hier driftet Müde-Flo wohl ein bisschen ab\ldots}
     \end{itemize}
     \item Sonst haben wir ja schonmal was mit einer Quersumme gemacht \info{Übungsblatt~3, Aufgabe~3}
     \item Mehr Tipps kann ich dazu auch nicht geben\ldots
-\end{itemize}
-\end{frame}
-
-\subsection{Aufgabe 2}
-\begin{frame}{Aufgabe 2: Globale Variablen}
-\begin{itemize}[<+(1)->]
-    \itemsep9pt
-    \item Da haben wir heute ja schon was mit Zeichen gemacht!
-    \item Die Aufgabe lässt sich schön elegant lösen.
+    \item Und wegen Aufgabe~2\ldots \begin{itemize}
+        \item Da haben wir heute ja schon was mit Zeichen gemacht!
+        \item Die Aufgabe lässt sich schön elegant lösen.
+    \end{itemize}
 \end{itemize}
 \end{frame}
 
 \subsection{Aufgabe 3}
-\begin{frame}{Aufgabe 3: Objektorientierung: Klassenentwurf }
+\setbox\pinguA=\hbox{\begin{tikzpicture}[scale=.65, every node/.style={transform shape}]
+\tikzumlset{fill class=white, fill note=white!20}
+\umlclass[x=0,y=0,name=stud]{Student}{
+    {\umlstatic{+ studierendenzahl : int}}\\
+    {- name : String}\\
+    {- matrikelnummer : int}\\
+    {+ besuchtVorlesungen : String[5]}}{
+        {+ Student (name : String, nummer : int)}\\
+        {+ getName() : String}\\
+        {+ getNummer() : int}\\
+        {+ addVorlesung(String name) : void}\\
+        {+ getVorlesungen() : String[5]}\\
+        {+ removeVorlesung(String name) : void }}
+\draw [decorate,decoration={brace,amplitude=10pt,raise=4pt,mirror},yshift=0pt] (-4,2) -- ++(0,-1.92) node [black,midway, above,rotate=90,yshift=0.75cm] {Attribute};
+\draw [decorate,decoration={brace,amplitude=10pt,raise=4pt,mirror},yshift=0pt] (-4,2-1.92) -- ++(0,-2.78) node [black,midway, above,rotate=90,yshift=.75cm] {Methoden};
+\node at(0,3.25) [above] (kln) {Klassenname};
+\draw[-Kite] (kln) -- ++(0,-0.799);
+{\node [right] at (4.5,1.82-1.54/2+0.9) {\parbox{9cm}{
+    {(\textbf{--}) steht für ein \bjava{private} Attribut}\\
+    {(\textbf{+}) für ein \bjava{public} Attribut}\\
+    % {(\textbf{\#}) für ein \bjava{protected} Attribut}\\
+    % {\bjava{static}-Komponenten werden unterstrichen.} % well :D
+    }};
+}
+\end{tikzpicture}}
+\begin{frame}{Aufgabe 3: Objektorientierung: Klassenentwurf}
 \begin{itemize}[<+(1)->]
     \itemsep9pt
     \item Wir möchten einen \textit{Klassenentwurf}
@@ -995,11 +1016,14 @@ for(double x = 0; x <= 1 - schrittweite; x += schrittweite) \{^^J
         \item Generierte Klassenentwürfe sind aber verboten!
     \end{itemize}
 \end{itemize}
+\begin{tikzpicture}[@O]
+    \onslide<8->{\node[above left,yshift=\btdmfootheight] at (current page.south east) {\copy\pinguA};}
+\end{tikzpicture}
 \end{frame}
 \fi
 
 
-\SetNextSectionText{TODO: Quote}
+\SetNextSectionText[.55\linewidth]{There aren't that many people in the world who are good programmers and there are not that many people in the world who are good writers, and here we are expecting them to be both.\\--- Donald E. Knuth,~\cite[p.649]{knuth1999digital}}
 \section{Abschließendes}
 {\SummaryFrame
 \begin{frame}[t]{Zusammenfassend}
