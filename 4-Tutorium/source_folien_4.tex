@@ -662,7 +662,7 @@ public class Referenzvariablen {
     \itemsep10pt
     \item {\intask Welche Ausgaben erzeugen die Zeilen~18 und~19?}\hfill\Z18; liefert~2, und~\Z19;~1.
     \item \task{Welche Ausgaben erzeugen die Zeilen~20--26?}\par
-    \pause Sie erzeugen \say{\T{0\n2\n0}} \info{wobei \T{\textbackslash n} ein neue Zeile darstellt}.\smallskip\\*
+    \pause Sie erzeugen \say{\T{0\n2\n0}} \info{wobei \T{\textbackslash n} ein neue Zeile darstellt}\smallskip\\*
     \pause Die Zielen befassen sich mit der Ausgabe von \T{array}. Dieses wird in~\Z16; Java initialisiert hier direkt mit \bjava{\{0, 0, 0\}}. \pause Das Unterprogramm erfüllt nun in~\Z2; die Referenz zu \T{array} als Kopie \info{das ist \textit{Call-by-Value}, verhält sich aber wie \textit{Call-by-Reference}}, \pause das \bjava{if} in~\Z3; scheitert, da \T{array} auf \bjava{\{0, 0, 0\}}  verweist und \bjava{idx = 1}, \bjava{ele = 2} (aus vorheriger Antwort). \pause
    \Z7; ändert damit das gemeinsame Array zu \bjava{\{0, 2, 0\}} \info{Seiteneffekt}, die Neuzuweisung in~\Z9; überschreibt lediglich die in den Parameter kopierte Referenz. \pause
     Damit löst das \bjava{if} in~\Z20; aus und es erfolgt besagte Ausgabe.
@@ -876,7 +876,7 @@ public class Referenzvariablen {
             \item Was, wenn wir mit dem Fehler eine Nachricht mitgeben möchten?
             \item Wie können wir Verbindungen zwischen Fehlern ausdrücken?
         \end{itemize}
-        \item Dafür werden wir später \link{https://docs.oracle.com/javase/tutorial/essential/exceptions/}{Exceptions} betrachten.
+        \item Dafür werden wir später \link{https://docs.oracle.com/javase/tutorial/essential/exceptions/}{Exceptions} betrachten
     \end{itemize}
 \end{frame}
 }
