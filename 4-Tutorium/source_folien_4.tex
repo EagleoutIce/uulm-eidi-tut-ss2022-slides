@@ -365,7 +365,7 @@ public static final int Z = 90;  public static final int z = 122;
 !*\onslide<5->*!            arrayKopie[i] -= shift;
 !*\onslide<5->*!    }!*\Snode{@end}*!
 !*\onslide<6->*!    return arrayKopie;
-!*\onslide<3->*!}
+!*\onslide<3->*!}!*\onslide<1->*!
 \end{plainjava}
 \end{onlyenv}
 \begin{onlyenv}<8->
@@ -400,9 +400,9 @@ public static char[] flipInCopy(char[] flipBuchstaben) {
 
 !*\onslide<1->*!    |ihl|flipInPlace(arrayKopie);|ihl|
     |ihl|return arrayKopie;|ihl|
-|ihl|}|ihl|
+|ihl|}|ihl|!*\onslide<1->*!
 \end{plainjava}
-\end{uncoverenv}
+\end{uncoverenv}\onslide<1->
 \begin{tikzpicture}[@O]
     \onslide<7->{
         \node[above=\btdmfootheight,T,xshift=-3.75cm] at(current page.south) {\strut Werte primitiver Datentypen werden bei Zuweisung kopiert.};
@@ -410,6 +410,7 @@ public static char[] flipInCopy(char[] flipBuchstaben) {
         \only<8->{\node[above left,yshift=\btdmfootheight,T] at(current page.south east) {\strut\textattachfile{\curpath Praesenzaufgabe.java}{Praesenzaufgabe.java}, \textattachfile{\curpath PraesenzaufgabeNaiv.java}{PraesenzaufgabeNaiv.java}\;};}
     }
 \end{tikzpicture}
+\onslide<1->
 \end{frame}
 
 \subsection{Allgemeine Fragen}
@@ -607,38 +608,38 @@ class X {
 \task<2->{Betrachten Sie den folgenden Java Code~(\only<2->{\textattachfile{\curpath Referenzvariablen.java}{Referenzvariablen.java}}):}\vspace*{-4mm}
 \lstfs{8}
 \begin{plainjava}[multicols=2,lineskip=-.5pt,prebreak={},numbers=left,numbersep=2pt]
-public class Referenzvariablen {
-  public static void setzeElementVielleicht(int[] array, int idx, int ele) {
-    if (array == null || idx >= array.length || ele <= 0) {
-      System.out.println("Eingabe ungültig!");
-      return;
-    }
-    array[idx] = ele;
-    ele = 4;
-    array = null;
-  }
-
-  public static void main(String[] args) {
-    int ele = 1;
-    int idx = ele;
-    ele = 2;
-    int[] array = new int[3];
-    setzeElementVielleicht(array, idx, ele);
-    System.out.println(ele);
-    System.out.println(idx);
-    if (array != null) {
-      for (int wert : array) {
-        System.out.println(wert);
-      }
-    } else {
-      System.out.println("Array ungültig!");
-    }
-  }
-}
+!*\onslide<3->*!public class Referenzvariablen {
+!*\onslide<3->*!  public static void setzeElementVielleicht(int[] array, int idx, int ele) {
+!*\onslide<3->*!    if (array == null || idx >= array.length || ele <= 0) {
+!*\onslide<3->*!      System.out.println("Eingabe ungültig!");
+!*\onslide<3->*!      return;
+!*\onslide<3->*!    }
+!*\onslide<3->*!    array[idx] = ele;
+!*\onslide<3->*!    ele = 4;
+!*\onslide<3->*!    array = null;
+!*\onslide<3->*!  }
+!*\onslide<3->*!
+!*\onslide<3->*!  public static void main(String[] args) {
+!*\onslide<3->*!    int ele = 1;
+!*\onslide<3->*!    int idx = ele;
+!*\onslide<3->*!    ele = 2;
+!*\onslide<3->*!    int[] array = new int[3];
+!*\onslide<3->*!    setzeElementVielleicht(array, idx, ele);
+!*\onslide<3->*!    System.out.println(ele);
+!*\onslide<3->*!    System.out.println(idx);
+!*\onslide<3->*!    if (array != null) {
+!*\onslide<3->*!      for (int wert : array) {
+!*\onslide<3->*!        System.out.println(wert);
+!*\onslide<3->*!      }
+!*\onslide<3->*!    } else {
+!*\onslide<3->*!      System.out.println("Array ungültig!");
+!*\onslide<3->*!    }
+!*\onslide<3->*!  }
+!*\onslide<3->*!}!*\onslide<1->*!
 \end{plainjava}
 \vspace*{-4mm}\begin{enumerate}
-    \item<3-> \task{Welche Ausgaben erzeugen die Zeilen~18 und~19? Begründen Sie Ihre Antwort.}
-    \item<4-> \task{Welche Ausgaben erzeugen die Zeilen~20--26? Begründen Sie Ihre Antwort.}
+    \item<4-> \task{Welche Ausgaben erzeugen die Zeilen~18 und~19? Begründen Sie Ihre Antwort.}
+    \item<5-> \task{Welche Ausgaben erzeugen die Zeilen~20--26? Begründen Sie Ihre Antwort.}
 \end{enumerate}
 \end{frame}
 {\def\n{\textcolor{codeouthl}{\textbackslash n}\,}
@@ -646,11 +647,11 @@ public class Referenzvariablen {
 \begin{frame}{Ein schneller Blick auf knappe Antworten}
 \begin{enumerate}[<+(1)->]
     \itemsep10pt
-    \item {\intask Welche Ausgaben erzeugen die Zeilen~18 und~19?}\hfill\pause\Z18; liefert~2, und~\Z19;~1.\smallskip\\*
+    \item {\intask Welche Ausgaben erzeugen die Zeilen~18 und~19?}\hfill\pause\Z18; liefert~2, und~\Z19;~1.\smallskip\\*\pause
     Zuerst die Ausgabe von \T{ele}, dieses wird in~\Z13; mit~1 initialisiert und in~\Z15; mit~2 überschrieben. \pause Der Parameter \T{ele} in~\Z2; besitzt einen anderen Sichtbarkeits- und Gültigkeitsbereich, zudem wird der Wert durch \textit{Call-by-Value} kopiert. Damit hat das Unterprogramm keinen Einfluss auf den wert in \T{ele} aus \T{main}. \pause Auf \T{ele} findet kein weiterer Zugriff statt, es ist~2.\smallskip\par\pause
     Analog argumentiert es sich für \T{idx}, welches in~\Z14; mit dem dortigen Wert von \T{ele} (ist~1) initialisiert wird (da es ein primitiver Datentyp ist, wird hier auch mit \textit{Call-by-Value} der Wert kopiert). \pause Anschließend findet kein verändernder Zugriff statt und \T{idx} ist~1.
     \item \task{Welche Ausgaben erzeugen die Zeilen~20--26?}\par
-    \pause Sie erzeugen \say{\T{0\n2\n0}} \info{wobei \T{\textbackslash n} ein neue Zeile darstellt}.\\*
+    \pause Sie erzeugen \say{\T{0\n2\n0}} \info{wobei \T{\textbackslash n} ein neue Zeile darstellt}
 \end{enumerate}
 \end{frame}
 
@@ -670,7 +671,7 @@ public class Referenzvariablen {
 \iffull
 {\AddonFrame
 \begin{frame}{Heap und Stack\ldots\ Again}
-    \begin{itemize}
+    \begin{itemize}[<+(1)->]
         \itemsep12pt
         \item Das könnte man jetzt aufwändig durchanimieren\ldots
         \item Ich möchte aber, dass ihr das zur Übung macht!
@@ -695,15 +696,15 @@ public class Referenzvariablen {
 !*\onslide<9->*!    |ihl|...|ihl|
 !*\onslide<8->*!}
 \end{plainjava}
-    \item Die Signatur lautet \say{\bjava{foo(int, double[], boolean)}}
-    \item Das werden wir in Zukunft weiter behandeln und einbetten!
+    \item<10-> Die Signatur lautet \say{\bjava{foo(int, double[], boolean)}}
+    \item<11-> Das werden wir in Zukunft weiter behandeln und einbetten!
 \end{itemize}
 \end{frame}
 
 % \paragraph{Eine alte Heap-Stack-Freude}
 \makeatletter
 \lhns@elemwidth3cm
-\lhns@minborderheight8cm
+\lhns@minborderheight8.15cm
 \makeatother
 \newcommand<>\lm[1][]{\only#2{#1\llap{\faAngleRight~}}}
 \newcommand<>\rm[1][]{\only#2{#1\rlap{~\faAngleLeft}}}
@@ -773,23 +774,23 @@ public class Referenzvariablen {
 \begin{frame}{Aufgabe 2: Mehrdimensionale Arrays}
     \task<2->{Im Folgenden sollen Methoden zum Verarbeiten von mehrdimensionalen Arrays (Matrizen) implementiert werden.
     Legen Sie dazu eine Java Datei \T{Matrix.java} an.
-    Im Folgenden sei~\(n\) die Anzahl der Zeilen,~\(m\) die Anzahl der Spalten,~\(i\) und~\(j\) die jeweiligen Indizes, sowie \(a_{ij}\) das Element in der \(i\)-ten Zeile und \(j\)-ten Spalte. Die \link{https://de.wikipedia.org/wiki/Zeilensummennorm}{Zeilensummennorm} ist in der Mathematik die von der Summennorm abgeleitete natürliche Matrixnorm. Die Zeilensummennorm \(\dist{A}_\infty\) einer Matrix~\(A\) entspricht der maximalen Betragssumme aller ihrer Zeilen:\nomathskip
+    Im Folgenden sei~\(n\) die Anzahl der Zeilen,~\(m\) die Anzahl der Spalten,~\(i\) und~\(j\) die jeweiligen Indizes, sowie \(a_{ij}\) das Element in der \(i\)-ten Zeile und \(j\)-ten Spalte. \onslide<3->{Die \link{https://de.wikipedia.org/wiki/Zeilensummennorm}{Zeilensummennorm} ist in der Mathematik die von der Summennorm abgeleitete natürliche Matrixnorm. Die Zeilensummennorm \(\dist{A}_\infty\) einer Matrix~\(A\) entspricht der maximalen Betragssumme aller ihrer Zeilen:}\nomathskip
 \begin{columns}[onlytextwidth,c]
 \column{.3\linewidth}
-\begin{equation*}
+\onslide<4->{\begin{equation*}
     \dist{A}_\infty =\max_{i = 1, \ldots, n} \sum_{j = 1}^n \abs{a_{ij}}
-\end{equation*}
+\end{equation*}}
 \column{.7\linewidth}
-\textbf{Beispiel:} Die Zeilensummennorm der Matrix~\(A = \left(\begin{smallmatrix}
+\onslide<5->{\textbf{Beispiel:} Die Zeilensummennorm der Matrix~\(A = \left(\begin{smallmatrix}
     1 & -2 & -3 \\
     2 & 4 & -1
-\end{smallmatrix}\right)\) is gegeben durch \(\dist{A}_\infty = \max\{\abs{1} + \abs{-2} + \abs{-3},\;\allowbreak \abs{2} + \abs{4} + \abs{-1}\} = \max\{6, 7\} = 7\).
+\end{smallmatrix}\right)\) is gegeben durch \(\dist{A}_\infty = \max\{\abs{1} + \abs{-2} + \abs{-3},\;\allowbreak \abs{2} + \abs{4} + \abs{-1}\} = \max\{6, 7\} = 7\).}
 \end{columns}
 \begin{enumerate}
-    \item \label{tsk:a}Legen Sie ein 2-D Array mit~\(3 \times 3\) Elementen vom Typ double an und füllen Sie es mit gültigen Werten.
-    \item Implementieren Sie eine Methode \T{public static double berechneBetragssumme(double[] arr)}, die die Betragsnorm von \T{arr}, d.h. die Summe der Beträge der Elemente, berechnet und zurückgibt. Für ungültige Eingaben (\T{arr} ist \T{null} oder hat die Länge~\(0\)) soll \T{-1.0} zurückgegeben werden.
-    \item \label{tsk:c}Implementieren Sie eine Methode \T{public static double berechneZeilensummennorm(\allowbreak double[][] \allowbreak mat)}, die ein 2-D Array als Argument annimmt, die Zeilensummennorm berechnet und diese zurückgibt. Für ungültige Eingaben (mat ist null oder hat die Länge~\(0\)) soll \T{-1.0} zurückgegeben werden.
-    \item Rufen Sie die Methode aus Teilaufgabe~\ref{tsk:c} mit ihrer Matrix aus und geben Sie das Ergebnis auf die Konsole aus.
+    \item<6-> \label{tsk:a}Legen Sie ein 2-D Array mit~\(3 \times 3\) Elementen vom Typ double an und füllen Sie es mit gültigen Werten.
+    \item<7-> Implementieren Sie eine Methode \T{public static double berechneBetragssumme(double[] arr)}, die die Betragsnorm von \T{arr}, d.h. die Summe der Beträge der Elemente, berechnet und zurückgibt. Für ungültige Eingaben (\T{arr} ist \T{null} oder hat die Länge~\(0\)) soll \T{-1.0} zurückgegeben werden.
+    \item<8-> \label{tsk:c}Implementieren Sie eine Methode \T{public static double berechneZeilensummennorm(\allowbreak double[][] \allowbreak mat)}, die ein 2-D Array als Argument annimmt, die Zeilensummennorm berechnet und diese zurückgibt. Für ungültige Eingaben (mat ist null oder hat die Länge~\(0\)) soll \T{-1.0} zurückgegeben werden.
+    \item<9-> Rufen Sie die Methode aus Teilaufgabe~\ref{tsk:c} mit ihrer Matrix aus und geben Sie das Ergebnis auf die Konsole aus.
 \end{enumerate}
 }
 \end{frame}
@@ -813,15 +814,15 @@ public class Referenzvariablen {
 !*\onslide<9->*!double[][] m2 = new double[][]; !*\Snode{@2}*!
 !*\onslide<11->*!double[][] m3 = new double[2][]; !*\Snode{@3}*!
 !*\onslide<13->*!int[][]:ws::ws::ws::ws:m4 = new int[1][3]; !*\Snode{@4}*!
-!*\onslide<15->*!double[][] m5 = { null, {}, { null } }; !*\Snode{@5}*!
+!*\onslide<15->*!double[][] m5 = { null, {}, { null } }; !*\Snode{@5}*!!*\onslide<1->*!
 \end{plainjava}
 \end{itemize}
 \begin{tikzpicture}[@O]
-\onslide<8->{\node[T,right=-1pt,scale=.9] at(@1.east) {\faCheck~\T{m1} ist noch nicht initialisiert};}
+\onslide<8->{\node[T,right=-1pt,scale=.95] at(@1.east) {\faCheck~\T{m1} ist noch nicht initialisiert};}
 \onslide<10->{\node[T,right=-1pt,align=left,scale=.9] at(@2.east) {\faFlash~Java \textup{muss} das Array initialisieren~\(\to\) braucht dessen Größe};}
-\onslide<12->{\node[T,right=-1pt,scale=.9] at(@3.east) {\faCheck~\T{m3} ist \T{\{ null, null \}} (Default-Wert für \T{double[]})};}
-\onslide<14->{\node[T,right=-1pt,scale=.9] at(@4.east) {\faCheck~\T{m4} ist \T{\{\;\{ 0, 0, 0 \}\;\}} (Default-Wert für \T{int})};}
-\onslide<16->{\node[T,below right,xshift=-1pt,yshift=.6\baselineskip,align=left,scale=.9] at(@5.east) {\faFlash~\T{null} und \T{\{\}} \info{leer} sind valide \T{double[]},\\\phantom{\faFlash}~\T{\{ null \}} aber nicht, da \T{double} nicht \T{null}\\\phantom{\faFlash}~sein kann.};}
+\onslide<12->{\node[T,right=-1pt,scale=.95] at(@3.east) {\faCheck~\T{m3} ist \T{\{ null, null \}} (Default-Wert für \T{double[]})};}
+\onslide<14->{\node[T,right=-1pt,scale=.95] at(@4.east) {\faCheck~\T{m4} ist \T{\{\;\{ 0, 0, 0 \}\;\}} (Default-Wert für \T{int})};}
+\onslide<16->{\node[T,below right,xshift=-1pt,yshift=.6\baselineskip,align=left,scale=.95] at(@5.east) {\faFlash~\T{null} und \T{\{\}} \info{leer} sind valide \T{double[]},\\\phantom{\faFlash}~\T{\{ null \}} aber nicht, da \T{double} nicht \T{null}\\\phantom{\faFlash}~sein kann.};}
 \end{tikzpicture}
 \end{frame}
 
@@ -843,19 +844,19 @@ public class Referenzvariablen {
 
 \begin{frame}[fragile,c]{c)~\T{\bfseries berechneZeilensummennorm(double[][])}}
 \begin{plainjava}[lineskip=2pt]
-public static double berechneZeilensummennorm(double[][] mat) {
-    if (mat == null || mat.length == 0) {
-        System.out.println("Eingabe ungültig!");
-        return -1.0;
-    }
-    double max = Double.MIN_VALUE;
-    for (double[] array : mat) {
-        double norm = berechneBetragssumme(array);
-        if (norm == -1.0):ws::ws::ws::ws::ws:return -1.0; // Fehler in Unteralgorithmus?
-        else if (norm > max) max = norm;
-    }
-    return max;
-}
+!*\onslide<2->*!public static double berechneZeilensummennorm(double[][] mat) {
+!*\onslide<3->*!    if (mat == null || mat.length == 0) {
+!*\onslide<4->*!        System.out.println("Eingabe ungültig!");
+!*\onslide<5->*!        return -1.0;
+!*\onslide<3->*!    }
+!*\onslide<6->*!    double max = Double.MIN_VALUE;
+!*\onslide<7->*!    for (double[] array : mat) {
+!*\onslide<8->*!        double norm = berechneBetragssumme(array);
+!*\onslide<9->*!        if (norm == -1.0):ws::ws::ws::ws::ws:return -1.0; !*\onslide<10->*!// Fehler in Unteralgorithmus?
+!*\onslide<11->*!        else if (norm > max) max = norm;
+!*\onslide<7->*!    }
+!*\onslide<12->*!    return max;
+!*\onslide<2->*!}
 \end{plainjava}
 \end{frame}
 
@@ -868,9 +869,9 @@ public static double berechneZeilensummennorm(double[][] mat) {
 \end{plainjava}
     \item<4-> Der gesamte Code findet sich in der Datei \only<4->{\textattachfile{\curpath Matrix.java}{Matrix.java}}
     % \item     TODO: daruaf eingehen ob es besser ist in for ouder außerhalb von for zu initialisiern
-    \item Und wie wechseln wir die Funktion nun einfach aus? \begin{itemize}
-        \item Mit EidI-Wissen eher weniger
-        \item Aber \link{https://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html}{Lambdas} sind hier hilfreich!
+    \item<5-> Und wie wechseln wir die Funktion nun einfach aus? \begin{itemize}
+        \item<6-> Mit EidI-Wissen eher weniger
+        \item<7-> Aber \link{https://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html}{Lambdas} sind hier hilfreich!
     \end{itemize}
 \end{itemize}
 \end{frame}
@@ -898,11 +899,11 @@ public static double berechneZeilensummennorm(double[][] mat) {
         \end{itemize}
         \item Und nun noch berechnen \info{\(f(x) = \exp(-x^2)\)}:
 \begin{plainjava}
-!*\onslide<8->*!public static double berechneF(double x) {
-!*\onslide<9->*!    return Math.exp(-(x*x));
-!*\onslide<8->*!}
+!*\onslide<7->*!public static double berechneF(double x) {
+!*\onslide<8->*!    return Math.exp(-(x*x));
+!*\onslide<7->*!}
 \end{plainjava}
-        \item<10-> Natürlich kann man hier auch \bjava{Math.pow(x, 2.0)} oder so benutzen
+        \item<9-> Natürlich kann man hier auch \bjava{Math.pow(x, 2.0)} oder so benutzen
     \end{itemize}
 \end{frame}
 
@@ -917,7 +918,7 @@ public static double berechneZeilensummennorm(double[][] mat) {
 !*\onslide<6->*!        return (x2 - x1) * ((berechneF(x1) + berechneF(x2)) / 2.0);
 !*\onslide<3->*!}
 \end{plainjava}
-        \item Auch hier handelt es sich um unspektakuläres übernehmen der Aufgabenstellung
+        \item<7-> Auch hier handelt es sich um unspektakuläres übernehmen der Aufgabenstellung
     \end{itemize}
 \end{frame}
 
@@ -973,11 +974,13 @@ for(double x = 0; x <= 1 - schrittweite; x += schrittweite) \{^^J
 
 \begin{frame}[fragile]{e)~\T{\bfseries Ausgabe}}
 \begin{itemize}[<+(1)->]
+    \itemsep10pt
     \item Wieder eine fancy Ausgabe!
-\begin{plainjava}
+\begin{plainjava}[aboveskip=0pt]
 !*\onslide<3->*!System.out.println(trapezVerfahren(n));
 \end{plainjava}
-    \item Der gesamte Code befindet sich hier:~\only<4->{\textattachfile{\curpath NumerischeIntegration.java}{NumerischeIntegration.java}}
+    \item<4-> Der gesamte Code befindet sich hier:~\only<4->{\textattachfile{\curpath NumerischeIntegration.java}{NumerischeIntegration.java}}
+    \iffull\item<5-> Sonst gibt es hier nichts mehr zu sagen\fi
 \end{itemize}
 \end{frame}
 
@@ -1031,7 +1034,7 @@ for(double x = 0; x <= 1 - schrittweite; x += schrittweite) \{^^J
     {getVorlesungen() : String[]}\\
     {removeVorlesung(String name) : void }}
 \end{tikzpicture}}
-\begin{frame}{Aufgabe 3: Objektorientierung: Klassenentwurf}
+\begin{frame}{Aufgabe 3: Objektorientierung --- Klassenentwurf}
 \begin{itemize}[<+(1)->]
     \itemsep9pt
     \item Wir möchten einen \textit{Klassenentwurf} \info{Und Objektlies}
