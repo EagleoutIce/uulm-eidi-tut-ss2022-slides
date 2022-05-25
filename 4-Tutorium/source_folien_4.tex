@@ -891,10 +891,6 @@ public class Referenzvariablen {
 \end{plainjava}
     \item<4-> Der gesamte Code findet sich in der Datei \only<4->{\textattachfile{\curpath Matrix.java}{Matrix.java}}
     % \item     TODO: daruaf eingehen ob es besser ist in for ouder außerhalb von for zu initialisiern
-    \item<5-> Und wie wechseln wir die Funktion nun einfach aus? \begin{itemize}
-        \item<6-> Mit EidI-Wissen eher weniger
-        \item<7-> Aber \link{https://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html}{Lambdas} sind hier hilfreich!
-    \end{itemize}
 \end{itemize}
 \end{frame}
 
@@ -1002,7 +998,12 @@ for(double x = 0; x <= 1 - schrittweite; x += schrittweite) \{^^J
 !*\onslide<3->*!System.out.println(trapezVerfahren(n));
 \end{plainjava}
     \item<4-> Der gesamte Code befindet sich hier:~\only<4->{\textattachfile{\curpath NumerischeIntegration.java}{NumerischeIntegration.java}}
-    \iffull\item<5-> Sonst gibt es hier nichts mehr zu sagen\fi
+    \iffull
+    \item<5-> Und wie wechseln wir die Funktion nun einfach aus? \begin{itemize}
+        \item<6-> Mit EidI-Wissen eher weniger
+        \item<7-> Aber \link{https://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html}{Lambdas} sind hier hilfreich!
+    \end{itemize}
+    \fi
 \end{itemize}
 \end{frame}
 
