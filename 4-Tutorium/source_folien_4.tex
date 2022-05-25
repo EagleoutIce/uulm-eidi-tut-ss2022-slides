@@ -607,36 +607,38 @@ class X {
 \begin{frame}[fragile]{Aufgabe 1: Referenzvariablen}
 \task<2->{Betrachten Sie den folgenden Java Code~(\only<2->{\textattachfile{\curpath Referenzvariablen.java}{Referenzvariablen.java}}):}\vspace*{-4mm}
 \lstfs{8}
+\begin{uncoverenv}<3->
 \begin{plainjava}[multicols=2,lineskip=-.5pt,prebreak={},numbers=left,numbersep=2pt]
-!*\onslide<3->*!public class Referenzvariablen {
-!*\onslide<3->*!  public static void setzeElementVielleicht(int[] array, int idx, int ele) {
-!*\onslide<3->*!    if (array == null || idx >= array.length || ele <= 0) {
-!*\onslide<3->*!      System.out.println("Eingabe ungültig!");
-!*\onslide<3->*!      return;
-!*\onslide<3->*!    }
-!*\onslide<3->*!    array[idx] = ele;
-!*\onslide<3->*!    ele = 4;
-!*\onslide<3->*!    array = null;
-!*\onslide<3->*!  }
-!*\onslide<3->*!
-!*\onslide<3->*!  public static void main(String[] args) {
-!*\onslide<3->*!    int ele = 1;
-!*\onslide<3->*!    int idx = ele;
-!*\onslide<3->*!    ele = 2;
-!*\onslide<3->*!    int[] array = new int[3];
-!*\onslide<3->*!    setzeElementVielleicht(array, idx, ele);
-!*\onslide<3->*!    System.out.println(ele);
-!*\onslide<3->*!    System.out.println(idx);
-!*\onslide<3->*!    if (array != null) {
-!*\onslide<3->*!      for (int wert : array) {
-!*\onslide<3->*!        System.out.println(wert);
-!*\onslide<3->*!      }
-!*\onslide<3->*!    } else {
-!*\onslide<3->*!      System.out.println("Array ungültig!");
-!*\onslide<3->*!    }
-!*\onslide<3->*!  }
-!*\onslide<3->*!}!*\onslide<1->*!
+public class Referenzvariablen {
+  public static void setzeElementVielleicht(int[] array, int idx, int ele) {
+    if (array == null || idx >= array.length || ele <= 0) {
+      System.out.println("Eingabe ungültig!");
+      return;
+    }
+    array[idx] = ele;
+    ele = 4;
+    array = null;
+  }
+
+  public static void main(String[] args) {
+    int ele = 1;
+    int idx = ele;
+    ele = 2;
+    int[] array = new int[3];
+    setzeElementVielleicht(array, idx, ele);
+    System.out.println(ele);
+    System.out.println(idx);
+    if (array != null) {
+      for (int wert : array) {
+        System.out.println(wert);
+      }
+    } else {
+      System.out.println("Array ungültig!");
+    }
+  }
+}!*\onslide<1->*!
 \end{plainjava}
+\end{uncoverenv}
 \vspace*{-4mm}\begin{enumerate}
     \item<4-> \task{Welche Ausgaben erzeugen die Zeilen~18 und~19? Begründen Sie Ihre Antwort.}
     \item<5-> \task{Welche Ausgaben erzeugen die Zeilen~20--26? Begründen Sie Ihre Antwort.}
@@ -852,7 +854,7 @@ class X {
 !*\onslide<6->*!    double max = Double.MIN_VALUE;
 !*\onslide<7->*!    for (double[] array : mat) {
 !*\onslide<8->*!        double norm = berechneBetragssumme(array);
-!*\onslide<9->*!        if (norm == -1.0):ws::ws::ws::ws::ws:return -1.0; !*\onslide<10->*!// Fehler in Unteralgorithmus?
+!*\onslide<9->*!        if (norm == -1.0) return -1.0; !*\onslide<10->*!// Fehler in Unteralgorithmus?
 !*\onslide<11->*!        else if (norm > max) max = norm;
 !*\onslide<7->*!    }
 !*\onslide<12->*!    return max;
@@ -893,17 +895,17 @@ class X {
 \begin{plainjava}[aboveskip=0pt]
 !*\onslide<3->*!int n = Integer.parseInt(args[0]);
 \end{plainjava}
-        \item Ein \link{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Scanner.html}{Scanner} kann hier theoretisch auch möglich sein \begin{itemize}
-            \item Den wollen wir dann aber auch immer schließen!
-            \item Uns reichen Kommandozeilenparameter
+        \item<4-> Ein \link{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Scanner.html}{Scanner} ist hier theoretisch auch möglich \begin{itemize}
+            \item<5-> Den wollen wir dann aber auch immer schließen!
+            \item<6-> Uns reichen Kommandozeilenparameter
         \end{itemize}
-        \item Und nun noch berechnen \info{\(f(x) = \exp(-x^2)\)}:
+        \item<7-> Und nun noch berechnen \info{\(f(x) = \exp(-x^2)\)}:
 \begin{plainjava}
-!*\onslide<7->*!public static double berechneF(double x) {
-!*\onslide<8->*!    return Math.exp(-(x*x));
-!*\onslide<7->*!}
+!*\onslide<8->*!public static double berechneF(double x) {
+!*\onslide<9->*!    return Math.exp(-(x*x));
+!*\onslide<8->*!}
 \end{plainjava}
-        \item<9-> Natürlich kann man hier auch \bjava{Math.pow(x, 2.0)} oder so benutzen
+        \item<19-> Natürlich kann man hier auch \bjava{Math.pow(x, 2.0)} oder so benutzen
     \end{itemize}
 \end{frame}
 
