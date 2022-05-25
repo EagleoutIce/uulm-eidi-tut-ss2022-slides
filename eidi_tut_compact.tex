@@ -54,7 +54,7 @@
 \ifx!\detokenize{#1}!\def\@short{#2}\else\def\@short{#1}\def\beamer@shorttitle{#1}\fi
 \SetNextSectionText{\getKwRange{#5}\\KW~#5}% 3 instead of two as this seems to pop more
 \expandafter\section\expandafter[\@short]{#2}%
-\bgroup\let\section\subsection
+\begingroup\let\section\subsection
 \let\subsection\subsubsection
 % sub sub stays subsub?
 % \let\subsubsection\paragraph
@@ -74,8 +74,9 @@
 \typeout{Loading: #3/source_folien_#4.tex}
 \begin{refsection}[#3/references.bib]% allow for sub bibliographies
 \@input{#3/source_folien_#4.tex}
+\ifnum#1=4\egroup\fi % FIXME: patching problems
 \end{refsection}
-\egroup
+\endgroup
 }
 
 % update prepath

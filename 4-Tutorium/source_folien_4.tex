@@ -519,7 +519,7 @@ Scanner b = a;
     \end{itemize}
 \end{frame}
 
-\begingroup
+{
 \lstset{add to literate={X}{{{\solGet{keywordC}{X}}}}1 {Y}{{{\solGet{keywordC}{Y}}}}1 {Z}{{{\solGet{keywordC}{Z}}}}1}
 \begin{frame}[t,fragile]{Kopien, ein Beispiel}
     \begin{itemize}[<+(1)->]
@@ -536,7 +536,7 @@ class X {
         \item Und was davon macht jetzt \bjava{Object::clone()}?\pause{} Spoiler: Nobody knows.
     \end{itemize}
 \end{frame}
-\endgroup
+}
 
 \begin{frame}[t,fragile]{Cloneable}
     \begin{itemize}[<+(1)->]
@@ -684,7 +684,6 @@ public class Referenzvariablen {
         \item Hier zeige ich gleich die Animation eines anderen Codes \info{als Hilfe}
     \end{itemize}
 \end{frame}
-
 \begin{frame}[fragile]{Sprechen über Signaturen}
 \SetupLstHl
 \begin{itemize}[<+(1)->]
@@ -969,7 +968,7 @@ for(double x = 0; x <= 1 - schrittweite; x += schrittweite) \{^^J
         \node[right,T] (@) at(@1.east) {Ginge hier auch nur \T{1/n}?};
     }
     \onslide<11->{
-        \node[below right,yshift=1mm,T] at(@.south west) {Nö, dann wäre das mit \(\text{\T{n}} > 1\) immer 0 (da Ganzzahldivison).};
+        \node[below right,yshift=1mm,T] at(@.south west) {Nö, dann wäre das mit \(\text{\T{n}} > 1\) immer \(0\) (da Ganzzahldivison).};
     }
 \end{tikzpicture}
 \end{frame}
@@ -982,7 +981,7 @@ for(double x = 0; x <= 1 - schrittweite; x += schrittweite) \{^^J
 !*\onslide<3->*!System.out.println(trapezVerfahren(n));
 \end{plainjava}
     \item<4-> Der gesamte Code befindet sich hier:~\only<4->{\textattachfile{\curpath NumerischeIntegration.java}{NumerischeIntegration.java}}
-    \item<5-> Sonst gibt es hier nichts mehr zu sagen
+    \iffull\item<5-> Sonst gibt es hier nichts mehr zu sagen\fi
 \end{itemize}
 \end{frame}
 
@@ -990,7 +989,9 @@ for(double x = 0; x <= 1 - schrittweite; x += schrittweite) \{^^J
 \SetNextSectionText{Methoden und OOP\\Abgabe: \DTMDate{2022-05-30}}
 \section{Aussicht: Übungsblatt 5}
 \subsection{Aufgabe 1 und 2}
-\begin{frame}{Aufgaben 1\; und 2}
+\begin{frame}
+\end{frame}
+\begin{frame}{Aufgaben 1 und 2}
 \begin{itemize}[<+(1)->]
     \itemsep9pt
     \item Hier helfen \link{https://docs.oracle.com/javase/8/docs/technotes/guides/language/varargs.html}{varargs}! \begin{itemize}
@@ -1054,7 +1055,6 @@ for(double x = 0; x <= 1 - schrittweite; x += schrittweite) \{^^J
 \end{frame}
 \fi
 
-
 \SetNextSectionText[.55\linewidth]{There aren't that many people in the world who are good programmers and there are not that many people in the world who are good writers, and here we are expecting them to be both.\\--- Donald E. Knuth,~\cite[p.649]{knuth1999digital}}
 \section{Abschließendes}
 {\SummaryFrame
@@ -1063,9 +1063,9 @@ for(double x = 0; x <= 1 - schrittweite; x += schrittweite) \{^^J
 \vfill\vfill % double fill for more fraction
 \begin{itemize}[<+(1)->]
     \itemsep6.5pt
-    \item In manchen Fällen \textit{muss} Java intiialisieren \info{Arrays!} \begin{itemize}
+    \item In manchen Fällen \textit{muss} Java initialisieren \info{Arrays!} \begin{itemize}
         \item Ganzzahlen werden \(0\), Fließkommazahlen \(0.0\) (im jeweiligen Typ, also \bjava{0.0f},~\ldots)
-        \item \bjava{boolean} wird \bjava{false}, \bjava{char} wird \bjava{'\0'} \info{Unicode-\say{Null}}
+        \item \bjava{boolean} wird \bjava{false}, \bjava{char} wird \bjava{'\\0'} \info{Unicode-\say{Null}}
         \item Referenzdatentypen (wie Arrays) werden \bjava{null}
     \end{itemize}
     \item Java unterscheidet Methoden durch ihre Signatur (Name \& Parametertypliste)
@@ -1078,9 +1078,9 @@ for(double x = 0; x <= 1 - schrittweite; x += schrittweite) \{^^J
 \end{frame}
 }
 
+
 \outro{\vskip9mm\centering \onslide<2->{\scalebox{1.35}{\begin{tikzpicture}
     \pingu[cloak=pingu@bronze!80!pingu@black,right wing wave, lightsaber right=pingu@blue,eyes wink]
 \end{tikzpicture}}}}
-
 
 \iffull\end{document}\fi
