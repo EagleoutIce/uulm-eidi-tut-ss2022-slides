@@ -1,6 +1,3 @@
-We can face our problem. We can arrange such facts as we have with order and method. Hercule Poirot, in Murder on the Orient Express (1934)
-
-
 About 1000 instructions is a reasonable upper limit for the complexity of problems no envisioned. Herman Goldstine and John von Neumann (1946)
 
 
@@ -16,13 +13,3 @@ An algorithm must be seen to be believed.\\--- Donald E. Knuth~\cite{knuth1997fu
   year={1997},
   publisher={Addison-Wesley}
 }
-
-
-
-There is no real ending. It’s just the place where you stop the story.
-
-    Frank Herbert interview, 3 February 1969, California State College, Fullerton.
-
-
-There aren't that many people in the world who are good programmers and there are not that many people in the world who are good writers, and here we are expecting them to be both.
-Knuth Digital Typography [p. 649]

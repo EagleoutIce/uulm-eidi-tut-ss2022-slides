@@ -29,7 +29,6 @@
 \email{florian.sihler@uni-ulm.de}
 
 \usepackage{tikz}
-\usepackage[glows]{tikzpingus}
 \usepackage{csquotes}
 \usepackage{xfrac}
 
@@ -44,9 +43,13 @@
     lithie-boxes={germanenv,koma,overwrite},%
     lithie-task-boxes={cpalette},lecture-bibliography={biber},% ,style=numeric-comp
     lecture-algorithms,lecture-shortcuts,
+    sopra-models,
     % lecture-links={},%
     lecture-registers={disable}% would interfere with beamer
 ]{lithie-util}
+
+\AtBeginDocument{\pgfsetlayers{background,main,middle,foreground}}
+\usepackage[glows]{tikzpingus} % assert layer stuff for tikzuml (sopra-models) :D
 
 \usepackage{cancel}
 \usepackage{lecture-runtimes,lecture-personal-tikz,lecture-personal-resize,lecture-personal-extra-units,tikzsymbols}
