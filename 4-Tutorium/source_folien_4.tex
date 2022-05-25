@@ -943,7 +943,7 @@ public class Referenzvariablen {
 \begin{frame}[fragile]{d)~\T{\bfseries trapezVerfahren(int)}}
     \SetupLstHl\begin{itemize}[<+(1)->]
         \item Wir können hier über die Schritte (\(i < n\)) oder über \T{x} terminieren.\infoblock{Das Verhalten Umsetzung unterscheidet sich bei Rundungsfehlern!}
-\begin{plainjava}
+\begin{plainjava}[lineskip=1pt]
 !*\onslide<3->*!public static double trapezVerfahren(int n) {
 !*\onslide<4->*!    if (n < 1) {
 !*\onslide<5->*!        System.err.println("Eingabe ungültig");
@@ -966,7 +966,7 @@ for(double x = 0; x <= 1 - schrittweite; x += schrittweite) \{^^J
 \MakeThePinguExplainIt[text width=11.33cm]{cap=!hide,headphones,glasses=!hide,cup=!hide,sunglasses,eyes hearts,body type=chubby,lollipop left,right item angle=-52}{Auch möglich wäre soetwas:\\\copy\codebox}
 \begin{frame}[fragile,c]{d)~\T{\bfseries trapezVerfahren(int)}\hfill II}
 \SetupLstHl
-\begin{plainjava}
+\begin{plainjava}[lineskip=1pt]
 !*\onslide<1->*!public static double trapezVerfahren(int n) {
 !*\onslide<1->*!    |ihl|...|ihl|
 !*\onslide<2->*!    double schrittweite = 1.0 / n; !*\Snode{@1}*!
