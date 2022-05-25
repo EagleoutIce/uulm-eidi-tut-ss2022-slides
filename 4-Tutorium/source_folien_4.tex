@@ -861,6 +861,27 @@ public class Referenzvariablen {
 \end{plainjava}
 \end{frame}
 
+\iffull
+{\AddonFrame
+\begin{frame}{Zu negativen Werten}
+    \begin{itemize}[<+(1)->]
+        \itemsep12pt
+        \item \say{Magic-Numbers} sind generell schlecht \begin{itemize}
+            \item Wie bei den Zeichen \say{A} vs. \(65\)
+            \item Hier können Konstanten eine erste Abhilfe schaffen
+        \end{itemize}
+        \item Betrachten wir die \bjava{-1.0} \begin{itemize}
+            \item Was ist, wenn \bjava{-1.0} auch ein gültiger Rückgabewert ist?
+            \item Wie können wir den Aufrufer auf das Problem hinweisen?
+            \item Was, wenn wir mit dem Fehler eine Nachricht mitgeben möchten?
+            \item Wie können wir Verbindungen zwischen Fehlern ausdrücken.
+        \end{itemize}
+        \item Dafür werden wir später \link{https://docs.oracle.com/javase/tutorial/essential/exceptions/}{Exceptions} betrachten.
+    \end{itemize}
+\end{frame}
+}
+\fi
+
 \begin{frame}[fragile]{d)~Ausgabe}
 \begin{itemize}[<+(1)->]
     \itemsep8pt
