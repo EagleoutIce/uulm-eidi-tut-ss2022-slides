@@ -1,7 +1,7 @@
 \InputIfFileExists{../data/global.src}\relax\relax
 
 \iffull
-\title{TODO}
+\title{Klasse globale, potente Entwürfe}
 \subtitle{Tutorium fünf}
 \date{KW 22}
 \addbibresource{references.bib}
@@ -18,7 +18,23 @@
 \begin{frame}[fragile,c]{Kurzwiederholung}
     \begin{itemize}[<+(1)->]
         \itemsep9.25pt
-        \item TODO
+        \item Bei Arrays \textit{muss} Java \info{\say{die erste Ebene}} initialisieren! \begin{itemize}
+            \itemsep3pt
+            \item Alles wird \say{Null} (\bjava{0}, \bjava{0.0}, \bjava{'\\0'}, \bjava{false}, \bjava{null})
+            \item \bjava{new float[2][]}~\textcolor{gray}{\(\to\)} \bjava{\{null, null\}},~~\bjava{new int[2][1]}~\textcolor{gray}{\(\to\)} \bjava{\{\{0\}, \{0\}\}},~\ldots
+        \end{itemize}
+        \item Methoden werden in Java durch ihre Signatur unterschieden \begin{itemize}
+            \itemsep3pt
+            \item Dies ist der Name und die Parametertypliste
+            \item Im Beispiel \onslide<8->{ist dies \bjava{mega(int, char[])}:}
+\begin{plainjava}[aboveskip=0pt,belowskip=0pt]
+!*\onslide<7->*!public static double mega(int i, char[] r) {
+!*\onslide<7->*!    return (double) i + r.length;
+!*\onslide<7->*!}!*\onslide<1->*!
+\end{plainjava}
+        \end{itemize}
+    \item Unterprogramme sind ein wichtiger Abstraktions-Mechanismus
+    \item Seiteneffekte sind ein Problem und sollten \info{wo möglich} vermieden werden!
     \end{itemize}
 \end{frame}
 }\fi
