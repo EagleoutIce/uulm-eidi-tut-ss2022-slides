@@ -1046,16 +1046,16 @@ for(double x = 0; x <= 1 - schrittweite; x += schrittweite) \{^^J
 \path (-4cm+6mm,2cm-1.92cm-1pt) -- ++(0,-2.78) node [black,midway, above,rotate=90,yshift=.75cm] {Methoden};
 \node at(0,3.25) [above=-6mm] (kln) {Klassenname};
 % Hackey decky
-\umlclass[x=10,y=0]{Objekt: Student}{
+\umlclass[x=10,y=0,rounded corners=4pt]{Objekt: Student}{
     {studierendenzahl: 10142}\\
     {name: \dq Peter-Hans\dq}\\
     {matrikelnummer: 10142001}\\
-    {besuchtVorlesungen: \{\dq EidI\dq, \dq GdBs\dq, \dq Ana1\dq, \dq Pengu\dq \} }}{
+    {besuchtVorlesungen: [\dq EidI\dq, \dq GdBs\dq, \dq Ana1\dq, \dq Pengu\dq] }}{
     {getName() : String}\\
     {getNummer() : int}\\
-    {addVorlesung(String name) : void}\\
+    {addVorlesung(name: String) : void}\\
     {getVorlesungen() : String[]}\\
-    {removeVorlesung(String name) : void }}
+    {removeVorlesung(name: String) : void }}
 \end{tikzpicture}}
 \begin{frame}{Aufgabe 3: Objektorientierung --- Klassenentwurf}
 \begin{itemize}[<+(1)->]
