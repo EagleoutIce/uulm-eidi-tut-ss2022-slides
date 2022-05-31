@@ -129,6 +129,104 @@ Klasse \T{Potenz}} und lassen Sie sich die \Mark<10->{Attribute des Objekts anze
 \SetNextSectionText{Methoden und OOP\\Abgabe: \DTMDate{2022-05-30}}
 \section{Übungsblatt 5}
 \subsection{Aufgabe 1}
+\begin{lrbox}{\codebox}
+\SetupLstHl\lstfs{7}\begin{minipage}{7cm}
+\begin{plainjava}
+public class Quersumme {
+    public static void main(String[] args) {
+        int zahl = Integer.parseInt(args[0]);
+
+        if (zahl < 0) {
+            System.err.println("Eingabe ungültig!");
+            return;
+        }
+
+        int quersumme = 0;
+        int divRest;
+        while (zahl > 0) {
+            divRest = zahl % 10;
+            quersumme = quersumme + divRest;
+            zahl = zahl / 10;
+        }
+        System.out.println(quersumme);
+    }
+}
+\end{plainjava}
+\end{minipage}
+\end{lrbox}
+\begin{frame}[c]{Aufgabe 1: Methoden mit einer variablen Parameterzahl }
+    \task<2->{Legen Sie eine Java Datei namens Quersummen.java und implementieren Sie die folgende Aufgabe innerhalb dieser
+    Datei als eine öffentliche statische Methode namens \T{quersummeVonQuersummen}.
+    \onslide<3->{Die Methode soll eine beliebige Anzahl an Parametern vom Typ \T{int} erwarten und für jede dieser Zahlen die Quersumme
+    berechnen und diese aufsummieren. Zusätzlich soll eine weitere boolean Parameter angeben, ob aus der Summe wiederum die Quersumme berechnet werden soll. Testen Sie Ihre Implementierung mit den angebenden Beispielen.}\medskip
+
+    \onslide<4->{\textbf{Beispiele:}\\
+\T{Ja, 123, 92, 57, 30 $\to$ 6 + 11 + 12 + 3 = 32 $\to$ 5}\\
+\T{Nein, 12, 9, 4 $\to$ 3 + 9 + 4 = 16}}
+    }\vspace*{-2.25\baselineskip}
+\onslide<5->{\centerline{\hspace*{15mm}\begin{tikzpicture}
+    \pingu[right wing shock,left wing wave, eyes wink,halo,name=calline]
+    \node[shape=cloud callout,above right=5mm,xshift=2.85cm,draw,callout absolute pointer={([xshift=12mm]calline-head-left)},callout pointer segments=3,cloud ignores aspect,cloud puffs=25,scale=.45,inner sep=0pt] (@) at(calline-wing-left-tip) {
+        \vspace*{-3mm}\hspace*{3mm}\copy\codebox
+    };
+    \node[opacity=.75,gray] at ([yshift=.25cm]@) {Blatt 3, Aufgabe 3};
+\end{tikzpicture}}}
+\end{frame}
+
+\begin{frame}[fragile]{Meta-Quersummen}
+\begin{itemize}[<+(1)->]
+    \item Wir sollen mehrere Quersummen berechnen. Wir haben schon ein Programm für eine:\vfill\lstfs{8}
+\columns[onlytextwidth,c]
+\column{.475\linewidth}
+\begin{plainjava}
+public static void main(String[] args) {
+   int zahl = Integer.parseInt(args[0]);!*\Snode{IntParse}*!
+   if (zahl < 0) {
+      System.err.println("Eingabe doof!");
+      return;
+   }
+   int quersumme = 0;
+   int divRest;
+   while (zahl > 0) {
+      divRest = zahl % 10;
+      quersumme = quersumme + divRest;
+      zahl = zahl / 10;
+   }
+   System.out.println(quersumme);
+}
+\end{plainjava}
+\column{0pt}
+\clap{$\to$}
+\column{.475\linewidth}
+\makeatletter
+\begin{tikzpicture}[@O]
+    \def\hlcolor{paletteA}
+    \iftikzmark{IntParseNew}{% save@pt@
+        \edef\Want{\csname save@pt@\tikzmark@pp@name{IntParseNew}\endcsname}
+        \draw (\Want.east) circle[radius=1mm];
+    }{}
+    % \hlcode{IntParseNew}{@}
+\end{tikzpicture}
+\begin{plainjava}
+public static int quersumme(!*\tikzmarknode{IntParseNew}{\sbasic{\skB{int} zahl}}*!){
+    if(zahl < 0){
+        System.out.println("Eingabe doof!");
+        return 0;
+    }
+    int qs = 0;
+    while(zahl > 0){
+        qs = qs + (zahl % 10);
+        zahl = zahl / 10;
+    }
+    return qs;
+}
+\end{plainjava}
+\endcolumns
+\end{itemize}
+\begin{tikzpicture}[@O,K/.style={above,gray,font=\footnotesize\sffamily}]
+    \draw[lightgray,-Kite] (IntParse) to[out=5,in=165,edge node={node[K] {Ein allgemeinerer Eingabeparameter}}] ([yshift=1mm]IntParseNew.north);
+\end{tikzpicture}
+\end{frame}
 
 \begin{frame}{TODO:}
     TODO: toString machen
@@ -157,6 +255,7 @@ Klasse \T{Potenz}} und lassen Sie sich die \Mark<10->{Attribute des Objekts anze
 \end{itemize}
 \end{frame}
 }
+
 
 
 \outro{\vskip9mm\centering \onslide<2->{\begin{tikzpicture}
