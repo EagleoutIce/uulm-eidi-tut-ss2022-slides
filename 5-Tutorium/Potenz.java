@@ -24,8 +24,7 @@ public class Potenz {
    }
 
    public void printAttribute() {
-      System.out.printf("Basis: %.3f \n", this.basis);
-      System.out.printf("Potenz: %d \n", this.potenz);
+      System.out.printf("Basis: %.3f%n", this.basis);
+      System.out.printf("Potenz: %d%n", this.potenz);
    }
-
 }

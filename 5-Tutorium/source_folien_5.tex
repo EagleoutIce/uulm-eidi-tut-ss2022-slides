@@ -47,27 +47,30 @@
 \begin{aufgabe}{Show me ya' potency}
 \vspace*{-\baselineskip}\relax
 \begin{enumerate}
-    \item<2-> Implementieren Sie eine Klasse für Potenzen. Die Klasse soll zwei private Attribute \T{basis} und \T{potenz} besitzen,
+    \item<2-> Implementieren Sie eine Klasse \T{Potenz} für Potenzen. Die Klasse soll zwei private Attribute \T{basis} und \T{potenz} besitzen,
     sowie einen Konstruktor mit zwei Argumenten definieren, der den Attributen Anfangswerte zuweist. \onslide<3->{Zusätzlich
     soll es getter und setter für die Attribute geben. Die Klasse soll eine öffentliche Methode besitzen, die die
     Attribute der Instanz auf die Konsole ausgibt.}
-    \item<4-> Legen Sie eine zweite Java Datei namens \T{PotenzenMain.java} an, die als Programmeinstiegspunkt dienen soll, d.h. hier ist die main Methode implementiert. \onslide<5->{Instanziieren Sie innerhalb der \T{main} Methode ein Objekt der
+    \item<4-> Legen Sie \info{im selben Ordner} eine zweite Java Datei namens \T{PotenzMain.java} an, die als Programmeinstiegspunkt dienen soll, d.h. hier ist die \T{main} Methode implementiert. \onslide<5->{Instanziieren Sie innerhalb der \T{main} Methode ein Objekt der
     Klasse \T{Potenz} und lassen Sie sich die Attribute des Objekts anzeigen.}
 \end{enumerate}
 \end{aufgabe}
+\begin{tikzpicture}[@O]
+\node[above left=.35mm,thick,draw,gray,fill=white,rounded corners=2pt,yshift=\btdmfootheight,scale=.65,align=left] at(current page.south east) {\bbash{javac Potenz.java PotenzMain.java}\\\bbash{java PotenzMain}};
+\end{tikzpicture}
 \end{frame}
 
 {\newcommand<>\Mark[1]{{\only#2{\color{black}}#1}}
 \begin{frame}[fragile,c]{Ich bin Herbert Klassenzüchter!}
 \columns[onlytextwidth,c]
-\column{.29\linewidth}
-\task<2->{Implementieren Sie eine \Mark<3->{Klasse für Potenzen}. Die Klasse soll \Mark<5->{zwei private Attribute \T{basis} und \T{potenz}} besitzen,
-sowie einen \Mark<8->{Konstruktor mit zwei Argumenten} definieren, der den \Mark<10->{Attributen Anfangswerte zuweist}.
+\column{.3\linewidth}
+\task<2->{Implementieren Sie eine \Mark<3->{Klasse \T{Potenz} für Potenzen}. Die Klasse soll \Mark<5->{zwei private Attribute \T{basis} und \T{potenz}} besitzen,
+sowie einen \Mark<8->{Konstruktor mit zwei Argumenten} definieren, der den \Mark<10->{Attributen Anfangswerte zuweist}.\medskip\par
 Zusätzlich soll es \Mark<12->{getter} und \Mark<14->{setter} für die Attribute geben. Die Klasse soll eine \Mark<16->{öffentliche Methode} besitzen, die die
 Attribute der Instanz auf die Konsole ausgibt.}
 \column{.64\linewidth}
 \lstfs{9}
-\begin{plainjava}[lineskip=.5pt]
+\begin{plainjava}[lineskip=.5pt,morekeywords={[3]{Potenz,PotenzMain}}]
 !*\onslide<4->*!public class Potenz {
 !*\onslide<6->*!   private !*\onslide<7->*!double !*\onslide<6->*!basis;
 !*\onslide<6->*!   private !*\onslide<7->*!int !*\onslide<6->*!potenz;
@@ -87,14 +90,50 @@ Attribute der Instanz auf die Konsole ausgibt.}
 !*\onslide<4->*!}
 \end{plainjava}
 \endcolumns
+\begin{tikzpicture}[@O]
+    \only<18->{\node[above left,yshift=\btdmfootheight] at (current page.south east) {\textattachfile{\curpath Potenz.java}{Potenz.java}\;};}
+\end{tikzpicture}
+\end{frame}
+
+\begin{frame}[fragile,c]{Major Main}
+\columns[onlytextwidth,c]
+\column{.3\linewidth}
+\task<3->{Legen Sie eine \Mark<4->{zweite Java Datei namens \T{PotenzMain.java}} an, die als Programmeinstiegspunkt dienen soll, d.h. hier ist die \Mark<6->{\T{main} Methode} implementiert.\medskip\par Instanziieren Sie innerhalb der \T{main} Methode \Mark<8->{ein Objekt der
+Klasse \T{Potenz}} und lassen Sie sich die \Mark<10->{Attribute des Objekts anzeigen}.}
+\column{.64\linewidth}
+\lstfs{9}\SetupLstHl
+\begin{plainjava}[lineskip=1.5pt,morekeywords={[3]{Potenz,PotenzMain}}]
+!*\onslide<2->*!!*\CodeFileMarker{Potenz.java}*!
+!*\onslide<2->*!|ihl|public class Potenz {|ihl|
+!*\onslide<2->*!|ihl|    public Potenz(double b, int e) { ... }|ihl|
+!*\onslide<2->*!|ihl|   ...|ihl|
+!*\onslide<2->*!|ihl|    public void print() { ... }|ihl|
+!*\onslide<2->*!|ihl|}|ihl|
+
+!*\onslide<5->*!!*\CodeFileMarker{PotenzMain.java}*!
+!*\onslide<5->*!public class PotenzMain {
+!*\onslide<12->*!   !*\ShowInTheWeb{https://www.online-java.com/oBHh8ndD2C}*!
+!*\onslide<7->*!   public static void main(String[] args) {
+!*\onslide<9->*!      Potenz p = new Potenz(2.0, 3);
+!*\onslide<11->*!      p.print(); !*\onslide<12->*!// :yields: 2.0^(3)
+!*\onslide<7->*!   }
+!*\onslide<5->*!}
+\end{plainjava}
+\endcolumns
+\begin{tikzpicture}[@O]
+    \only<12->{\node[above left,yshift=\btdmfootheight] at (current page.south east) {\textattachfile{\curpath PotenzMain.java}{PotenzMain.java}\;};}
+\end{tikzpicture}
 \end{frame}
 }
+
+\SetNextSectionText{Methoden und OOP\\Abgabe: \DTMDate{2022-05-30}}
+\section{Übungsblatt 5}
+\subsection{Aufgabe 1}
 
 \begin{frame}{TODO:}
     TODO: toString machen
 
     Bauplananalogie etc.
-    TODO: davor auf Dateien und selber Ordner eingehen
     TODO: auf this eingehen TODO: start überlagern  und soo
     TOPDO: heap-darstellung mit mehr chaos für Chlassen
 
@@ -105,8 +144,6 @@ Attribute der Instanz auf die Konsole ausgibt.}
 
     TODO: Klassenentwurf vom letztenmal :D
     TODO: Begriffe fundieren
-
-    TODO: godbolt als Java-Beispiele?
 \end{frame}
 \SetNextSectionText[.55\linewidth]{TODO}
 \section{Abschließendes}

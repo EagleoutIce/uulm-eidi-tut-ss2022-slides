@@ -125,12 +125,13 @@
 \makeatletter
 \sol@list@define@styles{%
  {literals: \@declaredcolor{btdm@text}\slshape},%
- {basic:    \@declaredcolor{btdm@text}\sol@ttfamily}%
+ {basic:    \@declaredcolor{btdm@text}\sol@ttfamily}%,
+ %{keywordC: \@declaredcolor{sol@colors@lst@keywordC}\slshape}%
 }%
 \AtEndPreamble{\def\sol@cpalette@hook{%
 \lstcolorlet{keywordA}{paletteA!95!black}%
 \lstcolorlet{keywordB}{paletteB!95!black}%
-\lstcolorlet{keywordC}{paletteC!60!paletteA}%
+\lstcolorlet{keywordC}{paletteC!23!paletteA}%
 \lstcolorlet{numbers}{paletteB}%
 \lstcolorlet{literals}{black}%
 \lstcolorlet{comments}{lightgray!80!btdm@text}%
@@ -327,3 +328,6 @@
 % current space hack:
 \preto\AnimateCode{\vspace*{-.65\baselineskip}}
 \appto\endAnimateCode{\vspace*{-\baselineskip}}
+\def\CodeFileMarker#1{{\color{lightgray}\sffamily\tiny\llap{\faFileCodeO~\thinspace}#1}}
+\def\ShowInTheWeb#1{\smash{\raisebox{.25mm}{\color{lightgray}\sffamily\tiny\fancyulcolor{lightgray}\link{#1}{display in browser}}}\vspace*{-.25mm}}
+% \def\CodeFileMarker#1{{\hfill\color{lightgray}\sffamily\tiny#1\rlap{\thinspace~\faFileCodeO}}}
