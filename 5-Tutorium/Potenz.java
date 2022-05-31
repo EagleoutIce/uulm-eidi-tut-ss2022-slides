@@ -1,22 +1,22 @@
 public class Potenz {
    private double basis;
-   private int exponent;
+   private int potenz;
 
    public Potenz(final double b, final int e) {
       this.basis = b;
-      this.exponent = e;
+      this.potenz = e;
    }
 
    public double getBasis() {
       return this.basis;
    }
 
-   public int getExponent() {
-      return this.exponent;
+   public int getPotenz() {
+      return this.potenz;
    }
 
-   public void setExponent(final int e) {
-      this.exponent = e;
+   public void setPotenz(final int e) {
+      this.potenz = e;
    }
 
    public void setBasis(final double b) {
@@ -25,7 +25,7 @@ public class Potenz {
 
    public void printAttribute() {
       System.out.printf("Basis: %.3f \n", this.basis);
-      System.out.printf("Exponent: %d \n", this.exponent);
+      System.out.printf("Potenz: %d \n", this.potenz);
    }
 
 }

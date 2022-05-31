@@ -26,15 +26,17 @@
         \item Methoden werden in Java durch ihre Signatur unterschieden \begin{itemize}
             \itemsep3pt
             \item Dies ist der Name und die Parametertypliste
-            \item Im Beispiel \onslide<8->{ist dies \bjava{mega(int, char[])}:}
+            \item Im Beispiel \onslide<9->{ist dies \bjava{mega(int, char[])}:}
+\AnimateCode{onslide={*\Line{1}\Others{3}\NoLocation\Forever},first slide=8}%
 \begin{plainjava}[aboveskip=0pt,belowskip=0pt]
 !*\onslide<7->*!public static double mega(int i, char[] r) {
 !*\onslide<7->*!    return (double) i + r.length;
 !*\onslide<7->*!}!*\onslide<1->*!
 \end{plainjava}
+\endAnimateCode
         \end{itemize}
-    \item Unterprogramme sind ein wichtiger Abstraktions-Mechanismus
-    \item Seiteneffekte sind ein Problem und sollten \info{wo möglich} vermieden werden!
+    \item<10-> Unterprogramme sind ein wichtiger Abstraktions-Mechanismus
+    \item<11-> Seiteneffekte sind ein Problem und sollten \info{wo möglich} vermieden werden!
     \end{itemize}
 \end{frame}
 }\fi
@@ -55,11 +57,49 @@
 \end{aufgabe}
 \end{frame}
 
+{\newcommand<>\Mark[1]{{\only#2{\color{black}}#1}}
+\begin{frame}[fragile,c]{Ich bin Herbert Klassenzüchter!}
+\columns[onlytextwidth,c]
+\column{.29\linewidth}
+\task<2->{Implementieren Sie eine \Mark<3->{Klasse für Potenzen}. Die Klasse soll \Mark<5->{zwei private Attribute \T{basis} und \T{potenz}} besitzen,
+sowie einen \Mark<8->{Konstruktor mit zwei Argumenten} definieren, der den \Mark<10->{Attributen Anfangswerte zuweist}.
+Zusätzlich soll es \Mark<12->{getter} und \Mark<14->{setter} für die Attribute geben. Die Klasse soll eine \Mark<16->{öffentliche Methode} besitzen, die die
+Attribute der Instanz auf die Konsole ausgibt.}
+\column{.64\linewidth}
+\lstfs{9}
+\begin{plainjava}[lineskip=.5pt]
+!*\onslide<4->*!public class Potenz {
+!*\onslide<6->*!   private !*\onslide<7->*!double !*\onslide<6->*!basis;
+!*\onslide<6->*!   private !*\onslide<7->*!int !*\onslide<6->*!potenz;
+!*\onslide<4->*!
+!*\onslide<9->*!   public Potenz(double b, int e) {
+!*\onslide<11->*!      this.basis = b;
+!*\onslide<11->*!      this.potenz = e;
+!*\onslide<9->*!   }
+!*\onslide<13->*!   public double getBasis() { return this.basis; }
+!*\onslide<13->*!   public int getPotenz() { return this.potenz; }
+!*\onslide<15->*!   public void setBasis(double b) { this.basis = b; }
+!*\onslide<15->*!   public void setPotenz(int e) { this.potenz = e; }
+
+!*\onslide<17->*!   public void print() {
+!*\onslide<17->*!      System.out.println(basis + "^(" + potenz + ")");
+!*\onslide<17->*!   }
+!*\onslide<4->*!}
+\end{plainjava}
+\endcolumns
+\end{frame}
+}
+
 \begin{frame}{TODO:}
+    TODO: toString machen
+
     Bauplananalogie etc.
     TODO: davor auf Dateien und selber Ordner eingehen
+    TODO: auf this eingehen TODO: start überlagern  und soo
+    TOPDO: heap-darstellung mit mehr chaos für Chlassen
+    TODO: make corners of object diagram round!! (Tut4)
 
-
+    TODO: private hilfsmethoden ansprechen
     TODO: Ausblick mit Gültigkeits- und Sichtbarkeitsbereichen
     TODO: Signatur nochmal wiederholen usw
     TODO: überschatten überlagern

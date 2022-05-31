@@ -36,7 +36,7 @@
 \PassOptionsToPackage{defernumbers=true}{biblatex}% allows for split bibs
 \def\LithieBoxesLoadDefault{}
 \usepackage[%
-    sopra-listings={encoding,cpalette,print,highlights,nodefaultfont},%
+    sopra-listings={encoding,cpalette,print,highlights,nodefaultfont,fakeminted},%
     % sopra-tables,
     color-palettes,beamer-extra,%
     %util,%,,%
@@ -322,3 +322,8 @@
 \newcommand<>{\mark}[1]{{\only#2{\color{black}}#1}}
 
 \usepackage{code-animation}
+\SetCodeAnimationFadeOutMixin{!12!codeouthl}
+\CodeAnimationsWithFadeOut
+% current space hack:
+\preto\AnimateCode{\vspace*{-.65\baselineskip}}
+\appto\endAnimateCode{\vspace*{-\baselineskip}}
