@@ -176,11 +176,15 @@ public class Quersumme {
 \begin{frame}[fragile]{Meta-Quersummen}
 \begin{itemize}[<+(1)->]
     \item Wir sollen mehrere Quersummen berechnen. Wir haben schon ein Programm für eine:\vfill\lstfs{8}
+\begin{tikzpicture}[@O]
+    \def\hlcolor{paletteA}
+    \hlbehindcode{IntParse}{@>}
+\end{tikzpicture}
 \columns[onlytextwidth,c]
 \column{.475\linewidth}
 \begin{plainjava}
 public static void main(String[] args) {
-   int zahl = Integer.parseInt(args[0]);!*\Snode{IntParse}*!
+    !*\Snode{IntParse}*!int zahl = Integer.parseInt(args[0]);!*\Snode{IntParse@}*!
    if (zahl < 0) {
       System.err.println("Eingabe doof!");
       return;
@@ -199,14 +203,6 @@ public static void main(String[] args) {
 \clap{$\to$}
 \column{.475\linewidth}
 \makeatletter
-\begin{tikzpicture}[@O]
-    \def\hlcolor{paletteA}
-    \iftikzmark{IntParseNew}{% save@pt@
-        \edef\Want{\csname save@pt@\tikzmark@pp@name{IntParseNew}\endcsname}
-        \draw (\Want.east) circle[radius=1mm];
-    }{}
-    % \hlcode{IntParseNew}{@}
-\end{tikzpicture}
 \begin{plainjava}
 public static int quersumme(!*\tikzmarknode{IntParseNew}{\sbasic{\skB{int} zahl}}*!){
     if(zahl < 0){
@@ -224,7 +220,7 @@ public static int quersumme(!*\tikzmarknode{IntParseNew}{\sbasic{\skB{int} zahl}
 \endcolumns
 \end{itemize}
 \begin{tikzpicture}[@O,K/.style={above,gray,font=\footnotesize\sffamily}]
-    \draw[lightgray,-Kite] (IntParse) to[out=5,in=165,edge node={node[K] {Ein allgemeinerer Eingabeparameter}}] ([yshift=1mm]IntParseNew.north);
+    \draw[lightgray,-Kite] (@>) to[out=5,in=165,edge node={node[K] {Ein allgemeinerer Eingabeparameter}}] ([yshift=1mm]IntParseNew.north);
 \end{tikzpicture}
 \end{frame}
 

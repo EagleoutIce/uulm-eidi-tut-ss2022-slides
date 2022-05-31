@@ -255,6 +255,8 @@
 \newcommand\hlbcode[3][1.9pt]{\fill[\hlcolor,opacity=\hlopa,rounded corners=1pt] ([shift={(-\hlhs,-#1)}]#2.south west) rectangle ([shift={(\hlhs,#1)}]#2@.north east); \coordinate (#3) at (#2@.east);}
 \newcommand\bcodeover[4][1.9pt]{\hlbcode[#1]{#2}{#3}\path(#2)--(#2@) node[pos=.5]{#4};}
 
+\newcommand\hlbehindcode[3][1.9pt]{\fill[\hlcolor,opacity=\hlopa,rounded corners=1pt] ([shift={(-\hlhs,-#1)}]pic cs:#2) rectangle ([shift={(\hlhs,#1)}]pic cs:#2@); \coordinate (#3) at (pic cs:#2@);}
+
 \newcommand\hlbcodeframe[3][1.9pt]{\draw[\hlcolor,thick,opacity=.5+\hlopa,rounded corners=1pt] ([shift={(-\hlhs,-#1)}]#2.south west) rectangle ([shift={(\hlhs,#1)}]#2@.north east); \coordinate (#3) at (#2@.east);}
 
 \makeatletter % adapt fontsize
