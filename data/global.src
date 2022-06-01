@@ -81,6 +81,7 @@
 \newdimen\ul@surround \ul@surround=1.35\p@
 % we make the auto detection of the depth bigger
 \def\update@ul{\setbox\z@\hbox{{(j}}\edef\fancyul@thickness{\the\dimexpr.2\dp\z@}}
+\def\rawlink#1{\leavevmode\kern-\ul@surround{\update@ul\kern\ul@surround\relax\fancyul{#1}}}
 % define a link macro that can be used with href and fancyul
 \DeclareRobustCommand*\link{\hyper@normalise\link@do}
 \def\link@do#1#2{\leavevmode\kern-\ul@surround\href{#1}{\update@ul\kern\ul@surround\relax\fancyul{#2}}}% thinspace for some nicer padding
@@ -251,11 +252,17 @@
 \sisetup{unit-font-command=\mathsf}
 \usepackage{mathastext} % load it here for upshape again :D
 \def\hlcolor{paletteA}
-\def\hlopa{0.2}\def\hlhs{.4mm}
+\def\hlopa{0.2}\def\hlhs{.4mm}% horizonal shift
 \newcommand\hlcode[3][1.9pt]{\fill[\hlcolor,opacity=\hlopa,rounded corners=1pt] ([shift={(-\hlhs,-#1)}]#2.south west) rectangle ([shift={(\hlhs,#1)}]#2.north east); \coordinate (#3) at (#2.east);}
 \newcommand\hlbcode[3][1.9pt]{\fill[\hlcolor,opacity=\hlopa,rounded corners=1pt] ([shift={(-\hlhs,-#1)}]#2.south west) rectangle ([shift={(\hlhs,#1)}]#2@.north east); \coordinate (#3) at (#2@.east);}
 \newcommand\bcodeover[4][1.9pt]{\hlbcode[#1]{#2}{#3}\path(#2)--(#2@) node[pos=.5]{#4};}
-\newcommand\hlbehindcode[3][0pt]{\setbox0=\hbox{\pgfinterruptpicture\HStrut\endpgfinterruptpicture}\fill[\hlcolor,opacity=\hlopa,rounded corners=1pt] ([shift={(-\hlhs,-#1-.95\dp0)}]pic cs:#2) rectangle ([shift={(\hlhs,#1+.87\ht0)}]pic cs:#2@); \coordinate (#3) at ([yshift=.415\ht0]pic cs:#2@);}
+\newcommand\hlbehindcode[3][0pt]{\setbox0=\hbox{\pgfinterruptpicture\HStrut\endpgfinterruptpicture}\fill[\hlcolor,opacity=\hlopa,rounded corners=1pt] ([shift={(-\hlhs,-#1-.95\dp0)}]pic cs:#2) rectangle ([shift={(\hlhs,#1+.87\ht0)}]pic cs:#2@); \coordinate (#3) at ([yshift=.415\ht0]pic cs:#2@);
+\path ([shift={(-\hlhs,#1+.87\dp0)}]pic cs:#2) -- ([shift={(\hlhs,#1+.87\ht0)}]pic cs:#2@) coordinate[pos=.5,yshift=1mm] (#3_up);\path ([shift={(-\hlhs,-#1-.95\dp0)}]pic cs:#2) -- ([shift={(\hlhs,-#1+.95\ht0)}]pic cs:#2@) coordinate[pos=.5,yshift=-1mm] (#3_down) }% hardcoded 1mm padding
+% just underlines as there are no vert buffers:D
+\newcommand\hlbehindcodeunder[3][0pt]{\setbox0=\hbox{\pgfinterruptpicture\HStrut\endpgfinterruptpicture}\fill[\hlcolor,opacity=\hlopa,rounded corners=1pt] ([shift={(-\hlhs,-#1-1.6pt)}]pic cs:#2) rectangle ([shift={(\hlhs,#1+1.6pt)}]pic cs:#2@); \coordinate (#3) at (pic cs:#2@);
+\path ([shift={(-\hlhs,#1+.87\dp0)}]pic cs:#2) -- ([shift={(\hlhs,#1+.87\ht0)}]pic cs:#2@) coordinate[pos=.5,yshift=1mm] (#3_up);
+\path ([shift={(-\hlhs,-#1-.95\dp0)}]pic cs:#2) -- ([shift={(\hlhs,-#1+.95\ht0)}]pic cs:#2@) coordinate[pos=.5,yshift=-1mm-1.6pt] (#3_down); }
+
 
 \newcommand\hlbcodeframe[3][1.9pt]{\draw[\hlcolor,thick,opacity=.5+\hlopa,rounded corners=1pt] ([shift={(-\hlhs,-#1)}]#2.south west) rectangle ([shift={(\hlhs,#1)}]#2@.north east); \coordinate (#3) at (#2@.east);}
 
@@ -332,7 +339,9 @@
 \appto\endAnimateCode{\vspace*{-\baselineskip}}
 \def\CodeFileMarker#1{{\color{lightgray}\sffamily\tiny\llap{\faFileCodeO~\thinspace}#1}}
 \def\ShowInTheWeb#1{\smash{\raisebox{.25mm}{\color{lightgray}\sffamily\tiny\fancyulcolor{lightgray}\link{#1}{display in browser}}}\vspace*{-.25mm}}
+
 % \def\CodeFileMarker#1{{\hfill\color{lightgray}\sffamily\tiny#1\rlap{\thinspace~\faFileCodeO}}}
+\def\CodeFileMarkerAttach#1{\CodeFileMarker{\attachfilesetup{color=lightgray}\fancyulcolor{lightgray}\textattachfile{\curpath #1}{\rawlink{#1}}}}
 
 \mode<all>{\newcommand<>\onlyhandout[1]{\relax}}
 \mode<handout>{\let\onlyhandout\only}
@@ -386,3 +395,7 @@
 \fill[body,rotate around=41:(@)] ([xshift=-.1mm,yshift=-.2mm]@) ellipse[x radius=.55mm,y radius=.35mm];
 \endscope
 \end{tikzpicture}}
+
+\newsavebox\pingudoc
+\savebox\pingudoc{\tikz\pingu[body=pingu@black,shirt=pingu@red!80!pingu@black!70!white,bow tie=orange!90!purple, left wing wave, cape=pingu@white!75!gray, halo, halo raise=1.55mm,halo above,cloak wings=false,right eye wink,right,cloak cap=pingu@white!75!gray,monocle left,monocle left glass=pingu@bronze,cane right=pingu@bronze!90!pingu@black, cane right raise=-1.65mm];}
+
