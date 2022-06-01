@@ -257,7 +257,7 @@
 \newcommand\hlbcode[3][1.9pt]{\fill[\hlcolor,opacity=\hlopa,rounded corners=1pt] ([shift={(-\hlhs,-#1)}]#2.south west) rectangle ([shift={(\hlhs,#1)}]#2@.north east); \coordinate (#3) at (#2@.east);}
 \newcommand\bcodeover[4][1.9pt]{\hlbcode[#1]{#2}{#3}\path(#2)--(#2@) node[pos=.5]{#4};}
 \newcommand\hlbehindcode[3][0pt]{\setbox0=\hbox{\pgfinterruptpicture\HStrut\endpgfinterruptpicture}\fill[\hlcolor,opacity=\hlopa,rounded corners=1pt] ([shift={(-\hlhs,-#1-.95\dp0)}]pic cs:#2) rectangle ([shift={(\hlhs,#1+.87\ht0)}]pic cs:#2@); \coordinate (#3) at ([yshift=.415\ht0]pic cs:#2@);
-\path ([shift={(-\hlhs,#1+.87\dp0)}]pic cs:#2) -- ([shift={(\hlhs,#1+.87\ht0)}]pic cs:#2@) coordinate[pos=.5,yshift=1mm] (#3_up);\path ([shift={(-\hlhs,-#1-.95\dp0)}]pic cs:#2) -- ([shift={(\hlhs,-#1+.95\ht0)}]pic cs:#2@) coordinate[pos=.5,yshift=-1mm] (#3_down) }% hardcoded 1mm padding
+\path ([shift={(-\hlhs,#1+.87\dp0)}]pic cs:#2) -- ([shift={(\hlhs,#1+.87\ht0)}]pic cs:#2@) coordinate[pos=.5,yshift=1mm] (#3_up);\path ([shift={(-\hlhs,-#1-.95\dp0)}]pic cs:#2) -- ([shift={(\hlhs,-#1+.95\ht0)}]pic cs:#2@) coordinate[pos=.5,yshift=-1mm] (#3_down); }% hardcoded 1mm padding
 % just underlines as there are no vert buffers:D
 \newcommand\hlbehindcodeunder[3][0pt]{\setbox0=\hbox{\pgfinterruptpicture\HStrut\endpgfinterruptpicture}\fill[\hlcolor,opacity=\hlopa,rounded corners=1pt] ([shift={(-\hlhs,-#1-1.6pt)}]pic cs:#2) rectangle ([shift={(\hlhs,#1+1.6pt)}]pic cs:#2@); \coordinate (#3) at (pic cs:#2@);
 \path ([shift={(-\hlhs,#1+.87\dp0)}]pic cs:#2) -- ([shift={(\hlhs,#1+.87\ht0)}]pic cs:#2@) coordinate[pos=.5,yshift=1mm] (#3_up);
