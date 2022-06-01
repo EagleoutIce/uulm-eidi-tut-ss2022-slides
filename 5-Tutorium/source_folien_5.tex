@@ -14,6 +14,9 @@
 \TopicOverview{5}
 \fi
 
+\iffalse
+
+
 \iffull{\SummaryFrame
 \begin{frame}[fragile,c]{Kurzwiederholung}
     \begin{itemize}[<+(1)->]
@@ -630,6 +633,129 @@ private static boolean isUppercase(char c) { return c >= 'A' && c <= 'Z'; }
 % \end{frame}
 % }\fi
 
+
+\fi
+
+
+\SetNextSectionText{Aber die Sprache um ein Wort ärmer machen heißt das Denken der Nation um einen Begriff ärmer machen\\Arthur Schopenhauer~--- \cite[II, chp.~12]{schopenhauer1859welt}}
+\section{Terminologien}
+\iffull
+\begin{frame}[fragile]{Ein Beispiel}
+\begin{itemize}[<+(1)->]
+    \itemsep8pt
+    \item Wir möchten das aufsummierte Alter eines Array an Pinguinen
+    \item In diesem Zuge möchte ich ein paar Begriffe klären
+    \item Pinguine beschreiben wir \info{mit ganz viel Liebe\ldots\ ich meine} wie folgt\ldots
+\end{itemize}
+\end{frame}
+\fi
+\begin{frame}[fragile,c]{Pinguineeee --- Struktur}
+\lstfs{9}\def\hlopa{.4}
+\begin{tikzpicture}[@O]
+    \def\hlcolor{pingu@green}
+    \onslide<12->{
+        \hlbehindcodeunder{Penguin}{@Pengu>}
+    }
+    \onslide<17->{
+        \hlbehindcodeunder{Penguin_ctor}{@Pengu_ctor>}
+    }
+    \def\hlcolor{pingu@yellow}
+    \onslide<14->{
+        \hlbehindcodeunder{Penguin_age}{@Pengu_age>}
+        \hlbehindcodeunder{Penguin_name}{@Pengu_name>}
+    }
+    \onslide<22->{
+        \hlbehindcodeunder{age_1}{@>}
+        \hlbehindcodeunder{name_1}{@>}
+    }
+    \def\hlcolor{pingu@blue}
+    \onslide<19->{
+        \hlbehindcodeunder{Penguin_ctor_age}{@Pengu_ctor_age>}
+        \hlbehindcodeunder{Penguin_ctor_name}{@Pengu_ctor_name>}
+    }
+    \onslide<22->{
+        \hlbehindcodeunder{age_2}{@>}
+        \hlbehindcodeunder{name_2}{@>}
+    }
+\end{tikzpicture}\vspace*{-\baselineskip}
+\begin{plainjava}[lineskip=4.5pt]
+!*\onslide<3->*!!*\CodeFileMarkerAttach{Penguin.java}*!
+!*\onslide<2->*!public class !*\Snode{Penguin}*!Penguin!*\Snode{Penguin@}*! {!*\Snode{classline}*!
+!*\onslide<4->*!   private final int !*\Snode{Penguin_age}*!!*\tikzmarknode{age}{age}*!!*\Snode{Penguin_age@}*!;
+!*\onslide<5->*!   final String !*\Snode{Penguin_name}*!!*\tikzmarknode{name}{name}*!!*\Snode{Penguin_name@}*!;
+!*\onslide<2->*!
+!*\onslide<6->*!   public !*\Snode{Penguin_ctor_full}*!!*\Snode{Penguin_ctor}*!Penguin!*\Snode{Penguin_ctor@}*!(String !*\Snode{Penguin_ctor_name}*!name!*\Snode{Penguin_ctor_name@}*!, int !*\Snode{Penguin_ctor_age}*!age!*\Snode{Penguin_ctor_age@}*!)!*\Snode{Penguin_ctor_full@}*! {!*\Snode{ctor}*!
+!*\onslide<7->*!       !*\Snode{name_assignment}*!this.!*\Snode{name_1}*!name!*\Snode{name_1@}*! = !*\Snode{name_2}*!name!*\Snode{name_2@}*!;!*\Snode{name_assignment@}*!
+!*\onslide<7->*!       !*\Snode{age_assignment}*!this.!*\Snode{age_1}*!age!*\Snode{age_1@}*! = !*\Snode{age_2}*!age!*\Snode{age_2@}*!;!*\Snode{age_assignment@}*!
+!*\onslide<6->*!   }
+
+!*\onslide<8->*!   public int !*\Snode{getAge}*!getAge!*\Snode{getAge@}*!() { return age; }!*\Snode{ageStart}*!
+!*\onslide<9->*!   public String toString() {
+!*\onslide<10->*!      return name + " watschelt seit " + age + " Jahr(en)";!*\Snode{longest}*!
+!*\onslide<9->*!   }!*\Snode{toStringEnd}*!
+!*\onslide<2->*!}
+\end{plainjava}
+\begin{tikzpicture}[@O]
+    \onslide<11->{\node[right,T] at(classline.east) {Die Pinguin-Klasse!};}
+    \onslide<13->{
+         \draw[lightgray,-Kite] (@Pengu>_up) to[out=50,in=180] ++(.5,.25) node[right, T] {Muss gleich heißen wie Datei (Groß- und Kleinschreibung beachten)!};
+    }
+    \onslide<15->{
+        \draw[decoration=brace,decorate,lightgray] ([xshift=2mm,yshift=1.5mm]age.north east) coordinate (@) to[edge node={node[right=1mm,T] {Attribute der Klasse. Sie definieren den \textbf{Zustand}}}] ([yshift=-1.5mm]name.south east-|@);
+    }
+    \onslide<16->{\node[right,T,yshift=.33mm] at(ctor.east) {Der Konstruktor liefert den \textbf{initialen Zustand}};}
+    \onslide<18->{
+        \draw[lightgray,-Kite] (@Pengu_ctor>_up) to[bend left] ++(.5,.235) node[right, T] {Muss gleich heißen wie die Klasse! Er ist damit auch keine Methode};
+    }
+
+    \onslide<19->{
+        \draw[lightgray,-Kite] (@Pengu_ctor_age>_down) to[out=300,in=180] ++(.5,-.35) node[right, T] (@) {Die Parameter (können beliebig heißen)};
+        \draw[lightgray,-Kite] (@Pengu_ctor_name>_down) to[out=300,in=180] (@.west);
+    }
+
+    \onslide<20->{
+        \node[below right=2mm,yshift=-5mm,T] (@) at(@Pengu_ctor_name>_down) {\T{new Penguin(\dq Piep\dq, 3);} \faCheck};
+        \onslide<21->{
+            \node[right=2mm,T] (@) at(@.east) {\T{new Penguin();} \faFlash};
+            \node[below left,xshift=9mm,yshift=1.25mm, T,align=right] (@) at(@.south east) {Der leere default-Konstruktor existiert nur genau dann, wenn kein expliziter existiert. \\Hier existiert \T{Penguin(String, int)}.};
+        }
+    }
+    \onslide<23->{
+        \draw[decoration=brace,decorate,lightgray] ([xshift=2mm,yshift=1.5mm]ageStart.north east-|longest.east) coordinate (@) to[edge node={node[right=1mm,T,align=left] {Methoden der Klasse.\\Sie definieren das \textbf{Verhalten}}}] ([yshift=-1.5mm]toStringEnd.south east-|@);
+    }
+    % ist \textit{keine Methode} und
+\end{tikzpicture}
+% TODO: getAge and stuff
+\end{frame}
+
+\begin{frame}[fragile,c]{Pinguineeee --- Gültigkeit \& Sichtbarkeit}
+\lstfs{9} TODO Tabelle und so
+\begin{plainjava}[lineskip=4.5pt]
+!*\onslide<3->*!!*\CodeFileMarker{Penguin.java}*!
+!*\onslide<2->*!public class Penguin {
+!*\onslide<2->*!   private final int age;
+!*\onslide<2->*!   final String name;
+!*\onslide<2->*!
+!*\onslide<2->*!   public Penguin(String name, int age) {
+!*\onslide<2->*!       this.name = name;
+!*\onslide<2->*!       this.age = age;
+!*\onslide<2->*!   }
+!*\onslide<2->*!
+!*\onslide<2->*!   public int getAge() { return age; }
+!*\onslide<2->*!   public String toString() {
+!*\onslide<2->*!      return name + " watschelt seit " + age + " Jahr(en)";
+!*\onslide<2->*!   }
+!*\onslide<2->*!}
+\end{plainjava}
+\end{frame}
+
+\begin{frame}{TODO: final und soo}
+TODO: auch default werte
+TODO: Ctor keine Methode?
+TODO: default konstruktor
+\end{frame}
+
+\iffalse
 \begin{frame}{TODO:}
     TODO: toString machen
 
@@ -646,17 +772,27 @@ private static boolean isUppercase(char c) { return c >= 'A' && c <= 'Z'; }
     TODO: animiere CharRotation stuff mit heap und stack und sooo :eyes:
 \end{frame}
 
+\iffull
 \SetNextSectionText{Grundlagen der OOP\\Abgabe: \DTMDate{2022-06-07}}
 \section{Aussicht: Übungsblatt 6}
-\begin{frame}{}
-
+\begin{frame}{Ein kurzer Blick Zurück}
+    \begin{itemize}[<+(1)->]
+        \itemsep5pt
+        \item Alles was ich zu den Aufgaben auf dem nächsten Blatt sagen könnte, findet sich schon auf den Folien
+        \item Man werfe einen Blick zurück!
+        \item Aber: sich kurz zu fassen heißt nicht, wichtiges auszulassen \begin{itemize}
+            \item Die Idee ist eher, dass ihr kurze Beschreibungen findet die alles wichtiges beinhalten
+            \item Ob dabei wohl Fachbegriffe hilfreich sind?
+        \end{itemize}
+    \end{itemize}
 \end{frame}
+\fi
 
-\begin{frame}
-    Aussicht
-\end{frame}
 
-\SetNextSectionText[.55\linewidth]{TODO}
+\fi
+
+
+\SetNextSectionText[.55\linewidth]{Those who cannot remember the past are condemned to repeat it.\\George Santayana~--- \cite{santayana1905life}}
 \section{Abschließendes}
 {\SummaryFrame
 \begin{frame}[t]{Zusammenfassend}
@@ -671,8 +807,9 @@ private static boolean isUppercase(char c) { return c >= 'A' && c <= 'Z'; }
 
 
 
-\outro{\vskip9mm\centering \onslide<2->{\begin{tikzpicture}
-
-\end{tikzpicture}}}
+\outro{\vskip9mm\centering \onslide<2->{\scalebox{1.35}{\begin{tikzpicture}
+        \node[scale=.265,rotate=-13] (bb) at (0,0) {\usebox\beebox};
+        \node[left,yshift=-16mm,scale=1.33] at (bb.west) {\usebox\pingudoc};
+    \end{tikzpicture}}}}
 
 \iffull\end{document}\fi
