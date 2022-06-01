@@ -13,7 +13,8 @@
     author={Florian Sihler},%
     color=0.2 0.3647 0.4941, icon=Tag, mimetype=text/plain%
 }
-\usepackage{xcolor}
+\usepackage[prefix=]{xcolor-material}
+
 \usepackage[main=ngerman]{babel}
 
 \providecommand\btdmmode{lightmode-fill}
@@ -254,8 +255,7 @@
 \newcommand\hlcode[3][1.9pt]{\fill[\hlcolor,opacity=\hlopa,rounded corners=1pt] ([shift={(-\hlhs,-#1)}]#2.south west) rectangle ([shift={(\hlhs,#1)}]#2.north east); \coordinate (#3) at (#2.east);}
 \newcommand\hlbcode[3][1.9pt]{\fill[\hlcolor,opacity=\hlopa,rounded corners=1pt] ([shift={(-\hlhs,-#1)}]#2.south west) rectangle ([shift={(\hlhs,#1)}]#2@.north east); \coordinate (#3) at (#2@.east);}
 \newcommand\bcodeover[4][1.9pt]{\hlbcode[#1]{#2}{#3}\path(#2)--(#2@) node[pos=.5]{#4};}
-
-\newcommand\hlbehindcode[3][1.9pt]{\fill[\hlcolor,opacity=\hlopa,rounded corners=1pt] ([shift={(-\hlhs,-#1)}]pic cs:#2) rectangle ([shift={(\hlhs,#1)}]pic cs:#2@); \coordinate (#3) at (pic cs:#2@);}
+\newcommand\hlbehindcode[3][0pt]{\setbox0=\hbox{\pgfinterruptpicture\HStrut\endpgfinterruptpicture}\fill[\hlcolor,opacity=\hlopa,rounded corners=1pt] ([shift={(-\hlhs,-#1-.95\dp0)}]pic cs:#2) rectangle ([shift={(\hlhs,#1+.87\ht0)}]pic cs:#2@); \coordinate (#3) at ([yshift=.415\ht0]pic cs:#2@);}
 
 \newcommand\hlbcodeframe[3][1.9pt]{\draw[\hlcolor,thick,opacity=.5+\hlopa,rounded corners=1pt] ([shift={(-\hlhs,-#1)}]#2.south west) rectangle ([shift={(\hlhs,#1)}]#2@.north east); \coordinate (#3) at (#2@.east);}
 
@@ -333,3 +333,51 @@
 \def\CodeFileMarker#1{{\color{lightgray}\sffamily\tiny\llap{\faFileCodeO~\thinspace}#1}}
 \def\ShowInTheWeb#1{\smash{\raisebox{.25mm}{\color{lightgray}\sffamily\tiny\fancyulcolor{lightgray}\link{#1}{display in browser}}}\vspace*{-.25mm}}
 % \def\CodeFileMarker#1{{\hfill\color{lightgray}\sffamily\tiny#1\rlap{\thinspace~\faFileCodeO}}}
+
+\definecolor{bee}{RGB}{255, 224, 108}
+\definecolor{wings}{RGB}{205, 245, 253}
+\colorlet{wings}{wings!70!white}
+\newsavebox\beebox
+\def\lbody{ (left) to[out=270,in=150] (0,-.725) to[out=30,in=270] (right)}
+\savebox\beebox{\begin{tikzpicture}[body/.style={pingu@black!82!BlueGrey50},scale=4,very path/.append style={line join=round}]
+% wings
+\coordinate (wl) at(20:2.55mm);
+\coordinate (wr) at(160:2.55mm);
+\draw[very thick,body,fill=wings!80!white,rotate around=-32:(wl)] (wl) ellipse [x radius=6.15mm, y radius=2.75mm];
+\draw[very thick,body,fill=wings!80!white,rotate around=32:(wr)] (wr) ellipse [x radius=6.15mm, y radius=2.75mm];
+\draw[very thick,body,fill=wings,rotate around=19:(wl)] (wl) ellipse [x radius=6.55mm, y radius=3.125mm];
+\draw[very thick,body,fill=wings,rotate around=-19:(wr)] (wr) ellipse [x radius=6.55mm, y radius=3.125mm];
+% body
+\path (-.375,0) coordinate (left) -- (.375,0) coordinate (right);
+\filldraw[ultra thick,body]\lbody;
+\scope\clip\lbody;
+\foreach \angl in {30,1} {
+\fill[bee] (-\angl:.75) to[bend left=14] (180+\angl:.75) -- ++(0,-1.75mm)
+                     to[bend right=14] (-\angl-14:.75) -- cycle;
+}\endscope
+% left and right arm
+\foreach\m/\s/\k in {right/-2.45/95,left/-.75/80} {
+\scope[shift=(\m),yshift=\s,rotate around=\k:(\m),scale=.166]
+\fill[body] (-.965,0) arc(270:90:.29) -- ++(1.233,0) arc (90:-90:.29) -- cycle;
+\endscope}
+% sting
+\draw[line cap=round,body,thick] (0,-.725) -- ++(0,-.035);
+% head
+\draw[ultra thick,body,fill=bee,rounded corners=6pt] (.85mm,-.55mm) to[bend right=30,looseness=.9] ([xshift=1.45mm,yshift=1.35mm]right) arc(0:180:{(.75cm+2*1.45mm)/2} and {(.75cm+2*1.45mm)/2.05}) to[bend right=30,looseness=.9] (-.85mm,-.55mm) -- cycle;
+% eyes [intersect with left and right]
+\fill[body] (left|-0,2.265mm)++(.6mm,0) coordinate (el) circle[radius=.6mm];
+\coordinate (ell) at ([yshift=-.8mm]el);
+\fill[red!21!bee,rotate around=3:(ell)] ([yshift=-.8mm]el) ellipse[x radius=.412mm, y radius=.165mm];
+\fill[body] (right|-0,2.265mm)++(-.6mm,0) coordinate (er) circle[radius=.6mm];
+\coordinate (err) at ([yshift=-.8mm]er);
+\fill[red!21!bee,rotate around=-1:(err)] ([yshift=-.8mm]er) ellipse[x radius=.4mm, y radius=.155mm];
+% mouth
+\scope[yshift=1mm]
+\draw[thick,line cap=round] (-.6mm,0) arc (180:360:.6mm and .415mm);
+% antenna
+\draw[body,line cap=round,ultra thick] (123:4mm) to[out=110,in=-41] ++(-1mm,3mm) coordinate (@);
+\fill[body,rotate around=-41:(@)] ([xshift=-.1mm,yshift=-.185mm]@) ellipse[x radius=.55mm,y radius=.35mm];
+\draw[body,line cap=round,ultra thick] (57:4mm) to[out=70,in=180+41] ++(1mm,3mm) coordinate (@);
+\fill[body,rotate around=41:(@)] ([xshift=-.1mm,yshift=-.2mm]@) ellipse[x radius=.55mm,y radius=.35mm];
+\endscope
+\end{tikzpicture}}
