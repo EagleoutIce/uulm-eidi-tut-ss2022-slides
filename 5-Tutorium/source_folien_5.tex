@@ -14,8 +14,6 @@
 \TopicOverview{5}
 \fi
 
-\iffalse
-
 
 \iffull{\SummaryFrame
 \begin{frame}[fragile,c]{Kurzwiederholung}
@@ -634,8 +632,6 @@ private static boolean isUppercase(char c) { return c >= 'A' && c <= 'Z'; }
 % }\fi
 
 
-\fi
-
 
 \SetNextSectionText{Aber die Sprache um ein Wort ärmer machen heißt das Denken der Nation um einen Begriff ärmer machen\\Arthur Schopenhauer~--- \cite[II, chp.~12]{schopenhauer1859welt}}
 \section{Terminologien}
@@ -717,7 +713,7 @@ private static boolean isUppercase(char c) { return c >= 'A' && c <= 'Z'; }
         \node[below right=2mm,yshift=-5mm,T] (@) at(@Pengu_ctor_name>_down) {\T{new Penguin(\dq Piep\dq, 3);} \faCheck};
         \onslide<21->{
             \node[right=2mm,T] (@) at(@.east) {\T{new Penguin();} \faFlash};
-            \node[below left,xshift=9mm,yshift=1.25mm, T,align=right] (@) at(@.south east) {Der leere default-Konstruktor existiert nur genau dann, wenn kein expliziter existiert. \\Hier existiert \T{Penguin(String, int)}.};
+            \node[below left,xshift=9mm,yshift=1.25mm, T, codeouthl, scale=.85,align=right] (@) at(@.south east) {Der leere default-Konstruktor existiert nur genau dann, wenn kein expliziter existiert. \\Hier existiert \T{Penguin(String, int)}.};
         }
     }
     \onslide<23->{
@@ -756,7 +752,6 @@ TODO: Ctor keine Methode?
 TODO: default konstruktor
 \end{frame}
 
-\iffalse
 \begin{frame}{TODO:}
     TODO: toString machen
 
@@ -789,8 +784,6 @@ TODO: default konstruktor
 \end{frame}
 \fi
 
-
-\fi
 
 
 \SetNextSectionText[.55\linewidth]{Those who cannot remember the past are condemned to repeat it.\\George Santayana~--- \cite{santayana1905life}}
