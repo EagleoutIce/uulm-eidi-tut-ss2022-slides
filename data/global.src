@@ -169,7 +169,8 @@
 \def\AddonFrame{\IfBtdmDarkmode{\UpdateBtdmColor*{btdm@primary}{\colorlet{btdm@block}{btdm@block!20!btdm@border@up}}}{\UpdateBtdmColor{btdm@primary!68!btdm@background}}}
 
 \long\def\info#1{\textcolor{gray}{\scriptsize(#1)}}
-\long\def\infoblock#1{\par{\scriptsize\textcolor{gray}{(#1)}\par}}
+% no parens anymore?
+\long\def\infoblock#1{\par{\scriptsize\textcolor{gray}{#1}\par}}
 
 
 \newsavebox\pinguexplainbox
@@ -341,7 +342,7 @@
 \def\ShowInTheWeb#1{\smash{\raisebox{.25mm}{\color{lightgray}\sffamily\tiny\fancyulcolor{lightgray}\link{#1}{display in browser}}}\vspace*{-.25mm}}
 
 % \def\CodeFileMarker#1{{\hfill\color{lightgray}\sffamily\tiny#1\rlap{\thinspace~\faFileCodeO}}}
-\def\CodeFileMarkerAttach#1{\CodeFileMarker{\attachfilesetup{color=lightgray}\fancyulcolor{lightgray}\textattachfile{\curpath #1}{\rawlink{#1}}}}
+\newcommand<>\CodeFileMarkerAttach[1]{\only#2{\CodeFileMarker{\attachfilesetup{color=lightgray}\fancyulcolor{lightgray}\textattachfile{\curpath #1}{\rawlink{#1}}}}}
 
 \mode<all>{\newcommand<>\onlyhandout[1]{\relax}}
 \mode<handout>{\let\onlyhandout\only}
@@ -399,3 +400,7 @@
 \newsavebox\pingudoc
 \savebox\pingudoc{\tikz\pingu[body=pingu@black,shirt=pingu@red!80!pingu@black!70!white,bow tie=orange!90!purple, left wing wave, cape=pingu@white!75!gray, halo, halo raise=1.55mm,halo above,cloak wings=false,right eye wink,right,cloak cap=pingu@white!75!gray,monocle left,monocle left glass=pingu@bronze,cane right=pingu@bronze!90!pingu@black, cane right raise=-1.65mm];}
 
+
+% this is so we can have tables with rotate headers :D
+\usepackage{adjustbox}
+\newcolumntype{Y}[2]{>{\adjustbox{angle=#1,lap=\width-(#2)}\bgroup}l<{\egroup}}

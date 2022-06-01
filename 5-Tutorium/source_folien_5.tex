@@ -572,7 +572,7 @@ private static boolean isUppercase(char c) { return c >= 'A' && c <= 'Z'; }
 \begin{enumerate}
     \setcounter{enumi}{2}
     \item<2-> \task{Als nächstes soll nun die Klasse \T{Warenkorb} entworfen werden. Überlegen Sie sich hierzu insbesondere, wie die \T{Artikel} in einem \T{Warenkorb} modelliert werden können.}
-    \item<10-> \task{Geben Sie eine Instanz der Klasse \T{Warenkorb} an.}
+    \item<9-> \task{Geben Sie eine Instanz der Klasse \T{Warenkorb} an.}
 \end{enumerate}\vfill
 \begin{center}
     \scalebox{.65}{\begin{tikzpicture}
@@ -581,26 +581,26 @@ private static boolean isUppercase(char c) { return c >= 'A' && c <= 'Z'; }
 \onslide<4->{Kundennummer: int}\\
 \onslide<5->{Artikelliste: \solGet{keywordC}{Artikel}[]}\\
 }{
-\onslide<7->{fügeArtikelHinzu(Artikel: \solGet{keywordC}{Artikel}): void}\\
-\onslide<8->{entferneArtikel(index: int): boolean}\\
-\onslide<9->{berechneGesamtpreis(): float}\\
+\onslide<6->{fügeArtikelHinzu(Artikel: \solGet{keywordC}{Artikel}): void}\\
+\onslide<7->{entferneArtikel(index: int): boolean}\\
+\onslide<8->{berechneGesamtpreis(): float}\\
 }}
 
-\onslide<11->{\umlclass[x=10,y=0,rounded corners=4pt]{Objekt: Mein Warenkorb}{
-    \onslide<12->{Kundennummer: 744392}\\
-    \onslide<13->{Artikelliste: [\textit{Mein Hemd}]}
+\onslide<10->{\umlclass[x=10,y=0,rounded corners=4pt]{Objekt: Mein Warenkorb}{
+    \onslide<11->{Kundennummer: 744392}\\
+    \onslide<12->{Artikelliste: [\textit{Mein Hemd}]}
 }{
-    \onslide<14->{fügeArtikelHinzu(Artikel: \solGet{keywordC}{Artikel}): void}\\
-    \onslide<14->{entferneArtikel(index: int): Artikel}\\
-    \onslide<14->{berechneGesamtpreis(): float}\\
+    \onslide<13->{fügeArtikelHinzu(Artikel: \solGet{keywordC}{Artikel}): void}\\
+    \onslide<13->{entferneArtikel(index: int): Artikel}\\
+    \onslide<13->{berechneGesamtpreis(): float}\\
 }}
 \end{tikzpicture}}
 \end{center}
 \begin{itemize}
-    \item Es ist nicht unbedingt notwendig, mit \textit{Main Hemd}, ein Objekt zu referenzieren \begin{itemize}
+    \item<14-> Es ist nicht unbedingt notwendig, mit \textit{Main Hemd}, ein Objekt zu referenzieren \begin{itemize}
         \itemsep2.5pt
-        \item Je nach Problem, reicht vielleicht auch einfach die Artikelnummer, da sie eindeutig ist.
-        \item Man kann das Objekt auch an Ort und Stelle \say{schreiben}\infoblock{Dann mit meist in \link{https://www.json.org/json-de.html}{JSON}-(ähnlicher)-Syntax \T{\{Name: \dq Hemd \dq, Preis: 42.99f, \textcolor{codeouthl}{\ldots}\}}}
+        \item<15-> Je nach Problem, reicht vielleicht auch einfach die Artikelnummer, da sie eindeutig ist.
+        \item<16-> Man kann das Objekt auch an Ort und Stelle \say{schreiben}\infoblock{Dann mit meist in \link{https://www.json.org/json-de.html}{JSON}-(ähnlicher)-Syntax \T{\{Name: \dq Hemd \dq, Preis: 42.99f, \textcolor{codeouthl}{\ldots}\}}}
     \end{itemize}
 \end{itemize}
 \end{frame}
@@ -664,6 +664,11 @@ private static boolean isUppercase(char c) { return c >= 'A' && c <= 'Z'; }
         \hlbehindcodeunder{age_1}{@>}
         \hlbehindcodeunder{name_1}{@>}
     }
+    \onslide<25->{
+        \hlbehindcodeunder{age_3}{@>}
+        \hlbehindcodeunder{age_4}{@>}
+        \hlbehindcodeunder{name_3}{@name_last>}
+    }
     \def\hlcolor{pingu@blue}
     \onslide<19->{
         \hlbehindcodeunder{Penguin_ctor_age}{@Pengu_ctor_age>}
@@ -673,9 +678,14 @@ private static boolean isUppercase(char c) { return c >= 'A' && c <= 'Z'; }
         \hlbehindcodeunder{age_2}{@>}
         \hlbehindcodeunder{name_2}{@>}
     }
-\end{tikzpicture}\vspace*{-\baselineskip}
-\begin{plainjava}[lineskip=4.5pt]
-!*\onslide<3->*!!*\CodeFileMarkerAttach{Penguin.java}*!
+    \def\hlcolor{pingu@red}
+    \onslide<24->{
+        \hlbehindcodeunder{getAge}{@getAge>}
+        \hlbehindcodeunder{toString}{@>}
+    }
+\end{tikzpicture}\vspace*{-1.33\baselineskip}
+\begin{plainjava}[lineskip=4pt]%,morekeywords={[3]{Penguin}}]
+!*\CodeFileMarkerAttach<3->{Penguin.java}*!
 !*\onslide<2->*!public class !*\Snode{Penguin}*!Penguin!*\Snode{Penguin@}*! {!*\Snode{classline}*!
 !*\onslide<4->*!   private final int !*\Snode{Penguin_age}*!!*\tikzmarknode{age}{age}*!!*\Snode{Penguin_age@}*!;
 !*\onslide<5->*!   final String !*\Snode{Penguin_name}*!!*\tikzmarknode{name}{name}*!!*\Snode{Penguin_name@}*!;
@@ -685,9 +695,9 @@ private static boolean isUppercase(char c) { return c >= 'A' && c <= 'Z'; }
 !*\onslide<7->*!       !*\Snode{age_assignment}*!this.!*\Snode{age_1}*!age!*\Snode{age_1@}*! = !*\Snode{age_2}*!age!*\Snode{age_2@}*!;!*\Snode{age_assignment@}*!
 !*\onslide<6->*!   }
 
-!*\onslide<8->*!   public int !*\Snode{getAge}*!getAge!*\Snode{getAge@}*!() { return age; }!*\Snode{ageStart}*!
-!*\onslide<9->*!   public String toString() {
-!*\onslide<10->*!      return name + " watschelt seit " + age + " Jahr(en)";!*\Snode{longest}*!
+!*\onslide<8->*!   public int !*\Snode{getAge}*!getAge!*\Snode{getAge@}*!() { return !*\Snode{age_3}*!age!*\Snode{age_3@}*!; }!*\Snode{ageStart}*!
+!*\onslide<9->*!   public String !*\Snode{toString}*!toString!*\Snode{toString@}*!() {
+!*\onslide<10->*!      return !*\Snode{name_3}*!name!*\Snode{name_3@}*! + " watschelt seit " + !*\Snode{age_4}*!age!*\Snode{age_4@}*! + " Jahr(en)";!*\Snode{longest}*!
 !*\onslide<9->*!   }!*\Snode{toStringEnd}*!
 !*\onslide<2->*!}
 \end{plainjava}
@@ -697,7 +707,7 @@ private static boolean isUppercase(char c) { return c >= 'A' && c <= 'Z'; }
          \draw[lightgray,-Kite] (@Pengu>_up) to[out=50,in=180] ++(.5,.25) node[right, T] {Muss gleich heißen wie Datei (Groß- und Kleinschreibung beachten)!};
     }
     \onslide<15->{
-        \draw[decoration=brace,decorate,lightgray] ([xshift=2mm,yshift=1.5mm]age.north east) coordinate (@) to[edge node={node[right=1mm,T] {Attribute der Klasse. Sie definieren den \textbf{Zustand}}}] ([yshift=-1.5mm]name.south east-|@);
+        \draw[decoration=brace,decorate,lightgray] ([xshift=2mm,yshift=1.5mm]age.north east) coordinate (@) to[edge node={node[right=1mm,T] {Attribute der Klasse. Sie definieren den \textbf{Zustand}.}}] ([yshift=-1.5mm]name.south east-|@);
     }
     \onslide<16->{\node[right,T,yshift=.33mm] at(ctor.east) {Der Konstruktor liefert den \textbf{initialen Zustand}};}
     \onslide<18->{
@@ -717,43 +727,139 @@ private static boolean isUppercase(char c) { return c >= 'A' && c <= 'Z'; }
         }
     }
     \onslide<23->{
-        \draw[decoration=brace,decorate,lightgray] ([xshift=2mm,yshift=1.5mm]ageStart.north east-|longest.east) coordinate (@) to[edge node={node[right=1mm,T,align=left] {Methoden der Klasse.\\Sie definieren das \textbf{Verhalten}}}] ([yshift=-1.5mm]toStringEnd.south east-|@);
+        \draw[decoration=brace,decorate,lightgray] ([xshift=2mm,yshift=1.5mm]ageStart.north east-|longest.east) coordinate (@) to[edge node={node[right=1mm,T,align=left] {Methoden der Klasse.\\Sie definieren das \textbf{Verhalten}.}}] ([yshift=-1.5mm]toStringEnd.south east-|@);
     }
-    % ist \textit{keine Methode} und
+    \onslide<26->{
+        \node[above,T] at (@getAge>_up) {Ein stinknormaler Getter};
+    }
+    \onslide<27->{
+        \node[below right,T,text width=10cm,xshift=-1.8cm] at(@name_last>_down) {toString ist in Java \say{besonders} (durch \T{\link{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html\#toString()}{Object}}). Es wird z.B. bei (String-)Konkatenation automatisch aufgerufen.};
+    }
 \end{tikzpicture}
-% TODO: getAge and stuff
-% TODO: highlight others
 \end{frame}
 
 \begin{frame}[fragile,c]{Pinguineeee --- Gültigkeit \& Sichtbarkeit}
-\lstfs{9} TODO Tabelle und so
-\begin{plainjava}[lineskip=4.5pt]
-!*\onslide<3->*!!*\CodeFileMarker{Penguin.java}*!
-!*\onslide<2->*!public class Penguin {
-!*\onslide<2->*!   private final int age;
-!*\onslide<2->*!   final String name;
+\lstfs{9}\def\hlopa{.4}
+\begin{tikzpicture}[@O]
+\def\hlcolor{pingu@green}
+\onslide<6->{
+    \hlbehindcodeunder{@Penguin_age}{@>}
+}
+\onslide<11->{\hlbehindcodeunder{@age_1}{@>}}
+\onslide<12->{\hlbehindcodeunder{@age_3}{@@age3>}}
+\onslide<13->{\hlbehindcodeunder{@age_4}{@>}}
+\def\hlcolor{pingu@yellow}
+\onslide<7->{
+    \hlbehindcodeunder{@Penguin_name}{@>}
+}
+\onslide<11->{\hlbehindcodeunder{@name_1}{@>}}
+
+\def\hlcolor{pingu@blue}
+\onslide<8->{
+    \hlbehindcodeunder{@Penguin_ctor_name}{@>}
+}
+\onslide<11->{\hlbehindcodeunder{@name_2}{@>}}
+\onslide<13->{\hlbehindcodeunder{@name_3}{@@name3>}}
+\def\hlcolor{pingu@red}
+\onslide<9->{
+\hlbehindcodeunder{@Penguin_ctor_age}{@@Penguin_ctor_age>}
+}
+\onslide<11->{\hlbehindcodeunder{@age_2}{@>}}
+
+\end{tikzpicture}\vspace*{-1.33\baselineskip}
+\begin{plainjava}[lineskip=4pt]%,morekeywords={[3]{Penguin}}]
+!*\onslide<2->*!!*\CodeFileMarker{Penguin.java}*!
+!*\onslide<2->*!!*\Snode{@CLASS}*!public class !*\Snode{@Penguin}*!Penguin!*\Snode{@Penguin@}*! {!*\Snode{@classline}*!
+!*\onslide<2->*!   private final int !*\Snode{@Penguin_age}*!!*\tikzmarknode{@age}{age}*!!*\Snode{@Penguin_age@}*!;!*\Snode{@ageline}*!
+!*\onslide<2->*!   final String !*\Snode{@Penguin_name}*!!*\tikzmarknode{@name}{name}*!!*\Snode{@Penguin_name@}*!;
 !*\onslide<2->*!
-!*\onslide<2->*!   public Penguin(String name, int age) {
-!*\onslide<2->*!       this.name = name;
-!*\onslide<2->*!       this.age = age;
-!*\onslide<2->*!   }
-!*\onslide<2->*!
-!*\onslide<2->*!   public int getAge() { return age; }
-!*\onslide<2->*!   public String toString() {
-!*\onslide<2->*!      return name + " watschelt seit " + age + " Jahr(en)";
-!*\onslide<2->*!   }
-!*\onslide<2->*!}
+!*\onslide<2->*!   !*\Snode{@CTOR}*!public !*\Snode{@Penguin_ctor_full}*!!*\Snode{@Penguin_ctor}*!Penguin!*\Snode{@Penguin_ctor@}*!(String !*\Snode{@Penguin_ctor_name}*!name!*\Snode{@Penguin_ctor_name@}*!, int !*\Snode{@Penguin_ctor_age}*!age!*\Snode{@Penguin_ctor_age@}*!)!*\Snode{@Penguin_ctor_full@}*! {!*\Snode{@ctor}*!
+!*\onslide<2->*!       !*\Snode{@name_assignment}*!this.!*\Snode{@name_1}*!name!*\Snode{@name_1@}*! = !*\Snode{@name_2}*!name!*\Snode{@name_2@}*!;!*\Snode{@name_assignment@}*!
+!*\onslide<2->*!       !*\Snode{@age_assignment}*!this.!*\Snode{@age_1}*!age!*\Snode{@age_1@}*! = !*\Snode{@age_2}*!age!*\Snode{@age_2@}*!;!*\Snode{@age_assignment@}*!
+!*\onslide<2->*!   !*\Snode{@CTOR@}*!}
+
+!*\onslide<2->*!   public int !*\Snode{@getAge}*!getAge!*\Snode{@getAge@}*!() { return !*\Snode{@age_3}*!age!*\Snode{@age_3@}*!; }!*\Snode{@ageStart}*!
+!*\onslide<2->*!   public String !*\Snode{@toString}*!toString!*\Snode{@toString@}*!() {
+!*\onslide<2->*!      return !*\Snode{@name_3}*!name!*\Snode{@name_3@}*! + " watschelt seit " + !*\Snode{@age_4}*!age!*\Snode{@age_4@}*! + " Jahr(en)";!*\Snode{@longest}*!
+!*\onslide<2->*!   }!*\Snode{@toStringEnd}*!
+!*\onslide<2->*!!*\Snode{@CLASS@}*!}
 \end{plainjava}
+\def\K{\multicolumn{1}{Y{45}{1em}}}
+\begin{tikzpicture}[@O]
+    \onslide<3->{\node[below left=4mm,xshift=-6mm,yshift=-1.25cm,text width=7cm,scale=.55] at(current page.north east) {\centering\begin{tabular}{l *4{>{\centering\arraybackslash}m{1.25em}}@{\hskip23pt}l}
+        & \K{Selbe Klasse} & \K{Selbes Paket} & \K{\color{codeouthl}Unterklasse} & \K{Überall sonst} & Beispiel\\[5pt]
+    \T{public} & \faCheck & \faCheck & \color{codeouthl}\faCheck & \faCheck & \T{age}\\
+    \T{\color{codeouthl}protected} & \color{codeouthl}\faCheck & \color{codeouthl}\faCheck & \color{codeouthl}\faCheck & & ---\\
+    $\langle$nichts\kern.5pt$\rangle$ & \faCheck & \faCheck & & & \T{name}\\
+    \T{private} & \faCheck & & & & \T{Penguin} % solGet{keywordC}
+    \end{tabular}\medskip\\\centerline{\Large \textbf{Sichtbarkeits}modifikatoren}};}
+    \onslide<4->{\node[right,T] at(classline.east) {Objekte leben, wie mind. eine Referenz auf sie gültig ist.};}
+    \onslide<5->{
+        \draw[decoration=brace,decorate,lightgray] ([xshift=2mm,yshift=1.5mm]@age.north east) coordinate (@) to[edge node={node[right=1mm,T,align=left] {Die Attribute besitzen die selbe \textup{Gültigkeit},\\wie das Objekt, dem sie gehören.}}] ([yshift=-1.5mm]@name.south east-|@);
+    }
+    \onslide<6->{
+        \fill[rounded corners=1.6pt,pingu@green,opacity=\hlopa] ([xshift=1mm,yshift=-5pt]@CLASS) rectangle ([xshift=1mm-3.2pt,yshift=5pt]@CLASS@);
+        \path ([xshift=1mm-3.2pt,yshift=-5pt]@CLASS) to[edge node={node[left,T,scale=.8] {\rotatebox{90}{Gültigkeit}}}] ([xshift=1mm-3.2pt,yshift=5pt]@CLASS@);
+    }
+    \onslide<7->{
+        \fill[rounded corners=1.6pt,pingu@yellow,opacity=\hlopa] ([xshift=1mm+1.5mm,yshift=-5pt]@CLASS) rectangle ([xshift=1mm+1.5mm-3.2pt,yshift=5pt]@CLASS@);
+    }
+    \onslide<8->{
+        \fill[rounded corners=1.6pt,pingu@blue,opacity=\hlopa] ([xshift=1mm,yshift=-5pt]@CTOR) rectangle ([xshift=1mm-3.2pt,yshift=5pt]@CTOR@);
+    }
+    \onslide<9->{
+        \fill[rounded corners=1.6pt,pingu@red,opacity=\hlopa] ([xshift=1mm+1.5mm,yshift=-5pt]@CTOR) rectangle ([xshift=1mm+1.5mm-3.2pt,yshift=5pt]@CTOR@);
+    }
+    \onslide<10->{
+        \node[below right,text width=8.5cm,yshift=-1mm,xshift=-1.5cm,T] at(@@Penguin_ctor_age>_down) {Die Parameter \textbf{überschatten}~(\link{https://docs.oracle.com/javase/specs/jls/se17/html/jls-6.html\#jls-6.4}{JLS17~$6.4$}) die gleichnamigen Attribute. Wir benötigen nun \T{this} um auf diese zuzugreifen.};
+    }
+    \onslide<12->{
+        \node[above right=1mm,xshift=-1cm,T] at(@@age3>_up) {Das \T{age}-Attribut wird hier nicht überschattet.};
+    }
+    \onslide<13->{
+        \node[below right=1mm,xshift=-1cm,T] at(@@name3>_down) {Beide Attribute werden nicht überschattet!};
+    }
+\end{tikzpicture}
 \end{frame}
 
-\begin{frame}{TODO: final und soo}
-TODO: auch default werte
-TODO: Ctor keine Methode?
-TODO: default konstruktor
+{\def\gets#1#2#3{\onslide<#1->{\makebox[8em][l]{\bjava{#2}}}~\edef\outtmp{\the\numexpr#1+1}\onslide<\outtmp->{\textcolor{codeouthl}{$\to$~\T{#3}}}}
+\begin{frame}[fragile]{Defaultkonstruktoren und -Werte}
+    \begin{itemize}[<+(1)->]
+        \itemsep3.25pt
+        \item Java erzeugt genau dann einen default-Konstruktor, wenn kein expliziter existiert.
+        \item Konstruktoren sind keine Methoden, können aber z.B. überladen werden\onslide<4->{\infoblock{Überladen heißt: gleicher Name, aber andere Signatur (Name \& Parametertypliste)}} \begin{itemize}
+            \item<5-> Ein Konstruktor kann nur mit \bjava{new} aufgerufen werden
+            \item<6-> Er hat keinen Rückgabetyp
+            \item<7-> Er muss genau so heißen wie die Klasse
+            \item<8-> Er kann andere Konstruktoren über \bjava{this} aufrufen (erstes Statement)
+        \end{itemize}
+        \item<9-> Wie bei Arrays, weißt Java Attributen default-Werte zu, wenn wir dies nicht tun:
+    \end{itemize}
+\begin{columns}[onlytextwidth,c]
+\column{.5\linewidth}
+\begin{plainjava}[morekeywords={[3]{Waddler}}]
+!*\onslide<10->*!public class Waddler {
+!*\onslide<10->*!    int age;
+!*\onslide<10->*!    float speed;
+!*\onslide<10->*!    char[] directions;
+!*\onslide<10->*!    boolean[][] canWaddleOn;
+!*\onslide<10->*!}!*\onslide<1->*!
+\end{plainjava}
+\column{.5\linewidth}
+\onslide<11->{\bjava[morekeywords={[3]{Waddler}}]{Waddler w = new Waddler();}}\\
+\gets{12}{w.age}{0}\\
+\gets{14}{w.speed}{0.0f}\\
+\gets{16}{w.directions}{null}\\
+\gets{18}{w.canWaddleOn}{null} \info{kein \T{new}!}\\
+% \onslide<20->{\(\longrightarrow\) Die Initialisierung von Arrays erfolgt erst mit \bjava{new}.}
+\end{columns}
 \end{frame}
+}
+
+% \begin{frame}{TODO: final und soo}
+% \end{frame}
 
 \begin{frame}{TODO:}
-    TODO: toString machen
 
     Bauplananalogie etc.
     TODO: auf this eingehen TODO: start überlagern  und soo
