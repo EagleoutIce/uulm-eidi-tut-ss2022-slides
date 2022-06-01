@@ -61,6 +61,7 @@
 \end{frame}
 
 {\newcommand<>\Mark[1]{{\only#2{\color{black}}#1}}
+\MakeThePinguExplainIt[text width=7cm,xshift=4mm,yshift=2mm]{cap=!hide,cup=!hide,glasses=!hide,body type=legacy, eye patch right, right item angle=-50}{Die Typen von \T{basis} und \T{potenz} sind hier sinnvoll, aber frei gewählt.}
 \begin{frame}[fragile,c]{Ich bin Herbert Klassenzüchter!}
 \columns[onlytextwidth,c]
 \column{.3\linewidth}
@@ -91,7 +92,8 @@ Attribute der Instanz auf die Konsole ausgibt.}
 \end{plainjava}
 \endcolumns
 \begin{tikzpicture}[@O]
-    \only<18->{\node[above left,yshift=\btdmfootheight] at (current page.south east) {\textattachfile{\curpath Potenz.java}{Potenz.java}\;};}
+    \onlyhandout<19->{\node[above left,yshift=\btdmfootheight] at (current page.south east) {\textattachfile{\curpath Potenz.java}{Potenz.java}\;};}
+    \onslide<18->{\node[left=-9mm,scale=.6] at(current page.12) {\copy\pinguexplainbox};}
 \end{tikzpicture}
 \end{frame}
 
@@ -121,7 +123,7 @@ Klasse \T{Potenz}} und lassen Sie sich die \Mark<10->{Attribute des Objekts anze
 \end{plainjava}
 \endcolumns
 \begin{tikzpicture}[@O]
-    \only<12->{\node[above left,yshift=\btdmfootheight] at (current page.south east) {\textattachfile{\curpath PotenzMain.java}{PotenzMain.java}\;};}
+    \onlyhandout<12->{\node[above left,yshift=\btdmfootheight] at (current page.south east) {\textattachfile{\curpath PotenzMain.java}{PotenzMain.java}\;};}
 \end{tikzpicture}
 \end{frame}
 }
@@ -289,9 +291,9 @@ public class Quersumme {
 \iffull
     \onslide<8->{\node[above left,xshift=4mm,yshift=1.5mm,scale=.35] (bee) at(current page.south east) {\rotatebox{20}{\copy\beebox}};
     \node[T,left] at (bee.west) {Grüße aus einem \textup{summ}derbaren letzten Semester};}
-    \only<9->{\node[above left,yshift=\btdmfootheight,xshift=-2.5cm] at (current page.south east) {\textattachfile{\curpath Quersummen.java}{Quersummen.java}\;};}
+    \onlyhandout<9->{\node[above left,yshift=\btdmfootheight,xshift=-2.5cm] at (current page.south east) {\textattachfile{\curpath Quersummen.java}{Quersummen.java}\;};}
 \else
-    \only<8->{\node[above left,yshift=\btdmfootheight] at (current page.south east) {\textattachfile{\curpath Quersummen.java}{Quersummen.java}\;};}
+    \onlyhandout<8->{\node[above left,yshift=\btdmfootheight] at (current page.south east) {\textattachfile{\curpath Quersummen.java}{Quersummen.java}\;};}
 \fi
 \end{tikzpicture}
 \end{frame}
@@ -307,14 +309,14 @@ public class Quersumme {
     \T{n = 3, \{'a', 'Z'\} $\to$ \{'d', 'C'\}}
 }}
 \begin{tikzpicture}[@O]
-    \onslide<5->{\node[above left,yshift=\btdmfootheight] at(current page.south east) {\copy\pinguexplainbox};}
+    \onslide<5->{\node[above left,yshift=\btdmfootheight,scale=.8] at(current page.south east) {\copy\pinguexplainbox};}
 \end{tikzpicture}
 \end{frame}
 }
 
 \begin{frame}[fragile]{Problemreduktion}
     \begin{itemize}[<+(1)->]
-        \itemsep5pt
+        \itemsep7.5pt
         \item Wir reduzieren das Problem, alle Zeichen zu verschieben, zunächst auf ein Zeichen
         \item Bei Hilfsmethoden stellt sich die Frage, ob sie semantisch alleine sinnvoll sind\begin{itemize}
             \itemsep2pt
@@ -334,6 +336,10 @@ public class Quersumme {
 
 \begin{frame}[fragile]{Hilfsmethodenfreuden}
 \SetupLstHl
+\begin{tikzpicture}[@O]
+    \def\hlcolor{gray}
+    \onslide<17->{\hlbehindcode[1pt]{base}{@>}}
+\end{tikzpicture}\vspace*{-\baselineskip}
 \begin{onlyenv}<2-8|handout:0>
 \begin{plainjava}
 !*\onslide<2->*!public static char rotiereCharacter(char c){
@@ -388,7 +394,7 @@ private static boolean isUppercase(char c) {
 }
 \end{plainjava}
 \end{onlyenv}
-\begin{onlyenv}<11|handout:1>
+\begin{onlyenv}<11-19|handout:0>
 \begin{plainjava}
 public static char rotiereCharacter(char c){
     if (isLowercase(c)) {
@@ -399,13 +405,86 @@ public static char rotiereCharacter(char c){
         return c;
     }
 }
+
+!*\onslide<16->*!private static char addCyclicOnBase(!*\Snode{base}*!char base!*\Snode{base@}*!, char c) {
+!*\onslide<18->*!    return (char) (base + Math.!*\tikzmarknode{floorMod}{floorMod}*!(c - base + n, !*\tikzmarknode{magic-num}{\snum{26}}*!));
+!*\onslide<16->*!}!*\onslide<1->*!
 \end{plainjava}
 \lstfs{9}
 \begin{plainjava}
-|ihl|private static boolean isLowercase(char c) { return c >= 'a' && c <= 'z'; }|ihl|
-|ihl|private static boolean isUppercase(char c) { return c >= 'A' && c <= 'Z'; }|ihl|
+private static boolean isLowercase(char c) { return c >= 'a' && c <= 'z'; }
+private static boolean isUppercase(char c) { return c >= 'A' && c <= 'Z'; }
 \end{plainjava}
 \end{onlyenv}
+\begin{onlyenv}<20-|handout:1>
+\begin{plainjava}
+public static char rotiereCharacter(char c){
+    if (isLowercase(c)) {
+        return addCyclicOnBase('a', c);
+    } else if (isUppercase(c)) {
+        return addCyclicOnBase('A', c);
+    } else {
+        return c;
+    }
+}
+
+private static char addCyclicOnBase(!*\Snode{base}*!char base!*\Snode{base@}*!, char c) {
+    return (char) (base + Math.!*\tikzmarknode{floorMod}{floorMod}*!(c - base + n, !*\tikzmarknode{magic-num}{\snum{26}}*!));
+}
+\end{plainjava}
+\lstfs{9}
+\begin{plainjava}
+private static boolean isLowercase(char c) { return c >= 'a' && c <= 'z'; }
+private static boolean isUppercase(char c) { return c >= 'A' && c <= 'Z'; }
+\end{plainjava}
+\end{onlyenv}
+\begin{tikzpicture}[@O]
+\scope[shift=(current page.east),xshift=-2.35cm,yshift=2.5cm,scale=.9]
+    \onslide<12->{\foreach[count=\i from 0] \colprefix/\letter/\ascii in {\color{codeouthl}/?/63,\color{codeouthl}/@/64,/A/65,/B/66,/C/67,\color{codeouthl}/$\mathbf{\vdots}$/0,/Y/89,/Z/90,\color{codeouthl}/[/91,\color{codeouthl}/\textbackslash/92} {
+        \colprefix
+        \node[scale=.9,font=\bfseries\sffamily] (\i) at (0,-.575*\i) {\makebox[1.15em][c]{\strut\letter}};
+        \ifnum\ascii>0
+        \onslide<13->{\node[scale=.9,right=-1mm,font=\scriptsize\sffamily] (\i b) at (\i.east) {\T{\makebox[2em][r]{\ascii}}};}
+        \onslide<14->{\node[scale=.9,right=-1mm,font=\scriptsize\sffamily] (\i c) at (\i b.east) {\T{\makebox[2em][r]{\the\numexpr\ascii-65}}};}
+        \fi
+    }}
+    \onslide<14->{\node[above,gray] at(0c.north) {~~~~\T{\footnotesize c\,-\,'A'}};}
+
+    \onslide<15->{\draw[{Kite[round,scale=.9]}-{Kite[round,scale=.9]},rounded corners=3pt] ([yshift=-2mm]2.100) -- ++(0,3.125mm) -| ([xshift=-4mm,yshift=-.5mm]7.260) coordinate[pos=.75] (@) -| ([yshift=2.35mm]7.260);
+        \node[left] (@b) at(@) {Wrap-Around mit Modulo!};
+        \node[below left,yshift=2mm,xshift=-.5mm,align=right,T] at(@b.south east) {Wir normalisieren, um nicht die 65\\durch das Modulo zu verlieren.};
+    }
+    \onslide<17->{\path(base.north)--(base@.north) coordinate[pos=.5] (@);
+        \draw[Kite-,codeouthl] ([xshift=3mm]@.north) to[bend right] ++(-.5,.25) node[left,T] {Für Kleinbuchstaben ändert sich nur die Normalisierung.};
+    }
+    \onslide<19->{
+        \draw[Kite-,codeouthl] (magic-num.south) to[bend right] ++(.5,-.5) node[right,align=left,T] {Magic-Number (Alphabeeet)};
+    }
+    \onslide<20->{
+        \draw[Kite-,codeouthl] (floorMod.south) to[bend left] ++(-.5,-.35) node[left,T] {Javas Modulo beachtet das Vorzeichen!};
+    }
+\endscope
+\end{tikzpicture}
+\end{frame}
+
+\begin{frame}[fragile]{Ein finales Beispiel}
+\SetupLstHl
+\begin{itemize}[<+(1)->]
+    \item Nun gilt es noch aufzurufen:
+\begin{plainjava}
+!*\onslide<3->*!|ihl|public class CharRotation {|ihl|
+!*\onslide<4->*!    public static void main(String[] args) {
+!*\onslide<5->*!        char[] arr = { 'a', 'Z' };
+!*\onslide<6->*!        rotiereCharacterArray(arr);
+!*\onslide<7->*!        System.out.println(arr);!*\Snode{newarr}*!
+!*\onslide<4->*!    }
+!*\onslide<3->*!|ihl|}|ihl|
+\end{plainjava}
+\end{itemize}
+\begin{tikzpicture}[@O]
+    \onslide<8->{\node[T,right] at(newarr.east) {\T{System.out.println(char[])}};}
+    \onlyhandout<9->{\node[above left,yshift=\btdmfootheight] at (current page.south east) {\textattachfile{\curpath CharRotation.java}{CharRotation.java}\;};}
+\end{tikzpicture}
 \end{frame}
 
 {\AddonFrame

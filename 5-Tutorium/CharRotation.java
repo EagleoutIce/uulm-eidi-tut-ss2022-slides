@@ -32,9 +32,7 @@ public class CharRotation {
    public static void main(String[] args) {
       char[] arr = { 'a', 'Z' };
       rotiereCharacterArray(arr);
-      for (char c : arr) {
-         System.out.println(c);
-      }
+      System.out.println(arr);
    }
 
 }
