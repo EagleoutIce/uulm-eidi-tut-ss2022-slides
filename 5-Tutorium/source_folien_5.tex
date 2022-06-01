@@ -489,7 +489,19 @@ private static boolean isUppercase(char c) { return c >= 'A' && c <= 'Z'; }
 
 {\AddonFrame
 \begin{frame}{Refactoring}
- TODO: eigentlich wird von hinten aufgerollt usw.
+ \begin{itemize}[<+(1)->]
+    \itemsep8pt
+     \item Die auf den Folien gezeigte Vorgehensweise ist irreführend
+     \item Insbesondere wenn es aufwändiger wird, schreibt niemand direkt solchen Code
+     \item Das Stichwort lautet \textbf{Refactoring}
+        \begin{itemize}
+            \itemsep3pt
+            \item Code lässt sich immer aufräumen und leserlicher, testbarer,~\ldots\ gestalten
+            \item Die eigentliche Implementierung nimmt relativ wenig Zeit ein~\cite{10.5555/2820282.2820289} \infoblock{Die meiste Zeit \say{stirbt} für das Verstehen von bestehendem Code (je nach Größe rund \qty{70}\percent), aber auch Testen und Anforderungsdefinitionen bekommen einen Teil.}
+            \item Selbst bei kleinen Projekten \info{ungefähr \num{1000} Zeilen} nimmt die Entwicklung nur $\approx$\qty{50}\percent\ Zeit ein.
+        \end{itemize}
+     \item Nehmt euch doch am Ende nochmal 20~Minuten und versucht euren Code zu verbessern
+ \end{itemize}
 \end{frame}
 }
 
