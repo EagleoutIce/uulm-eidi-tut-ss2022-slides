@@ -115,7 +115,7 @@ Klasse \T{Potenz}} und lassen Sie sich die \Mark<10->{Attribute des Objekts anze
 
 !*\onslide<5->*!!*\CodeFileMarker{PotenzMain.java}*!
 !*\onslide<5->*!public class PotenzMain {
-!*\onslide<12->*!   !*\ShowInTheWeb{https://www.online-java.com/oBHh8ndD2C}*!
+!*\onslide<13->*!   !*\ShowInTheWeb{https://www.online-java.com/oBHh8ndD2C}*!
 !*\onslide<7->*!   public static void main(String[] args) {
 !*\onslide<9->*!      Potenz p = new Potenz(2.0, 3);
 !*\onslide<11->*!      p.print(); !*\onslide<12->*!// :yields: 2.0^(3)
@@ -124,7 +124,7 @@ Klasse \T{Potenz}} und lassen Sie sich die \Mark<10->{Attribute des Objekts anze
 \end{plainjava}
 \endcolumns
 \begin{tikzpicture}[@O]
-    \onlyhandout<12->{\node[above left,yshift=\btdmfootheight] at (current page.south east) {\textattachfile{\curpath PotenzMain.java}{PotenzMain.java}\;};}
+    \onlyhandout<14->{\node[above left,yshift=\btdmfootheight] at (current page.south east) {\textattachfile{\curpath PotenzMain.java}{PotenzMain.java}\;};}
 \end{tikzpicture}
 \end{frame}
 }
@@ -724,7 +724,7 @@ private static boolean isUppercase(char c) { return c >= 'A' && c <= 'Z'; }
         \node[below right=2mm,yshift=-5mm,T] (@) at(@Pengu_ctor_name>_down) {\T{new Penguin(\dq Piep\dq, 3);} \faCheck};
         \onslide<21->{
             \node[right=2mm,T] (@) at(@.east) {\T{new Penguin();} \faFlash};
-            \node[below left,xshift=9mm,yshift=1.25mm, T, codeouthl, scale=.85,align=right] (@) at(@.south east) {Der leere default-Konstruktor existiert nur genau dann, wenn kein expliziter existiert. \\Hier existiert \T{Penguin(String, int)}.};
+            \node[below left,xshift=9mm,yshift=1.25mm, T, codeouthl, scale=.85,align=right] (@) at(@.south east) {Der leere default-Konstruktor existiert nur genau dann, wenn kein expliziter existiert.\\Hier existiert \T{Penguin(String, int)}.};
         }
     }
     \onslide<23->{
@@ -851,7 +851,7 @@ private static boolean isUppercase(char c) { return c >= 'A' && c <= 'Z'; }
 \gets{12}{w.age}{0}\\
 \gets{14}{w.speed}{0.0f}\\
 \gets{16}{w.directions}{null}\\
-\gets{18}{w.canWaddleOn}{null} \info{kein \T{new}!}\\
+\gets{18}{w.canWaddleOn}{null} \onslide<20->{\info{kein \T{new}!}}\\
 % \onslide<20->{\(\longrightarrow\) Die Initialisierung von Arrays erfolgt erst mit \bjava{new}.}
 \end{columns}
 \end{frame}
@@ -888,8 +888,8 @@ private static boolean isUppercase(char c) { return c >= 'A' && c <= 'Z'; }
 !*\onslide<4->*!   }
 !*\onslide<2->*!
 !*\onslide<8->*!   public static void main(String[] args) {
-!*\onslide<9->*!      Penguin[] pengus = { !*\onslide<9->*!new Penguin("Hugo", 3),
-!*\onslide<9->*!        !*\onslide<9->*!new Penguin("Sophie", 7) !*\onslide<8->*!};
+!*\onslide<9->*!      Penguin[] pengus = { !*\onslide<10->*!new Penguin("Hugo", 3),
+!*\onslide<9->*!        !*\onslide<10->*!new Penguin("Sophie", 7) !*\onslide<9->*!};
 !*\onslide<11->*!      System.out.println(pengus[0]);
 !*\onslide<12->*!      System.out.println(sum(pengus));
 !*\onslide<8->*!   }
@@ -897,13 +897,13 @@ private static boolean isUppercase(char c) { return c >= 'A' && c <= 'Z'; }
 \end{plainjava}
 \endAnimateCode
 \begin{tikzpicture}[@O]
-    \onslide<13->{\node[right,T] at(sum) {sum(Penguin[])};}
+    \onslide<13->{\node[right,T] at(sum) {\textup{\T{sum(Penguin[])}}};}
     \onslide<16>{\node[ca@CommentNode] at(ca@@-13@end) {Hugo watschelt seit 3 Jahr(en)};}
     \onslide<17-|handout:0>{\node[ca@CommentNode@out] at(ca@@-13@end) {Hugo watschelt seit 3 Jahr(en)};}
     \onslide<19|handout:0>{\node[ca@CommentNode] at(ca@@-4@end) {\T{\strut sum = 0}};}
     \onslide<20|handout:0>{\node[ca@CommentNode@out] at(ca@@-4@end) {\T{\strut sum = 0}};}
     \onslide<21-22|handout:3>{\node[ca@CommentNode@out] at(ca@@-4@end) {\T{\strut sum = 3}};}
-    \onslide<22-25|handout:0>{\node[ca@CommentNode@out] at(ca@@-4@end) {\T{\strut sum = 10}};}
+    \onslide<23-25|handout:0>{\node[ca@CommentNode@out] at(ca@@-4@end) {\T{\strut sum = 10}};}
     \onslide<26->{\node[below left,T,align=right,yshift=-1.5cm] at(current page.north east) {Hier ist Platz für Heap und Stack.\\Oh, schon 2~Uhr.\\Das wird eine Tafelnummer};}
 \end{tikzpicture}
 \end{frame}
