@@ -710,7 +710,7 @@ private static boolean isUppercase(char c) { return c >= 'A' && c <= 'Z'; }
 \begin{frame}[fragile,c]{Pinguineeee --- Struktur}
 \lstfs{9}\def\hlopa{.4}
 \begin{tikzpicture}[@O]
-    \def\hlcolor{pingu@green!85!pingu@black}
+    \def\hlcolor{pingu@green!82!pingu@black}
     \onslide<12->{
         \hlbehindcodeunder{Penguin}{@Pengu>}
     }
@@ -804,7 +804,7 @@ private static boolean isUppercase(char c) { return c >= 'A' && c <= 'Z'; }
 \begin{frame}[fragile,c]{Pinguineeee --- Gültigkeit \& Sichtbarkeit}
 \lstfs{9}\def\hlopa{.4}
 \begin{tikzpicture}[@O]
-\def\hlcolor{pingu@green!85!pingu@black}
+\def\hlcolor{pingu@green!82!pingu@black}
 \onslide<6->{
     \hlbehindcodeunder{@Penguin_age}{@>}
 }
@@ -861,7 +861,7 @@ private static boolean isUppercase(char c) { return c >= 'A' && c <= 'Z'; }
         \draw[decoration=brace,decorate,lightgray] ([xshift=2mm,yshift=1.5mm]@age.north east) coordinate (@) to[edge node={node[right=1mm,T,align=left] {Die Attribute besitzen die selbe \textbf{Gültigkeit},\\wie das Objekt, dem sie gehören.}}] ([yshift=-1.5mm]@name.south east-|@);
     }
     \onslide<6->{
-        \fill[rounded corners=1.6pt,pingu@green!85!pingu@black,opacity=\hlopa] ([xshift=1mm,yshift=-5pt]@CLASS) rectangle ([xshift=1mm-3.2pt,yshift=5pt]@CLASS@);
+        \fill[rounded corners=1.6pt,pingu@green!82!pingu@black,opacity=\hlopa] ([xshift=1mm,yshift=-5pt]@CLASS) rectangle ([xshift=1mm-3.2pt,yshift=5pt]@CLASS@);
         \path ([xshift=1mm-3.2pt,yshift=-5pt]@CLASS) to[edge node={node[left,T,scale=.8] {\rotatebox{90}{Gültigkeit}}}] ([xshift=1mm-3.2pt,yshift=5pt]@CLASS@);
     }
     \onslide<7->{
