@@ -222,7 +222,7 @@ public class Quersumme {
 !*\onslide<6->*!    }
 !*\onslide<10->*!    int quersumme = 0;
 !*\onslide<12->*!    while(zahl > 0){
-!*\onslide<13->*!        quersumme = quersumme + (zahl !*\tikzmarknode{percentNew}{\sbasic{\%}}*! 10);
+!*\onslide<13->*!        quersumme += (zahl !*\tikzmarknode{percentNew}{\sbasic{\%}}*! 10);
 !*\onslide<14->*!        zahl = zahl / 10;
 !*\onslide<12->*!    }
 !*\onslide<16->*!    !*\tikzmarknode{return2New}{\skA{return}}*! quersumme;
@@ -470,9 +470,57 @@ private static boolean isUppercase(char c) { return c >= 'A' && c <= 'Z'; }
 \end{tikzpicture}
 \end{frame}
 
-% \begin{frame}[fragile]{Die Array-Rotation}
-
-% \end{frame}
+\iffull
+{\AddonFrame
+\begin{frame}[fragile]{Eine alternative Rotation}
+\begin{tikzpicture}[@O]
+\onslide<13->{\def\hlcolor{gray}
+\hlbehindcode[.25pt]{26a}{@26a>}
+\hlbehindcode[.25pt]{26b}{@>}
+}
+\onslide<14->{\def\hlcolor{paletteA}
+\hlbehindcode[.25pt]{25}{@25>}
+}
+\end{tikzpicture}\vspace*{-\baselineskip}
+\begin{itemize}[<+(1)->]
+    \itemsep4pt
+    \item Und was machen wir ohne Modulo? Wir können Schleifen verwenden!
+    \item Zusätzlicher Bonus? Es genügt das Anpassen von \bjava{addCyclicOnBase(char, char)}:
+\begin{plainjava}
+!*\CodeFileMarkerAttach<5->{CharRotationLoops.java}*!
+!*\onslide<4->*!private static char addCyclicOnBase(char base, char c) {
+!*\onslide<5->*!    int shiftedBase = c + n;!*\Snode{apply}*!
+!*\onslide<8->*!    while(shiftedBase < base)
+!*\onslide<8->*!        shiftedBase += !*\Snode{26a}*!26!*\Snode{26a@}*!;!*\Snode{cycle}*!
+!*\onslide<10->*!    while(shiftedBase > base + !*\Snode{25}*!25!*\Snode{25@}*!)
+!*\onslide<10->*!        shiftedBase -= !*\Snode{26b}*!26!*\Snode{26b@}*!;
+!*\onslide<11->*!    return (char) shiftedBase;
+!*\onslide<4->*!}
+\end{plainjava}
+\end{itemize}\vspace*{-.4\baselineskip}
+\begin{center}
+    \scalebox{.9}{\begin{tikzpicture}
+        \onslide<6->{\foreach[count=\i from 0] \colprefix/\letter/\ascii in {\color{codeouthl}/?/63,\color{codeouthl}/@/64,/A/65,/B/66,/C/67,\color{codeouthl}/\ldots/0,/Y/89,/Z/90,\color{codeouthl}/[/91,\color{codeouthl}/\textbackslash/92} {
+            \colprefix\node[font=\bfseries\sffamily] at(\i,0) {\letter};
+        }}
+        \onslide<7->{
+            \draw[thick,line cap=round] (2-.5,-.5) -- ++(0,1) node[below left,yshift=3mm,scale=.85] {\T{< 'A'}};
+        }
+        \onslide<9->{
+            \draw[thick,line cap=round] (8-.5,-.5) -- ++(0,1) node[below right,yshift=3mm,scale=.85] {\T{'Z' < }};
+        }
+    \end{tikzpicture}}
+\end{center}
+\begin{tikzpicture}[@O]
+    \onslide<12->{\node[T,right] at (apply.east) {Füge offset hinzu};}
+    \onslide<14->{\node[T,right] at(cycle) {Verschiebe solange um Zyklusbreite, bis (wieder) in Zyklus!};}
+    \onslide<15->{
+        \draw[lightgray,-Kite] (@25>_down) to[bend right] ++(.5,-.5) node[right, T] {\T{'A' + \textup{25}} $\widehat{=}$ \T{'Z'}};
+    }
+\end{tikzpicture}
+\end{frame}
+}
+\fi
 
 \begin{frame}[fragile]{Ein Beispiel zum Abschluss}
 \SetupLstHl
@@ -662,7 +710,7 @@ private static boolean isUppercase(char c) { return c >= 'A' && c <= 'Z'; }
 \begin{frame}[fragile,c]{Pinguineeee --- Struktur}
 \lstfs{9}\def\hlopa{.4}
 \begin{tikzpicture}[@O]
-    \def\hlcolor{orange}
+    \def\hlcolor{orange!90!pingu@black}
     \onslide<12->{
         \hlbehindcodeunder{Penguin}{@Pengu>}
     }
@@ -698,7 +746,8 @@ private static boolean isUppercase(char c) { return c >= 'A' && c <= 'Z'; }
         \hlbehindcodeunder{toString}{@>}
     }
 \end{tikzpicture}\vspace*{-1.33\baselineskip}
-\begin{plainjava}[lineskip=4pt]%,morekeywords={[3]{Penguin}}]
+%,morekeywords={[3]{Penguin}}]
+\begin{plainjava}[lineskip=4pt]
 !*\CodeFileMarkerAttach<3->{Penguin.java}*!
 !*\onslide<2->*!public class !*\Snode{Penguin}*!Penguin!*\Snode{Penguin@}*! {!*\Snode{classline}*!
 !*\onslide<4->*!   private final int !*\Snode{Penguin_age}*!!*\tikzmarknode{age}{age}*!!*\Snode{Penguin_age@}*!;
@@ -755,7 +804,7 @@ private static boolean isUppercase(char c) { return c >= 'A' && c <= 'Z'; }
 \begin{frame}[fragile,c]{Pinguineeee --- Gültigkeit \& Sichtbarkeit}
 \lstfs{9}\def\hlopa{.4}
 \begin{tikzpicture}[@O]
-\def\hlcolor{orange}
+\def\hlcolor{orange!90!pingu@black}
 \onslide<6->{
     \hlbehindcodeunder{@Penguin_age}{@>}
 }
@@ -780,7 +829,8 @@ private static boolean isUppercase(char c) { return c >= 'A' && c <= 'Z'; }
 \onslide<11->{\hlbehindcodeunder{@age_2}{@>}}
 
 \end{tikzpicture}\vspace*{-1.33\baselineskip}
-\begin{plainjava}[lineskip=4pt]%,morekeywords={[3]{Penguin}}]
+%,morekeywords={[3]{Penguin}}]
+\begin{plainjava}[lineskip=4pt]
 !*\onslide<2->*!!*\CodeFileMarker{Penguin.java}*!
 !*\onslide<2->*!!*\Snode{@CLASS}*!public class !*\Snode{@Penguin}*!Penguin!*\Snode{@Penguin@}*! {!*\Snode{@classline}*!
 !*\onslide<2->*!   private final int !*\Snode{@Penguin_age}*!!*\tikzmarknode{@age}{age}*!!*\Snode{@Penguin_age@}*!;!*\Snode{@ageline}*!
@@ -811,7 +861,7 @@ private static boolean isUppercase(char c) { return c >= 'A' && c <= 'Z'; }
         \draw[decoration=brace,decorate,lightgray] ([xshift=2mm,yshift=1.5mm]@age.north east) coordinate (@) to[edge node={node[right=1mm,T,align=left] {Die Attribute besitzen die selbe \textbf{Gültigkeit},\\wie das Objekt, dem sie gehören.}}] ([yshift=-1.5mm]@name.south east-|@);
     }
     \onslide<6->{
-        \fill[rounded corners=1.6pt,orange,opacity=\hlopa] ([xshift=1mm,yshift=-5pt]@CLASS) rectangle ([xshift=1mm-3.2pt,yshift=5pt]@CLASS@);
+        \fill[rounded corners=1.6pt,orange!90!pingu@black,opacity=\hlopa] ([xshift=1mm,yshift=-5pt]@CLASS) rectangle ([xshift=1mm-3.2pt,yshift=5pt]@CLASS@);
         \path ([xshift=1mm-3.2pt,yshift=-5pt]@CLASS) to[edge node={node[left,T,scale=.8] {\rotatebox{90}{Gültigkeit}}}] ([xshift=1mm-3.2pt,yshift=5pt]@CLASS@);
     }
     \onslide<7->{
