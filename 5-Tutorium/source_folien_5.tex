@@ -470,23 +470,36 @@ private static boolean isUppercase(char c) { return c >= 'A' && c <= 'Z'; }
 \end{tikzpicture}
 \end{frame}
 
+% \begin{frame}[fragile]{Die Array-Rotation}
+
+% \end{frame}
+
 \begin{frame}[fragile]{Ein Beispiel zum Abschluss}
 \SetupLstHl
 \begin{itemize}[<+(1)->]
-    \item Nun gilt es noch aufzurufen:
+    \itemsep3pt
+    \item Nun verbleibt es jedes Zeichen im Array zu verschieben:
 \begin{plainjava}
-!*\onslide<3->*!|ihl|public class CharRotation {|ihl|
-!*\onslide<4->*!    public static void main(String[] args) {
-!*\onslide<5->*!        char[] arr = { 'a', 'Z' };
-!*\onslide<6->*!        rotiereCharacterArray(arr);
-!*\onslide<7->*!        System.out.println(arr);!*\Snode{newarr}*!
+!*\onslide<3->*!public static void rotiereCharacterArray(char[] arr) {
+!*\onslide<4->*!    for (int i = 0; i < arr.length; i++) {
+!*\onslide<5->*!        arr[i] = rotiereCharacter(arr[i]);
 !*\onslide<4->*!    }
-!*\onslide<3->*!|ihl|}|ihl|
+!*\onslide<3->*!}
+\end{plainjava}
+    \item<6-> Nun gilt es noch aufzurufen:
+\begin{plainjava}
+!*\onslide<7->*!|ihl|public class CharRotation {|ihl|
+!*\onslide<8->*!    public static void main(String[] args) {
+!*\onslide<9->*!        char[] arr = { 'a', 'Z' };
+!*\onslide<10->*!        rotiereCharacterArray(arr);
+!*\onslide<11->*!        System.out.println(arr);!*\Snode{newarr}*!
+!*\onslide<8->*!    }
+!*\onslide<7->*!|ihl|}|ihl|
 \end{plainjava}
 \end{itemize}
 \begin{tikzpicture}[@O]
-    \onslide<8->{\node[T,right=3mm] at(newarr.east) {\T{System.out.println(char[])}};}
-    \onlyhandout<9->{\node[above left,yshift=\btdmfootheight] at (current page.south east) {\textattachfile{\curpath CharRotation.java}{CharRotation.java}\;};}
+    \onslide<12->{\node[T,right=3mm] at(newarr.east) {\T{System.out.println(char[])}};}
+    \onlyhandout<13->{\node[above left,yshift=\btdmfootheight] at (current page.south east) {\textattachfile{\curpath CharRotation.java}{CharRotation.java}\;};}
 \end{tikzpicture}
 \end{frame}
 
