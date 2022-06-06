@@ -1,18 +1,22 @@
 \makeatletter
 \def\DoCustomTheme{\def\btdmtheme{%
 \usetheme[libs,nofootfade,centerfoot]{dividing-lines}%
-\RequirePackage{xcolor}\colorlet{btdm@primary}{green}\colorlet{btdm@background}{white}\colorlet{btdm@border@down}{green}\colorlet{btdm@text}{btdl@color@text}%
+\RequirePackage{xcolor}\colorlet{codeouthl}{gray!45!white}\colorlet{btdm@primary}{green}\colorlet{btdm@background}{white}\colorlet{btdm@border@down}{codeouthl}\colorlet{btdm@text}{btdl@color@text}%
 \let\highlight\hl
 \let\hl\relax% work with soul
 \def\IfBtdmDarkmode####1####2{####2}\relax
 \def\setfootmarker####1{\relax}%
+% overwrite nodefaultfont used by main style
+\AtEndPreamble{\RequirePackage{AnonymousPro}}%
+\def\ttdefault{AnonymousPro}%
 }}
 \@ifundefined{iffull}{\DoCustomTheme}{\iffull\DoCustomTheme\fi}
 \InputIfFileExists{../data/global.src}\relax\relax
 \iffull
 \DefinePalette{Recap}{Hellblau,hellbläulich: RGB(21, 110, 130)}
-{Rot,rötlich: RGB(137,64,75)}{Blau,bläulich: RGB(51, 93, 126)}{Grün,grünlich: RGB(21, 150, 90)}
+{Hellblau,hellbläulich: RGB(21, 110, 130)}{Blau,bläulich: RGB(51, 93, 126)}{Grün,grünlich: RGB(21, 150, 90)}
 \UsePalette{Recap}
+\let\sbseries\sbfamily
 \SetColorProfile*{paletteA}{paletteC}{paletteD}
 \def\PostTitlepage{\begin{tikzpicture}[@O]
    \node[above right,xshift=7.5mm,yshift=1.25cm,scale=.8] at(current page.south west) {\LoadOverview{1}{}{2}~~\LoadOverview{2}{}{3\,\&\,4}~~\LoadOverview{3}{}{5}~~\LoadOverview{4}{}{6}~~\LoadOverview{5}{}{7}};
@@ -25,15 +29,15 @@
 \newcounter{slidetasks}
 \setcounter{slidetasks}{0}
 \def\SidebarTask#1{\stepcounter{slidetasks}\SidebarRaw{\Large\rotatebox{90}{\def\rmdefault{AlphaSlabOne-TLF}\color{paletteA!62!pingu@black!36!pingu@white}\rmfamily\selectfont Aufgabe \theslidetasks}\hfill\null}\pdfbookmark[4]{A\theslidetasks)~#1}{lecture@task@@id@\thepage}}
-\def\SidebarSolution#1{\SidebarRaw{\hfill\Large\rotatebox{90}{\def\rmdefault{AlphaSlabOne-TLF}\color{paletteA!62!pingu@black!36!pingu@white}\rmfamily\selectfont #1}}}
-\def\textsb#1{{\sbfamily#1}}
+\def\SidebarSolution{\SidebarRaw{\Large\rotatebox{90}{\def\rmdefault{AlphaSlabOne-TLF}\color{paletteA!62!pingu@black!36!pingu@white}\rmfamily\selectfont Auflösung \theslidetasks}\hfill\null}}
+\def\textsb#1{{\sbseries#1}}
 \def\LargeSide{\begin{tikzpicture}[overlay, remember picture]
   \fill[paletteA] (current page.north west) rectangle ([xshift=4.2mm]current page.south west);
 \end{tikzpicture}}
 \def\ShortSide{\begin{tikzpicture}[overlay, remember picture]
   \fill[paletteA!62!pingu@black!36!pingu@white] (current page.north west) rectangle ([xshift=2.75mm]current page.south west);
 \end{tikzpicture}}
-\def\rhead#1{\hfill\textcolor{shadeB}{\sbfamily#1}}
+\def\rhead#1{\hfill\textcolor{shadeA}{\sbseries#1}}
 \fi
 
 \iffull
@@ -115,60 +119,292 @@ XII. Suchen und Sortieren}%
 \end{itemize}
 \end{frame}
 
-{\def\longa#1{\multicolumn{2}{l}{#1}}
+{\def\>{~\hskip1em}
 \SidebarTask{Terminate the Algorithm}
 \begin{frame}[c]{Terminate the Algorithm}
-\onslide<2->{Antworten Sie jeweils für A, B und C mit \say{Ja}, wenn diese Terminieren oder Begründen Sie kurz.}\vfill
+\onslide<2->{Antworten Sie jeweils für A, B und C mit \say{Ja}, wenn die Verfahren Terminieren oder Widerlegen Sie kurz.}\vspace*{2.5em}
+{\small\columns[t,onlytextwidth]
+\column{.26\linewidth}
+\onslide<3->{Given \(i \in \Z\) \\
+   Set \(j \gets 0\) \\
+   \textbf{while} \(i \neq 0\) \textbf{do}\\
+   \> \(i \gets i - 1\)\\
+   \> \(j \gets j + i\)\\
+   \textbf{stop}\\
+}
+\column{.34\linewidth}
+\onslide<4->{Given \(p = (x, y) \in \R^2\) \\
+   \textbf{if} \(x > y\) \textbf{then}\\
+   \> \(p = (y,x)\)\\
+   \textbf{stop} \\
+}
+\column{.4\linewidth}
+\onslide<5->{Given \(z = (z_1,\ldots, z_n)\), \(z_i \in \N\) \\
+   Set \(j \gets 0\) \\
+   \textbf{while} not (\(z_1 \leq \ldots \leq z_n\)) \textbf{do}\\
+   \> shuffle \(z\) randomly\\
+   \textbf{stop} \\
+}
+\endcolumns\medskip}
+% flo, you can do that better :c
 \columns[c,onlytextwidth]
-\column{.25\linewidth}
-\centering\onslide<3->{\begin{tabular}{ll}
-   Given & \(i \in \Z\) \\
-   Set & \(j \gets 0\) \\
-   \longa{\textbf{while} \(i \geq 0\) \textbf{do}}\\
-   \longa{\kern1em\(i \gets i - 1\)} \\
-   \longa{\kern1em\(j \gets j + i\)} \\
-   \textbf{stop} & \\
-\end{tabular}\medskip\par
-A}
-\column{.29\linewidth}
-\centering\onslide<3->{\begin{tabular}{ll}
-   \strut & \\
-   Given & \(p = (x, y) \in \R^2\) \\
-   \longa{\textbf{if} \(x > y\) \textbf{then}}\\
-   \longa{\kern1em\(p = (y,x)\)} \\
-   \textbf{stop} & \\
-\end{tabular}\medskip\par
-B}
-\column{.46\linewidth}
-\centering\onslide<3->{\begin{tabular}{ll}
-   \strut & \\
-   Given & \(z = (z_1,\ldots, z_n)\), \(z_i \in \N\) \\
-   Set & \(j \gets 0\) \\
-   \longa{\textbf{while} not \(z_1 \leq \ldots \leq z_n\) \textbf{do}}\\
-   \longa{\kern1em shuffle \(z\) randomly} \\
-   \textbf{stop} & \\
-\end{tabular}\medskip\par
-C}
+\column{.26\linewidth}
+\onslide<3->{\centerline{A}}
+\column{.34\linewidth}
+\onslide<4->{\centerline{B}}
+\column{.4\linewidth}
+\onslide<5->{\centerline{C}}
 \endcolumns
 \onslide<1->{\ShortSide}%
+\end{frame}
+\SidebarReset
+
+\SidebarSolution
+\begin{frame}[c]{Yeah, Terminate the Algorithm!}
+\onslide<2->{\columns[c,onlytextwidth]
+\column{.06\linewidth}
+A
+\column{.35\linewidth}
+\scriptsize
+Given \(i \in \Z\) \\
+      Set \(j \gets 0\) \\
+      \textbf{while} \(i \neq 0\) \textbf{do}\\
+      \> \(i \gets i - 1\)\\
+      \> \(j \gets j + i\)\\
+      \textbf{stop}\\
+\column{.59\linewidth}
+\onslide<3->{Terminiert nicht.} \onslide<4->{Betrachte \(i < 0\), Dekrement sorgt dafür, dass nie \(i = 0\).}
+\endcolumns}\bigskip
+\onslide<5->{\columns[c,onlytextwidth]
+\column{.06\linewidth}
+B
+\column{.35\linewidth}
+\scriptsize
+Given \(p = (x, y) \in \R^2\) \\
+   \textbf{if} \(x > y\) \textbf{then}\\
+   \> \(p = (y,x)\)\\
+   \textbf{stop} \\
+\column{.59\linewidth}
+\onslide<6->{Ja, terminiert.}
+\endcolumns}\bigskip
+\onslide<7->{\columns[c,onlytextwidth]
+\column{.06\linewidth}
+C
+\column{.35\linewidth}
+\scriptsize
+Given \(z = (z_1,\ldots, z_n)\), \(z_i \in \N\) \\
+   Set \(j \gets 0\) \\
+   \textbf{while} not (\(z_1 \leq \ldots \leq z_n\)) \textbf{do}\\
+   \> shuffle \(z\) randomly\\
+   \textbf{stop} \\
+\column{.59\linewidth}
+\onslide<8->{Terminiert Nicht.} \onslide<9->{Betrachte \(z = (3, 1)\), \say{shuffle} kann stets \((3,1)\) liefern.}
+\endcolumns}
 \end{frame}
 \SidebarReset
 }
 
 \subsection{Eigenschaften}
 \begin{frame}{What can we say about an Algorithm?}
-   \hfill{\onslide<2->{\Large\bfseries\only<3->{\color{gray}\sbfamily} Totale Korrektheit}}\hfill\null\par
-   \vfill\vfill
+   \vfill
+   \centerline{\onslide<2->{\Large\bfseries\only<3->{\color{gray}\sbseries Totale Korrektheit} }}
+   \vfill
+   \updateitemize{1.}% faker
    \begin{enumerate}
       \itemsep10pt
-      \item<3-> {\sbfamily Termination}\\
+      \item<3-> {\sbseries Termination}\\
          Der Algorithmus endet nach endlich vielen Schritten für jede Eingabe.
-      \item<4-> {\sbfamily Partielle Korrektheit}\\
+      \item<4-> {\sbseries Partielle Korrektheit}\\
          Wenn der Algorithmus terminiert, ist er korrekt.
    \end{enumerate}
-   Determinismus und Determiniertheit
-   \vfill\par
 \end{frame}
+
+\SidebarTask{Algorithmusanalyse}
+\begin{frame}[fragile,c]{Algorithmusanalyse}
+   \onslide<2->{Analysieren Sie den Algorithmus hinsichtlich seiner totalen Korrektheit im Bezug auf die Berechnung der Leonardo-\allowbreak Zahlen.
+   Weisen Sie dafür alle notwendigen Eigenschaften nach oder liefern Sie geeignete Gegenbeispiele.}
+   \lstfs{10}\vfill
+\columns[c,onlytextwidth]
+\column{.605\linewidth}
+\begin{plainjava}
+!*\onslide<4->*!public static long L(int n) {
+!*\onslide<5->*!   if(n == 0 || n == 1) return 1;
+!*\onslide<6->*!   int l1 = 1, l2 = 1;
+!*\onslide<7->*!   for(int i = 0; i < n - 1; i++) {
+!*\onslide<8->*!      int tmp = l1;
+!*\onslide<9->*!      l1 = l2;
+!*\onslide<10->*!      l2 = tmp + l2 + 1;
+!*\onslide<7->*!   }
+!*\onslide<11->*!   return l2;
+!*\onslide<4->*!}!*\onslide<1->*!
+\end{plainjava}
+\column{.395\linewidth}
+\onslide<3->{Die Leonardo-Zahlen sind definiert (für \(n \geq 0\)):\\
+\(L(0) = 1,~L(1) = 1\)\\
+\(L(n) = L(n - 1) + L(n - 2) + 1\)}
+\endcolumns
+\onslide<1->{\ShortSide}%
+\end{frame}
+\SidebarReset
+
+
+\SidebarSolution
+\begin{frame}[fragile,c]{Algorithmusanalyse}
+\begin{enumerate}
+   \itemsep11pt
+   \item<2-> Terminiertheit \begin{itemize}
+      \item<4-> \T{n} ist konstant.
+      \item<5-> Für \(n = 0\), bzw. \(n = 1\) trivial.
+      \item<6-> Für \(n > 1\) wächst \(i\) streng monoton an und wird irgendwann \(i < n - 1\) verletzen.
+   \end{itemize}
+   \item<3-> Partielle Korrektheit
+\end{enumerate}
+\begin{tikzpicture}[overlay,remember picture]
+   \node[below left,text width=7cm,scale=.625] at(current page.north east) {%
+\begin{plainjava}
+public static long L(int n) {
+   if(n == 0 || n == 1) return 1;
+   int l1 = 1, l2 = 1;
+   for(int i = 0; i < n - 1; i++) {
+      int tmp = l1; l1 = l2;
+      l2 = tmp + l2 + 1;
+   }
+   return l2;
+}
+\end{plainjava}
+};
+\end{tikzpicture}
+\end{frame}
+
+\begin{frame}[fragile,c]{Algorithmusanalyse}
+\begin{enumerate}
+   \itemsep11pt
+   \item<1-> Terminiertheit
+   \item<1-> Partielle Korrektheit \begin{itemize}
+      \item<2-> Für \(n = 0\), bzw. \(n = 1\) per Definition.
+      \item<3-> Für \(n > 1\) per vollständiger Induktion. \begin{description}[IH]
+         \itemsep5pt
+         \item<4->[IA] Für \(n = 2\). \onslide<5->{Mit \(i < 1\) haben wir einen Zyklus. Das Ergebnis:
+            \(\T{l2} = 1 + 1 + 1 = 3 = L(2)\) und \(\T{l1} = 1 = L(1)\).\quad\textcolor{lightgray}{\faCheck}}
+         \item<6->[IH] Für \(n \geq 0\) ist \(\T{l2}\) die \(n\)-te und \(\T{l1}\) die \(n-1\)-te Leonardo-Zahl.
+         \item<7->[IS] Mit \(n \to n + 1\) wird durch \bjava{l1 = l2} nämlich nach der IH \onslide<8->{\(\T{l1} = L(n) = L(n + 1 - 1)\) und mit \bjava{l2 = tmp + l2 + 1} wird \(L(n + 1) = L(n + 1 - 1) + L(n + 2 - 1) + 1\).}
+      \end{description}
+   \end{itemize}
+\end{enumerate}
+\begin{tikzpicture}[overlay,remember picture]
+   \node[below left,text width=7cm,scale=.625] at(current page.north east) {%
+\begin{plainjava}
+public static long L(int n) {
+   if(n == 0 || n == 1) return 1;
+   int l1 = 1, l2 = 1;
+   for(int i = 0; i < n - 1; i++) {
+      int tmp = l1; l1 = l2;
+      l2 = tmp + l2 + 1;
+   }
+   return l2;
+}
+\end{plainjava}
+};
+\end{tikzpicture}
+\end{frame}
+\SidebarReset
+
+\setbox\pinguA=\hbox{\tikz{\pingu[blush,eyes wink,bow tie,cane right,left wing wave]}}
+\begin{frame}[c]{What can we say about an Algorithm?\rhead{II}}
+\begin{layout-full}
+\begin{center}
+   \begin{tikzpicture}[align-half-base]
+      \onslide<3->{\node[circle,fill=gray,scale=.8] (a) at(0,0) {};
+         \node[left,gray] at(a.west) {in}; % label stuff
+         \node[circle,fill=gray,scale=.8] (b) at(2,0) {};
+         \node[right,gray] at(b.east) {out};
+      }
+      \onslide<4->{
+         \foreach\ang in {25,15,5} {
+            \draw[gray,-{Kite[scale=.65]},line cap=round] (a) to[bend left=\ang] (b);
+            \draw[gray,-{Kite[scale=.65]},line cap=round] (a) to[bend right=\ang] (b);
+         }
+      }
+      \onslide<2->{\node[below=6mm] (@) at(current bounding box.south) {Determiniertheit};}
+      \pgfinterruptboundingbox
+      \onslide<8->{\node[T,below] at(@.south) {Gleiche Eingabe~\(\to\) Gleiche Ausgabe};}
+      \endpgfinterruptboundingbox
+   \end{tikzpicture}\hskip1.5cm\clap{\onslide<10->{\smash{\raisebox{17.75pt}{$\Longleftarrow$}}}}\hskip1.5cm
+   \begin{tikzpicture}[align-half-base]
+      \onslide<6->{\node[circle,fill=gray,scale=.8] (a) at(0,0) {};
+         \node[left,gray] at(a.west) {in}; % label stuff
+         \node[circle,fill=gray,scale=.8] (b) at(2,0) {};
+         \node[right,gray] at(b.east) {out};
+      }
+      \onslide<7->{
+         \draw[gray,-{Kite[scale=.65]},line cap=round,] (a) to[bend left=15] (b);
+         \foreach\ang in {25,15,5} {
+            \path[gray,-{Kite[scale=.65]},line cap=round] (a) to[bend left=\ang] (b);
+            \path[gray,-{Kite[scale=.65]},line cap=round] (a) to[bend right=\ang] (b);
+         }
+      }
+      \onslide<5->{\node[below=6mm] (@) at(current bounding box.south) {Determinismus};}
+      \pgfinterruptboundingbox
+      \onslide<9->{\node[T,below] at(@.south) {Gleiche Eingabe~\(\to\) Gleiche Zustandsfolge};}
+      \endpgfinterruptboundingbox
+   \end{tikzpicture}
+\end{center}
+\end{layout-full}
+\begin{tikzpicture}[@O]
+   \node[above right,scale=.65] (@) at(current page.south west) {\copy\pinguA};
+   \node[T,right,yshift=-6mm,xshift=2mm,align=left] at(@.north east) {Wer determiniert ist, möchte sein Ziel um jeden Preis erreichen\\auf \say{egal welcher Weg}.};
+\end{tikzpicture}
+\end{frame}
+
+
+\SidebarTask{Ein Algorithmenentwurf}
+\begin{frame}[c]{Ein Algorithmenentwurf}
+\onslide<2->{Entwerfen Sie einen Algorithmus als Pseudocode, der einen Binärstring $b$ in die entsprechende Dezimalzahl $d$ umwandelt. Diese finden Sie folgendermaßen: \begin{equation*}
+   d = \sum_{i = 1}^N b_i2^{N - i}
+\end{equation*}
+Dabei ist \(b_i\) der \(i\)-te Eintrag des Strings. Für \(b = \text{\T{1001}}\) gilt damit: \begin{equation*}
+   \tikzmarknode{@1}{1 \cdot {\color{gray}2^{4 - 1}}} + \tikzmarknode{@2}{0 \cdot {\color{gray}2^{4 - 2}}} + \tikzmarknode{@3}{0 \cdot {\color{gray}2^{4 - 3}}} + \tikzmarknode{@4}{1 \cdot {\color{gray}2^{4 - 4}}} = 9
+\end{equation*}\vspace*{-1mm}\par
+Wobei hier \(N = 4\).}
+\begin{tikzpicture}[@O]
+   % macro? pffffh
+   \onslide<2->{\draw[decoration=brace,decorate] ([yshift=-1mm]@1.south east) to[edge node={node[below=1mm] {8}}] ([yshift=-1mm]@1.south west);
+   \draw[decoration=brace,decorate] ([yshift=-1mm]@2.south east) to[edge node={node[below=1mm] {0}}] ([yshift=-1mm]@2.south west);
+   \draw[decoration=brace,decorate] ([yshift=-1mm]@3.south east) to[edge node={node[below=1mm] {0}}] ([yshift=-1mm]@3.south west);
+   \draw[decoration=brace,decorate] ([yshift=-1mm]@4.south east) to[edge node={node[below=1mm] {1}}] ([yshift=-1mm]@4.south west);}
+\end{tikzpicture}%
+\onslide<1->{\ShortSide}%
+\end{frame}
+\SidebarReset
+\SidebarSolution
+\setbox\pinguA=\hbox{\tikz{\pingu[headband=paletteA,headband upper angle=20,head band angle=20,head band knot,head band bands=false,right wing wave,body type=legacy,heart=codeouthl]}}
+\begin{frame}[c]{Algorithmenübernahme}
+\begin{tikzpicture}[@O]
+   \onslide<2->{\node[below left=4mm] at(current page.north east) {\(\displaystyle d= \sum_{i = 1}^N b_i 2^{N - i}\)};}
+\end{tikzpicture}
+\SetKw{KwStep}{waddle size}
+\begin{algorithm}[H]
+\PreCode
+    \onslide<3->{\KwIn{binary string \(b\)}}\medskip
+\StartCode
+    \onslide<4->{\(N \gets \text{length of }b\)\;}
+    \onslide<5->{\(d \gets 0\)\;}
+    \onslide<6->{\For{\(i \gets 1\) \KwTo~\KwSty{inclusive} \(N\) \tikzmarknode{@-main}{\KwStep} 1} {
+       \onslide<8->{\(d \gets d + \tikzmarknode{@-b}{b_i} \cdot 2^{N - i}\)\;}
+    }}
+    \onslide<10->{\KwRet \(d\)\;}
+\end{algorithm}
+\begin{tikzpicture}[@O]
+   % macro? pffffh
+   \onslide<7->{\draw[decoration=brace,decorate,T] ([yshift=1mm]@-main.north west) to[edge node={node[above=1mm] {Schrittgröße!}}] ([yshift=1mm]@-main.north east);}
+   \onslide<9->{\draw[T,-Kite] (@-b.south) to[bend right] ++(.2,-.4) node[below right,yshift=.7\baselineskip,align=left] {Ist hier schon durch\\die Aufgabe gegeben.};}
+   \onslide<11->{\node[left=-5mm,scale=.7] (@) at(current page.east) {\copy\pinguA};
+      \node[above left,yshift=-.75cm,xshift=.66cm,T]  at(@.north west) {\say{for all \(i \in \{1, \ldots, N\}\)\ldots}};
+   }
+\end{tikzpicture}
+\end{frame}
+\SidebarReset
+
 
 \subsection{Algorithmus-Diskussion}
 {\def\comm#1{\hfill\textcolor{gray}{\footnotesize#1}}
@@ -190,10 +426,457 @@ C}
 \end{frame}}
 
 
-\section{Konstrukte}
-\begin{frame}
-
+\SidebarTask{Eine Aufwandsanalyse}
+\begin{frame}[c]{Eine Aufwandsanalyse}
+\onslide<2->{Bestimmen Sie den worst-case Laufzeitaufwand des folgenden Verfahrens in Elementaroperationen:}
+\bigskip\par
+\onslide<3->{\begin{algorithm}[H]
+\PreCode
+    \KwIn{binary string \(b\)}\medskip
+\StartCode
+    \(N \gets \text{length of }b\)\;
+    \(d \gets 0\)\;
+    \For{\(i \gets 1\) \KwTo~\KwSty{inclusive} \(N\) \tikzmarknode{@-main}{\KwStep} \(1\)} {
+       \(d \gets d + \tikzmarknode{@-b}{b_i} \cdot 2^{N - i}\)\;
+    }
+    \KwRet \(d\)\;
+\end{algorithm}}
+\onslide<1->{\ShortSide}%
 \end{frame}
+\SidebarReset
+
+\SidebarSolution
+{\newcommand<>\ComplexityMarker[1]{\only#2{\rlap{\qquad\compl{#1}}}}
+\def\compl#1{\text{\sbseries\itshape\paletteA{#1}}}
+\begin{frame}[c]{Gimme this Aufwand-Thing}
+\onslide<2->{\begin{algorithm}[H]
+\PreCode
+    {\only<3->{\color{codeouthl}}\KwIn{binary string \(b\)}}\medskip
+\StartCode
+    \(N \gets \text{length of }b\)\ComplexityMarker<4->{1}\;
+    \(d \gets 0\)\ComplexityMarker<5->{1}\;
+    \For(\ComplexityMarker<6->{\paletteD{n}}){\(i \gets 1\) \KwTo~\KwSty{inclusive} \(N\) \tikzmarknode{@-main}{\KwStep} \(1\)} {
+       \(d \tikzmarknode{assign}{{}\gets{}} d \tikzmarknode{+}{{}+{}} b_i \tikzmarknode{dot}{{}\cdot{}} \tikzmarknode{exp-left}{\HStrut}2^{N \tikzmarknode{-}{\,-\,} i}\tikzmarknode{exp-right}{\HStrut}\)\ComplexityMarker<12->{5}\;
+    }
+    \KwRet \(d\)\ComplexityMarker<13->{1}\;
+\end{algorithm}}
+\bigskip
+\onslide<14->{\(\compl{1}\,E + \compl{1}\,E + \compl{\paletteD{n}} \cdot (\compl{5}\,E) + \compl{1}\,E \onslide<15->{= (3 + 5 \cdot n)\,E\)}}
+\begin{tikzpicture}[@O]
+   \onslide<7->{\draw[T,-Kite] (-.south) to[bend right] ++(.5,-.2) node[right=-1mm,align=left] {\compl{\color{lightgray}1}};}
+   \path(exp-left.south)--(exp-right.south) coordinate[pos=.5] (exp);
+   \onslide<8->{
+   \draw[decoration={brace,mirror},decorate] ([yshift=-.25mm]exp-left.south) -- ([yshift=-.25mm]exp-right.south);
+   \draw[T,-Kite] ([yshift=-.75mm]exp.south) to[bend right] ++(.2,-.4) node[right=-.6mm,align=left] {\compl{\color{lightgray}1}};
+   }
+   \onslide<9->{\draw[T,-Kite] (dot.south) to[bend right] ++(.075,-.4) node[right=-.6mm,align=left] {\compl{\color{lightgray}1}};}
+   \onslide<10->{\draw[T,-Kite] (+.south) to[bend right] ++(.2,-.4) node[right=-.6mm,align=left] {\compl{\color{lightgray}1}};}
+   \onslide<11->{\draw[T,-Kite] (assign.south) to[bend right] ++(.2,-.4) node[right=-.6mm,align=left] {\compl{\color{lightgray}1}};}
+\end{tikzpicture}
+\end{frame}
+\SidebarReset
+
+\subsection{Recap}
+\begin{frame}[c]{\paletteA{\sbfamily Kurzgesagt}\hfill Algorithmen}
+\begin{itemize}[<+(1)->]
+   \itemsep14pt
+   \item Totale Korrektheit \begin{itemize}
+      \item \textit{Terminiertheit:}\hfill Endliche Schritte für jede Eingabe
+      \item \textit{Partielle Korrektheit:}\hfill Wenn terminiert, dann korrekt
+   \end{itemize}
+   \item Weitere Eigenschaften \begin{itemize}
+      \item \textit{Determiniertheit:}\hfill Gleiche Eingabe~\(\to\) Gleiche Ausgabe
+      \item \textit{Determinismus:}\hfill Gleiche Eingabe~\(\to\) Gleiche Zustandsfolge
+   \end{itemize}
+   \item Der Abstraktionsprozess kommt durch Übung
+\end{itemize}
+\LargeSide
+\end{frame}
+
+
+\section{Konstrukte}
+\subsection{Datentypen}
+\def\dt#1{{\large\bfseries\textcolor{paletteA!58!white}{\strut#1}}}
+\begin{frame}[c]{Primitive Datentypen}
+\centering\begin{layout-imageonly}
+\begin{tikzpicture}[scale=2.65]
+   \onslide<2->{\node[right] (boolean) at(0,0)             {\dt{boolean}};}
+   \onslide<3->{\node[right] (byte) at(0,-1.66*1/2.65)     {\dt{byte}};}
+   \onslide<3->{\node[right=6.5mm] (short) at(byte.east)   {\dt{short}};}
+   \onslide<4->{\node[below=1.35cm] (char) at(short.south) {\dt{char}};}
+   \onslide<3->{\node[right=6.5mm] (int) at(short.east)    {\dt{int}};}
+   \onslide<3->{\node[right=6.5mm] (long) at(int.east)     {\dt{long}};}
+   \onslide<3->{\node[right=6.5mm] (float) at(long.east)   {\dt{float}};}
+   \onslide<3->{\node[right=6.5mm] (double) at(float.east) {\dt{double}};}
+
+\begin{scope}[every path/.append style={draw,-Kite}]
+\onslide<5->{\path (byte) -- (short);
+\path (short) -- (int);
+\path (int) -- (long);
+\path (long) -- (float);
+\path (float) -- (double);}
+\onslide<6->{\path[rounded corners=2pt] (char) -| (int) coordinate[pos=.3] (join);
+\node[below right,xshift=5mm,yshift=-1mm] (join-d) at (join) {UTF-16};
+\path[gray] (join.east) to[bend right] (join-d.west);}
+\onslide<7->{
+   \node[gray,above] at (byte.north) {8};
+   \node[gray,above] at (short.north) {16};
+   \node[gray,above] at (int.north) {32};
+   \node[gray,above] at (long.north) {64};
+   \node[gray,above] at (float.north) {32};
+   \node[gray,above] at (double.north) {64};
+   \node[gray,above] at (char.north) {16};
+}
+\onslide<8->{\draw[decoration={brace,mirror,amplitude=3pt},decorate,-] ([yshift=1pt]float.south west) -- ([yshift=1pt]double.south east) node[pos=.5,below=4.5pt] {\sbfamily Rundungsproblem!};}
+\onslide<9->{\draw[decoration={brace,mirror,amplitude=3pt},decorate,-] ([yshift=1pt]byte.south west) -- ([yshift=1pt]short.south east) node[pos=.5,below=4.5pt] {\sbfamily \(+\),~~\(/\),~~\ldots~~\(\longrightarrow\)~~\bjava{int}};}
+\end{scope}
+\end{tikzpicture}
+\end{layout-imageonly}
+\end{frame}
+
+\def\ms#1{{\relax{#1}}}
+\def\a{\color{codeouthl}a}
+\def\b{\color{codeouthl}b}
+\def\K#1{\text{\textbf{\color{paletteA}#1}}}
+\begin{frame}[c]{Präzedenzregeln}
+\def\to{\raisebox{1pt}{\;\tikz\draw[pingu@black!80!pingu@white,-{Kite[scale=1.05]},line cap=round,line width=.925pt] (0,0) -- (6mm,0);}}%
+\begin{itemize}
+   \item<2-> Eine Auswahl:
+   \begin{alignat*}{4}
+      \onslide<3->{\ms{\a\K{++},~~\a\K{-\,-}}}&\onslide<4->{\to~\ms{\K{!}\a,~~ \K{-}\a,~~ \K{++}\a,~~\K{-\,-}\a}}&&\onslide<5->{\to~\ms{\a~\K*~\b,~~\a~\K/~\b,~~\a~\K\%~\b}} \\
+      &\onslide<6->{\to~\ms{\a~\K+~\b,~~\a~\K-~\b}}&& \onslide<7->{\to~\ms{\a~\K{==}~\b,~~\a~\K<~\b,~~\ldots}}\\
+      & \onslide<8->{\to~\ms{\a~\K{\textasciicircum}~\b}}&&\onslide<9->{\to~\ms{\a~\K{\&\&}~\b}}\\
+      & \onslide<10->{\to~\ms{\a~\K{||}~\b}}
+      \onslide<1->
+   \end{alignat*}
+\end{itemize}
+\end{frame}
+
+\SidebarTask{Typbestimmung}
+\begin{frame}{Typbestimmung}
+\onslide<2->{\flushleft Bestimmen Sie für jeden der folgenden Java-Ausdrücke den Typ \textit{jedes Teilausdrucks}, sowie das Gesamtergebnis. Sie dürfen Rundungsprobleme der Sprache ignorieren:\vfill
+\begin{itemize}
+   \itemsep10pt
+   \item \bjava{14 - 3D * 2 / 12}
+   \item \bjava{(char) ((byte) 'a' + 3) + " Sonne"}
+   \item \bjava{14 - 2 + (3 > 9 || true ^ false ? "Hallo" : "Welt")}
+   \item \bjava{7/2 - 3 * 2.5 + 2f}
+\end{itemize}}
+\onslide<1->{\ShortSide}%
+\end{frame}
+\SidebarReset
+
+\SidebarSolution
+\def\mj#1{\text{\bjava{#1}}}
+\def\ob<#1>#2#3{\only<-\the\numexpr#1-1\relax|handout:0>{\mj{#2}}\only<#1->{\overbracket[.33pt]{\mj{#2}}^{\makebox[0pt]{\scriptsize\mj{#3}}}}}
+\def\gub<#1>#2#3{\only<-\the\numexpr#1-1\relax|handout:0>{#2}\only<#1->{\underbracket[.33pt]{#2}_{\makebox[0pt]{\scriptsize\mj{#3}}}}}
+\def\gob<#1>#2#3{\only<-\the\numexpr#1-1\relax|handout:0>{#2}\only<#1->{\overbracket[.33pt]{#2}^{\makebox[0pt]{\scriptsize\mj{#3}}}}}
+\begin{frame}[c]{Typbestimmung\rhead{II}}
+   \begin{itemize}
+      \itemsep14pt
+      \item<2-> \(\ob<3>{14}{int} \mj{-} \gub<5>{\gob<4>{\ob<3>{3D}{double} \mj{*} \ob<3>{2}{int}}{double} \mj{/} \ob<3>{12}{int}}{double} \only<6->{{}= \ob<6>{13.5}{double}}\)
+      \item<7-> \(\gob<11>{(\mj{char})~\gub<10>{(\gub<9>{(\mj{byte}) \ob<8>{'a'}{char}}{byte} + \ob<8>{3}{int})}{int}}{char} + \ob<8>{\" Sonne\"}{String} \only<12->{{}=\ob<12>{\"d Sonne\"}{String}}\)
+   \end{itemize}
+\end{frame}
+
+\begin{frame}[c]{Typbestimmung\rhead{III}}
+   \begin{itemize}
+      \itemsep14pt
+      \item<2-> \(\gob<7>{\ob<3>{14}{int} \mj{-} \ob<3>{2}{int}}{int} \mj{+} \gob<6>{(\gub<5>{\gub<4>{\ob<3>{3}{int} \mj{>} \ob<3>{9}{int}}{boolean} \mj{||} \gub<4>{\ob<3>{true}{boolean} \mj{^} \ob<3>{false}{boolean}}{boolean}}{boolean} \mj{?} \ob<3>{\"Hallo\"}{String} \mj{:} \ob<3>{\"Welt\"}{String})}{String}\) \\[-6pt]
+      \onslide<8->{\({}= \ob<8>{\"12Hallo\"}{String}\)}
+      \item<9-> \(\gob<12>{\gub<11>{\ob<10>{7}{int}\mj{/}\ob<10>{2}{int}}{int} \mj{-} \gub<11>{\ob<10>{3}{int} \mj{*} \ob<10>{2.5}{double}}{double}}{double} \mj{+} \ob<10>{2f}{float} \only<13->{{}= \ob<13>{-2.5}{double}}\)
+   \end{itemize}
+\end{frame}
+\SidebarReset
+
+\subsection{Definitionen und Blöcke}
+\begin{frame}[c]{Variablendefinition}
+   \begin{description}[Initialisierung]
+      \itemsep=12pt
+      \item<2->[Deklaration] Es gibt etwas mit diesem Namen (und Typ):\\
+         \onslide<3->{\bjava{int x;}\quad \bjava{char w;}}
+      \item<4->[Zuweisung] Wertzuweisung, bzw. Ersetzung des Wertes:\\
+         \onslide<5->{\bjava{x = 12; x = 9;}\quad \bjava{w = 'k';}}
+      \item<6->[Initialisierung] \textit{Erste} Wertzuweisung zu einer Variable:\\
+         \onslide<7->{\bjava{int x = 12;}\quad \bjava{char w; w = 'x';}}
+   \end{description}\medskip
+   \begin{center}
+      \onslide<8->{\bjava{final} erzwingt, dass eine Variable nur Initialisiert und dann nicht erneut zugewiesen werden darf.}
+   \end{center}
+\end{frame}
+
+\newsavebox\holdi
+\savebox\holdi{\tikz\pingu[right wing grab, left wing wave,eyes angry,santa beard];}
+\begin{frame}[c]{Standardwerte}
+   \begin{itemize}[<+(1)->]
+      \itemsep10pt
+      \item Standardwerte für: \begin{itemize}
+         \itemsep3pt
+         \item Klassen-Variablen (\bjava{static})
+         \item Instanz-Variablen
+         \item Array-Komponenten (wie bei \bjava{new int[]})
+      \end{itemize}
+      \item Der Standardwert ist \say{Null}: \begin{itemize}
+         \itemsep3pt
+         \item \bjava{byte}, \bjava{short}, \bjava{int}, \bjava{long} $\longrightarrow$ \bjava{0}
+         \item \bjava{float}, \bjava{double} $\longrightarrow$ \bjava{0.0}
+         \item \bjava{char} $\longrightarrow$ \T{'}\!\!\bjava{\\u0000}\T{'} (\say{Unicodesymbol mit Wert \(0\)})
+         \item \bjava{boolean} $\longrightarrow$ \bjava{false}
+         \item Komplexe Datentypen $\longrightarrow$ \bjava{null}
+      \end{itemize}
+   \end{itemize}
+\begin{tikzpicture}[overlay,remember picture]
+   \onslide<12->{\node[below left,yshift=.33cm,scale=.65] (d) at(current page.north east) {\rotatebox{180}{\usebox\holdi}};
+   \node[left] at(d.west) {Explicit is betta!};}
+\end{tikzpicture}
+\end{frame}
+
+\newcommand<>\lm[1][]{\only#2{#1\llap{\textcolor{paletteA!68!white}{\faCaretRight}~}}}
+\makeatletter
+\lhns@elemwidth3cm
+\lhns@minborderheight3.25cm
+\makeatother
+\begin{frame}[c,fragile]{Blöcke}
+   \begin{itemize}[<+(1)->]
+      \itemsep10pt
+      \item Methodenaufrufe erzeugen \say{Stack-Frames}.
+      \item Code-Blöcke arbeiten vergleichbar.
+      \item Beim Verlassen wird alles davon vom Stack geschmissen.
+   \end{itemize}
+\begin{columns}[onlytextwidth,c]
+\column{.5\linewidth}
+\onslide<5->
+\begin{plainjava}
+!*\lm<6|handout:0>*!int x = 5;
+{
+!*\lm<7|handout:0>*!   double b = 12.5;
+!*\lm<8>*!   x = x + (int) b;
+}
+!*\lm<9-|handout:0>*!int y = x;
+\end{plainjava}
+\column{.5\linewidth}
+\onslide<5->{\downsize{.45\linewidth}{\begin{tikzpicture}[lhns@basestyle/.append style={execute at begin node=\strut,font=\ttfamily},lhns@blockstyle/.append style={draw=gray,thick}]
+\begin{heap-n-stack}{}
+\only<6->{\stack{x = \only<-7|handout:0>{5}\only<8-|handout:1>{17}}}
+\only<7-8>{\stack{- Block -}
+\stack{b = 12.5}}
+\only<9-|handout:0>{\stack{y = 17}}
+\renderstack
+\end{heap-n-stack}
+\end{tikzpicture}}}
+\end{columns}
+\end{frame}
+
+\subsection{Überschatten}
+\newsavebox\pingushadow
+\savebox\pingushadow{\pingudefaults{wings grab}\begin{tikzpicture}
+   \scope[xshift=2.95cm,yshift=.21cm,canvas is xz plane at y=-1,rotate=180,scale=1.165]
+      \pingudefaultsappend{body=pingu@black,body front=pingu@black,feet color=pingu@black,bill color=pingu@black,eyes=none,wings=none}
+      \pingu[@block/.style={fill=pingu@black!38!white}];% no feet part problems on shadow
+      \pingu[:ghost glow,feet=none];
+   \endscope
+   \pingu[cup=pingu@green!76!paletteA,eyes wink];
+   \scope[xshift=1.95cm,yshift=-.44cm,scale=.25]
+      \pingu[:hide,feet=normal,feet color=pingu@yellow!66!pingu@black,feet front];
+      \pingu[wings wave,eyes shiny,@block/.append style={fill=#1!66!pingu@black},heart=paletteA!68!white,hat=paletteA];% get feet behind but still above shadow
+   \endscope
+\end{tikzpicture}}
+\begin{frame}[c,fragile]{Überschatten}
+\vspace*{.885\baselineskip}\begin{itemize}[<+(1)->]
+   \itemsep9pt
+   \item<3-> Instanz-/Klassenvariable mit gleichem Be-\\
+   zeichner wie lokale Variable.
+   \item<4-> Der lokale Bezeichner überschattet den \say{globalen}.
+   \item<5-> So kann auch der Typ verändert werden.
+\end{itemize}\vspace*{-3.65\baselineskip}
+\begin{layout-imageonly}
+\begin{columns}[onlytextwidth,c]
+\column{.65\linewidth}
+\lstfs{9}\lstset{lineskip=3.25pt}\begin{uncoverenv}<6->\begin{plainjava}
+class LetThereBeDarkness {
+  static int happiness = 7;
+  public static void main(String[] args) {
+    System.out.println(happiness);
+    String happiness = "Maunz";
+    System.out.println(happiness);
+  }
+}
+\end{plainjava}
+\end{uncoverenv}
+\column{.35\linewidth}
+\begin{uncoverenv}<7-> Ausgabe:%
+\begin{void*}
+7
+Maunz!*\onslide<1->*!
+\end{void*}
+\end{uncoverenv}
+\end{columns}\vspace*{-2\baselineskip}
+\end{layout-imageonly}
+\begin{tikzpicture}[overlay,remember picture]
+   \onslide<2->{\node[below left=.33cm,scale=1] at(current page.north east) {\usebox\pingushadow};}
+\end{tikzpicture}
+\end{frame}
+
+\SidebarTask{Was gibt das Programm aus?}
+\begin{frame}[c,fragile]{Programmausgaben}
+Geben Sie für die Zeilen \T{i}--\T{iv} die erzeugte Ausgabe an und erklären Sie die Werte der beteiligten Variablen.
+\lstfs{9}\begin{plainjava}
+!*\onslide<2->*!public class Example {
+!*\onslide<2->*!   public static int main;
+!*\onslide<2->*!   public static String a = "Hallo";
+!*\onslide<2->*!   public static void main(String[] args) {
+!*\onslide<2->*!      int a = 7,  b = 15;
+!*\onslide<2->*!      System.out.println(a + "; " + main); // i)
+!*\onslide<2->*!      {
+!*\onslide<2->*!         float main = 3 * b++;
+!*\onslide<2->*!         Example.a += b;
+!*\onslide<2->*!         System.out.println(b + "; " + main); // ii)
+!*\onslide<2->*!      }
+!*\onslide<2->*!      System.out.println(a + "; " + b + "; " + main); // iii)
+!*\onslide<2->*!      System.out.println(Example.a + "; " + Example.main); // iv)
+!*\onslide<2->*!   }
+!*\onslide<2->*!}!*\onslide<1->*!
+\end{plainjava}
+\onslide<1->{\ShortSide}%
+\end{frame}
+\SidebarReset
+\SidebarSolution
+\def\Show<#1>#2;{\onslide<#1->{{\only<#1|handout:1>{\colorlet{@}{gray}}\path[@]#2;}}}
+\def\ShowFull<#1>#2;{\onslide<#1-|handout:2>{{\only<#1>{\colorlet{@}{gray}}\path[@]#2;}}}
+\tikzset{every tikzmarknode/.append style={outer sep=2.25pt}}
+\begin{frame}[c,fragile]{Programmausgaben\rhead{II}}
+\lstfs{9}\begin{plainjava}
+public class !*\rlap{\tikzmarknode{Example}{\phantom{Example}}}*!Example {
+   public static int !*\rlap{\!\tikzmarknode{main}{\phantom{main}}}*!main;
+   public static String a!*\llap{\tikzmarknode{a}{\phantom{a}}}*! = "Hallo";
+   public static void main(String[] args) {
+      int !*\rlap{\tikzmarknode{a2}{\phantom{a}}}*!a = 7;
+      int !*\rlap{\tikzmarknode{b}{\phantom{b}}}*!b = 15;
+      System.out.println(!*\rlap{\tikzmarknode{ua}{\phantom{a}}}*!a + "; " + !*\rlap{\tikzmarknode{umain}{\phantom{main}}}*!main); // i)
+      {
+         float !*\rlap{\tikzmarknode{main2}{\phantom{main}}}*!main = 3 * !*\rlap{\tikzmarknode{ub}{\phantom{b}}}*!b++;
+         !*\rlap{\tikzmarknode{uExample}{\phantom{Example}}}*!Example.!*\rlap{\tikzmarknode{ua2}{\phantom{a}}}*!a += !*\rlap{\tikzmarknode{ub2}{\phantom{b}}}*!b;
+         System.out.println(!*\rlap{\tikzmarknode{ub3}{\phantom{b}}}*!b + "; " + !*\rlap{\tikzmarknode{umain2}{\phantom{main}}}*!main); // ii)
+      }
+      System.out.println(!*\rlap{\tikzmarknode{ua3}{\phantom{a}}}*!a + "; " + !*\rlap{\tikzmarknode{ub4}{\phantom{b}}}*!b + "; " + !*\rlap{\tikzmarknode{umain3}{\phantom{main}}}*!main); // iii)
+      System.out.println(!*\rlap{\tikzmarknode{uExample2}{\phantom{Example}}}*!Example.!*\rlap{\tikzmarknode{ua4}{\phantom{a}}}*!a + "; " + !*\rlap{\tikzmarknode{uExample3}{\phantom{Example}}}*!Example.!*\rlap{\tikzmarknode{umain4}{\phantom{main}}}*!main); // iv)
+   }
+}
+\end{plainjava}
+\begin{tikzpicture}[overlay,remember picture,every path/.append style={draw,gray,-Kite}]
+\colorlet{@}{lightgray!70!white}%
+\Show<2> (ua.west) to[out=165,in=-60] (pic cs:a2);
+\Show<3> (umain.north) to[bend right] (main.east);
+\Show<4> (ub.north) to[out=140,in=290] (b.south);
+\Show<5> (ua2.north) to[out=100,in=260] (a.south);
+\Show<6> (ub2.north west) to[out=140,in=290] (b.south);
+\Show<7> (ub3.north west) to[out=140,in=290] (b.south);
+\Show<8> (umain2.north) to[out=170,in=-30] ([xshift=-2pt]main2.south east);
+
+\ShowFull<9> (ua3.north) to[out=100,in=-30] ([xshift=-2pt]a2.east);
+\ShowFull<9> (ub4.north) to[out=100,in=-30] ([xshift=-2pt]b.east);
+\ShowFull<9> (umain3.north) to[out=100,in=-30] ([xshift=-2pt]main.east);
+
+\ShowFull<10> (ua4.north) to[out=100,in=-30] ([xshift=-2pt]a.east);
+\ShowFull<10> (umain4.north) to[out=100,in=-30] ([xshift=-2pt]main.east);
+\end{tikzpicture}%
+\end{frame}
+
+
+\begin{frame}[c,fragile]{Programmausgaben\rhead{III}}
+\vspace*{-\baselineskip}\begin{columns}[onlytextwidth,c]
+\column{.6\linewidth}
+\lstfs{4}\begin{plainjava}
+public class Example {
+   public static int main;
+   public static String a = "Hallo";
+   public static void main(String[] args) {
+      int a = 7;
+      int b = 15;
+      !*\tikzmark{li}*!System.out.println(a + "; " + main);!*\tikzmark{ri}*! // i)
+      {
+         float main = 3 * b++;
+         Example.a += b;
+         !*\tikzmark{lii}*!System.out.println(b + "; " + main);!*\tikzmark{rii}*! // ii)
+      }
+      !*\tikzmark{liii}*!System.out.println(a + "; " + b + "; " + main);!*\tikzmark{riii}*! // iii)
+      !*\tikzmark{liv}*!System.out.println(Example.a + "; " + Example.main);!*\tikzmark{riv}*! // iv)
+   }
+}
+\end{plainjava}
+\column{.4\linewidth}
+\small\updateitemize{iii)}%
+\begin{enumerate}
+   \itemsep4.5pt
+   \item<3->[i)] \bjava{7; 0}
+   \item<5->[ii)] \bjava{16; 45.0}
+   \item<7->[iii)] \bjava{7; 16; 0}
+   \item<9->[iv)] \bjava{Hallo16; 0}
+\end{enumerate}
+\end{columns}
+\vspace*{4mm}
+{\scriptsize\begin{enumerate}
+   \itemsep7pt
+   \item<4->[i)] \textit{\bjava{a = 7}, da lokales \bjava{a} das globale \bjava{Example.a} überschattet. \bjava{main = 0} durch \bjava{Example.main}, da Deklaration mit default \say{\bjava{0}} initialisierte.}
+   \item<6->[ii)] \textit{\bjava{b = 16}}, da lokal überschattet und durch \bjava{b++} in Initialisierung von lokalem \bjava{main}. \bjava{main = 45.0}, da \bjava{float} und Initialisierung \bjava{3 * 15} (Postinkrement).
+   \item<8->[iii)] \textit{\bjava{a = 7} mit lokalem \bjava{a}, \bjava{b = 16} durch Postinkrement, \bjava{main = 0} da Scope von lokalem \bjava{main} zuende, globales \bjava{Example.main} nicht mehr überschattet.}
+   \item<10->[iv)] \textit{\bjava{Example.a = "Hallo16"} durch Konkatenation \bjava{Example.a += 16}, \bjava{Example.main = 0} wie zuvor.}
+\end{enumerate}}
+\begin{tikzpicture}[overlay,remember picture]
+   \onslide<2->{\fill[paletteA,opacity=.13,rounded corners=1pt] ([yshift=-1pt,xshift=-1pt]pic cs:li) rectangle ([yshift=3.5pt,xshift=1pt]pic cs:ri);}
+   \onslide<5->{\fill[paletteA,opacity=.13,rounded corners=1pt] ([yshift=-1pt,xshift=-1pt]pic cs:lii) rectangle ([yshift=3.5pt,xshift=1pt]pic cs:rii);}
+   \onslide<7->{\fill[paletteA,opacity=.13,rounded corners=1pt] ([yshift=-1pt,xshift=-1pt]pic cs:liii) rectangle ([yshift=3.5pt,xshift=1pt]pic cs:riii);}
+   \onslide<9->{\fill[paletteA,opacity=.13,rounded corners=1pt] ([yshift=-1pt,xshift=-1pt]pic cs:liv) rectangle ([yshift=3.5pt,xshift=1pt]pic cs:riv);}
+\end{tikzpicture}%
+\end{frame}
+\SidebarReset
+
+\subsection{Fallunterscheidungen}
+\begin{frame}[c]{Fallunterscheidungen}
+\begin{itemize}[<+(1)->]
+   \itemsep12pt
+   \item Wenn \say{X} dann \say{Y} sonst \say{Z}
+\begin{center}
+   \bjava{if(X) Y else Z}
+\end{center}
+   \item Der Sonst-Fall (\bjava{ else Z}) ist optional.
+   \item Wir können \bjava{Y} und \bjava{Z} durch einen Code-Block aus mehreren Zeilen bestehen lassen.
+   \item Wir können die Ausdrücke verschachteln.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[c]{Fallunterscheidungen\rhead{II}}
+\begin{itemize}[<+(1)->]
+   \itemsep12pt
+   \item Es gibt eine ternäre Kurzform:
+\begin{center}
+   \bjava{X ? Y : Z}
+\end{center}
+   \item Der Sonst-Fall (\bjava{: Z}) ist \textsb{nicht} optional.
+   \item \bjava{Y} und \bjava{Z} müssen zu einem Wert evaluieren.
+   \item Wir können die Ausdrücke verschachteln.
+   \item Anders als \bjava{if}-\bjava{else} ist der Ternäre-Operator kein Statement! Wir müssen ihn also eingebettet verwenden.
+\end{itemize}
+\end{frame}
+
+\subsection{Recap}
+{\def\mto{\ensuremath{\to}}
+\def\dt#1{{\bfseries\textcolor{paletteA!58!white}{\strut#1}}}
+\begin{frame}[c]{\paletteA{\sbfamily Kurzgesagt}\hfill Konstrukte}
+\begin{itemize}[<+(1)->]
+   \itemsep18pt
+   \item \textit{Implizit}:\hfill \dt{byte}~\mto~\dt{short}~\mto~\dt{int}~\mto~\dt{long}~\mto~\dt{float}~\mto~\dt{double}\\
+   Zahlen von klein zu groß, sowie: \dt{char}~\mto~\dt{int}.
+   \item \textit{Präzedenzregeln}:\\
+   Post vor Prä, sonst wie Arithmetik \& Logik.
+   \item \textit{Default-Werte}:\\
+   Zahlen und Zeichen \bjava{0}, Boolean \bjava{false}, Rest \bjava{null}.
+   \item \textit{Überschatten}:\quad Lokal über Global.
+\end{itemize}
+\LargeSide
+\end{frame}
+}
+
 \section{Arrays \& Iteration}
 \begin{frame}
 
@@ -207,6 +890,10 @@ C}
 \section{OOP}
 \begin{frame}
 
+\end{frame}
+
+\begin{frame}
+   TODO: die 3. Präsenzaufagbe als Wert 0
 \end{frame}
 
 \iffull

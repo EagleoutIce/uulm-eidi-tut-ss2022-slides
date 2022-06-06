@@ -59,7 +59,7 @@
 \def\qrcolor{paletteA!60!btdm@background}
 \AtBeginDocument{\fancyqrset{r color=\qrcolor,l color=\qrcolor}}
 
-\usetikzlibrary{decorations.pathreplacing,decorations.text,arrows.meta,decorations,decorations.pathreplacing,tikzmark}
+\usetikzlibrary{decorations.pathreplacing,decorations.text,arrows.meta,decorations,decorations.pathreplacing,tikzmark,3d}
 \solLoadLanguage{latex,bash,cpp}
 \colorlet{cprimary}{btdm@primary} % TODO update that
 
