@@ -1,22 +1,216 @@
+\makeatletter
+\def\DoCustomTheme{\def\btdmtheme{%
+\usetheme[libs,nofootfade,centerfoot]{dividing-lines}%
+\RequirePackage{xcolor}\colorlet{btdm@primary}{green}\colorlet{btdm@background}{white}\colorlet{btdm@border@down}{green}\colorlet{btdm@text}{btdl@color@text}%
+\let\highlight\hl
+\let\hl\relax% work with soul
+\def\IfBtdmDarkmode####1####2{####2}\relax
+\def\setfootmarker####1{\relax}%
+}}
+\@ifundefined{iffull}{\DoCustomTheme}{\iffull\DoCustomTheme\fi}
 \InputIfFileExists{../data/global.src}\relax\relax
+\iffull
+\DefinePalette{Recap}{Hellblau,hellbläulich: RGB(21, 110, 130)}
+{Rot,rötlich: RGB(137,64,75)}{Blau,bläulich: RGB(51, 93, 126)}{Grün,grünlich: RGB(21, 150, 90)}
+\UsePalette{Recap}
+\SetColorProfile*{paletteA}{paletteC}{paletteD}
+\def\PostTitlepage{\begin{tikzpicture}[@O]
+   \node[above right,xshift=7.5mm,yshift=1.25cm,scale=.8] at(current page.south west) {\LoadOverview{1}{}{2}~~\LoadOverview{2}{}{3\,\&\,4}~~\LoadOverview{3}{}{5}~~\LoadOverview{4}{}{6}~~\LoadOverview{5}{}{7}};
+\end{tikzpicture}}
+
+\def\defaultitemizeblock{\faAngleRight}
+\updateitemize{\paletteA{\defaultitemizeblock}}
+\updateitemizesub{\textcolor{gray}{\faAngleRight}}
+
+\newcounter{slidetasks}
+\setcounter{slidetasks}{0}
+\def\SidebarTask#1{\stepcounter{slidetasks}\SidebarRaw{\Large\rotatebox{90}{\def\rmdefault{AlphaSlabOne-TLF}\color{paletteA!62!pingu@black!36!pingu@white}\rmfamily\selectfont Aufgabe \theslidetasks}\hfill\null}\pdfbookmark[4]{A\theslidetasks)~#1}{lecture@task@@id@\thepage}}
+\def\SidebarSolution#1{\SidebarRaw{\hfill\Large\rotatebox{90}{\def\rmdefault{AlphaSlabOne-TLF}\color{paletteA!62!pingu@black!36!pingu@white}\rmfamily\selectfont #1}}}
+\def\textsb#1{{\sbfamily#1}}
+\def\LargeSide{\begin{tikzpicture}[overlay, remember picture]
+  \fill[paletteA] (current page.north west) rectangle ([xshift=4.2mm]current page.south west);
+\end{tikzpicture}}
+\def\ShortSide{\begin{tikzpicture}[overlay, remember picture]
+  \fill[paletteA!62!pingu@black!36!pingu@white] (current page.north west) rectangle ([xshift=2.75mm]current page.south west);
+\end{tikzpicture}}
+\def\rhead#1{\hfill\textcolor{shadeB}{\sbfamily#1}}
+\fi
 
 \iffull
-\title{TODO}
-\subtitle{Wiederholungstutorium}
+% guard against makeuppercase
+\def\titlecolorset{\color{lightgray!15!white}}
+\title{\texorpdfstring{\setbox0=\hbox{Zwischen}\hskip\wd0\clap{\smash{\protect\titlecolorset\raisebox{-3.5pt}{\scalebox{1.33}{\faRepeat}}}}\llap{\box0}}{Zwischen}wiederholung}
+\subtitle{Ein kleiner Blick zurück}
 \date{KW 23}
 \addbibresource{references.bib}
-\fi
+\else
 \SetTutoriumNumber{Wdh}
+\fi
 
 \iffull\begin{document}
-\titleframe
-
-\TopicOverview{0}
 \fi
 
+\iffull
+{\btfootfalse
+{\setbeamercolor{background canvas}{bg=paletteA}
+\def\ImpT#1{\textit{\color{pingu@white}#1}}
+\begin{frame}[c,plain]{~}
+\begin{layout-full}
+\begin{center}
+   \bfseries\color{paletteA!68!white}
+      Dieses \ImpT{Recap} liefert \ImpT{keine Garantie auf Vollständigkeit}. Ich konzentriere mich bewusst auf einige wenige aber wichtige \ImpT{Kernthemen}, die in der Hinsicht~--- zumindest auf den Folien~--- auch leicht simplifiziert dargestellt sind.\bigskip\par
+      \ImpT{Penguins will be happy!}\\Flo
+\end{center}
+\end{layout-full}
+\end{frame}
+}
+
+\begin{frame}[c]{}
+\def\g{\only<4->{\color{gray}}}%
+\only<5-|handout:0>{\global\btfoottrue}%
+\only<2|handout:0>{\vspace*{2.25em}\footnotesize%
+I. Einführung\\
+II. Aspekte der Algorithmenkonstruktion\\
+III. Programmierung im Kleinen --- Namen und Dinge\\
+IV. Programmierung im Kleinen --- Steuerung des Programmablaufs\\
+V. Zeigervariable, Arrays und Iterationen\\
+VI. Programmieren im Großen --- Strukturierter Entwurf und Unterprogramme\\
+VII. Einführung in die objektorientierte Programmierung (OOP)\\
+VIII. Rekursive Algorithmen\\
+IX. Weiterführende Konzepte der objektorientierten Programmierung\\
+X. Dynamische Datenstrukturen\\
+XI. Algorithmen und Zeitkomplexität\\
+XII. Suchen und Sortieren}%
+\updateitemize{10.}%
+\only<3->{\vspace*{2.25em}\begin{enumerate}
+
+   \item<3-> \hyperlink{btdl@section.1}{Algorithmenkonstruktion}
+   \item<3-> \hyperlink{btdl@section.2}{Programmkonstrukte (Namen \& Programmfluss)}
+   \item<3-> \hyperlink{btdl@section.3}{Arrays und Iterationen}
+   \item<3-> \hyperlink{btdl@section.4}{Unterprogramme}
+   \item<3-> \hyperlink{btdl@section.5}{Objektorientierte Programmierung}\bigskip
+   \item<3->[\g 6.] \g Rekursion
+   \item<3->[\g 7.] \g Weiterführende Konzepte der OOP
+   \item<3->[\g 8.] \g Dynamische Datenstrukturen
+   \item<3->[\g 9.] \g Laufzeitkomplexität
+   \item<3->[\g10.] \g Suchen und Sortieren
+\end{enumerate}}%
+\end{frame}
+}
+\fi
+
+\section{Algorithmen}
+
+\subsection{Definition}
+\begin{frame}[c]{Was \textit{ist} ein Algorithmus?}
+   \begin{center}
+      \onslide<2->{Eine eindeutige Handlungsvorschrift zur Lösung eines Problems}
+   \end{center}\vfill
+\begin{itemize}
+      \itemsep8pt
+      \item<3-> Schrittweise ausführ- und reproduzierbar.
+      \item<4-> Endlich viele, wohldefinierte Elementaroperationen.
+      \item<5-> Stoppt für jede Eingabe in endlich vielen Schritten.\bigskip
+      \item<6->[\color{gray}\defaultitemizeblock] {\color{gray}\itshape Fordert gemeinsames Sprachverständnis.}
+\end{itemize}
+\end{frame}
+
+{\def\longa#1{\multicolumn{2}{l}{#1}}
+\SidebarTask{Terminate the Algorithm}
+\begin{frame}[c]{Terminate the Algorithm}
+\onslide<2->{Antworten Sie jeweils für A, B und C mit \say{Ja}, wenn diese Terminieren oder Begründen Sie kurz.}\vfill
+\columns[c,onlytextwidth]
+\column{.25\linewidth}
+\centering\onslide<3->{\begin{tabular}{ll}
+   Given & \(i \in \Z\) \\
+   Set & \(j \gets 0\) \\
+   \longa{\textbf{while} \(i \geq 0\) \textbf{do}}\\
+   \longa{\kern1em\(i \gets i - 1\)} \\
+   \longa{\kern1em\(j \gets j + i\)} \\
+   \textbf{stop} & \\
+\end{tabular}\medskip\par
+A}
+\column{.29\linewidth}
+\centering\onslide<3->{\begin{tabular}{ll}
+   \strut & \\
+   Given & \(p = (x, y) \in \R^2\) \\
+   \longa{\textbf{if} \(x > y\) \textbf{then}}\\
+   \longa{\kern1em\(p = (y,x)\)} \\
+   \textbf{stop} & \\
+\end{tabular}\medskip\par
+B}
+\column{.46\linewidth}
+\centering\onslide<3->{\begin{tabular}{ll}
+   \strut & \\
+   Given & \(z = (z_1,\ldots, z_n)\), \(z_i \in \N\) \\
+   Set & \(j \gets 0\) \\
+   \longa{\textbf{while} not \(z_1 \leq \ldots \leq z_n\) \textbf{do}}\\
+   \longa{\kern1em shuffle \(z\) randomly} \\
+   \textbf{stop} & \\
+\end{tabular}\medskip\par
+C}
+\endcolumns
+\onslide<1->{\ShortSide}%
+\end{frame}
+\SidebarReset
+}
+
+\subsection{Eigenschaften}
+\begin{frame}{What can we say about an Algorithm?}
+   \hfill{\onslide<2->{\Large\bfseries\only<3->{\color{gray}\sbfamily} Totale Korrektheit}}\hfill\null\par
+   \vfill\vfill
+   \begin{enumerate}
+      \itemsep10pt
+      \item<3-> {\sbfamily Termination}\\
+         Der Algorithmus endet nach endlich vielen Schritten für jede Eingabe.
+      \item<4-> {\sbfamily Partielle Korrektheit}\\
+         Wenn der Algorithmus terminiert, ist er korrekt.
+   \end{enumerate}
+   Determinismus und Determiniertheit
+   \vfill\par
+\end{frame}
+
+\subsection{Algorithmus-Diskussion}
+{\def\comm#1{\hfill\textcolor{gray}{\footnotesize#1}}
+\begin{frame}[c]{Discussing an Algorithm}
+\centering\begin{tikzpicture}
+   \onslide<2->{\node (p) at (0,0) {\strut Problem};}
+   \onslide<3->{\node (l) at (7,0) {\strut Lösung};}
+   \onslide<4->{\draw[-Kite] (p) -- (l) node[pos=.5,fill=white] {\null~?~\null};}
+\end{tikzpicture}
+\vfill
+\begin{itemize}
+   \itemsep7.5pt
+   \item<5-> Problemspezifikation\comm{Was meinen Sie mit \say{schnell}?}
+   \item<6-> Problemabstraktion\comm{Was ist gegeben, was ist gesucht?}
+   \item<7-> Algorithmenentwurf\comm{Wie kommen wir von gegeben zu gesucht?}
+   \item<8-> Korrektheitsnachweis\comm{Löst unser Ansatz das Problem?}
+   \item<9-> Aufwandsanalyse\comm{Wie verhält er sich?}
+\end{itemize}
+\end{frame}}
+
+
+\section{Konstrukte}
 \begin{frame}
 
 \end{frame}
-\outro{\vskip9mm\centering \onslide<2->{x}}
+\section{Arrays \& Iteration}
+\begin{frame}
 
+\end{frame}
+
+\section{Unterprogramme}
+\begin{frame}
+
+\end{frame}
+
+\section{OOP}
+\begin{frame}
+
+\end{frame}
+
+\iffull
+\else
+\outro{\vskip9mm\centering \onslide<2->{x}}
+\fi
 \iffull\end{document}\fi

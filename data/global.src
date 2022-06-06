@@ -19,8 +19,8 @@
 
 \providecommand\btdmmode{lightmode-fill}
 \providecommand\btdmopts{}
-\usetheme[\btdmmode,\btdmopts]{digital-minimal}
-
+\providecommand\btdmtheme{\usetheme[\btdmmode,\btdmopts]{digital-minimal}}
+\btdmtheme
 \newif\iffull
 \fulltrue
 
@@ -228,7 +228,7 @@
     &
     \MayLoadActive{2}{3\,\&\,4} & \MayLoadActive{3}{5} & \MayLoadActive{4}{6} & \medskip\\
     \color{gray}\ifnum#1>4\ifnum#1<8\hl\fi\fi\ifnum#1=9\hl\fi Vertiefungen\quad
-    &\MayLoadActive{5}{7\,\&\,9}&\MayLoadActive{6}{8}&\MayLoadActive{7}{10}&\MayLoadActive{9}{12}
+    &\MayLoadActive{5}{7\,\&\,9}&\MayLoadActive{6}{10}&\MayLoadActive{7}{8}&\MayLoadActive{9}{12}
 \endtabular
 }\par
 \vspace*{0pt plus 1filll}\null
