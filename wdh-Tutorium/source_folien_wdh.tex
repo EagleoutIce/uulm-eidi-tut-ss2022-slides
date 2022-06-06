@@ -38,6 +38,25 @@
   \fill[paletteA!62!pingu@black!36!pingu@white] (current page.north west) rectangle ([xshift=2.75mm]current page.south west);
 \end{tikzpicture}}
 \def\rhead#1{\hfill\textcolor{shadeA}{\sbseries#1}}
+\makeatletter
+\newenvironment{lillyHighlight}[1][]
+{\begingroup\tikzset{lilly@Highlight@par/.style={#1}}\begin{lrbox}{\@tempboxa}}
+{\end{lrbox}\lilly@lsthighlight@box[lilly@Highlight@par]{\@tempboxa}\endgroup}
+
+\newcommand*\@lillyLstHL[1][]{%
+  \begin{lillyHighlight}[#1]\bgroup\aftergroup\lilly@lsthighlight@endenv%
+}
+\def\lilly@lsthighlight@endenv{\end{lillyHighlight}\egroup}
+
+\newcommand*\lilly@lsthighlight@box[2][]{%
+  \tikz[#1]{%
+    \pgfpathrectangle{\pgfpoint\p@\z@}{\pgfpoint{\wd #2}{\ht #2}}%
+    \pgfusepath{use as bounding box}%
+    \node[anchor=base west, outer sep=\z@,inner xsep=\p@, inner ysep=-1.105\p@, rounded corners=1.65\p@, minimum height=\ht\strutbox+\p@,#1]{\raisebox\p@{\strut}\strut\usebox{#2}};
+  }%
+}
+\def\lstHLZWS{\@lillyLstHL[fill=gray!31,draw=gray!31]}
+\lstdefinelanguage{xJava}{language=lJava, moredelim=**[is][{\lstHLZWS}]{|zws|}{|zws|}}
 \fi
 
 \iffull
@@ -59,7 +78,7 @@
 {\setbeamercolor{background canvas}{bg=paletteA}
 \def\ImpT#1{\textit{\color{pingu@white}#1}}
 \begin{frame}[c,plain]{~}
-\begin{layout-full}
+\vspace*{-1.5mm}\begin{layout-full}
 \begin{center}
    \bfseries\color{paletteA!68!white}
       Dieses \ImpT{Recap} liefert \ImpT{keine Garantie auf Vollständigkeit}. Ich konzentriere mich bewusst auf einige wenige aber wichtige \ImpT{Kernthemen}, die in der Hinsicht~--- zumindest auf den Folien~--- auch leicht simplifiziert dargestellt sind.\bigskip\par
@@ -878,22 +897,960 @@ public class Example {
 }
 
 \section{Arrays \& Iteration}
-\begin{frame}
+\subsection{Arrays}
+\begin{frame}{Arrays}
+\begin{itemize}[<+(1)->]
+   \itemsep16pt
+   \item Sind komplexe Datentypen (\(\to\) Heap).
+   \item Jeder Datentyp kann ein (eindimensionales) Array werden:
+   \begin{center}
+      \bjava{int[] = new int[12];}
+   \end{center}
+   \item Mehrdimensionale Arrays, sind Arrays von Arrays von\ldots
+   \item Zugriff: \bjava{:lan:array:ran:[:lan:index:ran:]}\smallskip \begin{itemize}
+   \itemsep2.5pt
+   \item Liefert \bjava{:lan:index:ran:}-Element in \bjava{:lan:array:ran:}.
+   \item Wenn Array von Array, ist \bjava{:lan:array:ran:[:lan:index:ran:]} wieder ein Array.
+   \end{itemize}
+\end{itemize}
+\end{frame}
 
+\subsection{Schleiflies}
+\begin{frame}[fragile]{Schleifen}
+   \vspace*{-.75\baselineskip}\begin{itemize}[<+(1)->]
+      \itemsep5pt
+      \item Drei Schleifenarten: \bjava{for}, \bjava{while}, \bjava{do}-\bjava{while}
+      \item Sie sind alle gleichmächtig\vspace*{-7.125\baselineskip}
+   \end{itemize}\lstfs{10}
+\begin{layout-imageonly}
+\begin{columns}[onlytextwidth,c]
+\column{.43\linewidth}
+\begin{uncoverenv}<4->
+\begin{plainjava}
+for(int i = 3; i < 8; i++) {
+   // Miau
+}
+\end{plainjava}
+\end{uncoverenv}
+\onslide<7->{\itshape Anzahl bekannt}
+\column{.25\linewidth}
+\begin{uncoverenv}<5->
+\begin{plainjava}
+int i = 3;
+while(i < 8) {
+   // Miau
+   i += 1;
+}
+\end{plainjava}
+\end{uncoverenv}
+\onslide<8->{\itshape Kein Maximum}
+\column{.245\linewidth}
+\begin{uncoverenv}<6->
+\begin{plainjava}
+int i = 3;
+do {
+   // Miau
+   i += 1;
+} while(i < 8);
+\end{plainjava}
+\end{uncoverenv}
+\onslide<9->{\itshape Mindestens 1}
+\end{columns}\vspace*{-6.4\baselineskip}
+\end{layout-imageonly}
+\begin{itemize}
+   \itemsep5pt
+   \item<10-> Bei \bjava{for} sind alle drei Blöcke optional.
+   \item<11-> Bei \bjava{do}-\bjava{while} aufpassen: \begin{itemize}
+      \item<12-> Semikolon!
+      \item<13-> Wird es wirklich mindestens ein mal durchlaufen?
+   \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\SidebarTask{Schleifen umwandeln}
+\begin{frame}[fragile,c]{Schleifen umwandeln}
+\begin{uncoverenv}<2->
+\flushleft Im Folgenden finden Sie zwei Code-Ausschnitte. Schreiben Sie diese so um, dass sie nur noch Schleifen der angegebenen Art verwenden, ohne dass sich das Verhalten des Codes verändert. Dabei repräsentiert \bjava{k} eine natürliche Zahl (exklusive \(0\)), welche Sie nicht kennen.
+\lstfs{8}\begin{columns}[onlytextwidth,T]
+\column{.65\linewidth}
+\begin{plainjava}
+// do-while
+int[] x = new int[]{17, 22, 13, 0};
+for(int i = 0; i < x.length - k; i += 1) {
+    System.out.println(x[i]);
+}
+\end{plainjava}
+\column{.35\linewidth}
+\begin{plainjava}
+// for
+int i = 1;
+do {
+    i *= k;
+    k -= i;
+} while(k >= 5);
+System.out.println(i);
+\end{plainjava}
+\end{columns}
+\end{uncoverenv}
+\onslide<1->{\ShortSide}%
+\end{frame}
+\SidebarReset
+
+\SidebarSolution
+\begin{frame}[fragile,c]{Schleifen umwandeln\rhead{II}}
+\begin{itemize}[<+(1)->]
+   \itemsep3pt
+   \item Aus \bjava{for} machen wir \bjava{do}-\bjava{while}
+   \item Wird es überhaupt einmal ausgeführt?
+\end{itemize}
+\lstfs{9}
+\begin{plainjava}
+!*\onslide<4->*!int[] x = new int[]{17, 22, 13, 0};
+!*\onslide<4->*!for(int i = 0; i < x.length - k; i += 1)
+!*\onslide<4->*!    System.out.println(x[i]);
+\end{plainjava}
+\vspace*{-1.4\baselineskip}\par\null\qquad\paletteA{\faCaretDown}
+\begin{plainjava}
+!*\onslide<5->*!int[] x = new int[]{17, 22, 13, 0};
+!*\onslide<6->*!if(x.length - k <= 0) // Sonst keine Ausführung
+!*\onslide<6->*!   return;
+!*\onslide<7->*!int i = 0; // Initialisierung
+!*\onslide<8->*!do { // normale Schleife
+!*\onslide<9->*!   System.out.println(x[i]);
+!*\onslide<9->*!   i++;
+!*\onslide<8->*!} while(i < x.length - k);
+\end{plainjava}
+\end{frame}
+
+\begin{frame}[fragile,c]{Schleifen umwandeln\rhead{III}}
+\begin{itemize}[<+(1)->]
+   \itemsep3pt
+   \item Aus \bjava{do}-\bjava{while} machen wir \bjava{for}
+   \item Wird es doch mindestens ein mal ausgeführt?
+   \item Brauchen wir die Variablen danach noch?
+\end{itemize}
+\lstfs{9}
+\begin{uncoverenv}<5->
+\begin{columns}[onlytextwidth,c]
+\column{.4\linewidth}
+\begin{plainjava}
+int i = 1;
+do {
+  i *= k;
+  k -= i;
+} while(k >= 5);
+System.out.println(i);
+\end{plainjava}
+\vspace*{-1.15\baselineskip}\par\null\qquad\paletteA{\faCaretRight}
+\column{.6\linewidth}
+\begin{plainjava}
+!*\onslide<6->*!int i = 1; // Bedarf nach Schleife
+!*\onslide<7->*!if(k < 5) { // Trotzdem ausführen?
+!*\onslide<8->*!   i *= k;
+!*\onslide<9->*!   // Wie Lebenserfahrung:
+!*\onslide<9->*!   k -= i; // theoretisch unnötig
+!*\onslide<7->*!} else {
+!*\onslide<10->*!   for(; k >= 5; k -= i)
+!*\onslide<11->*!      i *= k; // oder hier k -= i
+!*\onslide<7->*!}
+System.out.println(i);
+\end{plainjava}
+\end{columns}
+\end{uncoverenv}
+\end{frame}
+\SidebarReset
+
+\subsection{Recap}
+\def\mto{\ensuremath{\to}}
+\begin{frame}[c]{\paletteA{\sbfamily Kurzgesagt}\hfill Arrays \& Iteration}
+\begin{itemize}[<+(1)->]
+   \itemsep18pt
+   \item Arrays sind komplexe Datentypen.
+   \item Mehrdimensionale Arrays sind eindimensionale Arrays von eindimensionalen Arrays von\ldots
+   \item Die drei Schleifenarten sind gleichmächtig. \begin{itemize}
+      \item Maximum bekannt: \bjava{for}
+      \item Mindestens ein mal: \bjava{do}-\bjava{while}
+      \item Sonst: \bjava{while}
+   \end{itemize}
+\end{itemize}
+\LargeSide
 \end{frame}
 
 \section{Unterprogramme}
-\begin{frame}
-
+\subsection{Übersicht}
+\begin{frame}[fragile,c]{Unterprogramme}
+   \begin{itemize}[<+(1)->]
+      \itemsep11pt
+      \item Ein Unterprogramm lagert einen Teil des Programms aus.
+      \item In Java: \textsb{Methoden}\vspace*{-8\baselineskip}
+   \end{itemize}
+\begin{layout-imageonly}
+\begin{plainjava}
+!*\onslide<4->*!:lan:Modifikatoren:ran: :lan:Rückgabetyp:ran: :lan:Name:ran:(:lan:Parameterliste:ran:) {
+!*\onslide<4->*!   :lan:Inhalt:ran:
+!*\onslide<4->*!}
+\end{plainjava}\vspace*{-9\baselineskip}
+\end{layout-imageonly}
+   \begin{itemize}[<+(1)->]
+      \itemsep11pt
+      \item<5-> Modifikatoren beeinflussen beispielsweise die Sichtbarkeit.
+   \end{itemize}
 \end{frame}
+
+\begin{frame}[fragile,c]{Ein Beispiel}
+\lstfs{10}\SetupLstHl\begin{layout-imageonly}
+\begin{plainjava}
+!*\onslide<2->*!|ihl|:lan:Modifikatoren:ran: :lan:Rückgabetyp:ran: :lan:Name:ran:(:lan:Parameterliste:ran:) {|ihl|
+!*\onslide<2->*!|ihl|   :lan:Inhalt:ran:|ihl|
+!*\onslide<2->*!|ihl|}|ihl|
+
+
+
+
+!*\onslide<3->*!!*\tikzmark{mod-l}*!public static!*\tikzmark{mod-r}*! !*\tikzmark{String-l}*!String!*\tikzmark{String-r}*! !*\tikzmark{name-l}*!giveMeTheMiau!*\tikzmark{name-r}*!(!*\tikzmark{params-l}*!int times, double cuteness!*\tikzmark{params-r}*!) {
+!*\onslide<4->*!   !*\tikzmark{start}*!String out = "";
+!*\onslide<4->*!   for(int i = 0; i < times * cuteness; i++) {
+!*\onslide<4->*!      out += "Miau ";
+!*\onslide<4->*!   }
+!*\onslide<4->*!   !*\tikzmark{end}*!return out;
+!*\onslide<3->*!}
+\end{plainjava}
+\end{layout-imageonly}
+\begin{tikzpicture}[overlay,remember picture]
+   \onslide<5->{\draw[decoration=brace,decorate] ([yshift=8pt]pic cs:mod-l) -- ([yshift=8pt]pic cs:mod-r) node[pos=.5,above=2pt] {\strut Modifikatoren};}
+   \onslide<6->{\draw[decoration=brace,decorate] ([yshift=8pt]pic cs:String-l) -- ([yshift=8pt]pic cs:String-r) node[pos=.5,above=2pt] {\strut R-Typ};}
+   \onslide<7->{\draw[decoration=brace,decorate] ([yshift=8pt]pic cs:name-l) -- ([yshift=8pt]pic cs:name-r) node[pos=.5,above=2pt] {\strut Name};}
+   \onslide<8->{\draw[decoration=brace,decorate] ([yshift=8pt]pic cs:params-l) -- ([yshift=8pt]pic cs:params-r) node[pos=.5,above=2pt] {\strut Parameterliste};}
+   \onslide<9->{\draw[decoration={brace,mirror},decorate] ([yshift=8pt,xshift=-1.5pt]pic cs:start) -- ([yshift=-2pt,xshift=-1.5pt]pic cs:end) node[pos=.5,left=3pt] {\strut\rotatebox{90}{Inhalt}};}
+   \onslide<10->{
+      \node[above left=.5cm,draw=gray,very thick,inner sep=5pt,rounded corners=1.75pt,xshift=-.25cm,yshift=.65cm,align=left] at(current page.south east) {\textsb{Signatur}: Name \& Parametertypen\\\lstfs{11}\bjava{giveMeTheMiau(int, double)}};
+   }
+\end{tikzpicture}
+\end{frame}
+
+\begin{frame}[fragile,c]{Rückgabewert}
+   \begin{itemize}[<+(1)->]
+      \itemsep11pt
+      \item \bjava{void} kennzeichnet, dass die Methode nichts zurückgibt.
+      \item Sonst: jeder Ausführungspfad muss einen Wert vom angegebenen Typ liefern.
+   \end{itemize}
+\begin{plainjava}
+!*\onslide<4->*!public static int iHaveCatPics(String where) {
+!*\onslide<5->*!   if(where.equals("MIAFF"))
+!*\onslide<5->*!      return 42;
+!*\onslide<4->*!}
+\end{plainjava}
+   \begin{itemize}
+      \item<6-> \textsb{Verboten}, da nicht jeder Ausführungspfad \bjava{int} liefert.
+   \end{itemize}
+\end{frame}
+
+\subsection{Methodenaufruf}
+\begin{frame}[c]{Methodenaufruf}
+   \begin{itemize}[<+(1)->]
+      \itemsep11pt
+      \item Methoden mit \bjava{static} gehören der Klasse. \begin{itemize}
+         \item Wir benötigen kein Objekt.
+         \item In ihnen \say{gibt} es \textit{kein} \bjava{this}.
+      \end{itemize}
+      \item Java sucht beim Aufruf eine Methode mit entsprechender Signatur. \begin{itemize}
+         \item Implizite Typkonvertierung!
+      \end{itemize}
+      \item \textsb{Überladung}: Gleicher Name, unterschiedliche Signatur.
+   \end{itemize}
+\end{frame}
+
+\newsavebox\agentpingu
+\savebox\agentpingu{\tikz\pingu[cloak=pingu@black,sunglasses,tie=pingu@black,eyes angry,glasses opacity=.876];}
+\begin{frame}[c]{Call-By \& Seiteneffekte}
+   \vspace*{.75\baselineskip}\begin{itemize}
+      \itemsep11pt
+      \item<3-> Aufruf: \say{Stack-Einträge} der Parameter werden \textit{kopiert}.
+      \begin{itemize}
+         \item<4-> Primitive Datentypen:\hfill call-by-\textit{value}
+         \item<5-> Komplexe Datentypen:\hfill call-by-\textit{reference}
+      \end{itemize}
+      \item<6-> Genau genommen hat Java nur \say{call-by-value}
+      \item<7-> \textsb{Seiteneffekt}: Wenn nach dem Aufruf mehr als der Rückgabewert verbleibt. \begin{itemize}
+         \item<8-> Instanzvariable verändert sich.
+         \item<9-> Durch Referenz wird ein Array modifiziert.
+         \item<10-> Eine Nachricht fliegt durchs Internet.
+         \item<11-> \ldots
+      \end{itemize}
+   \end{itemize}
+\begin{tikzpicture}[overlay,remember picture]
+   \onslide<2->{\node[below left=.33cm,scale=.6] (agent) at(current page.north east) {\usebox\agentpingu};
+   \node[left,align=right,font=\footnotesize] at(agent.west) {You can call me pingu.\\Cute pingu!};}
+\end{tikzpicture}
+\end{frame}
+
+\begin{frame}[fragile,c]{Varargs}
+   \begin{itemize}[<+(1)->]
+      \itemsep11pt
+      \item Der letzte Parameter darf in Java ein \say{Vararg} sein.
+      \item Drei Punkte: erlaubt beliebig viele Argumente des Typs.
+      \item Kann in der Methode als Array verwendet werden.\vspace*{-2\baselineskip}
+   \end{itemize}
+\begin{layout-imageonly}
+\begin{plainjava}
+!*\onslide<5->*!static double[] funFunFun(int factor, double... arguments) {
+!*\onslide<6->*!   for(int i = 0; i < arguments.length; i++) {
+!*\onslide<6->*!      arguments[i] *= factor;
+!*\onslide<6->*!   }
+!*\onslide<7->*!   return arguments;
+!*\onslide<5->*!}
+\end{plainjava}
+\end{layout-imageonly}
+\end{frame}
+
+\SidebarTask{Methodenausgaben}
+\begin{frame}[c]{Methodenausgaben}
+\flushleft\onslide<2->{Betrachten Sie das Java-Programm [WELLP~TODO] auf dem Blatt und geben Sie für die kommentierten Zeilen jeweils die Werte der Variablen \bjava{a}, \bjava{b} und \bjava{c} an (tragen Sie diese in die entsprechende Box \smash{\tikz[baseline=.135cm]\draw[gray,rounded corners=1pt](0,0) rectangle (.9cm,.35cm+.33\baselineskip);} ein).
+Erklären Sie die Ausgaben dabei durch eine kurze Erläuterung der beteiligten Java-Mechanismen. Relevant sind: i)~Überladungen, ii)~Seiteneffekte, iii)~Überschattungen und iv)~Standardwerte. Sie dürfen in ihrer Skizzierung die römischen Zahlen verwenden, um auf die Mechanismen hinzuweisen.}\par
+\onslide<1->{\ShortSide}%
+\end{frame}
+\SidebarReset
+
+\SidebarSolution
+\begin{frame}[fragile,c]{Methodenausgaben\rhead{II}}
+\SetupLstHl
+\begin{columns}[onlytextwidth,c]
+\column{.45\linewidth}
+\lstfs{7}\begin{plainjava}
+!*\onslide<2->*!|ihl|public class MethodExample {|ihl|
+!*\onslide<2->*!   |ihl|public static char a;|ihl|
+!*\onslide<2->*!   |ihl|public static int b = 5;|ihl|
+!*\onslide<2->*!   |ihl|public static int c = 3;|ihl|
+!*\onslide<2->*!
+!*\onslide<2->*!   static int x(int a) |ihl|{ ... }|ihl|
+!*\onslide<2->*!   static int x(char[] b) |ihl|{ ... }|ihl|
+!*\onslide<2->*!   static String x() |ihl|{ ... }|ihl|
+!*\onslide<2->*!   |ihl|public static void main(...) {|ihl|
+!*\onslide<2->*!      // 1)
+!*\onslide<2->*!      ...
+!*\onslide<2->*!   |ihl|}|ihl|
+!*\onslide<2->*!}!*\onslide<1->*!
+\end{plainjava}
+\column{.55\linewidth}
+\onslide<3->{Allgemein:}
+\begin{itemize}
+   \itemsep8pt
+   \item<4-> \bjava{x} wird Überladen und präsentiert drei Signaturen:
+      \onslide<5->{\bjava{x(int)}, \bjava{x(char[])} und \bjava{x()}.}
+   \item<6-> Nur \bjava{x(char[])} hat Seiteneffekte. \begin{itemize}
+      \item<7-> In \bjava{x(int)} überschattet der Parameter das globale \bjava{a}.
+      \item<8-> In \bjava{x(char[])} wird \bjava{a} verändert.
+      \item<9-> In \bjava{x()} wird \bjava{b} überschattet.
+   \end{itemize}
+\end{itemize}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile,c]{Methodenausgaben\rhead{III}}
+\SetupLstHl
+\begin{columns}[onlytextwidth,c]
+\column{.45\linewidth}
+\lstfs{7}\begin{plainjava}
+|ihl|public class MethodExample {|ihl|
+   public static char a;
+   public static int b = 5;
+   public static int c = 3;
+
+   |ihl|static int x(int a) { ... }|ihl|
+   |ihl|static int x(char[] b) { ... }|ihl|
+   |ihl|static String x() { ... }|ihl|
+   |ihl|public static void main(...) {|ihl|
+      // 1)
+      |ihl|...|ihl|
+   |ihl|}|ihl|
+}!*\onslide<1->*!
+\end{plainjava}
+\column{.55\linewidth}
+\onslide<2->{Werte:}
+\begin{itemize}
+   \itemsep8pt
+   \item<3-> \bjava{a} ist \bjava{0} (zugehöriges Unicode-Symbol \T{NULL}) da Java einer Klassenvariable vom Typ \bjava{char} diesen Wert zuweist.
+   \item<4-> \bjava{b} ist \bjava{5} und \bjava{c} ist \bjava{3} da die Klassenvariablen so initialisiert werden.
+\end{itemize}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile,c]{Methodenausgaben\rhead{IV}}
+\SetupLstHl
+\begin{columns}[onlytextwidth,c]
+\column{.45\linewidth}
+\lstfs{7}\begin{plainjava}
+|ihl|public class MethodExample {|ihl|
+   public static char a;
+   public static int b = 5;
+   public static int c = 3;
+
+   |ihl|static int x(int a) { ... }|ihl|
+   |ihl|static int x(char[] b) { ... }|ihl|
+   static String x() {
+      String b = "Hallo";
+      return b;
+   }
+   |ihl|public static void main(...) {|ihl|
+      |ihl|...|ihl|
+      String c = x();
+      // 2)
+      |ihl|...|ihl|
+   |ihl|}|ihl|
+}!*\onslide<1->*!
+\end{plainjava}
+\column{.55\linewidth}
+\onslide<2->{Werte:}
+\begin{itemize}
+   \itemsep8pt
+   \item<3-> \bjava{a} ist \bjava{0} es bleibt durch den Aufruf von \bjava{c()} unverändert.
+   \item<4-> \bjava{b} ist \bjava{5} also ebenfalls unverändert. \bjava{c()} erzeugt ein neues \bjava{b}, welches das globale überschattet.
+   \item<5-> \bjava{c} ist \bjava{\"Hallo\"}, das lokale \bjava{c} überschattet das globale. Der Wert ergibt sich durch \bjava{x()} welches das globale \bjava{b} überschattet.
+\end{itemize}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile,c]{Methodenausgaben\rhead{V}}
+\SetupLstHl
+\begin{columns}[onlytextwidth,c]
+\column{.45\linewidth}
+\lstfs{7}\begin{plainjava}
+|ihl|public class MethodExample {|ihl|
+   public static char a;
+   public static int b = 5;
+   public static int c = 3;
+
+   |ihl|static int x(int a) { ... }|ihl|
+   static int x(char[] b) {
+      a += b[1];
+      return b[0];
+   }
+   |ihl|static String x() { ... }|ihl|
+   |ihl|public static void main(...) {|ihl|
+      |ihl|...|ihl|
+      x(c.toCharArray());
+      // 3)
+      |ihl|...|ihl|
+   |ihl|}|ihl|
+}!*\onslide<1->*!
+\end{plainjava}
+\column{.55\linewidth}
+\onslide<2->{Werte:}
+\begin{itemize}
+   \itemsep8pt
+   \item<3-> Durch \bjava{c.toCharArray()} wird \bjava{x(char[])} aufgerufen. \bjava{char[] b} überschattet das globale.
+   \item<4-> \bjava{a} wird durch \bjava{a += b[1]} zu \bjava{'a'} (\(97\)) geändert.
+   \item<5-> \bjava{b} ist unverändert \bjava{5}, da es in \bjava{x(char[])} überschattet wird.
+   \item<6-> \bjava{c} ist \bjava{\"Hallo\"}, wie zuvor.
+\end{itemize}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile,c]{Methodenausgaben\rhead{VI}}
+\SetupLstHl
+\begin{columns}[onlytextwidth,c]
+\column{.45\linewidth}
+\lstfs{7}\begin{plainjava}
+|ihl|public class MethodExample {|ihl|
+   public static char a;
+   public static int b = 5;
+   public static int c = 3;
+
+   static int x(int a) {
+      a = a * a;
+      return b + 2;
+   }
+   |ihl|static int x(char[] b) { ... }|ihl|
+   |ihl|static String x() { ... }|ihl|
+   |ihl|public static void main(...) {|ihl|
+      |ihl|...|ihl|
+      int b = x(a);
+      // 4)
+   |ihl|}|ihl|
+}!*\onslide<1->*!
+\end{plainjava}
+\column{.55\linewidth}
+\onslide<2->{Werte:}
+\begin{itemize}
+   \itemsep8pt
+   \item<3-> Es wird \bjava{x(int)} aufgerufen.
+   \item<4-> \bjava{a} bleibt unverändert \bjava{'a'} (\(97\)), da der Parameter in \bjava{x(int)} das globale überschattet.
+   \item<5-> \bjava{b} ist \bjava{7}, da das lokale nun das globale überschattet und den Wert \bjava{b + 2} erhält.
+   \item<6-> \bjava{c} ist \bjava{\"Hallo\"}, wie zuvor.
+\end{itemize}
+\end{columns}
+\end{frame}
+\SidebarReset
+
+
+\SidebarTask{Reverse}
+\begin{frame}[c]{Reverse}
+\flushleft\onslide<2->{Schreiben Sie eine Methode \bjava{static void reverse} \bjava{(int[] arr)} welche das übergebene Array umdreht, sodass das erste Elemente nun an letzter Stelle steht, das zweite an vorletzter Stelle,~\ldots\ und das letzte Element nun an erster Stelle steht.\par}
+\onslide<1->{\ShortSide}%
+\end{frame}
+\SidebarReset
+
+\SidebarSolution
+\begin{frame}[fragile,c]{Reverse\rhead{II}}
+\begin{plainjava}
+!*\onslide<5->*!static void swap(int[] arr, int i, int j) {
+!*\onslide<6->*!   int tmp = arr[i];
+!*\onslide<6->*!   arr[i] = arr[j];
+!*\onslide<6->*!   arr[j] = tmp;
+!*\onslide<5->*!}
+!*\onslide<2->*!
+!*\onslide<2->*!static void reverse(int[] arr) {
+!*\onslide<3->*!   for(int i = 0; i < arr.length / 2; i++) {
+!*\onslide<4->*!      swap(arr, i, arr.length - i - 1);
+!*\onslide<3->*!   }
+!*\onslide<2->*!}
+\end{plainjava}
+\end{frame}
+\SidebarReset
+
+\subsection{Recap}
+\begin{frame}[c]{\paletteA{\sbfamily Kurzgesagt}\hfill Unterprogramme}
+\begin{itemize}[<+(1)->]
+   \itemsep18pt
+   \item \textit{Überladung:}\hfill Gleicher Name, andere Signatur. \begin{itemize}
+      \item \textit{Signatur:} Name \& Parametertypliste
+      \item Müssen zudem in selber Klasse sein (später: Vererbung)
+   \end{itemize}
+   \item Beim Aufruf macht Java call-by-value: \begin{itemize}
+      \item Alle Parameter werden kopiert (Stack).
+   \end{itemize}
+\end{itemize}
+\LargeSide
+\end{frame}
+
 
 \section{OOP}
-\begin{frame}
+\subsection{Allgemein}
+\SidebarRaw{\downsize{15em}{\begin{tikzpicture}
+   \draw[paletteA,fill=shadeB] (0,0) circle[radius=15mm];
+   \draw (0,0) circle[radius=30mm];
+   \foreach \a in {0,30,...,359} {
+      \draw (\a:15mm) -- (\a:30mm);
+   }
+\end{tikzpicture}}}
+\begin{frame}{Allgemein}
+   \begin{itemize}[<+(1)->]
+      \itemsep14pt
+      \item Objekte abstrahieren Daten und Verhalten.
+      \item Ermöglicht Wiederverwendung von Komponenten.
+      \item Klassen definieren eine Blaupause: \begin{itemize}
+         \item Welche Eigenschaften haben die Daten? \hfill \textsb{Attribute}
+         \item Was kann mit den Daten gemacht werden? \hfill \textsb{Methoden}
+      \end{itemize}
+      \item Die Attribute definieren den Zustand
+      \item Die Methoden definieren das Verhalten
+   \end{itemize}
+\end{frame}
+\SidebarReset
 
+\def\Card#1#2{\begin{tikzpicture}
+   \node (udbert) at(0,0) {\bjava{Penguin #1}};
+   \node[below right,inner sep=0pt,xshift=4pt,align=left,draw,rounded corners=1pt] at (udbert.south west) {\begin{tabular}{l|p{4em}}
+      #2
+   \end{tabular}};
+\end{tikzpicture}}
+
+\newsavebox\pingunote
+\savebox\pingunote{\tikz\pingu[left wing wave,santa hat,cloak=paletteA!80!pingu@white,cloak cap=!hide,eyes wink,santa beard];}
+\begin{frame}[fragile,c]{Klasse vs. Objekt}
+   \begin{itemize}[<+(1)->]
+      \itemsep7pt
+      \item Klasse ist eine Blaupause
+      \item Objekte weisen Attribute konkrete Werte zu
+   \end{itemize}\vspace*{-1\baselineskip}
+\begin{layout-imageonly}
+\begin{columns}[onlytextwidth,c]
+\column{.475\linewidth}\SetupLstHl\lstfs{10}
+\begin{plainjava}
+!*\onslide<4->*!class Penguin {
+!*\onslide<4->*!   double cute;
+!*\onslide<4->*!   int age;
+!*\onslide<4->*!   String name;
+!*\onslide<4->*!
+!*\onslide<4->*!   |ihl|void walk(int snow) { ... }|ihl|
+!*\onslide<4->*!   |ihl|void peep() { ... }|ihl|
+!*\onslide<4->*!   |ihl|...|ihl|
+!*\onslide<4->*!}
+\end{plainjava}
+\column{.525\linewidth}
+\def\arraystretch{1.125}%
+\resizebox\linewidth!{\onslide<5->{\Card{udbert}{cute & \(5.7\)\\\hline
+age & \(12\)\\\hline
+name & \say{Udi}}}~~\onslide<6->{\Card{josie}{cute & \(6.1\)\\\hline
+age & \(10\)\\\hline
+name & \say{Josie}}~}}\\[5pt]\resizebox\linewidth!{\onslide<8->{\Card{peter}{cute & \(6\)\\\hline
+age & \(10\)\\\hline
+name & \say{Petaa}}}~~\onslide<7->{\Card{saphira}{cute & \(8\)\\\hline
+age & \(11\)\\\hline
+name & \say{Saph}}}~}
+\end{columns}
+\end{layout-imageonly}
+\begin{tikzpicture}[overlay,remember picture]
+   \onslide<9->{\node[below left=-2cm] (pingu) at(current page.north east) {\rotatebox{140}{\usebox\pingunote}};
+   \node[below left,yshift=.2cm,xshift=.75cm,font=\footnotesize,align=right] at(pingu.west) {Jedes Objekt erzeugt\\alle Instanzvariablen \say{für sich}\\allein.};}
+\end{tikzpicture}
 \end{frame}
 
+\subsection{Klasseneigenschaften}
+\begin{frame}{Der Konstruktor}
+\begin{itemize}[<+(1)->]
+   \itemsep6pt
+   \item Erlaubt für Werte beim Erzeugen (\say{initialer Zustand}).
+   \item Ein Konstruktor ist \textit{keine} Methode.\vspace*{-\topsep}
+\end{itemize}
+\begin{multicols}{2}
+\begin{itemize}[<+(1)->]
+   \item Unterschiede: \begin{itemize}
+      \item Muss heißen wie die Klasse
+      \item Hat keinen Rückgabetyp
+      \item Kann nichts zurückgeben
+      \item Benötigt \bjava{new} für Aufruf
+      \item \ldots
+   \end{itemize}
+   \item Gemeinsamkeiten:
+   \begin{itemize}
+      \item Hat Parameter
+      \item Kann überladen werden
+      \item Kann Methoden aufrufen
+      \item Kann Objekte erzeugen
+      \item \ldots
+   \end{itemize}
+\end{itemize}
+\end{multicols}
+\begin{itemize}[<+(1)->]
+   \item Java erzeugt \textit{genau dann} einen leeren Konstruktor, wenn kein expliziter Konstruktor existiert.
+\end{itemize}
+\begin{tikzpicture}[overlay,remember picture]
+   \onslide<17->{\node[below left=.5cm,align=right] at(current page.north east) {\textsb{Instanziierung:} Erzeugen\\eines neuen Objektes.};}
+\end{tikzpicture}
+\end{frame}
+
+
+\begin{frame}[fragile,c]{Der Standardkonstruktor}
+\begin{layout-imageonly}
+\begin{columns}[onlytextwidth,c]
+\column{.5\linewidth}
+\begin{plainjava}
+!*\onslide<2->*!public class Supa {
+!*\onslide<2->*!   int x;
+!*\onslide<2->*!}
+\end{plainjava}
+\column{.5\linewidth}
+\begin{itemize}
+   \item<3-> \cjava{Supa s = new Supa();}\smallskip\\
+   \onslide<4->{Erlaubt, durch den leeren Standardkonstruktor.
+   \bjava{s.x} hat den Standardwert \bjava{0}.}
+\end{itemize}
+\end{columns}
+\begin{columns}[onlytextwidth,c]
+\column{.5\linewidth}
+\begin{plainjava}
+!*\onslide<5->*!public class Mega {
+!*\onslide<5->*!   String name;
+!*\onslide<5->*!   public Mega(String name) {
+!*\onslide<5->*!     this.name = name;
+!*\onslide<5->*!  }
+!*\onslide<5->*!}
+\end{plainjava}
+\column{.5\linewidth}
+\begin{itemize}
+   \item<6-> \cjava{Mega m = new Mega();}\smallskip\\
+   \onslide<7->{Nicht erlaubt. Existiert ein expliziter Konstruktor, erstellt Java keinen leeren mehr!}
+   \item<8-> \cjava{Mega x = new Mega(\"Huhu\");}\smallskip\\
+   \onslide<9->{Erlaubt. \bjava{x.name} ist \bjava{\"Huhu\"}.}
+\end{itemize}
+\end{columns}
+\end{layout-imageonly}
+\end{frame}
+
+
+\begin{frame}[fragile,c]{Einen Konstruktor überladen}
+\begin{itemize}[<+(1)->]
+   \itemsep3.5pt
+   \item Konstruktoren können einander mit \bjava{this} aufrufen. Dies muss dann das \emph{erste} Statement sein. Keine Rekursion.
+\end{itemize}\vspace*{-.85\baselineskip}
+\begin{layout-imageonly}
+\begingroup\lstfs{9}\begin{multicols}{2}
+\begin{plainjava}
+!*\onslide<3->*!public class Car {
+!*\onslide<3->*!   int topSpeed;
+!*\onslide<3->*!   final boolean pengu;
+!*\onslide<4->*!   public !*\tikzmark{Car-2l}*!Car(int top, boolean p)!*\tikzmark{Car-2r}*! {
+!*\onslide<4->*!      this.topSpeed = top;
+!*\onslide<4->*!      this.pengu = p;
+!*\onslide<4->*!   }
+!*\onslide<3->*!
+!*\onslide<5->*!   public !*\tikzmark{Car-1l}*!Car!*\tikzmark{Car-1r}*!(int top) {
+!*\onslide<5->*!      !*\tikzmark{this-2l}*!this(top, true);!*\tikzmark{this-2r}*!
+!*\onslide<5->*!      System.out.println("Piep");
+!*\onslide<5->*!   }
+!*\onslide<3->*!
+!*\onslide<6->*!   public !*\tikzmark{Car-l}*!Car()!*\tikzmark{Car-r}*! { !*\tikzmark{this-1l}*!this(20);!*\tikzmark{this-1r}*! }
+!*\onslide<3->*!}
+\end{plainjava}
+\end{multicols}\endgroup
+\begin{itemize}
+\itemsep3.5pt
+\item<9-> \cjava{new Car()}\,: \onslide<10->{\bjava{topSpeed} ist \bjava{20}, \bjava{pengu} ist \bjava{true}. Mit Piep!}
+\item<11-> \cjava{new Car(14)}\,: \onslide<12->{\bjava{topSpeed} ist \bjava{14}, \bjava{pengu} ist \bjava{true}. Mit Piep!}
+\item<13-> \cjava{new Car(2, false)}\,: \onslide<14->{\bjava{topSpeed} ist \bjava{2}, \bjava{pengu} ist \bjava{False}. Kein Piep!}
+\end{itemize}
+\end{layout-imageonly}
+\begin{tikzpicture}[overlay,remember picture]
+   \onslide<7->{\draw[decoration=brace,decorate] ([yshift=8pt]pic cs:this-1l) -- ([yshift=8pt]pic cs:this-1r) node[pos=.5,above=3pt] {\footnotesize\bjava{Car(int)}};}
+   \onslide<8->{\draw[gray,-Kite] ([yshift=3pt]pic cs:this-2l) to[out=180,in=20] ([yshift=10pt,xshift=-18pt]pic cs:Car-2r);}
+\end{tikzpicture}
+\end{frame}
+
+\begin{frame}[c]{Static vs. Non-Static}
+   \begin{itemize}[<+(1)->]
+      \itemsep11pt
+      \item Statische Variablen \& Methoden sind an die Klasse gebunden. \begin{itemize}
+         \item Kein Objekt notwendig um Sie aufzurufen/abzugreifen.
+         \item Keine Instanz- sondern Klassenvariablen.
+      \end{itemize}
+      \item Die Frage lautet: Ist diese Eigenschaft allen Objekten gemein?
+   \end{itemize}
+\end{frame}
+
+
+\SidebarTask{Kameraszenario}
+\begin{frame}[c]{Kameraszenario}
+\onslide<2->{\footnotesize\flushleft Sie sehen das Grundgerüst einer Kameraklasse. Bearbeiten Sie die folgenden beiden Teilaufgaben,
+welche aufeinander aufbauen. Sie dürfen keine (Java-)Ausnahmen verwenden.
+\begin{enumerate}
+    \item Schreiben Sie einen leeren Konstruktor, welcher die von Java zugewiesenen Standardwerte explizit initialisiert. Dieser Konstruktor soll nicht von Code abseits der \bjava{Camera}-Klasse aufrufbar sein und so verhindern, dass weitere Kamera-Objekte erstellt werden können.
+    \item Erweitern Sie die Klasse nun in sofern, dass es immer maximal fünf Kamera-Objekte gibt, welche durch \bjava{get(int)} durch eine Zahl \(x \in \{0, 1, 2, 3, 4\}\) abgefragt werden können. Dabei soll ein Kamera-Objekt erst (mit ihrem vorher erzeugten Konstruktor) erzeugt werden, wenn es durch die Zahl angefragt wird. Weiter sollen Folgeanfragen mit der Zahl dasselbe Objekt zurückliefern. Geben Sie für \(x < 0\) und \(x \geq 5\) den Wert \bjava{null} zurück.
+\end{enumerate}}
+\onslide<1->{\ShortSide}%
+\end{frame}
+\SidebarReset
+
+
+\SidebarSolution
+\begin{frame}[fragile,c]{Der Konstruktor}
+\begin{plainjava}
+!*\onslide<2->*!private Camera() {
+!*\onslide<3->*!   x = y = z = 0;
+!*\onslide<3->*!   recording = false;
+!*\onslide<2->*!}
+\end{plainjava}\medskip
+\begin{itemize}
+   \item<4-> \bjava{private}: Damit von außen nicht zugreifbar.
+   \item<5-> \bjava{x = y = z = 0} als Kurzform für \bjava{x = 0}, \bjava{y = 0} und \bjava{z = 0}.
+\end{itemize}
+\begin{tikzpicture}[remember picture,overlay]
+   % TODO: improve that
+   \only<6->{\node[below left=.5cm] at(current page.north east) {\footnotesize\faFileO~\textattachfile{\curpath Camera.java}{Camera.java}};}
+\end{tikzpicture}%
+\end{frame}
+
+\begin{frame}[fragile,c]{Nur fünf Kameras}
+\begin{plainjava}
+!*\onslide<2->*!private static Camera[] cameras = new Camera[5];
+!*\onslide<2->*!
+!*\onslide<3->*!public static Camera get(int n) {
+!*\onslide<4->*!   if(n < 0 || n >= 5) return null;
+!*\onslide<5->*!   if(cameras[n] == null)
+!*\onslide<5->*!      cameras[n] = new Camera();
+!*\onslide<6->*!   return cameras[n];
+!*\onslide<3->*!}
+\end{plainjava}
+\begin{itemize}
+   \itemsep6pt
+   \item<7-> Das Array kontrolliert den Pool verfügbarer Kameras.
+   \item<8-> Statische Erzeuger-Methoden erlauben mehr Kontrolle.
+\end{itemize}
+\end{frame}
+\SidebarReset
+
+\subsection{Sichtbarkeiten \& Gültigkeiten}
+\begin{frame}{Sichtbarkeit \& Gültigkeit}
+   \begin{itemize}[<+(1)->]
+      \itemsep14pt
+      \item Klassen, Methoden \& Attribute haben \textsb{Sichtbarkeiten} (Scope). \begin{itemize}
+         \item Sie können nur verwendet werden, wo sie sichtbar sind.
+         \item Diese Sichtbarkeit wird durch \bjava{public}, \bjava{private},~\ldots\ kontrolliert.
+      \end{itemize}
+      \item Daten (Variablen,~\ldots) haben einen \textsb{Gültigkeitsbereich}. \begin{itemize}
+         \item Solange sie vom Stack aus von Java erreichbar sind.
+      \end{itemize}
+      \item Sichtbarkeits- \& Gültigkeitsbereiche überschneiden sich.
+      \item Eine Variable kann z.B. gültig, aber gerade durch Überschattung nicht sichtbar sein.
+   \end{itemize}
+\end{frame}
+
+\begin{frame}[c]{Gruppierung}
+   \begin{itemize}[<+(1)->]
+      \itemsep14pt
+      \item Java nutzt \textsb{Packages} als Namensräume \begin{itemize}
+         \item Ordner der dann alle zugehörigen Java-Dateien enthält.
+         \item Können über \bjava{import <pack:c:age>;} sichtbar gemacht werden.
+         \item Dabei wird \bjava{java.lang} immer importiert.
+      \end{itemize}
+      \item Sichtbarkeiten interagieren auch mit Vererbung.
+   \end{itemize}
+\end{frame}
+
+
+\begin{frame}[c]{Scopes}
+   \begin{itemize}[<+(1)->]
+      \itemsep13pt
+      \item Java erlaubt vier verschiedene Zugriffsmodifikatoren: \begin{itemize}
+         \item \textit{private:} Nur innerhalb der Klasse.
+         \item \textit{protected:} Im gesamten Paket sowie allen Unterklassen.
+         \item \textit{public:} Überall sichtbar wo Paket sichtbar.
+         \item \textit{\say{default}:} Überall im Paket.
+     \end{itemize}
+     \item \textit{Hinweis:} Objekte einer Klasse können auf private Elemente anderer Objekte der gleichen Klasse zugreifen.
+   \end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile,c]{Ein Scope Beispiel}
+   \small\begin{itemize}[<+(1)->]
+      \itemsep6pt
+   \item Es gibt vier Geltungsbereiche (\textit{engl.} scopes) für Variablen.\vspace*{-8\baselineskip}
+\begin{layout-imageonly}\lstfs{10}
+\begin{plainjava}[language=xJava]
+!*\onslide<3->*!|zws|public|zws| class Pinguin { // !*\solGet{comments}{\textbf{1.}}*! global
+!*\onslide<4->*!    !**!|zws|private|zws| int sozialversicherungsnummer; // !*\solGet{comments}{\textbf{2.}}*! Klasse
+!*\onslide<5->*!    !**!|zws|protected|zws| int watschelIndex; // !*\solGet{comments}{\textbf{3.}}*! geschützt
+!*\onslide<6->*!    !**!|zws|public|zws| void watschel() { /* ... */ } // !*\solGet{comments}{\textbf{4.}}*! (erneut: global)
+!*\onslide<7->*!    void piepsen() { /* ... */ } // !*\solGet{comments}{\textbf{5.}}*! Standard: Paket
+!*\onslide<3->*!}
+\end{plainjava}\vspace*{-8.66\baselineskip}
+\end{layout-imageonly}
+\item<8-> Die Klasse \bjava{Tiger} sei im selben, \bjava{Auto} sei in einem anderen Paket, \bjava{Felspingu} erbe von \bjava{Pinguin} aber sei in einem anderem Paket: \medskip\par
+\hspace*{-5em}\hfill\onslide<9->{\def\y{\faCheckSquareO}\def\n{\hspace*{-1pt}\faSquareO}\scriptsize\begin{minipage}{.5\linewidth}
+\begin{tabular}{p{6em}ccccc}
+   \toprule
+                  & 1 & 2 & 3 & 4 & 5 \\
+\midrule
+      \T{Pinguin} & \y & \y & \y & \y & \y \\
+      \T{Tiger}   & \y & \n & \y & \y & \y \\
+\bottomrule
+\end{tabular}
+\end{minipage}\hspace*{5em}\begin{minipage}{.5\linewidth}
+\begin{tabular}{p{6em}ccccc}
+      \toprule
+                  & 1 & 2 & 3 & 4 & 5 \\
+\midrule
+      \T{Auto} & \y & \n & \n & \y & \n \\
+      \T{Felspingu} & \y & \n & \y & \y & \n \\
+\bottomrule
+\end{tabular}
+\end{minipage}\hfill}
+\end{itemize}
+\end{frame}
+
+\subsection{Ausnahmen}
+\begin{frame}{Fehlerbehandlung}
+   \begin{itemize}[<+(1)->]
+      \itemsep8pt
+      \item Wenn irgendetwas schief geht, wirft Java eine Ausnahme.
+      \item Wir unterscheiden drei Arten: \begin{itemize}
+         \item \textsb{Error:} Katastrophe, zum Beispiel kein Speicher. Kaum behandelbar.
+         \item \textsb{RuntimeException:} Vorhersehbar, aber nun schwer behandelbar (wie ein negativer Array-Index,~\ldots).
+         \item \textsb{Exception:} Schwer vorhersehbare Ausnahme (wie Datei nicht gefunden,~\ldots).
+      \end{itemize}
+      \item Normale \say{Exceptions} \emph{müssen} in Java: \begin{itemize}
+         \item Behandelt werden (\bjava{try-catch}), oder
+         \item weitergeleitet werden (\bjava{throws}).
+      \end{itemize}
+   \end{itemize}
+\end{frame}
+
+\begin{frame}[c]{Eskalationsfreude}
+   \begin{itemize}[<+(1)->]
+      \itemsep10pt
+      \item Eine Ausnahme unterbricht den Programmfluss.
+      \item Wird sie nicht direkt behandelt, eskaliert die Ausnahme den \say{Call-Stack} hinauf.
+      \item Was über die \bjava{main}-Methode eskaliert wird von der JVM abgefangen und beendet das Programm.
+      \item Ausnahmen sollten in Java aber nicht zur Werterückgabe verwendet werden.
+   \end{itemize}
+\end{frame}
+
+
+\SidebarTask{Fehler finden}
+\begin{frame}[c]{Fehler finden}
+\onslide<2->{\footnotesize\flushleft Im Code finden sich \textsb{10 Fehler}, welche vom Java-Compiler erkannt werden.
+Identifizieren Sie \textsb{acht} dieser Fehler durch \begin{enumerate}
+    \item die Angabe der Code-Zeilennummer und
+    \item eine kurze Erklärung, was den Fehler verursacht.
+\end{enumerate}
+\flushleft Tragen Sie die Informationen in die Tabelle ein.
+Wenn Sie mehrere Fehler in einer Code-Zeile finden, tragen sie diese separat ein~--- die zusätzlichen Zeilen existieren dabei nur, um Ihnen eine Selbstkorrektur zu ermöglichen.
+Folgefehler zählen dabei nicht als separate Fehler. Wird also beispielsweise ein Bezeichner inkorrekt initialisiert, so zählt nicht jede Verwendung als zusätzlicher Fehler sondern nur die inkorrekte Initialisierung.\par}
+\onslide<1->{\ShortSide}%
+\end{frame}
+\SidebarReset
+
+\SidebarSolution
+\begin{frame}[c]{Fehlersuche}
+   \updateitemize{15.}%
+   \begin{enumerate}[<+(1)->]
+      \itemsep9.25pt
+      \item \textit{Zeile 2}:\quad \bjava{void} ist kein Datentyp.
+      \item \textit{Zeile 3/10}:\quad Wenn \bjava{omega} \bjava{final} ist, kann es im\\\qquad Konstruktor nicht geändert werden.
+      \item \textit{Zeile 6}:\quad das Produkt aus \bjava{char} und \bjava{double} ist \bjava{double}\\\qquad und muss explizit zu \bjava{int} konvertiert werden.
+      \item \textit{Zeile 9}:\quad Ein Konstruktor muss genau so heißen wie die\\\qquad Klasse. Hier ist das \bjava{I} aber groß. Alternativ fehlt\\\qquad mindestens der Rückgabetyp.
+      \item \textit{Zeile 13}:\quad \bjava{double} ist ein Keyword und kann nicht als\\\qquad Bezeichner verwendet werden.
+   \end{enumerate}
+\end{frame}
+
+\begin{frame}[c]{Fehlersuche\rhead{II}}
+   \updateitemize{15.}%
+   \begin{enumerate}[<+(1)->]
+      \itemsep9.25pt
+      \item[6.] \textit{Zeile 18}:\quad \bjava{andromeda} ist in \bjava{iDoGood()} keine Variable.
+      \item[7.] \textit{Zeile 23}:\quad Hier fehlt das Semikolon, es ist\\\qquad auskommentiert.
+      \item[8.] \textit{Zeile 25}:\quad \bjava{System.Err} existiert nur kleingeschrieben als\\\qquad\bjava{System.err}.
+      \item[9.] \textit{Zeile 30}:\quad \bjava{global} ist in Java kein gültiges\\\qquad Methoden-Präfix.
+      \item[10.] \textit{Zeile 31}:\quad \bjava{iDoGood} ist ein Konstruktor und kann nur mit\\\qquad\bjava{new} aufgerufen werden (die \bjava{boolean}-Methode\\\qquad bräuchte ein Objekt).
+   \end{enumerate}
+\end{frame}
+\SidebarReset
+
+\subsection{Recap}
+\begin{frame}[c]{\paletteA{\sbfamily Kurzgesagt}\hfill OOP}
+\begin{itemize}[<+(1)->]
+   \itemsep18pt
+   \item Eine Klasse definiert die Blaupause für Objekte. \begin{itemize}
+      \item Attribute definieren den Zustand.
+      \item Methoden definieren den Verhalten.
+   \end{itemize}
+   \item Der Konstruktor baut den initialen Zustand \begin{itemize}
+      \item \textsb{Instanziierung}: Erzeugen eines neuen Objektes.
+      \item Wenn keiner: erzeugt Java den leeren Standardkonstruktor.
+      \item \bjava{this} erlaubt Aufruf von Überladungen.
+   \end{itemize}
+   \item Klassen, Methoden,~\ldots:\hfill \textsb{Sichtbarkeit}  (\bjava{public},~\ldots)
+   \item \textsb{Gültigkeit}sbereich: Wo die Daten \say{existieren}.
+\end{itemize}
+\LargeSide
+\end{frame}
+
+% \newsavebox\postpengu
+% \savebox\postpengu{\tikz\pingu[body=paletteA!68!pingu@white,body front=paletteA!38!pingu@white,eyes wink,eyes color=paletteA!68!pingu@white,bill color=paletteA!68!pingu@white,feet color=paletteA!68!pingu@white,heart=paletteA!38!pingu@white,santa hat=paletteA!68!pingu@white,santa hat second=paletteA!38!pingu@white,santa beard=paletteA!68!pingu@white];}
+% \PostPage{\begin{tikzpicture}[overlay,remember picture]
+%    \node[below left=.66cm,scale=1.33] at (current page.north east) {\rotatebox{-10}{\usebox\postpengu}};
+%    \node[below right=.5cm] (qr) at(current page.north west) {\fancyqr[height=3.65cm]{https://github.com/EagleoutIce/christmas-eidi-recap}};
+%    \node[below right,pingu@white,yshift=-.25cm,text width=3.75cm,font=\scriptsize] at(qr.south west) {Sources \& current version on GitHub};
+% \end{tikzpicture}}
+
 \begin{frame}
-   TODO: die 3. Präsenzaufagbe als Wert 0
+   TODO: die 3. Präsenzaufagbe als Wert 0 und 2. anstelle KAchellland
+
+   TODO: improve embedding
+
+   TODO: Weihnachtswiederholung referenzieren
 \end{frame}
 
 \iffull
