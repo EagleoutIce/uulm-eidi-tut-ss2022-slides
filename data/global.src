@@ -223,12 +223,12 @@
     \rule{0cm}{.5\overviewheight}%
     \color{gray}\ifnum#1=1\hl\else\ifnum#1=8\hl\fi\fi Theorie\quad
     %
-    & \MayLoadActive{1}{2} & & & \MayLoadActive{8}{11}\medskip\\
+    & \MayLoadActive{1}{2} & & & \MayLoadActive{8}{12}\medskip\\
     \color{gray}\ifnum#1>1\ifnum#1<5\hl\fi\fi Grundlagen\quad
     &
     \MayLoadActive{2}{3\,\&\,4} & \MayLoadActive{3}{5} & \MayLoadActive{4}{6} & \medskip\\
     \color{gray}\ifnum#1>4\ifnum#1<8\hl\fi\fi\ifnum#1=9\hl\fi Vertiefungen\quad
-    &\MayLoadActive{5}{7\,\&\,9}&\MayLoadActive{6}{10}&\MayLoadActive{7}{8}&\MayLoadActive{9}{12}
+    &\MayLoadActive{5}{7\,\&\,10}&\MayLoadActive{6}{11}&\MayLoadActive{7}{9}&\MayLoadActive{9}{8}
 \endtabular
 }\par
 \vspace*{0pt plus 1filll}\null

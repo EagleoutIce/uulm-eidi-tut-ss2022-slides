@@ -113,10 +113,10 @@ XII. Suchen und Sortieren}%
    \item<3-> \hyperlink{btdl@section.4}{Unterprogramme}
    \item<3-> \hyperlink{btdl@section.5}{Objektorientierte Programmierung}\bigskip
    \item<3->[\g 6.] \g Rekursion
-   \item<3->[\g 7.] \g Weiterführende Konzepte der OOP
-   \item<3->[\g 8.] \g Dynamische Datenstrukturen
-   \item<3->[\g 9.] \g Laufzeitkomplexität
-   \item<3->[\g10.] \g Suchen und Sortieren
+   \item<3->[\g 7.] \g Suchen und Sortieren
+   \item<3->[\g 8.] \g Weiterführende Konzepte der OOP
+   \item<3->[\g 9.] \g Dynamische Datenstrukturen
+   \item<3->[\g 10.] \g Laufzeitkomplexität
 \end{enumerate}}%
 \end{frame}
 }
@@ -1207,7 +1207,7 @@ System.out.println(i);
 
 \SidebarTask{Reverse}
 \begin{frame}[c]{Reverse}
-\flushleft\onslide<2->{Schreiben Sie eine Methode \bjava{static void reverse} \bjava{(int[] arr)} welche das übergebene Array umdreht, sodass das erste Elemente nun an letzter Stelle steht, das zweite an vorletzter Stelle,~\ldots\ und das letzte Element nun an erster Stelle steht.\par}
+\flushleft\onslide<2->{Schreiben Sie eine Methode \bjava{static void reverse(int[]} \bjava{arr)} welche das übergebene Array umdreht, sodass das erste Elemente nun an letzter Stelle steht, das zweite an vorletzter Stelle,~\ldots\ und das letzte Element nun an erster Stelle steht.\par}
 \onslide<1->{\ShortSide}%
 \end{frame}
 \SidebarReset
@@ -1382,7 +1382,7 @@ name & \say{Saph}}}~}
 \column{.5\linewidth}
 \begin{itemize}
    \item<6-> \cjava{Mega m = new Mega();}\smallskip\\
-   \onslide<7->{Nicht erlaubt. Existiert ein expliziter Konstruktor, erstellt Java keinen leeren mehr!}
+   \onslide<7->{Nicht erlaubt. Existiert ein expliziter Konstruktor, erstellt Java keinen \say{leeren} mehr!}
    \item<8-> \cjava{Mega x = new Mega(\"Huhu\");}\smallskip\\
    \onslide<9->{Erlaubt. \bjava{x.name} ist \bjava{\"Huhu\"}.}
 \end{itemize}
@@ -1495,6 +1495,7 @@ welche aufeinander aufbauen. Sie dürfen keine (Java-)Ausnahmen verwenden.
 \begin{frame}{Sichtbarkeit \& Gültigkeit}
    \begin{itemize}[<+(1)->]
       \itemsep14pt
+      \item TODO: URGENT UPDATE THIS
       \item Klassen, Methoden \& Attribute haben \textsb{Sichtbarkeiten} (Scope). \begin{itemize}
          \item Sie können nur verwendet werden, wo sie sichtbar sind.
          \item Diese Sichtbarkeit wird durch \bjava{public}, \bjava{private},~\ldots\ kontrolliert.
@@ -1548,7 +1549,7 @@ welche aufeinander aufbauen. Sie dürfen keine (Java-)Ausnahmen verwenden.
 !*\onslide<3->*!}
 \end{plainjava}\vspace*{-8.66\baselineskip}
 \end{layout-imageonly}
-\item<8-> Die Klasse \bjava{Tiger} sei im selben, \bjava{Auto} sei in einem anderen Paket, \bjava{Felspingu} erbe von \bjava{Pinguin} aber sei in einem anderem Paket: \medskip\par
+\item<8-> [TODO: Update this]Die Klasse \bjava{Tiger} sei im selben, \bjava{Auto} sei in einem anderen Paket, \bjava{Felspingu} erbe von \bjava{Pinguin} aber sei in einem anderem Paket: \medskip\par
 \hspace*{-5em}\hfill\onslide<9->{\def\y{\faCheckSquareO}\def\n{\hspace*{-1pt}\faSquareO}\scriptsize\begin{minipage}{.5\linewidth}
 \begin{tabular}{p{6em}ccccc}
    \toprule
