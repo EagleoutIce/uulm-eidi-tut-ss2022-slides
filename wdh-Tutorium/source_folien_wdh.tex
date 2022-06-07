@@ -28,7 +28,9 @@
 
 \newcounter{slidetasks}
 \setcounter{slidetasks}{0}
-\def\SidebarTask#1{\stepcounter{slidetasks}\SidebarRaw{\Large\rotatebox{90}{\def\rmdefault{AlphaSlabOne-TLF}\color{paletteA!62!pingu@black!36!pingu@white}\rmfamily\selectfont Aufgabe \theslidetasks}\hfill\null}\pdfbookmark[4]{A\theslidetasks)~#1}{lecture@task@@id@\thepage}}
+\def\SidebarTask#1{\refstepcounter{slidetasks}\SidebarRaw{\Large\rotatebox{90}{\def\rmdefault{AlphaSlabOne-TLF}\color{paletteA!62!pingu@black!36!pingu@white}\rmfamily\selectfont Aufgabe \theslidetasks}\hfill\null}\pdfbookmark[4]{A\theslidetasks)~#1}{lecture@task@@id@\thepage}
+\hypertarget{#1}{\label{#1}}}
+\def\TaskRef#1{\hyperlink{#1}{Aufgabe~\ref*{#1}}}
 \def\SidebarSolution{\SidebarRaw{\Large\rotatebox{90}{\def\rmdefault{AlphaSlabOne-TLF}\color{paletteA!62!pingu@black!36!pingu@white}\rmfamily\selectfont Auflösung \theslidetasks}\hfill\null}}
 \def\textsb#1{{\sbseries#1}}
 \def\LargeSide{\begin{tikzpicture}[overlay, remember picture]
@@ -258,7 +260,7 @@ Given \(z = (z_1,\ldots, z_n)\), \(z_i \in \N\) \\
 !*\onslide<4->*!}!*\onslide<1->*!
 \end{plainjava}
 \column{.395\linewidth}
-\onslide<3->{Die Leonardo-Zahlen sind definiert (für \(n \geq 0\)):\\
+\onslide<3->{Die Leonardo-Zahlen sind für \(n \geq 0\) definiert:\smallskip\\
 \(L(0) = 1,~L(1) = 1\)\\
 \(L(n) = L(n - 1) + L(n - 2) + 1\)}
 \endcolumns
@@ -279,7 +281,7 @@ Given \(z = (z_1,\ldots, z_n)\), \(z_i \in \N\) \\
    \item<3-> Partielle Korrektheit
 \end{enumerate}
 \begin{tikzpicture}[overlay,remember picture]
-   \node[below left,text width=7cm,scale=.625] at(current page.north east) {%
+   \node[below left,text width=7cm,scale=.675] at(current page.north east) {%
 \begin{plainjava}
 public static long L(int n) {
    if(n == 0 || n == 1) return 1;
@@ -311,7 +313,7 @@ public static long L(int n) {
    \end{itemize}
 \end{enumerate}
 \begin{tikzpicture}[overlay,remember picture]
-   \node[below left,text width=7cm,scale=.625] at(current page.north east) {%
+   \node[below left,text width=7cm,scale=.675] at(current page.north east) {%
 \begin{plainjava}
 public static long L(int n) {
    if(n == 0 || n == 1) return 1;
@@ -447,7 +449,7 @@ Wobei hier \(N = 4\).}
 
 \SidebarTask{Eine Aufwandsanalyse}
 \begin{frame}[c]{Eine Aufwandsanalyse}
-\onslide<2->{Bestimmen Sie den worst-case Laufzeitaufwand des folgenden Verfahrens in Elementaroperationen:}
+\onslide<2->{Bestimmen Sie den worst-case Laufzeitaufwand des folgenden Verfahrens\textsuperscript{\,$\to$ \TaskRef{Ein Algorithmenentwurf}} in Elementaroperationen:}
 \bigskip\par
 \onslide<3->{\begin{algorithm}[H]
 \PreCode
@@ -1675,6 +1677,8 @@ Folgefehler zählen dabei nicht als separate Fehler. Wird also beispielsweise ei
    TODO: Weihnachtswiederholung referenzieren
    TODO: outro
    TODO: iffull--false should just reveal the short compat repeat slides without their side banners!
+
+   TODO: doch das mit den Begriffen i guess
 \end{frame}
 
 \iffull
