@@ -1618,14 +1618,13 @@ name & \say{Saph}}}~}
 \begin{frame}[c]{Klassische Fehler}
    \begin{itemize}
       \itemsep10pt
-      \item<2-> \link{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/NullPointerException.html}{\solGet{keywordC}{NullPointerException}}\onslide<3->{\t{unchecked}
-      \infoblock{Wir verwenden \T{null} wo ein Objekt gebraucht wird.}}
-      \item<4-> \link{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/ArithmeticException.html}{\solGet{keywordC}{ArithmeticException}}\onslide<5->{\t{unchecked}
+      \item<2-> \solGet{keywordC}{\link{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/ArithmeticException.html}{ArithmeticException}}\onslide<3->{\t{unchecked}
       \infoblock{Verbotene Rechenoperation wie Teilen einer Ganzzahl durch \(0\).}}
-      \item<6-> \link{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/FileNotFoundException.html}{\solGet{keywordC}{FileNotFoundException}}\onslide<7->{\t{checked}\infoblock{Der gegebene Pfad liefert keine Datei!}}
-      \item \link{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/StackOverflowError.html}{\solGet{keywordC}{StackOverflowError}}
-      \item \solGet{keywordC}{IllegalArgumentException}
-      \item \solGet{keywordC}{ArrayIndexOutOfBoundsException}
+      \item<4-> \solGet{keywordC}{\link{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/ArrayIndexOutOfBoundsException.html}{ArrayIndexOutOfBoundsException}}\onslide<5->{\t{unchecked}\infoblock{Negativer Index oder zu großer Index für Array!}}
+      \item<6-> \solGet{keywordC}{\link{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/FileNotFoundException.html}{FileNotFoundException}}\onslide<7->{\t{checked}\infoblock{Der gegebene Pfad liefert keine Datei!}}
+      \item<8-> \solGet{keywordC}{\link{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html}{IllegalArgumentException}}\onslide<9->{\t{unchecked}\infoblock{Eine Methode hat ein unpassendes Argument erhalten!}}
+      \item<10-> \solGet{keywordC}{\link{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/NullPointerException.html}{NullPointerException}}\onslide<11->{\t{unchecked}
+      \infoblock{Wir verwenden \T{null} wo ein Objekt gebraucht wird.}}
    \end{itemize}
 \end{frame}
 }
@@ -1644,7 +1643,7 @@ name & \say{Saph}}}~}
 \SidebarTask{Fehler finden}
 \begin{frame}[c]{Fehler finden}
 \onslide<2->{\footnotesize\flushleft Im Code finden sich \textsb{10 Fehler}, welche vom Java-Compiler erkannt werden.
-Identifizieren Sie \textsb{acht} dieser Fehler durch \begin{enumerate}
+Identifizieren Sie \textsb{acht} dieser Fehler durch \updateitemize{1.}\begin{enumerate}
     \item die Angabe der Code-Zeilennummer und
     \item eine kurze Erklärung, was den Fehler verursacht.
 \end{enumerate}
@@ -1655,10 +1654,8 @@ Folgefehler zählen dabei nicht als separate Fehler. Wird also beispielsweise ei
 \end{frame}
 \begin{frame}[fragile,c]{Fehler finden\rhead{II}}
 \lstfs{8}\vspace*{-4mm}%
-% \begin{layout-full}
-% \end{layout-full}
-\lstset{lineskip=0.5pt}\soldisablenumhl
-\begin{plainvoid}[numbers=left,numbersep=6pt,multicols=2,numberstyle=\scriptsize\color{black}]
+\lstset{lineskip=0.5pt}\columnsep=10pt\soldisablenumhl
+\begin{plainvoid}[numbers=left,numbersep=6pt,multicols=2,numberstyle=\scriptsize\color{darkgray}]
 public class iDoGood {
   final void i = 0x7;
   private final String omega = "Sunshine";
@@ -1759,8 +1756,6 @@ public class iDoGood {
    TODO: outro
    TODO: iffull--false should just reveal the short compat repeat slides without their side banners!
 
-
-   TODO: exceptions (Beispiele vorstellen, Baum machen)
 \end{frame}
 
 \iffull
