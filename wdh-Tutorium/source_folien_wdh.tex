@@ -1851,7 +1851,7 @@ name & \say{Saph}}}~}
 \end{minted}
 \end{onlyenv}
 \begin{itemize}
-   \item<14-> Die Klassen finden sich dann hier: \only<14->{\textattachfile{\curpath BinaerUmwandler.java}{BinaerUmwandler.java}} und \only<14->{\textattachfile{\curpath BinaerHaupt.java}{BinaerHaupt.java}}.
+   \item<14-|handout:2> Die Klassen finden sich dann hier: \only<14->{\textattachfile{\curpath BinaerUmwandler.java}{BinaerUmwandler.java}} und \only<14->{\textattachfile{\curpath BinaerHaupt.java}{BinaerHaupt.java}}.
 \end{itemize}
 \end{frame}
 \SidebarReset
@@ -1986,9 +1986,10 @@ public class iDoGood {
 /*\onslide<4->*/      int bi = binary.charAt(i - 1) == '1' ? 1 : 0;
 /*\onslide<4->*/      d += bi * Math.pow(2, n - i);
 /*\onslide<4->*/   }
-/*\onslide<4->*/    return d;
+/*\onslide<4->*/   return d;
 /*\onslide<3->*/}
 \end{minted}
+In wie weit unterscheidet sich ihre Berechnung von der aus \SidebarTask{Eine Aufwandsanalyse}.
    \onslide<1->{\ShortSide}%
 \end{frame}
 \SidebarReset
