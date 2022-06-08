@@ -583,7 +583,7 @@ Wobei hier \(N = 4\).}
    \item \bjava{14 - 3D * 2 / 12}
    \item \bjava{(char) ((byte) 'a' + 3) + " Sonne"}
    \item \bjava{14 - 2 + (3 > 9 || true ^ false ? "Hallo" : "Welt")}
-   \item \bjava{7/2 - 3 * 2.5 + 2f}
+   \item \bjava{7/2 - 3 * (float) 2.5 + 2f}
 \end{itemize}}
 \onslide<1->{\ShortSide}%
 \end{frame}
@@ -607,7 +607,7 @@ Wobei hier \(N = 4\).}
       \itemsep14pt
       \item<2-> \(\gob<7>{\ob<3>{14}{int} \mj{-} \ob<3>{2}{int}}{int} \mj{+} \gob<6>{(\gub<5>{\gub<4>{\ob<3>{3}{int} \mj{>} \ob<3>{9}{int}}{boolean} \mj{||} \gub<4>{\ob<3>{true}{boolean} \mj{^} \ob<3>{false}{boolean}}{boolean}}{boolean} \mj{?} \ob<3>{\"Hallo\"}{String} \mj{:} \ob<3>{\"Welt\"}{String})}{String}\) \\[-6pt]
       \onslide<8->{\({}= \ob<8>{\"12Hallo\"}{String}\)}
-      \item<9-> \(\gob<12>{\gub<11>{\ob<10>{7}{int}\mj{/}\ob<10>{2}{int}}{int} \mj{-} \gub<11>{\ob<10>{3}{int} \mj{*} \ob<10>{2.5}{double}}{double}}{double} \mj{+} \ob<10>{2f}{float} \only<13->{{}= \ob<13>{-2.5}{double}}\)
+      \item<9-> \(\gob<12>{\gub<11>{\ob<10>{7}{int}\mj{/}\ob<10>{2}{int}}{int} \mj{-} \gub<11>{\ob<10>{3}{int} \mj{*} \ob<10>{(float) 2.5}{float}}{float}}{float} \mj{+} \ob<10>{2f}{float} \only<13->{{}= \ob<13>{-2.5}{float}}\)
    \end{itemize}
 \end{frame}
 \SidebarReset
@@ -662,9 +662,9 @@ Wobei hier \(N = 4\).}
 \begin{frame}[c,fragile]{Blöcke}
    \begin{itemize}[<+(1)->]
       \itemsep10pt
-      \item Methodenaufrufe erzeugen \say{Stack-Frames}.
-      \item Code-Blöcke arbeiten vergleichbar.
-      \item Beim Verlassen wird alles davon vom Stack geschmissen.
+      \item Methodenaufrufe erzeugen \say{Stack-Frames}
+      \item Code-Blöcke arbeiten vergleichbar
+      \item Beim Verlassen wird alles davon vom Stack geschmissen
    \end{itemize}
 \begin{columns}[onlytextwidth,c]
 \column{.5\linewidth}
@@ -742,7 +742,7 @@ Maunz!*\onslide<1->*!
 
 \SidebarTask{Was gibt das Programm aus?}
 \begin{frame}[c,fragile]{Programmausgaben}
-Geben Sie für die Zeilen \T{i}--\T{iv} die erzeugte Ausgabe an und erklären Sie die Werte der beteiligten Variablen.
+Geben Sie für die Zeilen \T{i}--\T{iv} je die erzeugte Ausgabe an und erklären Sie die Werte der beteiligten Variablen.
 \lstfs{9}\begin{plainjava}
 !*\onslide<2->*!public class Example {
 !*\onslide<2->*!   public static int main;
@@ -1430,7 +1430,7 @@ name & \say{Saph}}}~}
 \itemsep3.5pt
 \item<9-> \cjava{new Car()}\,: \onslide<10->{\bjava{topSpeed} ist \bjava{20}, \bjava{pengu} ist \bjava{true}. Mit Piep!}
 \item<11-> \cjava{new Car(14)}\,: \onslide<12->{\bjava{topSpeed} ist \bjava{14}, \bjava{pengu} ist \bjava{true}. Mit Piep!}
-\item<13-> \cjava{new Car(2, false)}\,: \onslide<14->{\bjava{topSpeed} ist \bjava{2}, \bjava{pengu} ist \bjava{False}. Kein Piep!}
+\item<13-> \cjava{new Car(2, false)}\,: \onslide<14->{\bjava{topSpeed} ist \bjava{2}, \bjava{pengu} ist \bjava{false}. Kein Piep!}
 \end{itemize}
 \end{layout-imageonly}
 \begin{tikzpicture}[overlay,remember picture]
@@ -1453,7 +1453,7 @@ name & \say{Saph}}}~}
 
 \SidebarTask{Kameraszenario}
 \begin{frame}[c]{Kameraszenario}
-\onslide<2->{\footnotesize\flushleft Sie sehen das Grundgerüst einer Kameraklasse. Sie dürfen für die Aufgabe keine (Java-)Ausnahmen verwenden.
+\onslide<2->{\footnotesize\flushleft Sie sehen das Grundgerüst einer Kameraklasse. Sie dürfen für die Aufgabe \textit{keine} (Java-)Ausnahmen verwenden.
 \begin{enumerate}
     \item Schreiben Sie einen leeren Konstruktor, welcher die von Java zugewiesenen Standardwerte explizit initialisiert. Dieser Konstruktor soll nicht von Code abseits der \bjava{Camera}-Klasse aufrufbar sein und so verhindern, dass weitere Kamera-Objekte erstellt werden können.
     \item Erweitern Sie die Klasse nun in sofern, dass es immer maximal fünf Kamera-Objekte gibt, welche durch \bjava{get(int)} durch eine Zahl \(x \in \{0, 1, 2, 3, 4\}\) abgefragt werden können. Dabei soll ein Kamera-Objekt erst (mit Ihrem vorher erzeugten Konstruktor) erzeugt werden, wenn es durch die Zahl angefragt wird. Weiter sollen Folgeanfragen mit der Zahl dasselbe Objekt zurückliefern. Geben Sie für \(x < 0\) und \(x \geq 5\) den Wert \bjava{null} zurück.
@@ -1475,13 +1475,14 @@ name & \say{Saph}}}~}
 \column{.5\linewidth}
 \updateitemize{1.}%
 \begin{enumerate}
-   \item<4-> Leerer Konstruktor, der Standardwerte explizit zuweist und nicht von außerhalb aufrufbar sein soll.
+   \item<4-> Leerer Konstruktor, der Standardwerte explizit zuweist und nicht von außerhalb aufrufbar ist.
 \end{enumerate}
 \endcolumns
+\medskip
 \updateitemize{1.}%
 \begin{enumerate}
    \setcounter{enumi}{1}
-   \item<5-> Maximal fünf Kamera-Objekte (\(\{0, \ldots, 4\}\)) durch \bjava{get(int)}. Sollen erst erzeugt werden, wenn angefordert, illegale Werte sollen \bjava{null} liefern.
+   \item<5-> Maximal fünf Kamera-Objekte (\(i \in \{0, \ldots, 4\}\)) durch \bjava{Camera get(int i)}. Sollen erst erzeugt werden, wenn angefordert, illegale Werte sollen \bjava{null} liefern.
 \end{enumerate}
 \onslide<1->{\ShortSide}%
 \end{frame}
@@ -1492,13 +1493,15 @@ name & \say{Saph}}}~}
 \begin{frame}[fragile,c]{Der Konstruktor}
 \begin{plainjava}
 !*\onslide<2->*!private Camera() {
-!*\onslide<3->*!   x = y = z = 0;
-!*\onslide<3->*!   recording = false;
+!*\onslide<3->*!   x = y = 0.0f;
+!*\onslide<4->*!   z = 0;
+!*\onslide<5->*!   recording = false;
 !*\onslide<2->*!}
 \end{plainjava}\medskip
 \begin{itemize}
-   \item<4-> \bjava{private}: Damit von außen nicht zugreifbar.
-   \item<5-> \bjava{x = y = z = 0} als Kurzform für \bjava{x = 0}, \bjava{y = 0} und \bjava{z = 0}.
+   \item<6-> \bjava{private}: Damit von außen nicht zugreifbar
+   \item<7-> \bjava{x = y = 0.0f} als Kurzform für \bjava{x = 0.0f}, \bjava{y = 0.0f} \onslide<8->{\infoblock{Hier spielen Präzedenzregeln, Assoziativität und die Tatsache zusammen, dass \T{$\alpha$ = $\beta$} selbst wieder zu $\beta$ evaluiert: \T{$\gamma$ = ($\alpha$ = $\beta$)}.}}
+   \item<9-> \bjava{0.0f}, weil es sich hierbei ja um floats handelt. \bjava{0} würde eine implizite Typkonvertierung benötigen!
 \end{itemize}
 \begin{tikzpicture}[remember picture,overlay]
    % TODO: improve that
@@ -1517,10 +1520,11 @@ name & \say{Saph}}}~}
 !*\onslide<6->*!   return cameras[n];
 !*\onslide<3->*!}
 \end{plainjava}
+\bigskip
 \begin{itemize}
    \itemsep6pt
-   \item<7-> Das Array kontrolliert den Pool verfügbarer Kameras.
-   \item<8-> Statische Erzeuger-Methoden erlauben mehr Kontrolle.
+   \item<7-> Das Array kontrolliert den Pool verfügbarer Kameras
+   \item<8-> Statische Erzeuger-Methoden erlauben mehr Kontrolle
 \end{itemize}
 \end{frame}
 \SidebarReset
@@ -1530,14 +1534,14 @@ name & \say{Saph}}}~}
    \begin{itemize}[<+(1)->]
       \itemsep14pt
       \item Klassen, Methoden \& Attribute haben \textsb{Sichtbarkeiten}. \begin{itemize}
-         \item Sie können nur verwendet werden, wo sie sichtbar sind.
-         \item Diese Sichtbarkeit wird durch \bjava{public}, \bjava{private},~\ldots\ kontrolliert.
+         \item Sie können nur verwendet werden, wo sie sichtbar sind
+         \item Diese Sichtbarkeit wird durch \bjava{public}, \bjava{private},~\ldots\ kontrolliert
       \end{itemize}
       \item Variablen,~\ldots\ haben einen \textsb{Gültigkeitsbereich} (Scope). \begin{itemize}
          \item So gibt es den Gültigkeitsbereich der Klasse und
          \item Den lokalen Gültigkeitsbereich in Methoden, Blöcken,~\ldots
       \end{itemize}
-      \item Eine Variable kann z.B. sichtbar, aber gerade durch Überschattung nicht gültig sein.
+      \item Eine Variable kann z.B. sichtbar, aber gerade durch Überschattung nicht gültig sein
    \end{itemize}
 \end{frame}
 
@@ -1545,11 +1549,11 @@ name & \say{Saph}}}~}
    \begin{itemize}[<+(1)->]
       \itemsep14pt
       \item Java nutzt \textsb{Packages} als Namensräume \begin{itemize}
-         \item Ordner der dann alle zugehörigen Java-Dateien enthält.
-         \item Können über \bjava{import <pack:c:age>;} sichtbar gemacht werden.
-         \item Dabei wird \bjava{java.lang} immer importiert.
+         \item Ordner der dann alle zugehörigen Java-Dateien enthält
+         \item Können über \bjava{import <pack:c:age>;} sichtbar gemacht werden
+         \item Dabei wird \bjava{java.lang} immer importiert
       \end{itemize}
-      \item Sichtbarkeiten interagieren auch mit Vererbung.
+      % \item Sichtbarkeiten interagieren auch mit Vererbung.
    \end{itemize}
 \end{frame}
 
@@ -1643,19 +1647,20 @@ name & \say{Saph}}}~}
 \SidebarTask{Fehler finden}
 \begin{frame}[c]{Fehler finden}
 \onslide<2->{\footnotesize\flushleft Im Code finden sich \textsb{10 Fehler}, welche vom Java-Compiler erkannt werden.
-Identifizieren Sie \textsb{acht} dieser Fehler durch \updateitemize{1.}\begin{enumerate}
+Identifizieren Sie \textsb{acht} dieser Fehler durch \smallskip\updateitemize{1.}\begin{enumerate}
     \item die Angabe der Code-Zeilennummer und
     \item eine kurze Erklärung, was den Fehler verursacht.
 \end{enumerate}
-\flushleft Tragen Sie die Informationen in die Tabelle ein.
-Wenn Sie mehrere Fehler in einer Code-Zeile finden, tragen sie diese separat ein~--- die zusätzlichen Zeilen existieren dabei nur, um Ihnen eine Selbstkorrektur zu ermöglichen.
+\flushleft
+Wenn Sie mehrere Fehler in einer Code-Zeile finden, tragen sie diese separat ein.
 Folgefehler zählen dabei nicht als separate Fehler. Wird also beispielsweise ein Bezeichner inkorrekt initialisiert, so zählt nicht jede Verwendung als zusätzlicher Fehler sondern nur die inkorrekte Initialisierung.\par}
 \onslide<1->{\ShortSide}%
 \end{frame}
+{\makeatletter
 \begin{frame}[fragile,c]{Fehler finden\rhead{II}}
 \lstfs{8}\vspace*{-4mm}%
-\lstset{lineskip=0.5pt}\columnsep9mm\soldisablenumhl
-\begin{plainvoid}[numbers=left,numbersep=6pt,multicols=2,numberstyle=\color{darkgray},numbersep=2pt]
+\lstset{lineskip=0.5pt}\lstcolorlet{linenumbers}{darkgray}\columnsep9mm\soldisablenumhl
+\begin{plainvoid}[numbers=left,numbersep=6pt,multicols=2,numberstyle=\@declaredcolor{darkgray}\fontsize{6pt}{6pt}\selectfont\sffamily\sbseries\sol@lst@num@consume, numbersep=2pt]
 public class iDoGood {
   final void i = 0x7;
   private final String omega = "Sunshine";
@@ -1694,6 +1699,7 @@ public class iDoGood {
 \end{plainvoid}
 \onslide<1->{\ShortSide}%
 \end{frame}
+}
 \SidebarReset
 
 \SidebarSolution
