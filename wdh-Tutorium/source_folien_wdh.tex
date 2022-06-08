@@ -1654,8 +1654,8 @@ Folgefehler zählen dabei nicht als separate Fehler. Wird also beispielsweise ei
 \end{frame}
 \begin{frame}[fragile,c]{Fehler finden\rhead{II}}
 \lstfs{8}\vspace*{-4mm}%
-\lstset{lineskip=0.5pt}\columnsep=10pt\soldisablenumhl
-\begin{plainvoid}[numbers=left,numbersep=6pt,multicols=2,numberstyle=\scriptsize\color{darkgray}]
+\lstset{lineskip=0.5pt}\columnsep9mm\soldisablenumhl
+\begin{plainvoid}[numbers=left,numbersep=6pt,multicols=2,numberstyle=\color{darkgray},numbersep=2pt]
 public class iDoGood {
   final void i = 0x7;
   private final String omega = "Sunshine";
@@ -1664,8 +1664,8 @@ public class iDoGood {
     return x * y;
   }
 
-  public IDoGood(String dromeda) {
-    this.omega = dromeda;
+  public IDoGood(String eda) {
+    this.omega = eda;
   }
 
   static int double(byte i) {
@@ -1678,7 +1678,7 @@ public class iDoGood {
 
   private boolean iDoGood() {
     if(this.omega.equals("i"));
-    int i = 0 // /** // **/ /* ;
+    int i = 0 // /** // **/ /*;
     for(;i < 2_00;i++, i += 2)
      System.Err.println(i);
     return false /** // */ ;
