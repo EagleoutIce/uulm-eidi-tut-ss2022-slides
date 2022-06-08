@@ -16,7 +16,7 @@
 \DefinePalette{Recap}{Hellblau,hellbläulich: RGB(21, 110, 130)}
 {Hellblau,hellbläulich: RGB(21, 110, 130)}{Blau,bläulich: RGB(51, 93, 126)}{Grün,grünlich: RGB(21, 150, 90)}
 \UsePalette{Recap}
-\fancyulcolor{paletteA!40!white}
+\fancyulcolor{paletteA!62!pingu@black!36!pingu@white}
 \let\sbseries\sbfamily
 \SetColorProfile*{paletteA}{paletteC}{paletteD}
 \def\PostTitlepage{\begin{tikzpicture}[@O]
@@ -1967,16 +1967,34 @@ public class iDoGood {
 %    \node[below right,pingu@white,yshift=-.25cm,text width=3.75cm,font=\scriptsize] at(qr.south west) {Sources \& current version on GitHub};
 % \end{tikzpicture}}
 
-\begin{frame}
-   TODO: die 3. Präsenzaufagbe als Wert 0 und 2. anstelle KAchellland
+% \begin{frame}
+%    TODO: Weihnachtswiederholung referenzieren
+%    TODO: outro
+%    TODO: iffull--false should just reveal the short compat repeat slides without their side banners!
 
-   TODO: Weihnachtswiederholung referenzieren
-   TODO: outro
-   TODO: iffull--false should just reveal the short compat repeat slides without their side banners!
+% \end{frame}
 
+
+\SidebarTask{Noch komplexer!}
+\begin{frame}[fragile,c]{Noch komplexer!}
+\onslide<2->{Geben Sie die worst-case Laufzeitkomplexität (abhängig von der Eingabelänge) des folgenden Algorithmus an:}
+\begin{minted}[escapeinside={/*}{*/}]{java}
+/*\onslide<3->*/public static long binZuDez(String binary) {
+/*\onslide<4->*/   int n = binary.length();
+/*\onslide<4->*/   long d = 0;
+/*\onslide<4->*/   for(int i = 1; i <= n; i++) {
+/*\onslide<4->*/      int bi = binary.charAt(i - 1) == '1' ? 1 : 0;
+/*\onslide<4->*/      d += bi * Math.pow(2, n - i);
+/*\onslide<4->*/   }
+/*\onslide<4->*/    return d;
+/*\onslide<3->*/}
+\end{minted}
+   \onslide<1->{\ShortSide}%
 \end{frame}
+\SidebarReset
 
 \iffull
+\outro{\rlap{Basiert auf der \def\fancyulbackground{btdm@primary}\fancyulcolor{pingu@white}\link{https://github.com/EagleoutIce/christmas-eidi-recap}{Weihnachtswiederholung}}}
 \else
 \outro{\vskip9mm\centering \onslide<2->{x}}
 \fi
