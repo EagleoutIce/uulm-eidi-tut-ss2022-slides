@@ -42,6 +42,7 @@
 \end{tikzpicture}}
 \lstset{lineskip=2.25pt}% hack them one level
 \def\rhead#1{\hfill\textcolor{shadeA}{\sbseries#1}}
+\solsetmintedstyle{plain}
 \makeatletter
 \AtEndPreamble{\def\sol@lang@java@kwstyle{\color{gray}}}%
 \newenvironment{lillyHighlight}[1][]
@@ -1363,7 +1364,6 @@ name & \say{Saph}}}~}
 \end{tikzpicture}
 \end{frame}
 
-
 \begin{frame}[fragile,c]{Der Standardkonstruktor}
 \begin{layout-imageonly}
 \begin{columns}[onlytextwidth,c]
@@ -1400,7 +1400,6 @@ name & \say{Saph}}}~}
 \end{columns}
 \end{layout-imageonly}
 \end{frame}
-
 
 \begin{frame}[fragile,c]{Einen Konstruktor überladen}
 \begin{itemize}[<+(1)->]
@@ -1439,6 +1438,44 @@ name & \say{Saph}}}~}
    \onslide<8->{\draw[gray,-Kite] ([yshift=3pt]pic cs:this-2l) to[out=180,in=20] ([yshift=10pt,xshift=-18pt]pic cs:Car-2r);}
 \end{tikzpicture}
 \end{frame}
+
+
+\SidebarTask{Die Algorithmenklasse}
+\begin{frame}[c]{Die Algorithmenklasse}
+\onslide<2->{%
+\updateitemize{1.}\begin{enumerate}[<+(1)->]
+   \item Erzeugen Sie eine Klasse \T{BinaerUmwandler}, welche private Instanzvariablen für einen Binärstring und eine Dezimalzahl besitzt.
+   \item Erstellen Sie Getter und Setter für die Instanzvariablen.
+   \item Implementieren Sie den Standardkonstruktor explizit und erzeugen Sie eine überladene Version, die den übergebenen Binärstring initialisiert.
+\end{enumerate}}
+\onslide<1->{\ShortSide}%
+\end{frame}
+\SidebarReset
+\SidebarSolution
+\begin{frame}[fragile,c]{Mein kleiner Algorithmus}
+\only<2-9|handout:1> {1.~Klasse \T{BinaerUmwandler} mit privaten Instanzvariablen}\smallskip\\
+\only<5-9|handout:1> {2.~Getter und Setter}\medskip
+\begin{minted}[escapeinside={/*}{*/}]{java}
+/*\onslide<3->*/public class BinaerUmwandler {
+/*\onslide<4->*/   private String binary;
+/*\onslide<4->*/   private long decimal;
+/*\onslide<6->*/   public String getBinary() { return this.binary; }
+/*\onslide<7->*/   public void setBinary(String binary) {
+/*\onslide<9->*/      this.binary = binary;
+/*\onslide<7->*/   }
+
+/*\onslide<10->*/   public long getDecimal() { return this.decimal; }
+/*\onslide<11->*/   public void setDecimal(long decimal) {
+/*\onslide<12->*/      this.decimal = decimal;
+/*\onslide<11->*/   }
+/*\onslide<3->*/}
+\end{minted}
+\end{frame}
+\SidebarReset
+
+
+% TODO: we build this up block by block
+
 
 \begin{frame}[c]{Static vs. Non-Static}
    \begin{itemize}[<+(1)->]
@@ -1491,7 +1528,7 @@ name & \say{Saph}}}~}
 
 
 \SidebarSolution
-\begin{frame}[fragile,c]{Der Konstruktor}
+\begin{frame}[fragile,c]{Der Kamera-Konstruktor}
 \begin{plainjava}
 !*\onslide<2->*!private Camera() {
 !*\onslide<3->*!   x = y = 0.0f;
