@@ -500,6 +500,7 @@ Wobei hier \(N = 4\).}
 \end{tikzpicture}
 \end{frame}
 \SidebarReset
+}
 
 \subsection{Recap}
 \begin{frame}[c]{\paletteA{\sbfamily Kurzgesagt}\hfill Algorithmen}
@@ -1983,19 +1984,48 @@ public class iDoGood {
 /*\onslide<4->*/   int n = binary.length();
 /*\onslide<4->*/   long d = 0;
 /*\onslide<4->*/   for(int i = 1; i <= n; i++) {
-/*\onslide<4->*/      int bi = binary.charAt(i - 1) == '1' ? 1 : 0;
-/*\onslide<4->*/      d += bi * Math.pow(2, n - i);
+/*\onslide<4->*/      int bi = binary.charAt(i - 1) - '0';
+/*\onslide<4->*/      d = d + bi * Math.pow(2, n - i);
 /*\onslide<4->*/   }
 /*\onslide<4->*/   return d;
 /*\onslide<3->*/}
 \end{minted}
-In wie weit unterscheidet sich ihre Berechnung von der aus \SidebarTask{Eine Aufwandsanalyse}.
+In wie weit unterscheidet sich ihre Berechnung von der aus \TaskRef{Eine Aufwandsanalyse}.
    \onslide<1->{\ShortSide}%
 \end{frame}
 \SidebarReset
 
+
+{
+\SidebarSolution
+\newcommand<>\ComplexityMarker[1]{\only#2{\rlap{\quad\compl{#1}}}}
+\def\compl#1{\text{\bfseries\itshape\paletteA{#1}}}
+\def\<{\ensuremath{\langle}}
+\def\>{\ensuremath{\rangle}}
+\begin{frame}[fragile,c]{Das ist ja ganz was anderes!}
+\begin{minted}[escapeinside={/*}{*/}]{java}
+/*\onslide<2->*/public static long binZuDez(String binary) {
+/*\onslide<2->*/   int n = binary.length(); /*\ComplexityMarker<3->{2}*/
+/*\onslide<2->*/   long d = 0; /*\ComplexityMarker<4->{1}*/
+/*\onslide<2->*/   for(int i = 1; i <= n; i++) { /*\ComplexityMarker<5->{\paletteD{n}}*/
+/*\onslide<2->*/      int bi = binary.charAt(i - 1) - '0';  /*\ComplexityMarker<6->{$\langle$charAt$\rangle$ + 3}*/
+/*\onslide<2->*/      d = d + bi * Math.pow(2, n - i); /*\ComplexityMarker<7->{$\langle$pow$\rangle$ + 4}*/
+/*\onslide<2->*/   }
+/*\onslide<2->*/   return d; /*\ComplexityMarker<8->{1}*/
+/*\onslide<2->*/}
+\end{minted}
+\smallskip
+\begin{align*}
+   &\onslide<9->{\compl{2}\,E + \compl{1}\,E + \compl{\paletteD{n}} \cdot (\compl{\<\text{\T{charAT}}\> + 3}\,E + \compl{\<\text{\T{pow}}\> + 4}) + \compl{1}\,E}\\
+   \onslide<10->{=}& \onslide<10->{\bigl(4 + (7 + \<\text{\T{charAT}}\> + \<\text{\T{pow}}\>) \cdot n\bigr)\,E}
+\end{align*}
+
+\end{frame}
+\SidebarReset
+}
+
 \iffull
-\outro{\rlap{Basiert auf der \def\fancyulbackground{btdm@primary}\fancyulcolor{pingu@white}\link{https://github.com/EagleoutIce/christmas-eidi-recap}{Weihnachtswiederholung}}}
+\outro{\rlap{Basiert auf der \def\fancyulbackground{paletteA}\fancyulcolor{pingu@white}\link{https://github.com/EagleoutIce/christmas-eidi-recap}{Weihnachtswiederholung}}}
 \else
 \outro{\vskip9mm\centering \onslide<2->{x}}
 \fi
