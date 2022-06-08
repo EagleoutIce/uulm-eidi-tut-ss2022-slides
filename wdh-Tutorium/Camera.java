@@ -2,11 +2,14 @@ import java.util.Arrays;
 
 
 public final class Camera {
-   private int x, y, z;
+   private float x;
+   private float y;
+   private int z;
    private boolean recording;
 
    private Camera() {
-      x = y = z = 0;
+      x = y = 0.0f;
+      z = 0;
       recording = false;
    }
 
@@ -31,8 +34,8 @@ public final class Camera {
       this.recording = false;
    }
 
-   public int[] position() {
-      return new int[]{x, y, z};
+   public float[] position() {
+      return new float[]{x, y, z};
    }
 
    public boolean running() {

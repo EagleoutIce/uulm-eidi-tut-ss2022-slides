@@ -126,7 +126,7 @@
 }
 \makeatletter
 \sol@list@define@styles{%
- {literals: \@declaredcolor{btdm@text}\slshape},%
+ {literals: \@declaredcolor{btdm@text}\itshape},%
  {basic:    \@declaredcolor{btdm@text}\sol@ttfamily}%,
  %{keywordC: \@declaredcolor{sol@colors@lst@keywordC}\slshape}%
 }%

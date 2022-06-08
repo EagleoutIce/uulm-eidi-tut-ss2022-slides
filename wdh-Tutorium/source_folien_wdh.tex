@@ -29,18 +29,20 @@
 \newcounter{slidetasks}
 \setcounter{slidetasks}{0}
 \def\SidebarTask#1{\refstepcounter{slidetasks}\SidebarRaw{\Large\rotatebox{90}{\def\rmdefault{AlphaSlabOne-TLF}\color{paletteA!62!pingu@black!36!pingu@white}\rmfamily\selectfont Aufgabe \theslidetasks}\hfill\null}\pdfbookmark[4]{A\theslidetasks)~#1}{lecture@task@@id@\thepage}
-\hypertarget{#1}{\label{#1}}}
-\def\TaskRef#1{\hyperlink{#1}{Aufgabe~\ref*{#1}}}
+\only<1>{\hypertarget{@#1}{\label{#1}}}}
+\def\TaskRef#1{\hyperlink{@#1}{Aufgabe~\ref*{#1}}}
 \def\SidebarSolution{\SidebarRaw{\Large\rotatebox{90}{\def\rmdefault{AlphaSlabOne-TLF}\color{paletteA!62!pingu@black!36!pingu@white}\rmfamily\selectfont Auflösung \theslidetasks}\hfill\null}}
 \def\textsb#1{{\sbseries#1}}
-\def\LargeSide{\begin{tikzpicture}[overlay, remember picture]
+\def\LargeSide{\begin{tikzpicture}[@O]
   \fill[paletteA] (current page.north west) rectangle ([xshift=4.2mm]current page.south west);
 \end{tikzpicture}}
-\def\ShortSide{\begin{tikzpicture}[overlay, remember picture]
+\def\ShortSide{\begin{tikzpicture}[@O]
   \fill[paletteA!62!pingu@black!36!pingu@white] (current page.north west) rectangle ([xshift=2.75mm]current page.south west);
 \end{tikzpicture}}
+\lstset{lineskip=2.25pt}% hack them one level
 \def\rhead#1{\hfill\textcolor{shadeA}{\sbseries#1}}
 \makeatletter
+\AtEndPreamble{\def\sol@lang@java@kwstyle{\color{gray}}}%
 \newenvironment{lillyHighlight}[1][]
 {\begingroup\tikzset{lilly@Highlight@par/.style={#1}}\begin{lrbox}{\@tempboxa}}
 {\end{lrbox}\lilly@lsthighlight@box[lilly@Highlight@par]{\@tempboxa}\endgroup}
@@ -882,7 +884,7 @@ public class Example {
 
 \subsection{Recap}
 {\def\mto{\ensuremath{\to}}
-\def\dt#1{{\bfseries\textcolor{paletteA!58!white}{\strut#1}}}
+\def\dt#1{{\textcolor{paletteA!58!white}{\sbseries\strut#1}}}
 \begin{frame}[c]{\paletteA{\sbfamily Kurzgesagt}\hfill Konstrukte}
 \begin{itemize}[<+(1)->]
    \itemsep18pt
@@ -925,7 +927,7 @@ public class Example {
       \item Sie sind alle gleichmächtig\vspace*{-7.125\baselineskip}
    \end{itemize}\lstfs{10}
 \begin{layout-imageonly}
-\begin{columns}[onlytextwidth,c]
+\columns[onlytextwidth,t]
 \column{.43\linewidth}
 \begin{uncoverenv}<4->
 \begin{plainjava}
@@ -934,7 +936,6 @@ for(int i = 3; i < 8; i++) {
 }
 \end{plainjava}
 \end{uncoverenv}
-\onslide<7->{\itshape Anzahl bekannt}
 \column{.25\linewidth}
 \begin{uncoverenv}<5->
 \begin{plainjava}
@@ -945,7 +946,6 @@ while(i < 8) {
 }
 \end{plainjava}
 \end{uncoverenv}
-\onslide<8->{\itshape Kein Maximum}
 \column{.245\linewidth}
 \begin{uncoverenv}<6->
 \begin{plainjava}
@@ -956,8 +956,16 @@ do {
 } while(i < 8);
 \end{plainjava}
 \end{uncoverenv}
+\endcolumns
+\columns[onlytextwidth,c]
+   \column{.43\linewidth}
+\onslide<7->{\itshape Anzahl bekannt}
+\column{.25\linewidth}
+\onslide<8->{\itshape Kein Maximum}
+\column{.245\linewidth}
 \onslide<9->{\itshape Mindestens 1}
-\end{columns}\vspace*{-6.4\baselineskip}
+\endcolumns
+\vspace*{-6.4\baselineskip}
 \end{layout-imageonly}
 \begin{itemize}
    \itemsep5pt
@@ -977,7 +985,7 @@ do {
 \lstfs{8}\begin{columns}[onlytextwidth,T]
 \column{.65\linewidth}
 \begin{plainjava}
-// do-while
+// In eine do-while-Schleife
 int[] x = new int[]{17, 22, 13, 0};
 for(int i = 0; i < x.length - k; i += 1) {
     System.out.println(x[i]);
@@ -985,7 +993,7 @@ for(int i = 0; i < x.length - k; i += 1) {
 \end{plainjava}
 \column{.35\linewidth}
 \begin{plainjava}
-// for
+// In eine for-Schleife
 int i = 1;
 do {
     i *= k;
@@ -1012,7 +1020,7 @@ System.out.println(i);
 !*\onslide<4->*!for(int i = 0; i < x.length - k; i += 1)
 !*\onslide<4->*!    System.out.println(x[i]);
 \end{plainjava}
-\vspace*{-1.4\baselineskip}\par\null\qquad\paletteA{\faCaretDown}
+\vspace*{-1.4\baselineskip}\par\null\qquad{\color{lightgray}\faCaretDown}
 \begin{plainjava}
 !*\onslide<5->*!int[] x = new int[]{17, 22, 13, 0};
 !*\onslide<6->*!if(x.length - k <= 0) // Sonst keine Ausführung
@@ -1044,7 +1052,7 @@ do {
 } while(k >= 5);
 System.out.println(i);
 \end{plainjava}
-\vspace*{-1.15\baselineskip}\par\null\qquad\paletteA{\faCaretRight}
+\vspace*{-1.15\baselineskip}\par\null\qquad{\color{lightgray}\faCaretRight}
 \column{.6\linewidth}
 \begin{plainjava}
 !*\onslide<6->*!int i = 1; // Bedarf nach Schleife
@@ -1156,7 +1164,7 @@ System.out.println(i);
          \item Wir benötigen kein Objekt.
          \item In ihnen \say{gibt} es \textit{kein} \bjava{this}.
       \end{itemize}
-      \item Java sucht beim Aufruf eine Methode mit entsprechender Signatur. \begin{itemize}
+      \item Java sucht beim Aufruf eine (sichtbare \& gültige) Methode mit entsprechender Signatur. \begin{itemize}
          \item Implizite Typkonvertierung!
       \end{itemize}
       \item \textsb{Überladung}: Gleicher Name, unterschiedliche Signatur.
@@ -1171,12 +1179,12 @@ System.out.println(i);
       \item<3-> Aufruf: \say{Stack-Einträge} der Parameter werden \textit{kopiert}.
       \begin{itemize}
          \item<4-> Primitive Datentypen:\hfill call-by-\textit{value}
-         \item<5-> Komplexe Datentypen:\hfill call-by-\textit{reference}
+         \item<5-> Komplexe Datentypen:\hfill \say{call-by-\textit{reference}}
       \end{itemize}
-      \item<6-> Genau genommen hat Java nur \say{call-by-value}
-      \item<7-> \textsb{Seiteneffekt}: Wenn nach dem Aufruf mehr als der Rückgabewert verbleibt. \begin{itemize}
+      \item<6-> Genau genommen hat Java nur \say{call-by-value}\infoblock{Aber wir folgen mal der Terminologie der Vorlesung.}
+      \item<7-> \textsb{Seiteneffekt}: Wenn nach dem Aufruf Zustandsänderungen neben dem Rückgabewert verbleiben.\smallskip \begin{itemize}
          \item<8-> Instanzvariable verändert sich.
-         \item<9-> Durch Referenz wird ein Array modifiziert.
+         \item<9-> Durch Referenzen wird ein Array modifiziert.
          \item<10-> Eine Nachricht fliegt durchs Internet.
          \item<11-> \ldots
       \end{itemize}
@@ -1187,7 +1195,7 @@ System.out.println(i);
 \end{tikzpicture}
 \end{frame}
 
-\begin{frame}[fragile,c]{Varargs}
+\begin{frame}[fragile]{Varargs}
    \begin{itemize}[<+(1)->]
       \itemsep11pt
       \item Der letzte Parameter darf in Java ein \say{Vararg} sein.
@@ -1209,7 +1217,7 @@ System.out.println(i);
 
 \SidebarTask{Reverse}
 \begin{frame}[c]{Reverse}
-\flushleft\onslide<2->{Schreiben Sie eine Methode \bjava{static void reverse(int[]} \bjava{arr)} welche das übergebene Array umdreht, sodass das erste Elemente nun an letzter Stelle steht, das zweite an vorletzter Stelle,~\ldots\ und das letzte Element nun an erster Stelle steht.\par}
+\flushleft\onslide<2->{Schreiben Sie eine Methode \bjava{static void reverse(int[]} \bjava{arr)}, welche das übergebene Array umdreht, sodass das erste Elemente nun an letzter Stelle steht, das zweite an vorletzter Stelle,~\ldots\ und das letzte Element nun an erster Stelle steht.\par}
 \onslide<1->{\ShortSide}%
 \end{frame}
 \SidebarReset
@@ -1260,8 +1268,8 @@ System.out.println(i);
 \begin{frame}{Allgemein}
    \begin{itemize}[<+(1)->]
       \itemsep14pt
-      \item Objekte abstrahieren Daten und Verhalten.
-      \item Ermöglicht Wiederverwendung von Komponenten.
+      \item Objekte abstrahieren Daten und Verhalten
+      \item Ermöglicht Wiederverwendung von Komponenten
       \item Klassen definieren eine Blaupause: \begin{itemize}
          \item Welche Eigenschaften haben die Daten? \hfill \textsb{Attribute}
          \item Was kann mit den Daten gemacht werden? \hfill \textsb{Methoden}
@@ -1280,7 +1288,7 @@ System.out.println(i);
 \end{tikzpicture}}
 
 \newsavebox\pingunote
-\savebox\pingunote{\tikz\pingu[left wing wave,santa hat,cloak=paletteA!80!pingu@white,cloak cap=!hide,eyes wink,santa beard];}
+\savebox\pingunote{\tikz\pingu[left wing wave,cloak=paletteA!80!pingu@white,eyes wink];}
 \begin{frame}[fragile,c]{Klasse vs. Objekt}
    \begin{itemize}[<+(1)->]
       \itemsep7pt
@@ -1324,8 +1332,8 @@ name & \say{Saph}}}~}
 \begin{frame}{Der Konstruktor}
 \begin{itemize}[<+(1)->]
    \itemsep6pt
-   \item Erlaubt für Werte beim Erzeugen (\say{initialer Zustand}).
-   \item Ein Konstruktor ist \textit{keine} Methode.\vspace*{-\topsep}
+   \item Erlaubt für Werte beim Erzeugen (\say{initialer Zustand})
+   \item Ein Konstruktor ist \textit{keine} Methode\vspace*{-\topsep}
 \end{itemize}
 \begin{multicols}{2}
 \begin{itemize}[<+(1)->]
@@ -1438,19 +1446,43 @@ name & \say{Saph}}}~}
          \item Kein Objekt notwendig um Sie aufzurufen/abzugreifen.
          \item Keine Instanz- sondern Klassenvariablen.
       \end{itemize}
-      \item Die Frage lautet: Ist diese Eigenschaft allen Objekten gemein?
+      \item Die Frage~--- ob man etwas static machen soll~--- lautet:\\Ist diese Eigenschaft allen Objekten gemein?
    \end{itemize}
 \end{frame}
 
 
 \SidebarTask{Kameraszenario}
 \begin{frame}[c]{Kameraszenario}
-\onslide<2->{\footnotesize\flushleft Sie sehen das Grundgerüst einer Kameraklasse. Bearbeiten Sie die folgenden beiden Teilaufgaben,
-welche aufeinander aufbauen. Sie dürfen keine (Java-)Ausnahmen verwenden.
+\onslide<2->{\footnotesize\flushleft Sie sehen das Grundgerüst einer Kameraklasse. Sie dürfen für die Aufgabe keine (Java-)Ausnahmen verwenden.
 \begin{enumerate}
     \item Schreiben Sie einen leeren Konstruktor, welcher die von Java zugewiesenen Standardwerte explizit initialisiert. Dieser Konstruktor soll nicht von Code abseits der \bjava{Camera}-Klasse aufrufbar sein und so verhindern, dass weitere Kamera-Objekte erstellt werden können.
-    \item Erweitern Sie die Klasse nun in sofern, dass es immer maximal fünf Kamera-Objekte gibt, welche durch \bjava{get(int)} durch eine Zahl \(x \in \{0, 1, 2, 3, 4\}\) abgefragt werden können. Dabei soll ein Kamera-Objekt erst (mit ihrem vorher erzeugten Konstruktor) erzeugt werden, wenn es durch die Zahl angefragt wird. Weiter sollen Folgeanfragen mit der Zahl dasselbe Objekt zurückliefern. Geben Sie für \(x < 0\) und \(x \geq 5\) den Wert \bjava{null} zurück.
+    \item Erweitern Sie die Klasse nun in sofern, dass es immer maximal fünf Kamera-Objekte gibt, welche durch \bjava{get(int)} durch eine Zahl \(x \in \{0, 1, 2, 3, 4\}\) abgefragt werden können. Dabei soll ein Kamera-Objekt erst (mit Ihrem vorher erzeugten Konstruktor) erzeugt werden, wenn es durch die Zahl angefragt wird. Weiter sollen Folgeanfragen mit der Zahl dasselbe Objekt zurückliefern. Geben Sie für \(x < 0\) und \(x \geq 5\) den Wert \bjava{null} zurück.
 \end{enumerate}}
+\onslide<1->{\ShortSide}%
+\end{frame}
+\begin{frame}[fragile,c]{Kameraszenario\rhead{II}}
+\columns[c,onlytextwidth]
+\column{.5\linewidth}
+\begin{plainjava}
+!*\onslide<2->*!public final class Camera {
+!*\onslide<3->*!   private float x;
+!*\onslide<3->*!   private float y;
+!*\onslide<3->*!   private int z;
+!*\onslide<3->*!   private boolean recording;
+!*\onslide<3->*!   // :ldots:
+!*\onslide<2->*!}
+\end{plainjava}
+\column{.5\linewidth}
+\updateitemize{1.}%
+\begin{enumerate}
+   \item<4-> Leerer Konstruktor, der Standardwerte explizit zuweist und nicht von außerhalb aufrufbar sein soll.
+\end{enumerate}
+\endcolumns
+\updateitemize{1.}%
+\begin{enumerate}
+   \setcounter{enumi}{1}
+   \item<5-> Maximal fünf Kamera-Objekte (\(\{0, \ldots, 4\}\)) durch \bjava{get(int)}. Sollen erst erzeugt werden, wenn angefordert, illegale Werte sollen \bjava{null} liefern.
+\end{enumerate}
 \onslide<1->{\ShortSide}%
 \end{frame}
 \SidebarReset
@@ -1497,16 +1529,15 @@ welche aufeinander aufbauen. Sie dürfen keine (Java-)Ausnahmen verwenden.
 \begin{frame}{Sichtbarkeit \& Gültigkeit}
    \begin{itemize}[<+(1)->]
       \itemsep14pt
-      \item TODO: URGENT UPDATE THIS
-      \item Klassen, Methoden \& Attribute haben \textsb{Sichtbarkeiten} (Scope). \begin{itemize}
+      \item Klassen, Methoden \& Attribute haben \textsb{Sichtbarkeiten}. \begin{itemize}
          \item Sie können nur verwendet werden, wo sie sichtbar sind.
          \item Diese Sichtbarkeit wird durch \bjava{public}, \bjava{private},~\ldots\ kontrolliert.
       \end{itemize}
-      \item Daten (Variablen,~\ldots) haben einen \textsb{Gültigkeitsbereich}. \begin{itemize}
-         \item Solange sie vom Stack aus von Java erreichbar sind.
+      \item Variablen,~\ldots\ haben einen \textsb{Gültigkeitsbereich} (Scope). \begin{itemize}
+         \item So gibt es den Gültigkeitsbereich der Klasse und
+         \item Den lokalen Gültigkeitsbereich in Methoden, Blöcken,~\ldots
       \end{itemize}
-      \item Sichtbarkeits- \& Gültigkeitsbereiche überschneiden sich.
-      \item Eine Variable kann z.B. gültig, aber gerade durch Überschattung nicht sichtbar sein.
+      \item Eine Variable kann z.B. sichtbar, aber gerade durch Überschattung nicht gültig sein.
    \end{itemize}
 \end{frame}
 
@@ -1526,7 +1557,7 @@ welche aufeinander aufbauen. Sie dürfen keine (Java-)Ausnahmen verwenden.
 \begin{frame}[c]{Scopes}
    \begin{itemize}[<+(1)->]
       \itemsep13pt
-      \item Java erlaubt vier verschiedene Zugriffsmodifikatoren: \begin{itemize}
+      \item Java erlaubt vier verschiedene Sichtbarkeitsmodifikatoren: \begin{itemize}
          \item \textit{private:} Nur innerhalb der Klasse.
          \item \textit{protected:} Im gesamten Paket sowie allen Unterklassen.
          \item \textit{public:} Überall sichtbar wo Paket sichtbar.
@@ -1540,49 +1571,42 @@ welche aufeinander aufbauen. Sie dürfen keine (Java-)Ausnahmen verwenden.
 \begin{frame}[fragile,c]{Ein Scope Beispiel}
    \small\begin{itemize}[<+(1)->]
       \itemsep6pt
-   \item Es gibt vier Geltungsbereiche (\textit{engl.} scopes) für Variablen.\vspace*{-8\baselineskip}
+   \item Es gibt vier Sichtbarkeitsbereiche für Klassen, Attribute,~\ldots.\vspace*{-8\baselineskip}
 \begin{layout-imageonly}\lstfs{10}
 \begin{plainjava}[language=xJava]
-!*\onslide<3->*!|zws|public|zws| class Pinguin { // !*\solGet{comments}{\textbf{1.}}*! global
-!*\onslide<4->*!    !**!|zws|private|zws| int sozialversicherungsnummer; // !*\solGet{comments}{\textbf{2.}}*! Klasse
-!*\onslide<5->*!    !**!|zws|protected|zws| int watschelIndex; // !*\solGet{comments}{\textbf{3.}}*! geschützt
-!*\onslide<6->*!    !**!|zws|public|zws| void watschel() { /* ... */ } // !*\solGet{comments}{\textbf{4.}}*! (erneut: global)
-!*\onslide<7->*!    void piepsen() { /* ... */ } // !*\solGet{comments}{\textbf{5.}}*! Standard: Paket
+!*\onslide<3->*!|zws|public|zws| class Person { // !*\solGet{comments}{\textbf{1.}}*! global
+!*\onslide<4->*!    !**!|zws|private|zws| int alter; // !*\solGet{comments}{\textbf{2.}}*! Klasse
+!*\onslide<5->*!    !**!|zws|protected|zws| int gewicht; // !*\solGet{comments}{\textbf{3.}}*! geschützt
+!*\onslide<6->*!    !**!|zws|public|zws| void schlafe() { /* ... */ } // !*\solGet{comments}{\textbf{4.}}*! (erneut: global)
+!*\onslide<7->*!    void esse() { /* ... */ } // !*\solGet{comments}{\textbf{5.}}*! Standard: Paket
 !*\onslide<3->*!}
 \end{plainjava}\vspace*{-8.66\baselineskip}
 \end{layout-imageonly}
-\item<8-> [TODO: Update this]Die Klasse \bjava{Tiger} sei im selben, \bjava{Auto} sei in einem anderen Paket, \bjava{Felspingu} erbe von \bjava{Pinguin} aber sei in einem anderem Paket: \medskip\par
-\hspace*{-5em}\hfill\onslide<9->{\def\y{\faCheckSquareO}\def\n{\hspace*{-1pt}\faSquareO}\scriptsize\begin{minipage}{.5\linewidth}
+\item<8-> Die Klasse \bjava{Tier} sei im selben, \bjava{Haus} sei in einem anderen Paket: \medskip\par
+\onslide<9->{\def\y{\faCheckSquareO}\def\n{\hspace*{-1pt}\faSquareO}\scriptsize\begin{minipage}{.5\linewidth}
 \begin{tabular}{p{6em}ccccc}
    \toprule
                   & 1 & 2 & 3 & 4 & 5 \\
 \midrule
-      \T{Pinguin} & \y & \y & \y & \y & \y \\
-      \T{Tiger}   & \y & \n & \y & \y & \y \\
+      \T{Person} & \y & \y & \y & \y & \y \\
+      \T{Tier}   & \y & \n & \y & \y & \y \\
+      \T{Hause}  & \y & \n & \n & \y & \n \\
 \bottomrule
 \end{tabular}
-\end{minipage}\hspace*{5em}\begin{minipage}{.5\linewidth}
-\begin{tabular}{p{6em}ccccc}
-      \toprule
-                  & 1 & 2 & 3 & 4 & 5 \\
-\midrule
-      \T{Auto} & \y & \n & \n & \y & \n \\
-      \T{Felspingu} & \y & \n & \y & \y & \n \\
-\bottomrule
-\end{tabular}
-\end{minipage}\hfill}
+\end{minipage}}
 \end{itemize}
 \end{frame}
 
 \subsection{Ausnahmen}
+{\def\t#1{\hfill\textcolor{gray}{\itshape#1}}
 \begin{frame}{Fehlerbehandlung}
    \begin{itemize}[<+(1)->]
       \itemsep8pt
-      \item Wenn irgendetwas schief geht, wirft Java eine Ausnahme.
+      \item Wenn irgendetwas schief geht, wirft Java eine Ausnahme
       \item Wir unterscheiden drei Arten: \begin{itemize}
          \item \textsb{Error:} Katastrophe, zum Beispiel kein Speicher. Kaum behandelbar.
-         \item \textsb{RuntimeException:} Vorhersehbar, aber nun schwer behandelbar (wie ein negativer Array-Index,~\ldots).
-         \item \textsb{Exception:} Schwer vorhersehbare Ausnahme (wie Datei nicht gefunden,~\ldots).
+         \item \textsb{RuntimeException:} Vorhersehbar, aber nun schwer behandelbar (wie ein negativer Array-Index,~\ldots).\t{unchecked}
+         \item \textsb{Exception:} Schwer vorhersehbare Ausnahme (wie Datei nicht gefunden,~\ldots).\t{checked}
       \end{itemize}
       \item Normale \say{Exceptions} \emph{müssen} in Java: \begin{itemize}
          \item Behandelt werden (\bjava{try-catch}), oder
@@ -1591,10 +1615,25 @@ welche aufeinander aufbauen. Sie dürfen keine (Java-)Ausnahmen verwenden.
    \end{itemize}
 \end{frame}
 
+\begin{frame}[c]{Klassische Fehler}
+   \begin{itemize}
+      \itemsep10pt
+      \item<2-> \link{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/NullPointerException.html}{\solGet{keywordC}{NullPointerException}}\onslide<3->{\t{unchecked}
+      \infoblock{Wir verwenden \T{null} wo ein Objekt gebraucht wird.}}
+      \item<4-> \link{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/ArithmeticException.html}{\solGet{keywordC}{ArithmeticException}}\onslide<5->{\t{unchecked}
+      \infoblock{Verbotene Rechenoperation wie Teilen einer Ganzzahl durch \(0\).}}
+      \item<6-> \link{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/FileNotFoundException.html}{\solGet{keywordC}{FileNotFoundException}}\onslide<7->{\t{checked}\infoblock{Der gegebene Pfad liefert keine Datei!}}
+      \item \link{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/StackOverflowError.html}{\solGet{keywordC}{StackOverflowError}}
+      \item \solGet{keywordC}{IllegalArgumentException}
+      \item \solGet{keywordC}{ArrayIndexOutOfBoundsException}
+   \end{itemize}
+\end{frame}
+}
+
 \begin{frame}[c]{Eskalationsfreude}
    \begin{itemize}[<+(1)->]
       \itemsep10pt
-      \item Eine Ausnahme unterbricht den Programmfluss.
+      \item Eine Ausnahme unterbricht den Programmfluss
       \item Wird sie nicht direkt behandelt, eskaliert die Ausnahme den \say{Call-Stack} hinauf.
       \item Was über die \bjava{main}-Methode eskaliert wird von der JVM abgefangen und beendet das Programm.
       \item Ausnahmen sollten in Java aber nicht zur Werterückgabe verwendet werden.
@@ -1604,7 +1643,7 @@ welche aufeinander aufbauen. Sie dürfen keine (Java-)Ausnahmen verwenden.
 
 \SidebarTask{Fehler finden}
 \begin{frame}[c]{Fehler finden}
-\onslide<2->{\footnotesize\flushleft Im Code [TODO: update this and update enumerate and make small sheet with code]finden sich \textsb{10 Fehler}, welche vom Java-Compiler erkannt werden.
+\onslide<2->{\footnotesize\flushleft Im Code finden sich \textsb{10 Fehler}, welche vom Java-Compiler erkannt werden.
 Identifizieren Sie \textsb{acht} dieser Fehler durch \begin{enumerate}
     \item die Angabe der Code-Zeilennummer und
     \item eine kurze Erklärung, was den Fehler verursacht.
@@ -1612,6 +1651,50 @@ Identifizieren Sie \textsb{acht} dieser Fehler durch \begin{enumerate}
 \flushleft Tragen Sie die Informationen in die Tabelle ein.
 Wenn Sie mehrere Fehler in einer Code-Zeile finden, tragen sie diese separat ein~--- die zusätzlichen Zeilen existieren dabei nur, um Ihnen eine Selbstkorrektur zu ermöglichen.
 Folgefehler zählen dabei nicht als separate Fehler. Wird also beispielsweise ein Bezeichner inkorrekt initialisiert, so zählt nicht jede Verwendung als zusätzlicher Fehler sondern nur die inkorrekte Initialisierung.\par}
+\onslide<1->{\ShortSide}%
+\end{frame}
+\begin{frame}[fragile,c]{Fehler finden\rhead{II}}
+\lstfs{8}\vspace*{-4mm}%
+% \begin{layout-full}
+% \end{layout-full}
+\lstset{lineskip=0.5pt}\soldisablenumhl
+\begin{plainvoid}[numbers=left,numbersep=6pt,multicols=2,numberstyle=\scriptsize\color{black}]
+public class iDoGood {
+  final void i = 0x7;
+  private final String omega = "Sunshine";
+
+  static int iMultiply(final char x, double y) {
+    return x * y;
+  }
+
+  public IDoGood(String dromeda) {
+    this.omega = dromeda;
+  }
+
+  static int double(byte i) {
+    return 2 * ++i;
+  }
+
+  private iDoGood() {
+    this(andromeda);
+  }
+
+  private boolean iDoGood() {
+    if(this.omega.equals("i"));
+    int i = 0 // /** // **/ /* ;
+    for(;i < 2_00;i++, i += 2)
+     System.Err.println(i);
+    return false /** // */ ;
+  }
+
+  static class iDoBetta {
+    global doBetta() {
+      iDoGood gud = iDoGood();
+      System.out.println(gud.omega);
+    }
+  }
+}
+\end{plainvoid}
 \onslide<1->{\ShortSide}%
 \end{frame}
 \SidebarReset
@@ -1636,7 +1719,7 @@ Folgefehler zählen dabei nicht als separate Fehler. Wird also beispielsweise ei
       \item[6.] \textit{Zeile 18}:\quad \bjava{andromeda} ist in \bjava{iDoGood()} keine Variable.
       \item[7.] \textit{Zeile 23}:\quad Hier fehlt das Semikolon, es ist\\\qquad auskommentiert.
       \item[8.] \textit{Zeile 25}:\quad \bjava{System.Err} existiert nur kleingeschrieben als\\\qquad\bjava{System.err}.
-      \item[9.] \textit{Zeile 30}:\quad \bjava{global} ist in Java kein gültiges\\\qquad Methoden-Präfix.
+      \item[9.] \textit{Zeile 30}:\quad \bjava{global} ist in Java kein gültiges Methoden-\\\qquad Präfix.
       \item[10.] \textit{Zeile 31}:\quad \bjava{iDoGood} ist ein Konstruktor und kann nur mit\\\qquad\bjava{new} aufgerufen werden (die \bjava{boolean}-Methode\\\qquad bräuchte ein Objekt).
    \end{enumerate}
 \end{frame}
@@ -1656,7 +1739,7 @@ Folgefehler zählen dabei nicht als separate Fehler. Wird also beispielsweise ei
       \item \bjava{this} erlaubt Aufruf von Überladungen.
    \end{itemize}
    \item Klassen, Methoden,~\ldots:\hfill \textsb{Sichtbarkeit}  (\bjava{public},~\ldots)
-   \item \textsb{Gültigkeit}sbereich: Wo die Daten \say{existieren}.
+   \item \textsb{Gültigkeit}sbereich: Wo die Variablen \say{deklariert sind}.
 \end{itemize}
 \LargeSide
 \end{frame}
@@ -1672,13 +1755,12 @@ Folgefehler zählen dabei nicht als separate Fehler. Wird also beispielsweise ei
 \begin{frame}
    TODO: die 3. Präsenzaufagbe als Wert 0 und 2. anstelle KAchellland
 
-   TODO: improve embedding
-
    TODO: Weihnachtswiederholung referenzieren
    TODO: outro
    TODO: iffull--false should just reveal the short compat repeat slides without their side banners!
 
-   TODO: doch das mit den Begriffen i guess
+
+   TODO: exceptions (Beispiele vorstellen, Baum machen)
 \end{frame}
 
 \iffull
