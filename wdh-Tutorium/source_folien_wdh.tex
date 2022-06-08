@@ -16,7 +16,7 @@
 \DefinePalette{Recap}{Hellblau,hellbläulich: RGB(21, 110, 130)}
 {Hellblau,hellbläulich: RGB(21, 110, 130)}{Blau,bläulich: RGB(51, 93, 126)}{Grün,grünlich: RGB(21, 150, 90)}
 \UsePalette{Recap}
-\fancyulcolor{paletteA!50!white}
+\fancyulcolor{paletteA!40!white}
 \let\sbseries\sbfamily
 \SetColorProfile*{paletteA}{paletteC}{paletteD}
 \def\PostTitlepage{\begin{tikzpicture}[@O]
@@ -1452,7 +1452,7 @@ name & \say{Saph}}}~}
 \end{frame}
 \SidebarReset
 \SidebarSolution
-\begin{frame}[fragile,c]{Mein kleiner Algorithmus}
+\begin{frame}[fragile,c]{Eine Klasse entsteht}
 \only<2-12|handout:1> {1.~Klasse \T{BinaerUmwandler} mit privaten Instanzvariablen\smallskip\\
 \onslide<5-12|handout:1> {2.~Getter und Setter}}
 \only<13-|handout:2> {3.~\bjava{BinaerUmwandler()} und \bjava{BinaerUmwandler(String)}}
@@ -1487,8 +1487,8 @@ name & \say{Saph}}}~}
 /*\onslide<17->*/      this.binary = binary;
 /*\onslide<16->*/   }
 /*\onslide<18->*/   public BinaerUmwandler() {
-/*\onslide<19^->*/      this.binary = null;
-/*\onslide<19^->*/      this.decimal = 0L;
+/*\onslide<19->*/      this.binary = null;
+/*\onslide<19->*/      this.decimal = 0L;
 /*\onslide<18->*/   }
 /*\onslide<14->*/|ihl|}|ihl|
 \end{minted}
@@ -1496,13 +1496,12 @@ name & \say{Saph}}}~}
 \end{frame}
 \SidebarReset
 
-
 \SidebarTask{Die Algorithmenklasse, 2}
 \begin{frame}[c]{Die Algorithmenklasse\rhead{II}}
 \onslide<2->{%
 \updateitemize{1.}\begin{enumerate}[<+(1)->]
    \setcounter{enumi}{3}
-   \item Implementieren Sie Ihren Algorithms aus \TaskRef{Ein Algorithmenentwurf} als die statische Funktion \bjava{long binZuDez(String binary)}:\medskip
+   \item Implementieren Sie Ihren Algorithms aus \TaskRef{Ein Algorithmenentwurf} als die statische Funktion \bjava{long binZuDez(String binary)}:\medskip\par
    \begin{algorithm}[H]
 \PreCode
     \KwIn{binary string \(b\)}
@@ -1523,25 +1522,79 @@ name & \say{Saph}}}~}
 
 \SidebarSolution
 \begin{frame}[fragile,c]{Mein kleiner Algorithmus}
-\only<2-|handout:1> {4.~Algorithmus implementieren}
+\only<2-|handout:1>{4.~Algorithmus implementieren\only<handout:0>{\smallskip\\}}
+\only<12-|handout:2>{5.~Anpassen von Setter \& Konstruktor}
 \medskip
 \SetupLstHl
-\begin{onlyenv}<3-|handout:0>
+\begin{tikzpicture}[@O]
+   \node[below left,text width=.7\linewidth,scale=.65] at (current page.north east) {\begin{algorithm}[H]
+\PreCode
+    \KwIn{binary string \(b\)}
+\StartCode
+    \(N \gets \text{length of }b\)\;
+    \(d \gets 0\)\;
+    \For{\(i \gets 1\) \KwTo~\KwSty{inclusive} \(N\) \tikzmarknode{@-main}{\KwStep} \(1\)} {
+       \(d \gets d + \tikzmarknode{@-b}{b_i} \cdot 2^{N - i}\)\;
+    }
+    \KwRet \(d\)\;
+\end{algorithm}};
+\end{tikzpicture}
+\begin{onlyenv}<3|handout:0>
 \begin{minted}[escapeinside={/*}{*/}]{java}
-/*\onslide<2->*/|ihl|public class BinaerUmwandler {|ihl|
-/*\onslide<2->*/   |ihl|private String binary;|ihl|
-/*\onslide<2->*/   |ihl|private long decimal;|ihl|
-/*\onslide<2->*/   |ihl|...|ihl|
-public static long binZuDez(String binary) {
-   int n = binary.length();
-   long d = 0;
-   for(int i = 0; i < N; i++) {
-      d += binary.charAt(i) * Math.pow(2, N-i);
-   }
-}
-/*\onslide<2->*/|ihl|}|ihl|
+/*\onslide<3->*/|ihl|public class BinaerUmwandler {|ihl|
+/*\onslide<3->*/   |ihl|private String binary;|ihl|
+/*\onslide<3->*/   |ihl|private long decimal;|ihl|
+/*\onslide<3->*/   |ihl|...|ihl|
+/*\onslide<3->*/   public BinaerUmwandler(String binary) {
+/*\onslide<3->*/      this();
+/*\onslide<3->*/      this.binary = binary;
+/*\onslide<3->*/   }
+/*\onslide<3->*/   public BinaerUmwandler() {
+/*\onslide<3->*/      this.binary = null;
+/*\onslide<3->*/      this.decimal = 0L;
+/*\onslide<3->*/   }
+/*\onslide<3->*/|ihl|}|ihl|
 \end{minted}
 \end{onlyenv}
+\begin{onlyenv}<4-10|handout:1>
+\begin{minted}[escapeinside={/*}{*/}]{java}
+/*\onslide<4->*/|ihl|public class BinaerUmwandler {|ihl|
+/*\onslide<4->*/   |ihl|private String binary;|ihl|
+/*\onslide<4->*/   |ihl|private long decimal;|ihl|
+/*\onslide<4->*/   |ihl|...|ihl|
+/*\onslide<5->*/   public static long binZuDez(String binary) {
+/*\onslide<6->*/      int n = binary.length();
+/*\onslide<7->*/      long d = 0;
+/*\onslide<8->*/      for(int i = 1; i <= n; i++) {
+/*\onslide<9->*/         int bi = binary.charAt(i - 1) == '1' ? 1 : 0;
+/*\onslide<9->*/         d += bi * Math.pow(2, n - i);
+/*\onslide<8->*/      }
+/*\onslide<10->*/      return d;
+/*\onslide<5->*/   }
+/*\onslide<4->*/|ihl|}|ihl|
+\end{minted}
+\end{onlyenv}
+\begin{onlyenv}<12-|handout:2>
+\begin{minted}[escapeinside={/*}{*/}]{java}
+/*\onslide<12->*/|ihl|public class BinaerUmwandler {|ihl|
+/*\onslide<12->*/   |ihl|private String binary;|ihl|
+/*\onslide<12->*/   |ihl|private long decimal;|ihl|
+/*\onslide<12->*/   |ihl|...|ihl|
+/*\onslide<12->*/   |ihl|public static long binZuDez(String binary);|ihl|
+/*\onslide<13->*/   public void setBinary(String binary) {
+/*\onslide<14->*/      this.binary = binary;
+/*\onslide<14->*/      this.decimal = binZuDez(binary);
+/*\onslide<13->*/   }
+/*\onslide<13->*/
+/*\onslide<15->*/   public BinaerUmwandler(String binary) {
+/*\onslide<16->*/      setBinary(binary);
+/*\onslide<15->*/   }
+/*\onslide<12->*/|ihl|}|ihl|
+\end{minted}
+\end{onlyenv}
+\begin{tikzpicture}[@O]
+   \onslide<11-|handout:1>{\node[above left=.5cm,yshift=.9cm,T,align=right] at(current page.south east) {Alternativ auch \T{int bi = binary.charAT(i) - '0';}.\\Die \T{i - 1} brauchen wir, da im Pseudocode \T{i = 1} gilt,\\Java aber mit 0 indiziert.};}
+\end{tikzpicture}
 \end{frame}
 \SidebarReset
 
@@ -1750,6 +1803,58 @@ public static long binZuDez(String binary) {
    \end{itemize}
 \end{frame}
 
+\SidebarTask{Die Algorithmenklasse, 3}
+\begin{frame}[c]{Die Algorithmenklasse\rhead{III}}
+\onslide<2->{Nehmen Sie ihren Code aus \TaskRef{Die Algorithmenklasse, 2} als Basis.\smallskip%
+\updateitemize{1.}\begin{enumerate}[<+(1)->]
+   \setcounter{enumi}{5}
+   \itemsep5pt
+   \item Sichern Sie ihre Klasse so ab, dass \bjava{NullPointerException}s \say{sinnvoll} abgefangen werden.
+   \item Legen Sie eine Klasse \T{BinaerHaupt} an und schreiben sie eine Programmeinstiegsmethode, welche ein \T{BinaerUmwandler}-Objekt erzeugt und die errechnete Dezimalzahl ausgibt.
+\end{enumerate}}
+\onslide<1->{\ShortSide}%
+\end{frame}
+\SidebarReset
+
+
+\SidebarSolution
+\begin{frame}[fragile, c]{Nullen-Sichern}
+\only<2-|handout:1>{6.~Gesicherte Fehlermeldungen\only<handout:0>{\smallskip\\}}
+\only<8-|handout:2>{7.~Die Hauptklasse \T{BinaerHaupt}}
+\SetupLstHl
+\begin{onlyenv}<3-7|handout:1>
+\begin{minted}[escapeinside={/*}{*/}]{java}
+/*\onslide<3->*/|ihl|public class BinaerUmwandler {|ihl|
+/*\onslide<3->*/   |ihl|private String binary;|ihl|
+/*\onslide<3->*/   |ihl|private long decimal;|ihl|
+/*\onslide<3->*/   |ihl|...|ihl|
+/*\onslide<4->*/   public static long binZuDez(String binary) {
+/*\onslide<5->*/      try {
+/*\onslide<6->*/         |ihl|...|ihl|
+/*\onslide<5->*/      } catch(NullPointerException ex) {
+/*\onslide<7->*/         ex.printStackTrace();
+/*\onslide<7->*/         return -1; // "sinnvoll"
+/*\onslide<5->*/      }
+/*\onslide<4->*/   }
+/*\onslide<3->*/|ihl|}|ihl|
+\end{minted}
+\end{onlyenv}
+\begin{onlyenv}<8-|handout:2>
+\begin{minted}[escapeinside={/*}{*/}]{java}
+/*\onslide<9->*/public class BinaerHaupt {
+/*\onslide<10->*/   public static void main(String[] args) {
+/*\onslide<11->*/      BinaerUmwandler binieee = new BinaerUmwandler("10101");
+/*\onslide<12->*/      System.out.println(binieee.getDecimal());
+/*\onslide<13->*/      System.out.println(BinaerUmwandler.binZuDez(null));
+/*\onslide<10->*/   }
+/*\onslide<9->*/}/*\onslide<1->*/
+\end{minted}
+\end{onlyenv}
+\begin{itemize}
+   \item<14-> Die Klassen finden sich dann hier: \only<14->{\textattachfile{\curpath BinaerUmwandler.java}{BinaerUmwandler.java}} und \only<14->{\textattachfile{\curpath BinaerHaupt.java}{BinaerHaupt.java}}.
+\end{itemize}
+\end{frame}
+\SidebarReset
 
 \SidebarTask{Fehler finden}
 \begin{frame}[c]{Fehler finden}
