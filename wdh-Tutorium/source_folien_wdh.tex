@@ -16,6 +16,7 @@
 \DefinePalette{Recap}{Hellblau,hellbläulich: RGB(21, 110, 130)}
 {Hellblau,hellbläulich: RGB(21, 110, 130)}{Blau,bläulich: RGB(51, 93, 126)}{Grün,grünlich: RGB(21, 150, 90)}
 \UsePalette{Recap}
+\fancyulcolor{paletteA}
 \let\sbseries\sbfamily
 \SetColorProfile*{paletteA}{paletteC}{paletteD}
 \def\PostTitlepage{\begin{tikzpicture}[@O]
@@ -1152,7 +1153,7 @@ System.out.println(i);
 !*\onslide<4->*!}
 \end{plainjava}
    \begin{itemize}
-      \item<6-> \textsb{Verboten}, da nicht jeder Ausführungspfad \bjava{int} liefert.
+      \item<6-> \textsb{Verboten}, da nicht jeder Ausführungspfad \bjava{int} liefert
    \end{itemize}
 \end{frame}
 
@@ -1249,7 +1250,7 @@ System.out.println(i);
       \item Müssen zudem in selber Klasse sein (später: Vererbung)
    \end{itemize}
    \item Beim Aufruf macht Java call-by-value: \begin{itemize}
-      \item Alle Parameter werden kopiert (Stack).
+      \item Alle Parameter werden kopiert (Stack)
    \end{itemize}
 \end{itemize}
 \LargeSide
@@ -1562,10 +1563,10 @@ name & \say{Saph}}}~}
    \begin{itemize}[<+(1)->]
       \itemsep13pt
       \item Java erlaubt vier verschiedene Sichtbarkeitsmodifikatoren: \begin{itemize}
-         \item \textit{private:} Nur innerhalb der Klasse.
-         \item \textit{protected:} Im gesamten Paket sowie allen Unterklassen.
-         \item \textit{public:} Überall sichtbar wo Paket sichtbar.
-         \item \textit{\say{default}:} Überall im Paket.
+         \item \textit{private:} Nur innerhalb der Klasse
+         \item \textit{protected:} Im gesamten Paket sowie allen Unterklassen
+         \item \textit{public:} Überall sichtbar wo Paket sichtbar
+         \item \textit{\say{default}:} Überall im Paket
      \end{itemize}
      \item \textit{Hinweis:} Objekte einer Klasse können auf private Elemente anderer Objekte der gleichen Klasse zugreifen.
    \end{itemize}
@@ -1637,7 +1638,7 @@ name & \say{Saph}}}~}
    \begin{itemize}[<+(1)->]
       \itemsep10pt
       \item Eine Ausnahme unterbricht den Programmfluss
-      \item Wird sie nicht direkt behandelt, eskaliert die Ausnahme den \say{Call-Stack} hinauf.
+      \item Wird sie nicht direkt behandelt, eskaliert die Ausnahme den \say{Call-Stack} hinauf
       \item Was über die \bjava{main}-Methode eskaliert wird von der JVM abgefangen und beendet das Programm.
       \item Ausnahmen sollten in Java aber nicht zur Werterückgabe verwendet werden.
    \end{itemize}
@@ -1720,9 +1721,9 @@ public class iDoGood {
    \begin{enumerate}[<+(1)->]
       \itemsep9.25pt
       \item[6.] \textit{Zeile 18}:\quad \bjava{andromeda} ist in \bjava{iDoGood()} keine Variable.
-      \item[7.] \textit{Zeile 23}:\quad Hier fehlt das Semikolon, es ist\\\qquad auskommentiert.
+      \item[7.] \textit{Zeile 23}:\quad Fehlendes fehlt Semikolon (auskommentiert).
       \item[8.] \textit{Zeile 25}:\quad \bjava{System.Err} existiert nur kleingeschrieben als\\\qquad\bjava{System.err}.
-      \item[9.] \textit{Zeile 30}:\quad \bjava{global} ist in Java kein gültiges Methoden-\\\qquad Präfix.
+      \item[9.] \textit{Zeile 30}:\quad \bjava{global} ist in Java kein gültiger Methoden-\\\qquad Modifikator.
       \item[10.] \textit{Zeile 31}:\quad \bjava{iDoGood} ist ein Konstruktor und kann nur mit\\\qquad\bjava{new} aufgerufen werden (die \bjava{boolean}-Methode\\\qquad bräuchte ein Objekt).
    \end{enumerate}
 \end{frame}
@@ -1732,14 +1733,14 @@ public class iDoGood {
 \begin{frame}[c]{\paletteA{\sbfamily Kurzgesagt}\hfill OOP}
 \begin{itemize}[<+(1)->]
    \itemsep18pt
-   \item Eine Klasse definiert die Blaupause für Objekte. \begin{itemize}
-      \item Attribute definieren den Zustand.
-      \item Methoden definieren den Verhalten.
+   \item Eine Klasse definiert die Blaupause für Objekte \begin{itemize}
+      \item Attribute definieren den Zustand
+      \item Methoden definieren den Verhalten
    \end{itemize}
    \item Der Konstruktor baut den initialen Zustand \begin{itemize}
-      \item \textsb{Instanziierung}: Erzeugen eines neuen Objektes.
-      \item Wenn keiner: erzeugt Java den leeren Standardkonstruktor.
-      \item \bjava{this} erlaubt Aufruf von Überladungen.
+      \item \textsb{Instanziierung}: Erzeugen eines neuen Objektes
+      \item Wenn keiner: erzeugt Java den leeren Standardkonstruktor
+      \item \bjava{this} erlaubt Aufruf von überladenen Konstruktoren
    \end{itemize}
    \item Klassen, Methoden,~\ldots:\hfill \textsb{Sichtbarkeit}  (\bjava{public},~\ldots)
    \item \textsb{Gültigkeit}sbereich: Wo die Variablen \say{deklariert sind}.
