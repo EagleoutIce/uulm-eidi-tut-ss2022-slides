@@ -232,7 +232,7 @@ Given \(z = (z_1,\ldots, z_n)\), \(z_i \in \N\) \\
 \subsection{Eigenschaften}
 \begin{frame}{What can we say about an Algorithm?}
    \vfill
-   \centerline{\onslide<2->{\Large\bfseries\only<3->{\color{gray}\sbseries Totale Korrektheit} }}
+   \onslide<2->{\centerline{\Large\bfseries\color{gray}\sbseries Totale Korrektheit}}
    \vfill
    \updateitemize{1.}% faker
    \begin{enumerate}
@@ -376,8 +376,8 @@ public static long L(int n) {
 \end{center}
 \end{layout-full}
 \begin{tikzpicture}[@O]
-   \node[above right,scale=.65] (@) at(current page.south west) {\copy\pinguA};
-   \node[T,right,yshift=-6mm,xshift=2mm,align=left] at(@.north east) {Wer determiniert ist, möchte sein Ziel um jeden Preis erreichen\\auf \say{egal welcher Weg}.};
+   \onslide<11->{\node[above right,scale=.65] (@) at(current page.south west) {\copy\pinguA};
+   \node[T,right,yshift=-6mm,xshift=2mm,align=left] at(@.north east) {Wer determiniert ist, möchte sein Ziel um jeden Preis erreichen\\auf \say{egal welcher Weg}.};}
 \end{tikzpicture}
 \end{frame}
 
@@ -387,13 +387,13 @@ public static long L(int n) {
 \onslide<2->{Entwerfen Sie einen Algorithmus als Pseudocode, der einen Binärstring $b$ in die entsprechende Dezimalzahl $d$ umwandelt. Diese finden Sie folgendermaßen: \begin{equation*}
    d = \sum_{i = 1}^N b_i2^{N - i}
 \end{equation*}
-Dabei ist \(b_i\) der \(i\)-te Eintrag des Strings. Für \(b = \text{\T{1001}}\) gilt damit: \begin{equation*}
+\onslide<3->{Dabei ist \(b_i\) der \(i\)-te Eintrag des Strings. Für \(b = \text{\T{1001}}\) gilt damit: \begin{equation*}
    \tikzmarknode{@1}{1 \cdot {\color{gray}2^{4 - 1}}} + \tikzmarknode{@2}{0 \cdot {\color{gray}2^{4 - 2}}} + \tikzmarknode{@3}{0 \cdot {\color{gray}2^{4 - 3}}} + \tikzmarknode{@4}{1 \cdot {\color{gray}2^{4 - 4}}} = 9
 \end{equation*}\vspace*{-1mm}\par
-Wobei hier \(N = 4\).}
+Wobei hier \(N = 4\).}}
 \begin{tikzpicture}[@O]
    % macro? pffffh
-   \onslide<2->{\draw[decoration=brace,decorate] ([yshift=-1mm]@1.south east) to[edge node={node[below=1mm] {8}}] ([yshift=-1mm]@1.south west);
+   \onslide<3->{\draw[decoration=brace,decorate] ([yshift=-1mm]@1.south east) to[edge node={node[below=1mm] {8}}] ([yshift=-1mm]@1.south west);
    \draw[decoration=brace,decorate] ([yshift=-1mm]@2.south east) to[edge node={node[below=1mm] {0}}] ([yshift=-1mm]@2.south west);
    \draw[decoration=brace,decorate] ([yshift=-1mm]@3.south east) to[edge node={node[below=1mm] {0}}] ([yshift=-1mm]@3.south west);
    \draw[decoration=brace,decorate] ([yshift=-1mm]@4.south east) to[edge node={node[below=1mm] {1}}] ([yshift=-1mm]@4.south west);}
@@ -499,8 +499,8 @@ Wobei hier \(N = 4\).}
    \onslide<11->{\draw[T,-Kite] (assign.south) to[bend right] ++(.2,-.4) node[right=-.6mm,align=left] {\compl{\color{lightgray}1}};}
 \end{tikzpicture}
 \end{frame}
-\SidebarReset
 }
+\SidebarReset
 
 \subsection{Recap}
 \begin{frame}[c]{\paletteA{\sbfamily Kurzgesagt}\hfill Algorithmen}
@@ -583,10 +583,10 @@ Wobei hier \(N = 4\).}
 \onslide<2->{\flushleft Bestimmen Sie für jeden der folgenden Java-Ausdrücke den Typ \textit{jedes Teilausdrucks}, sowie das Gesamtergebnis. Sie dürfen Rundungsprobleme der Sprache ignorieren:\vfill
 \begin{itemize}
    \itemsep10pt
-   \item \bjava{14 - 3D * 2 / 12}
-   \item \bjava{(char) ((byte) 'a' + 3) + " Sonne"}
-   \item \bjava{14 - 2 + (3 > 9 || true ^ false ? "Hallo" : "Welt")}
-   \item \bjava{7/2 - 3 * (float) 2.5 + 2f}
+   \item<3-> \bjava{14 - 3D * 2 / 12}
+   \item<3-> \bjava{(char) ((byte) 'a' + 3) + " Sonne"}
+   \item<3-> \bjava{14 - 2 + (3 > 9 || true ^ false ? "Hallo" : "Welt")}
+   \item<3-> \bjava{7/2 - 3 * (float) 2.5 + 2f}
 \end{itemize}}
 \onslide<1->{\ShortSide}%
 \end{frame}
@@ -864,9 +864,9 @@ public class Example {
 \begin{center}
    \bjava{if(X) Y else Z}
 \end{center}
-   \item Der Sonst-Fall (\bjava{ else Z}) ist optional.
-   \item Wir können \bjava{Y} und \bjava{Z} durch einen Code-Block aus mehreren Zeilen bestehen lassen.
-   \item Wir können die Ausdrücke verschachteln.
+   \item Der Sonst-Fall (\bjava{ else Z}) ist optional
+   \item Wir können \bjava{Y} und \bjava{Z} durch einen Code-Block aus mehreren Zeilen bestehen lassen
+   \item Wir können die Ausdrücke verschachteln
 \end{itemize}
 \end{frame}
 
@@ -983,25 +983,25 @@ do {
 \SidebarTask{Schleifen umwandeln}
 \begin{frame}[fragile,c]{Schleifen umwandeln}
 \begin{uncoverenv}<2->
-\flushleft Im Folgenden finden Sie zwei Code-Ausschnitte. Schreiben Sie diese so um, dass sie nur noch Schleifen der angegebenen Art verwenden, ohne dass sich das Verhalten des Codes verändert. Dabei repräsentiert \bjava{k} eine natürliche Zahl (exklusive \(0\)), welche Sie nicht kennen.
+\flushleft Im Folgenden finden Sie zwei Code-Ausschnitte. Schreiben Sie diese so um, dass sie nur noch Schleifen der angegebenen Art verwenden, ohne dass sich das Verhalten des Codes verändert. \onslide<3->{Dabei repräsentiert \bjava{k} eine natürliche Zahl (exklusive \(0\)), welche Sie nicht kennen.}
 \lstfs{8}\begin{columns}[onlytextwidth,T]
 \column{.65\linewidth}
 \begin{plainjava}
-// In eine do-while-Schleife
-int[] x = new int[]{17, 22, 13, 0};
-for(int i = 0; i < x.length - k; i += 1) {
-    System.out.println(x[i]);
-}
+!*\onslide<4->*!// In eine do-while-Schleife
+!*\onslide<4->*!int[] x = new int[]{17, 22, 13, 0};
+!*\onslide<4->*!for(int i = 0; i < x.length - k; i += 1) {
+!*\onslide<4->*!    System.out.println(x[i]);
+!*\onslide<4->*!}
 \end{plainjava}
 \column{.35\linewidth}
 \begin{plainjava}
-// In eine for-Schleife
-int i = 1;
-do {
-    i *= k;
-    k -= i;
-} while(k >= 5);
-System.out.println(i);
+!*\onslide<5->*!// In eine for-Schleife
+!*\onslide<5->*!int i = 1;
+!*\onslide<5->*!do {
+!*\onslide<5->*!    i *= k;
+!*\onslide<5->*!    k -= i;
+!*\onslide<5->*!} while(k >= 5);
+!*\onslide<5->*!System.out.println(i);
 \end{plainjava}
 \end{columns}
 \end{uncoverenv}
@@ -1162,14 +1162,14 @@ System.out.println(i);
 \begin{frame}[c]{Methodenaufruf}
    \begin{itemize}[<+(1)->]
       \itemsep11pt
-      \item Methoden mit \bjava{static} gehören der Klasse. \begin{itemize}
-         \item Wir benötigen kein Objekt.
-         \item In ihnen \say{gibt} es \textit{kein} \bjava{this}.
+      \item Methoden mit \bjava{static} gehören der Klasse \begin{itemize}
+         \item Wir benötigen kein Objekt
+         \item In ihnen \say{gibt} es \textit{kein} \bjava{this}
       \end{itemize}
       \item Java sucht beim Aufruf eine (sichtbare \& gültige) Methode mit entsprechender Signatur. \begin{itemize}
          \item Implizite Typkonvertierung!
       \end{itemize}
-      \item \textsb{Überladung}: Gleicher Name, unterschiedliche Signatur.
+      \item \textsb{Überladung}: Gleicher Name, unterschiedliche Signatur
    \end{itemize}
 \end{frame}
 
@@ -1472,7 +1472,7 @@ name & \say{Saph}}}~}
 /*\onslide<11->*/   public void setDecimal(long decimal) {
 /*\onslide<12->*/      this.decimal = decimal;
 /*\onslide<11->*/   }
-/*\onslide<3->*/}
+/*\onslide<3->*/}/*\onslide<1->*/
 \end{minted}
 \end{onlyenv}
 \begin{onlyenv}<13-|handout:2>
@@ -1490,9 +1490,9 @@ name & \say{Saph}}}~}
 /*\onslide<19->*/      this.binary = null;
 /*\onslide<19->*/      this.decimal = 0L;
 /*\onslide<18->*/   }
-/*\onslide<14->*/|ihl|}|ihl|
+/*\onslide<14->*/|ihl|}|ihl|/*\onslide<1->*/
 \end{minted}
-\end{onlyenv}
+\end{onlyenv}\onslide<1->
 \end{frame}
 \SidebarReset
 
@@ -1593,7 +1593,7 @@ name & \say{Saph}}}~}
 \end{minted}
 \end{onlyenv}
 \begin{tikzpicture}[@O]
-   \onslide<11-|handout:1>{\node[above left=.5cm,yshift=.9cm,T,align=right] at(current page.south east) {Alternativ auch \T{int bi = binary.charAT(i) - '0';}.\\Die \T{i - 1} brauchen wir, da im Pseudocode \T{i = 1} gilt,\\Java aber mit 0 indiziert.};}
+   \onslide<12|handout:1>{\node[above left=.5cm,yshift=.9cm,T,align=right] at(current page.south east) {Alternativ auch \T{int bi = binary.charAT(i) - '0';}.\\Die \T{i - 1} brauchen wir, da im Pseudocode \T{i = 1} gilt,\\Java aber mit 0 indiziert.};}
 \end{tikzpicture}
 \end{frame}
 \SidebarReset
@@ -1613,10 +1613,10 @@ name & \say{Saph}}}~}
 
 \SidebarTask{Kameraszenario}
 \begin{frame}[c]{Kameraszenario}
-\onslide<2->{\footnotesize\flushleft Sie sehen das Grundgerüst einer Kameraklasse. Sie dürfen für die Aufgabe \textit{keine} (Java-)Ausnahmen verwenden.
+\onslide<2->{\footnotesize\flushleft Sie sehen das Grundgerüst einer Kameraklasse. Sie dürfen für die Aufgabe \textit{keine} (Java-)Ausnahmen verwenden.\updateitemize{1.}
 \begin{enumerate}
-    \item Schreiben Sie einen leeren Konstruktor, welcher die von Java zugewiesenen Standardwerte explizit initialisiert. Dieser Konstruktor soll nicht von Code abseits der \bjava{Camera}-Klasse aufrufbar sein und so verhindern, dass weitere Kamera-Objekte erstellt werden können.
-    \item Erweitern Sie die Klasse nun in sofern, dass es immer maximal fünf Kamera-Objekte gibt, welche durch \bjava{get(int)} durch eine Zahl \(x \in \{0, 1, 2, 3, 4\}\) abgefragt werden können. Dabei soll ein Kamera-Objekt erst (mit Ihrem vorher erzeugten Konstruktor) erzeugt werden, wenn es durch die Zahl angefragt wird. Weiter sollen Folgeanfragen mit der Zahl dasselbe Objekt zurückliefern. Geben Sie für \(x < 0\) und \(x \geq 5\) den Wert \bjava{null} zurück.
+    \item<3-> Schreiben Sie einen leeren Konstruktor, welcher die von Java zugewiesenen Standardwerte explizit initialisiert. Dieser Konstruktor soll nicht von Code abseits der \bjava{Camera}-Klasse aufrufbar sein und so verhindern, dass weitere Kamera-Objekte erstellt werden können.
+    \item<4-> Erweitern Sie die Klasse nun in sofern, dass es immer maximal fünf Kamera-Objekte gibt, welche durch \bjava{get(int)} durch eine Zahl \(x \in \{0, 1, 2, 3, 4\}\) abgefragt werden können. Dabei soll ein Kamera-Objekt erst (mit Ihrem vorher erzeugten Konstruktor) erzeugt werden, wenn es durch die Zahl angefragt wird. Weiter sollen Folgeanfragen mit der Zahl dasselbe Objekt zurückliefern. Geben Sie für \(x < 0\) und \(x \geq 5\) den Wert \bjava{null} zurück.
 \end{enumerate}}
 \onslide<1->{\ShortSide}%
 \end{frame}
@@ -1664,8 +1664,7 @@ name & \say{Saph}}}~}
    \item<9-> \bjava{0.0f}, weil es sich hierbei ja um floats handelt. \bjava{0} würde eine implizite Typkonvertierung benötigen!
 \end{itemize}
 \begin{tikzpicture}[remember picture,overlay]
-   % TODO: improve that
-   \only<6->{\node[below left=.5cm] at(current page.north east) {\footnotesize\faFileO~\textattachfile{\curpath Camera.java}{Camera.java}};}
+   \only<10->{\node[below left=.5cm] at(current page.north east) {\footnotesize\faFileO~\textattachfile{\curpath Camera.java}{Camera.java}};}
 \end{tikzpicture}%
 \end{frame}
 
@@ -1860,12 +1859,12 @@ name & \say{Saph}}}~}
 \begin{frame}[c]{Fehler finden}
 \onslide<2->{\footnotesize\flushleft Im Code finden sich \textsb{10 Fehler}, welche vom Java-Compiler erkannt werden.
 Identifizieren Sie \textsb{acht} dieser Fehler durch \smallskip\updateitemize{1.}\begin{enumerate}
-    \item die Angabe der Code-Zeilennummer und
-    \item eine kurze Erklärung, was den Fehler verursacht.
+    \item<3-> die Angabe der Code-Zeilennummer und
+    \item<4-> eine kurze Erklärung, was den Fehler verursacht.
 \end{enumerate}
 \flushleft
-Wenn Sie mehrere Fehler in einer Code-Zeile finden, tragen sie diese separat ein.
-Folgefehler zählen dabei nicht als separate Fehler. Wird also beispielsweise ein Bezeichner inkorrekt initialisiert, so zählt nicht jede Verwendung als zusätzlicher Fehler sondern nur die inkorrekte Initialisierung.\par}
+\onslide<5->{Wenn Sie mehrere Fehler in einer Code-Zeile finden, tragen sie diese separat ein.
+Folgefehler zählen dabei nicht als separate Fehler. Wird also beispielsweise ein Bezeichner inkorrekt initialisiert, so zählt nicht jede Verwendung als zusätzlicher Fehler sondern nur die inkorrekte Initialisierung.\par}}
 \onslide<1->{\ShortSide}%
 \end{frame}
 {\makeatletter
@@ -1989,7 +1988,7 @@ public class iDoGood {
 /*\onslide<4->*/   return d;
 /*\onslide<3->*/}
 \end{minted}
-In wie weit unterscheidet sich ihre Berechnung von der aus \TaskRef{Eine Aufwandsanalyse}.
+\onslide<5->{In wie weit unterscheidet sich ihre Berechnung von der aus \TaskRef{Eine Aufwandsanalyse}?}
    \onslide<1->{\ShortSide}%
 \end{frame}
 \SidebarReset
@@ -2018,7 +2017,7 @@ In wie weit unterscheidet sich ihre Berechnung von der aus \TaskRef{Eine Aufwand
    &\onslide<9->{\compl{2}\,E + \compl{1}\,E + \compl{\paletteD{n}} \cdot (\compl{\<\text{\T{charAT}}\> + 3}\,E + \compl{\<\text{\T{pow}}\> + 4}) + \compl{1}\,E}\\
    \onslide<10->{=}& \onslide<10->{\bigl(4 + (7 + \<\text{\T{charAT}}\> + \<\text{\T{pow}}\>) \cdot n\bigr)\,E}
 \end{align*}
-
+\onslide<11->{Das heißt, konkrete Implementationen können durch Anpassungen und Unteralgorithmen unterschiedliche Laufzeitkomplexitäten berechnet werden.}
 \end{frame}
 \SidebarReset
 }
