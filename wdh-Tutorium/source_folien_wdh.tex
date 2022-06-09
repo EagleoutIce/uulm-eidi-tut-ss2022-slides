@@ -1553,7 +1553,7 @@ name & \say{Saph}}}~}
 /*\onslide<3->*/      this.binary = null;
 /*\onslide<3->*/      this.decimal = 0L;
 /*\onslide<3->*/   }
-/*\onslide<3->*/|ihl|}|ihl|
+/*\onslide<3->*/|ihl|}|ihl|/*\onslide<1->*/
 \end{minted}
 \end{onlyenv}
 \begin{onlyenv}<4-10|handout:1>
@@ -1571,7 +1571,7 @@ name & \say{Saph}}}~}
 /*\onslide<8->*/      }
 /*\onslide<10->*/      return d;
 /*\onslide<5->*/   }
-/*\onslide<4->*/|ihl|}|ihl|
+/*\onslide<4->*/|ihl|}|ihl|/*\onslide<1->*/
 \end{minted}
 \end{onlyenv}
 \begin{onlyenv}<12-|handout:2>
@@ -1589,11 +1589,11 @@ name & \say{Saph}}}~}
 /*\onslide<15->*/   public BinaerUmwandler(String binary) {
 /*\onslide<16->*/      setBinary(binary);
 /*\onslide<15->*/   }
-/*\onslide<12->*/|ihl|}|ihl|
+/*\onslide<12->*/|ihl|}|ihl|/*\onslide<1->*/
 \end{minted}
-\end{onlyenv}
+\end{onlyenv}\onslide<1->
 \begin{tikzpicture}[@O]
-   \onslide<12|handout:1>{\node[above left=.5cm,yshift=.9cm,T,align=right] at(current page.south east) {Alternativ auch \T{int bi = binary.charAT(i) - '0';}.\\Die \T{i - 1} brauchen wir, da im Pseudocode \T{i = 1} gilt,\\Java aber mit 0 indiziert.};}
+   \onslide<0|handout:1>{\node[above left=.5cm,yshift=.9cm,T,align=right] at(current page.south east) {Alternativ auch \T{int bi = binary.charAT(i) - '0';}.\\Die \T{i - 1} brauchen wir, da im Pseudocode \T{i = 1} gilt,\\Java aber mit 0 indiziert.};}
 \end{tikzpicture}
 \end{frame}
 \SidebarReset
@@ -1818,7 +1818,7 @@ name & \say{Saph}}}~}
 
 \SidebarSolution
 \begin{frame}[fragile, c]{Nullen-Sichern}
-\only<2-|handout:1>{6.~Gesicherte Fehlermeldungen\only<handout:0>{\smallskip\\}}
+\only<2-7|handout:1>{6.~Gesicherte Fehlermeldungen}
 \only<8-|handout:2>{7.~Die Hauptklasse \T{BinaerHaupt}}
 \SetupLstHl
 \begin{onlyenv}<3-7|handout:1>
@@ -1996,7 +1996,7 @@ public class iDoGood {
 
 {
 \SidebarSolution
-\newcommand<>\ComplexityMarker[1]{\only#2{\rlap{\quad\compl{#1}}}}
+\newcommand<>\ComplexityMarker[1]{\only#2{\rlap{\quad\smash{\compl{#1}}}}}
 \def\compl#1{\text{\bfseries\itshape\paletteA{#1}}}
 \def\<{\ensuremath{\langle}}
 \def\>{\ensuremath{\rangle}}
@@ -2017,7 +2017,7 @@ public class iDoGood {
    &\onslide<9->{\compl{2}\,E + \compl{1}\,E + \compl{\paletteD{n}} \cdot (\compl{\<\text{\T{charAT}}\> + 3}\,E + \compl{\<\text{\T{pow}}\> + 4}) + \compl{1}\,E}\\
    \onslide<10->{=}& \onslide<10->{\bigl(4 + (7 + \<\text{\T{charAT}}\> + \<\text{\T{pow}}\>) \cdot n\bigr)\,E}
 \end{align*}
-\onslide<11->{Das heißt, konkrete Implementationen können durch Anpassungen und Unteralgorithmen unterschiedliche Laufzeitkomplexitäten berechnet werden.}
+\onslide<11->{\scriptsize Das heißt, für konkrete Implementationen können durch Anpassungen und Unteralgorithmen unterschiedliche Laufzeitkomplexitäten berechnet werden.}
 \end{frame}
 \SidebarReset
 }
