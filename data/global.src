@@ -309,6 +309,20 @@
 \newcommand*\mb[2][0]{\only<#2|handout:#1>{\rlap{\smash{\raisebox{-.66\baselineskip}{\color{btdm@primary}\faAngleUp}}}}}
 \newcommand*\mh[2][0]{\only<#2|handout:#1>{\;\color{btdm@primary}\faAngleLeft}}
 \newcommand*\mdl[2][0]{\only<#2|handout:#1>{\llap{\smash{\raisebox{-.5\baselineskip}{\tikz{\fill[btdm@primary,rounded corners=1pt] (0,-.65mm) rectangle ++(2.15\p@,\baselineskip+.65mm);}}~}}}}
+\newcommand*\mbg[2][0]{\only<#2|handout:#1>{\rlap{\smash{\raisebox{-.66\baselineskip}{\kern-.1em\color{shadeA}\MDUp}}}}}
+\newcommand<>\rBS[1]{\only#2{\solGet{comments}{\color{lightgray}\itshape#1}}}
+\newcommand<>\rBSo[1]{\onslide#2{\solGet{comments}{\color{lightgray}\itshape#1}}}
+
+\def\MDRight{{\tiny\smash{\faChevronRight}}}
+\def\MDLeft{{\tiny\smash{\faChevronLeft}}}
+\def\MDDown{{\tiny\smash{\faChevronDown}}}
+\def\MDUp{{\tiny\smash{\faChevronUp}}}
+
+\newcommand*\ml[2][0]{\only<#2|handout:#1>{\rlap{\color{paletteA}\;\MDLeft}}}
+\newcommand*\mg[2][0]{\only<#2|handout:#1>{\llap{\color{shadeA!70!paletteA}\MDRight~}}}
+\newcommand*\MD[2][0]{\only<#2|handout:#1>{\llap{\color{paletteA}\MDRight~}}}
+
+\def\mkb#1{$\vphantom{A}\smash{\underset{\!\bullet}{\text{#1}}}$}
 % config takeover :D
 \lstfs{10}\lstset{lineskip=5.5pt}
 \colorlet{lgray}{lightgray!48!white}
