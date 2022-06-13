@@ -761,14 +761,14 @@ public class Kreis {
 \end{frame}
 \fi
 
-\begin{frame}[fragile,c]{Oh halt! Die \Ţ{Kreis.main}!}
+\begin{frame}[fragile,c]{Oh halt! Die \T{\textbf{KreisMain.java}}!}
 \begin{plainjava}
 !*\CodeFileMarkerAttach<7->{KreisMain.java}*!
 !*\onslide<2->*!public class KreisMain {
 !*\onslide<3->*!   public static void main(String[] args) {
-!*\onslide<4->*!       double r = Double.parseDouble(args[0]);
-!*\onslide<5->*!       Kreis kreis = new Kreis(r);
-!*\onslide<6->*!       kreis.print();
+!*\onslide<4->*!       double radius = Double.parseDouble(args[0]);
+!*\onslide<5->*!       Kreis k = new Kreis(radius);
+!*\onslide<6->*!       k.print();
 !*\onslide<3->*!   }
 !*\onslide<2->*!}
 \end{plainjava}
