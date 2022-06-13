@@ -730,19 +730,19 @@ public class Kreis {
         \fill[rounded corners=1.6pt,orange,opacity=\hlopa] ([xshift=-1mm,yshift=5pt]umf3) rectangle ([xshift=-1mm-3.2pt,yshift=-5pt]umf3);
     }
     \onslide<9|handout:2>{
-        \fill[rounded corners=1.6pt,pingu@green,opacity=\hlopa] ([xshift=-1mm,yshift=5pt]r1) rectangle ([xshift=-1mm-3.2pt,yshift=-5pt]r1@);
-        \fill[rounded corners=1.6pt,pingu@green,opacity=\hlopa] ([xshift=-1mm,yshift=5pt]r2) rectangle ([xshift=-1mm-3.2pt,yshift=-5pt]r2@);
-        \fill[rounded corners=1.6pt,pingu@green,opacity=\hlopa] ([xshift=-1mm,yshift=5pt]r3) rectangle ([xshift=-1mm-3.2pt,yshift=-5pt]r3@);
+        \fill[rounded corners=1.6pt,gray!80!pingu@black,opacity=\hlopa] ([xshift=-1mm,yshift=5pt]r1) rectangle ([xshift=-1mm-3.2pt,yshift=-5pt]r1@);
+        \fill[rounded corners=1.6pt,gray!80!pingu@black,opacity=\hlopa] ([xshift=-1mm,yshift=5pt]r2) rectangle ([xshift=-1mm-3.2pt,yshift=-5pt]r2@);
+        \fill[rounded corners=1.6pt,gray!80!pingu@black,opacity=\hlopa] ([xshift=-1mm,yshift=5pt]r3) rectangle ([xshift=-1mm-3.2pt,yshift=-5pt]r3@);
     }
     \onslide<10-|handout:3>{
-        \fill[rounded corners=1.6pt,pingu@green,opacity=\hlopa] ([xshift=-1mm,yshift=5pt]r1) rectangle ([xshift=-1mm-3.2pt,yshift=-5pt]r1);
-        \fill[rounded corners=1.6pt,pingu@green,opacity=\hlopa] ([xshift=-1mm,yshift=5pt]r2) rectangle ([xshift=-1mm-3.2pt,yshift=-5pt]r2@);
-        \fill[rounded corners=1.6pt,pingu@green,opacity=\hlopa] ([xshift=-1mm,yshift=5pt]r3) rectangle ([xshift=-1mm-3.2pt,yshift=-5pt]r3@);
+        \fill[rounded corners=1.6pt,gray!80!pingu@black,opacity=\hlopa] ([xshift=-1mm,yshift=5pt]r1) rectangle ([xshift=-1mm-3.2pt,yshift=-5pt]r1);
+        \fill[rounded corners=1.6pt,gray!80!pingu@black,opacity=\hlopa] ([xshift=-1mm,yshift=5pt]r2) rectangle ([xshift=-1mm-3.2pt,yshift=-5pt]r2@);
+        \fill[rounded corners=1.6pt,gray!80!pingu@black,opacity=\hlopa] ([xshift=-1mm,yshift=5pt]r3) rectangle ([xshift=-1mm-3.2pt,yshift=-5pt]r3@);
     }
     \onslide<6-7|handout:1>{
-        \fill[rounded corners=1.6pt,green!70!pingu@black,opacity=\hlopa] ([xshift=-1mm,yshift=5pt]fla1) rectangle ([xshift=-1mm-3.2pt,yshift=-5pt]fla1@);
-        \fill[rounded corners=1.6pt,green!70!pingu@black,opacity=\hlopa] ([xshift=-1mm,yshift=5pt]fla2) rectangle ([xshift=-1mm-3.2pt,yshift=-5pt]fla2@);
-        \fill[rounded corners=1.6pt,green!70!pingu@black,opacity=\hlopa] ([xshift=-1mm,yshift=5pt]fla3) rectangle ([xshift=-1mm-3.2pt,yshift=-5pt]fla3);
+        \fill[rounded corners=1.6pt,gray!70!pingu@black,opacity=\hlopa] ([xshift=-1mm,yshift=5pt]fla1) rectangle ([xshift=-1mm-3.2pt,yshift=-5pt]fla1@);
+        \fill[rounded corners=1.6pt,gray!70!pingu@black,opacity=\hlopa] ([xshift=-1mm,yshift=5pt]fla2) rectangle ([xshift=-1mm-3.2pt,yshift=-5pt]fla2@);
+        \fill[rounded corners=1.6pt,gray!70!pingu@black,opacity=\hlopa] ([xshift=-1mm,yshift=5pt]fla3) rectangle ([xshift=-1mm-3.2pt,yshift=-5pt]fla3);
     }
 \end{tikzpicture}
 \end{frame}
@@ -750,13 +750,15 @@ public class Kreis {
 \iffull
 \begin{frame}{Ja dreht es sich nun?}
     \begin{itemize}[<+(1)->]
+        \itemsep6pt
         \item So haben wir noch unzählige Unsauberkeiten: \begin{itemize}
-            \item Der \bjava{Kreis(dobule)} prüft nun auch ob der Radius mindestens \(0\) ist
+            \item Der \bjava{Kreis(dobule)} prüft nun auch, ob der Radius mindestens \(0\) ist \info{ist das gewollt?}
             \item Mit \bjava{setUmfang(double)} und \bjava{setFlaeche(double)} können wir die abgeleiteten Eigenschaften zerstören
             \item Analog mit \bjava{berechneFlaeche(double)} und \bjava{berechneUmfang(double)}
             \item Wir nutzen ein eigenes \bjava{print} und nicht Javas \bjava{toString}-Mechanismus
         \end{itemize}
         \item Hier kam dies aber einfach durch die Aufgabe\ldots
+        \item Die lief ja auch recht gut!
     \end{itemize}
 \end{frame}
 \fi
@@ -773,6 +775,32 @@ public class Kreis {
 !*\onslide<2->*!}
 \end{plainjava}
 \end{frame}
+
+\subsection{Aufgabe 2}
+{\taskenum
+\begin{frame}[fragile]{Aufgabe 2: Gültigkeitsbereiche von Variablen}
+\begin{enumerate}[<+(1)->]
+    \item \task{Betrachten Sie folgende Klassendefinition:}
+\begin{plainjava}
+!*\onslide<3->*!public class DemoA {
+!*\onslide<3->*!    static int x = 0;
+!*\onslide<3->*!    int y = 1;
+!*\onslide<3->*!    public static int methode(int z){
+!*\onslide<3->*!        return this.y + z;
+!*\onslide<3->*!    }
+!*\onslide<3->*!}
+\end{plainjava}
+    \task<4->{Handelt es sich hierbei um eine gültige Java Klassendefinition? Begründen Sie Ihre Antwort \textit{kurz}.}
+\end{enumerate}
+\end{frame}
+}
+
+\iffull
+\SetNextSectionText{Grundlagen der Rekursion\\Abgabe: \DTMDate{2022-06-20}}
+\section{Aussicht: Übungsblatt 7}
+\begin{frame}{Habbeldu}
+\end{frame}
+\fi
 
 \SetNextSectionText[.55\linewidth]{TODO}
 \section{Abschließendes}
