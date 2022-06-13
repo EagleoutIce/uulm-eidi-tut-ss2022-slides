@@ -793,6 +793,51 @@ public class Kreis {
     \task<4->{Handelt es sich hierbei um eine gültige Java Klassendefinition? Begründen Sie Ihre Antwort \textit{kurz}.}
 \end{enumerate}
 \end{frame}
+
+
+\begin{frame}[fragile]{Und nun Ausgaben!}
+\begin{enumerate}[<+(1)->]
+    \setcounter{enumi}{1}
+    \item \task{Betrachten Sie folgende Klassendefinition:}
+\begin{plainjava}
+!*\onslide<3->*!public class DemoB {
+!*\onslide<3->*!    int x = 0;
+!*\onslide<3->*!    public static void methode(int x){
+!*\onslide<3->*!        System.out.println(x);
+!*\onslide<3->*!    }
+!*\onslide<3->*!    public static void methode2(){
+!*\onslide<3->*!        methode(1);
+!*\onslide<3->*!    }
+!*\onslide<3->*!    public static void main(String[] args){
+!*\onslide<3->*!        methode2();
+!*\onslide<3->*!    }
+!*\onslide<3->*!}
+\end{plainjava}
+    \task<4->{Welche Ausgabe erzeugt das Programm? Begründen Sie Ihre Antwort \textit{kurz}.}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Und nochmal Ausgaben!}
+\begin{enumerate}[<+(1)->]
+    \setcounter{enumi}{1}
+    \item \task{Betrachten Sie folgende Klassendefinition:}
+\begin{plainjava}
+!*\onslide<3->*!public class DemoC {
+!*\onslide<3->*!    static int i;
+!*\onslide<3->*!    public static void methode(){
+!*\onslide<3->*!        for(; i <= 3; i++){
+!*\onslide<3->*!            System.out.println(i);
+!*\onslide<3->*!        }
+!*\onslide<3->*!    }
+!*\onslide<3->*!    public static void main(String[] args){
+!*\onslide<3->*!        methode();
+!*\onslide<3->*!        methode();
+!*\onslide<3->*!    }
+!*\onslide<3->*!}
+\end{plainjava}
+    \task<4->{Welche Ausgabe erzeugt das Programm? Begründen Sie Ihre Antwort \textit{kurz}.}
+\end{enumerate}
+\end{frame}
 }
 
 \iffull
