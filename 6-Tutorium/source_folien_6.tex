@@ -320,12 +320,458 @@ return true;
 \end{frame}
 \fi
 
+{\taskenum
+\begin{frame}{Ja was isses nun?}
+\begin{enumerate}[<+(1)->]
+    \itemsep12pt
+    \item \task{Ist Ihre Implementierung ein linear-rekursiver Algorithmus? Warum?}\pause
+    Unser Verfahren ruft sich \emph{höchstens ein mal selbst auf}, damit ist er linear-rekursiv!
+    \item \task{Ist Ihre Implementierung ein end- oder kopf-rekursiver Algorithmus? Warum?}\pause
+    Der Algorithmus ist End-Rekursiv, da die letzte im Rekursionsfall ausgeführte Operation die Rekursion selbst ist.
+    Damit geschieht im Aufstieg nichts mehr.
+\end{enumerate}
+\end{frame}
+}
 
-\begin{frame}
-    TODO: rekursions arten undZeichnen: TOODO. schauen für anschnitt rekursion und übernahme oder so
 
-    TODO: fehler in lösung irgendwo..
-    TODO: aussicht
+% \begin{frame}
+%     TODO: rekursions arten undZeichnen: TOODO. schauen für anschnitt rekursion und übernahme oder so
+%
+%     TODO: fehler in lösung irgendwo..
+%     TODO: aussicht
+% \end{frame}
+
+\SetNextSectionText{Grundlagen der OOP\\Abgabe: \DTMDate{2022-06-07}}
+\section{Übungsblatt 6}
+\subsection{Aufgabe 1}
+{\taskenum
+\begin{frame}[c]{Aufgabe 1: Klassenentwurf in Java}
+    \task{\begin{itemize}[<+(1)->]
+        \itemsep5pt
+        \item Erstellen Sie eine Klasse Kreis. Diese soll folgende Eigenschaften und Methoden implementieren: \begin{itemize}
+            \item Privaten Instanzvariablen für den Radius, Flächeninhalt und Umfang.
+            \item einen öffentlichen Konstruktor, der den Radius des Kreises als Parameter übernimmt, die restlichen
+            Eigenschaften daraus ableitet, und die entsprechenden Variablen initialisiert.
+            \item get- und set-Methoden für die Instanzvariablen. Dabei soll es nur für den Radius eine set-Methode
+            geben und Flächeninhalt und Umfang sollen daraus abgeleitet werden. Stellen Sie sicher, dass nur gültige
+            Werte für den Radius (\(r \geq 0\)) akzeptiert werden.
+            \item Eine Instanzmethode um die Eigenschaften des Kreises auf der Kommandozeile auszugeben
+            \item Eine Instanzmethode die einen Kreisradius als Parameter übernimmt, den entsprechenden Flächeninhalt
+            berechnet, das zugehörige Attribut aktualisiert und dieses zurückgibt.
+            \item Eine Instanzmethode die einen Kreisradius als Parameter übernimmt, den entsprechenden Umfang berechnet,
+            das zugehörige Attribut aktualisiert und dieses zurückgibt.
+        \end{itemize}
+        \item Erstellen Sie eine weitere Klasse \T{KreisMain}, die den Programmeinstiegspunkt implementiert.
+        Lesen Sie über die Kommandozeilenparameter einen Radius ein und instanziieren Sie innerhalb der \T{main} Methode
+        ein Objekt der Klasse \T{Kreis} mit dem eingelesenen Radius. Lassen Sie sich die Eigenschaften dieser Instanz
+        anzeigen.
+    \end{itemize}}
+\end{frame}
+}
+
+\begin{frame}[c,fragile]{Eine runde Sache!}
+\begin{onlyenv}<1-12|handout:1>
+\begin{columns}[c,onlytextwidth]
+\column{.25\linewidth}
+\footnotesize\onslide<3->{1.~Private Instanzvariablen für Radius, Flächeninhalt und Umfang.}\medskip\par
+\onslide<6->{2.~öffentlicher Konstruktor, der den Radius des Kreises als Parameter übernimmt, die restlichen Eigenschaften daraus ableitet, und die entsprechenden Variablen initialisiert.}
+\column{.05\linewidth}
+\column{.7\linewidth}
+\SetupLstHl
+\begin{plainjava}
+!*\onslide<2->*!public class Kreis {
+!*\onslide<4->*!   private !*\onslide<5->*!double !*\onslide<4->*!radius;
+!*\onslide<4->*!   private !*\onslide<5->*!double !*\onslide<4->*!flaeche;
+!*\onslide<4->*!   private !*\onslide<5->*!double !*\onslide<4->*!umfang;
+
+!*\onslide<7->*!   public Kreis(double radius) {
+!*\onslide<8->*!       this.radius = radius;
+!*\onslide<9->*!       this.flaeche = !*\onslide<10->*!Math.PI * radius * radius!*\onslide<9->*!;
+!*\onslide<9->*!       this.umfang = !*\onslide<11->*!2 * Math.PI * radius!*\onslide<9->*!;
+!*\onslide<7->*!   }
+!*\onslide<12->*!   |ihl|...|ihl|
+!*\onslide<2->*!}
+\end{plainjava}
+\end{columns}
+\end{onlyenv}
+\begin{onlyenv}<13-26|handout:2-3>
+\begin{columns}[c,onlytextwidth]
+\column{.25\linewidth}
+\footnotesize\onslide<14->{3.~get- und set-Methoden für die Instanzvariablen. Dabei soll es nur für den Radius eine set-Methode geben und Flächeninhalt und Umfang sollen daraus abgeleitet werden. Stellen Sie
+sicher, dass nur gültige Werte für den Radius (\(r \geq 0\)) akzeptiert werden.}\medskip\par
+\column{.05\linewidth}
+\column{.7\linewidth}
+\SetupLstHl
+\begin{onlyenv}<-17|handout:2>
+\begin{plainjava}
+!*\onslide<13->*!public class Kreis {
+!*\onslide<13->*!   |ihl|private double radius, flaeche, umfang;|ihl|
+!*\onslide<13->*!   |ihl|private Kreis(double radius)  { ... }|ihl|
+
+!*\onslide<15->*!   public double getRadius() {
+!*\onslide<15->*!       return this.radius;
+!*\onslide<15->*!   }
+!*\onslide<16->*!   public double getFlaeche() {
+!*\onslide<16->*!       return this.flaeche;
+!*\onslide<16->*!   }
+!*\onslide<17->*!   public double getUmfang() {
+!*\onslide<17->*!       return this.umfang;
+!*\onslide<17->*!   }
+!*\onslide<13->*!}
+\end{plainjava}
+\end{onlyenv}
+\begin{onlyenv}<18-|handout:3>
+\begin{plainjava}
+!*\onslide<18->*!public class Kreis {
+!*\onslide<18->*!   |ihl|private double radius, flaeche, umfang;|ihl|
+!*\onslide<18->*!   |ihl|...|ihl|
+!*\onslide<19->*!   public void setRadius(double r) {
+!*\onslide<21->*!       if (r < 0)!*\onslide<22->*! return;
+!*\onslide<14->*!       this.radius = r;
+!*\onslide<23->*!       this.flaeche = !*\onslide<24->*!Math.PI * radius * radius!*\onslide<23->*!;
+!*\onslide<25->*!       this.umfang = !*\onslide<26->*!2 * Math.PI * radius!*\onslide<25->*!;
+!*\onslide<19->*!   }
+!*\onslide<19->*!   public void setUmfang(double umfang) {
+!*\onslide<20->*!       this.umfang = umfang;
+!*\onslide<19->*!   }
+!*\onslide<19->*!   public void setFlaeche(double flaeche) {
+!*\onslide<20->*!       this.flaeche = flaeche;
+!*\onslide<19->*!   }
+!*\onslide<18->*!}
+\end{plainjava}
+\end{onlyenv}
+\end{columns}
+\end{onlyenv}
+\begin{onlyenv}<27-34|handout:4>
+\begin{columns}[c,onlytextwidth]
+\column{.25\linewidth}
+\footnotesize\onslide<28->{4.~Eine Instanzmethode um die Eigenschaften des Kreises auf der Kommandozeile auszugeben.}\medskip\par
+\onslide<31->{5.~Eine Instanzmethode die einen Kreisradius als Parameter übernimmt, den entsprechenden
+Flächeninhalt berechnet, das zugehörige Attribut aktualisiert und dieses zurückgibt.}
+\column{.05\linewidth}
+\column{.7\linewidth}
+\SetupLstHl
+\begin{plainjava}
+!*\onslide<27->*!public class Kreis {
+!*\onslide<27->*!   |ihl|private double radius, flaeche, umfang;|ihl|
+!*\onslide<27->*!   |ihl|...|ihl|
+
+!*\onslide<29->*!   public void print() {
+!*\onslide<30->*!      System.out.println("Radius: " + radius + "cm" +
+!*\onslide<30->*!           + "\n Fläche: " + flaeche + "cm^2"
+!*\onslide<30->*!           + "\n Umfang: " + umfang + "cm");
+!*\onslide<29->*!   }
+
+!*\onslide<32->*!   public double berechneFlaeche(double radius) {
+!*\onslide<33->*!       this.flaeche = Math.PI * radius * radius;
+!*\onslide<34->*!       return this.flaeche;
+!*\onslide<32->*!   }
+!*\onslide<27->*!}
+\end{plainjava}
+\end{columns}
+\end{onlyenv}
+\begin{onlyenv}<35-|handout:5>
+\begin{columns}[c,onlytextwidth]
+\column{.25\linewidth}
+\footnotesize\onslide<36->{6.~Eine Instanzmethode die einen Kreisradius als Parameter übernimmt, den entsprechenden
+Umfang berechnet, das zugehörige Attribut aktualisiert und dieses zurückgibt.}
+\column{.05\linewidth}
+\column{.7\linewidth}
+\SetupLstHl
+\begin{plainjava}
+!*\onslide<35->*!public class Kreis {
+!*\onslide<35->*!   |ihl|private double radius, flaeche, umfang;|ihl|
+!*\onslide<35->*!   |ihl|...|ihl|
+
+!*\onslide<37->*!   public double berechneUmfang(double radius) {
+!*\onslide<38->*!       this.umfang = 2 * Math.PI * radius;
+!*\onslide<39->*!       return this.umfang;
+!*\onslide<37->*!   }
+!*\onslide<35->*!}
+\end{plainjava}
+\end{columns}
+\end{onlyenv}
+\end{frame}
+
+\begin{frame}[c,fragile]{Eine runde Sache?}
+\lstfs{7}% adaptive cols
+\begin{tikzpicture}[@O]
+    % TODO: animations
+    \def\hlcolor{pingu@red}
+    \onslide<3-8|handout:1-2>{\hlbehindcodeunder{f1}{@f1>}
+    \hlbehindcodeunder{f2}{@f2>}
+    \hlbehindcodeunder{f3}{@f3>}}
+    \def\hlcolor{pingu@blue}
+    \onslide<4-8|handout:1-2>{\hlbehindcodeunder{u1}{@f1>}
+    \hlbehindcodeunder{u2}{@f2>}
+    \hlbehindcodeunder{u3}{@f3>}}
+    \def\hlcolor{pingu@yellow}
+    \def\hlcolor{pingu@green!82!pingu@black}
+\end{tikzpicture}\vspace*{-\baselineskip}
+\begin{onlyenv}<2-6|handout:1>
+\columns[c,onlytextwidth]
+\column{.48\linewidth}
+\begin{plainjava}
+public class Kreis {
+    private double radius;
+    private double flaeche;
+    private double umfang;
+    public Kreis(double radius) {
+        this.radius = radius;
+        !*\Snode{f1}*!this.flaeche = Math.PI * radius * radius!*\Snode{f1@}*!;
+        !*\Snode{u1}*!this.umfang = 2 * Math.PI * radius!*\Snode{u1@}*!;
+    }
+    public double getRadius() {
+        return this.radius;
+    }
+    public double getFlaeche() {
+        return this.flaeche;
+    }
+    public double getUmfang() {
+        return this.umfang;
+    }
+    public void setRadius(double r) {
+        if (r < 0) return;
+        this.radius = r;
+        !*\Snode{fla3}*!!*\Snode{f2}*!this.flaeche = Math.PI * radius * radius!*\Snode{f2@}*!;
+\end{plainjava}
+\column{.52\linewidth}
+\begin{plainjava}
+        !*\Snode{umf3}*!!*\Snode{u2}*!this.umfang = 2 * Math.PI * radius!*\Snode{u2@}*!;
+    }
+    !*\Snode{umf1}*!public void setUmfang(double umfang) {
+        this.umfang = umfang;
+    !*\Snode{umf1@}*!}
+    !*\Snode{fla1}*!public void setFlaeche(double flaeche) {
+        this.flaeche = flaeche;
+    !*\Snode{fla1@}*!}
+    public void print() {
+        System.out.println("Radius: " + radius + "cm" +
+            + "\n Fläche: " + flaeche + "cm^2"
+            + "\n Umfang: " + umfang + "cm");
+    }
+    !*\Snode{fla2}*!public double berechneFlaeche(double radius) {
+        !*\Snode{f3}*!this.flaeche = Math.PI * radius * radius!*\Snode{f3@}*!;
+        return this.flaeche;
+    !*\Snode{fla2@}*!}
+    !*\Snode{umf2}*!public double berechneUmfang(double radius) {
+        !*\Snode{u3}*!this.umfang = 2 * Math.PI * radius!*\Snode{u3@}*!;
+        return this.umfang;
+    !*\Snode{umf2@}*!}
+}
+\end{plainjava}
+\endcolumns
+\end{onlyenv}
+\begin{onlyenv}<7-8|handout:2>
+\columns[c,onlytextwidth]
+\column{.48\linewidth}
+\begin{plainjava}
+public class Kreis {
+    private double radius;
+    private double flaeche;
+    private double umfang;
+    public Kreis(double radius) {
+        !*\Snode{r1}*!this.radius = radius;
+        !*\Snode{f1}*!berechneFlaeche(radius)!*\Snode{f1@}*!;
+        !*\Snode{r1@}*!!*\Snode{u1}*!berechneUmfang(radius)!*\Snode{u1@}*!;
+    }
+    public double getRadius() {
+        return this.radius;
+    }
+    public double getFlaeche() {
+        return this.flaeche;
+    }
+    public double getUmfang() {
+        return this.umfang;
+    }
+    !*\Snode{r2}*!public void setRadius(double r) {
+        if (r < 0) return;
+        this.radius = r;
+    !*\Snode{r2@}*!    !*\Snode{fla3}*!!*\Snode{f2}*!berechneFlaeche(r)!*\Snode{f2@}*!;
+\end{plainjava}
+\column{.52\linewidth}
+\begin{plainjava}
+    !*\Snode{r3}*!    !*\Snode{umf3}*!!*\Snode{u2}*!berechneUmfang(r)!*\Snode{u2@}*!;
+    !*\Snode{r3@}*!}
+    !*\Snode{umf1}*!public void setUmfang(double umfang) {
+        this.umfang = umfang;
+    !*\Snode{umf1@}*!}
+    !*\Snode{fla1}*!public void setFlaeche(double flaeche) {
+        this.flaeche = flaeche;
+    !*\Snode{fla1@}*!}
+    public void print() {
+        System.out.println("Radius: " + radius + "cm" +
+            + "\n Fläche: " + flaeche + "cm^2"
+            + "\n Umfang: " + umfang + "cm");
+    }
+    !*\Snode{fla2}*!public double berechneFlaeche(double radius) {
+        !*\Snode{f3}*!this.flaeche = Math.PI * radius * radius!*\Snode{f3@}*!;
+        return this.flaeche;
+    !*\Snode{fla2@}*!}
+    !*\Snode{umf2}*!public double berechneUmfang(double radius) {
+        !*\Snode{u3}*!this.umfang = 2 * Math.PI * radius!*\Snode{u3@}*!;
+        return this.umfang;
+    !*\Snode{umf2@}*!}
+}
+\end{plainjava}
+\endcolumns
+\end{onlyenv}
+\begin{onlyenv}<9|handout:0>
+\columns[c,onlytextwidth]
+\column{.48\linewidth}
+\begin{plainjava}
+public class Kreis {
+    private double radius;
+    private double flaeche;
+    private double umfang;
+    public Kreis(double radius) {
+        !*\Snode{r1}*!this.radius = radius;
+        berechneFlaeche(radius);
+        !*\Snode{r1@}*!berechneUmfang(radius);
+    }
+    public double getRadius() {
+        return this.radius;
+    }
+    public double getFlaeche() {
+        return this.flaeche;
+    }
+    public double getUmfang() {
+        return this.umfang;
+    }
+    !*\Snode{r2}*!public void setRadius(double r) {
+        if (r < 0) return;
+        this.radius = r;
+    !*\Snode{r2@}*!    berechneFlaeche(r):
+\end{plainjava}
+\column{.52\linewidth}
+\begin{plainjava}
+    !*\Snode{r3}*!    berechneUmfang(r);
+    !*\Snode{r3@}*!}
+    public void setUmfang(double umfang) {
+        this.umfang = umfang;
+    }
+    public void setFlaeche(double flaeche) {
+        this.flaeche = flaeche;
+    }
+    public void print() {
+        System.out.println("Radius: " + radius + "cm" +
+            + "\n Fläche: " + flaeche + "cm^2"
+            + "\n Umfang: " + umfang + "cm");
+    }
+    public double berechneFlaeche(double radius) {
+        this.flaeche = Math.PI * radius * radius;
+        return this.flaeche;
+    }
+    public double berechneUmfang(double radius) {
+        this.umfang = 2 * Math.PI * radius;
+        return this.umfang;
+    }
+}
+\end{plainjava}
+\endcolumns
+\end{onlyenv}
+\begin{onlyenv}<10-|handout:3>
+\columns[c,onlytextwidth]
+\column{.48\linewidth}
+\begin{plainjava}
+!*\CodeFileMarkerAttach<11->{Kreis.java}*!
+public class Kreis {
+    private double radius;
+    private double flaeche;
+    private double umfang;
+    public Kreis(double radius) {
+        !*\Snode{r1}*!setRadius(radius);
+    }
+    public double getRadius() {
+        return this.radius;
+    }
+    public double getFlaeche() {
+        return this.flaeche;
+    }
+    public double getUmfang() {
+        return this.umfang;
+    }
+    !*\Snode{r2}*!public void setRadius(double r) {
+        if (r < 0) return;
+        this.radius = r;
+    !*\Snode{r2@}*!    berechneFlaeche(r);
+\end{plainjava}
+\column{.52\linewidth}
+\begin{plainjava}
+    !*\Snode{r3}*!    berechneUmfang(r);
+    !*\Snode{r3@}*!}
+    public void setUmfang(double umfang) {
+        this.umfang = umfang;
+    }
+    public void setFlaeche(double flaeche) {
+        this.flaeche = flaeche;
+    }
+    public void print() {
+        System.out.println("Radius: " + radius + "cm" +
+            + "\n Fläche: " + flaeche + "cm^2"
+            + "\n Umfang: " + umfang + "cm");
+    }
+    public double berechneFlaeche(double radius) {
+        this.flaeche = Math.PI * radius * radius;
+        return this.flaeche;
+    }
+    public double berechneUmfang(double radius) {
+        this.umfang = 2 * Math.PI * radius;
+        return this.umfang;
+    }
+}
+\end{plainjava}
+\endcolumns
+\end{onlyenv}
+\begin{tikzpicture}[@O]
+    \onslide<5-7|handout:1>{
+        \fill[rounded corners=1.6pt,orange,opacity=\hlopa] ([xshift=-1mm,yshift=5pt]umf1) rectangle ([xshift=-1mm-3.2pt,yshift=-5pt]umf1@);
+        \fill[rounded corners=1.6pt,orange,opacity=\hlopa] ([xshift=-1mm,yshift=5pt]umf2) rectangle ([xshift=-1mm-3.2pt,yshift=-5pt]umf2@);
+        \fill[rounded corners=1.6pt,orange,opacity=\hlopa] ([xshift=-1mm,yshift=5pt]umf3) rectangle ([xshift=-1mm-3.2pt,yshift=-5pt]umf3);
+    }
+    \onslide<9|handout:2>{
+        \fill[rounded corners=1.6pt,pingu@green,opacity=\hlopa] ([xshift=-1mm,yshift=5pt]r1) rectangle ([xshift=-1mm-3.2pt,yshift=-5pt]r1@);
+        \fill[rounded corners=1.6pt,pingu@green,opacity=\hlopa] ([xshift=-1mm,yshift=5pt]r2) rectangle ([xshift=-1mm-3.2pt,yshift=-5pt]r2@);
+        \fill[rounded corners=1.6pt,pingu@green,opacity=\hlopa] ([xshift=-1mm,yshift=5pt]r3) rectangle ([xshift=-1mm-3.2pt,yshift=-5pt]r3@);
+    }
+    \onslide<10-|handout:3>{
+        \fill[rounded corners=1.6pt,pingu@green,opacity=\hlopa] ([xshift=-1mm,yshift=5pt]r1) rectangle ([xshift=-1mm-3.2pt,yshift=-5pt]r1);
+        \fill[rounded corners=1.6pt,pingu@green,opacity=\hlopa] ([xshift=-1mm,yshift=5pt]r2) rectangle ([xshift=-1mm-3.2pt,yshift=-5pt]r2@);
+        \fill[rounded corners=1.6pt,pingu@green,opacity=\hlopa] ([xshift=-1mm,yshift=5pt]r3) rectangle ([xshift=-1mm-3.2pt,yshift=-5pt]r3@);
+    }
+    \onslide<6-7|handout:1>{
+        \fill[rounded corners=1.6pt,green!70!pingu@black,opacity=\hlopa] ([xshift=-1mm,yshift=5pt]fla1) rectangle ([xshift=-1mm-3.2pt,yshift=-5pt]fla1@);
+        \fill[rounded corners=1.6pt,green!70!pingu@black,opacity=\hlopa] ([xshift=-1mm,yshift=5pt]fla2) rectangle ([xshift=-1mm-3.2pt,yshift=-5pt]fla2@);
+        \fill[rounded corners=1.6pt,green!70!pingu@black,opacity=\hlopa] ([xshift=-1mm,yshift=5pt]fla3) rectangle ([xshift=-1mm-3.2pt,yshift=-5pt]fla3);
+    }
+\end{tikzpicture}
+\end{frame}
+
+\iffull
+\begin{frame}{Ja dreht es sich nun?}
+    \begin{itemize}[<+(1)->]
+        \item So haben wir noch unzählige Unsauberkeiten: \begin{itemize}
+            \item Der \bjava{Kreis(dobule)} prüft nun auch ob der Radius mindestens \(0\) ist
+            \item Mit \bjava{setUmfang(double)} und \bjava{setFlaeche(double)} können wir die abgeleiteten Eigenschaften zerstören
+            \item Analog mit \bjava{berechneFlaeche(double)} und \bjava{berechneUmfang(double)}
+            \item Wir nutzen ein eigenes \bjava{print} und nicht Javas \bjava{toString}-Mechanismus
+        \end{itemize}
+        \item Hier kam dies aber einfach durch die Aufgabe\ldots
+    \end{itemize}
+\end{frame}
+\fi
+
+\begin{frame}[fragile,c]{Oh halt! Die \Ţ{Kreis.main}!}
+\begin{plainjava}
+!*\CodeFileMarkerAttach<7->{KreisMain.java}*!
+!*\onslide<2->*!public class KreisMain {
+!*\onslide<3->*!   public static void main(String[] args) {
+!*\onslide<4->*!       double r = Double.parseDouble(args[0]);
+!*\onslide<5->*!       Kreis kreis = new Kreis(r);
+!*\onslide<6->*!       kreis.print();
+!*\onslide<3->*!   }
+!*\onslide<2->*!}
+\end{plainjava}
 \end{frame}
 
 \SetNextSectionText[.55\linewidth]{TODO}
