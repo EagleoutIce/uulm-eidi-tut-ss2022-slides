@@ -14,13 +14,89 @@
 \TopicOverview{7}
 \fi
 
-
 \iffull{\SummaryFrame
-\begin{frame}[fragile,c]{Kurzwiederholung}
-    \begin{itemize}[<+(1)->]
-        \itemsep9.25pt
-        \item TODO: zusammenfassungsfolien der wdg nochmaleinbringe
-    \end{itemize}
+\def\sub#1#2{\node[font=\footnotesize\sffamily,scale=.715,align=center,gray,below=-3.65mm] at(#1.south) {\strut#2\strut};}
+\begin{frame}[c]{Algorithmen}
+\begin{itemize}[<+(1)->]
+   \itemsep14pt
+   \item Totale Korrektheit \begin{itemize}
+      \item \textit{Terminiertheit:}\hfill Endliche Schritte für jede Eingabe
+      \item \textit{Partielle Korrektheit:}\hfill Wenn terminiert, dann korrekt
+   \end{itemize}
+   \item Weitere Eigenschaften \begin{itemize}
+      \item \textit{Determiniertheit:}\hfill Gleiche Eingabe~\(\to\) Gleiche Ausgabe
+      \item \textit{Determinismus:}\hfill Gleiche Eingabe~\(\to\) Gleiche Zustandsfolge
+   \end{itemize}
+\end{itemize}
+\centerline{%
+\begin{tikzpicture}
+    \onslide<+(1)->{\node (0) at(0,0) {\strut Spezifikation};
+    \sub0{Begriffe mit\\Problemrelevanz}}
+    \foreach[count=\i,remember =\i as \li (initially 0)] \a/\t in {Abstraktion/{Gegeben \& Gesucht},{\makebox[14mm]{\only<8->{\sbseries}Entwurf}}/{Algorithmus},Verifikation/{Termination \&\\partielle Korrektheit},Aufwandsanalyse/{Laufzeitverhalten}} {
+        \onslide<+(1)->{\node[right=.5mm] (k\i) at(\li.east) {\strut\faAngleRight};
+        \node[right=.5mm] (\i) at (k\i.east) {\strut\a};
+        \sub\i{\t}}
+    }
+\end{tikzpicture}}
+\end{frame}
+
+\def\mto{\ensuremath{\to}}
+\def\dt#1{{\textcolor{paletteA!58!white}{\sbseries\strut#1}}}
+\begin{frame}[c]{Konstrukte}
+\begin{itemize}[<+(1)->]
+   \itemsep18pt
+   \item \textit{Implizit}:\hfill \dt{byte}~\mto~\dt{short}~\mto~\dt{int}~\mto~\dt{long}~\mto~\dt{float}~\mto~\dt{double}\\
+   Zahlen von klein zu groß, sowie: \dt{char}~\mto~\dt{int}.
+   \item \textit{Präzedenzregeln}:\\
+   Post vor Prä, sonst wie Arithmetik \& Logik.
+   \item \textit{Default-Werte}:\\
+   Zahlen und Zeichen \bjava{0}, Boolean \bjava{false}, Rest \bjava{null}.
+   \item \textit{Überschatten}:\quad Lokal über Global.
+\end{itemize}
+\end{frame}
+
+\def\mto{\ensuremath{\to}}
+\begin{frame}[c]{Arrays \& Iteration}
+\begin{itemize}[<+(1)->]
+   \itemsep18pt
+   \item Arrays sind komplexe Datentypen.
+   \item Mehrdimensionale Arrays sind eindimensionale Arrays von eindimensionalen Arrays von\ldots
+   \item Die drei Schleifenarten sind gleich mächtig. \begin{itemize}
+      \item Maximum bekannt: \bjava{for}
+      \item Mindestens ein mal: \bjava{do}-\bjava{while}
+      \item Sonst: \bjava{while}
+   \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[c]{Unterprogramme}
+\begin{itemize}[<+(1)->]
+   \itemsep18pt
+   \item \textit{Überladung:}\hfill Gleicher Name, andere Signatur. \begin{itemize}
+      \item \textit{Signatur:} Name \& Parametertypliste
+      \item Müssen zudem in selber Klasse sein (später: Vererbung)
+   \end{itemize}
+   \item Beim Aufruf macht Java call-by-value: \begin{itemize}
+      \item Alle Parameter werden kopiert (Stack)
+   \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[c]{OOP}
+\begin{itemize}[<+(1)->]
+   \itemsep18pt
+   \item Eine Klasse definiert die Blaupause für Objekte \begin{itemize}
+      \item Attribute definieren den Zustand
+      \item Methoden definieren den Verhalten
+   \end{itemize}
+   \item Der Konstruktor baut den initialen Zustand \begin{itemize}
+      \item \textit{Instanziierung}: Erzeugen eines neuen Objektes
+      \item Wenn keiner: erzeugt Java den leeren Standardkonstruktor
+      \item \bjava{this} erlaubt Aufruf von überladenen Konstruktoren
+   \end{itemize}
+   \item Klassen, Methoden,~\ldots:\hfill \textit{Sichtbarkeit}  (\bjava{public},~\ldots)
+   \item \textit{Gültigkeit}sbereich: Wo die Variablen \say{deklariert sind}.
+\end{itemize}
 \end{frame}
 }\fi
 
