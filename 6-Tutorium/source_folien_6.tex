@@ -21,12 +21,12 @@
 \begin{itemize}[<+(1)->]
    \itemsep14pt
    \item Totale Korrektheit \begin{description}[Partielle Korrektheit: ]
-      \item[Terminiertheit:] \kern0pt\onslide<+(1)->{Endliche Schritte für jede Eingabe}
-      \item[Partielle Korrektheit:] \kern0pt\onslide<+(1)->{Wenn terminiert, dann korrekt}
+      \item[Terminiertheit:] \strut\onslide<+(1)->{Endliche Schritte für jede Eingabe}
+      \item[Partielle Korrektheit:] \strut\onslide<+(1)->{Wenn terminiert, dann korrekt}
    \end{description}
    \item Weitere Eigenschaften \begin{description}[Determiniertheit: ]
-      \item[Determiniertheit:] \kern0pt\onslide<+(1)->{Gleiche Eingabe~\(\to\) Gleiche Ausgabe}
-      \item[Determinismus:] \kern0pt\onslide<+(1)->{Gleiche Eingabe~\(\to\) Gleiche Zustandsfolge}
+      \item[Determiniertheit:] \strut\onslide<+(1)->{Gleiche Eingabe~\(\to\) Gleiche Ausgabe}
+      \item[Determinismus:] \strut\onslide<+(1)->{Gleiche Eingabe~\(\to\) Gleiche Zustandsfolge}
    \end{description}
 \end{itemize}\vfill
 \centerline{%
@@ -143,10 +143,10 @@
 !*\onslide<6->*!private static boolean isPalindromeRecursive(String s) {
 !*\onslide<7->*!    if(s.length() < 2) !*\Snode{@1}*!
 !*\onslide<8->*!        return true;
-!*\onslide<9->*!    else if(s.charAt(0) != s.charAt(s.length() - 1)) !*\Snode{@2}*!
-!*\onslide<9->*!        return false;
+!*\onslide<10->*!    else if(s.charAt(0) != s.charAt(s.length() - 1)) !*\Snode{@2}*!
+!*\onslide<10->*!        return false;
 !*\onslide<7->*!    else !*\Snode{@3}*!
-!*\onslide<7->*!        return isPalindromeRecursive(s.substring(1, s.length() - 1));
+!*\onslide<9->*!        return isPalindromeRecursive(s.substring(1, s.length() - 1));
 !*\onslide<6->*!}!*\onslide<1->*!
 \end{plainjava}
 \begin{tikzpicture}[@O]
@@ -390,7 +390,7 @@ return true;
 !*\onslide<9->*!       this.umfang = !*\onslide<11->*!2 * Math.PI * radius!*\onslide<9->*!;
 !*\onslide<7->*!   }
 !*\onslide<12->*!   |ihl|...|ihl|
-!*\onslide<2->*!}
+!*\onslide<2->*!}!*\onslide<1->*!
 \end{plainjava}
 \end{columns}
 \end{onlyenv}
@@ -417,7 +417,7 @@ sicher, dass nur gültige Werte für den Radius (\(r \geq 0\)) akzeptiert werden
 !*\onslide<17->*!   public double getUmfang() {
 !*\onslide<17->*!       return this.umfang;
 !*\onslide<17->*!   }
-!*\onslide<13->*!}
+!*\onslide<13->*!}!*\onslide<1->*!
 \end{plainjava}
 \end{onlyenv}
 \begin{onlyenv}<18-|handout:3>
@@ -427,7 +427,7 @@ sicher, dass nur gültige Werte für den Radius (\(r \geq 0\)) akzeptiert werden
 !*\onslide<18->*!   |ihl|...|ihl|
 !*\onslide<19->*!   public void setRadius(double r) {
 !*\onslide<21->*!       if (r < 0)!*\onslide<22->*! return;
-!*\onslide<14->*!       this.radius = r;
+!*\onslide<22->*!       this.radius = r;
 !*\onslide<23->*!       this.flaeche = !*\onslide<24->*!Math.PI * radius * radius!*\onslide<23->*!;
 !*\onslide<25->*!       this.umfang = !*\onslide<26->*!2 * Math.PI * radius!*\onslide<25->*!;
 !*\onslide<19->*!   }
@@ -437,7 +437,7 @@ sicher, dass nur gültige Werte für den Radius (\(r \geq 0\)) akzeptiert werden
 !*\onslide<19->*!   public void setFlaeche(double flaeche) {
 !*\onslide<20->*!       this.flaeche = flaeche;
 !*\onslide<19->*!   }
-!*\onslide<18->*!}
+!*\onslide<18->*!}!*\onslide<1->*!
 \end{plainjava}
 \end{onlyenv}
 \end{columns}
@@ -466,7 +466,7 @@ Flächeninhalt berechnet, das zugehörige Attribut aktualisiert und dieses zurü
 !*\onslide<33->*!       this.flaeche = Math.PI * radius * radius;
 !*\onslide<34->*!       return this.flaeche;
 !*\onslide<32->*!   }
-!*\onslide<27->*!}
+!*\onslide<27->*!}!*\onslide<1->*!
 \end{plainjava}
 \end{columns}
 \end{onlyenv}
@@ -487,7 +487,7 @@ Umfang berechnet, das zugehörige Attribut aktualisiert und dieses zurückgibt.}
 !*\onslide<38->*!       this.umfang = 2 * Math.PI * radius;
 !*\onslide<39->*!       return this.umfang;
 !*\onslide<37->*!   }
-!*\onslide<35->*!}
+!*\onslide<35->*!}!*\onslide<1->*!
 \end{plainjava}
 \end{columns}
 \end{onlyenv}
@@ -511,7 +511,7 @@ Umfang berechnet, das zugehörige Attribut aktualisiert und dieses zurückgibt.}
 \begin{onlyenv}<2-6|handout:1>
 \columns[c,onlytextwidth]
 \column{.48\linewidth}
-\begin{plainjava}
+\begin{plainjava}[basicstyle={\solGetStyle{basicstyle}\HStrut}]
 public class Kreis {
     private double radius;
     private double flaeche;
