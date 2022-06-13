@@ -106,14 +106,22 @@
 % TODO: make sectionlink auto triggerat start of section
 \SetNextSectionText[.75\linewidth]{TODO\smallskip\\ TODO}
 \section{Präsenzaufgabe}
+{\taskenum
 \begin{frame}[fragile,c]{Präsenzaufgabe}
 \begin{aufgabe}{Meine Kleine, du hast Palindrom!}
+    \onslide<2->{In dieser Aufgabe sollen Sie eine rekursive Methode implementieren, die überprüfen soll, ob es sich bei dem als Parameter übergebenen String um ein Palindrom handelt. Ein Palindrom ist ein Wort, das vorwärts und rückwärts gelesen identisch ist.} \onslide<3->{Die Überprüfung soll nicht case-sensitive sein, d.h. das Wort \say{Kajak} soll zum Beispiel ein gültiges Palindrom sein.}
+
+    \onslide<4->{Beantworten Sie zudem folgende Fragen bezüglich Ihrer Implementierung:}
+    \begin{enumerate}
+        \item<5-> Ist Ihre Implementierung ein linear-rekursiver Algorithmus? Warum?
+        \item<6-> Ist Ihre Implementierung ein end- oder kopf-rekursiver Algorithmus? Warum?
+    \end{enumerate}
 \end{aufgabe}
 \end{frame}
+}
 
-\begin{frame}[c,fragile]{Übungsblatt 9 - Aufgabe 2}
-    \onslide<2->{\only<3->{\color{gray}}In dieser Aufgabe sollen Sie die Methode {\color{black}\bjava{public static boolean isPalindrome} \bjava{(String s)}} implementieren, welche überprüfen soll ob es sich bei dem als Parameter übergebenen String \bjava{s} um ein Palindrom handelt. Ein Palindrom ist ein Wort, das vorwärts und rückwärts gelesen identisch ist. Die Überprüfung soll {\color{black}nicht case-sensitive} sein, d.h. das Wort \textit{Kajak} soll zum Beispiel ein gültiges Palindrom sein.
-    Verwenden Sie bei ihrer Implementierung {\color{black}keine Schleifen}, sondern {\color{black}rekursive Methoden-Aufrufe!}}\bigskip
+\begin{frame}[c,fragile]{Eine erste Idee}
+    \onslide<2->{\only<3->{\color{gray}}In dieser Aufgabe sollen Sie eine {\color{black}rekursive Methode} implementieren, die überprüfen soll, ob es sich bei dem als {\color{black}Parameter übergebenen String} um ein {\color{black}Palindrom} handelt. Ein Palindrom ist ein Wort, das vorwärts und rückwärts gelesen identisch ist. Die Überprüfung soll {\color{black}nicht case-sensitive} sein, d.h. das Wort \say{Kajak} soll zum Beispiel ein gültiges Palindrom sein.}\bigskip
 
     \onslide<4->{\color{black}Idee:}
     \footnotesize\begin{itemize}
@@ -123,37 +131,41 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Übungsblatt 9 - Aufgabe 2}
-    \begin{itemize}[<+(1)->]
-        \item Die Datei befindet sich hier: \only<2->{\textattachfile{\curpath Palindrome.java}{Palindrome.java}}
-    \end{itemize}\vfill
+\begin{frame}[fragile]{Von Palindromen}
 \SetupLstHl\lstfs{10}%
 \begin{plainjava}
-!*\onslide<3->*!public static boolean isPalindrome(String s) { // die "Hilfsmethode"
+!*\CodeFileMarkerAttach<2->{Palindrome.java}*!
+!*\onslide<3->*!public static boolean isPalindrome(String s) { !*\Snode{@helper}*!
 !*\onslide<4->*!    return isPalindromeRecursive(s.toLowerCase());
 !*\onslide<3->*!}
 
 
-!*\onslide<5->*!private static boolean isPalindromeRecursive(String s) {
-!*\onslide<6->*!    if(s.length() < 2) // Basisfall: weniger als zwei Zeichen (Abrunden)
-!*\onslide<6->*!        return true;
-!*\onslide<7->*!    else if(s.charAt(0) != s.charAt(s.length() - 1)) // Basisfall
-!*\onslide<7->*!        return false;
-!*\onslide<8->*!    else // Rekursionsfall
-!*\onslide<8->*!        return isPalindromeRecursive(s.substring(1, s.length() - 1));
-!*\onslide<5->*!}
+!*\onslide<6->*!private static boolean isPalindromeRecursive(String s) {
+!*\onslide<7->*!    if(s.length() < 2) !*\Snode{@1}*!
+!*\onslide<8->*!        return true;
+!*\onslide<9->*!    else if(s.charAt(0) != s.charAt(s.length() - 1)) !*\Snode{@2}*!
+!*\onslide<9->*!        return false;
+!*\onslide<7->*!    else !*\Snode{@3}*!
+!*\onslide<7->*!        return isPalindromeRecursive(s.substring(1, s.length() - 1));
+!*\onslide<6->*!}!*\onslide<1->*!
 \end{plainjava}
-\vfill\null
+\begin{tikzpicture}[@O]
+    \onslide<5->{\node[T,yshift=.33mm,right] at(@helper) {die \say{Hilfsmethode}};}
+
+    \onslide<7->{\node[T,yshift=.33mm,right] at(@1) {Basisfall: weniger als zwei Zeichen};}
+    \onslide<9->{\node[T,yshift=.33mm,right] at(@2) {Basisfall: kein Palindrom!};}
+    \onslide<7->{\node[T,yshift=.33mm,right] at(@3) {Rekursionsfall};}
+\end{tikzpicture}
 \end{frame}
 
 \iffull
-\MakeThePinguExplainIt[text width=7cm]{cap=!hide,glasses=!hide,sunglasses round,eyes shiny,cup=!hide,santa beard,santa hat,right item angle=-142,staff right length=17mm}{Mit \bjava{:lan:ret:c:urn:ran:} haben wir hier die zurückzugebenden anonymen Variablen referenziert. Generell ist hier das \say{Speichern} der Position für den Aufstieg der Rekursion informal dargestellt.}
-\begin{frame}[c,fragile]{Übungsblatt 9 - Aufgabe 2\hfill Sie Simulantario Sie!}
-\sollockinline\SetupLstHl\lstfs{10}\begin{plainjava}
+\MakeThePinguExplainIt[text width=7cm]{cap=!hide,glasses=!hide,sunglasses round,eyes shiny,cup=!hide,santa beard,halo,right item angle=-142,staff right length=17mm}{Mit \bjava{:lan:ret:c:urn:ran:} haben wir hier die zurückzugebenden anonymen Variablen referenziert. Generell ist hier das \say{Speichern} der Position für den Aufstieg der Rekursion informal dargestellt.}
+\begin{frame}[c,fragile]{Sie Simulantario Sie!}
+\sollockinline\SetupLstHl\lstfs{9}\begin{plainjava}
 !*\onslide<2->*!!*\MD4*!private static boolean isPalindrome(String s) { !*\rBS<handout:2-4|4->{s=\dq RegalelaGEr\dq }*!
 !*\onslide<2->*!    !*\MD5*!return isPalindrom!*\mb{7,38}\mbg[2-3]{8-42}*!eRecursive(s!*\mb6*!.toLowerCase());!*\ml[4]{43}*! !*\rBS<handout:2-3|6-41>{\dq regalelager\dq }~~\rBS<handout:4|43>{true}*!
 !*\onslide<2->*!}
-!*\onslide<2->*!!*\MD{8,15,20,25,30,35}*!private static boolean isPalindromeRecursive(String s) { !*\rBS<handout:0|8-14>{s=\dq regalelager\dq }\rBS<handout:0|15-19>{s=\dq egalelage\dq }\rBS<handout:0|20-24>{s=\dq galelag\dq }\rBS<handout:2-3|25-29>{s=\dq alela\dq }\rBS<handout:0|30-34>{s=\dq lel\dq }\rBS<handout:0|35-37>{s=\dq e\dq }*!
+!*\onslide<2->*!!*\MD{8,15,20,25,30,35}*!private static boolean isPalindromeRecursive(String s) { !*\rBS<handout:0|8-14>{s=\dq regalelager\dq }\rBS<handout:0|15-19>{s=\dq egalelage\dq }\rBS<handout:0|20-24>{s=\dq galelag\dq }\rBS<handout:2|25-29>{s=\dq alela\dq }\rBS<handout:0|30-34>{s=\dq lel\dq }\rBS<handout:3|35-37>{s=\dq e\dq }*!
 !*\onslide<2->*!    !*\MD{9,16,21,26,31,36}*!if(s.length() < 2) return true;!*\ml[3]{37}*!
 !*\onslide<2->*!    !*\MD[2]{10,17,22,27,32}*!else if(s.charAt(0) != s.charAt(s.length() - 1)) return false; !*\rBS<handout:0|10-14>{'r'!='r'}\rBS<handout:0|17-19>{'e'!='e'}\rBS<handout:0|22-24>{'g'!='g'}\rBS<handout:2|27-29>{'a'!='a'}\rBS<handout:0|32-34>{'l'!='l'}*!
 !*\onslide<2->*!    !*\MD{11,18,23,28,33}*!else return isPalindrom!*\mb{14,19,24,29,34}\mbg[2-3]{15-18,20-23,25-28,30-33,35-41}*!eRecursive(s!*\mb{13}*!.substring(1, s!*\mb{12}*!.length() - 1));!*\ml{38,39,40,41,42}*!
@@ -256,9 +268,9 @@
 \fi
 
 \iffull
-\begin{frame}[c,fragile]{Übungsblatt 9 - Aufgabe 2\hfill Iterativer Ansatz}
+\begin{frame}[c,fragile]{Iterativer Ansatz}
     \begin{itemize}[<+(1)->]
-        \item Die ersten beiden Aufgaben lassen sich \textit{einfacher} Iterativ prüfen.
+        \item Diese Aufgabe lässt sich auch iterativ prüfen.
         \item Für das Palindrom schauen wir für jedes Zeichen \(i\) der \say{linken Hälfte} ob es mit dem gespiegelten \(\text{\T{length}} - i - 1\) der \say{rechten Hälfte} übereinstimmt:
     \end{itemize}
 \begin{plainjava}
@@ -273,11 +285,12 @@
 \end{plainjava}
 \end{frame}
 
-\begin{frame}[c,fragile]{Übungsblatt 9 - Aufgabe 2\hfill Iterativer Ansatz, II}
+\begin{frame}[c,fragile]{Iterativer Ansatz, II}
     \lstfs{10}\begin{itemize}[<+(1)->]
-        \item Dies können wir als Tail-Rekursion umschreiben (\only<2->{\textattachfile{\curpath PalindromeIterative.java}{PalindromeIterative.java}}):
+        \item Dies können wir als \only<-9|handout:0>{???}\only<10->{Tail}-Rekursion umschreiben:
     \end{itemize}
 \begin{plainjava}
+!*\CodeFileMarkerAttach<3->{PalindromeIterative.java}*!
 !*\onslide<3->*!public static boolean isPalindrome(String s) {
 !*\onslide<4->*!    return helper(s.toLowerCase(), 0);
 !*\onslide<3->*!}
