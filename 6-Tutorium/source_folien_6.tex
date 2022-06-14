@@ -1,7 +1,7 @@
 \InputIfFileExists{../data/global.src}\relax\relax
 
 \iffull
-\title{TODO}
+\title{Sichtbar ungültige Seiteneffekte!}
 \subtitle{Tutorium sechs}
 \date{KW 24}
 \addbibresource{references.bib}
@@ -87,10 +87,11 @@
 
 \begin{frame}[c]{Objektorientierte Progammierung}
 \begin{itemize}[<+(1)->]
-   \itemsep18pt
+   \itemsep15pt
    \item Eine Klasse definiert die Blaupause für Objekte \begin{itemize}
       \item Attribute definieren den Zustand
       \item Methoden definieren den Verhalten
+      \item Statische Elemente sind nicht Teil der Blaupause \info{sie gehören der Klasse!}
    \end{itemize}
    \item Der Konstruktor baut den initialen Zustand \begin{itemize}
       \item \textit{Instanziierung}: \pause Erzeugen eines neuen Objektes
@@ -786,15 +787,21 @@ public class Kreis {
 !*\onslide<3->*!    static int x = 0;
 !*\onslide<3->*!    int y = 1;
 !*\onslide<3->*!    public static int methode(int z){
-!*\onslide<3->*!        return this.y + z;
+!*\onslide<3->*!        return !*\tikzmarknode{@}{\skB{this}}*!.y + z;
 !*\onslide<3->*!    }
 !*\onslide<3->*!}
-\end{plainjava}
+\end{plainjava}\vspace*{2.5em}\par
     \task<4->{Handelt es sich hierbei um eine gültige Java Klassendefinition? Begründen Sie Ihre Antwort \textit{kurz}.}
+    \onslide<5->{\textit{Nein} eine statische Methode kann nicht auf Instanzattribute (hier: \T{y}) zugreifen.}
 \end{enumerate}
+\begin{tikzpicture}[@O]
+    \onslide<6->{\draw[lightgray,-Kite] (@.south) to[out=270,in=180] ++(.5,-.33) node[T,below right,yshift=.7\baselineskip,align=left,text width=8.5cm] {\T{this} bezieht sich auf das Objekt auf dem die Methode aufgerufen wird. Statische Methoden werden aber auf der Klasse aufgerufen! \only<7->{Das gilt natürlich auch ohne das \T{this}, da es sich dann immernoch auf eine Instanzvariable bezieht.}};}
+\end{tikzpicture}
 \end{frame}
 
-
+{\def\n{\textcolor{codeouthl}{\textbackslash n}\,}
+{
+\MakeThePinguExplainIt[text width=4.25cm]{cap=!hide,cup=!hide,blush,tie,tie dots,right item angle=-15}{Um an die Instanzvariable zu kommen, bräuchten wir in \bjava{methode(int)} den Ausdruck \bjava{this.x}!}
 \begin{frame}[fragile]{Und nun Ausgaben!}
 \begin{enumerate}[<+(1)->]
     \setcounter{enumi}{1}
@@ -815,7 +822,12 @@ public class Kreis {
 \end{plainjava}
     \task<4->{Welche Ausgabe erzeugt das Programm? Begründen Sie Ihre Antwort \textit{kurz}.}
 \end{enumerate}
+\begin{tikzpicture}[@O]
+    \onslide<5->{\node[below left,yshift=-1.5cm,xshift=-2mm,text width=6.25cm] at(current page.north east) {Ausgabe: \say{1\n}. Die \bjava{methode2()} ruft \bjava{methode(int)} auf, wobei der Parameter \T{x = 1} die Instanzvariable \T{x = 0} überschattet.};}
+    \onslide<6->{\node[above left,yshift=\btdmfootheight,scale=.8] at(current page.south east) {\copy\pinguexplainbox};}
+\end{tikzpicture}
 \end{frame}
+}
 
 \begin{frame}[fragile]{Und nochmal Ausgaben!}
 \begin{enumerate}[<+(1)->]
@@ -837,12 +849,69 @@ public class Kreis {
 \end{plainjava}
     \task<4->{Welche Ausgabe erzeugt das Programm? Begründen Sie Ihre Antwort \textit{kurz}.}
 \end{enumerate}
+\begin{tikzpicture}[@O]
+    \onslide<5->{\node[below left,yshift=-1.5cm,xshift=-2mm,text width=6.65cm] at(current page.north east) {Ausgabe: \say{0\n1\n2\n3}. Die Klassenvariable erhält den Default-Wert~\T{0}. Der erste Aufruf von \T{methode()} erzeugt \say{0\n1\n2\n3}. Da \T{i} statisch ist, verbleibt \T{i = 4} als Seiteneffekt. Die for-Schleife iteriert kein weiteres mal.};}
+\end{tikzpicture}
 \end{frame}
 }
+}
+
+\begin{frame}
+    TODO: vor dem SChreiben immer kurz nachdenken DArauf hinweisen wegen Probleklausur
+\end{frame}
 
 \subsection{Aufgabe 3}
-\begin{frame}{Aufgabe 3: Seiteneffekte}
-
+\begin{frame}[fragile,c]{Aufgabe 3: Seiteneffekte}
+\lstfs{8}\columns[t,onlytextwidth]
+\column{.525\linewidth}
+\begin{plainjava}[lineskip=0.25pt]
+!*\CodeFileMarker{Person.java}*!
+class Person {
+    private String name;
+    private ValuePair v;
+    public Person(String name, int x, int y) {
+        this.name = name;
+        v = new ValuePair(x,y);
+    }
+    public String getName() {
+        return name;
+    }
+    public ValuePair getValuePair() {
+        return v;
+    }
+}
+\end{plainjava}
+\column{.425\linewidth}
+\begin{plainjava}
+!*\CodeFileMarker{TestPerson}*!
+class TestPerson {
+   public static void main(String[] args) {
+      Person p = new Person("Heinz", 11, 22);
+      String n1 = p.getName();
+      ValuePair xy1 = p.getValuePair();
+      System.out.println(n1 " " + xy1.x + " " + xy1.y);
+      n1 = "Hugo";
+      String n2 = p.getName();
+      xy1.x = 33;
+      xy1.y = 44;
+      ValuePair xy2 = p.getValuePair();
+      System.out.println(n1 " " + xy1.x + " " + xy1.y);
+   }
+}
+\end{plainjava}
+\endcolumns
+\begin{tikzpicture}[@O]
+    \node[below left,text width=7cm] at(current page.north east) {\begin{plainjava}
+!*\CodeFileMarker{ValuePair.java}*!
+class ValuePair {
+    int x; int y;
+    public ValuePair(int x, int y) {
+        this.x = x; this.y = y;
+    }
+}
+    \end{plainjava}
+};
+\end{tikzpicture}
 \end{frame}
 
 \iffull
