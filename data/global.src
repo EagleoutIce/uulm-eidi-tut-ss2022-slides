@@ -336,8 +336,8 @@
 
 
 \usepackage{lecture-heap-n-stack}
-\def\lhnselementformat#1{\texttt{#1}}
-\def\lhnsielementformat#1{\textbf{\vphantom{A}#1}}
+\long\def\lhnselementformat#1{{\ttfamily#1}}
+\long\def\lhnsielementformat#1{{\bfseries\vphantom{A}#1}}
 \long\def\lhnselementbox#1#2{\parbox{#1}{\centering#2}}%
 \makeatletter
 \lhns@minborderheight=5.4cm
@@ -359,7 +359,7 @@
 \gdef\ca@Rightmark{\rlap{\@declaredcolor{paletteA}\RawMDLeft}}
 \gdef\ca@Botmark{\smash{\clap{\@declaredcolor{paletteA}\RawMDUp}}}}
 
-\SetCodeAnimationFadeOutMixin{!12!codeouthl}
+\SetCodeAnimationFadeOutMixin{!10!codeouthl}
 \CodeAnimationsWithFadeOut
 % current space hack:
 \preto\AnimateCode{\vspace*{-.65\baselineskip}}
