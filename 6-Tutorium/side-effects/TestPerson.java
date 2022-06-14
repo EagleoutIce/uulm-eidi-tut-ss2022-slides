@@ -9,6 +9,6 @@ class TestPerson {
      xy1.x = 33;
      xy1.y = 44;
      ValuePair xy2 = p.getValuePair();
-     System.out.println(n1 + " " + xy1.x + " " + xy1.y);
+     System.out.println(n2 + " " + xy1.x + " " + xy1.y);
    }
  }

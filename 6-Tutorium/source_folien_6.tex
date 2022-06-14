@@ -865,26 +865,41 @@ public class Kreis {
 % #endregion
 
 \subsection{Aufgabe 3}
-{\makeatletter\lhns@elemwidth3.66cm
+{\makeatletter\lhns@elemwidth3.95cm
 % with parbox i try to keep fontsize (especially resets) out of tikz mechanisms
 % custom -#mm for padding
-\def\Object#1#2{\centering\footnotesize\parbox{\linewidth-2.5mm}{\centerline{\bjava{#1} \textcolor{gray}{(object)}}\relax\ignorespaces#2}}
+\long\def\Object#1#2{\centering\parskip0pt\parindent0pt\footnotesize\parbox{\linewidth-2.5mm}{\centerline{\bjava{#1} \textcolor{gray}{(object)}}\smallskip\par\relax#2}}% hereby, i surrender to the humble alignment gods
 \setbox\pinguB=\hbox{\tikz{\pingu[eyes shock,left wing shock,devil-horns,right wing raise,sign post right=!]}}
 % move down the heap root just so that it is somewhat clear :D
 % somewhat of a small jitter:
 \pgfmathsetmacro\lhns@render@heap@jitter{-abs(rand)*1mm-.85mm}% just to be save and keep it constant over anims!
 % more kw does not work with langs atm... so...
 \lstset{add to literate={Person}{{{\solGet{keywordC}{Person}}}}6 {TestPerson}{{{\solGet{keywordC}{TestPerson}}}}{10} {ValuePair}{{{\solGet{keywordC}{ValuePair}}}}9}%
-\tikzset{ca@CommentNode/.append style={font=\sffamily\scriptsize\slshape,right=.5mm,yshift=-.5mm,scale=.75},ca@CommentNode@out/.append style={font=\sffamily\scriptsize\slshape}}% compact :)
+\tikzset{ca@CommentNode/.append style={font=\sffamily\scriptsize\slshape,right=.5mm,yshift=-.2mm,scale=.75},ca@CommentNode@out/.append style={font=\sffamily\scriptsize\slshape}}% compact :)
 \begin{frame}[fragile,t]{Aufgabe 3: Seiteneffekte}
+\begin{tikzpicture}[@O]
+    \onslide<32>{
+        \hlbehindcodeunder{out1}{@out>}
+        \node[below,xshift=5mm,T,scale=.75] at(@out>_down) {\say{Magic}};
+    }
+    \onslide<49>{
+        \hlbehindcodeunder{out2}{@out2>}
+        \node[below,xshift=5mm,T,scale=.75] at(@out2>_down) {\say{Magic}};
+    }
+\end{tikzpicture}\vspace*{-\baselineskip}
 \lstfs{7}\vspace*{-8mm}\columns[t,onlytextwidth]% get space for stack and heap!
 \column{.47\linewidth}
 \AnimateCode[@1]{onslide={%
     o-1:{},-,-,-,o5:{8}, % only highlight no line marker
     :5:{8},-,:6:{3},:7:{4}, % start of ctor person (second for params)
     *\Line{7}\Location{ValuePair-ctor}\Others{19,21}\Comment{ValuePair(int,int)},
-    :19:{21,7},-,-,:20:{18,7}
+    :19:{21,7},-,-,:20:{18,7},7,o-1:{}, % TODO: make o-1:{} something more usable :D
+    -,o9:{11},:9:{11},:10:{3},o-1:{},-,o12:{14},:12:{14},:13:{4},o-1:{},
+    -,-,-,-, % nun bei: String n2 = p.getName()
+    o9:{11},:9:{11},:10:{3},o-1:{},-,-,-,-,-, % nun bei: ValuePair xy2 = p.getValuePair()
+    o12:{14},:12:{14},:13:{4},o-1:{},-,-,0
 },first slide=5}
+% The :c: breaker is because i used literates :c
 \begin{minted}[escapeinside={/*}{*/}]{java}
 /*\CodeFileMarkerAttach<2->[side-effects/]{Person.java}*/
 /*\onslide<2->*/class Person {
@@ -897,7 +912,7 @@ public class Kreis {
 /*\onslide<2->*/  public String getName() {
 /*\onslide<2->*/    return name;
 /*\onslide<2->*/  }
-/*\onslide<2->*/  public ValuePair getValuePair() {
+/*\onslide<2->*/  public ValuePair getVa:c:luePair() {
 /*\onslide<2->*/    return v;
 /*\onslide<2->*/  }
 /*\onslide<2->*/}/*\smallskip*/
@@ -914,22 +929,30 @@ public class Kreis {
 \AnimateCode[@2]{onslide={%
     o-1:{},-,:3:{14},+,
     *\Line{4}\Location{Person-ctor}\Comment{Person(String,int,int)},
-    o4:{},-,-,-,-,-,-,-
+    o4:{},-,-,-,-,-,-,-,-,-,4,+,
+    *\Line{5}\Location{getName}\Comment{getName()},
+    o5:{},-,5,+,
+    *\Line{6}\Location{getValuePair}\Comment{getValuePair()},
+    o6:{},-,6,+,7,+,+,
+    *\Line{9}\Location{getName}\Comment{getName()},
+    o9:{},-,9,+,10,+,11,+,
+    *\Line{12}\Location{getValuePair}\Comment{getValuePair()},
+    o12:{},-,12,+,13,0
 },first slide=5}
 \begin{minted}[escapeinside={/*}{*/}]{java}
 /*\CodeFileMarkerAttach<4->[side-effects/]{TestPerson.java}*/
 /*\onslide<4->*/class TestPerson {
 /*\onslide<4->*/  public static void main(String[] args) {
 /*\onslide<4->*/    Person p = new /*\setbox0=\hbox{Person}\AnimLoc[.5\wd0]{Person-ctor}*/Person("Heinz", 11, 22);
-/*\onslide<4->*/    String n1 = p.getName();
-/*\onslide<4->*/    ValuePair xy1 = p.getValuePair();
-/*\onslide<4->*/    System.out.println(n1 + " " + xy1.x + " " + xy1.y);
+/*\onslide<4->*/    String n1 = p./*\setbox0=\hbox{getName}\AnimLoc[.5\wd0]{getName}*/getName();
+/*\onslide<4->*/    ValuePair xy1 = p./*\setbox0=\hbox{getValuePair}\AnimLoc[.5\wd0]{getValuePair}*/getValu:c:ePair();
+/*\onslide<4->*/    /*\Snode{out1}*/System.out.println(n1 + " " + xy1.x + " " + xy1.y);/*\Snode{out1@}*/
 /*\onslide<4->*/    n1 = "Hugo";
-/*\onslide<4->*/    String n2 = p.getName();
+/*\onslide<4->*/    String n2 = p./*\setbox0=\hbox{getName}\AnimLoc[.5\wd0]{getName}*/getName();
 /*\onslide<4->*/    xy1.x = 33;
 /*\onslide<4->*/    xy1.y = 44;
-/*\onslide<4->*/    ValuePair xy2 = p.getValuePair();
-/*\onslide<4->*/    System.out.println(n1 + " " + xy1.x + " " + xy1.y);
+/*\onslide<4->*/    ValuePair xy2 = p./*\setbox0=\hbox{getValuePair}\AnimLoc[.5\wd0]{getValuePair}*/getValu:c:ePair();
+/*\onslide<4->*/    /*\Snode{out2}*/System.out.println(n2 + " " + xy1.x + " " + xy1.y);/*\Snode{out2@}*/
 /*\onslide<4->*/  }
 /*\onslide<4->*/}/*\onslide<1->*/
 \end{minted}
@@ -939,32 +962,49 @@ public class Kreis {
 \setbox\pinguA=\hbox{\begin{tikzpicture}[lhns@basestyle/.append style={execute at begin node=\HStrut,font=\ttfamily},lhns@blockstyle/.append style={draw=gray,thick}]
 \begin{heap-n-stack}{}
 \only<6-9>{\heap{\color{gray}---heapland---}}
-\only<10->{\heap{\Object{Person}{\bjava{String name}\\\bjava{ValuePair v}}}}
+\only<10->{\heap{\Object{Person}{\bjava{String name}\par\bjava{ValuePair v}}}}
 % TODO: genau genommen existieren ja auch die Literale aber psst
 \only<11->{\heap{\bjava{\"Heinz\"}}}
-\only<16->{\heap{\Object{ValuePair}{\only<-17>{\bjava{int x = ?}}\only<18->{\bjava{int x = 11}}\\\only<-17>{\bjava{int y = ?}}\only<18->{\bjava{int y = 22}}}}}
+\only<16->{\heap{\Object{ValuePair}{\only<-17>{\bjava{int x = ?}}\only<18-39>{\bjava{int x = 11}}\only<40>{\bjava{int x =\ }\textbf{\protect\solGetStyle{numbers}33}}\only<41->{\bjava{int x = 33}}\par\only<-17>{\bjava{int y = ?}}\only<18-41>{\bjava{int y = 22}}\only<42>{\bjava{int y =\ }\textbf{\protect\solGetStyle{numbers}44}}\only<43->{\bjava{int y = 44}}}}}
+\only<33->{\heap{\bjava{\"Hugo\"}}}
 \renderheap
 % TODO: eingehen auf initialisierung, instanziierung , zuweisung etc...
 
 \only<7->{\stack{\textbf{main}}}
 \only<8->{\stack{\bjava{Person p}}}
-\only<10->{\stack{\textbf{\protect\downsize{\linewidth-4mm}{<ctor> Person}}}}
-\only<11-14>{\stack{\bjava{String name}}}
-\only<11-14>{\stack{\bjava{int x = 11}}}
-\only<11-14>{\stack{\bjava{int y = 22}}}
-\only<15->{\stack{\color{gray}{\protect\downsize{\linewidth-4mm}{\itshape\ldots name, x, y\ldots}}}}
-\only<15->{\stack{\textbf{\protect\downsize{\linewidth-4mm}{<ctor> ValuePair}}}}
-\only<17->{\stack{\bjava{int x = 11}}}
-\only<17->{\stack{\bjava{int y = 22}}}
+\only<10-19>{\stack{\textbf{<ctor> Person}}}
+\only<11-14,19>{\stack{\bjava{String name}}}
+\only<11-14,19>{\stack{\bjava{int x = 11}}}
+\only<11-14,19>{\stack{\bjava{int y = 22}}}
+\only<15-18>{\stack{\color{gray}{\itshape\ldots name, x, y\ldots}}}
+\only<15-18>{\stack{\textbf{<ctor> ValuePair}}}
+\only<17-18>{\stack{\bjava{int x = 11}}}
+\only<17-18>{\stack{\bjava{int y = 22}}}
+\only<21->{\stack{\bjava{String n1}}}
+\only<23-24>{\stack{\textbf{Person::getName}}}
+\only<26->{\stack{\only<39-42>{\bfseries}\bjava{ValuePair xy1}}}
+\only<28-29>{\stack{\textbf{\ldots::getValuePair}}}
+\only<31-32>{\stack{\textbf{\ldots out::println}}}
+\only<34->{\stack{\bjava{String n2}}}
+\only<36-37>{\stack{\textbf{Person::getName}}}
+\only<43->{\stack{\bjava{ValuePair xy2}}}
 \renderstack
 
-% TODO: only when coming back
-% \only<10->{\draw[lhns] (stack-1.east) to[out=0,in=180] (heap-0.west);}
+\only<20->{\draw[lhns] (stack-1.east) to[out=0,in=180] (heap-0.west);}
 \pgfinterruptboundingbox
 {% color group
-    \only<11->{\only<15->{\color{gray}}\draw[lhns] (stack-3.east) to[out=0,in=180] (heap-1.west);}
+    \only<11-19>{\only<15-18>{\color{gray}}\draw[lhns] (stack-3.east) to[out=0,in=180] (heap-1.west);}
 }
-\only<12->{\draw[lhns] ([xshift=-1.33cm,yshift=-1mm]heap-0.east) to[out=0,in=0,looseness=2] (heap-1.east);}
+\only<12->{\draw[lhns] ([xshift=-1.675cm,yshift=-.175mm]heap-0.east) to[out=0,in=0,looseness=2] (heap-1.east);}
+\only<19->{\draw[lhns] ([xshift=-1.675cm,yshift=-4.4mm]heap-0.east) to[out=0,in=0,looseness=2] (heap-2.east);}
+\only<25-32>{\draw[lhns] (stack-2.east) to[out=0,in=180] (heap-1.west);}
+{% color group
+\only<39-42>{\color{pingu@purple}}
+\only<30->{\draw[lhns] (stack-3.east) to[out=0,in=180] (heap-2.west);}
+}
+\only<33->{\draw[lhns] (stack-2.east) to[out=0,in=180] (heap-3.west);}
+\only<38->{\draw[lhns] (stack-4.east) to[out=0,in=180] (heap-1.west);}
+\only<47->{\draw[lhns] (stack-5.east) to[out=0,in=180] (heap-2.west);}
 \endpgfinterruptboundingbox
 \end{heap-n-stack}
 \end{tikzpicture}}%
@@ -975,7 +1015,9 @@ public class Kreis {
         \node[above right,yshift=\btdmfootheight,scale=.5,xshift=-4mm] (peng) at(current page.south) {\copy\pinguB};
         \node[above,T,align=center,text width=4cm,scale=.5] at(peng.north) {Wann genau und wie das Objekt auf dem Heap landet ist uns \textup{eschal}.};
     }
-    \onslide<6>{\node[below left,yshift=-1.25cm,xshift=-1mm,T,scale=.65] at(current page.north east) {Aus Platzgründen ignoriere ich, dass \T{args} auch auf Heap und Stack verwaltet wird!};}
+    \onslide<6>{\node[below left,yshift=-1.25cm,xshift=-1mm,T,scale=.65] at(current page.north east) {Aus Platzgründen ignoriere ich einiges (wie \T{args},~\ldots)!};}
+
+    \onslide<32->{\node[above=\btdmfootheight+.75cm,draw,rounded corners=2pt,gray,minimum width=3cm,align=left,minimum height=2.125\baselineskip] at(current page.south) {\T{Heinz 11 22}\\\only<49->{\T{Heinz 33 44}}};}
 \end{tikzpicture}}
 \end{frame}
 }
