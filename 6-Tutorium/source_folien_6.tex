@@ -11,9 +11,10 @@
 \iffull\begin{document}
 \titleframe
 
-\TopicOverview{7}
+% FIXME: \TopicOverview{7}
 \fi
-
+% #region out
+\iffalse
 \iffull{\SummaryFrame
 \def\sub#1#2{\node[font=\footnotesize\sffamily,scale=.715,align=center,gray,below=-2.65mm] at(#1.south) {\strut#2\strut};}
 \setbeamerfont{description item}{series=\mdseries,shape=\itshape}
@@ -860,59 +861,124 @@ public class Kreis {
     TODO: vor dem SChreiben immer kurz nachdenken DArauf hinweisen wegen Probleklausur
 \end{frame}
 
+\fi
+% #endregion
+
 \subsection{Aufgabe 3}
-\begin{frame}[fragile,c]{Aufgabe 3: Seiteneffekte}
-\lstfs{8}\columns[t,onlytextwidth]
-\column{.525\linewidth}
-\begin{plainjava}[lineskip=0.25pt]
-!*\CodeFileMarker{Person.java}*!
-class Person {
-    private String name;
-    private ValuePair v;
-    public Person(String name, int x, int y) {
-        this.name = name;
-        v = new ValuePair(x,y);
-    }
-    public String getName() {
-        return name;
-    }
-    public ValuePair getValuePair() {
-        return v;
-    }
-}
-\end{plainjava}
-\column{.425\linewidth}
-\begin{plainjava}
-!*\CodeFileMarker{TestPerson}*!
-class TestPerson {
-   public static void main(String[] args) {
-      Person p = new Person("Heinz", 11, 22);
-      String n1 = p.getName();
-      ValuePair xy1 = p.getValuePair();
-      System.out.println(n1 " " + xy1.x + " " + xy1.y);
-      n1 = "Hugo";
-      String n2 = p.getName();
-      xy1.x = 33;
-      xy1.y = 44;
-      ValuePair xy2 = p.getValuePair();
-      System.out.println(n1 " " + xy1.x + " " + xy1.y);
-   }
-}
-\end{plainjava}
+{\makeatletter\lhns@elemwidth3.66cm
+% with parbox i try to keep fontsize (especially resets) out of tikz mechanisms
+% custom -#mm for padding
+\def\Object#1#2{\centering\footnotesize\parbox{\linewidth-2.5mm}{\centerline{\bjava{#1} \textcolor{gray}{(object)}}\relax\ignorespaces#2}}
+\setbox\pinguB=\hbox{\tikz{\pingu[eyes shock,left wing shock,devil-horns,right wing raise,sign post right=!]}}
+% move down the heap root just so that it is somewhat clear :D
+% somewhat of a small jitter:
+\pgfmathsetmacro\lhns@render@heap@jitter{-abs(rand)*1mm-.85mm}% just to be save and keep it constant over anims!
+% more kw does not work with langs atm... so...
+\lstset{add to literate={Person}{{{\solGet{keywordC}{Person}}}}6 {TestPerson}{{{\solGet{keywordC}{TestPerson}}}}{10} {ValuePair}{{{\solGet{keywordC}{ValuePair}}}}9}%
+\tikzset{ca@CommentNode/.append style={font=\sffamily\scriptsize\slshape,right=.5mm,yshift=-.5mm,scale=.75},ca@CommentNode@out/.append style={font=\sffamily\scriptsize\slshape}}% compact :)
+\begin{frame}[fragile,t]{Aufgabe 3: Seiteneffekte}
+\lstfs{7}\vspace*{-8mm}\columns[t,onlytextwidth]% get space for stack and heap!
+\column{.47\linewidth}
+\AnimateCode[@1]{onslide={%
+    o-1:{},-,-,-,o5:{8}, % only highlight no line marker
+    :5:{8},-,:6:{3},:7:{4}, % start of ctor person (second for params)
+    *\Line{7}\Location{ValuePair-ctor}\Others{19,21}\Comment{ValuePair(int,int)},
+    :19:{21,7},-,-,:20:{18,7}
+},first slide=5}
+\begin{minted}[escapeinside={/*}{*/}]{java}
+/*\CodeFileMarkerAttach<2->[side-effects/]{Person.java}*/
+/*\onslide<2->*/class Person {
+/*\onslide<2->*/  private String name;
+/*\onslide<2->*/  private ValuePair v;
+/*\onslide<2->*/  public Person(String name, int x, int y) {
+/*\onslide<2->*/    this.name = name;
+/*\onslide<2->*/    v = new /*\setbox0=\hbox{ValuePair}\AnimLoc[.5\wd0]{ValuePair-ctor}*/ValuePair(x,y);
+/*\onslide<2->*/  }
+/*\onslide<2->*/  public String getName() {
+/*\onslide<2->*/    return name;
+/*\onslide<2->*/  }
+/*\onslide<2->*/  public ValuePair getValuePair() {
+/*\onslide<2->*/    return v;
+/*\onslide<2->*/  }
+/*\onslide<2->*/}/*\smallskip*/
+/*\CodeFileMarkerAttach<3->[side-effects/]{ValuePair.java}*/
+/*\onslide<3->*/class ValuePair {
+/*\onslide<3->*/  int x; int y;
+/*\onslide<3->*/  public ValuePair(int x, int y) {
+/*\onslide<3->*/    this.x = x; this.y = y;
+/*\onslide<3->*/  }
+/*\onslide<3->*/}/*\onslide<1->*/
+\end{minted}
+\endAnimateCode
+\column{.53\linewidth}
+\AnimateCode[@2]{onslide={%
+    o-1:{},-,:3:{14},+,
+    *\Line{4}\Location{Person-ctor}\Comment{Person(String,int,int)},
+    o4:{},-,-,-,-,-,-,-
+},first slide=5}
+\begin{minted}[escapeinside={/*}{*/}]{java}
+/*\CodeFileMarkerAttach<4->[side-effects/]{TestPerson.java}*/
+/*\onslide<4->*/class TestPerson {
+/*\onslide<4->*/  public static void main(String[] args) {
+/*\onslide<4->*/    Person p = new /*\setbox0=\hbox{Person}\AnimLoc[.5\wd0]{Person-ctor}*/Person("Heinz", 11, 22);
+/*\onslide<4->*/    String n1 = p.getName();
+/*\onslide<4->*/    ValuePair xy1 = p.getValuePair();
+/*\onslide<4->*/    System.out.println(n1 + " " + xy1.x + " " + xy1.y);
+/*\onslide<4->*/    n1 = "Hugo";
+/*\onslide<4->*/    String n2 = p.getName();
+/*\onslide<4->*/    xy1.x = 33;
+/*\onslide<4->*/    xy1.y = 44;
+/*\onslide<4->*/    ValuePair xy2 = p.getValuePair();
+/*\onslide<4->*/    System.out.println(n1 + " " + xy1.x + " " + xy1.y);
+/*\onslide<4->*/  }
+/*\onslide<4->*/}/*\onslide<1->*/
+\end{minted}
+\endAnimateCode\onslide<1->
 \endcolumns
-\begin{tikzpicture}[@O]
-    \node[below left,text width=7cm] at(current page.north east) {\begin{plainjava}
-!*\CodeFileMarker{ValuePair.java}*!
-class ValuePair {
-    int x; int y;
-    public ValuePair(int x, int y) {
-        this.x = x; this.y = y;
-    }
+\onslide<6->{% just for the alignment
+\setbox\pinguA=\hbox{\begin{tikzpicture}[lhns@basestyle/.append style={execute at begin node=\HStrut,font=\ttfamily},lhns@blockstyle/.append style={draw=gray,thick}]
+\begin{heap-n-stack}{}
+\only<6-9>{\heap{\color{gray}---heapland---}}
+\only<10->{\heap{\Object{Person}{\bjava{String name}\\\bjava{ValuePair v}}}}
+% TODO: genau genommen existieren ja auch die Literale aber psst
+\only<11->{\heap{\bjava{\"Heinz\"}}}
+\only<16->{\heap{\Object{ValuePair}{\only<-17>{\bjava{int x = ?}}\only<18->{\bjava{int x = 11}}\\\only<-17>{\bjava{int y = ?}}\only<18->{\bjava{int y = 22}}}}}
+\renderheap
+% TODO: eingehen auf initialisierung, instanziierung , zuweisung etc...
+
+\only<7->{\stack{\textbf{main}}}
+\only<8->{\stack{\bjava{Person p}}}
+\only<10->{\stack{\textbf{\protect\downsize{\linewidth-4mm}{<ctor> Person}}}}
+\only<11-14>{\stack{\bjava{String name}}}
+\only<11-14>{\stack{\bjava{int x = 11}}}
+\only<11-14>{\stack{\bjava{int y = 22}}}
+\only<15->{\stack{\color{gray}{\protect\downsize{\linewidth-4mm}{\itshape\ldots name, x, y\ldots}}}}
+\only<15->{\stack{\textbf{\protect\downsize{\linewidth-4mm}{<ctor> ValuePair}}}}
+\only<17->{\stack{\bjava{int x = 11}}}
+\only<17->{\stack{\bjava{int y = 22}}}
+\renderstack
+
+% TODO: only when coming back
+% \only<10->{\draw[lhns] (stack-1.east) to[out=0,in=180] (heap-0.west);}
+\pgfinterruptboundingbox
+{% color group
+    \only<11->{\only<15->{\color{gray}}\draw[lhns] (stack-3.east) to[out=0,in=180] (heap-1.west);}
 }
-    \end{plainjava}
-};
-\end{tikzpicture}
+\only<12->{\draw[lhns] ([xshift=-1.33cm,yshift=-1mm]heap-0.east) to[out=0,in=0,looseness=2] (heap-1.east);}
+\endpgfinterruptboundingbox
+\end{heap-n-stack}
+\end{tikzpicture}}%
+\begin{tikzpicture}[@O]% THATS NO PENGU :C The federation of penguin support would never lie!
+    \node[above left,xshift=-2mm,yshift=\btdmfootheight] at(current page.south east) {\resizebox*!{3cm}{\box\pinguA}};
+    % thats a pengu c:
+    \onslide<10>{%
+        \node[above right,yshift=\btdmfootheight,scale=.5,xshift=-4mm] (peng) at(current page.south) {\copy\pinguB};
+        \node[above,T,align=center,text width=4cm,scale=.5] at(peng.north) {Wann genau und wie das Objekt auf dem Heap landet ist uns \textup{eschal}.};
+    }
+    \onslide<6>{\node[below left,yshift=-1.25cm,xshift=-1mm,T,scale=.65] at(current page.north east) {Aus Platzgründen ignoriere ich, dass \T{args} auch auf Heap und Stack verwaltet wird!};}
+\end{tikzpicture}}
 \end{frame}
+}
 
 \iffull
 \SetNextSectionText{Grundlagen der Rekursion\\Abgabe: \DTMDate{2022-06-20}}
@@ -921,6 +987,7 @@ class ValuePair {
 \end{frame}
 \fi
 
+\iffalse
 \SetNextSectionText[.55\linewidth]{TODO}
 \section{Abschließendes}
 {\SummaryFrame
@@ -933,6 +1000,7 @@ class ValuePair {
 \end{itemize}
 \end{frame}
 }
+\fi
 
 % TODO: pascal case
 

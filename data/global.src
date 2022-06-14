@@ -313,14 +313,20 @@
 \newcommand<>\rBS[1]{\only#2{\solGet{comments}{\color{lightgray}\itshape#1}}}
 \newcommand<>\rBSo[1]{\onslide#2{\solGet{comments}{\color{lightgray}\itshape#1}}}
 
-\def\MDRight{{\tiny\smash{\faChevronRight}}}
-\def\MDLeft{{\tiny\smash{\faChevronLeft}}}
-\def\MDDown{{\tiny\smash{\faChevronDown}}}
-\def\MDUp{{\tiny\smash{\faChevronUp}}}
+\def\MDRight{{\smash{\Raw\MDRight}}}
+\def\MDLeft{{\smash{\Raw\MDLeft}}}
+\def\MDDown{{\smash{\Raw\MDDown}}}
+\def\MDUp{{\smash{\Raw\MDUp}}}
 
-\newcommand*\ml[2][0]{\only<#2|handout:#1>{\rlap{\color{paletteA}\;\MDLeft}}}
+\def\RawMDRight{{\tiny\faChevronRight}}
+\def\RawMDLeft{{\tiny\faChevronLeft}}
+\def\RawMDDown{{\tiny\faChevronDown}}
+\def\RawMDUp{{\tiny\faChevronUp}}
+
+
+\newcommand*\ml[2][0]{\only<#2|handout:#1>{\rlap{\@declaredcolor{paletteA}\;\MDLeft}}}
 \newcommand*\mg[2][0]{\only<#2|handout:#1>{\llap{\color{shadeA!70!paletteA}\MDRight~}}}
-\newcommand*\MD[2][0]{\only<#2|handout:#1>{\llap{\color{paletteA}\MDRight~}}}
+\newcommand*\MD[2][0]{\only<#2|handout:#1>{\llap{\@declaredcolor{paletteA}\MDRight~}}}
 
 \def\mkb#1{$\vphantom{A}\smash{\underset{\!\bullet}{\text{#1}}}$}
 % config takeover :D
@@ -347,6 +353,12 @@
 \newcommand<>{\mark}[1]{{\only#2{\color{black}}#1}}
 
 \usepackage{code-animation}
+% let the animation package comply with the oldschool :D (and slide design)
+{\makeatletter% raw without smash
+\gdef\ca@Leftmark{\llap{\@declaredcolor{paletteA}\RawMDRight}}
+\gdef\ca@Rightmark{\rlap{\@declaredcolor{paletteA}\RawMDLeft}}
+\gdef\ca@Botmark{\smash{\clap{\@declaredcolor{paletteA}\RawMDUp}}}}
+
 \SetCodeAnimationFadeOutMixin{!12!codeouthl}
 \CodeAnimationsWithFadeOut
 % current space hack:
@@ -356,7 +368,8 @@
 \def\ShowInTheWeb#1{\smash{\raisebox{.25mm}{\color{lightgray}\sffamily\tiny\fancyulcolor{lightgray}\link{#1}{display in browser}}}\vspace*{-.25mm}}
 
 % \def\CodeFileMarker#1{{\hfill\color{lightgray}\sffamily\tiny#1\rlap{\thinspace~\faFileCodeO}}}
-\newcommand<>\CodeFileMarkerAttach[1]{\only#2{\CodeFileMarker{\attachfilesetup{color=lightgray}\fancyulcolor{lightgray}\textattachfile{\curpath #1}{\rawlink{#1}}}}}
+\newcommand<>\CodeFileMarkerAttach[2][]{\only#3{\CodeFileMarker{\attachfilesetup{color=lightgray}\fancyulcolor{lightgray}\textattachfile{\curpath #1#2}{\rawlink{#2}}}}}
+\solsetmintedstyle{plain}
 
 \mode<all>{\newcommand<>\onlyhandout[1]{\relax}}
 \mode<handout>{\let\onlyhandout\only}
