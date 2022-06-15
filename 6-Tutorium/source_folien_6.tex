@@ -921,6 +921,7 @@ public class Kreis {
 \end{minted}
 \endAnimateCode
 \column{.53\linewidth}
+\begin{onlyenv}<1-|handout:0>
 \AnimateCode[@2]{onslide={%
     o-1:{},-,:3:{14},+,
     *\Line{4}\Location{Person-ctor}\Comment{Person(String,int,int)},
@@ -952,6 +953,27 @@ public class Kreis {
 /*\onslide<4->*/}/*\onslide<1->*/
 \end{minted}
 \endAnimateCode\onslide<1->
+\end{onlyenv}
+\begin{onlyenv}<0|handout:1>
+\begin{minted}[escapeinside={/*}{*/}]{java}
+/*\CodeFileMarkerAttach<4->[side-effects/]{TestPerson.java}*/
+class TestPerson {
+    /*\ShowInTheWeb[.1mm]{https://www.online-java.com/a3ZHilOS4M}*/
+   public static void main(String[] args) {
+      Person p = new Person("Heinz", 11, 22);
+      String n1 = p.getName();
+      ValuePair xy1 = p.getValuePair();
+      System.out.println(n1 + " " + xy1.x + " " + xy1.y);
+      n1 = "Hugo";
+      String n2 = p.getName();
+      xy1.x = 33;
+      xy1.y = 44;
+      ValuePair xy2 = p.getValuePair();
+      System.out.println(n2 + " " + xy1.x + " " + xy1.y);
+   }
+}
+\end{minted}
+\end{onlyenv}
 \endcolumns% FIXME: TODO: DO THAT FOR HANDOUT
 \onslide<6-|handout:0>{% just for the alignment
 \setbox\pinguA=\hbox{\begin{tikzpicture}[lhns@basestyle/.append style={execute at begin node=\HStrut,font=\ttfamily},lhns@blockstyle/.append style={draw=gray,thick}]
@@ -1111,6 +1133,7 @@ public class Kreis {
 \end{minted}
 \endAnimateCode
 \column{.53\linewidth}
+\begin{onlyenv}<1-|handout:0>
 \AnimateCode[@2]{onslide={%
     6,*\Line{6}\Location{getValuePair}\Comment{Person::getValuePair()},
     o6:{},-,-,-,-,-,-,6,%
@@ -1138,6 +1161,27 @@ public class Kreis {
 /*\onslide<4->*/}/*\onslide<1->*/
 \end{minted}
 \endAnimateCode\onslide<1->
+\end{onlyenv}
+\begin{onlyenv}<0|handout:1>
+\begin{minted}[escapeinside={/*}{*/}]{java}
+/*\CodeFileMarkerAttach<4->[side-effects/]{TestPerson.java}*/
+class TestPerson {
+    /*\ShowInTheWeb[.1mm]{https://www.online-java.com/ZIuJKYgG3y}*/
+   public static void main(String[] args) {
+      Person p = new Person("Heinz", 11, 22);
+      String n1 = p.getName();
+      ValuePair xy1 = p.getValuePair();
+      System.out.println(n1 + " " + xy1.x + " " + xy1.y);
+      n1 = "Hugo";
+      String n2 = p.getName();
+      xy1.x = 33;
+      xy1.y = 44;
+      ValuePair xy2 = p.getValuePair();
+      System.out.println(n2 + " " + xy1.x + " " + xy1.y);
+   }
+}
+\end{minted}
+\end{onlyenv}
 \endcolumns% FIXME: TODO: DO THAT FOR HANDOUT
 \onslide<5-|handout:0>{% just for the alignment
 \setbox\pinguA=\hbox{\begin{tikzpicture}[lhns@basestyle/.append style={execute at begin node=\HStrut,font=\ttfamily},lhns@blockstyle/.append style={draw=gray,thick}]
