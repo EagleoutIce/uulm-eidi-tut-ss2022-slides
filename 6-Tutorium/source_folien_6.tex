@@ -426,7 +426,7 @@ sicher, dass nur gültige Werte für den Radius (\(r \geq 0\)) akzeptiert werden
 !*\onslide<18->*!   |ihl|private double radius, flaeche, umfang;|ihl|
 !*\onslide<18->*!   |ihl|...|ihl|
 !*\onslide<19->*!   public void setRadius(double r) {
-!*\onslide<21->*!       if (r < 0)!*\onslide<22->*! return;
+!*\onslide<21->*!       if (r < 0) return;
 !*\onslide<22->*!       this.radius = r;
 !*\onslide<23->*!       this.flaeche = !*\onslide<24->*!Math.PI * radius * radius!*\onslide<23->*!;
 !*\onslide<25->*!       this.umfang = !*\onslide<26->*!2 * Math.PI * radius!*\onslide<25->*!;
