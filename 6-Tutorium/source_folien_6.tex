@@ -1066,7 +1066,8 @@ public class Kreis {
 \end{frame}
 }\fi
 
-\begin{frame}[fragile,t]{Und das hat jetzt warum geholfen?}
+\iffull
+\begin{frame}[fragile,t]{Und das hat warum geholfen?}
 \begin{tikzpicture}[@O]
     % \onslide<32>{
     %     \hlbehindcodeunder{out1}{@out>}
@@ -1084,8 +1085,9 @@ public class Kreis {
     *\Line{13}\Location{ValuePair-ctor}\Comment{ValuePair(int, int)}\Others{19,21},
     :19:{21,13},-,:20:{18,13},13,o-1:{},
     o-1:{},-,-, % nun bei: String n2 = p.getName()
-    o9:{11},:9:{11},:10:{3},o-1:{},-,-,-,-,-%, % nun bei: ValuePair xy2 = p.getValuePair()
-    %o12:{14},:12:{14},:13:{4},o-1:{},-,-,0
+    o9:{11},:9:{11},:10:{3},o-1:{},-,-,-, % nun bei: ValuePair xy2 = p.getValuePair()
+    o12:{14},:12:{14},:13:{4},*\Line{13}\Location{ValuePair-ctor}\Comment{ValuePair(int, int)}\Others{19,21},
+    :19:{21,13},-,:20:{18,13},13,o-1:{},-,0
 },first slide=5}
 % The :c: breaker is because i used literates :c
 \begin{minted}[escapeinside={/*}{*/}]{java}
@@ -1119,9 +1121,9 @@ public class Kreis {
     o6:{},-,-,-,-,-,-,6,%
     +,+,+,
     *\Line{9}\Location{getName}\Comment{Person::getName()},
-    o9:{},-,9,+,10,+,11,+,
+    o9:{},-,9,+,+,+,
     *\Line{12}\Location{getValuePair}\Comment{Person::getValuePair()},
-    o12:{},-%,12,+,13,0
+    o12:{},-,-,-,-,-,-,12,+,0
 },first slide=5}
 \begin{minted}[escapeinside={/*}{*/}]{java}
 /*\onslide<3->*//*\CodeFileMarker{TestPerson.java}*/
@@ -1159,16 +1161,36 @@ public class Kreis {
 % TODO: eingehen auf initialisierung, instanziierung , zuweisung etc...
 
 \only<5->{\stack{\textbf{main}}}
-\only<5->{\stack{\color{gray}{\itshape\ldots p, n1\ldots}}}
-\only<5->{\stack{\only<22-23>{\bfseries}\bjava{ValuePair xy1}}}
+\only<5-27,33->{\stack{\color{gray}{\itshape\ldots p, n1\ldots}}}
+\only<28-32>{\stack{\color{gray}{\itshape\ldots p,n1,xy1,n2\ldots}}}
+\only<5-27,33->{\stack{\only<22-23>{\bfseries}\bjava{ValuePair xy1}}}
 \only<7-13>{\stack{\textbf{\ldots::getValuePair}}}
 \only<10-12>{\stack{\textbf{<ctor> ValuePair}}}
 \only<11-12>{\stack{\bjava{int x = 11}}}
 \only<11-12>{\stack{\bjava{int y = 22}}}
-\only<16->{\stack{\bjava{String n2}}}
+\only<17-27,33->{\stack{\bjava{String n2}}}
 \only<19-20>{\stack{\textbf{Person::getName}}}
-% \only<17->{\stack{\bjava{ValuePair xy2}}}
+\only<24->{\stack{\bjava{ValuePair xy2}}}
+\only<26-32>{\stack{\textbf{\ldots::getValuePair}}}
+\only<29-31>{\stack{\textbf{<ctor> ValuePair}}}
+\only<30-31>{\stack{\bjava{int x = 11}}}
+\only<30-31>{\stack{\bjava{int y = 22}}}
 \renderstack
+
+% fake another heap item
+\makeatletter
+\only<29-30>{
+    \node[lhns@basestyle,below=\lhns@innersep] (@Extra) at([yshift=\lhns@render@heap@jitter]heap-4-box.south) {\@lhns@format@elem{\lhnselementformat{\Object{ValuePair}{\bjava{int x = ?, y = ?}}}}}; % content
+    \node[lhns@basestyle,fill=btdm@background,draw,minimum width=\lhns@elemwidth,fit={(@Extra.north) (@Extra.south)}] (@Extra-box) {};%
+    % shitty overdraw :C
+    \node[lhns@basestyle,below=\lhns@innersep] (@Extra) at([yshift=\lhns@render@heap@jitter]heap-4-box.south) {\@lhns@format@elem{\lhnselementformat{\Object{ValuePair}{\bjava{int x = ?, y = ?}}}}}; % content
+}
+\only<31->{
+    \node[lhns@basestyle,below=\lhns@innersep] (@Extra) at([yshift=\lhns@render@heap@jitter]heap-4-box.south) {\@lhns@format@elem{\lhnselementformat{\Object{ValuePair}{\bjava{int x = 11, y = 22}}}}}; % content
+    \node[lhns@basestyle,fill=btdm@background,draw,minimum width=\lhns@elemwidth,fit={(@Extra.north) (@Extra.south)}] (@Extra-box) {};%
+    % shit again :c
+    \node[lhns@basestyle,below=\lhns@innersep] (@Extra) at([yshift=\lhns@render@heap@jitter]heap-4-box.south) {\@lhns@format@elem{\lhnselementformat{\Object{ValuePair}{\bjava{int x = 11, y = 22}}}}}; % content
+}
 
 \only<5->{\draw[lhns,gray] (stack-1.east) to[out=0,in=180] (heap-0.west);}
 \pgfinterruptboundingbox
@@ -1178,11 +1200,14 @@ public class Kreis {
 \only<16->{\draw[lhns,gray] (stack-1.east) to[out=0,in=180] (heap-4.west);}
 {% color group
 \only<22-23>{\color{pingu@purple}}
-\only<14->{\draw[lhns] (stack-2.east) to[out=0,in=180] (heap-3.west);}
+\only<14-27,33->{\draw[lhns] (stack-2.east) to[out=0,in=180] (heap-3.west);}
+\only<28-32>{\draw[lhns] (stack-1.east) to[out=0,in=180] (heap-3.west);}
 }
 % \only<7->{\draw[lhns] (stack-2.east) to[out=0,in=180] (heap-3.west);}
-\only<21->{\draw[lhns] (stack-3.east) to[out=0,in=180] (heap-1.west);}
+\only<21-27,33->{\draw[lhns] (stack-3.east) to[out=0,in=180] (heap-1.west);}
+\only<28-32>{\draw[lhns] (stack-1.east) to[out=0,in=180] (heap-1.west);}
 % \only<12->{\draw[lhns] (stack-5.east) to[out=0,in=180] (heap-2.west);}
+\only<33->{\draw[lhns] (stack-4.east) to[out=0,in=180] (@Extra.west);}
 \endpgfinterruptboundingbox
 \end{heap-n-stack}
 \end{tikzpicture}}%
@@ -1190,10 +1215,29 @@ public class Kreis {
     \node[above left,xshift=-2mm,yshift=\btdmfootheight] at(current page.south east) {\resizebox*!{3cm}{\box\pinguA}};
     % thats a pengu c:
 
-    \onslide<15->{\node[above=\btdmfootheight+.75cm,draw,rounded corners=2pt,gray,minimum width=3cm,align=left,minimum height=2.2\baselineskip] at(current page.south) {\T{Heinz 11 22}\\\only<26->{\T{Heinz 11 22}}};}
+    \onslide<15->{\node[above=\btdmfootheight+.75cm,draw,rounded corners=2pt,gray,minimum width=3cm,align=left,minimum height=2.2\baselineskip] at(current page.south) {\T{Heinz 11 22}\\\only<34->{\T{Heinz 11 22}}};}
 \end{tikzpicture}}
 \end{frame}
+\fi
 }
+
+\iffull
+\begin{frame}{Noch ein paar weitere Worte}
+    \begin{itemize}[<+(1)->]
+        \itemsep8pt
+        \item Man könnte auch ein neues Array übergeben
+        \item Auch das modifizieren der \solGet{keywordC}{ValuePair}-Attribute mit \bjava{final} ist denkbar
+        \item Für Kopien bastelt man sich meistens einen Kopier-Konstruktor \begin{itemize}
+            \item Dieser erhält ein Objekt des gleichen Typs: \T{\solGet{keywordC}{ValuePair}(\solGet{keywordC}{ValuePair} other)}
+            \item Dabei initialisiert er das Objekt mit dem Zustand des übergebenen Objektes
+        \end{itemize}
+        \item Theoretisch wäre es auch möglich \bjava{getValuePair()} in \bjava{getValuePairX()} und \bjava{getValuePairY()} zu teilen \begin{itemize}
+            \item So geben geben wir nur noch primitive Datentypen nach außen
+            \item Das kann aber als Veränderung der Funktionalität verstanden werden
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+\fi
 
 \iffull
 \SetNextSectionText{Grundlagen der Rekursion\\Abgabe: \DTMDate{2022-06-20}}
@@ -1211,7 +1255,15 @@ public class Kreis {
 \vfill\vfill % double fill for more fraction
 \begin{itemize}[<+(1)->]
     \itemsep5pt
-    \item TODO
+    \item Rekursive Methoden rufen sich selbst (direkt oder indirekt) wieder auf \begin{itemize}
+        \item Geschieht dies maximal ein mal, so ist die Rekursion linear
+        \item Ist der rekursive Aufruf das letzte Statement, haben wir eine Tail-Rekursion
+    \end{itemize}
+    \item Variablen haben Gültigkeits- und Sichtbarkeitsbereiche \begin{itemize}
+        \item Die Gültigkeit hängt an der Deklaration (Überschattung,~\ldots)
+        \item Die Sichtbarkeit hängt an \bjava{public}, \bjava{private},~\ldots
+    \end{itemize}
+    \item Seiteneffekte sind ein großes Problem!
 \end{itemize}
 \end{frame}
 }
@@ -1221,7 +1273,7 @@ public class Kreis {
 
 
 \outro{\vskip9mm\centering \onslide<2->{\scalebox{1.35}{\begin{tikzpicture}
-       % TODO
-    \end{tikzpicture}}}}
+    \pingu[wings grab,cup=pingu@purple,eyes angry,hair 3=pingu@purple,body type=chubby]
+\end{tikzpicture}}}}
 
 \iffull\end{document}\fi
