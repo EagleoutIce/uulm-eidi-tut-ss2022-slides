@@ -937,6 +937,7 @@ public class Kreis {
 \begin{minted}[escapeinside={/*}{*/}]{java}
 /*\CodeFileMarkerAttach<4->[side-effects/]{TestPerson.java}*/
 /*\onslide<4->*/class TestPerson {
+/*\onslide<4->*/  /*\ShowInTheWeb{https://www.online-java.com/Sd4Z96bWio}*/
 /*\onslide<4->*/  public static void main(String[] args) {
 /*\onslide<4->*/    Person p = new /*\setbox0=\hbox{Person}\AnimLoc[.5\wd0]{Person-ctor}*/Person("Heinz", 11, 22);
 /*\onslide<4->*/    String n1 = p./*\setbox0=\hbox{getName}\AnimLoc[.5\wd0]{getName}*/getName();
@@ -1015,7 +1016,7 @@ public class Kreis {
     \onslide<32->{\node[above=\btdmfootheight+.75cm,draw,rounded corners=2pt,gray,minimum width=3cm,align=left,minimum height=2.2\baselineskip] at(current page.south) {\T{Heinz 11 22}\\\only<49->{\T{Heinz 33 44}}};}
 \end{tikzpicture}}
 \onslide<0|handout:1>{\begin{tikzpicture}[@O]
-    \node[above left=.75cm] at(current page.south east) {Die Animationen finden sich im Animationsfoliensatz\iffull\else\space des Tutoriums\fi!};
+    \node[above left=.5cm,yshift=\btdmfootheight] at(current page.south east) {Die Animationen finden sich im Animationsfoliensatz\iffull\else\space des Tutoriums\fi!};
 \end{tikzpicture}}
 \end{frame}
 {\taskenum
@@ -1055,7 +1056,7 @@ public class Kreis {
 /*\onslide<5->*/ }
 \end{minted}
 \column{.4\linewidth}
-\onslide<12->{Jetzt liefert \bjava{Person::getValu:c:ePair} eine neue Referenz auf ein neues Objekt zurück. Änderungen lassen das Attribut unberührt.}
+\onslide<12->{Jetzt liefert \bjava{Person::}\allowbreak\bjava{getValu:c:ePair} eine neue Referenz auf ein neues Objekt zurück. Änderungen lassen das Attribut unberührt.}
 \endcolumns
 \end{enumerate}
 \end{frame}
@@ -1123,6 +1124,7 @@ public class Kreis {
 \begin{minted}[escapeinside={/*}{*/}]{java}
 /*\onslide<3->*//*\CodeFileMarker{TestPerson.java}*/
 /*\onslide<4->*/class TestPerson {
+/*\onslide<4->*/  /*\ShowInTheWeb{https://www.online-java.com/Sd4Z96bWio}*/
 /*\onslide<4->*/  public static void main(String[] args) {
 /*\onslide<4->*/    Person p = new /*\setbox0=\hbox{Person}\AnimLoc[.5\wd0]{Person-ctor}*/Person("Heinz", 11, 22);
 /*\onslide<4->*/    String n1 = p./*\setbox0=\hbox{getName}\AnimLoc[.5\wd0]{getName}*/getName();
@@ -1213,7 +1215,7 @@ public class Kreis {
     \onslide<15->{\node[above=\btdmfootheight+.75cm,draw,rounded corners=2pt,gray,minimum width=3cm,align=left,minimum height=2.2\baselineskip] at(current page.south) {\T{Heinz 11 22}\\\only<34->{\T{Heinz 11 22}}};}
 \end{tikzpicture}}
 \onslide<0|handout:1>{\begin{tikzpicture}[@O]
-    \node[above left=.75cm] at(current page.south east) {Die Animationen finden sich im Animationsfoliensatz\iffull\else\space des Tutoriums\fi!};
+    \node[above left=.5cm,yshift=\btdmfootheight] at(current page.south east) {Die Animationen finden sich im Animationsfoliensatz\iffull\else\space des Tutoriums\fi!};
 \end{tikzpicture}}
 \end{frame}
 \fi
