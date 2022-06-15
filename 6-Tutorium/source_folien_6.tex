@@ -794,7 +794,7 @@ public class Kreis {
     \onslide<5->{\textit{Nein} eine statische Methode kann nicht auf Instanzattribute (hier: \T{y}) zugreifen.}
 \end{enumerate}
 \begin{tikzpicture}[@O]
-    \onslide<6->{\draw[lightgray,-Kite] (@.south) to[out=270,in=180] ++(.5,-.33) node[T,below right,yshift=.7\baselineskip,align=left,text width=8.5cm] {\T{this} bezieht sich auf das Objekt auf dem die Methode aufgerufen wird. Statische Methoden werden aber auf der Klasse aufgerufen! \only<7->{Das gilt natürlich auch ohne das \T{this}, da es sich dann immernoch auf eine Instanzvariable bezieht.}};}
+    \onslide<6->{\draw[lightgray,-Kite] (@.south) to[out=270,in=180] ++(.5,-.33) node[T,below right,yshift=.6\baselineskip,align=left,text width=8.5cm] {\T{this} bezieht sich auf das Objekt auf dem die Methode aufgerufen wird. Statische Methoden werden aber auf der Klasse aufgerufen! \only<7->{Das gilt natürlich auch ohne das \T{this}, da es sich dann immernoch auf eine Instanzvariable bezieht.}};}
 \end{tikzpicture}
 \end{frame}
 
