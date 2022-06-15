@@ -863,7 +863,7 @@ public class Kreis {
 
 \fi
 % #endregion
-
+\iffalse
 \subsection{Aufgabe 3}
 {\makeatletter\lhns@elemwidth3.95cm
 % with parbox i try to keep fontsize (especially resets) out of tikz mechanisms
@@ -1220,6 +1220,7 @@ public class Kreis {
 \end{frame}
 \fi
 }
+\fi
 
 \iffull
 \begin{frame}{Noch ein paar weitere Worte}
@@ -1241,8 +1242,20 @@ public class Kreis {
 
 \iffull
 \SetNextSectionText{Grundlagen der Rekursion\\Abgabe: \DTMDate{2022-06-20}}
+\immediate\write18{wget https://media.githubusercontent.com/media/EagleoutIce/Episode-Recursion/gh-pages/preview-01.png -O logoRecursion-\jobname.png}
 \section{Aussicht: Übungsblatt 7}
-\begin{frame}{Habbeldu}
+\begin{frame}{Rekursion!}
+    \begin{itemize}[<+(1)->]
+        \itemsep9pt
+        \item Ein erneuter Blick auf die Präsenzaufgabe kann sicherlich hilfreich sein!
+        \item Mathematische Definitionen lassen sich \textit{quasi} 1:1 übersetzen.
+        \item Als Vorgeschmack kann man sich die zugehörige Episode ansehen:\medskip\pause
+        \begin{center}
+            \scalebox{.75}{\begin{tikzpicture}[align-base]
+                \onslide<2->{\draw[thick,darkgray,rounded corners=2.5pt,path picture={\node at(path picture bounding box.center) {\href{https://media.githubusercontent.com/media/EagleoutIce/Episode-Recursion/gh-pages/noanim_rekursion.pdf}{\includegraphics[width=8.5cm,height=4.788cm,keepaspectratio]{logoRecursion-\jobname.png}}};}] (0,0) rectangle (8.5cm,4.788cm);}
+            \end{tikzpicture}}\qquad\fancyqr{https://github.com/EagleoutIce/Episode-Recursion}
+        \end{center}
+    \end{itemize}
 \end{frame}
 \fi
 
@@ -1274,6 +1287,6 @@ public class Kreis {
 
 \outro{\vskip9mm\centering \onslide<2->{\scalebox{1.35}{\begin{tikzpicture}
     \pingu[wings grab,cup=pingu@purple,eyes angry,hair 3=pingu@purple,body type=chubby]
-\end{tikzpicture}}}}
+\end{tikzpicture}}\\Es ist 3:41~Uhr\ldots}}
 
 \iffull\end{document}\fi
