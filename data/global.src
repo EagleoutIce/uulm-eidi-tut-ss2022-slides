@@ -313,10 +313,10 @@
 \newcommand<>\rBS[1]{\only#2{\solGet{comments}{\color{lightgray}\itshape#1}}}
 \newcommand<>\rBSo[1]{\onslide#2{\solGet{comments}{\color{lightgray}\itshape#1}}}
 
-\def\MDRight{{\smash{\Raw\MDRight}}}
-\def\MDLeft{{\smash{\Raw\MDLeft}}}
-\def\MDDown{{\smash{\Raw\MDDown}}}
-\def\MDUp{{\smash{\Raw\MDUp}}}
+\def\MDRight{{\smash{\RawMDRight}}}
+\def\MDLeft{{\smash{\RawMDLeft}}}
+\def\MDDown{{\smash{\RawMDDown}}}
+\def\MDUp{{\smash{\RawMDUp}}}
 
 \def\RawMDRight{{\tiny\faChevronRight}}
 \def\RawMDLeft{{\tiny\faChevronLeft}}

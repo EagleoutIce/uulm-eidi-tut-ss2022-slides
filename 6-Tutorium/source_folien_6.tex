@@ -11,10 +11,8 @@
 \iffull\begin{document}
 \titleframe
 
-% FIXME: \TopicOverview{7}
+\TopicOverview{7}
 \fi
-% #region out
-\iffalse
 \iffull{\SummaryFrame
 \def\sub#1#2{\node[font=\footnotesize\sffamily,scale=.715,align=center,gray,below=-2.65mm] at(#1.south) {\strut#2\strut};}
 \setbeamerfont{description item}{series=\mdseries,shape=\itshape}
@@ -861,9 +859,6 @@ public class Kreis {
     TODO: vor dem SChreiben immer kurz nachdenken DArauf hinweisen wegen Probleklausur
 \end{frame}
 
-\fi
-% #endregion
-\iffalse
 \subsection{Aufgabe 3}
 {\makeatletter\lhns@elemwidth3.95cm
 % with parbox i try to keep fontsize (especially resets) out of tikz mechanisms
@@ -1220,7 +1215,6 @@ public class Kreis {
 \end{frame}
 \fi
 }
-\fi
 
 \iffull
 \begin{frame}{Noch ein paar weitere Worte}
@@ -1259,7 +1253,6 @@ public class Kreis {
 \end{frame}
 \fi
 
-\iffalse
 \SetNextSectionText[.55\linewidth]{TODO}
 \section{Abschließendes}
 {\SummaryFrame
@@ -1280,10 +1273,6 @@ public class Kreis {
 \end{itemize}
 \end{frame}
 }
-\fi
-
-% TODO: pascal case
-
 
 \outro{\vskip9mm\centering \onslide<2->{\scalebox{1.35}{\begin{tikzpicture}
     \pingu[wings grab,cup=pingu@purple,eyes angry,hair 3=pingu@purple,body type=chubby]
