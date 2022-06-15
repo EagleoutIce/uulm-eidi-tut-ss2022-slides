@@ -872,10 +872,11 @@ public class Kreis {
 \setbox\pinguB=\hbox{\tikz{\pingu[eyes shock,left wing shock,devil-horns,right wing raise,sign post right=!]}}
 % move down the heap root just so that it is somewhat clear :D
 % somewhat of a small jitter:
-\pgfmathsetmacro\lhns@render@heap@jitter{-abs(rand)*1mm-.85mm}% just to be save and keep it constant over anims!
+\pgfmathsetmacro\lhns@render@heap@jitter{-abs(rand)*.5mm-.85mm}% just to be save and keep it constant over anims!
 % more kw does not work with langs atm... so...
 \lstset{add to literate={Person}{{{\solGet{keywordC}{Person}}}}6 {TestPerson}{{{\solGet{keywordC}{TestPerson}}}}{10} {ValuePair}{{{\solGet{keywordC}{ValuePair}}}}9}%
 \tikzset{ca@CommentNode/.append style={font=\sffamily\scriptsize\slshape,right=.5mm,yshift=-.2mm,scale=.75},ca@CommentNode@out/.append style={font=\sffamily\scriptsize\slshape}}% compact :)
+\iffalse
 \begin{frame}[fragile,t]{Aufgabe 3: Seiteneffekte}
 \begin{tikzpicture}[@O]
     \onslide<32>{
@@ -1017,7 +1018,179 @@ public class Kreis {
     }
     \onslide<6>{\node[below left,yshift=-1.25cm,xshift=-1mm,T,scale=.65] at(current page.north east) {Aus Platzgründen ignoriere ich einiges (wie \T{args},~\ldots)!};}
 
-    \onslide<32->{\node[above=\btdmfootheight+.75cm,draw,rounded corners=2pt,gray,minimum width=3cm,align=left,minimum height=2.125\baselineskip] at(current page.south) {\T{Heinz 11 22}\\\only<49->{\T{Heinz 33 44}}};}
+    \onslide<32->{\node[above=\btdmfootheight+.75cm,draw,rounded corners=2pt,gray,minimum width=3cm,align=left,minimum height=2.2\baselineskip] at(current page.south) {\T{Heinz 11 22}\\\only<49->{\T{Heinz 33 44}}};}
+\end{tikzpicture}}
+\end{frame}
+\fi
+\iffalse
+{\taskenum
+\setbox\pinguA=\hbox{\tikz{\pingu[wings grab,cup=pingu@purple,eyes angry,hair 3=pingu@purple,body type=chubby]}}
+\begin{frame}{Und wer-wo-wie-was ist das jetzt?}
+\begin{enumerate}[<+(1)->]
+    \item \task{Beschreiben Sie kurz, warum der Seiteneffekt auftritt.}\pause
+    Die Methode \T{Person::getValuePair} gibt nur eine Referenz auf das \bjava{ValuePair v}-Attribut zurück. Änderungen an dieser Referenz betreffen das selbe Objekt wie das, auf welches das \T{v} zeigt.\bigskip
+    \begin{center}
+        \onslide<4->{\begin{tikzpicture}[align-half-base]
+            \node (@) {\copy\pinguA};
+            \node[right=7mm,align=left,text width=7cm] at(@.east) {Und dafür hat der \textit{Depp} von Autor über sechs Stunden lang nur an der einen Animationsfolie gearbeitet??};
+        \end{tikzpicture}}
+    \end{center}
+\end{enumerate}
+\begin{tikzpicture}[@O]
+    \onslide<5->{\node[codeouthl,above left=2cm] at(current page.south east) {\rotatebox{45}{\def\rmdefault{AlphaSlabOne-TLF}\rmfamily\Large\bfseries Ja!}};}
+\end{tikzpicture}
+\end{frame}
+\begin{frame}[fragile]{Wie kriegen wir das weg?}
+\SetupLstHl
+\begin{enumerate}[<+(1)->]
+    \setcounter{enumi}{1}
+    \item \task{In einigen Fällen sind Seiteneffekte erwünscht oder zumindest toleriert. Hier gehen wir davon aus, dass dies nicht der Fall ist und Sie sollen die Dateien \T{Person.java}, \T{ValuePair.java} und \T{TestPerson.java} so anpassen, dass der Seiteneffekt aus~a) nicht mehr auftritt. Schreiben Sie die Begründung für die vorgenommene Änderung als Kommentar in die Datei. Achten Sie darauf, dass die Datei kompilierbar bleibt und auch zur Laufzeit nicht abstürzt, sowie dass die Funktionalität der Klassen erhalten bleibt.}\pause
+    Zunächst: es reicht nicht einfach die \T{main}-Methode zu ändern. So wird das Auftreten des prinzipiell Seiteneffekts ja nicht verhindert sondern nur kaschiert. \pause
+    Wir können aber einfach \bjava{Person::getValu:c:ePair} eine Kopie zurückgeben lassen:\lstfs{10}\vspace*{-3mm}
+\columns[c,onlytextwidth]
+\column{.6\linewidth}
+\begin{minted}[escapeinside={/*}{*/}]{java}
+/*\CodeFileMarkerAttach<11->{Person.java}*/
+/*\onslide<5->*/class Person {
+/*\onslide<6->*/   |ihl|...|ihl|
+/*\onslide<7->*/   public ValuePair getValu:c:ePair() {
+/*\onslide<8->*/     /*\only<9->{\color{codeouthl}\sout}{\only<-8|handout:0>{\skA}{return} v;}*/
+/*\onslide<10->*/     return new ValuePair(v.x, v.y);
+/*\onslide<7->*/   }
+/*\onslide<5->*/ }
+\end{minted}
+\column{.4\linewidth}
+\onslide<12->{Jetzt liefert \bjava{Person::getValu:c:ePair} eine neue Referenz auf ein neues Objekt zurück. Änderungen lassen das Attribut unberührt.}
+\endcolumns
+\end{enumerate}
+\end{frame}
+}\fi
+
+\begin{frame}[fragile,t]{Und das hat jetzt warum geholfen?}
+\begin{tikzpicture}[@O]
+    % \onslide<32>{
+    %     \hlbehindcodeunder{out1}{@out>}
+    %     \node[below,xshift=5mm,T,scale=.75] at(@out>_down) {\say{Magic}};
+    % }
+    % \onslide<49>{
+    %     \hlbehindcodeunder{out2}{@out2>}
+    %     \node[below,xshift=5mm,T,scale=.75] at(@out2>_down) {\say{Magic}};
+    % }
+\end{tikzpicture}\vspace*{-\baselineskip}
+\lstfs{7}\vspace*{-8mm}\columns[t,onlytextwidth]% get space for stack and heap!
+\column{.47\linewidth}
+\AnimateCode[@1]{onslide={%
+    o-1:{},o12:{14},:12:{14},:13:{4},
+    *\Line{13}\Location{ValuePair-ctor}\Comment{ValuePair(int, int)}\Others{19,21},
+    :19:{21,13},-,:20:{18,13},13,o-1:{},
+    o-1:{},-,-, % nun bei: String n2 = p.getName()
+    o9:{11},:9:{11},:10:{3},o-1:{},-,-,-,-,-%, % nun bei: ValuePair xy2 = p.getValuePair()
+    %o12:{14},:12:{14},:13:{4},o-1:{},-,-,0
+},first slide=5}
+% The :c: breaker is because i used literates :c
+\begin{minted}[escapeinside={/*}{*/}]{java}
+/*\CodeFileMarkerAttach<2->{Person.java}*/
+/*\onslide<2->*/class Person {
+/*\onslide<2->*/  private String name;
+/*\onslide<2->*/  private ValuePair v;
+/*\onslide<2->*/  public Person(String name, int x, int y) {
+/*\onslide<2->*/    this.name = name;
+/*\onslide<2->*/    v = new /*\setbox0=\hbox{ValuePair}\AnimLoc[.5\wd0]{ValuePair-ctor}*/ValuePair(x,y);
+/*\onslide<2->*/  }
+/*\onslide<2->*/  public String getName() {
+/*\onslide<2->*/    return name;
+/*\onslide<2->*/  }
+/*\onslide<2->*/  public ValuePair getVa:c:luePair() {
+/*\onslide<2->*/    return new /*\setbox0=\hbox{ValuePair}\AnimLoc[.5\wd0]{ValuePair-ctor}*/ValuePair(v.x, v.y);
+/*\onslide<2->*/  }
+/*\onslide<2->*/}/*\smallskip*/
+/*\onslide<3->*//*\CodeFileMarker{ValuePair.java}*/
+/*\onslide<3->*/class ValuePair {
+/*\onslide<3->*/  int x; int y;
+/*\onslide<3->*/  public ValuePair(int x, int y) {
+/*\onslide<3->*/    this.x = x; this.y = y;
+/*\onslide<3->*/  }
+/*\onslide<3->*/}/*\onslide<1->*/
+\end{minted}
+\endAnimateCode
+\column{.53\linewidth}
+\AnimateCode[@2]{onslide={%
+    6,*\Line{6}\Location{getValuePair}\Comment{Person::getValuePair()},
+    o6:{},-,-,-,-,-,-,6,%
+    +,+,+,
+    *\Line{9}\Location{getName}\Comment{Person::getName()},
+    o9:{},-,9,+,10,+,11,+,
+    *\Line{12}\Location{getValuePair}\Comment{Person::getValuePair()},
+    o12:{},-%,12,+,13,0
+},first slide=5}
+\begin{minted}[escapeinside={/*}{*/}]{java}
+/*\onslide<3->*//*\CodeFileMarker{TestPerson.java}*/
+/*\onslide<4->*/class TestPerson {
+/*\onslide<4->*/  public static void main(String[] args) {
+/*\onslide<4->*/    Person p = new /*\setbox0=\hbox{Person}\AnimLoc[.5\wd0]{Person-ctor}*/Person("Heinz", 11, 22);
+/*\onslide<4->*/    String n1 = p./*\setbox0=\hbox{getName}\AnimLoc[.5\wd0]{getName}*/getName();
+/*\onslide<4->*/    ValuePair xy1 = p./*\setbox0=\hbox{getValuePair}\AnimLoc[.5\wd0]{getValuePair}*/getValu:c:ePair();
+/*\onslide<4->*/    /*\Snode{out1}*/System.out.println(n1 + " " + xy1.x + " " + xy1.y);/*\Snode{out1@}*/
+/*\onslide<4->*/    n1 = "Hugo";
+/*\onslide<4->*/    String n2 = p./*\setbox0=\hbox{getName}\AnimLoc[.5\wd0]{getName}*/getName();
+/*\onslide<4->*/    xy1.x = 33;
+/*\onslide<4->*/    xy1.y = 44;
+/*\onslide<4->*/    ValuePair xy2 = p./*\setbox0=\hbox{getValuePair}\AnimLoc[.5\wd0]{getValuePair}*/getValu:c:ePair();
+/*\onslide<4->*/    /*\Snode{out2}*/System.out.println(n2 + " " + xy1.x + " " + xy1.y);/*\Snode{out2@}*/
+/*\onslide<4->*/  }
+/*\onslide<4->*/}/*\onslide<1->*/
+\end{minted}
+\endAnimateCode\onslide<1->
+\endcolumns
+\onslide<5->{% just for the alignment
+\setbox\pinguA=\hbox{\begin{tikzpicture}[lhns@basestyle/.append style={execute at begin node=\HStrut,font=\ttfamily},lhns@blockstyle/.append style={draw=gray,thick}]
+\begin{heap-n-stack}{}
+\only<5->{\heap{\Object{Person}{}}}
+% TODO: genau genommen existieren ja auch die Literale aber psst
+\only<5->{\heap{\bjava{\"Heinz\"}}}
+\only<5->{\heap{\Object{ValuePair}{\bjava{int x = 11, y = 22}}}}
+\only<10-11>{\heap{\Object{ValuePair}{\bjava{int x = ?, y = ?}}}}
+\only<12-21>{\heap{\Object{ValuePair}{\bjava{int x = 11, y = 22}}}}
+\only<22>{\heap{\Object{ValuePair}{\bjava{int x =\ }\textbf{\protect\solGetStyle{numbers}33}\bjava{, y = 22}}}}
+\only<23>{\heap{\Object{ValuePair}{\bjava{int x = 33}\bjava{, y =\ }\textbf{\protect\solGetStyle{numbers}44}}}}
+\only<24->{\heap{\Object{ValuePair}{\bjava{int x = 33, y = 44}}}}
+\only<16->{\heap{\bjava{\"Hugo\"}}}
+\renderheap
+% TODO: eingehen auf initialisierung, instanziierung , zuweisung etc...
+
+\only<5->{\stack{\textbf{main}}}
+\only<5->{\stack{\color{gray}{\itshape\ldots p, n1\ldots}}}
+\only<5->{\stack{\only<22-23>{\bfseries}\bjava{ValuePair xy1}}}
+\only<7-13>{\stack{\textbf{\ldots::getValuePair}}}
+\only<10-12>{\stack{\textbf{<ctor> ValuePair}}}
+\only<11-12>{\stack{\bjava{int x = 11}}}
+\only<11-12>{\stack{\bjava{int y = 22}}}
+\only<16->{\stack{\bjava{String n2}}}
+\only<19-20>{\stack{\textbf{Person::getName}}}
+% \only<17->{\stack{\bjava{ValuePair xy2}}}
+\renderstack
+
+\only<5->{\draw[lhns,gray] (stack-1.east) to[out=0,in=180] (heap-0.west);}
+\pgfinterruptboundingbox
+\only<5->{\draw[lhns,gray] (heap-0.east) to[out=0,in=0,looseness=1.25] (heap-1.east);}
+\only<5->{\draw[lhns,gray] (heap-0.east) to[out=0,in=0,looseness=1.25] (heap-2.east);}
+\only<5-15>{\draw[lhns,gray] (stack-1.east) to[out=0,in=180] (heap-1.west);}
+\only<16->{\draw[lhns,gray] (stack-1.east) to[out=0,in=180] (heap-4.west);}
+{% color group
+\only<22-23>{\color{pingu@purple}}
+\only<14->{\draw[lhns] (stack-2.east) to[out=0,in=180] (heap-3.west);}
+}
+% \only<7->{\draw[lhns] (stack-2.east) to[out=0,in=180] (heap-3.west);}
+\only<21->{\draw[lhns] (stack-3.east) to[out=0,in=180] (heap-1.west);}
+% \only<12->{\draw[lhns] (stack-5.east) to[out=0,in=180] (heap-2.west);}
+\endpgfinterruptboundingbox
+\end{heap-n-stack}
+\end{tikzpicture}}%
+\begin{tikzpicture}[@O]% THATS NO PENGU :C The federation of penguin support would never lie!
+    \node[above left,xshift=-2mm,yshift=\btdmfootheight] at(current page.south east) {\resizebox*!{3cm}{\box\pinguA}};
+    % thats a pengu c:
+
+    \onslide<15->{\node[above=\btdmfootheight+.75cm,draw,rounded corners=2pt,gray,minimum width=3cm,align=left,minimum height=2.2\baselineskip] at(current page.south) {\T{Heinz 11 22}\\\only<26->{\T{Heinz 11 22}}};}
 \end{tikzpicture}}
 \end{frame}
 }
