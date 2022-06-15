@@ -1086,14 +1086,7 @@ class TestPerson {
 \iffull
 \begin{frame}[fragile,t]{Und das hat warum geholfen?}
 \begin{tikzpicture}[@O]
-    % \onslide<32>{
-    %     \hlbehindcodeunder{out1}{@out>}
-    %     \node[below,xshift=5mm,T,scale=.75] at(@out>_down) {\say{Magic}};
-    % }
-    % \onslide<49>{
-    %     \hlbehindcodeunder{out2}{@out2>}
-    %     \node[below,xshift=5mm,T,scale=.75] at(@out2>_down) {\say{Magic}};
-    % }
+    % NOTE: keep for same padding
 \end{tikzpicture}\vspace*{-\baselineskip}
 \lstfs{7}\vspace*{-8mm}\columns[t,onlytextwidth]% get space for stack and heap!
 \column{.47\linewidth}
@@ -1144,7 +1137,7 @@ class TestPerson {
     o12:{},-,-,-,-,-,-,12,+,0
 },first slide=5}
 \begin{minted}[escapeinside={/*}{*/}]{java}
-/*\onslide<3->*//*\CodeFileMarker{TestPerson.java}*/
+/*\onslide<4->*//*\CodeFileMarker{TestPerson.java}*/
 /*\onslide<4->*/class TestPerson {
 /*\onslide<4->*/  public static void main(String[] args) {
 /*\onslide<4->*/    Person p = new /*\setbox0=\hbox{Person}\AnimLoc[.5\wd0]{Person-ctor}*/Person("Heinz", 11, 22);
