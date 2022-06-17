@@ -822,7 +822,7 @@ public class Kreis {
     \task<4->{Welche Ausgabe erzeugt das Programm? Begründen Sie Ihre Antwort \textit{kurz}.}
 \end{enumerate}
 \begin{tikzpicture}[@O]
-    \onslide<5->{\node[below left,yshift=-1.5cm,xshift=-2mm,text width=6.25cm] at(current page.north east) {Ausgabe: \say{1\n}. Die \bjava{methode2()} ruft \bjava{methode(int)} auf, wobei der Parameter \T{x = 1} die Instanzvariable \T{x = 0} überschattet.};}
+    \onslide<5->{\node[below left,yshift=-1.5cm,xshift=-2mm,text width=6.25cm,black] at(current page.north east) {Ausgabe: \say{1\n}. Die \bjava{methode2()} ruft \bjava{methode(int)} auf, wobei der Parameter \T{x = 1} die Instanzvariable \T{x = 0} überschattet.};}
     \onslide<6->{\node[above left,yshift=\btdmfootheight,scale=.8] at(current page.south east) {\copy\pinguexplainbox};}
 \end{tikzpicture}
 \end{frame}
@@ -849,7 +849,7 @@ public class Kreis {
     \task<4->{Welche Ausgabe erzeugt das Programm? Begründen Sie Ihre Antwort \textit{kurz}.}
 \end{enumerate}
 \begin{tikzpicture}[@O]
-    \onslide<5->{\node[below left,yshift=-1.5cm,xshift=-2mm,text width=6.65cm] at(current page.north east) {Ausgabe: \say{0\n1\n2\n3}. Die Klassenvariable erhält den Default-Wert~\T{0}. Der erste Aufruf von \T{methode()} erzeugt \say{0\n1\n2\n3}. Da \T{i} statisch ist, verbleibt \T{i = 4} als Seiteneffekt. Die for-Schleife iteriert kein weiteres mal.};}
+    \onslide<5->{\node[below left,yshift=-1.5cm,xshift=-2mm,text width=6.65cm,black] at(current page.north east) {Ausgabe: \say{0\n1\n2\n3}. Die Klassenvariable erhält den Default-Wert~\T{0}. Der erste Aufruf von \T{methode()} erzeugt \say{0\n1\n2\n3}. Da \T{i} statisch ist, verbleibt \T{i = 4} als Seiteneffekt. Die for-Schleife iteriert kein weiteres mal.};}
 \end{tikzpicture}
 \end{frame}
 }
