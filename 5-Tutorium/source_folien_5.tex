@@ -638,22 +638,22 @@ private static boolean isUppercase(char c) { return c >= 'A' && c <= 'Z'; }
 \begin{center}
     \scalebox{.65}{\begin{tikzpicture}
 \tikzumlset{fill class=btdm@background}
-\onslide<3->{\umlclass[x=0,y=0]{Warenkorb}{
+\onslide<3->{\umlclass[x=0,y=0,text=black]{Warenkorb}{
 \onslide<4->{Kundennummer: int}\\
-\onslide<5->{Artikelliste: \solGet{keywordC}{Artikel}[]}\\
+\onslide<5->{Artikelliste: \color{black}\solGet{keywordC}{Artikel}\color{black}[]}\\
 }{
-\onslide<6->{fügeArtikelHinzu(Artikel: \solGet{keywordC}{Artikel}): void}\\
-\onslide<7->{entferneArtikel(index: int): boolean}\\
-\onslide<8->{berechneGesamtpreis(): float}\\
+\onslide<6->{fügeArtikelHinzu(Artikel: \solGet{keywordC}{Artikel}\color{black}): void}\\
+\onslide<7->{\color{black}entferneArtikel(index: int): boolean}\\
+\onslide<8->{\color{black}berechneGesamtpreis(): float}\\
 }}
 
-\onslide<10->{\umlclass[x=10,y=0,rounded corners=4pt]{Objekt: Mein Warenkorb}{
+\onslide<10->{\umlclass[x=10,y=0,rounded corners=4pt,text=black]{Objekt: Mein Warenkorb}{
     \onslide<11->{Kundennummer: 744392}\\
     \onslide<12->{Artikelliste: [\textit{Mein Hemd}]}
 }{
-    \onslide<13->{fügeArtikelHinzu(Artikel: \solGet{keywordC}{Artikel}): void}\\
-    \onslide<13->{entferneArtikel(index: int): Artikel}\\
-    \onslide<13->{berechneGesamtpreis(): float}\\
+    \onslide<13->{fügeArtikelHinzu(Artikel: \solGet{keywordC}{Artikel}\color{black}): void}\\
+    \onslide<13->{\color{black}entferneArtikel(index: int): Artikel}\\
+    \onslide<13->{\color{black}berechneGesamtpreis(): float}\\
 }}
 \end{tikzpicture}}
 \end{center}
@@ -849,13 +849,13 @@ private static boolean isUppercase(char c) { return c >= 'A' && c <= 'Z'; }
 \end{plainjava}
 \def\K{\multicolumn{1}{Y{45}{1em}}}
 \begin{tikzpicture}[@O]
-    \onslide<3->{\node[below left=4mm,xshift=-6mm,yshift=-1.25cm,text width=7cm,scale=.55] at(current page.north east) {\centering\begin{tabular}{l *4{>{\centering\arraybackslash}m{1.25em}}@{\hskip23pt}l}
+    \onslide<3->{{\iffull\else\color{gray}\fi\node[below left=4mm,xshift=-6mm,yshift=-1.25cm,text width=7cm,scale=.55] at(current page.north east) {\centering\begin{tabular}{l *4{>{\centering\arraybackslash}m{1.25em}}@{\hskip23pt}l}
         & \K{Selbe Klasse} & \K{Selbes Paket} & \K{\color{codeouthl}Unterklasse} & \K{Überall sonst} & Beispiel\\[5pt]
     \T{public} & \faCheck & \faCheck & \color{codeouthl}\faCheck & \faCheck & \T{age}\\
     \T{\color{codeouthl}protected} & \color{codeouthl}\faCheck & \color{codeouthl}\faCheck & \color{codeouthl}\faCheck & & ---\\
     $\langle$nichts\kern.5pt$\rangle$ & \faCheck & \faCheck & & & \T{name}\\
     \T{private} & \faCheck & & & & \T{Penguin} % solGet{keywordC}
-    \end{tabular}\medskip\\\centerline{\Large\color{gray}\textbf{Sichtbarkeits}modifikatoren}};}
+    \end{tabular}\medskip\\\centerline{\Large\color{gray}\textbf{Sichtbarkeits}modifikatoren}};}}
     \onslide<4->{\node[right,T] at(classline.east) {Objekte leben, wie mind. eine Referenz auf sie gültig ist};}
     \onslide<5->{
         \draw[decoration=brace,decorate,lightgray] ([xshift=2mm,yshift=1.5mm]@age.north east) coordinate (@) to[edge node={node[right=1mm,T,align=left] {Die Attribute besitzen die selbe \textbf{Gültigkeit},\\wie das Objekt, dem sie gehören.}}] ([yshift=-1.5mm]@name.south east-|@);
