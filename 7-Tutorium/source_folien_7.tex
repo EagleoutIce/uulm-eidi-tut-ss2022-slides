@@ -86,7 +86,7 @@
         \onslide<7-8|handout:\HandoutB>{\node[above=-2mm] at(7-i.north) {\faAngleUp};}
         \onslide<8|handout:\HandoutB>{\node[above=2mm] at(7.north) {\(7 > 4\)};}
         \onslide<9-10|handout:\HandoutC>{\node[above=-2mm] at(4-i.north) {\faAngleUp};}
-        \onslide<10|handout:\HandoutC>{\node[above=2mm] at(4.north) {\(4 = 4\)};}
+        \iffull\onslide<10|handout:\HandoutC>{\node[above=2mm] at(4.north) {\(4 = 4\)};}\fi
     \end{tikzpicture}}
 \end{center}
 \begin{enumerate}
@@ -342,9 +342,10 @@ public int ggT(int a, int b) {
             \item $C(871)$ benötigt hingegen $178$ Schritte
             \item $C(872)$ benötigt wieder $116$ Schritte
             \item $C(876)$ benötigt nur $54$ Schritte
-            \item $C(14039)$ bedarf ebenfalls nur $45$ Schritte
+            \iffull\item $C(14039)$ bedarf ebenfalls nur $45$ Schritte
             \item $C(9780657630)$ bedarf hingegen $1132$ Schritte
             \item $C(9780657633)$ wieder nur $248$ Schritte
+            \fi
         \end{itemize}
     \end{itemize}
 \end{frame}
