@@ -268,6 +268,7 @@ public int ggT(int a, int b) {
 !*\onslide<4->*!      else
 !*\onslide<9->*!         return C(3 * n + 1);
 !*\onslide<3->*!   }
+
 !*\onslide<2->*!}
 \end{plainjava}
 \begin{onlyenv}<10->
@@ -281,7 +282,6 @@ public int ggT(int a, int b) {
 !*\onslide<14->*!         System.out.println("C(" + i + ") = "
 !*\onslide<14->*!            + (System.nanoTime() - start));
 !*\onslide<11->*!      }
-
 !*\onslide<10->*!   }
 \end{plainjava}
     };
@@ -309,7 +309,7 @@ public int ggT(int a, int b) {
 \end{tikzpicture}
 \end{onlyenv}%
 \begin{tikzpicture}[@O]
-    \onslide<1|handout:1>{\node[below=2mm,T] at(current page.north) {Cherry-Picked 1 Durchlauf (Teils bis \SI{30000}{\nano\second})};}
+    \onslide<2|handout:1>{\node[below=2mm,T] at(current page.north) {Cherry-Picked 1 Durchlauf (Teils bis \SI{30000}{\nano\second})};}
     \onslide<3|handout:2>{\node[below=2mm,T] at(current page.north) {Gemittelt über \num{100000} Läufe};}
 \end{tikzpicture}
 \end{frame}
@@ -369,7 +369,7 @@ public int ggT(int a, int b) {
 
 \begin{frame}[t,fragile]{Die O-Notation}
 \begin{itemize}[<+(1)->]
-    \item Für die \(\O\)-Notation gilt \(T(n) \in \O(f(n))\), wenn \(f(n)\) eine obere Schranke von \(T(n)\) ist, also: \onslide<3->{\[T(n) \in \O(f(n))\pause{}\iff \exists n_0 \in \mathbb{N}\: c \in \mathbb{R}^+\: \forall n \geq n_0: T(n) \leq c \cdot f(n).\vspace*{-\baselineskip}\]}
+    \item Für die \(\O\)-Notation gilt \(T(n) \in \O(f(n))\), wenn \(f(n)\) eine obere Schranke von \(T(n)\) ist, also:\vspace*{-.125\baselineskip} \onslide<3->{\[T(n) \in \O(f(n))\pause{}\iff \exists n_0 \in \mathbb{N}\: c \in \mathbb{R}^+\: \forall n \geq n_0: T(n) \leq c \cdot f(n).\]\vspace*{-\baselineskip}}
     \item<4-> Neben den mathematischen Gesetzen (Logarithmus,~\ldots) reichen meist die folgenden:\vspace*{-.66\baselineskip}
 \begin{center}%
 \resizebox{\linewidth}{!}{%
