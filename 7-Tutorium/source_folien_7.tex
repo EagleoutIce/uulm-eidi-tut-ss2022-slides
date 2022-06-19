@@ -249,12 +249,11 @@ public int ggT(int a, int b) {
 \def\M#1#2{\rlap{$\only<#1>{\color{paletteA}\mathbf}{#2}$}\phantom{\only<handout:0>{\mathbf}{#2}}}
 \onslide<2->{\begin{tikzpicture}[@O]
     \color{gray}
-    \only<1-|handout:0>{\color{codeouthl}}
     \node[below left,xshift=-2mm,yshift=-1.25cm,text width=12cm,scale=.65] at(current page.north east) {\begin{equation*}
         C(n) = \begin{cases}
-            1 & \M{7|handout:0}{\text{ falls }} n = 1 \\
-            C(n/2) & \text{ falls } n \text{  gerade} \\
-            C(3n + 1) & \text{ sonst}
+            \M{6|handout:0}{1} & \M{4|handout:0}{\text{ falls }} \M{5|handout:0}{n = 1} \\
+            \M{8|handout:0}{C(n/2)} & \M{4|handout:0}{\text{ falls }} \M{7|handout:0}{n \text{  gerade}} \\
+            \M{9|handout:0}{C(3n + 1)} & \M{4|handout:0}{\text{ sonst}}
         \end{cases}
 \end{equation*}};
 \end{tikzpicture}}\vspace*{-\baselineskip}
@@ -268,7 +267,7 @@ public int ggT(int a, int b) {
 !*\onslide<8->*!         return C(n / 2);
 !*\onslide<4->*!      else
 !*\onslide<9->*!         return C(3 * n + 1);
-!*\onslide<2->*!   }
+!*\onslide<3->*!   }
 !*\onslide<2->*!}
 \end{plainjava}
 \begin{onlyenv}<10->
