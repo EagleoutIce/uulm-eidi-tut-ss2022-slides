@@ -1,7 +1,7 @@
 \InputIfFileExists{../data/global.src}\relax\relax
 
 \iffull
-\setbox\pinguA=\hbox{\tikz\marmot[whiskers=gray,shadow];}\relax
+\setbox\pinguA=\hbox{\tikz\marmot[whiskers=gray];}\relax
 \titlesuffix{\tikzpicture[@O]
     \node[above left,yshift=\btdmfootheight] at(current page.south east) {\copy\pinguA};
 \endtikzpicture}
@@ -48,7 +48,7 @@
 \begin{frame}[fragile,c]{Präsenzaufgabe}
 \begin{aufgabe}{Irgendwo sind meine Socken doch}
 \task<2->{In der Vorlesung wurde der Binary Algorithmus zur Suche in einer geordneten Struktur vorgestellt. \begin{enumerate}[<+(1)->]
-    \item Geben Sie an, wie das folgende Array vom Suchalgorithmus Binary Search nach dem Schlüssel \say{4} durchsucht wird.
+    \item Geben Sie an, wie das folgende Array vom Suchalgorithmus Binary Search nach dem Schlüssel \say{4} durchsucht wird.\onslide<3->{
     \begin{center}
         \begin{tikzpicture}
             \foreach[count=\i from 0] \a in {-1,0,2,3,4,7,8,9} {
@@ -56,8 +56,8 @@
             }
             \draw[rounded corners=2pt] (-1.south west) rectangle (9.north east);
         \end{tikzpicture}
-    \end{center}
-    \item Begründen Sie \textit{kurz}, weshalb der Binary Search Algorithmus eine worst-case Laufzeit von \(T(n)_{max} \in \O(\log n)\) hat.
+    \end{center}}
+    \item<4-> Begründen Sie \textit{kurz}, weshalb der Binary Search Algorithmus eine worst-case Laufzeit von \(T(n)_{max} \in \O(\log n)\) hat.
 \end{enumerate}}
 \end{aufgabe}
 \end{frame}
@@ -86,7 +86,7 @@
 \begin{enumerate}
     \itemsep7pt
     \setcounter{enumi}{-1}
-    \item<2-|handout:1-> Initial ist \(\text{min = 0}\) und \(\text{max = 7}\). Wir springen in die Mitte: \(\text{mid} = \floor{(\text{min} + \text{max})/2}\). \onslide<3->{\infoblock{Hierbei runden wir im Gleichheitsfall ab. Das ist an sich willkürlich, hier aber von uns festgesetzt.}}
+    \item<2-|handout:1-> Initial ist \(\text{min = 0}\) und \(\text{max = 7}\). Wir springen in die Mitte: \(\text{mid} = \floor{(\text{min} + \text{max})/2}\). \onslide<4->{\infoblock{Hierbei runden wir im Gleichheitsfall ab. Das ist an sich willkürlich, hier aber von uns festgesetzt.}}
     \item<5-|handout:1-> Das betrachtete Element ist kleiner als der Schlüssel, wir springen in die rechte Hälfte.\onslide<6->{\infoblock{Das heißt wir verschieben \(\text{min} = \text{mid} + 1\) und wiederholen die Berechnung von \(\text{mid}\).}}
     \item<8-|handout:2-> Das betrachtete Element ist größer als der Schlüssel, wir springen in die linke Hälfte. \infoblock{Das heißt wir setzen \(\text{max} = \text{mid} - 1\) und wiederholen die Berechnung von \(\text{mid}\).}
     \item<10-|handout:3> Das betrachtete Element entspricht dem gesuchten, liefere Index: \(4\) zurück.
@@ -115,7 +115,7 @@
     \task<2->{Für einen rekursiv definierten Algorithmus kann man ein \say{Berechnungsformular} aufstellen, das für jeden rekursiven
     Aufruf (Inkarnation) vervielfältigt wird. Das Ergebnis der Berechnung wird dann durch Ein- und Rückübertragung
     von (Teil-) Lösungen bestimmt, wobei die Termination durch die Reduktion des Arguments ausgelöst wird. In dieser
-    Aufgabe sollen Sie eine derartige Formularmaschine selbst angeben.
+    Aufgabe sollen Sie eine derartige Formularmaschine selbst angeben.\medskip
 
     \onslide<3->{Betrachten Sie das folgende rekursive Programm und geben Sie das Formularblatt, sowie die Inkarnationen für den Aufruf \T{ggt(6, 3)} an. Folgen Sie dabei der Gestaltung und Ausführung des Beispiels aus der Vorlesung (Kap.~8, Folien 15ff.)}}
     \begin{plainjava}
@@ -130,24 +130,12 @@
 \end{frame}
 }
 
-\begin{frame}[c,fragile]{Formulargefahr}
-\forestset{K/.style={for tree={inner sep=4pt,block,minimum width=2em,outer sep=1pt,execute at begin node={\strut},grow=north,s sep=1.3em,l sep=1.5em}}}
-\tikzset{every label/.style={gray},every path/.append style={line cap=round}}
-\begin{onlyenv}<3-|handout:1>
-\raisebox{-.5\height}{\begin{forest} K
-   [{},label=left:ggT[6,label=right:a][3,label=left:b]]
-   \node[above right] at(current bounding box.north west) {Initialer Aufruf};
-\end{forest}}\onslide<4->{\quad$\equiv$\quad\raisebox{-.5\height}{\begin{forest} K
-    % TODO: do the 0 6 false thingy first, and do not evaluate the b = 3 stuff in the then case, be consistent!
-    % phantom to get the crap out of that
-    [\only<11->{?},label=left:if[\only<11->{\paletteA{\bfseries?}},label=right:ggT,edge label={node[midway,right]{\footnotesize else}}[\only<10->{3},label=above:b][\only<9->{0}[\only<8->{3},label=right:b][\only<8->{6},label=left:a]]][\only<7->{\color{codeouthl}3},label=above:b, edge label={node[pos=.55,left,align=right]{\footnotesize th\rlap{-}\\[-2.5mm]\footnotesize en}}][\phantom{false}\only<6->{\llap{false}},label=left:{=}, edge label={node[midway,left]{\footnotesize when}}[\only<5->{3},label=right:b][0]]]
-    \node[above right] at(current bounding box.north west) {Inkarnation \(1\): \(a = 6\), \(b = 3\)};
-    % TODO:animationen von unten ncach oben und andere steps mit handout breakds, bei der zwei einfach nur sperat animieren wie die aufploppenund bei der drei mehr reden als auf die FOlien packen (vielleicht einn QR code zum numberphile video oder so....)
- \end{forest}}}
-\end{onlyenv}
+\begin{frame}[b,fragile]{Formulargefahr}
+\forestset{K/.style={for tree={inner sep=4pt,block,minimum width=2em,outer sep=0pt,execute at begin node={\strut},grow=north,s sep=1.45em,l sep=1.5em}}}
+\tikzset{every label/.style={gray},label distance=-.5mm,every path/.append style={line cap=round}}
 \begin{tikzpicture}[@O]
 \begin{onlyenv}<2->
-\node[below left,yshift=-1.35cm,text width=5.25cm] at(current page.north east) {\lstfs{9}\begin{plainjava}
+\node[below left,yshift=-1.35cm,text width=4.5cm] at(current page.north east) {\lstfs{7}\begin{plainjava}
 public int ggT(int a, int b) {
     if(b == 0) {
         return a;
@@ -157,13 +145,215 @@ public int ggT(int a, int b) {
 }
     \end{plainjava}};
 \end{onlyenv}
+\end{tikzpicture}%\vspace*{-1.5\baselineskip}
+\begin{onlyenv}<3-|handout:1->
+\raisebox{-.5\height}{\begin{forest} K
+   [\only<3-17|handout:-2>{{\paletteA{\faQuestion}}}\only<18-|handout:3->{\bfseries3},label=left:ggT[3,label=left:b][6,label=right:a]]
+   \node[above right] at(current bounding box.north west) {Initialer Aufruf};
+   \pgfonlayer{background}
+   \draw[thick,rounded corners=2pt] ([xshift=-2.15mm,yshift=-2mm]current bounding box.south west) rectangle ([xshift=2mm,yshift=2mm]current bounding box.north east);
+   \endpgfonlayer
+\end{forest}}\onslide<4->{\quad$\equiv$\quad\raisebox{-.5\height}{\colorlet{@@}{black}\only<7->{\colorlet{@@}{codeouthl}}\begin{forest} K
+    % TODO: do the 0 6 false thingy first, and do not evaluate the b = 3 stuff in the then case, be consistent!
+    % phantom to get the crap out of that
+    [\only<11-16|handout:-2>{?}\only<17-|handout:3->{\bfseries3},label=left:if[\only<11-16|handout:-2>{\paletteA{\faQuestion}}\only<17-|handout:3->{\paletteA{\bfseries3}},label=right:ggT,edge label={node[midway,right]{\footnotesize else}}[\only<9->{0},label=left:\%[\only<8->{3},label=right:b][\only<8->{6},label=left:a]][\only<10->{3},label=above:b]][\only<7->{6},@@,label=above:a, edge label={node[pos=.55,left,align=right]{\footnotesize th\rlap{-}\\[-2.5mm]\footnotesize en}},edge=@@][\phantom{false}\only<6->{\llap{false}},label=left:{=}, edge label={node[midway,left]{\footnotesize when}}[0][\only<5->{3},label=above:b]]]
+    \node[above right] at(current bounding box.north west) {Inkarnation \(1\): \(a = 6\), \(b = 3\)};
+    \pgfonlayer{background}
+    \draw[thick,rounded corners=2pt] ([xshift=-2mm,yshift=-2mm]current bounding box.south west) rectangle ([xshift=4.25mm,yshift=2mm]current bounding box.north east);
+    \endpgfonlayer
+    % \node[below] at(current bounding box.south) {\smash{\T{ggt(6,3)}}};
+    % TODO:animationen von unten ncach oben und andere steps mit handout breakds, bei der zwei einfach nur sperat animieren wie die aufploppenund bei der drei mehr reden als auf die FOlien packen (vielleicht einn QR code zum numberphile video oder so....)
+ \end{forest}}}%
+ \onslide<11-16|handout:2>{\qquad\llap{\raisebox{-.6\height}{\colorlet{@@}{black}\only<14->{\colorlet{@@}{codeouthl}}\begin{forest} K
+    % TODO: do the 0 6 false thingy first, and do not evaluate the b = 3 stuff in the then case, be consistent!
+    % phantom to get the crap out of that
+    [\only<16->{3},label=left:if[{},for tree={@@,edge=@@},label=right:ggT,edge label={node[midway,right]{\footnotesize else}}[{},label=left:\%[0,label=right:b][3,label=left:a]][0,label=above:b]][\only<15->{3},label=above:a, edge label={node[pos=.55,left,align=right]{\footnotesize th\rlap{-}\\[-2.5mm]\footnotesize en}}][\phantom{true}\only<13->{\llap{true}},label=left:{=}, edge label={node[midway,left]{\footnotesize when}}[0][\only<12->{0},label=above:b]]]
+    \node[above right] at(current bounding box.north west) {Inkarnation \(2\): \(a = 3\), \(b = 0\)};
+    \pgfonlayer{background}
+    \draw[thick,fill=btdm@background,rounded corners=2pt,fill opacity=.885] ([xshift=-2mm,yshift=-2mm]current bounding box.south west) rectangle ([xshift=4.25mm,yshift=2mm]current bounding box.north east);
+    \endpgfonlayer
+    % \node[below] at(current bounding box.south) {\smash{\T{ggt(3,0)}}};
+ \end{forest}}}}
+\end{onlyenv}
+\end{frame}
+
+\subsection{Aufgabe 2}
+\begin{frame}[c]{Aufgabe 2: Rekursive Algorithmen implementieren}
+    \task<2->{Unter dem Integral \(R \das \int_a^b f(x) \dif x\) einer Funktion \(f\) versteht man auch die Fläche zwischen der \(x\)-Achse und dem Graphen der Funktion. Im Folgenden sollen Sie eine rekursive Approximation \(A(a, b)\) für das Integral der Funktion \(f(x) = x^2\) im Intervall \([a, b]\) implementieren. Dazu sollen Sie das Intervall solange in Teilintervalle halbieren, bs diese für eine direkte Berechnung hinreichend klein sind. Anschließend werden alle Teilflächen addiert. Es ergibt sich also folgende Rekursionsgleichung: \onslide<3->{\begin{equation*}
+        A^t(a, b) \das \begin{cases}
+            (b - a) \cdot f(a) & \text{ falls } b - a \leq 0.01 \\
+            A^{t + 1}\bigl(a, (a + b) / 2\bigr) + A^{t + 2}\bigl((a + b)/2, b\bigr),& \text{ sonst }
+        \end{cases}
+    \end{equation*}}
+    \onslide<4->{Implementieren Sie eine Methode, die das Integral wie beschreiben rekursiv approximiert und das Ergebnis als Resultat zurückgibt. Testen Sie Ihre Implementierung für das Intervall \([0, 1]\).}}
+\end{frame}
+
+\begin{frame}[c,fragile]{Mathematische Definitionen übernehmen}
+% no bold on handout
+\def\M#1#2{\rlap{$\only<#1>{\color{paletteA}\mathbf}{#2}$}\phantom{\only<handout:0>{\mathbf}{#2}}}
+\onslide<2->{\begin{tikzpicture}[@O]
+    \color{gray}
+    \only<1-|handout:0>{\color{codeouthl}}
+    \node[below left,xshift=-2mm,yshift=-1.25cm,text width=12cm,scale=.65] at(current page.north east) {\begin{align*}
+        \only<4-5,10-|handout:0>{\color{gray}}f(x) &\only<4-5,10-|handout:0>{\color{gray}}= x^2\\
+        \only<6-|handout:0>{\color{gray}}A^t(a, b) &\only<6-|handout:0>{\color{gray}}= \begin{cases}
+            \M{8|handout:0}{(b - a) \cdot f(a)} & \text{ falls } \M{7|handout:0}{b - a \leq 0.01} \\
+            \M{9|handout:0}{A^{t + 1}\bigl(a, (a + b) / 2\bigr) + A^{t + 2}\bigl((a + b)/2, b\bigr)},& \M{7|handout:0}{\text{ sonst }}
+    \end{cases}
+\end{align*}};
+\end{tikzpicture}}\vspace*{-\baselineskip}
+\begin{plainjava}[add to literate={∫}{{$\int$}}1]
+!*\CodeFileMarkerAttach<3->{Rekursion.java}*!
+!*\onslide<2->*!public class Rekursion {
+!*\onslide<4->*!   public static double f(double x) {
+!*\onslide<5->*!      return x * x;
+!*\onslide<4->*!   }!*\medskip*!
+!*\onslide<6->*!   public static double A(double a, double b) {
+!*\onslide<7->*!      if(b - a <= 0.01)
+!*\onslide<8->*!         return (b - a) * f(a);
+!*\onslide<7->*!      else
+!*\onslide<9->*!         return A(a, (a + b)/2) + A((a + b)/2, b);
+!*\onslide<6->*!   }!*\medskip*!
+!*\onslide<10->*!   public static void main(String[] args) {
+!*\onslide<11->*!      System.out.println("∫[0,1] x^2 = " + A(0,1));
+!*\onslide<10->*!   }
+!*\onslide<2->*!}
+\end{plainjava}
+\end{frame}
+
+\subsection{Aufgabe 3}
+{\taskenum
+\begin{frame}[c]{Aufgabe 3: Nicht-monotone Rekursion}
+    \task<2->{Die bisher in der Vorlesung betrachteten rekursiven Algorithmen haben alle eine monoton in der Argumentgröße steigende Laufzeit. Es gibt aber rekursive Funktionen, bei denen diese Annahme nicht zutrifft. Ein Beispiel hierfür ist die \hlink{https://de.wikipedia.org/wiki/Collatz-Problem}{Collatz Funktion}, die für \(n \geq 1\) wie folgt definiert sei: \onslide<3->{\begin{equation*}
+        C(n) \das \begin{cases}
+            1 & \text{ falls } n = 1 \\
+            C(n/2) & \text{ falls } n \text{  gerade} \\
+            C(3n + 1) & \text{ sonst}
+        \end{cases}
+    \end{equation*}}
+    \begin{enumerate}
+        \item<4-> Implementieren Sie die Collatz Funktion in Java, messen Sie jeweils die Ausführungszeit in Nanosekunden (s. \T{System.nanoTime()}) für die Eingaben von \(1\) bis \(1000\) und lassen Sie sich diese ausgeben.
+        \item<5-> Was können Sie über den Zusammenhang von \(n\) und der Ausführungszeit sagen? Schreiben Sie Ihre Antwort als Kommentar in die Java Datei.
+    \end{enumerate}}
+\end{frame}
+}
+
+\begin{frame}[c,fragile]{Ein wenig mehr von Collatz}
+\def\M#1#2{\rlap{$\only<#1>{\color{paletteA}\mathbf}{#2}$}\phantom{\only<handout:0>{\mathbf}{#2}}}
+\onslide<2->{\begin{tikzpicture}[@O]
+    \color{gray}
+    \only<1-|handout:0>{\color{codeouthl}}
+    \node[below left,xshift=-2mm,yshift=-1.25cm,text width=12cm,scale=.65] at(current page.north east) {\begin{equation*}
+        C(n) = \begin{cases}
+            1 & \M{7|handout:0}{\text{ falls }} n = 1 \\
+            C(n/2) & \text{ falls } n \text{  gerade} \\
+            C(3n + 1) & \text{ sonst}
+        \end{cases}
+\end{equation*}};
+\end{tikzpicture}}\vspace*{-\baselineskip}
+\begin{plainjava}
+!*\CodeFileMarkerAttach<3->{Collatz.java}*!
+!*\onslide<2->*!public class Collatz {
+!*\onslide<3->*!   public static int C(int n) {
+!*\onslide<4->*!      if !*\onslide<5->*!(n == 1)
+!*\onslide<6->*!         return 1;
+!*\onslide<4->*!      else if !*\onslide<7->*!(n % 2 == 0)
+!*\onslide<8->*!         return C(n / 2);
+!*\onslide<4->*!      else
+!*\onslide<9->*!         return C(3 * n + 1);
+!*\onslide<2->*!   }
+!*\onslide<2->*!}
+\end{plainjava}
+\begin{onlyenv}<10->
+\begin{tikzpicture}[@O]
+    \node[above left,yshift=\btdmfootheight,text width=9.75cm,outer sep=0pt] (@) at(current page.south east) {%
+\begin{plainjava}
+!*\onslide<10->*!   public static void main(String[] args) {
+!*\onslide<11->*!      for (int i = 1; i <= 1_000; i++) {
+!*\onslide<12->*!         long start = System.nanoTime();
+!*\onslide<13->*!         C(i);
+!*\onslide<14->*!         System.out.println("C(" + i + ") = "
+!*\onslide<14->*!            + (System.nanoTime() - start));
+!*\onslide<11->*!      }
+
+!*\onslide<10->*!   }
+\end{plainjava}
+    };
+    \draw[gray,decorate,decoration={brace,mirror,amplitude=5pt}] ([xshift=5mm,yshift=-3mm]@.north west) -- ([xshift=5mm,yshift=3mm]@.south west);
 \end{tikzpicture}
+\end{onlyenv}
+\end{frame}
+
+\iffull
+{\pgfplotsset{K/.style={width=.95\linewidth,height=\textheight,scaled ticks=false,xlabel=$i$,xticklabel style={align=center,font=\footnotesize,execute at begin node=\vphantom{1234567890}},legend pos=north west,legend style={nodes={font=\small,align=left},draw=none,rounded corners=1.25pt},legend cell align={left},bar width=.18pt,ymin=0,ymajorgrids,ylabel={Time [\si{\nano\second}]},xlabel={\scriptsize i (for $C(i)$)},major tick length=0pt,axis lines=left,xmin=-1,enlarge x limits={abs=1ex,upper},enlarge y limits={abs=1ex,upper},extra y ticks={#1},extra y tick style={paletteD,font=\footnotesize,grid=major,grid style={paletteD,thick}}, ytickmin=2,,legend columns=2,legend style={/tikz/column 2/.style={column sep=5pt}},axis line style={-Kite,line join=round,line cap=round},legend image post style={rounded corners=1.25pt},ylabel near ticks,xlabel near ticks,xlabel shift=5mm}}
+\begin{frame}[b]
+\null\vspace*{1em}
+\begin{onlyenv}<2|handout:1>
+\begin{tikzpicture}
+    \begin{axis}[K={402.873}]% avg
+        \addplot[ybar,fill,paletteA!80!lightgray] table[x=i,y=time,col sep=comma] {logging.data};
+    \end{axis}
+\end{tikzpicture}
+\end{onlyenv}%
+\begin{onlyenv}<3|handout:2>
+\begin{tikzpicture}
+    \begin{axis}[K={88.4737184999999},ytick={50,200,300}]% avg
+        \addplot[ybar,fill,paletteA!80!lightgray] table[x=i,y=time,col sep=comma] {logging-avg.data};
+    \end{axis}
+\end{tikzpicture}
+\end{onlyenv}%
+\begin{tikzpicture}[@O]
+    \onslide<1|handout:1>{\node[below=2mm,T] at(current page.north) {Cherry-Picked 1 Durchlauf (Teils bis \SI{30000}{\nano\second})};}
+    \onslide<3|handout:2>{\node[below=2mm,T] at(current page.north) {Gemittelt über \num{100000} Läufe};}
+\end{tikzpicture}
+\end{frame}
+\begin{frame}{Woher die Schwankungen}
+\begin{itemize}[<+(1)->]
+    \itemsep12pt
+    \item Benchmarking ist eigentlich um einiges tückischer!\;\raisebox{-4pt}{\smash{\textsuperscript{\cite{microbenchmarks}}}} \begin{itemize}
+        \item Das Zeitmessen selbst braucht Zeit
+        \item Die Java Virtual Machine hat zu Beginn einiges zusätzlich zu tun
+        \item Dienste wie die Garbage-Collection können unkontrolliert dazwischenfunken
+    \end{itemize}
+    \item Dafür gibt es Bibliotheken wie \hlink{https://github.com/openjdk/jmh}{jmh} oder \hlink{https://github.com/google/caliper}{caliper}
+    \item Hier ging es uns aber auch nicht um die exakten Zeiten, sondern nur um seltsame Schwankungen \begin{itemize}
+        \item Für die hätte man aber auch einfach die Rekursiontiefe aufzeichnen können
+        \item Menno\ldots
+    \end{itemize}
+\end{itemize}
+\end{frame}
+}
+\fi
+
+\begin{frame}{Ausführungszeitzusammenhänge}
+    \begin{itemize}[<+(1)->]
+        \itemsep8pt
+        \item Zwischen \(n\) und der Ausführungszeit existiert kein offensichtlicher Zusammenhang
+        \item Ganz allgemein zeigt die Collatz-Funktion wie eine einfache Formulierung ein quasi unmöglich vorhersehbares Verhalten an den Tag legen kann\;\raisebox{-4pt}{\smash{\textsuperscript{\cite{van2005collatz}, \cite{andrei1998collatz}}}} \begin{itemize}
+            \item $C(870)$ benötigt beispielsweise $28$ Schritte
+            \item $C(871)$ benötigt hingegen $178$ Schritte
+            \item $C(872)$ benötigt wieder $116$ Schritte
+            \item $C(876)$ benötigt nur $54$ Schritte
+            \item $C(14039)$ bedarf ebenfalls nur $45$ Schritte
+            \item $C(9780657630)$ bedarf hingegen $1132$ Schritte
+            \item $C(9780657633)$ wieder nur $248$ Schritte
+        \end{itemize}
+    \end{itemize}
 \end{frame}
 
 \iffull
 \SetNextSectionText{Suchen und Sortieren\\Abgabe: \DTMDate{2022-06-27}}
 \section{Aussicht: Übungsblatt 8}
-\begin{frame}{Habbeldu}
+\subsection{Aufgabe 1}
+\begin{frame}{Aufgabe 1: Naive Sortieralgorithmen}
+TODO: O-NOtation wiederholung
+\end{frame}
+
+\subsection{Aufgaben 2 und 3}
+\begin{frame}{Aufgaben 2 und 3}
+Best und worst-case analysen
+
+Transformation von Iteration in Rekursion, Palindrom-Präsenzaufgabe letzte Woche
 \end{frame}
 \fi
 
@@ -174,14 +364,45 @@ public int ggT(int a, int b) {
 \pause \printBibCommand
 \vfill\vfill % double fill for more fraction
 \begin{itemize}[<+(1)->]
-    \itemsep5pt
-    \item TODO
+    \itemsep6.5pt
+    \item Rekursion ist neben Iteration ein mächtiger Abstraktionsmechanismus \begin{itemize}
+        \item Ein gleichmächtiger, um genau zu sein
+        \item Es erlaubt beispielsweise die Umsetzung von Divide-And-Conquer-Verfahren
+    \end{itemize}
+    \item Neben der Formularmaschine gibt es viele andere \hlink{https://github.com/EagleoutIce/Episode-Recursion}{Visualisierungen} für Rekursion
+    \item Selbst einfach aussehende Algorithmen können sehr schwer nachvollziehbar sein!
+    \item Bei der Komplexitätsbetrachtung hilft die \(\O\)-Notation zum Vergleich \begin{itemize}
+        \item \say{Der am stärksten wachsende Ausdruck}
+        \item \(T(n) \in \O(f(n))\pause{}\iff \exists n_0 \in \mathbb{N}\: c \in \mathbb{R}^+\: \forall n \geq n_0: T(n) \leq c \cdot f(n)\)
+    \end{itemize}
 \end{itemize}
 \end{frame}
 }
 
-\outro{\vskip9mm\centering \onslide<2->{\scalebox{1.35}{\begin{tikzpicture}
-       % TODO
+\outro{\vskip9mm\centering \onslide<2->{\scalebox{1.42}{\begin{tikzpicture}
+    \pingu[body type=legacy,name=pingu,right wing wave,eyes wink,left wing grab,height=10mm,blush,feet=sit];
+    \draw[line cap=round]([xshift=.15mm]pingu-wing-right) to[bend right] ++(.1mm,1.1mm) -- ++(4.5mm,8.5mm) coordinate(@);
+    \scope[rotate around=-18:(@)]
+    \fill[pingu@yellow!80!pingu@red,rounded corners=1.5pt] (@) --++(1mm,0mm) --++(-1mm,.33mm) arc(270:630:4.325mm and 4.7mm) -- ++(-1mm,-.33mm) -- cycle;
+    \draw[line cap=round,pingu@black,very thin] (@)++(-.35mm,.3mm) to[bend right=14] ++(.7mm,0);
+    \endscope
+    \draw[line cap=round](pingu-wing-right) to[bend right] ++(-.65mm,1.4mm) -- ++(-2mm,8mm) coordinate(@);
+    \scope[rotate around=10:(@)]
+    \fill[pingu@green,rounded corners=1.5pt] (@) --++(1mm,0mm) --++(-1mm,.33mm) arc(270:630:4.25mm and 5.133mm) -- ++(-1mm,-.33mm) -- cycle;
+    % \fill[pingu@white,fill opacity=.6] (@)++(-3mm,7.15mm) ellipse[x radius=.39mm,y radius=.42mm];
+    \draw[line cap=round,pingu@black,very thin] (@)++(-.35mm,.3mm) to[bend right=14] ++(.7mm,0);
+    \endscope
+    \draw[line cap=round]([xshift=.1mm]pingu-wing-right) to[bend right] ++(-.55mm,1.4mm) -- ++(-.25mm,11mm) coordinate(@);
+    \scope[rotate around=4:(@)]
+    \fill[pingu@blue,rounded corners=1.5pt] (@) --++(1mm,0mm) --++(-1mm,.33mm) arc(270:630:4.125mm and 4.9mm) -- ++(-1mm,-.33mm) -- cycle;
+    % \fill[pingu@white,fill opacity=.6] (@)++(-3mm,6.75mm) ellipse[x radius=.39mm,y radius=.42mm];
+    \draw[line cap=round,pingu@black,very thin] (@)++(-.35mm,.3mm) to[bend right=14] ++(.7mm,0);
+    \endscope
+    \draw[line cap=round]([xshift=.1mm]pingu-wing-right) to[bend right] ++(-.85mm,1.35mm) -- ++(-5mm,4.5mm) coordinate(@);
+    \scope[rotate around=30:(@)]
+    \fill[pingu@purple,rounded corners=1.5pt] (@) --++(1mm,0mm) --++(-1mm,.33mm) arc(270:630:3.525mm and 4.3mm) -- ++(-1mm,-.33mm) -- cycle;
+    \draw[line cap=round,pingu@black,very thin] (@)++(-.35mm,.3mm) to[bend right=14] ++(.7mm,0);
+    \endscope
 \end{tikzpicture}}}}
 
 \iffull\end{document}\fi

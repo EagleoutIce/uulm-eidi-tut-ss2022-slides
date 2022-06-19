@@ -37,7 +37,7 @@
 \PassOptionsToPackage{defernumbers=true}{biblatex}% allows for split bibs
 \def\LithieBoxesLoadDefault{}
 \usepackage[%
-    sopra-listings={encoding,cpalette,print,highlights,nodefaultfont,fakeminted},%
+    sopra-listings={encoding,cpalette,print,highlights,nodefaultfont,extendednums,fakeminted},%
     % sopra-tables,
     color-palettes,beamer-extra,%
     %util,%,,%
@@ -52,6 +52,7 @@
 \AtBeginDocument{\pgfsetlayers{background,main,middle,foreground}}
 \usepackage[glows]{tikzpingus} % assert layer stuff for tikzuml (sopra-models) :D
 \usepackage{tikzlings}
+\usepackage{pgfplots}
 
 \usepackage{cancel}
 \usepackage{lecture-runtimes,lecture-personal-tikz,lecture-personal-resize,lecture-personal-extra-units,tikzsymbols}
