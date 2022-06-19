@@ -353,14 +353,48 @@ public int ggT(int a, int b) {
 \section{Aussicht: Übungsblatt 8}
 \subsection{Aufgabe 1}
 \begin{frame}{Aufgabe 1: Naive Sortieralgorithmen}
-TODO: O-NOtation wiederholung
+\begin{itemize}[<+(1)->]
+    \itemsep12pt
+    \item Bei manchen Problemen kann gezeigt werden,\pause{} dass sie sich nicht besser lösen lassen.\pause{} So zum Beispiel das Sortierproblem,\pause{} welches immer mindestens in \(\O(n \log n)\) liegt (\emph{average-case}).\pause{} Man spricht auch von einer unteren Schranke.
+    \item Ein paar Rechenregeln können hilfreich sein,\pause{} seien \(k, c\) Konstanten:\pause{}
+    \begin{alignat*}{3}
+        \onslide<9->{k} &\onslide<9->{= \O(1)} &\onslide<10->{ f(n)} &\onslide<10->{= \O(f(n))} \\
+        \onslide<11->{c \cdot \O(f(n))} &\onslide<11->{= \O(f(n))}&\onslide<12->{ \O(f(n)) + \O(f(n))} &\onslide<12->{= \O(f(n))} \\
+        \onslide<13->{\O(f(n)) \cdot \O(g(n))} &\onslide<13->{= \O(f(n) \cdot g(n))}\quad & \onslide<14->{\O(\O(f(n)))} &\onslide<14->{= \O(f(n))}
+    \end{alignat*}
+    \onslide<15->{Sowie: \onslide<16->{\(\O(f(n) + g(n)) = \O(\max\{f(n), g(n)\})\)}}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{Die O-Notation}
+\begin{itemize}[<+(1)->]
+    \item Für die \(\O\)-Notation gilt \(T(n) \in \O(f(n))\), wenn \(f(n)\) eine obere Schranke von \(T(n)\) ist, also: \onslide<3->{\[T(n) \in \O(f(n))\pause{}\iff \exists n_0 \in \mathbb{N}\: c \in \mathbb{R}^+\: \forall n \geq n_0: T(n) \leq c \cdot f(n).\vspace*{-\baselineskip}\]}
+    \item<4-> Neben den mathematischen Gesetzen (Logarithmus,~\ldots) reichen meist die folgenden:\vspace*{-.66\baselineskip}
+\begin{center}%
+\resizebox{\linewidth}{!}{%
+\setlength{\aboverulesep}{0pt}%
+\setlength{\belowrulesep}{0pt}%
+\setlength{\extrarowheight}{.85ex}%
+\begin{tabular}{c*{8}{c}}
+    \toprule
+    & \onslide<5->{\cellcolor{pingu@green!100!pingu@purple!21} \(\O(1)\)} & \onslide<6->{\cellcolor{pingu@green!85!pingu@purple!21}\(\O(\log n)\)} & \onslide<7->{\cellcolor{pingu@green!69!pingu@purple!21} \(\O(n)\)} & \onslide<8->{\cellcolor{pingu@green!53!pingu@purple!21} \(\O(n\log n)\)} & \onslide<9->{\cellcolor{pingu@green!36!pingu@purple!21} \(\O(n^2)\)} & \onslide<10->{\cellcolor{pingu@green!19!pingu@purple!21} \(\O(n^3)\)} & \onslide<11->{\cellcolor{pingu@green!14!pingu@purple!21} \(\O(2^n)\)} & \onslide<12->{\cellcolor{pingu@green!0!pingu@purple!21} \(\O(n!)\)} \\[0.45ex]\midrule
+    Bsp: & \onslide<5->{\(42\)} & \onslide<6->{\(4 \log (3n)\)} & \onslide<7->{\(4n-3\)} & \onslide<8->{\(4n\log(2n)\)} & \onslide<9->{\(n^2 + 2n - 1\)} & \onslide<10->{\(n^3 - 42n^2\)} & \onslide<11->{\(14\cdot2^n\)}& \onslide<12->{\(n! \cdot 10^{-42}\)}\\
+    Bez: &\onslide<5->{\footnotesize konst.} & \onslide<6->{\footnotesize logarithm.} & \onslide<7->{\footnotesize linear} &\onslide<8->{\footnotesize linear log.} & \onslide<9->{\footnotesize quadratisch} & \onslide<10->{\footnotesize kubisch} & \onslide<11->{\footnotesize exponentiell} & \onslide<12->{\footnotesize faktoriell} \\
+\bottomrule
+\end{tabular}}\bigskip
+\end{center}
+\item<13-> Es existieren auch noch andere Notationen, die uns zunächst egal sind
+\end{itemize}
 \end{frame}
 
 \subsection{Aufgaben 2 und 3}
 \begin{frame}{Aufgaben 2 und 3}
-Best und worst-case analysen
-
-Transformation von Iteration in Rekursion, Palindrom-Präsenzaufgabe letzte Woche
+\begin{itemize}[<+(1)->]
+    \itemsep12pt
+    \item Bei Best- und Worst-case Analysen gilt es, Eingaben zu finden die die beste und schlechteste Laufzeit liefern
+    \item So wie das Nachvollziehen von Algorithmen schwer ist, kann es schwer sein diese für einen Algorithmus zu finden \info{hier hilft Übung}
+    \item Für die Transformation von Iteration zu Rekursion hilft ein Blick auf die Präsenzaufgabe letzter Woche
+\end{itemize}
 \end{frame}
 \fi
 
