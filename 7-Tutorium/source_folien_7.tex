@@ -83,16 +83,14 @@
         \onslide<10|handout:3>{\node[above=2mm] at(4.north) {\(4 = 4\)};}
     \end{tikzpicture}}
 \end{center}
-\begin{onlyenv}<0|handout:1->
 \begin{enumerate}
     \itemsep7pt
     \setcounter{enumi}{-1}
-    \item<handout:1-> Initial ist \(\text{min = 0}\) und \(\text{max = 7}\). Wir springen in die Mitte: \(\text{mid} = \floor{(\text{min} + \text{max})/2}\). \infoblock{Hierbei runden wir im Gleichheitsfall ab. Das ist an sich willkürlich, hier aber von uns festgesetzt.}
-    \item<handout:1-> Das betrachtete Element ist kleiner als der Schlüssel, wir springen in die rechte Hälfte.\infoblock{Das heißt wir verschieben \(\text{min} = \text{mid} + 1\) und wiederholen die Berechnung von \(\text{mid}\).}
-    \item<handout:2-> Das betrachtete Element ist größer als der Schlüssel, wir springen in die linke Hälfte. \infoblock{Das heißt wir setzen \(\text{max} = \text{mid} - 1\) und wiederholen die Berechnung von \(\text{mid}\).}
-    \item<handout:3> Das betrachtete Element entspricht dem gesuchten, liefere Index: \(4\) zurück.
+    \item<2-|handout:1-> Initial ist \(\text{min = 0}\) und \(\text{max = 7}\). Wir springen in die Mitte: \(\text{mid} = \floor{(\text{min} + \text{max})/2}\). \onslide<3->{\infoblock{Hierbei runden wir im Gleichheitsfall ab. Das ist an sich willkürlich, hier aber von uns festgesetzt.}}
+    \item<5-|handout:1-> Das betrachtete Element ist kleiner als der Schlüssel, wir springen in die rechte Hälfte.\onslide<6->{\infoblock{Das heißt wir verschieben \(\text{min} = \text{mid} + 1\) und wiederholen die Berechnung von \(\text{mid}\).}}
+    \item<8-|handout:2-> Das betrachtete Element ist größer als der Schlüssel, wir springen in die linke Hälfte. \infoblock{Das heißt wir setzen \(\text{max} = \text{mid} - 1\) und wiederholen die Berechnung von \(\text{mid}\).}
+    \item<10-|handout:3> Das betrachtete Element entspricht dem gesuchten, liefere Index: \(4\) zurück.
 \end{enumerate}
-\end{onlyenv}
 \begin{tikzpicture}[@O]
     \node[below left,yshift=-1.35cm,align=left] at(current page.north east) {\only<3-|handout:1->{\(\frac{0+7}{2} = 3.5 \onslide<4->{\rightarrow 3}\)}\\[1.5mm]\only<6-|handout:2->{\(\frac{4+7}{2} = 5.5 \onslide<7->{\rightarrow 5}\)}};
 \end{tikzpicture}
@@ -133,16 +131,17 @@
 }
 
 \begin{frame}[c,fragile]{Formulargefahr}
-\forestset{K/.style={for tree={inner sep=4pt,block,minimum width=2em,outer sep=1pt,execute at begin node={\strut},grow=north,s sep=1.25em}}}
-\tikzset{every label/.style={gray}}
+\forestset{K/.style={for tree={inner sep=4pt,block,minimum width=2em,outer sep=1pt,execute at begin node={\strut},grow=north,s sep=1.3em,l sep=1.5em}}}
+\tikzset{every label/.style={gray},every path/.append style={line cap=round}}
 \begin{onlyenv}<3-|handout:1>
 \raisebox{-.5\height}{\begin{forest} K
    [{},label=left:ggT[6,label=right:a][3,label=left:b]]
    \node[above right] at(current bounding box.north west) {Initialer Aufruf};
-\end{forest}}\onslide<4->{\qquad$\equiv$\qquad\raisebox{-.5\height}{\begin{forest} K
+\end{forest}}\onslide<4->{\quad$\equiv$\quad\raisebox{-.5\height}{\begin{forest} K
     % TODO: do the 0 6 false thingy first, and do not evaluate the b = 3 stuff in the then case, be consistent!
-    [?,label=left:if[\paletteA{\bfseries?},label=right:ggT,edge label={node[midway,right]{\footnotesize else}}[3,label=above:b][\only<9->{0}[\only<8->{3},label=above:b][\only<8->{6},label=left:a]]][\only<7->{\color{codeouthl}3},label=above:b, edge label={node[midway,left,sloped]{\footnotesize then}}][\only<6->{false},label=left:{=}, edge label={node[midway,left]{\footnotesize when}}[\only<5->{3},label=right:b][0]]]
-    \node[above right,yshift=4mm] at(current bounding box.north west) {Inkarnation \(1\): \(a = 6\), \(b = 3\)};
+    % phantom to get the crap out of that
+    [\only<11->{?},label=left:if[\only<11->{\paletteA{\bfseries?}},label=right:ggT,edge label={node[midway,right]{\footnotesize else}}[\only<10->{3},label=above:b][\only<9->{0}[\only<8->{3},label=right:b][\only<8->{6},label=left:a]]][\only<7->{\color{codeouthl}3},label=above:b, edge label={node[pos=.55,left,align=right]{\footnotesize th\rlap{-}\\[-2.5mm]\footnotesize en}}][\phantom{false}\only<6->{\llap{false}},label=left:{=}, edge label={node[midway,left]{\footnotesize when}}[\only<5->{3},label=right:b][0]]]
+    \node[above right] at(current bounding box.north west) {Inkarnation \(1\): \(a = 6\), \(b = 3\)};
     % TODO:animationen von unten ncach oben und andere steps mit handout breakds, bei der zwei einfach nur sperat animieren wie die aufploppenund bei der drei mehr reden als auf die FOlien packen (vielleicht einn QR code zum numberphile video oder so....)
  \end{forest}}}
 \end{onlyenv}
