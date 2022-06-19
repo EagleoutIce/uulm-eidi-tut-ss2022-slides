@@ -63,10 +63,16 @@
 \end{frame}
 }
 
+{
+\iffull
+\def\HandoutA{1}\def\HandoutB{2}\def\HandoutC{3}
+\else
+\def\HandoutA{1}\def\HandoutB{1}\def\HandoutC{1}
+\fi
 \begin{frame}[c]{Ja wie suchen wir denn die 4?}
 \begin{center}
     \onslide<2->{\begin{tikzpicture}
-        \foreach[count=\i from 0] \a/\ao/\ho/\co in {-1/2/0/{6-|handout:2-},0/2/0/{6-|handout:2-},2/2/0/{6-|handout:2-},3/{2,3,4,5}/1/{6-|handout:2-},4/{2,3,9,10}/3/{0|handout:0},7/{2,6,7,8}/2/{9-|handout:3-},8/{2,6}/0/{9-|handout:3-},9/2/0/{9-|handout:3-}} {
+        \foreach[count=\i from 0] \a/\ao/\ho/\co in {-1/2/0/{6-|handout:\HandoutB-},0/2/0/{6-|handout:\HandoutB-},2/2/0/{6-|handout:\HandoutB-},3/{2,3,4,5}/\HandoutA/{6-|handout:\HandoutB-},4/{2,3,9,10}/\HandoutC/{0|handout:0},7/{2,6,7,8}/\HandoutB/{9-|handout:\HandoutC-},8/{2,6}/0/{9-|handout:\HandoutC-},9/2/0/{9-|handout:\HandoutC-}} {
             \color{gray}\only<\ao|handout:\ho>{\color{black}}
             \expandafter\only\expandafter<\co>{\color{codeouthl}}
             \node[outer sep=3pt] (\a) at (.66*\i, 0) {\a};
@@ -74,27 +80,28 @@
         }
         \draw[rounded corners=2pt] (-1.south west) rectangle (9.north east);
         \onslide<3|handout:0>{\path(3-i.north)--(4-i.north) coordinate[pos=.5] (@); \node[above=-2mm] at(@.north) {\faAngleUp};}
-        \onslide<4-5|handout:1>{\node[above=-2mm] at(3-i.north) {\faAngleUp};}
-        \onslide<5|handout:1>{\node[above=2mm] at(3.north) {\(3 < 4\)};}
+        \onslide<4-5|handout:\HandoutA>{\node[above=-2mm] at(3-i.north) {\faAngleUp};}
+        \onslide<5|handout:\HandoutA>{\node[above=2mm] at(3.north) {\(3 < 4\)};}
         \onslide<6|handout:0>{\path(7-i.north)--(8-i.north) coordinate[pos=.5] (@); \node[above=-2mm] at(@.north) {\faAngleUp};}
-        \onslide<7-8|handout:2>{\node[above=-2mm] at(7-i.north) {\faAngleUp};}
-        \onslide<8|handout:2>{\node[above=2mm] at(7.north) {\(7 > 4\)};}
-        \onslide<9-10|handout:3>{\node[above=-2mm] at(4-i.north) {\faAngleUp};}
-        \onslide<10|handout:3>{\node[above=2mm] at(4.north) {\(4 = 4\)};}
+        \onslide<7-8|handout:\HandoutB>{\node[above=-2mm] at(7-i.north) {\faAngleUp};}
+        \onslide<8|handout:\HandoutB>{\node[above=2mm] at(7.north) {\(7 > 4\)};}
+        \onslide<9-10|handout:\HandoutC>{\node[above=-2mm] at(4-i.north) {\faAngleUp};}
+        \onslide<10|handout:\HandoutC>{\node[above=2mm] at(4.north) {\(4 = 4\)};}
     \end{tikzpicture}}
 \end{center}
 \begin{enumerate}
     \itemsep7pt
     \setcounter{enumi}{-1}
-    \item<2-|handout:1-> Initial ist \(\text{min = 0}\) und \(\text{max = 7}\). Wir springen in die Mitte: \(\text{mid} = \floor{(\text{min} + \text{max})/2}\). \onslide<4->{\infoblock{Hierbei runden wir im Gleichheitsfall ab. Das ist an sich willkürlich, hier aber von uns festgesetzt.}}
-    \item<5-|handout:1-> Das betrachtete Element ist kleiner als der Schlüssel, wir springen in die rechte Hälfte.\onslide<6->{\infoblock{Das heißt wir verschieben \(\text{min} = \text{mid} + 1\) und wiederholen die Berechnung von \(\text{mid}\).}}
-    \item<8-|handout:2-> Das betrachtete Element ist größer als der Schlüssel, wir springen in die linke Hälfte. \infoblock{Das heißt wir setzen \(\text{max} = \text{mid} - 1\) und wiederholen die Berechnung von \(\text{mid}\).}
-    \item<10-|handout:3> Das betrachtete Element entspricht dem gesuchten, liefere Index: \(4\) zurück.
+    \item<2-|handout:\HandoutA-> Initial ist \(\text{min = 0}\) und \(\text{max = 7}\). Wir springen in die Mitte: \(\text{mid} = \floor{(\text{min} + \text{max})/2}\). \onslide<4->{\infoblock{Hierbei runden wir im Gleichheitsfall ab. Das ist an sich willkürlich, hier aber von uns festgesetzt.}}
+    \item<5-|handout:\HandoutA-> Das betrachtete Element ist kleiner als der Schlüssel, wir springen in die rechte Hälfte.\onslide<6->{\infoblock{Das heißt wir verschieben \(\text{min} = \text{mid} + 1\) und wiederholen die Berechnung von \(\text{mid}\).}}
+    \item<8-|handout:\HandoutB-> Das betrachtete Element ist größer als der Schlüssel, wir springen in die linke Hälfte. \infoblock{Das heißt wir setzen \(\text{max} = \text{mid} - 1\) und wiederholen die Berechnung von \(\text{mid}\).}
+    \item<10-|handout:\HandoutC> Das betrachtete Element entspricht dem gesuchten, liefere Index: \(4\) zurück.
 \end{enumerate}
 \begin{tikzpicture}[@O]
     \node[below left,yshift=-1.35cm,align=left] at(current page.north east) {\only<3-|handout:1->{\(\frac{0+7}{2} = 3.5 \onslide<4->{\rightarrow 3}\)}\\[1.5mm]\only<6-|handout:2->{\(\frac{4+7}{2} = 5.5 \onslide<7->{\rightarrow 5}\)}};
 \end{tikzpicture}
 \end{frame}
+}
 
 \begin{frame}{Und warum ist das schnell?}
     \begin{itemize}[<+(1)->]
@@ -372,8 +379,8 @@ Transformation von Iteration in Rekursion, Palindrom-Präsenzaufgabe letzte Woch
     \item Neben der Formularmaschine gibt es viele andere \hlink{https://github.com/EagleoutIce/Episode-Recursion}{Visualisierungen} für Rekursion
     \item Selbst einfach aussehende Algorithmen können sehr schwer nachvollziehbar sein!
     \item Bei der Komplexitätsbetrachtung hilft die \(\O\)-Notation zum Vergleich \begin{itemize}
-        \item \say{Der am stärksten wachsende Ausdruck}
         \item \(T(n) \in \O(f(n))\pause{}\iff \exists n_0 \in \mathbb{N}\: c \in \mathbb{R}^+\: \forall n \geq n_0: T(n) \leq c \cdot f(n)\)
+        \item \say{Der am stärksten wachsende Ausdruck}
     \end{itemize}
 \end{itemize}
 \end{frame}
