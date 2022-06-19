@@ -113,13 +113,52 @@
 \section{Übungsblatt 7}
 \subsection{Aufgabe 1}
 {\taskenum
-\begin{frame}[c]{Aufgabe 1: TODO}
-    \task{\begin{itemize}[<+(1)->]
-        \itemsep5pt
-        \item TODO
-    \end{itemize}}
+\begin{frame}[fragile,c]{Aufgabe 1: Ablauf eines rekursiven Programms}
+    \task<2->{Für einen rekursiv definierten Algorithmus kann man ein \say{Berechnungsformular} aufstellen, das für jeden rekursiven
+    Aufruf (Inkarnation) vervielfältigt wird. Das Ergebnis der Berechnung wird dann durch Ein- und Rückübertragung
+    von (Teil-) Lösungen bestimmt, wobei die Termination durch die Reduktion des Arguments ausgelöst wird. In dieser
+    Aufgabe sollen Sie eine derartige Formularmaschine selbst angeben.
+
+    \onslide<3->{Betrachten Sie das folgende rekursive Programm und geben Sie das Formularblatt, sowie die Inkarnationen für den Aufruf \T{ggt(6, 3)} an. Folgen Sie dabei der Gestaltung und Ausführung des Beispiels aus der Vorlesung (Kap.~8, Folien 15ff.)}}
+    \begin{plainjava}
+!*\onslide<4->*!public int ggT(int a, int b) {
+!*\onslide<4->*!    if(b == 0) {
+!*\onslide<4->*!        return a;
+!*\onslide<4->*!    } else {
+!*\onslide<4->*!        return ggt(b, a % b);
+!*\onslide<4->*!    }
+!*\onslide<4->*!}
+    \end{plainjava}
 \end{frame}
 }
+
+\begin{frame}[c,fragile]{Formulargefahr}
+\begin{onlyenv}<3-|handout:1>
+\raisebox{-.5\height}{\begin{forest}
+   for tree={inner sep=4pt,block,minimum width=2em,outer sep=1pt,execute at begin node={\strut},grow=north}
+   [{},label=left:ggT[6,label=right:a][3,label=left:b]]
+   \node[above right] at(current bounding box.north west) {Initialer Aufruf};
+\end{forest}}$\equiv$\raisebox{-.5\height}{\begin{forest}
+    for tree={inner sep=4pt,block,minimum width=2em,outer sep=1pt,execute at begin node={\strut},grow=north}
+    [{},label=left:if[false,label=right:{=}[6,label=right:b][0]][6,label=above:b][\paletteA{?},label=left:ggT[3][0[6][3]]]]
+    \node[above right] at(current bounding box.north west) {Inkarnation \(1\): \(a = 6\), \(b = 3\)};
+    % TODO:animationen von unten ncach oben und andere steps mit handout breakds, bei der zwei einfach nur sperat animieren wie die aufploppenund bei der drei mehr reden als auf die FOlien packen (vielleicht einn QR code zum numberphile video oder so....)
+ \end{forest}}
+\end{onlyenv}
+\begin{tikzpicture}[@O]
+\begin{onlyenv}<2->
+\node[below left,yshift=-1.35cm,text width=5.25cm] at(current page.north east) {\lstfs{9}\begin{plainjava}
+public int ggT(int a, int b) {
+    if(b == 0) {
+        return a;
+    } else {
+        return ggt(b, a % b);
+    }
+}
+    \end{plainjava}};
+\end{onlyenv}
+\end{tikzpicture}
+\end{frame}
 
 \iffull
 \SetNextSectionText{Suchen und Sortieren\\Abgabe: \DTMDate{2022-06-27}}
