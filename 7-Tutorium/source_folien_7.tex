@@ -133,17 +133,18 @@
 }
 
 \begin{frame}[c,fragile]{Formulargefahr}
+\forestset{K/.style={for tree={inner sep=4pt,block,minimum width=2em,outer sep=1pt,execute at begin node={\strut},grow=north,s sep=1.25em}}}
+\tikzset{every label/.style={gray}}
 \begin{onlyenv}<3-|handout:1>
-\raisebox{-.5\height}{\begin{forest}
-   for tree={inner sep=4pt,block,minimum width=2em,outer sep=1pt,execute at begin node={\strut},grow=north}
+\raisebox{-.5\height}{\begin{forest} K
    [{},label=left:ggT[6,label=right:a][3,label=left:b]]
    \node[above right] at(current bounding box.north west) {Initialer Aufruf};
-\end{forest}}$\equiv$\raisebox{-.5\height}{\begin{forest}
-    for tree={inner sep=4pt,block,minimum width=2em,outer sep=1pt,execute at begin node={\strut},grow=north}
-    [{},label=left:if[false,label=right:{=}[6,label=right:b][0]][6,label=above:b][\paletteA{?},label=left:ggT[3][0[6][3]]]]
-    \node[above right] at(current bounding box.north west) {Inkarnation \(1\): \(a = 6\), \(b = 3\)};
+\end{forest}}\onslide<4->{\qquad$\equiv$\qquad\raisebox{-.5\height}{\begin{forest} K
+    % TODO: do the 0 6 false thingy first, and do not evaluate the b = 3 stuff in the then case, be consistent!
+    [?,label=left:if[\paletteA{\bfseries?},label=right:ggT,edge label={node[midway,right]{\footnotesize else}}[3,label=above:b][\only<9->{0}[\only<8->{3},label=above:b][\only<8->{6},label=left:a]]][\only<7->{\color{codeouthl}3},label=above:b, edge label={node[midway,left,sloped]{\footnotesize then}}][\only<6->{false},label=left:{=}, edge label={node[midway,left]{\footnotesize when}}[\only<5->{3},label=right:b][0]]]
+    \node[above right,yshift=4mm] at(current bounding box.north west) {Inkarnation \(1\): \(a = 6\), \(b = 3\)};
     % TODO:animationen von unten ncach oben und andere steps mit handout breakds, bei der zwei einfach nur sperat animieren wie die aufploppenund bei der drei mehr reden als auf die FOlien packen (vielleicht einn QR code zum numberphile video oder so....)
- \end{forest}}
+ \end{forest}}}
 \end{onlyenv}
 \begin{tikzpicture}[@O]
 \begin{onlyenv}<2->
