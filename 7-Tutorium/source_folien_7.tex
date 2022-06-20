@@ -152,6 +152,7 @@ public int ggT(int a, int b) {
 }
     \end{plainjava}};
 \end{onlyenv}
+\onslide<0|handout:1->{\node[above left,yshift=\btdmfootheight,T,text width=4cm] at(current page.south east) {Das Abschneiden von Ästen hier durch ausgrauen!};}
 \end{tikzpicture}%\vspace*{-1.5\baselineskip}
 \begin{onlyenv}<3-|handout:1->
 \raisebox{-.5\height}{\begin{forest} K
@@ -163,7 +164,7 @@ public int ggT(int a, int b) {
 \end{forest}}\onslide<4->{\quad$\equiv$\quad\raisebox{-.5\height}{\colorlet{@@}{black}\only<7->{\colorlet{@@}{codeouthl}}\begin{forest} K
     % TODO: do the 0 6 false thingy first, and do not evaluate the b = 3 stuff in the then case, be consistent!
     % phantom to get the crap out of that
-    [\only<11-16|handout:-2>{?}\only<17-|handout:3->{\bfseries3},label=left:if[\only<11-16|handout:-2>{\paletteA{\faQuestion}}\only<17-|handout:3->{\paletteA{\bfseries3}},label=right:ggT,edge label={node[midway,right]{\footnotesize else}}[\only<9->{0},label=left:\%[\only<8->{3},label=right:b][\only<8->{6},label=left:a]][\only<10->{3},label=above:b]][\only<7->{6},@@,label=above:a, edge label={node[pos=.55,left,align=right]{\footnotesize th\rlap{-}\\[-2.5mm]\footnotesize en}},edge=@@][\phantom{false}\only<6->{\llap{false}},label=left:{=}, edge label={node[midway,left]{\footnotesize when}}[0][\only<5->{3},label=above:b]]]
+    [\only<11-16|handout:-2>{{\color{codeouthl}?}}\only<17-|handout:3->{\bfseries3},label=left:if[\only<11-16|handout:-2>{\paletteA{\faQuestion}}\only<17-|handout:3->{\paletteA{\bfseries3}},label=right:ggT,edge label={node[midway,right]{\footnotesize else}}[\only<9->{0},label=left:\%[\only<8->{3},label=right:b][\only<8->{6},label=left:a]][\only<10->{3},label=above:b]][\only<7->{6},@@,label=above:a, edge label={node[pos=.55,left,align=right]{\footnotesize th\rlap{-}\\[-2.5mm]\footnotesize en}},edge=@@][\phantom{false}\only<6->{\llap{false}},label=left:{=}, edge label={node[midway,left]{\footnotesize when}}[0][\only<5->{3},label=above:b]]]
     \node[above right] at(current bounding box.north west) {Inkarnation \(1\): \(a = 6\), \(b = 3\)};
     \pgfonlayer{background}
     \draw[thick,rounded corners=2pt] ([xshift=-2mm,yshift=-2mm]current bounding box.south west) rectangle ([xshift=4.25mm,yshift=2mm]current bounding box.north east);
