@@ -17,8 +17,32 @@
 \iffull{\SummaryFrame
 \begin{frame}[c]{Kurzwiederholung}
 \begin{itemize}[<+(1)->]
-   \itemsep14pt
-    \item TODO
+   \itemsep12pt
+    \item Die Rekursionsfamilie \info{Methoden die sich selbst aufrufen} ist riesig: \begin{itemize}
+        \itemsep3pt
+        \item Ruft sich eine Methode maximal einmal selbst auf, ist sie linear rekursiv.
+        \item Head-Rekursiv, wenn dieser Aufruf das erste Statement ist \info{alles passiert im Aufstieg}
+        \item Tail-Rekursiv, wenn dieser Aufruf das letzte Statement ist \info{alles passiert im Abstieg}
+        \item Ruft sie sich auch mehrfach pro Rekursionsfall auf, ist sie verzweigt rekursiv.
+    \end{itemize}
+    \item Die \say{Big-O-Notation} nutzen wir zum \info{z.B.} Vergleich der Laufzeitkomplexität:
+    \begin{itemize}
+        \itemsep3pt
+        \item \(T(n) \in \O(f(n))\pause{}\iff \exists n_0 \in \mathbb{N}\: c \in \mathbb{R}^+\: \forall n \geq n_0: T(n) \leq c \cdot f(n)\)
+        \item Ab einem gewissen Punkt (\(n_0\)) ist \(c \cdot f(n)\) stets größer als \(T(n)\)
+    \end{itemize}
+\begin{center}%
+\resizebox{\linewidth}{!}{%
+\setlength{\aboverulesep}{0pt}%
+\setlength{\belowrulesep}{0pt}%
+\setlength{\extrarowheight}{.85ex}%
+\begin{tabular}{c*{8}{c}}
+    \toprule
+    & {\cellcolor{pingu@green!100!pingu@purple!21} \(\O(1)\)} & {\cellcolor{pingu@green!85!pingu@purple!21}\(\O(\log n)\)} & {\cellcolor{pingu@green!69!pingu@purple!21} \(\O(n)\)} & {\cellcolor{pingu@green!53!pingu@purple!21} \(\O(n\log n)\)} & {\cellcolor{pingu@green!36!pingu@purple!21} \(\O(n^2)\)} & {\cellcolor{pingu@green!19!pingu@purple!21} \(\O(n^3)\)} & {\cellcolor{pingu@green!14!pingu@purple!21} \(\O(2^n)\)} & {\cellcolor{pingu@green!0!pingu@purple!21} \(\O(n!)\)} \\[0.45ex]\midrule
+    {\footnotesize Bez:} &{\footnotesize konst.} & {\footnotesize logarithm.} & {\footnotesize linear} &{\footnotesize linear log.} & {\footnotesize quadratisch} & {\footnotesize kubisch} & {\footnotesize exponentiell} & {\footnotesize faktoriell} \\
+\bottomrule
+\end{tabular}}\bigskip
+\end{center}
 \end{itemize}
 \end{frame}
 }\fi
