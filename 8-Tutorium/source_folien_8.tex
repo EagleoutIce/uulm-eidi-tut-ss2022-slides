@@ -1,0 +1,76 @@
+\InputIfFileExists{../data/global.src}\relax\relax
+
+\iffull
+\title{quaerere atque disponere} % \ldots\ sich selbst
+\subtitle{Tutorium M\texorpdfstring{\setbox0=\hbox{a}\resizebox*!{\ht0}{\tiny{8}}}{a}cht}
+\date{KW 26}
+\addbibresource{references.bib}
+\fi
+\SetTutoriumNumber{8}
+
+\iffull\begin{document}
+\titleframe
+
+\TopicOverview{9}
+\fi
+
+\iffull{\SummaryFrame
+\begin{frame}[c]{Kurzwiederholung}
+\begin{itemize}[<+(1)->]
+   \itemsep14pt
+    \item TODO
+\end{itemize}
+\end{frame}
+}\fi
+
+% TODO: make sectionlink auto triggerat start of section
+\SetNextSectionText[.6\linewidth]{}
+\section{Präsenzaufgabe}
+{\taskenum
+\begin{frame}[fragile,c]{Präsenzaufgabe}
+\begin{aufgabe}{TODO}
+\task<2->{TODO}
+\end{aufgabe}
+\end{frame}
+}
+
+\SetNextSectionText[.55\linewidth]{TODO}
+\section{Abschließendes}
+{\SummaryFrame
+\begin{frame}[t]{Zusammenfassend}
+\pause \printBibCommand
+\vfill\vfill % double fill for more fraction
+\begin{itemize}[<+(1)->]
+    \itemsep4pt
+    \item TODO
+\end{itemize}
+\end{frame}
+}
+
+\outro{\vskip9mm\centering \onslide<2->{\scalebox{1.42}{\begin{tikzpicture}
+    \pingu[body type=legacy,name=pingu,right wing wave,eyes wink,left wing grab,height=10mm,blush,feet=sit];
+    \draw[line cap=round]([xshift=.15mm]pingu-wing-right) to[bend right] ++(.1mm,1.1mm) -- ++(4.5mm,8.5mm) coordinate(@);
+    \scope[rotate around=-18:(@)]
+    \fill[pingu@yellow!80!pingu@red,rounded corners=1.5pt] (@) --++(1mm,0mm) --++(-1mm,.33mm) arc(270:630:4.325mm and 4.7mm) -- ++(-1mm,-.33mm) -- cycle;
+    \draw[line cap=round,pingu@black,very thin] (@)++(-.35mm,.3mm) to[bend right=14] ++(.7mm,0);
+    \endscope
+    \draw[line cap=round](pingu-wing-right) to[bend right] ++(-.65mm,1.4mm) -- ++(-2mm,8mm) coordinate(@);
+    \scope[rotate around=10:(@)]
+    \fill[pingu@green,rounded corners=1.5pt] (@) --++(1mm,0mm) --++(-1mm,.33mm) arc(270:630:4.25mm and 5.133mm) -- ++(-1mm,-.33mm) -- cycle;
+    % \fill[pingu@white,fill opacity=.6] (@)++(-3mm,7.15mm) ellipse[x radius=.39mm,y radius=.42mm];
+    \draw[line cap=round,pingu@black,very thin] (@)++(-.35mm,.3mm) to[bend right=14] ++(.7mm,0);
+    \endscope
+    \draw[line cap=round]([xshift=.1mm]pingu-wing-right) to[bend right] ++(-.55mm,1.4mm) -- ++(-.25mm,11mm) coordinate(@);
+    \scope[rotate around=4:(@)]
+    \fill[pingu@blue,rounded corners=1.5pt] (@) --++(1mm,0mm) --++(-1mm,.33mm) arc(270:630:4.125mm and 4.9mm) -- ++(-1mm,-.33mm) -- cycle;
+    % \fill[pingu@white,fill opacity=.6] (@)++(-3mm,6.75mm) ellipse[x radius=.39mm,y radius=.42mm];
+    \draw[line cap=round,pingu@black,very thin] (@)++(-.35mm,.3mm) to[bend right=14] ++(.7mm,0);
+    \endscope
+    \draw[line cap=round]([xshift=.1mm]pingu-wing-right) to[bend right] ++(-.85mm,1.35mm) -- ++(-5mm,4.5mm) coordinate(@);
+    \scope[rotate around=30:(@)]
+    \fill[pingu@purple,rounded corners=1.5pt] (@) --++(1mm,0mm) --++(-1mm,.33mm) arc(270:630:3.525mm and 4.3mm) -- ++(-1mm,-.33mm) -- cycle;
+    \draw[line cap=round,pingu@black,very thin] (@)++(-.35mm,.3mm) to[bend right=14] ++(.7mm,0);
+    \endscope
+\end{tikzpicture}}}}
+
+\iffull\end{document}\fi
