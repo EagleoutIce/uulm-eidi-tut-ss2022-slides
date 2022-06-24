@@ -9,7 +9,7 @@ TUTS_CLEAN := $(TUTS:=-clean)
 TARGET_DIR := all_pdfs
 VERBOSE := 0
 
-.PHONY: all docker clean retrieve_pdfs retrieve_compact compact overview ${TUTS} ${TUTS_CLEAN}
+.PHONY: all docker clean retrieve_pdfs retrieve_compact compact overview only_retrieve_pdfs ${TUTS} ${TUTS_CLEAN}
 
 all: overview retrieve_pdfs retrieve_compact
 	echo -e "\033[32mRun for: $(TUTS)\033[m"
@@ -18,7 +18,9 @@ overview:
 	echo -e "Build the Overview"
 	+$(MAKE) --jobs=2 --directory="overview/" all
 
-retrieve_pdfs: ${TUTS}
+retrieve_pdfs: ${TUTS} only_retrieve_pdfs
+
+only_retrieve_pdfs:
 	# We want to retrieve the pdfs so we can split them afterwards
 	mkdir -p ${TARGET_DIR}/animated
 	cp *-Tutorium/folien_*.pdf ${TARGET_DIR}/animated/
