@@ -17,7 +17,7 @@
 \iffull{\SummaryFrame
 \begin{frame}[c]{Kurzwiederholung}
 \begin{itemize}[<+(1)->]
-   \itemsep12pt
+   \itemsep8pt
     \item Die Rekursionsfamilie \info{Methoden die sich selbst aufrufen} ist riesig: \begin{itemize}
         \itemsep3pt
         \item Ruft sich eine Methode maximal einmal selbst auf, ist sie linear rekursiv.
@@ -25,7 +25,7 @@
         \item Tail-Rekursiv, wenn dieser Aufruf das letzte Statement ist \info{alles passiert im Abstieg}
         \item Ruft sie sich auch mehrfach pro Rekursionsfall auf, ist sie verzweigt rekursiv.
     \end{itemize}
-    \item Die \say{Big-O-Notation} nutzen wir zum \info{z.B.} Vergleich der Laufzeitkomplexität:
+    \item Die \say{Big-O-Notation} nutzen wir zum \info{z.B.} Vergleich der Laufzeitkomplexität:\pause
     \begin{itemize}
         \itemsep3pt
         \item \(T(n) \in \O(f(n))\pause{}\iff \exists n_0 \in \mathbb{N}\: c \in \mathbb{R}^+\: \forall n \geq n_0: T(n) \leq c \cdot f(n)\)
