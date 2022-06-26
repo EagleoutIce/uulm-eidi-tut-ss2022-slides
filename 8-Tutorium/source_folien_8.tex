@@ -346,7 +346,7 @@ make new \(i\) have value \(1\)\;
 
 \begin{frame}{Komplexitätsabschätzung}
     \begin{itemize}[<+(1)->]
-        \itemsep6pt
+        \itemsep9pt
         \item Nun fehlt noch die Laufzeit in \(\O\)-Notation für:
         \begin{equation*}
             T_{max}^{\mathrm{sort}}(n) = 3 + 3n + 12 \cdot \frac{n^2 - n}{3}
@@ -362,9 +362,49 @@ make new \(i\) have value \(1\)\;
 }
 
 \subsection{Aufgabe 2}
-\begin{frame}{Aufgabe 2: Tschudu}
+{\taskenum
+\begin{frame}[fragile,c]{Aufgabe 2: Nicht ganz so naive Sortieralgorithmen}
+\task<2->{Betrachten Sie folgende Implementierung von Insertion Sort zur aufsteigenden Sortierung:}\bigskip
+\lstfs{9}
+\columns[onlytextwidth,c]
+\column{.6\linewidth}
+\begin{plainjava}
+!*\onslide<3->*!public static void insertionSort(int[] arr) {
+!*\onslide<3->*!    int pos, key;
+!*\onslide<3->*!    for (int i = 1; i < arr.length; i++) {
+!*\onslide<3->*!        pos = i - 1;
+!*\onslide<3->*!        key = arr[pos + 1];
+!*\onslide<3->*!        while (pos >= 0 && arr[pos] > key) {
+!*\onslide<3->*!            arr[pos + 1] = arr[pos];
+!*\onslide<3->*!            pos--;
+!*\onslide<3->*!        }
+!*\onslide<3->*!        arr[pos + 1] = key;
+!*\onslide<3->*!    }
+!*\onslide<3->*!}!*\onslide<1->*!
+\end{plainjava}
+\column{.4\linewidth}
+\begin{enumerate}
+    \itemsep6pt
+    \item<4-> \task{Unter welchen Bedingungen tritt im obigen Sortieralgorithmus der {\sbseries best case} ein? Geben Sie die Laufzeit hierfür in \(\O\)-Notation an.}
+    \item<5-> \task{Unter welchen Bedingungen tritt im obigen Sortieralgorithmus der {\sbseries worst case} ein? Geben Sie die Laufzeit hierfür in \(\O\)-Notation an.}
+\end{enumerate}
+\endcolumns
 \end{frame}
 
+\begin{frame}{Case-Analyse}
+\begin{enumerate}
+    \itemsep12pt
+    \item \task{Unter welchen Bedingungen tritt im obigen Sortieralgorithmus der {\sbseries best case} ein? Geben Sie die Laufzeit hierfür in \(\O\)-Notation an.}\pause
+    Ist das Array bereits \textit{aufsteigend} sortiert, läuft die äußere Schleife \(n - 1\)-mal und die innere nie, da nie \say{\bjava{arr[pos] > arr[pos + 1]}} eintritt.\medskip\pause
+
+    Dies ist der best case mit \(\O(n)\) (der Rest ist \(\O(1)\)).
+    \item \task{Unter welchen Bedingungen tritt im obigen Sortieralgorithmus der {\sbseries worst case} ein? Geben Sie die Laufzeit hierfür in \(\O\)-Notation an.}\pause
+    Ist das Array \textit{absteigend} sortiert, läuft die äußere Schleife \(n - 1\) mal, und die innere über den kleinen Gauß insgesamt \(\O(n^2)\) mal, da stets \say{\bjava{arr[pos] > arr[pos + 1]}} gilt.\medskip
+
+    Somit haben wir einen worst case mit einer Laufzeitkomplexität von \(\O(n^2)\).
+\end{enumerate}
+\end{frame}
+}
 \subsection{Aufgabe 3}
 \begin{frame}{Aufgabe 3: magge disch}
 \end{frame}
