@@ -152,8 +152,183 @@
 \SetNextSectionText{Suchen und Sortieren\\Abgabe: \DTMDate{2022-06-27}}
 \section{Übungsblatt 8}
 \subsection{Aufgabe 1}
+{\taskenum
 \begin{frame}{Aufgabe 1: Naive Sortieralgorithmen}
+\task<2->{Teil von Übungsblatt~2 war der Entwurf eines naiven Sortieralgorithmus, welcher durch iteratives Vertauschen eine
+gegebene Liste aufsteigend sortiert. Hier finden Sie die Algorithmen als Pseudocode nochmals aufgeführt:}
+\SetAlgoVlined
+\columns[onlytextwidth,c]
+\scriptsize
+\column{.4\linewidth}
+\onslide<3->{\begin{algorithm}[H]
+\PreCode
+    \KwIn{List \(L = (l_1, \ldots, l_N)\), Indizes \(i\) und~\(j\)}
+\StartCode
+    make new \(N\) have value \(\mathrm{length}(L)\)\;
+    \If{\(N < 2\) \KwOr \(i < 1\) \KwOr \(j < 1\) \KwOr \(i > N\) \KwOr \(j > N\)}{
+        print \textit{out} \say{Eingabe ungültig!}\;
+        stop program\;
+    }
+    make new \(t\) have value \(l_i\)\;
+    make \(l_i\) have value \(l_j\)\;
+    make \(l_j\) have value \(t\)\;
+\end{algorithm}}
+\column{.6\linewidth}
+\onslide<4->{\begin{algorithm}[H]
+\PreCode
+    \KwIn{List \(L = (l_1, \ldots, l_N)\)}
+\StartCode
+make new \(N\) have value \(\mathrm{length}(L)\)\;
+\lIf{\(N < 2\)}{
+    print \textit{out} \say{Eingabe ungültig!} and stop program
+}
+make new \(i\) have value \(1\)\;
+\While{\(i < N\)}{
+    make new \(j\) have the value \(i + 1\)\;
+    \While{\(j \leq N\)}{
+        \lIf{\(l_i > l_j\)}{call \T{vertausche(L, i, j)}}
+        Increment \(j\) by \(1\)\;
+    }
+    Increment \(i\) by \(1\)\;
+}
+\end{algorithm}}
+\endcolumns
+\begin{enumerate}
+    \item<5-> \task{Implementieren Sie dieses Verfahren nun in Java. Halten Sie sich dabei genau an die Angaben aus den
+    gegeben Algorithmen und testen Sie Ihre Implementierung an einem Beispiel.}
+    \item<6-> \task{Für die Pseudocodevariante des Sortierverfahrens haben wir bereits eine Laufzeitabschätzung von:\columns[onlytextwidth,c]
+    \column{.29\linewidth}\nomathskip
+    \begin{equation*}
+        T_{max}^{\mathrm{sort}}(n) = 3 + 3n + 12 \cdot \frac{n^2 - n}{3}
+    \end{equation*}
+    \column{.71\linewidth}
+    Elementaroperationen (s. Übungsblatt~2) angegeben. Geben Sie nun hierfür die Laufzeit in der \O-Notation an und begründen Sie ihre Antwort \textit{kurz}.
+    \endcolumns}
+\end{enumerate}
 \end{frame}
+
+\begin{frame}[fragile,c]{Swappsies}
+\begin{plainjava}[lineskip=1.5pt]
+!*\onslide<3->*!public static void vertausche(!*\Snode{list}*!!*\onslide<5->*!int[] arr!*\Snode{list@}*!,!*\onslide<4->*! int i, int j!*\onslide<3->*!) {
+!*\onslide<6->*!    int n = arr.length;
+!*\onslide<7->*!    if(n < 2!*\onslide<8->*! || !*\Snode{arr}*!i < 0 || j < 0 || i >= n || j >= n!*\Snode{arr@}*!!*\onslide<7->*!) {
+!*\onslide<9->*!        System.err.println("Eingabe ungültig!");
+!*\onslide<10->*!        return;!*\Snode{ret@}*!
+!*\onslide<7->*!    }
+!*\onslide<11->*!    int t = arr[i];
+!*\onslide<12->*!    arr[i] = arr[j];
+!*\onslide<13->*!    arr[j] = t;
+!*\onslide<3->*!}
+\end{plainjava}
+\onslide<2->{\begin{tikzpicture}[@O]
+    \node[above left,yshift=\btdmfootheight,text width=6cm,font=\scriptsize] at(current page.south east) {\color{codeouthl}\SetAlgoVlined\begin{algorithm}[H]
+\PreCode
+    {\only<3-5>{\color{black}}\KwIn{List \(L = (l_1, \ldots, l_N)\), Indizes \(i\) und~\(j\)}}
+\StartCode
+    {\only<6>{\color{black}}make new \(N\) have value \(\mathrm{length}(L)\)\;}
+    {\only<7-8>{\color{black}}\If{\(N < 2\) \KwOr \(i < 1\) \KwOr \(j < 1\) \KwOr \(i > N\) \KwOr \(j > N\)}{
+        \color{codeouthl}
+        {\only<9>{\color{black}}print \textit{out} \say{Eingabe ungültig!}\;}
+        {\only<10>{\color{black}}stop program\;}
+    }}
+    {\only<11>{\color{black}}make new \(t\) have value \(l_i\)\;}
+    {\only<12>{\color{black}}make \(l_i\) have value \(l_j\)\;}
+    {\only<13>{\color{black}}make \(l_j\) have value \(t\)\;}
+\end{algorithm}};
+\only<0|handout:1>{
+    \def\hlcolor{pingu@green}
+    \hlbehindcodeunder{list}{@l>}
+    \draw[codeouthl,-Kite] ([xshift=-2mm,yshift=.1mm]@l>_up.north) to[out=80,in=180] ++(.5,.65) node[T,below right,yshift=.7\baselineskip,align=left] {Von Zahlen war nicht die Rede. Von Arrays auch nicht!\\Das sind (willkürlich sinnvolle) Annahmen.};
+    \def\hlcolor{pingu@purple}
+    \hlbehindcodeunder{arr}{@a>}
+    \draw[codeouthl,-Kite] ([xshift=-1.25cm,yshift=.1mm]@a>_up.north) to[out=80,in=180] ++(.5,.25) node[T,right] {Mathematisch: \(\{1, \ldots, n\}\), Java: \(\{0, \ldots, n - 1\}\)};
+    \node[above right,yshift=\btdmfootheight,T] {Ich habe mir hier die Freiheit genommen, \T{L} und \T{N} umzubenennen.};
+    \iffull
+    \draw[codeouthl,-Kite] (ret@.east) to[out=-5,in=180] ++(1.2,-.25) node[T,below right,yshift=.6\baselineskip,align=left] {Was machen wir aus \say{stop program}?\\\textbullet~\T{System.exit(1)}?\\\textbullet~Werfen einer Exception?};
+    \fi
+}
+\end{tikzpicture}}
+\end{frame}
+
+\begin{frame}[fragile,c]{Sort it!}
+\lstfs{8}
+\begin{plainjava}
+!*\CodeFileMarkerAttach<16->{NaiveSort.java}*!
+!*\onslide<3->*!public static void sortiere(int[] arr) {
+!*\onslide<4->*!    int n = arr.length;
+!*\onslide<5->*!    if (n < 2) {
+!*\onslide<6->*!        System.err.println("Eingabe ungültig!");
+!*\onslide<7->*!        return;
+!*\onslide<5->*!    }
+!*\onslide<8->*!    int i = 0;
+!*\onslide<9->*!    while(i < arr.length - 1) {
+!*\onslide<10->*!        int j = i + 1;
+!*\onslide<11->*!        while(j < arr.length) {
+!*\onslide<12->*!            if (arr[i] > arr[j]) {
+!*\onslide<13->*!                vertausche(arr, i, j);
+!*\onslide<12->*!            }
+!*\onslide<14->*!            j++;
+!*\onslide<11->*!        }
+!*\onslide<15->*!        i++;
+!*\onslide<9->*!    }
+!*\onslide<3->*!}
+\end{plainjava}
+\onslide<2->{\begin{tikzpicture}[@O]
+    \node[above left,yshift=\btdmfootheight,text width=6cm,font=\scriptsize] at(current page.south east) {\color{codeouthl}\SetAlgoVlined\begin{algorithm}[H]
+\PreCode
+    {\only<3>{\color{black}}\KwIn{List \(L = (l_1, \ldots, l_N)\)}}
+\StartCode
+{\only<4>{\color{black}}make new \(N\) have value \(\mathrm{length}(L)\)\;}
+{\only<5>{\color{black}}\lIf{\(N < 2\)}{
+    \color{codeouthl}
+    {\only<6-7>{\color{black}}print \textit{out} \say{Eingabe ungültig!}} {\only<7>{\color{black}}and stop program}
+}}
+{\only<8>{\color{black}}make new \(i\) have value \(1\)\;}
+{\only<9>{\color{black}}\While{\(i < N\)}{
+    \color{codeouthl}
+    {\only<10>{\color{black}}make new \(j\) have the value \(i + 1\)\;}
+    {\only<11>{\color{black}}\While{\(j \leq N\)}{
+        \color{codeouthl}
+        {\only<12>{\color{black}}\lIf{\(l_i > l_j\)}{\color{codeouthl}{\only<13>{\color{black}}call \T{vertausche(L, i, j)}}}}
+        {\only<14>{\color{black}}Increment \(j\) by \(1\)\;}
+    }}
+    {\only<15>{\color{black}}Increment \(i\) by \(1\)\;}
+}}
+\end{algorithm}};
+\end{tikzpicture}}
+\end{frame}
+
+\iffull
+{
+    \AddonFrame
+    \begin{frame}{Sort it, for the \sout{children} loops!}
+\begin{plainjava}
+!*\onslide<2->*!public static void sortiere(int[] arr) {
+!*\onslide<3->*!    int n = arr.length;
+!*\onslide<3->*!    if (n < 2) {
+!*\onslide<3->*!        System.err.println("Eingabe ungültig!");
+!*\onslide<3->*!    }
+!*\onslide<4->*!    for (int i = 0; i < arr.length; i++) {
+!*\onslide<5->*!        for (int j = i + 1; j < arr.length; j++) {
+!*\onslide<6->*!            if (arr[i] > arr[j]) {
+!*\onslide<6->*!                vertausche(arr, i, j);
+!*\onslide<6->*!            }
+!*\onslide<5->*!        }
+!*\onslide<4->*!    }
+!*\onslide<2->*!}
+\end{plainjava}
+    \end{frame}
+}
+\fi
+
+\begin{frame}
+    TODO: variant with for from file
+\end{frame}
+
+\begin{frame}
+    EXTRA STUFFSIES
+\end{frame}
+}
 
 \subsection{Aufgabe 2}
 \begin{frame}{Aufgabe 2: Tschudu}
