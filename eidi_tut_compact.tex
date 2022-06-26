@@ -11,7 +11,7 @@
 \UsePalette{Compact}
 \def\btdmopts{color=paletteA}%, footfade
 \def\btdmmode{lightmode-fill}
-\input{data/global.src}
+\input{data/global.tex}
 \UsePalette{Compact}
 % re-inforce the palette in case compact changes
 \usepackage{fmtcount}
@@ -60,7 +60,7 @@
 % \let\subsubsection\paragraph
 \gpreto\input@path{{#3/}}%
 \def\curpath{#3/}% for rBash and rExecute
-% we block global.src form being loaded
+% we block global.tex form being loaded
 % we keep the first for input
 \def\InputIfFileExists##1##2##3{\relax \global\let\InputIfFileExists\oldinputif}%
 % forbid additional loading:

@@ -35,7 +35,7 @@ Sonst haben die Ordner und Dateien folgende Bedeutung:
 * [`tikz-horner.sty`](data/tikz-horner.sty): Eine Altlast zum automatischen Generieren von Animationen für das Horner-Schema in LaTeX :D
 * [`ttt.sty`](data/ttt.sty): Eine Semi-Altlast für Tic-Tac-Toe (brrrrh, Memories)
 * [`makefile`](makefile): Wer weiß, was er tut, kann das auch direkt benutzen um seinen Spaß zu haben.
-* [`global.src`](data/global.src): So etwas wie die gemeinsame Präambel aller Foliensätze. Zusammengetackert, damit es auch ohne ein ganzes Ökosystem funktioniert.
+* [`global.tex`](data/global.tex): So etwas wie die gemeinsame Präambel aller Foliensätze. Zusammengetackert, damit es auch ohne ein ganzes Ökosystem funktioniert.
 
 ## 📜 Bonusfolien
 
