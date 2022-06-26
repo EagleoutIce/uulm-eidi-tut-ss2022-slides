@@ -59,10 +59,10 @@
 \end{aufgabe}
 \end{frame}
 
-\begin{frame}{Ein wenig Mergesort}
-    TODO: update array :D
+\begin{frame}[c]{Ein wenig Mergesort}
+    % TODO: update array :D
     \resizebox{.975\linewidth}{!}{%
-    \begin{tikzpicture}[yscale=0.9]
+    \begin{tikzpicture}[yscale=0.95,every path/.append style={line cap=round}]
         \onslide<1->{\node (a) at(0,0) {[\(8, 6, 3, 5, 1, 2, 7, 4\)]};}
         \foreach[count=\i] \l/\x in {{8,6,3,5}/-4,{1,2,7,4}/4}{
             \onslide<+(1)->{
@@ -121,6 +121,7 @@
 
 \begin{frame}{Eigenschaften unter der Lupe}
 LAufzeitabschätzung, über DArstelung mit Komma und easy split hard join reden!
+Die Dopplung der mittleren REiheist nicht notwendig, sie dient zur schöneren DArstellung der beiden Phasen (Ein- und Ausgabedaten usw., graue Pfeile)
 \end{frame}
 
 \SetNextSectionText[.55\linewidth]{TODO}
