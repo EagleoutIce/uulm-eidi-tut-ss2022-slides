@@ -327,7 +327,7 @@
 \def\RawMDDown{{\tiny\faChevronDown}}
 \def\RawMDUp{{\tiny\faChevronUp}}
 
-
+\newcommand*\omd[2][0]{\only<#2|handout:#1>{\llap{\color{paletteA}\MDRight~}}}
 \newcommand*\ml[2][0]{\only<#2|handout:#1>{\rlap{\@declaredcolor{paletteA}\;\MDLeft}}}
 \newcommand*\mg[2][0]{\only<#2|handout:#1>{\llap{\color{shadeA!70!paletteA}\MDRight~}}}
 \newcommand*\MD[2][0]{\only<#2|handout:#1>{\llap{\@declaredcolor{paletteA}\MDRight~}}}

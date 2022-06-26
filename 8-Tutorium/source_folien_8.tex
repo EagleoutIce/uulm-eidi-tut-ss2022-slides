@@ -477,6 +477,15 @@ make new \(i\) have value \(1\)\;
 
 
 \iffull
+{\AddonFrame
+\begin{frame}{Ein tieferer Blick}
+    \begin{itemize}[<+(1)->]
+        \itemsep12pt
+        \item Im Folgenden ein leicht modifizierter Ansatz an die binäre Suche\pause\infoblock{Aus dem letzten Semester}
+        \item Wenn ein Element mehrfach enthalten ist, möchten wir nun den kleinsten Index
+        \item Sonst folgen ein paar ganz brave Pingus\ldots
+    \end{itemize}
+\end{frame}
 \newsavebox\pinguBSa \savebox\pinguBSa{\PinguBanner{-14}{strawhat}}
 \newsavebox\pinguBSaa \savebox\pinguBSaa{\PinguBanner{-14}{cloak=pingu@black}}
 \newsavebox\pinguBSb \savebox\pinguBSb{\PinguBanner{24}{hat,hat position={1:(0cm,-.09cm){1.33}}}}
@@ -485,28 +494,28 @@ make new \(i\) have value \(1\)\;
 \newsavebox\pinguBSd \savebox\pinguBSd{\PinguBanner{109}{headband,pants}}
 \newsavebox\pinguBSe \savebox\pinguBSe{\PinguBanner{113}{vr-headset}}
 \newcommand<>\PinguBS[2]{$\underset{\onslide#3{\text{\huge\strut\T{#1}}}}{\expandafter\usebox\csname pinguBS#2\endcsname}$}
-\begin{frame}[fragile]{Präsenzaufgabe - Lösung\hfill Statische Simulation\llap{\smash{\raisebox{-.3\baselineskip}{\scalebox{.7}{\itshape\tiny \say{Statische},\;weil\;ich\;keinen\;Platz\;mehr\;für\;static\;hatte\;:D}}}}}
+\begin{frame}[fragile]{Modifizierte Binäre Suche\hfill Statische Simulation\llap{\smash{\raisebox{-.3\baselineskip}{\scalebox{.7}{\itshape\tiny \say{Statische},\;weil\;ich\;keinen\;Platz\;mehr\;für\;static\;hatte\;:D}}}}}
 \SetupLstHl\lstfs{8}\vspace*{-.5\baselineskip}\begin{columns}[c,onlytextwidth]
 \column{.495\linewidth}
 \begin{plainjava}
-!*\onslide<2->*!!*\md[1]{7,13}*!int search(int[] arr, int l, int r, int e) {
-!*\onslide<2->*!  !*\md{8,14}*!if(r < l) return -1; !*\rBS<handout:2|8-12>{r=6, l=0}\rBS<handout:3|14-17>{r=2, l=0}*!
-!*\onslide<2->*!  !*\md{9,15}*!int mid = l + (r - l) / 2; !*\rBS<handout:2|9-12>{mid=3}\rBS<handout:3|15-17>{mid=1}*!
-!*\onslide<2->*!  !*\md[3]{10,16}*!if (arr[mid] == e) return m!*\mb{17}*!id; !*\rBS<handout:2|10-12>{e=-14}\rBS<handout:3|16-17>{e=-14, mid=1}*!
-!*\onslide<2->*!  !*\md{11}*!else if (arr[mid] > e) !*\rBS<handout:2|11-12>{24 > -14}*!
-!*\onslide<2->*!      !*\md[2]{12}\mg[3]{13-17}*!return search(arr, l, mid - 1, e);!*\ml{18}*!
+!*\onslide<2->*!!*\omd[1]{7,13}*!int search(int[] arr, int l, int r, int e) {
+!*\onslide<2->*!  !*\omd{8,14}*!if(r < l) return -1; !*\rBS<handout:2|8-12>{r=6, l=0}\rBS<handout:3|14-17>{r=2, l=0}*!
+!*\onslide<2->*!  !*\omd{9,15}*!int mid = l + (r - l) / 2; !*\rBS<handout:2|9-12>{mid=3}\rBS<handout:3|15-17>{mid=1}*!
+!*\onslide<2->*!  !*\omd[3]{10,16}*!if (arr[mid] == e) return m!*\mb{17}*!id; !*\rBS<handout:2|10-12>{e=-14}\rBS<handout:3|16-17>{e=-14, mid=1}*!
+!*\onslide<2->*!  !*\omd{11}*!else if (arr[mid] > e) !*\rBS<handout:2|11-12>{24 > -14}*!
+!*\onslide<2->*!      !*\omd[2]{12}\mg[3]{13-17}*!return search(arr, l, mid - 1, e);!*\ml{18}*!
 !*\onslide<2->*!  else
 !*\onslide<2->*!      return search(arr, mid + 1, r, e);
 !*\onslide<2->*!}!*\ml{19}*!
 
-!*\onslide<3->*!!*\md5*!int find(int[] arr, int e) {
-!*\onslide<3->*!  !*\md{6}\mg[1-3]{7-19}*!int idx = search(arr, 0, arr.length - 1, e);!*\ml{20}*!
-!*\onslide<3->*!  !*\md[4]{21}*!if(idx == -1) return -1; !*\rBS<handout:4|21-25>{idx=1}*!
-!*\onslide<3->*!  !*\md{22,24}*!for(int i = 1; i <= idx; i++) { !*\rBS<handout:0|22-23>{i=1, 1<=1}\rBS<handout:0|24-25>{i=2, 2<=1}*!
-!*\onslide<3->*!      !*\md{23}*!if(arr[idx - i] != e) !*\rBS<handout:0|23>{arr[0]=-14, e=-14}*!
+!*\onslide<3->*!!*\omd5*!int find(int[] arr, int e) {
+!*\onslide<3->*!  !*\omd{6}\mg[1-3]{7-19}*!int idx = search(arr, 0, arr.length - 1, e);!*\ml{20}*!
+!*\onslide<3->*!  !*\omd[4]{21}*!if(idx == -1) return -1; !*\rBS<handout:4|21-25>{idx=1}*!
+!*\onslide<3->*!  !*\omd{22,24}*!for(int i = 1; i <= idx; i++) { !*\rBS<handout:0|22-23>{i=1, 1<=1}\rBS<handout:0|24-25>{i=2, 2<=1}*!
+!*\onslide<3->*!      !*\omd{23}*!if(arr[idx - i] != e) !*\rBS<handout:0|23>{arr[0]=-14, e=-14}*!
 !*\onslide<3->*!          return idx - i + 1;
 !*\onslide<3->*!  }
-!*\onslide<3->*!  !*\md{25}*!return 0; !*\onslide<handout:5|25->*!//Wir sind ganz links
+!*\onslide<3->*!  !*\omd{25}*!return 0; !*\onslide<handout:5|25->*!//Wir sind ganz links
 !*\onslide<3->*!}
 \end{plainjava}
 \column{.505\linewidth}
@@ -527,34 +536,34 @@ make new \(i\) have value \(1\)\;
 \end{tikzpicture}}
 \end{columns}\vspace*{-1.15\baselineskip}
 \begin{center}
-    \footnotesize\onslide<4->{\mbox{\md[0]{4}\mg[1-3]{5-25}\bjava{find(|ihl|new int[]\{-14, -14, 24, 24, 42, 109, 113\}|ihl|, -14);}}}\ml[5]{26}\smash{~~~~\onslide<handout:5|26->{~\bjava{// :yields: 0}}}
+    \footnotesize\onslide<4->{\mbox{\omd[0]{4}\mg[1-3]{5-25}\bjava{find(|ihl|new int[]\{-14, -14, 24, 24, 42, 109, 113\}|ihl|, -14);}}}\ml[5]{26}\smash{~~~~\onslide<handout:5|26->{~\bjava{// :yields: 0}}}
 \end{center}
 \end{frame}
 
 \newsavebox\pinguTalkHSa \savebox\pinguTalkHSa{\tikz\pingu[eyes=wink, left wing wave, right wing grab,bow tie=paletteA];}
 \newsavebox\pinguTalkHSb \savebox\pinguTalkHSb{\tikz\pingu[eyes=wink, left wing wave, right wing grab,tie=paletteB,shirt=pingu@red!60!pingu@black!60!pingu@white,second shirt=pingu@black,shirt above,princess crown];}
-\begin{frame}[fragile]{Präsenzaufgabe - Lösung\hfill Stackische Heap-Simulation}
+\begin{frame}[fragile]{Modifizierte Binäre Suche\hfill Stackische Heap-Simulation}
 \vspace*{-.5\baselineskip}\begin{columns}[c,onlytextwidth]
 \column{.495\linewidth}\SetupLstHl\lstfs{8}
 \begin{plainjava}
-!*\onslide<2->*!!*\md[1]{7,13}*!int search(int[] arr, int l, int r, int e) {
-!*\onslide<2->*!  !*\md{8,14}*!if(r < l) return -1; !*\rBS<handout:2|8-12>{r=6, l=0}\rBS<handout:3|14-17>{r=2, l=0}*!
-!*\onslide<2->*!  !*\md{9,15}*!int mid = l + (r - l) / 2; !*\rBS<handout:2|9-12>{mid=3}\rBS<handout:3|15-17>{mid=1}*!
-!*\onslide<2->*!  !*\md[3]{10,16}*!if (arr[mid] == e) return m!*\mb{17}*!id; !*\rBS<handout:2|10-12>{e=-14}\rBS<handout:3|16-17>{e=-14, mid=1}*!
-!*\onslide<2->*!  !*\md{11}*!else if (arr[mid] > e) !*\rBS<handout:2|11-12>{24 > -14}*!
-!*\onslide<2->*!      !*\md[2]{12}\mg[3]{13-17}*!return search(arr, l, mid - 1, e);!*\ml{18}*!
+!*\onslide<2->*!!*\omd[1]{7,13}*!int search(int[] arr, int l, int r, int e) {
+!*\onslide<2->*!  !*\omd{8,14}*!if(r < l) return -1; !*\rBS<handout:2|8-12>{r=6, l=0}\rBS<handout:3|14-17>{r=2, l=0}*!
+!*\onslide<2->*!  !*\omd{9,15}*!int mid = l + (r - l) / 2; !*\rBS<handout:2|9-12>{mid=3}\rBS<handout:3|15-17>{mid=1}*!
+!*\onslide<2->*!  !*\omd[3]{10,16}*!if (arr[mid] == e) return m!*\mb{17}*!id; !*\rBS<handout:2|10-12>{e=-14}\rBS<handout:3|16-17>{e=-14, mid=1}*!
+!*\onslide<2->*!  !*\omd{11}*!else if (arr[mid] > e) !*\rBS<handout:2|11-12>{24 > -14}*!
+!*\onslide<2->*!      !*\omd[2]{12}\mg[3]{13-17}*!return search(arr, l, mid - 1, e);!*\ml{18}*!
 !*\onslide<2->*!  else
 !*\onslide<2->*!      return search(arr, mid + 1, r, e);
 !*\onslide<2->*!}!*\ml{19}*!
 
-!*\onslide<3->*!!*\md5*!int find(int[] arr, int e) {
-!*\onslide<3->*!  !*\md{6}\mg[1-3]{7-19}*!int idx = search(arr, 0, arr.length - 1, e);!*\ml{20}*!
-!*\onslide<3->*!  !*\md[4]{21}*!if(idx == -1) return -1; !*\rBS<handout:4|21-25>{idx=1}*!
-!*\onslide<3->*!  !*\md{22,24}*!for(int i = 1; i <= idx; i++) { !*\rBS<handout:0|22-23>{i=1, 1<=1}\rBS<handout:0|24-25>{i=2, 2<=1}*!
-!*\onslide<3->*!      !*\md{23}*!if(arr[idx - i] != e) !*\rBS<handout:0|23>{arr[0]=-14, e=-14}*!
+!*\onslide<3->*!!*\omd5*!int find(int[] arr, int e) {
+!*\onslide<3->*!  !*\omd{6}\mg[1-3]{7-19}*!int idx = search(arr, 0, arr.length - 1, e);!*\ml{20}*!
+!*\onslide<3->*!  !*\omd[4]{21}*!if(idx == -1) return -1; !*\rBS<handout:4|21-25>{idx=1}*!
+!*\onslide<3->*!  !*\omd{22,24}*!for(int i = 1; i <= idx; i++) { !*\rBS<handout:0|22-23>{i=1, 1<=1}\rBS<handout:0|24-25>{i=2, 2<=1}*!
+!*\onslide<3->*!      !*\omd{23}*!if(arr[idx - i] != e) !*\rBS<handout:0|23>{arr[0]=-14, e=-14}*!
 !*\onslide<3->*!          return idx - i + 1;
 !*\onslide<3->*!  }
-!*\onslide<3->*!  !*\md{25}*!return 0; !*\onslide<handout:5|25->*!//Wir sind ganz links
+!*\onslide<3->*!  !*\omd{25}*!return 0; !*\onslide<handout:5|25->*!//Wir sind ganz links
 !*\onslide<3->*!}
 \end{plainjava}
 \column{.505\linewidth}
@@ -607,7 +616,7 @@ make new \(i\) have value \(1\)\;
 \end{tikzpicture}}}}~~
 \end{columns}\vspace*{-1\baselineskip}
 \begin{center}\SetupLstHl\lstfs{8}
-    \footnotesize\onslide<4->{\mbox{\md[0]{4}\mg[1-3]{5-25}\bjava{find(|ihl|new int[]\{-14, -14, 24, 24, 42, 109, 113\}|ihl|, -14);}}}\ml[5]{26}\smash{~~~~\onslide<handout:5|26->{~\bjava{// :yields: 0}}}
+    \footnotesize\onslide<4->{\mbox{\omd[0]{4}\mg[1-3]{5-25}\bjava{find(|ihl|new int[]\{-14, -14, 24, 24, 42, 109, 113\}|ihl|, -14);}}}\ml[5]{26}\smash{~~~~\onslide<handout:5|26->{~\bjava{// :yields: 0}}}
 \end{center}
 \begin{tikzpicture}[overlay,remember picture]
     \onslide<handout:1|6>{%
@@ -620,18 +629,18 @@ make new \(i\) have value \(1\)\;
     }
 \end{tikzpicture}%
 \end{frame}
+}
 \fi
 
 \iffull
 \SetNextSectionText{Suchen und Sortieren~II\\Abgabe: \DTMDate{2022-07-04}}
 \section{Aussicht: Übungsblatt 9}
-\subsection{Aufgabe 1}
 \begin{frame}{Nicht viel spannendes}
     \begin{itemize}[<+(1)->]
         \itemsep5pt
         \item Weitere Hilfsmethoden sind erlaubt.
         \item Die Aufgabe mag erschlagend wirken, es genügt aber einfach nur Schritt für Schritt dem Pseudocode zu Folgen.
-        \item Wer mag kann gerne Visualisierungen der Fibonacci-Suche zurate ziehen \info{oder selbst erstellen}
+        \item Wer mag kann gerne Visualisierungen der Fibonacci-Suche zurate ziehen \infoblock{Oder auch gerne selbst erstellen!}
         \item Bei der dritten Aufgabe ist Code-Verständnis gefragt!
     \end{itemize}
 \end{frame}
@@ -661,6 +670,6 @@ make new \(i\) have value \(1\)\;
 \outro{\vskip9mm\centering \onslide<2->{\begin{tikzpicture}
     \pingu[body=pingu@black,body front=pingu@black,eyes wink,bill color=pingu@black,eyes color=pingu@black,feet color=pingu@black,tie=pingu@white]
 \end{tikzpicture}}\bigskip\par
-\onslide<3->{You expected\ldots\ a recursion gag? Read this line again!}}
+\onslide<3->{You expected\ldots\ a recursion gag? Read this line again!}\par\onslide<4->{\itshape\color{gray}\footnotesize Still funny!}}
 
 \iffull\end{document}\fi
