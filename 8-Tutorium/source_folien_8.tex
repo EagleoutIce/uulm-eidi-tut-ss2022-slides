@@ -31,7 +31,7 @@
         \item \(T(n) \in \O(f(n))\pause{}\iff \exists n_0 \in \mathbb{N}\: c \in \mathbb{R}^+\: \forall n \geq n_0: T(n) \leq c \cdot f(n)\)
         \item Ab einem gewissen Punkt (\(n_0\)) ist \(c \cdot f(n)\) stets größer als \(T(n)\)
     \end{itemize}
-\begin{center}%
+\onslide<12->{\begin{center}%
 \resizebox{\linewidth}{!}{%
 \setlength{\aboverulesep}{0pt}%
 \setlength{\belowrulesep}{0pt}%
@@ -42,7 +42,7 @@
     {\footnotesize Bez:} &{\footnotesize konst.} & {\footnotesize logarithm.} & {\footnotesize linear} &{\footnotesize linear log.} & {\footnotesize quadratisch} & {\footnotesize kubisch} & {\footnotesize exponentiell} & {\footnotesize faktoriell} \\
 \bottomrule
 \end{tabular}}\bigskip
-\end{center}
+\end{center}}
 \end{itemize}
 \end{frame}
 }\fi
@@ -218,10 +218,10 @@ make new \(i\) have value \(1\)\;
 !*\onslide<11->*!    int t = arr[i];
 !*\onslide<12->*!    arr[i] = arr[j];
 !*\onslide<13->*!    arr[j] = t;
-!*\onslide<3->*!}
+!*\onslide<3->*!}!*\onslide<1->*!
 \end{plainjava}
 \onslide<2->{\begin{tikzpicture}[@O]
-    \node[above left,yshift=\btdmfootheight,text width=6cm,font=\scriptsize] at(current page.south east) {\color{codeouthl}\SetAlgoVlined\begin{algorithm}[H]
+    \node[above left,yshift=\btdmfootheight,text width=6.75cm,font=\scriptsize] at(current page.south east) {\color{codeouthl}\SetAlgoVlined\begin{algorithm}[H]
 \PreCode
     {\only<3-5>{\color{black}}\KwIn{List \(L = (l_1, \ldots, l_N)\), Indizes \(i\) und~\(j\)}}
 \StartCode
@@ -242,7 +242,7 @@ make new \(i\) have value \(1\)\;
     \def\hlcolor{pingu@purple}
     \hlbehindcodeunder{arr}{@a>}
     \draw[codeouthl,-Kite] ([xshift=-1.25cm,yshift=.1mm]@a>_up.north) to[out=80,in=180] ++(.5,.25) node[T,right] {Mathematisch: \(\{1, \ldots, n\}\), Java: \(\{0, \ldots, n - 1\}\)};
-    \node[above right,yshift=\btdmfootheight,T] {Ich habe mir hier die Freiheit genommen, \T{L} und \T{N} umzubenennen.};
+    \node[above right,xshift=2mm,yshift=\btdmfootheight,T,align=left] at (current page.south west) {Ich habe mir hier die Freiheit genommen,\\\T{L} und \T{N} umzubenennen.};
     \iffull
     \draw[codeouthl,-Kite] (ret@.east) to[out=-5,in=180] ++(1.2,-.25) node[T,below right,yshift=.6\baselineskip,align=left] {Was machen wir aus \say{stop program}?\\\textbullet~\T{System.exit(1)}?\\\textbullet~Werfen einer Exception?};
     \fi
@@ -251,9 +251,8 @@ make new \(i\) have value \(1\)\;
 \end{frame}
 
 \begin{frame}[fragile,c]{Sort it!}
-\lstfs{8}
+\lstfs{9}
 \begin{plainjava}
-!*\CodeFileMarkerAttach<16->{NaiveSort.java}*!
 !*\onslide<3->*!public static void sortiere(int[] arr) {
 !*\onslide<4->*!    int n = arr.length;
 !*\onslide<5->*!    if (n < 2) {
@@ -271,7 +270,7 @@ make new \(i\) have value \(1\)\;
 !*\onslide<11->*!        }
 !*\onslide<15->*!        i++;
 !*\onslide<9->*!    }
-!*\onslide<3->*!}
+!*\onslide<3->*!}!*\onslide<1->*!
 \end{plainjava}
 \onslide<2->{\begin{tikzpicture}[@O]
     \node[above left,yshift=\btdmfootheight,text width=6cm,font=\scriptsize] at(current page.south east) {\color{codeouthl}\SetAlgoVlined\begin{algorithm}[H]
@@ -301,7 +300,8 @@ make new \(i\) have value \(1\)\;
 \iffull
 {
     \AddonFrame
-    \begin{frame}{Sort it, for the \sout{children} loops!}
+    \MakeThePinguExplainIt[text width=6.65cm,yshift=-1cm]{cap=!hide,construction helmet,glasses=!hide,eyes shiny,heart=shadeA,body type=chubby,right item angle=-52}{Hier sind auch \bjava{for}-Schleifen in Ordnung, da sie für den gezeigten Fall ja nur eine Kurzschreibweise sind.}
+    \begin{frame}[fragile,c]{Sort it, for the \sout{children} loops!}
 \begin{plainjava}
 !*\onslide<2->*!public static void sortiere(int[] arr) {
 !*\onslide<3->*!    int n = arr.length;
@@ -315,18 +315,49 @@ make new \(i\) have value \(1\)\;
 !*\onslide<6->*!            }
 !*\onslide<5->*!        }
 !*\onslide<4->*!    }
-!*\onslide<2->*!}
+!*\onslide<2->*!}!*\onslide<1->*!
 \end{plainjava}
+\begin{tikzpicture}[@O]
+\onslide<7->{\node[above left,xshift=5mm,scale=.8,yshift=\btdmfootheight] at(current page.south east) {\copy\pinguexplainbox};}% copy for animations
+\end{tikzpicture}
     \end{frame}
 }
 \fi
 
-\begin{frame}
-    TODO: variant with for from file
+\begin{frame}[fragile,c]{Testen an einem Beispiel}
+\SetupLstHl
+\begin{plainjava}
+!*\CodeFileMarkerAttach<2->{NaiveSort.java}*!
+!*\onslide<2->*!public class NaiveSort {
+!*\onslide<3->*!   |ihl|public static void vertausche(int[] arr, int i, int j) { ... }|ihl|
+!*\onslide<3->*!   |ihl|public static void sortiere(int[] arr) { ... }|ihl|
+
+!*\onslide<3->*!   !*\ShowInTheWeb[.1mm]{https://www.online-java.com/Ry7xg6AO1m}*!
+!*\onslide<4->*!   public static void main(String[] args) {
+!*\onslide<5->*!      int[] arr = { 5, 8, 1, -1 };
+!*\onslide<6->*!      sortiere(arr);
+!*\onslide<7->*!      for (int i : arr)
+!*\onslide<7->*!        System.out.println(i);
+!*\onslide<4->*!   }
+!*\onslide<2->*!}
+\end{plainjava}
+%
 \end{frame}
 
-\begin{frame}
-    EXTRA STUFFSIES
+\begin{frame}{Komplexitätsabschätzung}
+    \begin{itemize}[<+(1)->]
+        \itemsep6pt
+        \item Nun fehlt noch die Laufzeit in \(\O\)-Notation für:
+        \begin{equation*}
+            T_{max}^{\mathrm{sort}}(n) = 3 + 3n + 12 \cdot \frac{n^2 - n}{3}
+        \end{equation*}
+        \item Vereinfachen wir zunächst:
+        \begin{equation*}
+            T_{max}^{\mathrm{sort}}(n) = 3 + 3n + 4\cdot n^2 - 4 \cdot n = 3 - 1\cdot n + 4\cdot n^2
+        \end{equation*}
+        \item Was Wachstumsverhalten des Ausdrucks wird von \(n^2\) dominiert, der Leitkoeffizient entfällt wie der Rest nach den Rechenregeln.
+        \item Damit ist: \(T_{max}^{\mathrm{sort}}(n) \in \O(n^2)\)
+    \end{itemize}
 \end{frame}
 }
 

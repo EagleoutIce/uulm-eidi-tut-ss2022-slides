@@ -14,6 +14,7 @@ public class NaiveSort {
       int n = arr.length;
       if (n < 2) {
          System.err.println("Eingabe ungültig!");
+         return;
       }
       for (int i = 0; i < arr.length; i++) {
          for (int j = i + 1; j < arr.length; j++) {
