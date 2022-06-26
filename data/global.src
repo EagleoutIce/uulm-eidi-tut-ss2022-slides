@@ -202,6 +202,7 @@
 \AtBeginDocument{\def\O{\ensuremath{\mathcal{O}}}}
 \newsavebox\pinguA \newsavebox\pinguB \newsavebox\pinguC
 \def\gend{\textcolor{gray}{\smaller:}}
+\def\PinguBanner#1#2{\tikz\pingu[wings wave, banner=#1, banner sticks length=3mm,banner bent=-42,banner raise=-3.55mm,banner font=\bfseries\Huge,eyes wink,banner height=5.25mm,#2];}
 
 \usepackage{setspace}
 

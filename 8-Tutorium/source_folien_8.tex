@@ -1,7 +1,7 @@
 \InputIfFileExists{../data/global.src}\relax\relax
 
 \iffull
-\title{quaerere atque disponere} % \ldots\ sich selbst
+\title{quaerere atque disponere} % \ldots\ sich selbst | suchen und ordnen
 \subtitle{Tutorium M\texorpdfstring{\setbox0=\hbox{a}\resizebox*!{\ht0}{\tiny{8}}}{a}cht}
 \date{KW 26}
 \addbibresource{references.bib}
@@ -47,8 +47,7 @@
 \end{frame}
 }\fi
 
-% TODO: make sectionlink auto triggerat start of section
-\SetNextSectionText[.6\linewidth]{}
+\SetNextSectionText[.6\linewidth]{Teile und Herrsche\\--- König Ludwig~XI von Frankreich}
 \section{Präsenzaufgabe}
 \begin{frame}[fragile,c]{Präsenzaufgabe}
 \begin{aufgabe}{Mit vereinter Kraft!}
@@ -476,6 +475,153 @@ make new \(i\) have value \(1\)\;
 \end{frame}
 }
 
+
+\iffull
+\newsavebox\pinguBSa \savebox\pinguBSa{\PinguBanner{-14}{strawhat}}
+\newsavebox\pinguBSaa \savebox\pinguBSaa{\PinguBanner{-14}{cloak=pingu@black}}
+\newsavebox\pinguBSb \savebox\pinguBSb{\PinguBanner{24}{hat,hat position={1:(0cm,-.09cm){1.33}}}}
+\newsavebox\pinguBSbb \savebox\pinguBSbb{\PinguBanner{24}{cake-hat}}
+\newsavebox\pinguBSc \savebox\pinguBSc{\PinguBanner{42}{halo}}
+\newsavebox\pinguBSd \savebox\pinguBSd{\PinguBanner{109}{headband,pants}}
+\newsavebox\pinguBSe \savebox\pinguBSe{\PinguBanner{113}{vr-headset}}
+\newcommand<>\PinguBS[2]{$\underset{\onslide#3{\text{\huge\strut\T{#1}}}}{\expandafter\usebox\csname pinguBS#2\endcsname}$}
+\begin{frame}[fragile]{Präsenzaufgabe - Lösung\hfill Statische Simulation\llap{\smash{\raisebox{-.3\baselineskip}{\scalebox{.7}{\itshape\tiny \say{Statische},\;weil\;ich\;keinen\;Platz\;mehr\;für\;static\;hatte\;:D}}}}}
+\SetupLstHl\lstfs{8}\vspace*{-.5\baselineskip}\begin{columns}[c,onlytextwidth]
+\column{.495\linewidth}
+\begin{plainjava}
+!*\onslide<2->*!!*\md[1]{7,13}*!int search(int[] arr, int l, int r, int e) {
+!*\onslide<2->*!  !*\md{8,14}*!if(r < l) return -1; !*\rBS<handout:2|8-12>{r=6, l=0}\rBS<handout:3|14-17>{r=2, l=0}*!
+!*\onslide<2->*!  !*\md{9,15}*!int mid = l + (r - l) / 2; !*\rBS<handout:2|9-12>{mid=3}\rBS<handout:3|15-17>{mid=1}*!
+!*\onslide<2->*!  !*\md[3]{10,16}*!if (arr[mid] == e) return m!*\mb{17}*!id; !*\rBS<handout:2|10-12>{e=-14}\rBS<handout:3|16-17>{e=-14, mid=1}*!
+!*\onslide<2->*!  !*\md{11}*!else if (arr[mid] > e) !*\rBS<handout:2|11-12>{24 > -14}*!
+!*\onslide<2->*!      !*\md[2]{12}\mg[3]{13-17}*!return search(arr, l, mid - 1, e);!*\ml{18}*!
+!*\onslide<2->*!  else
+!*\onslide<2->*!      return search(arr, mid + 1, r, e);
+!*\onslide<2->*!}!*\ml{19}*!
+
+!*\onslide<3->*!!*\md5*!int find(int[] arr, int e) {
+!*\onslide<3->*!  !*\md{6}\mg[1-3]{7-19}*!int idx = search(arr, 0, arr.length - 1, e);!*\ml{20}*!
+!*\onslide<3->*!  !*\md[4]{21}*!if(idx == -1) return -1; !*\rBS<handout:4|21-25>{idx=1}*!
+!*\onslide<3->*!  !*\md{22,24}*!for(int i = 1; i <= idx; i++) { !*\rBS<handout:0|22-23>{i=1, 1<=1}\rBS<handout:0|24-25>{i=2, 2<=1}*!
+!*\onslide<3->*!      !*\md{23}*!if(arr[idx - i] != e) !*\rBS<handout:0|23>{arr[0]=-14, e=-14}*!
+!*\onslide<3->*!          return idx - i + 1;
+!*\onslide<3->*!  }
+!*\onslide<3->*!  !*\md{25}*!return 0; !*\onslide<handout:5|25->*!//Wir sind ganz links
+!*\onslide<3->*!}
+\end{plainjava}
+\column{.505\linewidth}
+\centering\onslide<handout:1-|4->{\begin{tikzpicture}
+\only<handout:3-|13-19>{\scope[transparency group,opacity=.6]}
+\only<handout:4-|20->{\scope[transparency group,opacity=.3]}
+    \node at (0,0) {\downsize\linewidth{\PinguBS<handout:2-|7->{left}{a}~\PinguBS{}{aa}~\PinguBS{}b~\PinguBS<handout:2-|9->{mid}{bb}~\PinguBS{}c~\PinguBS{}d~\PinguBS<handout:2-|7->{right}e}};
+\only<handout:4-|20->{\endscope}
+\only<handout:3-|13-19>{\endscope}
+\end{tikzpicture}}\bigskip\par
+\only<handout:3-|13->{\begin{tikzpicture}
+    \only<handout:4-|20->{\scope[transparency group,opacity=.6]}
+    \node at (0,0) {\downsize\linewidth{\PinguBS<13->{left}{a}~\PinguBS<15->{mid}{aa}~\PinguBS<13->{right}b~\PinguBS{}{bb}~\PinguBS{}c~\PinguBS{}d~\PinguBS<7->{}e}};
+    \only<handout:4-|20->{\endscope}
+\end{tikzpicture}}\bigskip\par
+\only<handout:4-|20->{\begin{tikzpicture}
+    \node at (0,0) {\downsize\linewidth{\PinguBS{}{a}~\PinguBS<20->{idx}{aa}~\PinguBS{}b~\PinguBS{}{bb}~\PinguBS{}c~\PinguBS{}d~\PinguBS<7->{}e}};
+\end{tikzpicture}}
+\end{columns}\vspace*{-1.15\baselineskip}
+\begin{center}
+    \footnotesize\onslide<4->{\mbox{\md[0]{4}\mg[1-3]{5-25}\bjava{find(|ihl|new int[]\{-14, -14, 24, 24, 42, 109, 113\}|ihl|, -14);}}}\ml[5]{26}\smash{~~~~\onslide<handout:5|26->{~\bjava{// :yields: 0}}}
+\end{center}
+\end{frame}
+
+\newsavebox\pinguTalkHSa \savebox\pinguTalkHSa{\tikz\pingu[eyes=wink, left wing wave, right wing grab,bow tie=paletteA];}
+\newsavebox\pinguTalkHSb \savebox\pinguTalkHSb{\tikz\pingu[eyes=wink, left wing wave, right wing grab,tie=paletteB,shirt=pingu@red!60!pingu@black!60!pingu@white,second shirt=pingu@black,shirt above,princess crown];}
+\begin{frame}[fragile]{Präsenzaufgabe - Lösung\hfill Stackische Heap-Simulation}
+\vspace*{-.5\baselineskip}\begin{columns}[c,onlytextwidth]
+\column{.495\linewidth}\SetupLstHl\lstfs{8}
+\begin{plainjava}
+!*\onslide<2->*!!*\md[1]{7,13}*!int search(int[] arr, int l, int r, int e) {
+!*\onslide<2->*!  !*\md{8,14}*!if(r < l) return -1; !*\rBS<handout:2|8-12>{r=6, l=0}\rBS<handout:3|14-17>{r=2, l=0}*!
+!*\onslide<2->*!  !*\md{9,15}*!int mid = l + (r - l) / 2; !*\rBS<handout:2|9-12>{mid=3}\rBS<handout:3|15-17>{mid=1}*!
+!*\onslide<2->*!  !*\md[3]{10,16}*!if (arr[mid] == e) return m!*\mb{17}*!id; !*\rBS<handout:2|10-12>{e=-14}\rBS<handout:3|16-17>{e=-14, mid=1}*!
+!*\onslide<2->*!  !*\md{11}*!else if (arr[mid] > e) !*\rBS<handout:2|11-12>{24 > -14}*!
+!*\onslide<2->*!      !*\md[2]{12}\mg[3]{13-17}*!return search(arr, l, mid - 1, e);!*\ml{18}*!
+!*\onslide<2->*!  else
+!*\onslide<2->*!      return search(arr, mid + 1, r, e);
+!*\onslide<2->*!}!*\ml{19}*!
+
+!*\onslide<3->*!!*\md5*!int find(int[] arr, int e) {
+!*\onslide<3->*!  !*\md{6}\mg[1-3]{7-19}*!int idx = search(arr, 0, arr.length - 1, e);!*\ml{20}*!
+!*\onslide<3->*!  !*\md[4]{21}*!if(idx == -1) return -1; !*\rBS<handout:4|21-25>{idx=1}*!
+!*\onslide<3->*!  !*\md{22,24}*!for(int i = 1; i <= idx; i++) { !*\rBS<handout:0|22-23>{i=1, 1<=1}\rBS<handout:0|24-25>{i=2, 2<=1}*!
+!*\onslide<3->*!      !*\md{23}*!if(arr[idx - i] != e) !*\rBS<handout:0|23>{arr[0]=-14, e=-14}*!
+!*\onslide<3->*!          return idx - i + 1;
+!*\onslide<3->*!  }
+!*\onslide<3->*!  !*\md{25}*!return 0; !*\onslide<handout:5|25->*!//Wir sind ganz links
+!*\onslide<3->*!}
+\end{plainjava}
+\column{.505\linewidth}
+\raggedleft\makeatletter
+\lhns@elemwidth4.5cm
+\lhns@minborderheight11cm
+\makeatother
+\onslide<5->{\raisebox{.55cm}{\downsizeBoth{5.85cm}\linewidth{\begin{tikzpicture}[lhns@basestyle/.append style={execute at begin node=\strut,font=\ttfamily},lhns@blockstyle/.append style={draw=gray,thick}]
+\begin{heap-n-stack}{}
+\heap{\bjava{\{-14, :ldots:, 114\}}}
+\renderheap
+
+\stack{\textbf{main}}
+\stack{$\ldots$}
+\only<handout:5-|26->{\stack{\say{\bjava{find = 0}}}}
+\only<handout:1-4|-25>{\stack{\textbf{find}}
+\stack{arr}
+\stack{\bjava{e = -14}}
+\only<handout:1-3|6-19>{\stack{\bjava{idx =}~\textcolor{gray}{?}}}
+\only<handout:4|20->{\stack{\bjava{idx = 1}}}
+\only<handout:0|22-23>{\stack{\bjava{i = 1}}}
+\only<handout:0|24>{\stack{\bjava{i = 2}}}
+\only<handout:1-3|7-18>{\stack{\textbf{search}}
+\only<handout:1-2|-12>{\stack{arr}
+\stack{\bjava{l = 0}}
+\stack{\bjava{r = 6}}
+\stack{\bjava{e = -14}}}
+}
+\only<handout:2|9-12>{\stack{\bjava{mid = 3}}}
+\only<handout:3|13-17>{\stack{$\ldots$}
+\stack{\textbf{search}}
+\stack{arr}
+\stack{\bjava{l = 0}}
+\stack{\bjava{r = 2}}
+\stack{\bjava{e = -14}}
+}
+\only<handout:3|15-17>{\stack{\bjava{mid = 1}}}
+\only<handout:5|18>{\stack{$\ldots$}\stack{\say{\bjava{search = 1}}}}
+\only<handout:5|19>{\stack{\say{\bjava{search = 1}}}}}
+\renderstack
+\only<-25>{
+\only<handout:1-4>{\draw[lhns] (stack-3.east) to[out=20,in=220] (heap-0.west);}
+\only<handout:1-3|7-18>{
+    \draw[lhns] (stack-7.east) to[out=35,in=220] (heap-0.west);
+}
+\only<handout:3|13-17>{
+    \draw[lhns] (stack-9.east) to[out=37,in=218] (heap-0.west);
+}}
+\end{heap-n-stack}
+\end{tikzpicture}}}}~~
+\end{columns}\vspace*{-1\baselineskip}
+\begin{center}\SetupLstHl\lstfs{8}
+    \footnotesize\onslide<4->{\mbox{\md[0]{4}\mg[1-3]{5-25}\bjava{find(|ihl|new int[]\{-14, -14, 24, 24, 42, 109, 113\}|ihl|, -14);}}}\ml[5]{26}\smash{~~~~\onslide<handout:5|26->{~\bjava{// :yields: 0}}}
+\end{center}
+\begin{tikzpicture}[overlay,remember picture]
+    \onslide<handout:1|6>{%
+        \node[left=-.95cm,scale=.6] (pingu) at ([yshift=-1.5cm]current page.east) {\rotatebox[origin=c]{70}{\usebox\pinguTalkHSa}};
+        \node[above left,scale=.6,text width=4.425cm,align=right,xshift=-1cm,yshift=-.325cm] at (pingu.north) {Dabei muss der \bjava{find(int[], int)}-\\Aufruf nicht \hbox{direkt} in \bjava{main} sein.};
+    }
+    \onslide<handout:3|13>{%
+        \node[left=-.95cm,scale=.6] (pingu) at ([yshift=-1.5cm]current page.east) {\rotatebox[origin=c]{70}{\usebox\pinguTalkHSb}};
+        \node[above left,scale=.6,text width=4.425cm,align=right,xshift=-.665cm,yshift=-.325cm] at (pingu.north) {Genau genommen wird da (in \bjava{...}) noch mehr abgelegt. Zum Beispiel, wo es in der aufrufenden Methode weitergeht)\ldots};
+    }
+\end{tikzpicture}%
+\end{frame}
+\fi
+
 \iffull
 \SetNextSectionText{Suchen und Sortieren~II\\Abgabe: \DTMDate{2022-07-04}}
 \section{Aussicht: Übungsblatt 9}
@@ -492,7 +638,7 @@ make new \(i\) have value \(1\)\;
 
 \fi
 
-\SetNextSectionText[.55\linewidth]{TODO}
+\SetNextSectionText[.55\linewidth]{Thus all sorts of sophisticated order-systems become possible, which keep successively modifying themselves and hence also the computational processes that are likewise under their control.\\--- John v. Neumann~\cite{yon1958computer}} % merge sort | https://learning.oreilly.com/library/view/art-of-computer/9780321635792/ch05e.html
 \section{Abschließendes}
 {\SummaryFrame
 \begin{frame}[t]{Zusammenfassend}
@@ -512,8 +658,9 @@ make new \(i\) have value \(1\)\;
 \end{frame}
 }
 
-\outro{\vskip9mm\centering \onslide<2->{\scalebox{1.42}{\begin{tikzpicture}
-    % TODO
-\end{tikzpicture}}}}
+\outro{\vskip9mm\centering \onslide<2->{\begin{tikzpicture}
+    \pingu[body=pingu@black,body front=pingu@black,eyes wink,bill color=pingu@black,eyes color=pingu@black,feet color=pingu@black,tie=pingu@white]
+\end{tikzpicture}}\bigskip\par
+\onslide<3->{You expected\ldots\ a recursion gag? Read this line again!}}
 
 \iffull\end{document}\fi
