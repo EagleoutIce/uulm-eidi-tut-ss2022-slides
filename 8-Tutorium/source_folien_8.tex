@@ -164,7 +164,7 @@ gegebene Liste aufsteigend sortiert. Hier finden Sie die Algorithmen als Pseudoc
 \PreCode
     \KwIn{List \(L = (l_1, \ldots, l_N)\), Indizes \(i\) und~\(j\)}
 \StartCode
-    make new \(N\) have value \(\mathrm{length}(L)\)\;
+    make new \(N\) have value \(\text{length}(L)\)\;
     \If{\(N < 2\) \KwOr \(i < 1\) \KwOr \(j < 1\) \KwOr \(i > N\) \KwOr \(j > N\)}{
         print \textit{out} \say{Eingabe ungültig!}\;
         stop program\;
@@ -178,7 +178,7 @@ gegebene Liste aufsteigend sortiert. Hier finden Sie die Algorithmen als Pseudoc
 \PreCode
     \KwIn{List \(L = (l_1, \ldots, l_N)\)}
 \StartCode
-make new \(N\) have value \(\mathrm{length}(L)\)\;
+make new \(N\) have value \(\text{length}(L)\)\;
 \lIf{\(N < 2\)}{
     print \textit{out} \say{Eingabe ungültig!} and stop program
 }
@@ -199,7 +199,7 @@ make new \(i\) have value \(1\)\;
     \item<6-> \task{Für die Pseudocodevariante des Sortierverfahrens haben wir bereits eine Laufzeitabschätzung von:\columns[onlytextwidth,c]
     \column{.29\linewidth}\nomathskip
     \begin{equation*}
-        T_{max}^{\mathrm{sort}}(n) = 3 + 3n + 12 \cdot \frac{n^2 - n}{3}
+        T_{max}^{\text{sort}}(n) = 3 + 3n + 12 \cdot \frac{n^2 - n}{3}
     \end{equation*}
     \column{.71\linewidth}
     Elementaroperationen (s. Übungsblatt~2) angegeben. Geben Sie nun hierfür die Laufzeit in der \O-Notation an und begründen Sie ihre Antwort \textit{kurz}.
@@ -225,7 +225,7 @@ make new \(i\) have value \(1\)\;
 \PreCode
     {\only<3-5>{\color{black}}\KwIn{List \(L = (l_1, \ldots, l_N)\), Indizes \(i\) und~\(j\)}}
 \StartCode
-    {\only<6>{\color{black}}make new \(N\) have value \(\mathrm{length}(L)\)\;}
+    {\only<6>{\color{black}}make new \(N\) have value \(\text{length}(L)\)\;}
     {\only<7-8>{\color{black}}\If{\(N < 2\) \KwOr \(i < 1\) \KwOr \(j < 1\) \KwOr \(i > N\) \KwOr \(j > N\)}{
         \color{codeouthl}
         {\only<9>{\color{black}}print \textit{out} \say{Eingabe ungültig!}\;}
@@ -277,7 +277,7 @@ make new \(i\) have value \(1\)\;
 \PreCode
     {\only<3>{\color{black}}\KwIn{List \(L = (l_1, \ldots, l_N)\)}}
 \StartCode
-{\only<4>{\color{black}}make new \(N\) have value \(\mathrm{length}(L)\)\;}
+{\only<4>{\color{black}}make new \(N\) have value \(\text{length}(L)\)\;}
 {\only<5>{\color{black}}\lIf{\(N < 2\)}{
     \color{codeouthl}
     {\only<6-7>{\color{black}}print \textit{out} \say{Eingabe ungültig!}} {\only<7>{\color{black}}and stop program}
@@ -349,14 +349,14 @@ make new \(i\) have value \(1\)\;
         \itemsep9pt
         \item Nun fehlt noch die Laufzeit in \(\O\)-Notation für:
         \begin{equation*}
-            T_{max}^{\mathrm{sort}}(n) = 3 + 3n + 12 \cdot \frac{n^2 - n}{3}
+            T_{max}^{\text{sort}}(n) = 3 + 3n + 12 \cdot \frac{n^2 - n}{3}
         \end{equation*}
         \item Vereinfachen wir zunächst:
         \begin{equation*}
-            T_{max}^{\mathrm{sort}}(n) = 3 + 3n + 4\cdot n^2 - 4 \cdot n = 3 - 1\cdot n + 4\cdot n^2
+            T_{max}^{\text{sort}}(n) = 3 + 3n + 4\cdot n^2 - 4 \cdot n = 3 - 1\cdot n + 4\cdot n^2
         \end{equation*}
         \item Was Wachstumsverhalten des Ausdrucks wird von \(n^2\) dominiert, der Leitkoeffizient entfällt wie der Rest nach den Rechenregeln.
-        \item Damit ist: \(T_{max}^{\mathrm{sort}}(n) \in \O(n^2)\)
+        \item Damit ist: \(T_{max}^{\text{sort}}(n) \in \O(n^2)\)
     \end{itemize}
 \end{frame}
 }
@@ -406,8 +406,75 @@ make new \(i\) have value \(1\)\;
 \end{frame}
 }
 \subsection{Aufgabe 3}
-\begin{frame}{Aufgabe 3: magge disch}
+{\taskenum
+\begin{frame}[c]{Aufgabe 3: Rekursives Suchen}
+\task<2->{In dieser Aufgabe sollen Sie den iterativen Binary Search aus der Vorlesung in eine rekursive Variante umprogrammieren. Beantworten Sie die Fragen als Kommentar in der entsprechenden Java Datei.}
+\begin{enumerate}
+    \itemsep4pt
+    \item<3-> \label{8.3itsk:a}\task{Implementieren Sie eine rekursive Version des Binary Search Algorithmus. Für den Fall, dass der gesuchte Wer nicht gefunden werden konnte, geben Sie eine Meldung auf die Konsole aus sowie den Index -1 zurück. Testen Sie Ihre Implementierung an einem Beispiel. Nehmen Sie an, dass die Eingaben immer sortiert sind.}
+    \item<4-> \task{Ist Ihre Implementierung aus Teilaufgabe~\link{8.3itsk:a}{a)} Kopf- oder End-rekursiv? Begründen Sie Ihre Antwort kurz.}
+    \item<5-> \task{Geben Sie an, unter welchen Bedingungen für Ihre Implementierung der worst-case bzgl. der Laufzeit eintritt. Begründen Sie Ihre Antwort kurz.}
+    \item<6-> \task{Geben Sie die bestmögliche Laufzeitabschätzung für den worst-case in \(\O\)-Notation an. Begründen Sie Ihre Antwort kurz.}
+\end{enumerate}
 \end{frame}
+
+\begin{frame}[fragile,c]{Save me, Sonic!}
+\begin{plainjava}
+!*\onslide<2->*!public static int binSearchRec(int[] arr, int key, int left, int right) {
+!*\onslide<3->*!    if (left >= right) {
+!*\onslide<4->*!        System.out.println("Wert konnte nicht gefunden werden!");
+!*\onslide<5->*!        return -1;
+!*\onslide<3->*!    }
+!*\onslide<6->*!    int mid = (left + right) / 2;
+!*\onslide<7->*!    if (arr[mid] == key) {
+!*\onslide<8->*!        return mid;
+!*\onslide<7->*!    } else if (arr[mid] > key) {
+!*\onslide<9->*!        return binSearchRec(arr, key, left, mid - 1);
+!*\onslide<8->*!    } else {
+!*\onslide<10->*!        return binSearchRec(arr, key, mid + 1, right);
+!*\onslide<8->*!    }
+!*\onslide<2->*!}!*\onslide<1->*!
+\end{plainjava}
+\begin{tikzpicture}[@O]
+    \onslide<11->{\node[above left,yshift=\btdmfootheight,T,xshift=-1mm] at(current page.south east) {Eine wunderschöne Tail(s)-Rekursion!};}
+\end{tikzpicture}
+\end{frame}
+\begin{frame}[fragile,c]{Kunckles! Echidnas want to test that!}
+\SetupLstHl
+\begin{plainjava}
+!*\CodeFileMarkerAttach<2->{BinarySearchRecursive.java}*!
+!*\onslide<2->*!public class BinarySearchRecursive {
+!*\onslide<3->*!   |ihl|public static int binSearchRec(int[] arr, int k, int l, int r) { ... } |ihl|
+!*\onslide<2->*!
+!*\onslide<4->*!   public static void main(String[] ars) {
+!*\onslide<5->*!      int[] arr = { 1, 2, 4, 8, 16, 32, 64, 128, 256 };
+!*\onslide<6->*!      System.out.printf("Pos: " + binSearchRec(arr, 7, 0, arr.length - 1));
+!*\onslide<4->*!   }
+!*\onslide<2->*!}
+\end{plainjava}
+\end{frame}
+
+\begin{frame}[c]{Kopflose Analysen}
+\begin{enumerate}[<+(1)->]
+    \setcounter{enumi}{1}
+    \itemsep12pt
+    \item \task{Ist Ihre Implementierung aus Teilaufgabe~\link{8.3itsk:a}{a)} Kopf- oder End-rekursiv? Begründen Sie Ihre Antwort kurz.}\pause
+    Wie bereits angemerkt liegt eine Endrekursion vor: \pause alle Berechnungen passieren im Abstieg, die rekursiven Aufrufe sind für alle rekursiven Ausführungspfade das letzte Statement.
+    \item \task{Geben Sie an, unter welchen Bedingungen für Ihre Implementierung der worst-case bzgl. der Laufzeit eintritt. Begründen Sie Ihre Antwort kurz.}\pause
+    Wenn der gesuchte Wert nicht im Array enthalten ist, müssen wir die meisten Vergleiche durchführen.\pause \infoblock{Nachdem wir das letzte Element betrachtet haben, gehen wir noch einmal in die Rekursion um dann festzustellen, dass es nichts mehr zu durchsuchen gibt~--- das Suchfenster ist leer.}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[c]{Komplexity? Analyse!}
+\begin{enumerate}[<+(1)->]
+    \setcounter{enumi}{3}
+    \item \task{Geben Sie die bestmögliche Laufzeitabschätzung für den worst-case in \(\O\)-Notation an. Begründen Sie Ihre Antwort kurz.} \pause
+    Die Analyse bleibt zur iterativen Variante weitgehend unverändert. \pause Wir können das Array \(\log_2 n\)-mal teilen und haben somit \(\O(\log_2 n)\) rekursive Aufrufe. Da alle anderen Operationen konstant sind, landen wir somit bei: \begin{equation*}
+        T_{max}^{\text{rec. bin-search}} \in \O(\log n)
+    \end{equation*}
+\end{enumerate}
+\end{frame}
+}
 
 \iffull
 \SetNextSectionText{Suchen und Sortieren~II\\Abgabe: \DTMDate{2022-07-04}}
