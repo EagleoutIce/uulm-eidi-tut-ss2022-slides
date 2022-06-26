@@ -171,9 +171,9 @@
 }
 \def\AddonFrame{\IfBtdmDarkmode{\UpdateBtdmColor*{btdm@primary}{\colorlet{btdm@block}{btdm@block!20!btdm@border@up}}}{\UpdateBtdmColor{btdm@primary!68!btdm@background}}}
 
-\long\def\info#1{\textcolor{gray}{\scriptsize(#1)}}
+\newcommand<>\info[1]{\only#2{\textcolor{gray}{\scriptsize(#1)}}}
 % no parens anymore?
-\long\def\infoblock#1{\par{\scriptsize\textcolor{gray}{#1}\par}}
+\newcommand<>\infoblock[1]{\only#2{\par{\scriptsize\textcolor{gray}{#1}\par}}}
 
 
 \newsavebox\pinguexplainbox
