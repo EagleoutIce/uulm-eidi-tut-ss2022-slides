@@ -1,6 +1,6 @@
 public class BinarySearchRecursive {
    public static int binSearchRec(int[] arr, int key, int left, int right) {
-      if (left >= right) {
+      if (left > right) {
          System.out.println("Wert konnte nicht gefunden werden!");
          return -1;
       }
