@@ -25,13 +25,13 @@
         \item Tail-Rekursiv, wenn dieser Aufruf das letzte Statement ist \info{alles passiert im Abstieg}
         \item Ruft sie sich auch mehrfach pro Rekursionsfall auf, ist sie verzweigt rekursiv.
     \end{itemize}
-    \item Die \say{Big-O-Notation} nutzen wir zum \info{z.B.} Vergleich der Laufzeitkomplexität:\pause
+    \item Die \say{Big-O-Notation} nutzen wir zum \info{z.B.} Vergleich der Laufzeitkomplexität:
     \begin{itemize}
         \itemsep3pt
         \item \(T(n) \in \O(f(n))\pause{}\iff \exists n_0 \in \mathbb{N}\: c \in \mathbb{R}^+\: \forall n \geq n_0: T(n) \leq c \cdot f(n)\)
         \item Ab einem gewissen Punkt (\(n_0\)) ist \(c \cdot f(n)\) stets größer als \(T(n)\)
     \end{itemize}
-\onslide<12->{\begin{center}%
+\onslide<11->{\begin{center}%
 \resizebox{\linewidth}{!}{%
 \setlength{\aboverulesep}{0pt}%
 \setlength{\belowrulesep}{0pt}%
@@ -331,7 +331,7 @@ make new \(i\) have value \(1\)\;
 !*\onslide<3->*!   |ihl|public static void vertausche(int[] arr, int i, int j) { ... }|ihl|
 !*\onslide<3->*!   |ihl|public static void sortiere(int[] arr) { ... }|ihl|
 
-!*\onslide<3->*!   !*\ShowInTheWeb[.1mm]{https://www.online-java.com/Ry7xg6AO1m}*!
+!*\onslide<4->*!   !*\ShowInTheWeb[.1mm]{https://www.online-java.com/Ry7xg6AO1m}*!
 !*\onslide<4->*!   public static void main(String[] args) {
 !*\onslide<5->*!      int[] arr = { 5, 8, 1, -1 };
 !*\onslide<6->*!      sortiere(arr);
@@ -397,8 +397,8 @@ make new \(i\) have value \(1\)\;
     Ist das Array bereits \textit{aufsteigend} sortiert, läuft die äußere Schleife \(n - 1\)-mal und die innere nie, da nie \say{\bjava{arr[pos] > arr[pos + 1]}} eintritt.\medskip\pause
 
     Dies ist der best case mit \(\O(n)\) (der Rest ist \(\O(1)\)).
-    \item \task{Unter welchen Bedingungen tritt im obigen Sortieralgorithmus der {\sbseries worst case} ein? Geben Sie die Laufzeit hierfür in \(\O\)-Notation an.}\pause
-    Ist das Array \textit{absteigend} sortiert, läuft die äußere Schleife \(n - 1\) mal, und die innere über den kleinen Gauß insgesamt \(\O(n^2)\) mal, da stets \say{\bjava{arr[pos] > arr[pos + 1]}} gilt.\medskip
+    \item<4-> \task{Unter welchen Bedingungen tritt im obigen Sortieralgorithmus der {\sbseries worst case} ein? Geben Sie die Laufzeit hierfür in \(\O\)-Notation an.}\pause
+    Ist das Array \textit{absteigend} sortiert, läuft die äußere Schleife \(n - 1\) mal, und die innere über den kleinen Gauß insgesamt \(\O(n^2)\) mal, da stets \say{\bjava{arr[pos] > arr[pos + 1]}} gilt.\medskip\pause
 
     Somit haben wir einen worst case mit einer Laufzeitkomplexität von \(\O(n^2)\).
 \end{enumerate}
@@ -443,12 +443,12 @@ make new \(i\) have value \(1\)\;
 \begin{plainjava}
 !*\CodeFileMarkerAttach<2->{BinarySearchRecursive.java}*!
 !*\onslide<2->*!public class BinarySearchRecursive {
-!*\onslide<3->*!   |ihl|public static int binSearchRec(int[] arr, int k, int l, int r) { ... } |ihl|
+!*\onslide<3->*!  |ihl|public static int binSearchRec(int[] arr, int k, int l, int r) { ... } |ihl|
 !*\onslide<2->*!
-!*\onslide<4->*!   public static void main(String[] ars) {
-!*\onslide<5->*!      int[] arr = { 1, 2, 4, 8, 16, 32, 64, 128, 256 };
-!*\onslide<6->*!      System.out.println("Pos: " + binSearchRec(arr, 7, 0, arr.length - 1));
-!*\onslide<4->*!   }
+!*\onslide<4->*!  public static void main(String[] ars) {
+!*\onslide<5->*!    int[] arr = { 1, 2, 4, 8, 16, 32, 64, 128, 256 };
+!*\onslide<6->*!    System.out.println("Pos: " + binSearchRec(arr, 7, 0, arr.length - 1));
+!*\onslide<4->*!  }
 !*\onslide<2->*!}
 \end{plainjava}
 \end{frame}
@@ -468,7 +468,7 @@ make new \(i\) have value \(1\)\;
 \begin{enumerate}[<+(1)->]
     \setcounter{enumi}{3}
     \item \task{Geben Sie die bestmögliche Laufzeitabschätzung für den worst-case in \(\O\)-Notation an. Begründen Sie Ihre Antwort kurz.} \pause
-    Die Analyse bleibt zur iterativen Variante weitgehend unverändert. \pause Wir können das Array \(\log_2 n\)-mal teilen und haben somit \(\O(\log_2 n)\) rekursive Aufrufe. Da alle anderen Operationen konstant sind, landen wir somit bei: \begin{equation*}
+    Die Analyse bleibt zur iterativen Variante weitgehend unverändert. \pause Wir können das Array \(\log_2 n\)-mal teilen und haben somit \(\O(\log_2 n)\) rekursive Aufrufe. Da alle anderen Operationen konstant sind, landen wir somit bei:\pause \begin{equation*}
         T_{max}^{\text{rec. bin-search}} \in \O(\log n)
     \end{equation*}
 \end{enumerate}
@@ -724,7 +724,7 @@ make new \(i\) have value \(1\)\;
 \pause \printBibCommand
 \vfill\vfill % double fill for more fraction
 \begin{itemize}[<+(1)->]
-    \itemsep4pt
+    \itemsep8pt
     \item Such- und Sortierverfahren sind mit die \say{Musterkinder} in der Informatik
     \begin{itemize}
         \item Suchverfahren können durch eine vorhergehende Sortierung beschleunigt werden
