@@ -303,11 +303,11 @@ make new \(i\) have value \(1\)\;
     \begin{frame}[fragile,c]{Sort it, for the \sout{children} loops!}
 \begin{plainjava}
 !*\onslide<2->*!public static void sortiere(int[] arr) {
-!*\onslide<3->*!    int n = arr.length;
+!*\onslide<3->*!    int n = arr.length; // n = arr.length - 1?
 !*\onslide<3->*!    if (n < 2) {
 !*\onslide<3->*!        System.err.println("Eingabe ungültig!");
 !*\onslide<3->*!    }
-!*\onslide<4->*!    for (int i = 0; i < arr.length; i++) {
+!*\onslide<4->*!    for (int i = 0; i < arr.length; i++) { // vs. arr.length -1?
 !*\onslide<5->*!        for (int j = i + 1; j < arr.length; j++) {
 !*\onslide<6->*!            if (arr[i] > arr[j]) {
 !*\onslide<6->*!                vertausche(arr, i, j);
