@@ -635,16 +635,86 @@ make new \(i\) have value \(1\)\;
 \iffull
 \SetNextSectionText{Suchen und Sortieren~II\\Abgabe: \DTMDate{2022-07-04}}
 \section{Aussicht: Übungsblatt 9}
-\begin{frame}{Nicht viel spannendes}
-    \begin{itemize}[<+(1)->]
-        \itemsep5pt
-        \item Weitere Hilfsmethoden sind erlaubt.
-        \item Die Aufgabe mag erschlagend wirken, es genügt aber einfach nur Schritt für Schritt dem Pseudocode zu Folgen.
-        \item Wer mag kann gerne Visualisierungen der Fibonacci-Suche zurate ziehen \infoblock{Oder auch gerne selbst erstellen!}
-        \item Bei der dritten Aufgabe ist Code-Verständnis gefragt!
-    \end{itemize}
+\immediate\write18{wget https://media.githubusercontent.com/media/EagleoutIce/Episode-Heaps/gh-pages/preview-01.png -O logoHeaps-\jobname.png}
+\begin{frame}{Aufgabe 1: Heap Sort}
+\begin{itemize}[<+(1)->]
+    \item Bei Heapsort verwenden wir die Datenstruktur, nicht den Heap-Speicher
+    \item Wir unterscheiden zwei Heap-Arten: \begin{description}[Max-Heap]
+        \item[Max-Heap:] Eltern sind mindestens so groß wie die Kinder \info{parent~\(\geq\) children}
+        \item[Min-Heap:] Eltern sind maximal so groß wie die Kinder \info{parent~\(\leq\) children}
+    \end{description}
+\end{itemize}
+\onslide<6->{\begin{center}
+    \scalebox{.75}{\begin{tikzpicture}[align-base]
+        \onslide<2->{\draw[thick,darkgray,rounded corners=2.5pt,path picture={\node at(path picture bounding box.center) {\href{https://media.githubusercontent.com/media/EagleoutIce/Episode-Heaps/gh-pages/noanim_heap.pdf}{\includegraphics[width=8.5cm,height=4.788cm,keepaspectratio]{logoHeaps-\jobname.png}}};}] (0,0) rectangle (8.5cm,4.788cm);}
+    \end{tikzpicture}}\qquad\fancyqr{https://github.com/EagleoutIce/Episode-Heaps}
+\end{center}}
 \end{frame}
 
+
+{
+    \def\XList#1{
+\foreach[count=\i,remember=\i as \li(initially 0)] \n in {#1}{
+    \node[inner sep=4pt,draw,rounded rectangle,minimum width=3.5em,outer sep=2pt] (\i) at(4em*\i,0) {\strut\n};
+    \ifnum\i>1
+        \draw[line cap=round] (\li.east) -- (\i.west);
+    \fi
+}}
+\begin{frame}{Aufgaben 2 und 3}
+    \begin{itemize}[<+(1)->]
+        \item Hier geschieht nicht wirklich etwas spannendes
+        \item Shaker-Sort sei hier einmal visualisiert für\hfill \smash{\raisebox{-3pt}{\begin{tikzpicture}[scale=.65,every node/.style={transform shape},baseline=-.6ex,align-half-base]
+            \XList{17, -42, 8, 7, 37, 7, 0}
+        \end{tikzpicture}}}
+\tikzset{every path/.append style={line cap=round},MT/.style={codeouthl}}
+\begin{multicols}{2}
+\begin{enumerate}[<+(1)->]
+    \itemsep4pt
+    \item \begin{tikzpicture}[scale=.65,every node/.style={transform shape},baseline=-.6ex]
+        \XList{-42, 8, 7, 17, 7, 0, 37}
+        \draw[MT,-Kite] ([yshift=1mm]1.north west) -- ([yshift=1mm]6.north east);
+        \draw[Kite-Kite] (1.south) to[bend right] (2.south);
+        \draw[Kite-Kite] (2.south) to[bend right] (3.south);
+        \draw[Kite-Kite] (3.south) to[bend right] (4.south);
+        \draw[Kite-Kite] (5.south) to[bend right] (6.south);
+        \draw[Kite-Kite] (6.south) to[bend right] (7.south);
+    \end{tikzpicture}
+    \item \begin{tikzpicture}[scale=.65,every node/.style={transform shape},baseline=-.6ex]
+        \XList{-42, 0, 8, 7, 17, 7, 37}
+        \draw[MT,Kite-] ([yshift=1mm]2.north west) -- ([yshift=1mm]6.north east);
+        \draw[Kite-Kite] (6.south) to[bend left] (5.south);
+        \draw[Kite-Kite] (5.south) to[bend left] (4.south);
+        \draw[Kite-Kite] (4.south) to[bend left] (3.south);
+        \draw[Kite-Kite] (3.south) to[bend left] (2.south);
+    \end{tikzpicture}
+    \item \begin{tikzpicture}[scale=.65,every node/.style={transform shape},baseline=-.6ex]
+        \XList{-42, 0, 7, 8, 7, 17, 37}
+        \draw[MT,-Kite] ([yshift=1mm]2.north west) -- ([yshift=1mm]5.north east);
+        \draw[Kite-Kite] (3.south) to[bend right] (4.south);
+        \draw[Kite-Kite] (5.south) to[bend right] (6.south);
+    \end{tikzpicture}
+    \item \begin{tikzpicture}[scale=.65,every node/.style={transform shape},baseline=-.6ex]
+        \XList{-42, 0, 7, 7, 8, 17, 37}
+        \draw[MT,Kite-] ([yshift=1mm]3.north west) -- ([yshift=1mm]5.north east);
+        \draw[Kite-Kite] (5.south) to[bend left] (4.south);
+    \end{tikzpicture}
+    \item \begin{tikzpicture}[scale=.65,every node/.style={transform shape},baseline=-.6ex]
+        \XList{-42, 0, 7, 7, 8, 17, 37}
+        \draw[MT,-Kite] ([yshift=1mm]3.north west) -- ([yshift=1mm]4.north east);
+        \draw[btdm@background,Kite-Kite] (5.south) to[bend right] (6.south);
+    \end{tikzpicture}
+    \item \begin{tikzpicture}[scale=.65,every node/.style={transform shape},baseline=-.6ex]
+        \XList{-42, 0, 7, 7, 8, 17, 37}
+        \draw[MT,Kite-] ([yshift=1mm]4.north west) -- ([yshift=1mm]4.north east);
+        \path[btdm@background,Kite-Kite] (5.south) to[bend right] (6.south);
+    \end{tikzpicture}
+\end{enumerate}\medskip\par
+\end{multicols}
+        \item Der letzte Schritt muss, je nach Abbruchbedingung nicht stattfinden.
+        \item Bei Aufgabe~3 ist Code-Verständnis gefragt
+    \end{itemize}
+\end{frame}
+}
 \fi
 
 \SetNextSectionText[.55\linewidth]{Thus all sorts of sophisticated order-systems become possible, which keep successively modifying themselves and hence also the computational processes that are likewise under their control.\\--- John v. Neumann~\cite{yon1958computer}} % merge sort | https://learning.oreilly.com/library/view/art-of-computer/9780321635792/ch05e.html
