@@ -207,6 +207,17 @@ make new \(i\) have value \(1\)\;
 \end{frame}
 
 \begin{frame}[fragile,c]{Swappsies}
+\begin{tikzpicture}[@O]
+    \only<0|handout:1>{
+        \def\hlcolor{pingu@green}
+        \hlbehindcodeunder{list}{@l>}
+        \draw[codeouthl,-Kite] ([xshift=-2mm,yshift=.1mm]@l>_up.north) to[out=80,in=180] ++(.5,.65) node[T,below right,yshift=.7\baselineskip,align=left] {Von Zahlen war nicht die Rede. Von Arrays auch nicht!\\Das sind (willkürlich sinnvolle) Annahmen.};
+        \def\hlcolor{pingu@yellow}
+        \hlbehindcodeunder{arr}{@a>}
+        \draw[codeouthl,-Kite] ([xshift=-1.25cm,yshift=.1mm]@a>_up.north) to[out=80,in=180] ++(.5,.25) node[T,right] {Mathematisch: \(\{1, \ldots, n\}\), Java: \(\{0, \ldots, n - 1\}\)};
+        \node[above right,xshift=2mm,yshift=\btdmfootheight,T,align=left] at (current page.south west) {Ich habe mir hier die Freiheit genommen,\\\T{L} und \T{N} umzubenennen.};
+    }
+\end{tikzpicture}\vspace*{-\baselineskip}
 \begin{plainjava}[lineskip=1.5pt]
 !*\onslide<3->*!public static void vertausche(!*\Snode{list}*!!*\onslide<5->*!int[] arr!*\Snode{list@}*!,!*\onslide<4->*! int i, int j!*\onslide<3->*!) {
 !*\onslide<6->*!    int n = arr.length;
@@ -235,13 +246,6 @@ make new \(i\) have value \(1\)\;
     {\only<13>{\color{black}}make \(l_j\) have value \(t\)\;}
 \end{algorithm}};
 \only<0|handout:1>{
-    \def\hlcolor{pingu@green}
-    \hlbehindcodeunder{list}{@l>}
-    \draw[codeouthl,-Kite] ([xshift=-2mm,yshift=.1mm]@l>_up.north) to[out=80,in=180] ++(.5,.65) node[T,below right,yshift=.7\baselineskip,align=left] {Von Zahlen war nicht die Rede. Von Arrays auch nicht!\\Das sind (willkürlich sinnvolle) Annahmen.};
-    \def\hlcolor{pingu@yellow}
-    \hlbehindcodeunder{arr}{@a>}
-    \draw[codeouthl,-Kite] ([xshift=-1.25cm,yshift=.1mm]@a>_up.north) to[out=80,in=180] ++(.5,.25) node[T,right] {Mathematisch: \(\{1, \ldots, n\}\), Java: \(\{0, \ldots, n - 1\}\)};
-    \node[above right,xshift=2mm,yshift=\btdmfootheight,T,align=left] at (current page.south west) {Ich habe mir hier die Freiheit genommen,\\\T{L} und \T{N} umzubenennen.};
     \iffull
     \draw[codeouthl,-Kite] (ret@.east) to[out=-5,in=180] ++(1.2,-.25) node[T,below right,yshift=.6\baselineskip,align=left] {Was machen wir aus \say{stop program}?\\\textbullet~\T{System.exit(1)}?\\\textbullet~Werfen einer Exception?};
     \fi
