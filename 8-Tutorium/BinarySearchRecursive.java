@@ -16,6 +16,9 @@ public class BinarySearchRecursive {
 
    public static void main(String[] ars) {
       int[] arr = { 1, 2, 4, 8, 16, 32, 64, 128, 256 };
-      System.out.printf("Position des gesuchten Werts: %d \n", binSearchRec(arr, 23, 0, arr.length - 1));
+      for(int i : arr) {
+         System.out.printf("Position des gesuchten Werts: %d=>%d %n", i, binSearchRec(arr, i, 0, arr.length - 1));
+      }
+      System.out.printf("Position des gesuchten Werts: %d=>%d %n", 12, binSearchRec(arr, 12, 0, arr.length - 1));
    }
 }
