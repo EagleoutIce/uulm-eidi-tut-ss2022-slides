@@ -155,7 +155,7 @@ public class Queue {
 !*\onslide<5->*!        else
 !*\onslide<8->*!            this.last.setNextElement(next);
 !*\onslide<9->*!        this.last = next;!*\Snode{shift-tail}*!
-!*\onslide<11->*!        length++;
+!*\onslide<11->*!        length++;!*\onslide<1->*!
     }
 |ihl|}|ihl|
 \end{plainjava}
@@ -184,7 +184,7 @@ public class Queue {
 !*\onslide<6->*!            return true;!*\Snode{do-true}*!
 !*\onslide<3->*!        }
 !*\onslide<8->*!        return false;
-!*\onslide<2->*!    }
+!*\onslide<2->*!    }!*\onslide<1->*!
 |ihl|}|ihl|
 \end{plainjava}
 \begin{tikzpicture}[@O]
@@ -361,7 +361,7 @@ public class Queue {
 !*\onslide<4->*!        arr[i] = arr[j];
 !*\onslide<4->*!        arr[j] = tmp;
 !*\onslide<3->*!     }
-!*\onslide<2->*!}
+!*\onslide<2->*!}!*\onslide<1->*!
 \end{plainjava}
 \end{frame}
 
@@ -381,7 +381,7 @@ public class Queue {
 !*\onslide<6->*!            swapped = true;
 !*\onslide<4->*!        }
 !*\onslide<7->*!        return moveUp(arr, i+1, end, swapped);
-!*\onslide<2->*!    }
+!*\onslide<2->*!    }!*\onslide<1->*!
 |ihl|}|ihl|
 \end{plainjava}
 \begin{tikzpicture}[@O]
@@ -407,7 +407,7 @@ public class Queue {
 !*\onslide<2->*!           swapped = true;
 !*\onslide<2->*!        }
 !*\onslide<2->*!        return moveDown(arr, i-1, end, swapped);
-!*\onslide<2->*!    }
+!*\onslide<2->*!    }!*\onslide<1->*!
 |ihl|}|ihl|
 \end{plainjava}
 \end{onlyenv}
@@ -441,16 +441,16 @@ public class Queue {
     |ihl|static boolean moveUp(int[] arr, int i, int end, boolean s) { ... }|ihl|
     |ihl|static boolean moveDown(int[] arr, int i, int end, boolean s) { ... }|ihl|
 
-    public static void shakerSort(int[] array, int n) {
-        int offset = array.length - n;
-        if (n <= array.length / 2)
-           return;
-        else if (!moveUp(array, offset + 1, n, false))
-           return;
-        else if (!moveDown(array, n - 1, offset, false))
-           return;
-        shakerSort(array, n - 1);
-    }
+    !*\onslide<2->*!public static void shakerSort(int[] array, int n) {
+    !*\onslide<3->*!    int offset = array.length - n;
+    !*\onslide<4->*!    if (n <= array.length / 2)
+    !*\onslide<4->*!       return;
+    !*\onslide<5->*!    else if (!moveUp(array, offset + 1, n, false))
+    !*\onslide<6->*!       return;
+    !*\onslide<5->*!    else if (!moveDown(array, n - 1, offset, false))
+    !*\onslide<6->*!       return;
+    !*\onslide<7->*!    shakerSort(array, n - 1);
+    !*\onslide<2->*!}
 |ihl|}|ihl|
 \end{plainjava}
 \end{frame}
@@ -462,17 +462,17 @@ public class Queue {
 |ihl|public class ShakerSort {|ihl|
     |ihl|public static void shakerSort(int[] array, int n) { ... }|ihl|
 
-    public static void main(String[] args) {
-        Random random = new Random();
-        int length = random.nextInt(11) + 10;
-        int[] array = new int[length];!*\smallskip*!
-        for (int i = 0; i < length; i++)
-           array[i] = random.nextInt(100);!*\smallskip*!
-        System.out.println("Unsortiert: " + Arrays.toString(array));
-        shakerSort(array, length);
-        System.out.println("Sortiert: " + Arrays.toString(array));
-     }
-}
+!*\onslide<2->*!    public static void main(String[] args) {
+!*\onslide<3->*!        Random random = new Random();
+!*\onslide<4->*!        int length = random.nextInt(11) + 10;
+!*\onslide<5->*!        int[] array = new int[length];!*\smallskip*!
+!*\onslide<6->*!        for (int i = 0; i < length; i++)
+!*\onslide<6->*!           array[i] = random.nextInt(100);!*\smallskip*!
+!*\onslide<7->*!        System.out.println("Unsortiert: " + Arrays.toString(array));
+!*\onslide<8->*!        shakerSort(array, length);
+!*\onslide<9->*!        System.out.println("Sortiert: " + Arrays.toString(array));
+!*\onslide<2->*!    }!*\onslide<1->*!
+|ihl|}|ihl|
 \end{plainjava}
 \end{frame}
 
@@ -528,10 +528,73 @@ public class Queue {
 \SetNextSectionText{Dynamische Datenstrukturen\\Abgabe: \DTMDate{2022-07-11}}
 \section{Aussicht: Übungsblatt 10}
 
-\begin{frame}{Aufgabe 1: TODO}
+\begin{frame}{Aufgabe 1: Bäume}
 \begin{itemize}[<+(1)->]
-    \item
+    \item Wir können Bäume als rekursive Datenstruktur beschreiben \begin{itemize}
+        \item Für Binärbäume haben wir einen Knoten als Wurzel eines Teilbaums
+        \item Einen linken Teilbaum und einen rechten Teilbaum
+    \end{itemize}\bigskip
+\begin{columns}[onlytextwidth,c]
+    \column{.3\linewidth}
+    \onslide<5->{\begin{forest}
+        for tree={circle,draw}
+        [7[4[9[1][~,phantom]][0[2][5]]][3]]
+    \end{forest}}
+    \column{.7\linewidth}
+    \begin{itemize}
+        \item<6-> Breitendurchlauf:\\
+                  \onslide<7->{7, 4, 3, 9, 0, 1, 2, 5}
+        \item<8-> Prä-Order: (Knoten, links, rechts)\\
+                  \onslide<9->{7, 4, 9, 1, 0, 2, 5, 3}
+        \item<10-> In-Order: (links, Knoten, rechts)\\
+                  \onslide<11->{1, 9, 4, 2, 0, 5, 7, 3}
+        \item<12-> Post-Order: (links, rechts, Knoten)\\
+                  \onslide<13->{1, 9, 2, 5, 0, 4, 3, 7}
+    \end{itemize}
+\end{columns}
 \end{itemize}
+\end{frame}
+
+{\AddonFrame
+\begin{frame}[c]{Exkurs: Ein wenig fantastische Heaps gefällig?}
+\onslide<2->{\centering\heap{%
+    [42,name=root[19,name=inner1[7,name=inner2[3,name=leaf1][-2,name=leaf2]][8,name=leaf3]][-5,name=inner3[-9,name=leaf4]]]%
+    \onslide<3->{\fill[paletteA,rounded corners=.4pt] (root.north)++(-.75mm,2mm-.75mm) rectangle ++(1.5mm,1.5mm) [radius=2.15pt] node[left=1.65mm+.75mm,paletteA,font=\bfseries] (dr) {Wurzel};
+    \node[below=-4pt,gray,font=\scriptsize\itshape] at (dr.south) {root};}
+    \pgfinterruptboundingbox
+    \onslide<4->{\fill[paletteB] (inner1.north)++(0,2mm) circle [radius=2.15pt] node[left=1.65mm,paletteB,font=\bfseries] (di) {Innerer Knoten};
+    \node[below=-4pt,gray,font=\scriptsize\itshape] at (di.south) {inner node};
+    \foreach\i in {2,3} {\fill[paletteB] (inner\i.north)++(0,2mm) circle [radius=2.15pt];}}
+    \onslide<5->{\fill[paletteD] (leaf1.west)++(-2mm,0) circle [radius=2.15pt] node[left=1.65mm,paletteD,font=\bfseries] (dl) {Blatt};
+    \node[below=-4pt,gray,font=\scriptsize\itshape] at (dl.south) {leaf};
+    \foreach\i in {2,3,4} {\fill[paletteD] (leaf\i.west)++(-2mm,0) circle [radius=2.15pt];}}
+    \endpgfinterruptboundingbox
+    \onslide<6->{
+        \node[right=1.25cm,gray] (niveau) at (dr-|inner3) {\textbf{Ebene}};
+    }
+    \pgfonlayer{background}
+        \foreach[count=\i] \x in {root,inner1,leaf3,leaf1} {
+            \onslide<\the\numexpr\i+6\relax->{
+                \node[gray,font=\bfseries] (dn\i) at(\x-|niveau) {\i};
+                \draw[lgray!90!white,densely dashed, very thick] (dn\i.west) -- (dl.west|-dn\i.west);
+            }
+        }
+    \endpgfonlayer
+}}
+\end{frame}
+}
+\begin{frame}{Aufgabe 2: Self-Overriding Ring Buffer}
+    \begin{itemize}
+        \itemsep10pt
+        \item Bei einem Ring Buffer, zeigt ein Element nie auf \bjava{null}
+        \item Komplizierter wird es, wenn nicht werte in Elementen überschrieben sondern neue Elemente eingesetzt werden müssen
+        \item Versucht kategorisch, Skizzen zur Hilfestellung zu nehmen \begin{itemize}
+            \item Insbesondere wenn mehrere Zeiger im Spiel sind, ist das hilfreich
+            \item So können auch Randfälle identifiziert werden
+        \end{itemize}
+        \item Gebt euch Mühe, sauberen Code abzugeben
+        \item Kommentare werden gern gesehen
+    \end{itemize}
 \end{frame}
 \fi
 

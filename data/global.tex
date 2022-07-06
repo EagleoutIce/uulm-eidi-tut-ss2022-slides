@@ -436,3 +436,6 @@
 % this is so we can have tables with rotate headers :D
 \usepackage{adjustbox}
 \newcolumntype{Y}[2]{>{\adjustbox{angle=#1,lap=\width-(#2)}\bgroup}l<{\egroup}}
+
+
+\newcommand*\heap[2][]{\downsize{\linewidth}{\begin{forest}for tree={circle,draw=codeouthl!70!btdm@background,fill=codeouthl!70!btdm@background,text=black,minimum width=2.5em,s sep=4em-level*.5em,edge={line width=3pt,lgray},#1}#2\end{forest}}}
