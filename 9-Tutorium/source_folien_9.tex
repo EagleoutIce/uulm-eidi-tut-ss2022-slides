@@ -196,7 +196,7 @@ public class Queue {
 \section{Übungsblatt 9}
 \subsection{Aufgabe 1}
 {\taskenum
-\begin{frame}{Aufgabe 1: Heap Sort}
+\begin{frame}[c]{Aufgabe 1: Heap Sort}
     \taskblock<2->In dieser Aufgabe sollen Sie das folgende Array händisch aufsteigend mit dem Heap Sort Algorithmus sortieren: \begin{center}
     \([0, -1, 9, 4]\)
 \end{center}
@@ -207,7 +207,6 @@ public class Queue {
 \end{enumerate}
 \endtaskblock
 \end{frame}
-% TODO: pengu with min-heap
 {
 \MakeThePinguExplainIt[text width=6.65cm,yshift=-1.15cm]{cap=!hide,hat,hat coronal=paletteA,hat ribbon=paletteA,glasses=!hide,eyes wink,cup=!hide,heart=shadeA,right item angle=-50}{Hier haben wir einen Min-Heap, ein Max-Heap würde genau so funktionieren!}
 \begin{frame}{Der Aufbau eines Heaps}
@@ -348,6 +347,182 @@ public class Queue {
 }
 }
 % TODO. darauf hinweisen: rekursive datenstruktur
+
+\subsection{Aufgabe 2}
+\begin{frame}[c]{Aufgabe 2: Rekursive Sortieralgorithmen: Shaker Sort}
+    \task<2->{In dieser Aufgabe sollen Sie einen rekursiven Sortieralgorithmus selbst implementieren. Wir betrachten eine Variante des Bubble-Sort Algorithmus, bei dem das Array in jedem Sortierschritt alternierend von vorne und hinten durchlaufen wird. Nach jedem Durchlaufen werden die bereits sortieren Elemente vorne und hinten nicht mehr betrachtet werden. Implementieren Sie Shaker Sort in Java und testen Sie Ihre Lösung an mindestens einem Beispiel.}
+\end{frame}
+
+\begin{frame}[c,fragile]{Helping Swap}
+\begin{plainjava}
+!*\onslide<2->*!public class ShakerSort {
+!*\onslide<3->*!    private static void swap(int[] arr, int i, int j) {
+!*\onslide<4->*!        int tmp = arr[i];
+!*\onslide<4->*!        arr[i] = arr[j];
+!*\onslide<4->*!        arr[j] = tmp;
+!*\onslide<3->*!     }
+!*\onslide<2->*!}
+\end{plainjava}
+\end{frame}
+
+{
+\MakeThePinguExplainIt[text width=6.65cm,yshift=-1.15cm]{cap=!hide,hair=pingu@purple,headband,glasses=!hide,sunglasses round,eyes shiny,cup=pingu@yellow,right item angle=-50}{Was müsste man anpassen um immer mit \bjava{i + 1} zu vergleichen?}
+\begin{frame}[c,fragile]{Recursive Bubble-Up}
+\SetupLstHl
+\begin{plainjava}
+|ihl|public class ShakerSort {|ihl|
+    |ihl|private static void swap(int[] arr, int i, int j) { ... }|ihl|
+
+!*\onslide<2->*!    static boolean moveUp(int[] arr, int i, int end, boolean swapped) {
+!*\onslide<3->*!        if (i >= end)
+!*\onslide<3->*!            return swapped;
+!*\onslide<4->*!        if (arr[i] < arr[i - 1]) {
+!*\onslide<5->*!            swap(arr, i, i - 1);
+!*\onslide<6->*!            swapped = true;
+!*\onslide<4->*!        }
+!*\onslide<7->*!        return moveUp(arr, i+1, end, swapped);
+!*\onslide<2->*!    }
+|ihl|}|ihl|
+\end{plainjava}
+\begin{tikzpicture}[@O]
+    \onslide<8->{\node[above left,draw=none,rectangle,xshift=5mm,scale=.8] at(current page.south east) {\copy\pinguexplainbox};}% copy for animations
+\end{tikzpicture}
+\end{frame}
+}
+
+\begin{frame}[c,fragile]{Recursive Bubble-Down}
+\SetupLstHl
+\begin{onlyenv}<-2|handout:0>
+\begin{plainjava}
+|ihl|public class ShakerSort {|ihl|
+    |ihl|private static void swap(int[] arr, int i, int j) { ... }|ihl|
+    |ihl|static boolean moveUp(int[] arr, int i, int end, boolean swapped) |ihl|
+        |ihl|{ ... }|ihl|
+
+!*\onslide<2->*!    static boolean moveDown(int[] arr, int i, int end, boolean swapped) {
+!*\onslide<2->*!        if (i <= end)
+!*\onslide<2->*!           return swapped;
+!*\onslide<2->*!        if (arr[i] < arr[i - 1]) {
+!*\onslide<2->*!           swap(arr, i, i - 1);
+!*\onslide<2->*!           swapped = true;
+!*\onslide<2->*!        }
+!*\onslide<2->*!        return moveDown(arr, i-1, end, swapped);
+!*\onslide<2->*!    }
+|ihl|}|ihl|
+\end{plainjava}
+\end{onlyenv}
+\begin{onlyenv}<3->
+\begin{plainjava}
+|ihl|public class ShakerSort {|ihl|
+    |ihl|private static void swap(int[] arr, int i, int j) { ... }|ihl|
+    |ihl|static boolean moveUp(int[] arr, int i, int end, boolean swapped) |ihl|
+        |ihl|{ ... }|ihl|
+
+    |ihl|static boolean moveDown(int[] arr, int i, int end, boolean swapped) {|ihl|
+        |ihl|if (i |ihl|<=|ihl| end)|ihl|
+            |ihl|return swapped;|ihl|
+        |ihl|if (arr[i] < arr[i - 1]) {|ihl|
+        |ihl|   swap(arr, i, i - 1);|ihl|
+        |ihl|   swapped = true;|ihl|
+        |ihl|}|ihl|
+        |ihl|return|ihl| moveDown|ihl|(arr,|ihl| i-1|ihl|, end, swapped);|ihl|
+    |ihl|}|ihl|
+|ihl|}|ihl|
+\end{plainjava}
+\end{onlyenv}
+\end{frame}
+
+% TODO: alternative mit start und end
+\begin{frame}[c,fragile]{I shake it up, I shake it down!}
+\SetupLstHl
+\begin{plainjava}
+|ihl|public class ShakerSort {|ihl|
+    |ihl|private static void swap(int[] arr, int i, int j) { ... }|ihl|
+    |ihl|static boolean moveUp(int[] arr, int i, int end, boolean s) { ... }|ihl|
+    |ihl|static boolean moveDown(int[] arr, int i, int end, boolean s) { ... }|ihl|
+
+    public static void shakerSort(int[] array, int n) {
+        int offset = array.length - n;
+        if (n <= array.length / 2)
+           return;
+        else if (!moveUp(array, offset + 1, n, false))
+           return;
+        else if (!moveDown(array, n - 1, offset, false))
+           return;
+        shakerSort(array, n - 1);
+    }
+|ihl|}|ihl|
+\end{plainjava}
+\end{frame}
+
+\begin{frame}[c,fragile]{Some sample Code}
+\SetupLstHl
+\begin{plainjava}
+!*\CodeFileMarkerAttach{ShakerSort.java}*!
+|ihl|public class ShakerSort {|ihl|
+    |ihl|public static void shakerSort(int[] array, int n) { ... }|ihl|
+
+    public static void main(String[] args) {
+        Random random = new Random();
+        int length = random.nextInt(11) + 10;
+        int[] array = new int[length];!*\smallskip*!
+        for (int i = 0; i < length; i++)
+           array[i] = random.nextInt(100);!*\smallskip*!
+        System.out.println("Unsortiert: " + Arrays.toString(array));
+        shakerSort(array, length);
+        System.out.println("Sortiert: " + Arrays.toString(array));
+     }
+}
+\end{plainjava}
+\end{frame}
+
+\subsection{Aufgabe 3}
+\begin{frame}[c]{Aufgabe 3: Laplacescher Entwicklungssatz}
+\taskblock<2->
+    In dieser Aufgabe sollen Sie nochmal die Implementierung rekursiver Funktionen üben. Dazu betrachten wir die
+    rekursive Berechnung der Determinante einer quadratischen \(n \times n\) Matrix \(M\). Die Determinante gibt an, wie sich
+    das Volumen bei der durch die Matrix beschriebenen linearen Abbildung ändert, und ist ein Hilfsmittel bei der
+    Lösung linearer Gleichungssysteme. Sie kann für kleine Matrizen (\(1 \leq n \leq 10\)) rekursiv über den \link{https://de.wikipedia.org/wiki/Determinante\#Laplacescher\_Entwicklungssatz}{Laplaceschen
+    Entwicklungssatz} nach der ersten Spalte berechnet werden:
+    \begin{equation*}
+        \det(M) = \begin{cases}
+            m_{1,1} & \text{ falls } n = 1\\
+            \sum_{i = 1}^n (-1)^{i + 1} m_{i, 1} \det(M_{-i 1}) & \text{ für } n \geq 2
+        \end{cases}
+    \end{equation*}
+    wobei \(n \times n\) die Dimensionalität der Matrix \(M\), \(M_{-i, 1}\) die Matrix, die aus \(M\) entsteht, wenn die erste Spalte und die \(i\)-te Zeile entfernt werden (samt anschließendem Zusammenschieben) und \(m_{i, j}\) das element in der \(i\)-ten Zeile und \(j\)-ten Spalte seien.
+
+    In den Materialien zu diesem Übungsblatt finden Sie die Datei \T{Determinante.java}, die bereits alle notwendigen
+    Hilfsmethoden enthält. Sie sollen die vorgegebene Methode \T{int det(int[][] mat)} implementieren.
+\endtaskblock
+\end{frame}
+% note hier nichts zur Verfügung weil rechtlich an prof gebunden?
+
+\begin{frame}[fragile,c]{Translating a formula\ldots\space 1:1}
+\begin{plainjava}
+!*\onslide<2->*!private static int det(int[][] mat) {
+!*\onslide<3->*!    if(mat.length == 1) {
+!*\onslide<4->*!        return mat[0][0];
+!*\onslide<3->*!    } else {
+!*\onslide<4->*!        int result = 0;
+!*\onslide<5->*!        for(int i = 0; i < mat.length; i++) {
+!*\onslide<6->*!            result += (int)Math.pow(-1, i+1) * mat[i][0]
+!*\onslide<6->*!                * det(reduceMatrix(mat, i));
+!*\onslide<5->*!        }
+!*\onslide<7->*!        return result;
+!*\onslide<3->*!    }
+!*\onslide<2->*!}!*\onslide<1->*!
+\end{plainjava}
+\begin{tikzpicture}[@O]
+    \onslide<1->{\node[below left,text width=7cm,yshift=-1.25cm] at (current page.north east) {\begin{equation*}
+        \det(M) = \begin{cases}
+            m_{1,1} & \text{ falls } n = 1\\
+            \sum_{i = 1}^n (-1)^{i + 1} m_{i, 1} \det(M_{-i 1}) & \text{ für } n \geq 2
+        \end{cases}
+    \end{equation*}};}
+\end{tikzpicture}
+\end{frame}
+
 
 \iffull
 \SetNextSectionText{Dynamische Datenstrukturen\\Abgabe: \DTMDate{2022-07-11}}
