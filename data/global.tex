@@ -374,6 +374,7 @@
 % \def\CodeFileMarker#1{{\hfill\color{lightgray}\sffamily\tiny#1\rlap{\thinspace~\faFileCodeO}}}
 \newcommand<>\CodeFileMarkerAttach[2][]{\only#3{\CodeFileMarker{\attachfilesetup{color=lightgray}\fancyulcolor{lightgray}\textattachfile{\curpath #1#2}{\rawlink{#2}}}}}
 \solsetmintedstyle{plain}
+\newcommand<>\FileMarkerAttach[2][]{\only#3{\attachfilesetup{color=black}\textattachfile{\curpath #1#2}{\rawlink{#2}}}}
 
 \mode<all>{\newcommand<>\onlyhandout[1]{\relax}}
 \mode<handout>{\let\onlyhandout\only}

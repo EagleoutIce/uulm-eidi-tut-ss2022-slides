@@ -11,34 +11,203 @@
 \iffull\begin{document}
 \titleframe
 
-\TopicOverview{10}
+\TopicOverview{6}
 \fi
 
 \iffull{\SummaryFrame
 \begin{frame}[c]{Kurzwiederholung}
 \begin{itemize}[<+(1)->]
-   \itemsep8pt
-    \item
+   \itemsep12pt
+    \item Wir kennen eine ganze Bandbreite an Sortierverfahren: \begin{description}[Selectionsort]
+        \itemsep3pt
+        \item[Bubblesort] Vertausche benachbarte Elemente, solange nicht in Sortierrreihenfolge.
+        \item[Insertionsort] Sortiere erstes unsortiertes Element in sortierten Teil ein.
+        \item[Selectionsort] Setze kleinsten unsortierten Elements ans Ende des sortierten Teils.
+        \item[Mergesort] Aufteilen bis einelementig, wiederholtes mergen sortierter Teillisten.
+        \item[Quicksort] Pivot ans Ende, \(l\) solange \(<\), \(r\) solange \(\geq\). Bei treffen, tausche Pivot.
+        \item[Heapsort] Baue Heap (heapify, \(\text{Eltern} \leq \text Kinder\)), entferne Wurzel und heapify.
+    \end{description}
+    \item Zusätzlich zwei Suchverfahren: \begin{description}[Lineare Suche]
+        \itemsep3pt
+        \item[Lineare Suche] Betrachte alle Elemente und vergleiche mit Suchschlüssel.
+        \item[Binäre Suche] Sortierte Liste, wenn Mitte \(\neq\), prüfe wiederholt linke/rechte Hälfte.
+    \end{description}
 \end{itemize}
 \end{frame}
 }\fi
 
 \SetNextSectionText[.6\linewidth]{TODO}
 \section{Präsenzaufgabe}
+{\tikzset{W/.style={draw, rounded corners=2pt},K/.style={W, rectangle split, rectangle split parts=2,rectangle split horizontal}}
 \begin{frame}[fragile,c]{Präsenzaufgabe}
 \begin{aufgabe}{FIFO-Freuden}
-XX
+\only<-3|handout:0>{\only<3->{\footnotesize}\onslide<2->{In dieser Aufgabe sollen Sie Ihre eigene dynamische Datenstruktur implementieren. Hierbei soll es sich um eine Queue
+handeln, welche nach dem FIFO-Prinzip (First In~--- First Out) arbeitet, und \bjava{int} Werte speichert. Intern benötigen
+Sie hier zusätzlich zur Klasse Queue eine (innere) Klasse um die gespeicherten Elemente repräsentieren zu können.
+Hierfür können Sie die Vorlage \T{Element.java} auf Moodle verwenden, sowie die Vorlage \T{Queue.java}, die bereits das Grundgerüst enthält. Implementieren Sie nun zusätzlich die folgenden Methoden der Klasse \T{Queue}:\vspace*{-2mm} \begin{itemize}
+    \itemsep-3pt
+    \item Die Methode \bjava{public void enqueue(int value)} soll ein neues Element mit dem übergebenen wert am Ende der Queue einreihen.
+    \item Die Methode \bjava{public boolean dequeue()} soll das vorderste Element aus der Queue entfernen.\vspace*{-2mm}
+\end{itemize}
+    Sie finden Beispiele für die Operation in Abbildung. Verwenden Sie für Ihre Implementierung keine Arrays oder vorgefertigte dynamische Datenstrukturen, sondern implementieren Sie die Queue selbst als (einfach) verkettete Liste.}}%
+\only<4->{\vspace*{-\baselineskip}\par Implementieren Sie eine Queue, die \bjava{int} Werte speichert. Verwenden Sie dazu \T{\FileMarkerAttach<4->{Element.java}} und \T{\FileMarkerAttach<4->{Queue.java}} als Grundgerüst und implementieren Sie:\vspace*{-\smallskipamount} \begin{itemize}
+    \item<5-> \bjava{void enqueue(int value)} welche den Wert ans Ende der Queue einreiht\smallskip\par
+    \onslide<6->{\begin{tikzpicture}[align-half-base]
+        \node[K] (a) at (0,0) {4\nodepart{two}};
+        \node[K,right=2mm] (b) at (a.east) {5\nodepart{two}};
+        \node[K,right=2mm] (c) at (b.east) {1\nodepart{two}};
+        \node[K,right=2mm] (d) at (c.east) {3\nodepart{two}};
+        \node[W,right=2mm] (e) at (d.east) {\phantom{2}};
+        \pgfinterruptboundingbox
+        \node[below,T] at (a.south) {head};
+        \node[below,T] at (d.south) {tail};
+        \endpgfinterruptboundingbox
+        \draw[shorten <= .4mm,shorten >= .4mm,] (e.south west) -- (e.north east);
+        \draw[Circle-Kite] ([xshift=-1.65ex]a.east) -- (b.west);
+        \draw[Circle-Kite] ([xshift=-1.65ex]b.east) -- (c.west);
+        \draw[Circle-Kite] ([xshift=-1.65ex]c.east) -- (d.west);
+        \draw[Circle-Kite] ([xshift=-1.65ex]d.east) -- (e.west);
+    \end{tikzpicture}}~\onslide<7->{\(\overset{\T{enqueue(2)}}{\longrightarrow}\) \begin{tikzpicture}[align-half-base]
+        \node[K] (a) at (0,0) {4\nodepart{two}};
+        \node[K,right=2mm] (b) at (a.east) {5\nodepart{two}};
+        \node[K,right=2mm] (c) at (b.east) {1\nodepart{two}};
+        \node[K,right=2mm] (d) at (c.east) {3\nodepart{two}};
+        \node[K,right=2mm] (e) at (d.east) {2\nodepart{two}};
+        \node[W,right=2mm] (f) at (e.east) {\phantom{2}};
+        \pgfinterruptboundingbox
+        \node[below,T] at (a.south) {head};
+        \node[below,T] at (e.south) {tail};
+        \endpgfinterruptboundingbox
+        \draw[shorten <= .4mm,shorten >= .4mm,] (f.south west) -- (f.north east);
+        \draw[Circle-Kite] ([xshift=-1.65ex]a.east) -- (b.west);
+        \draw[Circle-Kite] ([xshift=-1.65ex]b.east) -- (c.west);
+        \draw[Circle-Kite] ([xshift=-1.65ex]c.east) -- (d.west);
+        \draw[Circle-Kite] ([xshift=-1.65ex]d.east) -- (e.west);
+        \draw[Circle-Kite] ([xshift=-1.65ex]e.east) -- (f.west);
+    \end{tikzpicture}}\bigskip
+    \item<8-> \bjava{boolean dequeue()} welche den vordersten Wert entfernt % (\bjava{false} wenn keiner)
+    \smallskip\par
+    \onslide<9->{\begin{tikzpicture}[align-half-base]
+        \node[K] (a) at (0,0) {4\nodepart{two}};
+        \node[K,right=2mm] (b) at (a.east) {5\nodepart{two}};
+        \node[K,right=2mm] (c) at (b.east) {1\nodepart{two}};
+        \node[K,right=2mm] (d) at (c.east) {3\nodepart{two}};
+        \node[K,right=2mm] (e) at (d.east) {2\nodepart{two}};
+        \node[W,right=2mm] (f) at (e.east) {\phantom{2}};
+        \pgfinterruptboundingbox
+        \node[below,T] at (a.south) {head};
+        \node[below,T] at (e.south) {tail};
+        \endpgfinterruptboundingbox
+        \draw[shorten <= .4mm,shorten >= .4mm,] (f.south west) -- (f.north east);
+        \draw[Circle-Kite] ([xshift=-1.65ex]a.east) -- (b.west);
+        \draw[Circle-Kite] ([xshift=-1.65ex]b.east) -- (c.west);
+        \draw[Circle-Kite] ([xshift=-1.65ex]c.east) -- (d.west);
+        \draw[Circle-Kite] ([xshift=-1.65ex]d.east) -- (e.west);
+        \draw[Circle-Kite] ([xshift=-1.65ex]e.east) -- (f.west);
+    \end{tikzpicture}}~\onslide<7->{\(\overset{\T{\setbox0=\hbox{enqueue(2)}\rlap{\kern.5\wd0\clap{\T{dequeue()}}}\phantom{\copy0}}}{\longrightarrow}\) \begin{tikzpicture}[align-half-base]
+        \node[K,right=2mm] (b) at (0,0) {5\nodepart{two}};
+        \node[K,right=2mm] (c) at (b.east) {1\nodepart{two}};
+        \node[K,right=2mm] (d) at (c.east) {3\nodepart{two}};
+        \node[K,right=2mm] (e) at (d.east) {2\nodepart{two}};
+        \node[W,right=2mm] (f) at (e.east) {\phantom{2}};
+        \pgfinterruptboundingbox
+        \node[below,T] at (b.south) {head};
+        \node[below,T] at (e.south) {tail};
+        \endpgfinterruptboundingbox
+        \draw[shorten <= .4mm,shorten >= .4mm,] (f.south west) -- (f.north east);
+        \draw[Circle-Kite] ([xshift=-1.65ex]b.east) -- (c.west);
+        \draw[Circle-Kite] ([xshift=-1.65ex]c.east) -- (d.west);
+        \draw[Circle-Kite] ([xshift=-1.65ex]d.east) -- (e.west);
+        \draw[Circle-Kite] ([xshift=-1.65ex]e.east) -- (f.west);
+    \end{tikzpicture}}\medskip
+\end{itemize}\onslide<7->{Verwenden Sie keine Arrays oder vorgefertigte dynamische Datenstrukturen, sondern eine eigene, (einfach) verkettete Liste.\vspace*{-\medskipamount}}}
 \end{aufgabe}
 \end{frame}
+}
 
+\begin{frame}[c,fragile]{Adding something to a Queue}
+\SetupLstHl
+\begin{onlyenv}<2|handout:0>
+\begin{plainjava}
+public class Queue {
+    private Element first;
+    private Element last;
+    private int length;
+    // ...
+
+    public void enqueue(int value) {
+        // TODO
+    }
+}
+\end{plainjava}
+\end{onlyenv}
+\begin{onlyenv}<3->
+    \begin{plainjava}
+|ihl|public class Queue {|ihl|
+    |ihl|private Element first;|ihl|
+    |ihl|private Element last;|ihl|
+    |ihl|private int length;|ihl|
+
+    public void enqueue(int value) {
+!*\onslide<4->*!        Element next = new Element(value);
+!*\onslide<5->*!        if(length == 0)!*\Snode{check-empty}*!
+!*\onslide<7->*!            this.first = next;
+!*\onslide<5->*!        else
+!*\onslide<8->*!            this.last.setNextElement(next);
+!*\onslide<9->*!        this.last = next;!*\Snode{shift-tail}*!
+!*\onslide<11->*!        length++;
+    }
+|ihl|}|ihl|
+\end{plainjava}
+\end{onlyenv}
+\begin{tikzpicture}[@O]
+    \onslide<6->{\node[T,right=3mm] at(check-empty.east) {Spezialfall beim Einfügen: Isse leer?};}
+    \onslide<10->{\node[T,right=3mm] at(shift-tail.east) {In jedem Fall: Verschiebe den Tail};}
+\end{tikzpicture}
+\end{frame}
+
+\begin{frame}[c,fragile]{Moving out}
+\SetupLstHl
+\begin{plainjava}
+!*\CodeFileMarkerAttach<9->[p-solution/]{Queue.java}*!
+|ihl|public class Queue {|ihl|
+    |ihl|private Element first;|ihl|
+    |ihl|private Element last;|ihl|
+    |ihl|private int length;|ihl|
+
+    |ihl|public void enqueue(int value) { ... }|ihl|
+
+!*\onslide<2->*!    public boolean dequeue() {
+!*\onslide<3->*!        if(length > 0) {
+!*\onslide<4->*!            this.first = this.first.getNextElement();
+!*\onslide<5->*!            length--;
+!*\onslide<6->*!            return true;!*\Snode{do-true}*!
+!*\onslide<3->*!        }
+!*\onslide<8->*!        return false;
+!*\onslide<2->*!    }
+|ihl|}|ihl|
+\end{plainjava}
+\begin{tikzpicture}[@O]
+    \onslide<7->{\node[T,right=3mm] at(do-true.east) {Es gab etwas zu Entfernen!};}
+\end{tikzpicture}
+\end{frame}
 
 \SetNextSectionText{Suchen und Sortieren~II\\Abgabe: \DTMDate{2022-07-04}}
 \section{Übungsblatt 9}
 \subsection{Aufgabe 1}
 {\taskenum
-\begin{frame}{Aufgabe 1: }
-\task<2->{}
+\begin{frame}{Aufgabe 1: Heap Sort}
+    \taskblock<2->In dieser Aufgabe sollen Sie das folgende Array händisch aufsteigend mit dem Heap Sort Algorithmus sortieren: \begin{center}
+    \([0, -1, 9, 4]\)
+\end{center}
+\begin{enumerate}
+    \item Phase 1: Geben Sie den schrittweise den entsprechenden Heap an und markieren Sie jeweils wo die Heap-
+    Eigenschaft verletzt ist. Orientieren Sie sich dabei an der Darstellung aus der Vorlesung.
+    \item Phase 2: Wandeln Sie den Heap aus Phase 1 schrittweise in ein sortiertes Array um. Markieren Sie jeweils wo nach dem Herausnehmen des \textit{Head} die Heap-Eigenschaft verletzt wurde und das entsprechende Resultat der \textit{Heapify} Operation.
+\end{enumerate}
+\endtaskblock
 \end{frame}
+}
 
 \iffull
 \SetNextSectionText{Dynamische Datenstrukturen\\Abgabe: \DTMDate{2022-07-11}}
