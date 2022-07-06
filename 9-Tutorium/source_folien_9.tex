@@ -207,7 +207,147 @@ public class Queue {
 \end{enumerate}
 \endtaskblock
 \end{frame}
+% TODO: pengu with min-heap
+{
+\MakeThePinguExplainIt[text width=6.65cm,yshift=-1.15cm]{cap=!hide,hat,hat coronal=paletteA,hat ribbon=paletteA,glasses=!hide,eyes wink,cup=!hide,heart=shadeA,right item angle=-50}{Hier haben wir einen Min-Heap, ein Max-Heap würde genau so funktionieren!}
+\begin{frame}{Der Aufbau eines Heaps}
+    \begin{enumerate}
+        \item<2-> \task{Geben Sie den schrittweise den Heap an und markieren Sie jeweils wo die Heap-Eigenschaft verletzt ist.
+        \begin{center}
+            \([0, -1, 9, 4]\)
+        \end{center}}
+    \end{enumerate}\vfill
+\tikzset{O/.style={circle,draw,minimum width=2em},every node/.append style={O}}
+% no forest for align
+\centering\downsize\linewidth{\onslide<3->{\begin{tikzpicture}[align-half-base,xscale=0.75]
+    \node (0) at (0,0) {0};
+    \node[minimum size=.25mm] (1) at (-1,-1) {};
+    \draw (0) -- (1);
+
+    \node[draw=none] at(0,-2) {};
+\end{tikzpicture}}\onslide<4->{~~\(\longrightarrow\)~~%
+\begin{tikzpicture}[align-half-base,xscale=0.75]
+    \node (0) at (0,0) {0};
+    \node (1) at (-1,-1) {-1};
+    \node[minimum size=.25mm] (2) at ( 1,-1) {};
+    \draw[thick] (0) -- (1) coordinate[pos=.5] (@);
+    \pgfinterruptboundingbox
+    \draw[rotate=42,thick] (@) ellipse[x radius=1.5cm, y radius=7.5mm];
+    \endpgfinterruptboundingbox
+    \draw (0) -- (2);
+
+    \node[draw=none] at(0,-2) {};
+\end{tikzpicture}}\onslide<5->{~~\(\longrightarrow\)~~%
+\begin{tikzpicture}[align-half-base,xscale=0.75]
+    \node (0) at (0,0) {-1};
+    \node (1) at (-1,-1) {0};
+    \node[minimum size=.25mm] (2) at ( 1,-1) {};
+    \draw (0) -- (1);
+    \draw (0) -- (2);
+
+    \node[draw=none] at(0,-2) {};
+\end{tikzpicture}}\onslide<6->{~~\(\longrightarrow\)~~%
+\begin{tikzpicture}[align-half-base,xscale=0.75]
+    \node (0) at (0,0) {-1};
+    \node (1) at (-1,-1) {0};
+    \node (2) at ( 1,-1) {9};
+    \node[minimum size=.25mm] (3) at (-2,-2) {};
+    \draw (0) -- (1);
+    \draw (0) -- (2);
+    \draw (1) -- (3);
+
+    \node[draw=none] at(0,-2) {};
+\end{tikzpicture}}\onslide<7->{~~\(\longrightarrow\)~~%
+\begin{tikzpicture}[align-half-base,xscale=0.75]
+    \node (0) at (0,0) {-1};
+    \node (1) at (-1,-1) {0};
+    \node (2) at ( 1,-1) {9};
+    \node (3) at (-2,-2) {4};
+    \node[minimum size=.25mm] (4) at (0,-2) {};
+    \draw (0) -- (1) -- (3);
+    \draw (1) -- (4);
+    \draw (0) -- (2);
+
+    \node[draw=none] at(0,-2) {};
+\end{tikzpicture}}}\vfill
+\begin{tikzpicture}[@O]
+    \onslide<8->{\node[above left,draw=none,rectangle,xshift=5mm,scale=.8,yshift=-\btdmfootheight] at(current page.south east) {\copy\pinguexplainbox};}% copy for animations
+\end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Der Abbau eines Miep}
+\begin{enumerate}
+    \setcounter{enumi}{1}
+\item<2-> \task{Wandeln Sie den Heap aus Phase 1 schrittweise in ein sortiertes Array um.}
+\end{enumerate}\vfill
+\tikzset{O/.style={circle,draw,minimum width=2em},every node/.append style={O}}
+\centering\downsize\linewidth{\onslide<3->{\begin{tikzpicture}[align-half-base,xscale=0.75]
+    \node[codeouthl] (0) at (0,0) {-1};
+    \node (1) at (-1,-1) {0};
+    \node (2) at ( 1,-1) {9};
+    \node (3) at (-2,-2) {4};
+    \draw (0) -- (1) -- (3);
+    \draw (0) -- (2);
+    \onslide<4->{\draw[-Kite] (3) to[bend right] (0);}
+
+    \node[draw=none] at(0,-2) {};
+    \onslide<5->{\node[below,draw=none,rectangle] at (current bounding box.south) {\([-1]\)};}
+\end{tikzpicture}}\onslide<6->{~~\(\longrightarrow\)~~%
+\begin{tikzpicture}[align-half-base,xscale=0.75]
+    \node (0) at (0,0) {4};
+    \node (1) at (-1,-1) {0};
+    \node (2) at ( 1,-1) {9};
+    \draw (0) -- (1) coordinate[pos=.5] (@);
+    \draw (0) -- (2);
+    \node[draw=none] at(0,-2) {};
+    \pgfinterruptboundingbox
+    \onslide<7->{\draw[rotate=42,thick] (@) ellipse[x radius=1.5cm, y radius=7.5mm];
+    \endpgfinterruptboundingbox
+
+    \node[below,draw=none,rectangle] at (current bounding box.south) {\([-1]\)};}
+\end{tikzpicture}}\onslide<8->{~~\(\longrightarrow\)~~%
+\begin{tikzpicture}[align-half-base,xscale=0.75]
+    \node[codeouthl] (0) at (0,0) {0};
+    \node (1) at (-1,-1) {4};
+    \node (2) at ( 1,-1) {9};
+    \draw (0) -- (1) coordinate[pos=.5] (@);
+    \draw (0) -- (2);
+    \node[draw=none] at(0,-2) {};
+    \onslide<9->{\draw[-Kite] (2) to[bend left] (0);}
+
+    \onslide<10->{\node[below,draw=none,rectangle] at (current bounding box.south) {\([-1, 0]\)};}
+\end{tikzpicture}}\onslide<11->{~~\(\longrightarrow\)~~%
+\begin{tikzpicture}[align-half-base,xscale=0.75]
+    \node (0) at (0,0) {9};
+    \node (1) at (-1,-1) {4};
+    \draw (0) -- (1) coordinate[pos=.5] (@);
+    \node[draw=none] at(0,-2) {};
+    % \onslide<9->{\draw[-Kite] (2) to[bend left] (0);}
+
+    \pgfinterruptboundingbox
+    \onslide<12->{\draw[rotate=42,thick] (@) ellipse[x radius=1.5cm, y radius=7.5mm];
+    \endpgfinterruptboundingbox
+
+    \node[below,draw=none,rectangle] at (current bounding box.south) {\([-1, 0]\)};}
+\end{tikzpicture}}\onslide<13->{~~\(\longrightarrow\)~~%
+\begin{tikzpicture}[align-half-base,xscale=0.75]
+    \node[codeouthl] (0) at (0,0) {4};
+    \node (1) at (-1,-1) {9};
+    \draw (0) -- (1);
+    \node[draw=none] at(0,-2) {};
+    \onslide<14->{\draw[-Kite] (1) to[bend right] (0);}
+
+    \onslide<15->{\node[below,draw=none,rectangle] at (current bounding box.south) {\([-1, 0, 4]\)};}
+\end{tikzpicture}}}\medskip\\
+\onslide<16->{~~\(\longrightarrow\)~~%
+\begin{tikzpicture}[align-half-base,xscale=0.75]
+    \node[codeouthl] (0) at (0,0) {9};
+    \onslide<17->{\node[below=2mm,draw=none,rectangle] at (current bounding box.south) {\([-1, 0, 4, 9]\)};}
+\end{tikzpicture}}
+\end{frame}
 }
+}
+% TODO. darauf hinweisen: rekursive datenstruktur
 
 \iffull
 \SetNextSectionText{Dynamische Datenstrukturen\\Abgabe: \DTMDate{2022-07-11}}
