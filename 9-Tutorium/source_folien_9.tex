@@ -51,7 +51,7 @@ Hierfür können Sie die Vorlage \T{Element.java} auf Moodle verwenden, sowie di
 \end{itemize}
     Sie finden Beispiele für die Operation in Abbildung. Verwenden Sie für Ihre Implementierung keine Arrays oder vorgefertigte dynamische Datenstrukturen, sondern implementieren Sie die Queue selbst als (einfach) verkettete Liste.}}%
 \only<4->{\vspace*{-\baselineskip}\par Implementieren Sie eine Queue, die \bjava{int} Werte speichert. Verwenden Sie dazu \T{\FileMarkerAttach<4->{Element.java}} und \T{\FileMarkerAttach<4->{Queue.java}} als Grundgerüst und implementieren Sie:\vspace*{-\smallskipamount} \begin{itemize}
-    \item<5-> \bjava{void enqueue(int value)} welche den Wert ans Ende der Queue einreiht\smallskip\par
+    \item<5-> \bjava{void enqueue(int value)}, welche den Wert ans Ende der Queue einreiht\smallskip\par
     \onslide<6->{\begin{tikzpicture}[align-half-base]
         \node[K] (a) at (0,0) {4\nodepart{two}};
         \node[K,right=2mm] (b) at (a.east) {5\nodepart{two}};
@@ -85,7 +85,7 @@ Hierfür können Sie die Vorlage \T{Element.java} auf Moodle verwenden, sowie di
         \draw[Circle-Kite] ([xshift=-1.65ex]d.east) -- (e.west);
         \draw[Circle-Kite] ([xshift=-1.65ex]e.east) -- (f.west);
     \end{tikzpicture}}\bigskip
-    \item<8-> \bjava{boolean dequeue()} welche den vordersten Wert entfernt % (\bjava{false} wenn keiner)
+    \item<8-> \bjava{boolean dequeue()}, welche den vordersten Wert entfernt % (\bjava{false} wenn keiner)
     \smallskip\par
     \onslide<9->{\begin{tikzpicture}[align-half-base]
         \node[K] (a) at (0,0) {4\nodepart{two}};
@@ -104,7 +104,7 @@ Hierfür können Sie die Vorlage \T{Element.java} auf Moodle verwenden, sowie di
         \draw[Circle-Kite] ([xshift=-1.65ex]c.east) -- (d.west);
         \draw[Circle-Kite] ([xshift=-1.65ex]d.east) -- (e.west);
         \draw[Circle-Kite] ([xshift=-1.65ex]e.east) -- (f.west);
-    \end{tikzpicture}}~\onslide<7->{\(\overset{\T{\setbox0=\hbox{enqueue(2)}\rlap{\kern.5\wd0\clap{\T{dequeue()}}}\phantom{\copy0}}}{\longrightarrow}\) \begin{tikzpicture}[align-half-base]
+    \end{tikzpicture}}~\onslide<10->{\(\overset{\T{\setbox0=\hbox{enqueue(2)}\rlap{\kern.5\wd0\clap{\T{dequeue()}}}\phantom{\copy0}}}{\longrightarrow}\) \begin{tikzpicture}[align-half-base]
         \node[K,right=2mm] (b) at (0,0) {5\nodepart{two}};
         \node[K,right=2mm] (c) at (b.east) {1\nodepart{two}};
         \node[K,right=2mm] (d) at (c.east) {3\nodepart{two}};
@@ -120,7 +120,7 @@ Hierfür können Sie die Vorlage \T{Element.java} auf Moodle verwenden, sowie di
         \draw[Circle-Kite] ([xshift=-1.65ex]d.east) -- (e.west);
         \draw[Circle-Kite] ([xshift=-1.65ex]e.east) -- (f.west);
     \end{tikzpicture}}\medskip
-\end{itemize}\onslide<7->{Verwenden Sie keine Arrays oder vorgefertigte dynamische Datenstrukturen, sondern eine eigene, (einfach) verkettete Liste.\vspace*{-\medskipamount}}}
+\end{itemize}\onslide<11->{Verwenden Sie keine Arrays oder vorgefertigte dynamische Datenstrukturen, sondern eine eigene, (einfach) verkettete Liste.\vspace*{-\medskipamount}}}
 \end{aufgabe}
 \end{frame}
 }
