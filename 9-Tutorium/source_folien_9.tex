@@ -400,10 +400,10 @@ public class Queue {
 
 !*\onslide<2->*!    static boolean moveDown(int[] arr, int i, int end, boolean swapped) {
 !*\onslide<2->*!        if (i <= end)
-!*\onslide<2->*!           return swapped;
+!*\onslide<2->*!            return swapped;
 !*\onslide<2->*!        if (arr[i] < arr[i - 1]) {
-!*\onslide<2->*!           swap(arr, i, i - 1);
-!*\onslide<2->*!           swapped = true;
+!*\onslide<2->*!            swap(arr, i, i - 1);
+!*\onslide<2->*!            swapped = true;
 !*\onslide<2->*!        }
 !*\onslide<2->*!        return moveDown(arr, i-1, end, swapped);
 !*\onslide<2->*!    }!*\onslide<1->*!
@@ -421,8 +421,8 @@ public class Queue {
         |ihl|if (i |ihl|<=|ihl| end)|ihl|
             |ihl|return swapped;|ihl|
         |ihl|if (arr[i] < arr[i - 1]) {|ihl|
-        |ihl|   swap(arr, i, i - 1);|ihl|
-        |ihl|   swapped = true;|ihl|
+        |ihl|    swap(arr, i, i - 1);|ihl|
+        |ihl|    swapped = true;|ihl|
         |ihl|}|ihl|
         |ihl|return|ihl| moveDown|ihl|(arr,|ihl| i-1|ihl|, end, swapped);|ihl|
     |ihl|}|ihl|
