@@ -174,7 +174,6 @@ public class Queue {
     |ihl|private Element first;|ihl|
     |ihl|private Element last;|ihl|
     |ihl|private int length;|ihl|
-
     |ihl|public void enqueue(int value) { ... }|ihl|
 
 !*\onslide<2->*!    public boolean dequeue() {
@@ -504,12 +503,12 @@ public class Queue {
 !*\onslide<3->*!    if(mat.length == 1) {
 !*\onslide<4->*!        return mat[0][0];
 !*\onslide<3->*!    } else {
-!*\onslide<4->*!        int result = 0;
-!*\onslide<5->*!        for(int i = 0; i < mat.length; i++) {
-!*\onslide<6->*!            result += (int)Math.pow(-1, i+1) * mat[i][0]
-!*\onslide<6->*!                        * det(reduceMatrix(mat, i));
-!*\onslide<5->*!        }
-!*\onslide<7->*!        return result;
+!*\onslide<5->*!        int result = 0;
+!*\onslide<6->*!        for(int i = 0; i < mat.length; i++) {
+!*\onslide<7->*!            result += (int)Math.pow(-1, i+1) * mat[i][0]
+!*\onslide<7->*!                        * det(reduceMatrix(mat, i));
+!*\onslide<6->*!        }
+!*\onslide<8->*!        return result;
 !*\onslide<3->*!    }
 !*\onslide<2->*!}!*\onslide<1->*!
 \end{plainjava}
@@ -537,10 +536,12 @@ public class Queue {
 \begin{columns}[onlytextwidth,c]
     \column{.1\linewidth}
     \column{.3\linewidth}
-    \onslide<5->{\begin{forest}
+    \begin{uncoverenv}<5->
+    \begin{forest}
         for tree={circle,draw}
         [7[4[9[1][~,phantom]][0[2][5]]][3]]
-    \end{forest}}
+    \end{forest}
+    \end{uncoverenv}
     \column{.6\linewidth}
     \begin{itemize}
         \item<6-> Breitendurchlauf:\\
@@ -586,7 +587,7 @@ public class Queue {
 }
 \subsection{Aufgabe 2}
 \begin{frame}{Aufgabe 2: Self-Overriding Ring Buffer}
-    \begin{itemize}
+    \begin{itemize}[<+(1)->]
         \itemsep10pt
         \item Bei einem Ring Buffer, zeigt ein Element nie auf \bjava{null}
         \item Komplizierter wird es, wenn nicht werte in Elementen überschrieben sondern neue Elemente eingesetzt werden müssen
@@ -605,7 +606,7 @@ public class Queue {
 \section{Abschließendes}
 {\SummaryFrame
 \begin{frame}[fragile,t]{Zusammenfassend}
-\pause \printBibCommand
+% \printBibCommand
 \lstfs{9}
 \vfill\vfill % double fill for more fraction
 \begin{itemize}[<+(1)->]
