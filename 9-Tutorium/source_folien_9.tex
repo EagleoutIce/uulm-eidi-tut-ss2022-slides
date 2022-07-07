@@ -443,11 +443,11 @@ public class Queue {
     !*\onslide<2->*!public static void shakerSort(int[] array, int n) {
     !*\onslide<3->*!    int offset = array.length - n;
     !*\onslide<4->*!    if (n <= array.length / 2)
-    !*\onslide<4->*!       return;
+    !*\onslide<4->*!        return;
     !*\onslide<5->*!    else if (!moveUp(array, offset + 1, n, false))
-    !*\onslide<6->*!       return;
+    !*\onslide<6->*!        return;
     !*\onslide<5->*!    else if (!moveDown(array, n - 1, offset, false))
-    !*\onslide<6->*!       return;
+    !*\onslide<6->*!        return;
     !*\onslide<7->*!    shakerSort(array, n - 1);
     !*\onslide<2->*!}
 |ihl|}|ihl|
