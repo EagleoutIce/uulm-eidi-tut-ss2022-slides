@@ -36,7 +36,7 @@
 \end{frame}
 }\fi
 
-\SetNextSectionText[.6\linewidth]{TODO}
+% \SetNextSectionText[.6\linewidth]{TODO}
 \section{Präsenzaufgabe}
 {\tikzset{W/.style={draw, rounded corners=2pt},K/.style={W, rectangle split, rectangle split parts=2,rectangle split horizontal}}
 \begin{frame}[fragile,c]{Präsenzaufgabe}
@@ -535,12 +535,13 @@ public class Queue {
         \item Einen linken Teilbaum und einen rechten Teilbaum
     \end{itemize}\bigskip
 \begin{columns}[onlytextwidth,c]
+    \column{.1\linewidth}
     \column{.3\linewidth}
     \onslide<5->{\begin{forest}
         for tree={circle,draw}
         [7[4[9[1][~,phantom]][0[2][5]]][3]]
     \end{forest}}
-    \column{.7\linewidth}
+    \column{.6\linewidth}
     \begin{itemize}
         \item<6-> Breitendurchlauf:\\
                   \onslide<7->{7, 4, 3, 9, 0, 1, 2, 5}
@@ -599,21 +600,78 @@ public class Queue {
 \fi
 
 
-\SetNextSectionText[.55\linewidth]{TODO}
+% \SetNextSectionText[.55\linewidth]{TODO}
 \section{Abschließendes}
 {\SummaryFrame
-\begin{frame}[t]{Zusammenfassend}
+\begin{frame}[fragile,t]{Zusammenfassend}
 \pause \printBibCommand
+\lstfs{9}
 \vfill\vfill % double fill for more fraction
 \begin{itemize}[<+(1)->]
     \itemsep8pt
-    \item TODO
+    \item Rekursion wird uns so schnell nicht verlassen \begin{itemize}
+        \item Viele Datenstrukturen sind rekursiv, was wir ausnutzen können
+        \item Für die verschiedenen Tiefen-Traversierungen beispielsweise:
+\begin{columns}[onlytextwidth,c]
+\column{.33\linewidth}
+\begin{plainjava}
+!*\onslide<5->*!void preorder(Node n) {
+!*\onslide<5->*!    if(n == null) return;
+!*\onslide<5->*!    // process n
+!*\onslide<5->*!    preorder(n.left);
+!*\onslide<5->*!    preorder(n.right);
+!*\onslide<5->*!}!*\onslide<1->*!
+\end{plainjava}
+\column{.33\linewidth}
+\begin{plainjava}
+!*\onslide<6->*!void inorder(Node n) {
+!*\onslide<6->*!    if(n == null) return;
+!*\onslide<6->*!    inorder(n.left);
+!*\onslide<6->*!    // process n
+!*\onslide<6->*!    inorder(n.right);
+!*\onslide<6->*!}!*\onslide<1->*!
+\end{plainjava}
+\column{.33\linewidth}
+\begin{plainjava}
+!*\onslide<7->*!void postorder(Node n) {
+!*\onslide<7->*!    if(n == null) return;
+!*\onslide<7->*!    postorder(n.left);
+!*\onslide<7->*!    postorder(n.right);
+!*\onslide<7->*!    // process n
+!*\onslide<7->*!}!*\onslide<1->*!
+\end{plainjava}
+\end{columns}
+    \item Auch lassen sich Regeln für Heaps so beschreiben
+    \end{itemize}
+    \item Listen (als spezielle Bäume) und Bäume sind vielseitig und elementar \begin{itemize}
+        \item Auch bei ihrer Handhabung hilft Übung!
+    \end{itemize}
 \end{itemize}
 \end{frame}
 }
 
-\outro{\vskip9mm\centering \onslide<2->{\begin{tikzpicture}
-    % \pingu[body=pingu@black,body front=pingu@black,eyes wink,bill color=pingu@black,eyes color=pingu@black,feet color=pingu@black,tie=pingu@white]
-\end{tikzpicture}}}
+\outro{\vskip9mm\centering \onslide<2->{\scalebox{1.25}{\begin{tikzpicture}
+    \node[align=center,scale=0.5] (peter) at(-3,0) {\tikz{\duck[body=yellow!50!red!20!white,recedinghair=gray!50!white,eyebrow,tshirt=white!93!black,jacket=red!50!black,glasses=brown!70!lightgray,scale=0.75];}\\Peter};
+    \node[align=center,scale=0.5] (erika) at(-1,0) {\tikz{\duck[body=yellow!50!red!20!white,longhair=gray!50!white,eyebrow,tshirt=white!93!black,jacket=blue!50!black,squareglasses=brown!70!lightgray,scale=0.75];}\\Erika};
+    \node[align=center,scale=0.5] (wolfgang) at(1,0) {\tikz{\duck[body=yellow!50!red!20!white,recedinghair=gray!50!white,eyebrow,tshirt=white!93!black,jacket=yellow!70!black,glasses=brown!70!lightgray,scale=0.75];}\\Wolfgang};
+    \node[align=center,scale=0.5] (rosalinde) at(3,0) {\tikz{\duck[body=yellow!50!red!20!white,longhair=gray!50!white,eyebrow,tshirt=white!93!black,jacket=lime!50!black,squareglasses=brown!70!lightgray,scale=0.75];}\\Rosalinde};
+
+    \node[align=center,scale=0.5] (dieter) at(-2,-1.75) {\tikz{\duck[body=yellow!50!red!20!white,parting=gray!80!brown,eyebrow,jacket=gray,lapel=black,buttons,scale=0.75];}\\Dieter};
+    \node[align=center,scale=0.5] (jasmin) at(2,-1.75) {\tikz{\duck[body=yellow!50!red!20!white,shorthair=brown!50!black,eyebrow,tshirt=white!93!black,jacket=purple!90!black,squareglasses=brown!70!lightgray,scale=0.75];}\\Jasmin};
+
+    \node[align=center,scale=0.5] (flo) at(0,-3.5) {\tikz{\duck[body=yellow!50!red!20!white,crazyhair=brown!90!black,eyebrow,jacket=pingu@purple,lapel=pingu@purple!50!black,buttons,scale=0.75,tie=pingu@purple!50!black,tshirt=white,glasses,laughing];}\\Florian};
+
+
+    \begin{scope}[every path/.style=rounded corners]
+        \draw(peter.south) -- ++(0,-0.25) -| (dieter);
+        \draw(erika.south) -- ++(0,-0.25) -| (dieter);
+
+        \draw(wolfgang.south) -- ++(0,-0.25) -| (jasmin);
+        \draw(rosalinde.south) -- ++(0,-0.25) -| (jasmin);
+
+        \draw(dieter.south) -- ++(0,-0.25) -| (flo);
+        \draw(jasmin.south) -- ++(0,-0.25) -| (flo);
+    \end{scope}
+\end{tikzpicture}}}}
 
 \iffull\end{document}\fi
