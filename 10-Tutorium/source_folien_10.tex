@@ -1,0 +1,224 @@
+\InputIfFileExists{../data/global.tex}\relax\relax
+
+\iffull
+\title{Kreisrunde Bäume --- Halin Graphen?}
+\subtitle{Datastructures going wild}
+\date{KW 28}
+\addbibresource{references.bib}
+\fi
+\SetTutoriumNumber{10}
+
+\iffull\begin{document}
+\titleframe
+
+\TopicOverview{6}
+\fi
+
+\iffull{\SummaryFrame
+\def\treenode[#1](#2)#3#4{\node[draw,rounded corners=2pt,minimum width=1.25cm,minimum height=7mm,align=center,#1] (#3) at (#2) {#4\\[-.35mm]};\draw([yshift=-.5mm]#3.east) -- ([yshift=-.5mm]#3.west) coordinate[pos=.5] (@); \draw(@) -- (#3.south);}
+\begin{frame}[c]{Kurzwiederholung}
+\small\begin{itemize}[<+(1)->]
+   \itemsep12pt
+    \item Wir kennen eine Reihe an dynamischen Datenstrukturen: \begin{description}
+        \itemsep10pt
+        \item[Einfach verkettete Liste:] \pause\hfill\tikzset{W/.style={draw, rounded corners=2pt},K/.style={W, rectangle split, rectangle split parts=2,rectangle split horizontal}}\scalebox{.8}{\begin{tikzpicture}[align-half-base]
+        \node[K] (a) at (0,0) {4\nodepart{two}};
+        \node[K,right=2mm] (b) at (a.east) {5\nodepart{two}};
+        \node[K,right=2mm] (c) at (b.east) {1\nodepart{two}};
+        \node[K,right=2mm] (d) at (c.east) {3\nodepart{two}};
+        \node[W,right=2mm] (e) at (d.east) {\phantom{2}};
+        \pgfinterruptboundingbox
+        \node[below=-.33mm,T] at (a.south) {head};
+        \node[below=-.33mm,T] at (d.south) {(tail)};
+        \endpgfinterruptboundingbox
+        \draw[shorten <= .4mm,shorten >= .4mm,] (e.south west) -- (e.north east);
+        \draw[Circle-Kite] ([xshift=-1.65ex]a.east) -- (b.west);
+        \draw[Circle-Kite] ([xshift=-1.65ex]b.east) -- (c.west);
+        \draw[Circle-Kite] ([xshift=-1.65ex]c.east) -- (d.west);
+        \draw[Circle-Kite] ([xshift=-1.65ex]d.east) -- (e.west);
+    \end{tikzpicture}}
+    % this is horrible, but i have no time
+    \item[Doppelt verkettete Liste:] \pause\hfill\tikzset{W/.style={draw, rounded corners=2pt},K/.style={W, rectangle split, rectangle split parts=3,rectangle split horizontal}}\scalebox{.8}{\begin{tikzpicture}[align-half-base]
+        \node[K] (a) at (0,0) {\nodepart{two}4\nodepart{three}};
+        \node[W,left=2mm] (f) at (a.west) {\phantom{2}};
+        \node[K,right=2mm] (b) at (a.east) {\nodepart{two}5\nodepart{three}};
+        \node[K,right=2mm] (c) at (b.east) {\nodepart{two}1\nodepart{three}};
+        \node[K,right=2mm] (d) at (c.east) {\nodepart{two}3\nodepart{three}};
+        \node[W,right=2mm] (e) at (d.east) {\phantom{2}};
+        \pgfinterruptboundingbox
+        \node[below=-.33mm,T] at (a.south) {head};
+        \node[below=-.33mm,T] at (d.south) {tail};
+        \endpgfinterruptboundingbox
+        \draw[shorten <= .4mm,shorten >= .4mm,] (e.south west) -- (e.north east);
+        \draw[shorten <= .4mm,shorten >= .4mm,] (f.south west) -- (f.north east);
+        \draw[Circle-Kite] ([yshift=1mm,xshift=-1.65ex]a.east) -- ([yshift=1mm]b.west);
+        \draw[Circle-Kite] ([yshift=-1mm,xshift=1.65ex]b.west) -- ([yshift=-1mm]a.east);
+        \draw[Circle-Kite] ([yshift=1mm,xshift=-1.65ex]b.east) -- ([yshift=1mm]c.west);
+        \draw[Circle-Kite] ([yshift=-1mm,xshift=1.65ex]c.west) -- ([yshift=-1mm]b.east);
+        \draw[Circle-Kite] ([yshift=1mm,xshift=-1.65ex]c.east) -- ([yshift=1mm]d.west);
+        \draw[Circle-Kite] ([yshift=-1mm,xshift=1.65ex]d.west) -- ([yshift=-1mm]c.east);
+        \draw[Circle-Kite] ([xshift=-1.65ex]d.east) -- (e.west);
+        \draw[Circle-Kite] ([xshift=1.65ex]a.west) -- (f.east);
+    \end{tikzpicture}}
+    \end{description}
+\end{itemize}\medskip
+    \tikzset{W/.style={draw, rounded corners=2pt}}%
+    \begin{columns}[onlytextwidth,T]
+\column{.4\linewidth}
+\onslide<6->{\textbf{Einfach verketteter (Binär-)Baum:}\smallskip\par}
+\onslide<7->{\scalebox{.8}{\begin{tikzpicture}[align-half-base]
+    \treenode[](0,0)a{4};
+    \treenode[yshift=-2mm,below left=2mm](a.south)b{5};
+    \treenode[yshift=-2mm,below right=2mm](a.south)c{1};
+    \treenode[yshift=-2mm,below left=2mm](b.south)d{3};
+
+    \node[W,yshift=-2mm,below left=2mm] (e) at (d.south) {\phantom{2}};
+    \node[W,yshift=-2mm,below right=2mm] (f) at (d.south) {\phantom{2}};
+    \node[W,yshift=-2mm,below left=2mm] (g) at (c.south) {\phantom{2}};
+    \node[W,yshift=-2mm,below right=2mm] (h) at (c.south) {\phantom{2}};
+    \node[W,yshift=-2mm,below right=2mm] (i) at (b.south) {\phantom{2}};
+    \foreach \a in {e,...,i} {
+        \draw[shorten <= .4mm,shorten >= .4mm,] (\a.south west) -- (\a.north east);
+    }
+    \foreach \fr/\tol/\tor in {a/b/c,b/d/i,c/g/h,d/e/f} {
+        \draw[Circle-Kite] ([xshift=-1.25cm/4,yshift=2mm]\fr.south) -- (\tol.north);
+        \draw[Circle-Kite] ([xshift=1.25cm/4,yshift=2mm]\fr.south) -- (\tor.north);
+    }
+    \node[left,T] at (a.west) {head};
+
+\end{tikzpicture}}}
+\column{.6\linewidth}
+\begin{itemize}
+    \itemsep\dimexpr-\smallskipamount-2pt\relax
+    \item<8-> Diese erlauben es, abstrakter Datentypen umsetzen:\smallskip
+    \item<9->[]\textbf{Liste:} \onslide<10->{Elemente vorne und hinten hinzufügen, Zugriff auf das \(i\)-te Element, ist die Liste leer?,~\ldots}
+    \item<11->[]\textbf{Queue (FIFO):} \onslide<12->{Elemente hinzufügen und entfernen (in Einfügereihenfolge), ist die Queue leer?,~\ldots}
+    \item<13->[]\textbf{Stack (LIFO):} \onslide<14->{Elemente hinzufügen und entfernen (umgekehrte Einfügereihenfolge), ist der Stack leer?,~\ldots}\smallskip
+    \item<15-> All diese abstrakten Datentypen haben ein klares (meist mathematisch definiertes) Verhalten.
+\end{itemize}
+    \end{columns}
+\end{frame}
+}\fi
+
+% \SetNextSectionText[.6\linewidth]{TODO}
+\section{Präsenzaufgabe}
+{
+\begin{frame}[fragile,c]{Präsenzaufgabe}
+\begin{aufgabe}{Traverse My-Tree}
+\begin{onlyenv}<2|handout:0>
+    In dieser Aufgabe sollen Sie binären Bäume aus Arrays wachsen lassen und diese anschließend in einem Breitendurchlauf traversieren. Hierfür finden Sie auf Moodle neben diesem  Übungsblatt weitere Java Files (\FileMarkerAttach[p/]{BinaryTree.java}, \FileMarkerAttach[p/]{BinaryTreeMain.java}, \FileMarkerAttach[p/]{IntegerNode.java}), die Sie für Ihre Implementierung verwenden dürfen. Verwenden Sie
+    ansonsten keine vorgefertigten dynamischen Datenstrukturen. Für die Darstellung der Knoten können Sie die vorgegeben Klasse \bjava{IntegerNode} verwenden, welche der einfach verketteten Version aus der Vorlesung entspricht.
+
+    Sie sollen die Methode \bjava{public void breadthFirstTraversal()} implementieren, welche den Baum in der Breite durchläuft und die Werte der einzelnen Knoten ausgibt. Hierfür werden Sie die vorgegebene Klasse Queue benötigen, welche \bjava{IntegerNode} Elemente einreihen kann.
+
+    \textbf{Zahlenbeispiel}\quad Im Breitendurchlauf traversiert ergibt sich für diesen Baum folgende Reihenfolge:
+    \begin{center}
+        \begin{forest}
+            for tree={circle,draw}
+            [9[1[3][6]][7[5][,phantom]]]
+        \end{forest}
+    \end{center}
+\end{onlyenv}%
+\begin{onlyenv}<3->%
+    \SetupLstHl % TODO: animation
+    \vspace*{-1.25\baselineskip}\par\footnotesize Sie sollen binären Bäume mit einem Breitendurchlauf traversieren. Verwenden Sie
+    neben den gegebenen (\FileMarkerAttach[p/]{BinaryTree.java}, \FileMarkerAttach[p/]{BinaryTreeMain.java}, \FileMarkerAttach[p/]{Queue.java}, \FileMarkerAttach[p/]{IntegerNode.java}) keine vorgefertigten dynamischen Datenstrukturen (sie entsprechen der Vorlesung).
+    Implementieren Sie die Methode \bjava{public void breadthFirstTraversal()}, welche den Baum im Breitendurchlauf durchläuft und die Werte der einzelnen Knoten ausgibt. Hierfür werden Sie \bjava{Queue} benötigen.\\
+    \textbf{Zahlenbeispiel}\quad Im Breitendurchlauf traversiert ergibt sich für diesen Baum folgende Reihenfolge:
+    \lstfs{6}\vspace*{-.4\baselineskip}%
+\begin{columns}[onlytextwidth,c]
+    \column{.16\linewidth}
+    \scalebox{.7}{\begin{forest}
+        for tree={circle,draw}
+        [9,name=9[1,name=1[3,name=3][6,name=6]][7,name=7[5,name=5][,phantom]]]
+        \foreach[count=\i from 1] \a in {9,1,7,3,6,5} {
+            \ifnum\i>3
+                \node[below,paletteA] at(\a.south) {\i};
+            \else \node[right,paletteA] at(\a.east) {\i};\fi
+        }
+    \end{forest}}
+    \column{.425\linewidth}
+\begin{plainjava}[morekeywords={[3]{BinaryTree, IntegerNode}}]
+public class BinaryTree {
+  private IntegerNode root;
+  public BinaryTree(int[] items) { |ihl|...|ihl| }
+  public void breadthFirstTraversal() { !*\faStar*! }
+}
+public class IntegerNode {
+  public IntegerNode(int value) { |ihl|...|ihl| }
+  public void setLeftChild(IntegerNode l) { |ihl|...|ihl| }
+  public IntegerNode getLeftChild() { |ihl|...|ihl| }
+  public void setValue(int value) { |ihl|...|ihl| }
+  public int getValue() { |ihl|...|ihl| }
+  ...
+}
+\end{plainjava}
+    \column{.435\linewidth}
+\begin{plainjava}[morekeywords={[3]{BinaryTree, IntegerNode}}]
+public class Queue {
+  class Element {
+    public Element(IntegerNode node) { |ihl|...|ihl| }
+    public void setNextElement(Element n) { |ihl|...|ihl| }
+    public Element getNextElement() { |ihl|...|ihl| }
+    public IntegerNode getNode() { |ihl|...|ihl| }
+  }
+  public Queue() { |ihl|...|ihl| }
+  public void enqueue(IntegerNode node) { |ihl|...|ihl| }
+  public IntegerNode dequeue() { |ihl|...|ihl| }
+  public int getLength() { |ihl|...|ihl| }
+  public boolean isEmpty() { |ihl|...|ihl| }
+}
+\end{plainjava}
+    \end{columns}
+\end{onlyenv}\vspace*{-1.1\baselineskip}%
+\end{aufgabe}
+\end{frame}
+}
+
+\begin{frame}{Die schematische Struktur}
+    \begin{itemize}
+        \item Pseudocode
+        \item Dann überführung mit Queue
+        \item Beispiel mit stack
+    \end{itemize}
+\end{frame}
+
+\SetNextSectionText{Dynamische Datenstrukturen\\Abgabe: \DTMDate{2022-07-11}}
+\section{Übungsblatt 10}
+\subsection{Aufgabe 1}
+{\taskenum
+\begin{frame}[c]{Aufgabe 1: TODO}
+    \taskblock<2->
+    \endtaskblock
+\end{frame}
+}
+
+\iffull
+\SetNextSectionText{Dynamische Datenstrukturen II\\Abgabe: \DTMDate{2022-07-18}}
+\section{Aussicht: Übungsblatt 11}
+\subsection{Aufgabe 1}
+\begin{frame}{Aufgabe 1: Graphen}
+\begin{itemize}[<+(1)->]
+    \item
+\end{itemize}
+\end{frame}
+
+% \SetNextSectionText[.55\linewidth]{TODO}
+\section{Abschließendes}
+{\SummaryFrame
+\begin{frame}[fragile,t]{Zusammenfassend}
+% \printBibCommand
+\lstfs{9}
+\vfill\vfill % double fill for more fraction
+\begin{itemize}[<+(1)->]
+    \itemsep8pt
+    \item
+\end{itemize}
+\end{frame}
+}
+
+\outro{\vskip9mm\centering \onslide<2->{\scalebox{1.35}{\begin{tikzpicture}
+
+\end{tikzpicture}}}}
+
+\iffull\end{document}\fi
