@@ -187,11 +187,35 @@ public class Queue {
 \section{Übungsblatt 10}
 \subsection{Aufgabe 1}
 {\taskenum
-\begin{frame}[c]{Aufgabe 1: TODO}
+\begin{frame}[c]{Aufgabe 1: Bäume}
     \taskblock<2->
+Betrachten Sie den folgenden Binärbaum:\medskip
+\begin{columns}[onlytextwidth,c]
+\column{.4\linewidth}
+\centering
+\begin{forest}
+    for tree={circle,draw}
+    [9[6[3][2]][7[5][,phantom]]]
+\end{forest}
+\column{.6\linewidth}
+\begin{enumerate}
+    \item Welchen Verzweigungsgrad hat der Baum? Begründen Sie Ihre Antwort \textit{kurz}.
+    \item Welche Tiefe hat der Baum?
+    \item Wie viele Knoten hat der Baum und wie viele davon sind Blätter?
+    \item Formt der Baum einen Max-Heap? Begründen Sie Ihre Antwort \textit{kurz}.
+    \item In welcher Reihenfolge werden die Knoten besucht, wenn der Baum im Tiefendurchlauf traversiert wird?
+    \item In welcher Reihenfolge werden die Knoten besucht, wenn der Baum im Breitendurchlauf traversiert wird?
+\end{enumerate}
+\end{columns}
     \endtaskblock
 \end{frame}
 }
+
+\subsection{Aufgabe 2}
+\begin{frame}{Self-Overriding Ring Buffer}
+    \taskblock<2->TODO
+    \endtaskblock
+\end{frame}
 
 \iffull
 \SetNextSectionText{Dynamische Datenstrukturen II\\Abgabe: \DTMDate{2022-07-18}}
