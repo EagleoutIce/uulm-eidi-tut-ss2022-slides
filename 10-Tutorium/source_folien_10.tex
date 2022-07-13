@@ -125,7 +125,7 @@
     neben den gegebenen (\FileMarkerAttach[p/]{BinaryTree.java}, \FileMarkerAttach[p/]{BinaryTreeMain.java}, \FileMarkerAttach[p/]{Queue.java}, \FileMarkerAttach[p/]{IntegerNode.java}) keine vorgefertigten dynamischen Datenstrukturen (sie entsprechen der Vorlesung).
     Implementieren Sie die Methode \bjava{public void breadthFirstTraversal()}, welche den Baum im Breitendurchlauf durchläuft und die Werte der einzelnen Knoten ausgibt. Hierfür werden Sie \bjava{Queue} benötigen.\\
     \textbf{Zahlenbeispiel}\quad Im Breitendurchlauf traversiert ergibt sich für diesen Baum folgende Reihenfolge:
-    \lstfs{6}\vspace*{-.4\baselineskip}%
+    \lstfs{6}\vspace*{-.425\baselineskip}%
 \begin{columns}[onlytextwidth,c]
     \column{.16\linewidth}
     \scalebox{.7}{\begin{forest}
@@ -181,6 +181,27 @@ public class Queue {
         \item Dann überführung mit Queue
         \item Beispiel mit stack
     \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile,c]{Let it be code}
+\begin{minted}{java}
+public void breadthFirstTraversal() {
+    Queue queue = new Queue();
+    queue.enqueue(root);
+
+    while (!queue.isEmpty()) {
+        IntegerNode node = queue.dequeue();
+
+        if (node.getLeftChild() != null)
+            queue.enqueue(node.getLeftChild());
+
+        if (node.getRightChild() != null)
+            queue.enqueue((node.getRightChild()));
+
+        System.out.println(node.getValue());
+    }
+}
+\end{minted}
 \end{frame}
 
 \SetNextSectionText{Dynamische Datenstrukturen\\Abgabe: \DTMDate{2022-07-11}}
