@@ -13,15 +13,40 @@
 
 \TopicOverview{6}
 \fi
+\iffalse
 
 \iffull{\SummaryFrame
+\begin{frame}[c]{Kurzwiederholung\hfill{Sortierverfahren}}
+\onslide<2->{\centering
+\def\arraystretch{1.225}
+\begin{tabular}{l*2{l}>{\footnotesize}{l}}
+\toprule
+              & \multicolumn{2}{c}{Laufzeit}  & \\
+    \cmidrule{2-3}
+    & \onslide<2->{best} & \onslide<2->{worst} & \onslide<2->{\normalsize Ansatz} \\
+\midrule
+    \onslide<3->{\tikzmarknode{itstart}{Bubble}}      & \onslide<3->{\(\O(n^2)\)\textcolor{gray}{, \(\O(n)\)}}       & \onslide<4->{\(\O(n^2)\)} & \onslide<3->{Vertausche benachbarte El., solange unsortiert.} \\
+    \onslide<5->{Insertion} & \onslide<5->{\(\O(n)\)}             & \onslide<5->{\(\O(n^2)\)}      & \onslide<6->{Sortiere 1. unsortiertes El. in sortierten Teil ein.}\\
+    \onslide<7->{\tikzmarknode{itend}{Selection}} & \onslide<7->{\(\O(n^2)\)}    & \onslide<7->{\(\O(n^2)\)}      & \onslide<8->{Kleinstes unsortiertes El. an Ende des sortierten Teils.} \\
+    % Quick-, merge und Heapsort können auch O(n)
+    \onslide<9->{\tikzmarknode{rekstart}{Merge}}    & \onslide<8->{\(\O(n \log n)\)} & \onslide<8->{\(\O(n \log n)\)}  & \onslide<9->{Aufteilen bis einel., wiederholtes mergen sortierter Teill.}\\
+    \onslide<10->{Quick}                             & \onslide<10->{\(\O(n \log n)\)} & \onslide<10->{\(\O(n^2)\)}    & \onslide<11->{Pivot $\to$ Ende, \(l\) sol. \(<\), \(r\) sol. \(\geq\). Treffen \(\to\) tausche Pivot.}\\
+    \onslide<12->{\tikzmarknode{rekend}{Heap}}       & \onslide<12->{\(\O(n \log n)\)} & \onslide<12->{\(\O(n\log n)\)} & \onslide<13->{Baue Heap, entferne wiederholt Wurzel, heapify.}\\
+\bottomrule
+\end{tabular}\medskip\par
+\only<0|handout:0>{\scriptsize\textit{Dies folgt den Implementationen der Vorlesung. Bereits leichte Modifikationen (wie: prüfe zuerst ob die Liste bereits sortiert ist) können die Daten verändern (beispielsweise einen best-case von \(\O(n)\) im Falle von Bubblesort).}}}
+\begin{tikzpicture}[@O]
+    \onslide<10->{\draw[decoration={brace,mirror},decorate] ([xshift=-1.25mm]itstart.north west) to[edge node={node[left=1mm] {\rotatebox{90}{iterativ}}}] ([xshift=-1.25mm]itend.south west);}
+    \onslide<11->{\draw[decoration={brace,mirror},decorate] ([xshift=-1.25mm]rekstart.north west) to[edge node={node[left=1mm] {\rotatebox{90}{rekursiv}}}] ([xshift=-1.25mm]rekend.south west);}
+\end{tikzpicture}
+\end{frame}
 \def\treenode[#1](#2)#3#4{\node[draw,rounded corners=2pt,minimum width=1.25cm,minimum height=7mm,align=center,#1] (#3) at (#2) {#4\\[-.35mm]};\draw([yshift=-.5mm]#3.east) -- ([yshift=-.5mm]#3.west) coordinate[pos=.5] (@); \draw(@) -- (#3.south);}
-\begin{frame}[c]{Kurzwiederholung}
+\begin{frame}[c]{Kurzwiederholung\hfill{Datentypen Advanced}}
 \small\begin{itemize}[<+(1)->]
    \itemsep12pt
     \item Wir kennen eine Reihe an dynamischen Datenstrukturen: \begin{description}
         \itemsep10pt
-        \item[Einfach verkettete Liste:] \pause\hfill\tikzset{W/.style={draw, rounded corners=2pt},K/.style={W, rectangle split, rectangle split parts=2,rectangle split horizontal}}\scalebox{.8}{\begin{tikzpicture}[align-half-base]
+        \item<3->[Einfach verkettete Liste:] ~\onslide<4->{\hfill\tikzset{W/.style={draw, rounded corners=2pt},K/.style={W, rectangle split, rectangle split parts=2,rectangle split horizontal}}\scalebox{.8}{\begin{tikzpicture}[align-half-base]
         \node[K] (a) at (0,0) {4\nodepart{two}};
         \node[K,right=2mm] (b) at (a.east) {5\nodepart{two}};
         \node[K,right=2mm] (c) at (b.east) {1\nodepart{two}};
@@ -36,9 +61,9 @@
         \draw[Circle-Kite] ([xshift=-1.65ex]b.east) -- (c.west);
         \draw[Circle-Kite] ([xshift=-1.65ex]c.east) -- (d.west);
         \draw[Circle-Kite] ([xshift=-1.65ex]d.east) -- (e.west);
-    \end{tikzpicture}}
+    \end{tikzpicture}}}
     % this is horrible, but i have no time
-    \item[Doppelt verkettete Liste:] \pause\hfill\tikzset{W/.style={draw, rounded corners=2pt},K/.style={W, rectangle split, rectangle split parts=3,rectangle split horizontal}}\scalebox{.8}{\begin{tikzpicture}[align-half-base]
+    \item<5->[Doppelt verkettete Liste:] ~\onslide<6->{\hfill\tikzset{W/.style={draw, rounded corners=2pt},K/.style={W, rectangle split, rectangle split parts=3,rectangle split horizontal}}\scalebox{.8}{\begin{tikzpicture}[align-half-base]
         \node[K] (a) at (0,0) {\nodepart{two}4\nodepart{three}};
         \node[W,left=2mm] (f) at (a.west) {\phantom{2}};
         \node[K,right=2mm] (b) at (a.east) {\nodepart{two}5\nodepart{three}};
@@ -59,14 +84,14 @@
         \draw[Circle-Kite] ([yshift=-1mm,xshift=1.65ex]d.west) -- ([yshift=-1mm]c.east);
         \draw[Circle-Kite] ([xshift=-1.65ex]d.east) -- (e.west);
         \draw[Circle-Kite] ([xshift=1.65ex]a.west) -- (f.east);
-    \end{tikzpicture}}
+    \end{tikzpicture}}}
     \end{description}
 \end{itemize}\medskip
     \tikzset{W/.style={draw, rounded corners=2pt}}%
     \begin{columns}[onlytextwidth,T]
 \column{.4\linewidth}
-\onslide<6->{\textbf{Einfach verketteter (Binär-)Baum:}\smallskip\par}
-\onslide<7->{\scalebox{.8}{\begin{tikzpicture}[align-half-base]
+\onslide<7->{\textbf{Einfach verketteter (Binär-)Baum:}\smallskip\par}
+\onslide<8->{\scalebox{.8}{\begin{tikzpicture}[align-half-base]
     \treenode[](0,0)a{4};
     \treenode[yshift=-2mm,below left=2mm](a.south)b{5};
     \treenode[yshift=-2mm,below right=2mm](a.south)c{1};
@@ -89,12 +114,12 @@
 \end{tikzpicture}}}
 \column{.6\linewidth}
 \begin{itemize}
-    \itemsep\dimexpr-\smallskipamount-2pt\relax
-    \item<8-> Diese erlauben es, abstrakter Datentypen umsetzen:\smallskip
-    \item<9->[]\textbf{Liste:} \onslide<10->{Elemente vorne und hinten hinzufügen, Zugriff auf das \(i\)-te Element, ist die Liste leer?,~\ldots}
-    \item<11->[]\textbf{Queue (FIFO):} \onslide<12->{Elemente hinzufügen und entfernen (in Einfügereihenfolge), ist die Queue leer?,~\ldots}
-    \item<13->[]\textbf{Stack (LIFO):} \onslide<14->{Elemente hinzufügen und entfernen (umgekehrte Einfügereihenfolge), ist der Stack leer?,~\ldots}\smallskip
-    \item<15-> All diese abstrakten Datentypen haben ein klares (meist mathematisch definiertes) Verhalten.
+    \itemsep\dimexpr-\smallskipamount-1.65pt\relax
+    \item<0-> Diese erlauben es, abstrakter Datentypen umsetzen:\smallskip
+    \item<10->[]\textbf{Liste:} \onslide<11->{Elemente vorne und hinten hinzufügen, Zugriff auf das \(i\)-te Element, ist die Liste leer?,~\ldots}
+    \item<12->[]\textbf{Queue (FIFO):} \onslide<13->{Elemente hinzufügen und entfernen (in Einfügereihenfolge), ist die Queue leer?,~\ldots}
+    \item<14->[]\textbf{Stack (LIFO):} \onslide<15->{Elemente hinzufügen und entfernen (umgekehrte Einfügereihenfolge), ist der Stack leer?,~\ldots}\smallskip
+    \item<16-> All diese abstrakten Datentypen haben ein klares (meist mathematisch definiertes) Verhalten.
 \end{itemize}
     \end{columns}
 \end{frame}
@@ -105,8 +130,8 @@
 {
 \begin{frame}[fragile,c]{Präsenzaufgabe}
 \begin{aufgabe}{Traverse My-Tree}
-\begin{onlyenv}<2|handout:0>
-    In dieser Aufgabe sollen Sie binären Bäume aus Arrays wachsen lassen und diese anschließend in einem Breitendurchlauf traversieren. Hierfür finden Sie auf Moodle neben diesem  Übungsblatt weitere Java Files (\FileMarkerAttach[p/]{BinaryTree.java}, \FileMarkerAttach[p/]{BinaryTreeMain.java}, \FileMarkerAttach[p/]{IntegerNode.java}), die Sie für Ihre Implementierung verwenden dürfen. Verwenden Sie
+\begin{onlyenv}<1-2|handout:0>
+    \onslide<2->{In dieser Aufgabe sollen Sie binären Bäume aus Arrays wachsen lassen und diese anschließend in einem Breitendurchlauf traversieren. Hierfür finden Sie auf Moodle neben diesem  Übungsblatt weitere Java Files (\FileMarkerAttach<2>[p/]{BinaryTree.java}, \FileMarkerAttach<2>[p/]{BinaryTreeMain.java}, \FileMarkerAttach<2>[p/]{IntegerNode.java}), die Sie für Ihre Implementierung verwenden dürfen. Verwenden Sie
     ansonsten keine vorgefertigten dynamischen Datenstrukturen. Für die Darstellung der Knoten können Sie die vorgegeben Klasse \bjava{IntegerNode} verwenden, welche der einfach verketteten Version aus der Vorlesung entspricht.
 
     Sie sollen die Methode \bjava{public void breadthFirstTraversal()} implementieren, welche den Baum in der Breite durchläuft und die Werte der einzelnen Knoten ausgibt. Hierfür werden Sie die vorgegebene Klasse Queue benötigen, welche \bjava{IntegerNode} Elemente einreihen kann.
@@ -117,18 +142,18 @@
             for tree={circle,draw}
             [9[1[3][6]][7[5][,phantom]]]
         \end{forest}
-    \end{center}
+    \end{center}}
 \end{onlyenv}%
 \begin{onlyenv}<3->%
     \SetupLstHl % TODO: animation
     \vspace*{-1.25\baselineskip}\par\footnotesize Sie sollen binären Bäume mit einem Breitendurchlauf traversieren. Verwenden Sie
     neben den gegebenen (\FileMarkerAttach[p/]{BinaryTree.java}, \FileMarkerAttach[p/]{BinaryTreeMain.java}, \FileMarkerAttach[p/]{Queue.java}, \FileMarkerAttach[p/]{IntegerNode.java}) keine vorgefertigten dynamischen Datenstrukturen (sie entsprechen der Vorlesung).
     Implementieren Sie die Methode \bjava{public void breadthFirstTraversal()}, welche den Baum im Breitendurchlauf durchläuft und die Werte der einzelnen Knoten ausgibt. Hierfür werden Sie \bjava{Queue} benötigen.\\
-    \textbf{Zahlenbeispiel}\quad Im Breitendurchlauf traversiert ergibt sich für diesen Baum folgende Reihenfolge:
-    \lstfs{6}\vspace*{-.425\baselineskip}%
+    \onslide<4->{\textbf{Zahlenbeispiel}\quad Im Breitendurchlauf traversiert ergibt sich für diesen Baum folgende Reihenfolge:}
+    \lstfs{6}\vspace*{-.55\baselineskip}%
 \begin{columns}[onlytextwidth,c]
     \column{.16\linewidth}
-    \scalebox{.7}{\begin{forest}
+    \onslide<4->{\scalebox{.7}{\begin{forest}
         for tree={circle,draw}
         [9,name=9[1,name=1[3,name=3][6,name=6]][7,name=7[5,name=5][,phantom]]]
         \foreach[count=\i from 1] \a in {9,1,7,3,6,5} {
@@ -136,72 +161,89 @@
                 \node[below,paletteA] at(\a.south) {\i};
             \else \node[right,paletteA] at(\a.east) {\i};\fi
         }
-    \end{forest}}
+    \end{forest}}}
     \column{.425\linewidth}
 \begin{plainjava}[morekeywords={[3]{BinaryTree, IntegerNode}}]
-public class BinaryTree {
-  private IntegerNode root;
-  public BinaryTree(int[] items) { |ihl|...|ihl| }
-  public void breadthFirstTraversal() { !*\faStar*! }
-}
-public class IntegerNode {
-  public IntegerNode(int value) { |ihl|...|ihl| }
-  public void setLeftChild(IntegerNode l) { |ihl|...|ihl| }
-  public IntegerNode getLeftChild() { |ihl|...|ihl| }
-  public void setValue(int value) { |ihl|...|ihl| }
-  public int getValue() { |ihl|...|ihl| }
-  ...
-}
+!*\onslide<5->*!public class BinaryTree {
+!*\onslide<5->*!  private IntegerNode root;
+!*\onslide<5->*!  public BinaryTree(int[] items) { |ihl|...|ihl| }
+!*\onslide<5->*!  public void breadthFirstTraversal() { !*\faStar*! }
+!*\onslide<5->*!}
+!*\onslide<9->*!public class IntegerNode {
+!*\onslide<9->*!  public IntegerNode(int value) { |ihl|...|ihl| }
+!*\onslide<9->*!  public void setLeftChild(IntegerNode l) { |ihl|...|ihl| }
+!*\onslide<9->*!  public IntegerNode getLeftChild() { |ihl|...|ihl| }
+!*\onslide<9->*!  public void setValue(int value) { |ihl|...|ihl| }
+!*\onslide<9->*!  public int getValue() { |ihl|...|ihl| }
+!*\onslide<9->*!  |ihl|...|ihl|
+!*\onslide<9->*!}!*\onslide<1->*!
 \end{plainjava}
     \column{.435\linewidth}
 \begin{plainjava}[morekeywords={[3]{BinaryTree, IntegerNode}}]
-public class Queue {
-  class Element {
-    public Element(IntegerNode node) { |ihl|...|ihl| }
-    public void setNextElement(Element n) { |ihl|...|ihl| }
-    public Element getNextElement() { |ihl|...|ihl| }
-    public IntegerNode getNode() { |ihl|...|ihl| }
-  }
-  public Queue() { |ihl|...|ihl| }
-  public void enqueue(IntegerNode node) { |ihl|...|ihl| }
-  public IntegerNode dequeue() { |ihl|...|ihl| }
-  public int getLength() { |ihl|...|ihl| }
-  public boolean isEmpty() { |ihl|...|ihl| }
-}
+!*\onslide<6->*!public class Queue {
+!*\onslide<7->*!  class Element {
+!*\onslide<7->*!    public Element(IntegerNode node) { |ihl|...|ihl| }
+!*\onslide<7->*!    public void setNextElement(Element n) { |ihl|...|ihl| }
+!*\onslide<7->*!    public Element getNextElement() { |ihl|...|ihl| }
+!*\onslide<7->*!    public IntegerNode getNode() { |ihl|...|ihl| }
+!*\onslide<7->*!  }
+!*\onslide<8->*!  public Queue() { |ihl|...|ihl| }
+!*\onslide<8->*!  public void enqueue(IntegerNode node) { |ihl|...|ihl| }
+!*\onslide<8->*!  public IntegerNode dequeue() { |ihl|...|ihl| }
+!*\onslide<8->*!  public int getLength() { |ihl|...|ihl| }
+!*\onslide<8->*!  public boolean isEmpty() { |ihl|...|ihl| }
+!*\onslide<6->*!}!*\onslide<1->*!
 \end{plainjava}
     \end{columns}
-\end{onlyenv}\vspace*{-1.1\baselineskip}%
+\end{onlyenv}\vspace*{-1.02\baselineskip}%
 \end{aufgabe}
 \end{frame}
 }
 
-\begin{frame}{Die schematische Struktur}
-    \begin{itemize}
-        \item Pseudocode
-        \item Dann überführung mit Queue
-        \item Beispiel mit stack
-    \end{itemize}
-\end{frame}
+\setbox\pinguA=\hbox{\scalebox{.7}{\begin{forest}
+    for tree={circle,draw}
+    [9,name=9[1,name=1[3,name=3][6,name=6]][7,name=7[5,name=5][,phantom]]]
+    \foreach[count=\i from 1] \a in {9,1,7,3,6,5} {
+        \ifnum\i>3
+            \node[below,paletteA] at(\a.south) {\i};
+        \else \node[right,paletteA] at(\a.east) {\i};\fi
+    }
+\end{forest}}}
 
+\iffull{%
+\immediate\write18{wget https://media.githubusercontent.com/media/EagleoutIce/Episode-Traversierung/gh-pages/preview-01.png -O logoTraversal-\jobname.png}
+\AddonFrame
+\begin{frame}[c]{Wääärbuuuung}
+    \begin{center}
+        \scalebox{.75}{\begin{tikzpicture}[align-base]
+            \onslide<2->{\draw[thick,darkgray,rounded corners=2.5pt,path picture={\node at(path picture bounding box.center) {\href{https://media.githubusercontent.com/media/EagleoutIce/Episode-Traversierung/gh-pages/noanim_traversal.pdf}{\includegraphics[width=8.5cm,height=4.788cm,keepaspectratio]{logoTraversal-\jobname.png}}};}] (0,0) rectangle (8.5cm,4.788cm);}
+        \end{tikzpicture}}\qquad\fancyqr{https://github.com/EagleoutIce/Episode-Traversierung}
+    \end{center}
+\end{frame}}\fi
+
+% TODO: animation?
+\MakeThePinguExplainIt[text width=7.65cm,yshift=-.33cm]{cap=!hide,glasses=!hide,eyes wink,strawhat,blush,right item angle=-112}{Es lässt sich auch mit \bjava{if(node == null)} beim Entnehmen prüfen.}
 \begin{frame}[fragile,c]{Let it be code}
 \begin{minted}{java}
-public void breadthFirstTraversal() {
-    Queue queue = new Queue();
-    queue.enqueue(root);
-
-    while (!queue.isEmpty()) {
-        IntegerNode node = queue.dequeue();
-
-        if (node.getLeftChild() != null)
-            queue.enqueue(node.getLeftChild());
-
-        if (node.getRightChild() != null)
-            queue.enqueue((node.getRightChild()));
-
-        System.out.println(node.getValue());
-    }
-}
+!*\CodeFileMarkerAttach<11->[p-sol/]{BinaryTree.java}\AddCodeFileMarkerAttach<11->[p-sol/]{BinaryTreeMain.java}, \AddCodeFileMarkerAttach<11->[p-sol/]{IntegerNode.java}\AddCodeFileMarkerAttach<11->[p-sol/]{Queue.java}*!
+!*\onslide<2->*!public void breadthFirstTraversal() {
+!*\onslide<3->*!    Queue queue = new Queue();
+!*\onslide<4->*!    queue.enqueue(root);
+!*\onslide<2->*!
+!*\onslide<5->*!    while (!queue.isEmpty()) {
+!*\onslide<6->*!        IntegerNode node = queue.dequeue();
+!*\onslide<7->*!        if (node.getLeftChild() != null)
+!*\onslide<8->*!            queue.enqueue(node.getLeftChild());
+!*\onslide<9->*!        if (node.getRightChild() != null)
+!*\onslide<9->*!            queue.enqueue(node.getRightChild());
+!*\onslide<10->*!        System.out.println(node.getValue());
+!*\onslide<5->*!    }
+!*\onslide<2->*!}
 \end{minted}
+\begin{tikzpicture}[@O]
+\onslide<2->{\node[below left,yshift=-1.33cm] at(current page.north east) {\copy\pinguA};}
+\onslide<0|handout:1>{\node[above left,xshift=5mm,scale=.8,yshift=\btdmfootheight-5mm] at(current page.south east) {\copy\pinguexplainbox};}% copy for animations
+\end{tikzpicture}
 \end{frame}
 
 \SetNextSectionText{Dynamische Datenstrukturen\\Abgabe: \DTMDate{2022-07-11}}
@@ -214,30 +256,202 @@ Betrachten Sie den folgenden Binärbaum:\medskip
 \begin{columns}[onlytextwidth,c]
 \column{.4\linewidth}
 \centering
-\begin{forest}
+\onslide<2->{\begin{forest}
     for tree={circle,draw}
-    [9[6[3][2]][7[5][,phantom]]]
-\end{forest}
+    [9[6[3][1]][7[5][,phantom]]]
+\end{forest}}
 \column{.6\linewidth}
-\begin{enumerate}
+\onslide<3->{\begin{enumerate}
     \item Welchen Verzweigungsgrad hat der Baum? Begründen Sie Ihre Antwort \textit{kurz}.
     \item Welche Tiefe hat der Baum?
     \item Wie viele Knoten hat der Baum und wie viele davon sind Blätter?
     \item Formt der Baum einen Max-Heap? Begründen Sie Ihre Antwort \textit{kurz}.
     \item In welcher Reihenfolge werden die Knoten besucht, wenn der Baum im Tiefendurchlauf traversiert wird?
     \item In welcher Reihenfolge werden die Knoten besucht, wenn der Baum im Breitendurchlauf traversiert wird?
-\end{enumerate}
+\end{enumerate}}
 \end{columns}
     \endtaskblock
 \end{frame}
-}
 
-\subsection{Aufgabe 2}
-\begin{frame}{Self-Overriding Ring Buffer}
-    \taskblock<2->TODO
-    \endtaskblock
+\setbox\pinguA=\hbox{\scalebox{.75}{\begin{forest}
+    for tree={circle,draw}
+    [9[6[3][1]][7[5][,phantom]]]
+\end{forest}}}
+\begin{frame}{Grundlagen Fragen}
+\begin{enumerate}[<+(1)->]
+    \itemsep8pt
+    \item \task{Welchen Verzweigungsgrad hat der Baum? Begründen Sie Ihre Antwort \textit{kurz}.}\pause
+        \(2\), alle Knoten haben \textit{höchstens} zwei Kinder.
+    \item \task{Welche Tiefe hat der Baum?}\pause
+        \(3\), der längste Pfad von einem Knoten zur Wurzel ist \(2\) lang.
+    \item \task{Wie viele Knoten hat der Baum und wie viele davon sind Blätter?}\pause
+        \(6\) Knoten \info{\(\{3, 6, 9, 1, 7, 5\}\)}, \(3\) davon sind Blätter \info{Knoten ohne Kinder, \(\{3, 1, 5\}\)}
+    \item \task{Formt der Baum einen Max-Heap? Begründen Sie Ihre Antwort \textit{kurz}.}\pause
+        Ja, die Elternknoten simd immer kleiner als alle ihre Kinder.
+\end{enumerate}
+\begin{tikzpicture}[@O]
+    \node[below left,yshift=-1.33cm] at(current page.north east) {\copy\pinguA};
+\end{tikzpicture}
 \end{frame}
 
+\MakeThePinguExplainIt[text width=6.65cm,yshift=-1.75cm]{cap=!hide,glasses=!hide,eyes wink,conical hat,blush,horse left,right item angle=-52,cup=!hide,horse left}{Neben Pre-, In- und Post-Order gibt es für spezifische Bäuem (wie Binärbäume) auch noch weitere Versionen, die uns aber erstmal egal sind.}
+\begin{frame}{Grundlagen Fragen\hfill II}
+\begin{enumerate}[<+(1)->]
+    \setcounter{enumi}{4}
+    \itemsep8pt
+    \item \task{In welcher Reihenfolge werden die Knoten besucht, wenn der Baum im Tiefendurchlauf\\traversiert wird?} \begin{description}[Post-Order:]
+        \item[Prä-Order:]  \(9\), \(6\), \(3\), \(1\), \(7\), \(5\)
+        \item[In-Order:]   \(3\), \(6\), \(1\), \(9\), \(5\), \(7\)
+        \item[Post-Order:] \(3\), \(1\), \(6\), \(5\), \(7\), \(9\)
+    \end{description}
+    \infoblock{Unter Angabe der Variante (Prä-, In- oder Post-Order) reicht hier auch nur eine Version.}
+    \item \task{In welcher Reihenfolge werden die Knoten besucht, wenn der Baum im Breitendurchlauf traversiert wird?}\pause
+    \(9\), \(6\), \(7\), \(3\), \(1\), \(5\).
+\end{enumerate}
+\begin{tikzpicture}[@O]
+    \node[below left,yshift=-1.33cm] at(current page.north east) {\copy\pinguA};
+    \onslide<8->{\node[above left,xshift=5mm,scale=.8,yshift=\btdmfootheight] at(current page.south east) {\copy\pinguexplainbox};}% copy for animations
+\end{tikzpicture}
+\end{frame}
+}
+\fi
+
+\subsection{Aufgabe 2}
+{\taskenum
+\begin{frame}{Aufgabe 2: Self-Overriding Ring Buffer}
+\begin{onlyenv}<handout:1|2-4>
+    \vspace*{-.5\baselineskip}\taskblock<2->
+    In dieser Aufgabe sollen Sie einen Ring Buffer implementieren. Hierbei handelt es sich um eine dynamische
+    Datenstruktur, ähnlich zu einer \T{DoublyLinkedList} aus der Vorlesung, jedoch verweist hier jedes Element auf seinen
+    Vorgänger und Nachfolger, wodurch sie einen Ring formen. Zusätzlich hat ein Ring Buffer eine fest vorgegebene
+    Kapazität. Hierfür werden intern zwei Referenzen \T{head} und \T{tail} verwendet, die so Beginn und Ende des belegten Bereichs markieren. Alle Positionen bis zum \T{tail} sind beginnend beim \T{head} Zeiger belegt. Wir betrachten ein
+    modifiziertes Ring Buffer, bei welchem alte Elemente überschrieben werden, falls der Buffer voll ist. Der Ring Buffer soll nach dem First--In--First--Out Prinzip arbeiten: neue Elemente werden an \T{tail} angefügt und es werden vom \T{head} aus Elemente abgearbeitet. Ein Beispiel finden Sie im Folgenden.\vspace*{-.33\baselineskip}
+\onslide<3->{\begin{center}
+    \begin{tikzpicture}[align-half-base]
+        \draw (0,0) circle[radius=1cm];
+        \draw (0,0) circle[radius=.825cm];
+        \foreach[count=\i] \a in {0,20,...,359} {
+            \draw (\a:.825cm) -- (\a:1cm);
+            \coordinate (@\i-out) at (\a+10:1cm);
+        }
+
+        \draw[Kite-] (@3-out) -- ++(.33,.6) -- ++(.25,0) node[right] {Tail};
+        \draw[Kite-] (@3-out) -- ++(.33,.25) -- ++(.25,0) node[right] {Head};
+
+        \node at(0,0) {i)};
+    \end{tikzpicture}\qquad\begin{tikzpicture}[align-half-base]
+        \fill[shadeA] (60:.825cm) -- (60:1cm) arc (60:-20:1cm) -- (-20:.825cm) arc(-20:60:.825cm);
+        \draw (0,0) circle[radius=1cm];
+        \draw (0,0) circle[radius=.825cm];
+        \foreach[count=\i] \a in {0,20,...,359} {
+            \draw (\a:.825cm) -- (\a:1cm);
+            \coordinate (@\i-out) at (\a+10:1cm);
+        }
+        \draw[Kite-] (@17-out) -- ++(.33,-.25) -- ++(.25,0) node[right] (tail) {Tail};
+        \draw[Kite-] (@3-out) -- ++(.33,.25) -- ++(.25,0) node[right] (head) {Head};
+        \node at(0,0) {ii)};
+        \draw[|-|] (tail) to[bend right=10] (head);
+    \end{tikzpicture}\qquad\begin{tikzpicture}[align-half-base]
+        \fill[shadeA] (0:.825cm) -- (0:1cm) arc (0:360:1cm) -- (360:.825cm) arc(360:0:.825cm);
+        \draw[pattern=north west lines,pattern color=gray] (60:.825cm) -- (60:1cm) arc (60:0:1cm) -- (0:.825cm) arc(0:60:.825cm);
+        \draw[|-|] (60:1.25cm) to[bend left=30] (0:1.25cm);
+        \draw (0,0) circle[radius=1cm];
+        \draw (0,0) circle[radius=.825cm];
+        \foreach[count=\i] \a in {0,20,...,359} {
+            \draw (\a:.825cm) -- (\a:1cm);
+            \coordinate (@\i-out) at (\a+10:1cm);
+        }
+        \draw[Kite-] (@18-out) -- ++(.33,-.6) -- ++(.25,0) node[right] {Head};
+        \draw[Kite-] (@18-out) -- ++(.33,-.25) -- ++(.25,0) node[right] {Tail};
+        \node at(0,0) {iii)};
+    \end{tikzpicture}\medskip\par
+\scalebox{.8}{\parbox{.6\linewidth}{\raggedright\tiny i) Der \T{RingBuffer} ist leer und \T{head}, sowie \T{tail} zeigen auf dasselbe Element.\quad ii) Teilweise belegt, nachdem vier Elemente eingefügt wurden und \T{head}, sowie \T{tail} nun auf verschiedenen Elemente zeigen.\quad iii) Der Buffer ist voll (\T{tail} hat \T{head} \say{überrundet}) und wird nun überschreieben.\only<4->{\quad Die Elemente sind wie eine \T{DoublyLinkedList} verbunden und haben zusätzlich eine Verknüpfung er beiden äußeren Elemente (unten rechts).}}}\hfill\tikzset{W/.style={draw, rounded corners=2pt},K/.style={W, rectangle split, rectangle split parts=3,rectangle split horizontal}}\onslide<4->{\scalebox{.8}{\begin{tikzpicture}[align-half-base]
+    \node[K] (a) at (0,0) {\nodepart{two}7\nodepart{three}};
+    \node[K,right=2mm] (b) at (a.east) {\nodepart{two}9\nodepart{three}};
+    \node[K,right=2mm] (c) at (b.east) {\nodepart{two}2\nodepart{three}};
+    \node[K,right=2mm] (d) at (c.east) {\nodepart{two}4\nodepart{three}};
+    \pgfinterruptboundingbox
+    \node[below=-.33mm,T] at (a.south) {head};
+    \node[below=-.33mm,T] at (d.south) {tail};
+    \endpgfinterruptboundingbox
+    \draw[Circle-Kite] ([yshift=1mm,xshift=-1.65ex]a.east) -- ([yshift=1mm]b.west);
+    \draw[Circle-Kite] ([yshift=-1mm,xshift=1.65ex]b.west) -- ([yshift=-1mm]a.east);
+    \draw[Circle-Kite] ([yshift=1mm,xshift=-1.65ex]b.east) -- ([yshift=1mm]c.west);
+    \draw[Circle-Kite] ([yshift=-1mm,xshift=1.65ex]c.west) -- ([yshift=-1mm]b.east);
+    \draw[Circle-Kite] ([yshift=1mm,xshift=-1.65ex]c.east) -- ([yshift=1mm]d.west);
+    \draw[Circle-Kite] ([yshift=-1mm,xshift=1.65ex]d.west) -- ([yshift=-1mm]c.east);
+    \draw[Circle-Kite,rounded corners=1pt] ([xshift=-1.65ex]d.east) -- ++(0,.33) -| ([xshift=.65ex,yshift=-1mm]a.west);
+    \draw[Circle-Kite,rounded corners=1pt] ([xshift=1.65ex]a.west) -- ++(0,.5) -| ([xshift=-.65ex,yshift=-1mm]d.east);
+\end{tikzpicture}}}
+\end{center}}
+\endtaskblock
+\end{onlyenv}
+\begin{onlyenv}<handout:2|3->
+\def\intaskfont{\scriptsize}
+\begin{enumerate}[<+(1)->]
+    \item \task{Nehmen Sie die Klassendefinition für \textattachfile{a2/Element.java}{Element}, die Sie bereits aus der Vorlesung kennen. Erweitern
+    Sie diese um eine private Referenz für den Vorgänger sowie passende getter und setter. Die Elemente sollen \bjava{int} halten.}
+    \item \task{Um den Ring Buffer zu implementieren, definieren Sie zunächst die entsprechende Klasse \T{RingBuffer}. Der
+   überladene Konstruktor soll die Kapazität als Parameter übernehmen und die Datenstruktur anlegen, indem
+   der Kapazität entsprechend viele Elemente (siehe a)) angelegt und verknüpft werden. \T{head} und \T{tail} zeigen
+   nun auf das erste Element (obige Abb. i). Wird als Kapazität ein negativer Wert übergeben, soll eine
+   \T{NegativeArraySizeException} ausgelöst werden}
+    \item \task{Die Methode \T{public int peek()} der Klasse RingBuffer soll den Wert an der Position zurückliefern, auf die
+    \T{head} zeigt. Sollte der Buffer leer sein, soll eine \T{NoSuchElementException} ausgelöst werden.}
+    \item \task{Die Methode \T{public void put(int value)} der Klasse RingBuffer soll den übergebenen Wert an der
+    Position im Ring Buffer speichern, auf die \T{tail} zeigt und \T{tail} auf den Nachfolger verschoben werden (obige Abb. ii). Sollte der Buffer komplett gefüllt sein, soll wieder von vorne begonnen werden und alte Elemente
+    überschrieben werden (obige Abb. iii). In diesem Fall soll auch \T{head} auf den Nachfolger verschoben, damit
+    \T{head} immer auf das älteste Element im Buffer zeigt und so die FIFO Eigenschaft gewahrt bleibt. Ein Beispiel für einen vollen Buffer der Kapazität 3 in das der Wert 4 eingefügt werden soll}
+    \item \task{Die Methode \T{public int remove()} der Klasse RingBuffer soll den Wert an der Position zurückliefern, auf
+    die \T{head} zeigt und \T{head} um eine Stelle zurückverschoben werden. Diese Methode simuliert also ein Abarbeiten
+    der Elemente im Buffer. Sollte der Buffer leer sein, soll eine NoSuchElementException ausgelöst werden}
+\end{enumerate}
+\end{onlyenv}
+\end{frame}
+
+\begin{frame}[fragile]{Extend the Element}
+\begin{enumerate}[<+(1)->]
+    \item \task{Nehmen Sie die Klassendefinition für \textattachfile{a2/Element.java}{Element}, die Sie bereits aus der Vorlesung kennen. Erweitern
+    Sie diese um eine private Referenz für den Vorgänger sowie passende getter und setter. Die Elemente sollen \bjava{int} halten.}
+\end{enumerate}
+\SetupLstHl
+\begin{onlyenv}<handout:0|3>
+\begin{minted}{java}
+class Element {
+    private int value;
+    private Element next;
+
+    public Element() { this.next = null; }
+    public void setNextElement(Element nextElement) { this.next = nextElement; }
+    public Element getNextElement() { return this.next; }
+    public void setValue(int value) { this.value = value; }
+    public int getValue() { return this.value; }
+}
+\end{minted}
+\end{onlyenv}
+\begin{onlyenv}<4->
+\begin{minted}{java}
+|ihl|class Element {|ihl|
+|ihl|    private int value;|ihl|
+|ihl|    private Element next;|ihl|
+/*\onslide<5->*/    private Element previous;
+
+|ihl|    public Element() { this.next = null;  /*\onslide<6->*/|ihl|this.previous = null;|ihl| /*\onslide<1->*/}|ihl|
+|ihl|    public void setNextElement(Element nextElement) { this.next = nextElement; }|ihl|
+|ihl|    public Element getNextElement() { return this.next; }|ihl|
+/*\onslide<7->*/public void setPreviousElement(Element previousElement) {
+/*\onslide<7->*/    this.previous = previousElement;
+/*\onslide<7->*/}
+/*\onslide<8->*/public Element getPreviousElement() {
+/*\onslide<8->*/    return this.previous;
+/*\onslide<8->*/}
+|ihl|    public void setValue(int value) { this.value = value; }|ihl|
+|ihl|    public int getValue() { return this.value; }|ihl|
+|ihl|}|ihl|/*\onslide<1->*/
+\end{minted}
+\end{onlyenv}
+\end{frame}
+}
 \iffull
 \SetNextSectionText{Dynamische Datenstrukturen II\\Abgabe: \DTMDate{2022-07-18}}
 \section{Aussicht: Übungsblatt 11}

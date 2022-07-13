@@ -28,7 +28,7 @@ public class BinaryTree {
         }
     }
 
-    public void breadthFirstTraversal() {
+    public void alternativeBreadthFirstTraversal() {
         Queue queue = new Queue();
         queue.enqueue(root);
 
@@ -40,11 +40,24 @@ public class BinaryTree {
                 queue.enqueue(node.getLeftChild());
 
             if (node.getRightChild() != null)
-                queue.enqueue((node.getRightChild()));
+                queue.enqueue(node.getRightChild());
 
             System.out.print(node.getValue() + (!queue.isEmpty() ? ", " : ""));
         }
         System.out.println("]");
     }
 
+    public void breadthFirstTraversal() {
+        Queue queue = new Queue();
+        queue.enqueue(root);
+
+        while (!queue.isEmpty()) {
+            IntegerNode node = queue.dequeue();
+            if (node == null)
+                continue;
+            queue.enqueue(node.getLeftChild());
+            queue.enqueue(node.getRightChild());
+            System.out.println(node.getValue());
+        }
+    }
 }

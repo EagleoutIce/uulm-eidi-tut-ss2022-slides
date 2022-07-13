@@ -292,8 +292,9 @@
 \tikzset{T/.style={sol@colors@lst@comments,font=\footnotesize\itshape\sffamily},@O/.style={overlay, remember picture}}
 
 \def\taskenum{\setbeamertemplate{enumerate item}{\task{\alph{enumi})}}}
-\def\intask{\footnotesize\color{gray}\itshape
-\taskenum\setbeamercolor{itemize/enumerate body}{fg=gray}\setbeamerfont{itemize/enumerate body}{size=\footnotesize,shape=\itshape}}
+\def\intaskfont{\footnotesize}
+\def\intask{\intaskfont\color{gray}\itshape
+\taskenum\setbeamercolor{itemize/enumerate body}{fg=gray}\setbeamerfont{itemize/enumerate body}{size=\intaskfont,shape=\itshape}}
 \newenvironment<>{taskblock}{\begin{uncoverenv}#1\par\begingroup\intask}{\par\endgroup\end{uncoverenv}}
 \newcommand<>\task[1]{\taskblock#2 #1\endtaskblock}
 
@@ -373,6 +374,7 @@
 
 % \def\CodeFileMarker#1{{\hfill\color{lightgray}\sffamily\tiny#1\rlap{\thinspace~\faFileCodeO}}}
 \newcommand<>\CodeFileMarkerAttach[2][]{\only#3{\CodeFileMarker{\attachfilesetup{color=lightgray}\fancyulcolor{lightgray}\textattachfile{\curpath #1#2}{\rawlink{#2}}}}}
+\newcommand<>\AddCodeFileMarkerAttach[2][]{\only#3{\color{lightgray}\sffamily\tiny\attachfilesetup{color=lightgray}\fancyulcolor{lightgray}, \textattachfile{\curpath #1#2}{\rawlink{#2}}}}
 \solsetmintedstyle{plain}
 \newcommand<>\FileMarkerAttach[2][]{\only#3{\attachfilesetup{color=black}\textattachfile{\curpath #1#2}{\rawlink{#2}}}}
 
