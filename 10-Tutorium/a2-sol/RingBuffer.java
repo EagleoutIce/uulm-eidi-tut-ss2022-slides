@@ -5,60 +5,65 @@ public class RingBuffer {
     private Element tail;
     private boolean isEmpty;
 
-    // aufgabe 2b
+    // Aufgabe 2b
     public RingBuffer(int capacity) {
-
-        if(capacity == 0) {
+        if (capacity == 0) {
             this.isEmpty = false;
             return;
-        }
-
-        if(capacity < 0){
+        } else if (capacity < 0) {
             throw new NegativeArraySizeException();
         }
 
-        /* lege das erste element an und
-        head und tail zeigen darauf */
+        /*
+         * lege das erste element an und
+         * head und tail zeigen darauf
+         */
         Element current = new Element();
-        this.head = current;
-        this.tail = current;
+        this.head = this.tail = current;
         this.isEmpty = true;
+        current = fillBuffer(capacity, current);
 
-        /* fuelle den ring bufer */
-        for(int i = 1; i < capacity; i++) {
-
-            Element next = new Element();
-            current.setNextElement(next);
-            next.setPreviousElement(current);
-
-            if(i == capacity - 1)
-                next.setNextElement(head);
-
-            current = next;
-        }
-        /* jetzt fehlt noch die verbindung vom ersten
-        zum letzten element. head zeigt noch auf das erste element
-        und current ist das letzte eingefügt element */
+        /*
+         * jetzt fehlt noch die verbindung vom ersten
+         * zum letzten element. head zeigt noch auf das erste element
+         * und current ist das letzte eingefügt element
+         */
         this.head.setPreviousElement(current);
         current.setNextElement(head);
     }
 
-    // augabe 2c
-    public int peek(){
-        if(this.isEmpty){
-             throw new NoSuchElementException();
+    private Element fillBuffer(int capacity, Element current) {
+        for (int i = 1; i < capacity; i++) {
+            Element next = new Element();
+            current.setNextElement(next);
+            next.setPreviousElement(current);
+            if (i == capacity - 1)
+                next.setNextElement(head);
+            current = next;
         }
-        return head.getValue();
+        return current;
     }
 
-    // aufgabe 2d
-    /* lege ein element an das ende des
-    ring buffers und verschiebe tail entsprechend */
+    // Aufgabe 2c
+    public int peek() {
+        if (this.isEmpty)
+            throw new NoSuchElementException();
+        else
+            return head.getValue();
+    }
+
+    // Aufgabe 2d
+    /*
+     * lege ein element an das ende des
+     * ring buffers und verschiebe tail entsprechend
+     */
     public void put(int value) {
-        /* wird eingefuegt wenn head und tail auf das gleiche
-        element zeigen und der buffer nicht leer ist, soll auch head
-        auf den nachfolger verschoben werden (FIFO) */
-        if(this.tail.equals(this.head) && !this.isEmpty){
+        /*
+         * wird eingefuegt wenn head und tail auf das gleiche
+         * element zeigen und der buffer nicht leer ist, soll auch head
+         * auf den nachfolger verschoben werden (FIFO)
+         */
+        if (this.tail.equals(this.head) && !this.isEmpty) {
             System.out.println("Es kommt zum Überlauf!");
             System.out.printf("Überschreibe Element %d mit %d \n", this.head.getValue(), value);
             this.head = this.head.getNextElement();
@@ -69,21 +74,24 @@ public class RingBuffer {
         this.isEmpty = false;
     }
 
-
-    // aufgabe 2e
-    /* entferne das element auf das head zeigt und verschiebe
-    head auf den vorgaenger */
+    // Aufgabe 2e
+    /*
+     * entferne das element auf das head zeigt und verschiebe
+     * head auf den vorgaenger
+     */
     public int remove() {
-        if(this.isEmpty){
+        if (this.isEmpty) {
             throw new NoSuchElementException();
         }
 
         int value = this.head.getValue();
         this.head = this.head.getNextElement();
 
-        /* buffer wird nur leer, wenn head tail
-        ''von hinten'' eingeholt hat. dies kann nur
-        nach einer remove operation passieren */
+        /*
+         * buffer wird nur leer, wenn head tail
+         * ''von hinten'' eingeholt hat. dies kann nur
+         * nach einer remove operation passieren
+         */
         this.isEmpty = this.head.equals(tail);
 
         return value;
@@ -91,17 +99,17 @@ public class RingBuffer {
 
     public static void main(String[] args) {
         System.out.println("Erstelle Ring Buffer");
-        try{
+        try {
             RingBuffer buffer = new RingBuffer(-2);
-        } catch (NegativeArraySizeException e){
+        } catch (NegativeArraySizeException e) {
             System.out.println(e);
         }
 
         RingBuffer buffer = new RingBuffer(2);
 
-        try{
+        try {
             buffer.remove();
-        } catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             System.out.println(e);
         }
 
@@ -115,9 +123,9 @@ public class RingBuffer {
         System.out.println("Entferne Elemente");
         System.out.println(buffer.remove());
         System.out.println(buffer.remove());
-        try{
+        try {
             buffer.remove();
-        } catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             System.out.println(e);
         }
 
@@ -132,11 +140,10 @@ public class RingBuffer {
         System.out.println("Entferne Elemente");
         System.out.println(buffer.remove());
         System.out.println(buffer.remove());
-        try{
+        try {
             buffer.remove();
-        } catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             System.out.println(e);
         }
-
     }
 }

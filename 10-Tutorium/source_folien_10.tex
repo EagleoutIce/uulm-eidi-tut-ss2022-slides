@@ -395,61 +395,195 @@ Betrachten Sie den folgenden Binärbaum:\medskip
    überladene Konstruktor soll die Kapazität als Parameter übernehmen und die Datenstruktur anlegen, indem
    der Kapazität entsprechend viele Elemente (siehe a)) angelegt und verknüpft werden. \T{head} und \T{tail} zeigen
    nun auf das erste Element (obige Abb. i). Wird als Kapazität ein negativer Wert übergeben, soll eine
-   \T{NegativeArraySizeException} ausgelöst werden}
-    \item \task{Die Methode \T{public int peek()} der Klasse RingBuffer soll den Wert an der Position zurückliefern, auf die
+   \T{NegativeArraySizeException} ausgelöst werden.}
+    \item \task{Die Methode \T{public int peek()} der Klasse \T{RingBuffer} soll den Wert an der Position zurückliefern, auf die
     \T{head} zeigt. Sollte der Buffer leer sein, soll eine \T{NoSuchElementException} ausgelöst werden.}
-    \item \task{Die Methode \T{public void put(int value)} der Klasse RingBuffer soll den übergebenen Wert an der
+    \item \task{Die Methode \T{public void put(int value)} der Klasse \T{RingBuffer} soll den übergebenen Wert an der
     Position im Ring Buffer speichern, auf die \T{tail} zeigt und \T{tail} auf den Nachfolger verschoben werden (obige Abb. ii). Sollte der Buffer komplett gefüllt sein, soll wieder von vorne begonnen werden und alte Elemente
     überschrieben werden (obige Abb. iii). In diesem Fall soll auch \T{head} auf den Nachfolger verschoben, damit
-    \T{head} immer auf das älteste Element im Buffer zeigt und so die FIFO Eigenschaft gewahrt bleibt. Ein Beispiel für einen vollen Buffer der Kapazität 3 in das der Wert 4 eingefügt werden soll}
-    \item \task{Die Methode \T{public int remove()} der Klasse RingBuffer soll den Wert an der Position zurückliefern, auf
+    \T{head} immer auf das älteste Element im Buffer zeigt und so die FIFO Eigenschaft gewahrt bleibt.}
+    \item \task{Die Methode \T{public int remove()} der Klasse \T{RingBuffer} soll den Wert an der Position zurückliefern, auf
     die \T{head} zeigt und \T{head} um eine Stelle zurückverschoben werden. Diese Methode simuliert also ein Abarbeiten
-    der Elemente im Buffer. Sollte der Buffer leer sein, soll eine NoSuchElementException ausgelöst werden}
+    der Elemente im Buffer. Sollte der Buffer leer sein, soll eine NoSuchElementException ausgelöst werden.}
 \end{enumerate}
 \end{onlyenv}
 \end{frame}
 
-\begin{frame}[fragile]{Extend the Element}
+\begin{frame}[fragile,c]{Extend the Element}
 \begin{enumerate}[<+(1)->]
     \item \task{Nehmen Sie die Klassendefinition für \textattachfile{a2/Element.java}{Element}, die Sie bereits aus der Vorlesung kennen. Erweitern
     Sie diese um eine private Referenz für den Vorgänger sowie passende getter und setter. Die Elemente sollen \bjava{int} halten.}
 \end{enumerate}
-\SetupLstHl
+\SetupLstHl\lstfs{9}
 \begin{onlyenv}<handout:0|3>
-\begin{minted}{java}
+\begin{minted}[escapeinside={/*}{*/}]{java}
+/*\CodeFileMarkerAttach<9->[a2-sol/]{Element.java}*/
 class Element {
     private int value;
     private Element next;
-
     public Element() { this.next = null; }
     public void setNextElement(Element nextElement) { this.next = nextElement; }
     public Element getNextElement() { return this.next; }
     public void setValue(int value) { this.value = value; }
     public int getValue() { return this.value; }
-}
+}/*\onslide<2->*/
 \end{minted}
 \end{onlyenv}
 \begin{onlyenv}<4->
-\begin{minted}{java}
+\begin{minted}[escapeinside={/*}{*/}]{java}
+/*\CodeFileMarkerAttach<9->[a2-sol/]{Element.java}*/
 |ihl|class Element {|ihl|
-|ihl|    private int value;|ihl|
-|ihl|    private Element next;|ihl|
+|ihl|    private int value; private Element next;|ihl|
 /*\onslide<5->*/    private Element previous;
-
 |ihl|    public Element() { this.next = null;  /*\onslide<6->*/|ihl|this.previous = null;|ihl| /*\onslide<1->*/}|ihl|
-|ihl|    public void setNextElement(Element nextElement) { this.next = nextElement; }|ihl|
+|ihl|    public void setNextElement(Element n) { this.next = n; }|ihl|
 |ihl|    public Element getNextElement() { return this.next; }|ihl|
-/*\onslide<7->*/public void setPreviousElement(Element previousElement) {
-/*\onslide<7->*/    this.previous = previousElement;
-/*\onslide<7->*/}
-/*\onslide<8->*/public Element getPreviousElement() {
-/*\onslide<8->*/    return this.previous;
-/*\onslide<8->*/}
+    /*\onslide<7->*/public void setPreviousElement(Element p) {
+    /*\onslide<7->*/    this.previous = p;
+    /*\onslide<7->*/}
+    /*\onslide<8->*/public Element getPreviousElement() {
+    /*\onslide<8->*/    return this.previous;
+    /*\onslide<8->*/}
 |ihl|    public void setValue(int value) { this.value = value; }|ihl|
 |ihl|    public int getValue() { return this.value; }|ihl|
 |ihl|}|ihl|/*\onslide<1->*/
 \end{minted}
 \end{onlyenv}
+\end{frame}
+
+\begin{frame}[fragile]{Start des RingBuffers}
+\begin{enumerate}[<+(1)->]
+    \setcounter{enumi}{1}
+    \item \task{Um den Ring Buffer zu implementieren, definieren Sie zunächst die entsprechende Klasse \T{RingBuffer}. Der
+    überladene Konstruktor soll die Kapazität als Parameter übernehmen und die Datenstruktur anlegen, indem
+    der Kapazität entsprechend viele Elemente (siehe a)) angelegt und verknüpft werden. \T{head} und \T{tail} zeigen
+    nun auf das erste Element (obige Abb. i). Wird als Kapazität ein negativer Wert übergeben, soll eine
+    \T{NegativeArraySizeException} ausgelöst werden}
+\end{enumerate}
+\SetupLstHl
+\begin{minted}[escapeinside={/*}{*/}]{java}
+/*\CodeFileMarkerAttach<8->[a2-sol/]{RingBuffer.java}*/
+/*\onslide<3->*/public class RingBuffer {
+/*\onslide<4->*/    private Element head;
+/*\onslide<4->*/    private Element tail;
+/*\onslide<5->*/    private boolean isEmpty;
+/*\onslide<3->*/
+/*\onslide<6->*/    public RingBuffer(int capacity) {
+/*\onslide<7->*/        |ihl|...|ihl|
+/*\onslide<6->*/    }
+/*\onslide<3->*/}/*\onslide<1->*/
+\end{minted}
+\end{frame}
+\begin{frame}[fragile]{Der Konstruktor}
+\SetupLstHl
+\begin{minted}[escapeinside={/*}{*/}]{java}
+/*\onslide<2->*/|ihl|public class RingBuffer {|ihl|
+/*\onslide<2->*/    |ihl|private Element head, tail; private boolean isEmpty;|ihl|
+/*\onslide<3->*/    |ihl|RingBuffer(int capacity) {|ihl|
+    /*\onslide<4->*/    if (capacity == 0) { this.isEmpty = false; return; }
+    /*\onslide<5->*/    else if (capacity < 0) { throw new NegativeArraySizeException(); }
+    /*\onslide<6->*/
+    /*\onslide<6->*/    Element current = new Element();
+    /*\onslide<7->*/    this.head = this.tail = current;
+    /*\onslide<7->*/    this.isEmpty = true;
+    /*\onslide<8->*/    current = fillBuffer(capacity, current);
+    /*\onslide<9->*/    this.head.setPreviousElement(current);
+    /*\onslide<10->*/   current.setNextElement(head);
+/*\onslide<3->*/    |ihl|}|ihl|
+/*\onslide<2->*/|ihl|}|ihl|/*\onslide<1->*/
+\end{minted}
+\end{frame}
+
+\begin{frame}[fragile,c]{Der Konstruktor\hfill II}
+\SetupLstHl\lstfs{9}
+\begin{minted}[escapeinside={/*}{*/}]{java}
+/*\onslide<2->*/|ihl|public class RingBuffer {|ihl|
+/*\onslide<2->*/    |ihl|private Element head, tail; private boolean isEmpty;|ihl|
+/*\onslide<3->*/    |ihl|RingBuffer(int capacity) { ... }|ihl|
+
+    /*\onslide<4->*/private Element fillBuffer(int capacity, Element current) {
+    /*\onslide<5->*/    for (int i = 1; i < capacity; i++) {
+    /*\onslide<6->*/        Element next = new Element();
+    /*\onslide<7->*/        current.setNextElement(next);
+    /*\onslide<7->*/        next.setPreviousElement(current);
+    /*\onslide<8->*/        if (i == capacity - 1)
+    /*\onslide<8->*/            next.setNextElement(head);
+    /*\onslide<9->*/        current = next;
+    /*\onslide<5->*/    }
+    /*\onslide<10->*/    return current;
+    /*\onslide<4->*/}
+/*\onslide<2->*/|ihl|}|ihl|/*\onslide<1->*/
+\end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{Modern Peek}
+\begin{enumerate}[<+(1)->]
+    \setcounter{enumi}{2}
+    \item \task{Die Methode \T{public int peek()} der Klasse \T{RingBuffer} soll den Wert an der Position zurückliefern, auf die
+    \T{head} zeigt. Sollte der Buffer leer sein, soll eine \T{NoSuchElementException} ausgelöst werden.}
+\end{enumerate}
+\SetupLstHl
+\begin{minted}[escapeinside={/*}{*/}]{java}
+/*\onslide<3->*/public class RingBuffer {
+/*\onslide<3->*/    |ihl|private Element head, tail; private boolean isEmpty;|ihl|
+/*\onslide<3->*/    |ihl|RingBuffer(int capacity) { ... }|ihl|
+/*\onslide<3->*/
+/*\onslide<4->*/    public int peek() {
+/*\onslide<5->*/        if (this.isEmpty)
+/*\onslide<6->*/            throw new NoSuchElementException();
+/*\onslide<5->*/        else
+/*\onslide<7->*/            return head.getValue();
+/*\onslide<4->*/    }
+/*\onslide<3->*/}/*\onslide<1->*/
+\end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{Put Put Put}
+\begin{enumerate}[<+(1)->]
+    \setcounter{enumi}{3}
+    \item \task{Die Methode \T{public void put(int value)} der Klasse \T{RingBuffer} soll den übergebenen Wert an der
+    Position im Ring Buffer speichern, auf die \T{tail} zeigt und \T{tail} auf den Nachfolger verschoben werden (obige Abb. ii). Sollte der Buffer komplett gefüllt sein, soll wieder von vorne begonnen werden und alte Elemente
+    überschrieben werden (obige Abb. iii). In diesem Fall soll auch \T{head} auf den Nachfolger verschoben, damit
+    \T{head} immer auf das älteste Element im Buffer zeigt und so die FIFO Eigenschaft gewahrt bleibt.}
+\end{enumerate}
+\SetupLstHl
+\begin{minted}[escapeinside={/*}{*/}]{java}
+/*\onslide<3->*/public class RingBuffer {
+/*\onslide<3->*/    |ihl|private Element head, tail; private boolean isEmpty;|ihl|
+/*\onslide<3->*/    |ihl|RingBuffer(int capacity) { ... }|ihl|
+/*\onslide<4->*/    public void put(int value) {
+/*\onslide<5->*/        if (this.tail == this.head && !this.isEmpty)
+/*\onslide<5->*/            this.head = this.head.getNextElement();
+/*\onslide<6->*/        this.tail.setValue(value);
+/*\onslide<7->*/        this.tail = this.tail.getNextElement();
+/*\onslide<8->*/        this.isEmpty = false;
+/*\onslide<4->*/    }
+/*\onslide<3->*/}/*\onslide<1->*/
+\end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{Operation Removal}
+\begin{enumerate}[<+(1)->]
+    \setcounter{enumi}{4}
+    \item \task{Die Methode \T{public int remove()} der Klasse \T{RingBuffer} soll den Wert an der Position zurückliefern, auf
+    die \T{head} zeigt und \T{head} um eine Stelle zurückverschoben werden. Diese Methode simuliert also ein Abarbeiten
+    der Elemente im Buffer. Sollte der Buffer leer sein, soll eine NoSuchElementException ausgelöst werden.}
+\end{enumerate}
+\SetupLstHl
+\begin{minted}[escapeinside={/*}{*/}]{java}
+/*\onslide<3->*/public class RingBuffer {
+/*\onslide<3->*/    |ihl|private Element head, tail; private boolean isEmpty;|ihl|
+/*\onslide<3->*/    |ihl|RingBuffer(int capacity) { ... }|ihl|
+/*\onslide<4->*/    public int remove() {
+/*\onslide<5->*/        if (this.isEmpty)
+/*\onslide<5->*/            throw new NoSuchElementException();
+/*\onslide<6->*/        int value = this.head.getValue();
+/*\onslide<7->*/        this.head = this.head.getNextElement();
+/*\onslide<8->*/        this.isEmpty = this.head == tail;
+/*\onslide<9->*/        return value;
+/*\onslide<4->*/    }
+/*\onslide<3->*/}/*\onslide<1->*/
+\end{minted}
 \end{frame}
 }
 \iffull
@@ -458,7 +592,8 @@ class Element {
 \subsection{Aufgabe 1}
 \begin{frame}{Aufgabe 1: Graphen}
 \begin{itemize}[<+(1)->]
-    \item
+    \item Adjazenzmatrix und Liste (Kompakt Kram oder so letztes sem)
+    \item 3: Traversierungen angeben
 \end{itemize}
 \end{frame}
 
@@ -471,7 +606,8 @@ class Element {
 \vfill\vfill % double fill for more fraction
 \begin{itemize}[<+(1)->]
     \itemsep8pt
-    \item
+    \item Prüfungsanmeldung
+    \item Feedback
 \end{itemize}
 \end{frame}
 }
