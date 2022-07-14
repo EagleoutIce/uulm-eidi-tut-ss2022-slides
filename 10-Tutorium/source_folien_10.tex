@@ -656,42 +656,14 @@ class Element {
 \end{frame}
 }
 
-\setbox\pinguA=\hbox{\tikz{\pingu[body type=tilt-left,right wing raise,eyes shock,small,pants=pingu@purple!50!pingu@blue,strawhat,strawhat position={-26.9:(-.185cm,.14cm){1.275}},lollipop left=pingu@blue,left item angle=-30]}}
-\setbox\pinguB=\hbox{\tikz{\pingu[sunglasses round,tie=pingu@black,tie dots,cloak=pingu@black,left wing hug,eyes angry]}}
-\setbox\pinguC=\hbox{\tikz{\pingu[sunglasses,tie=pingu@black,tie dots,cloak=pingu@black,right wing hug,eyes angry]}}
-\setbox\pinguD=\hbox{\tikz{
-   \pingu[:back,wings raise,name=pingu,hair=gray,hair 2=pingu@blue]
-   \path[postaction={decorate},decoration={text along path, text={|\sffamily\bfseries|Safety},text align={fit to path},text color=white}] ([yshift=5mm]pingu-belly-center) ++ (270-75:22pt and 5pt) arc (270-75:270+75:22pt and 5pt);
-}}
-\outro{\vskip9mm\centering \onslide<2->{\scalebox{1.35}{\begin{tikzpicture}
-    % \pingu[conical hat, blush,santa beard, cane right, cape=paletteA]
-    [W/.style={rounded corners,draw,lightgray,line width=4pt,minimum width=1.5cm,minimum height=.65cm,scale=2,font=\sffamily\Large,text=black,fill=btdm@background},V/.style={-Kite,lightgray,line cap=round,line width=3.5pt}]
-   \node[W] (a) at(0,0) {7};
-   \node[W,above right=.5cm,xshift=.25cm] (b) at(a.east) {9};
-   \node[W,below right=.5cm,xshift=.25cm] (c) at(a.east) {-5};
-   \node[W,right=.75cm,yshift=-2mm] (d) at(b.east) {15};
-   \node[W,right=.75cm,yshift=2mm] (e) at(d.east) {17};
 
-   \node[W,below left=.5cm] (f) at(c.south) {-6};
-   \node[W,,opacity=.7,below right=.5cm] (g) at(c.south) {-2};
-
-   \node[W,below left=.5cm,xshift=-.25cm] (h) at(g.south) {-3};
-   \node[W,below right=.5cm,xshift=1cm] (i) at(g.south) {-1};
-
-   \node[below=-1.1cm] at(d.south) {\rotatebox{-50}{\copy\pinguA}};
-   \node[left=-3.5mm,yshift=2mm] at(h.west) {\copy\pinguB};
-   \node[right=-3.5mm,yshift=2mm] at(i.east) {\copy\pinguC};
-
-   \node[below=7.65cm,xshift=-1cm,scale=1.5] (k) at(d.south) {\copy\pinguD};
-
-   \graph[edges={V}]{(a) -> (b) -> (d) -> (e),(a) -> (c) -> {(f), (g)},(g) -> {(h),(i)}};
-
-   % Pfeil und Kachel auf dem Boden, "wurde entfernt" da dynamisch :D
-
-   \node[W,below left=4mm,rotate=-8] (ax) at(k.south) {-4};
-
-   \draw[V] ([xshift=-8mm,yshift=7mm]ax.north west) -- ++(2.45cm,6mm);
-
-\end{tikzpicture}}}}
+\outro{\vskip9mm\centering \onslide<2->{\scalebox{1.5}{
+\begin{tikzpicture}
+    \doggo[collar=purple,height delta=-.5mm]
+\end{tikzpicture}~~%
+\reflectbox{\begin{tikzpicture}
+    \doggo[height delta=.1mm,body=black!50!gray!85!doggo@brown]
+\end{tikzpicture}}
+}}}
 
 \iffull\end{document}\fi
