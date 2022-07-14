@@ -12,14 +12,6 @@ jobs:
       with:
         lfs: true
         submodules: true
-    - name: Merge with build branch to get up to date pdfs
-      uses: devmasx/merge-branch@master
-      with:
-        type: now
-        from_branch: gh-pages
-        target_branch: master
-        github_token: ${{ github.token }}
-
     - name: get pu for preview
       run: sudo apt install poppler-utils
     - name: use make docker to do the magic
@@ -34,9 +26,9 @@ jobs:
         git config --local user.name "GitHub Action"
         git add -f "all_pdfs/" "preview-001.png"
         git commit -m "Newly compiled data"
-    # - name: Push changes
-    #   uses: ad-m/github-push-action@master
-    #   with:
-    #     branch: build
-    #     github_token: ${{ secrets.GITHUB_TOKEN }}
-    #     force: true
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        branch: build
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        force: true
