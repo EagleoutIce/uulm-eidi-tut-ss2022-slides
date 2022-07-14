@@ -223,7 +223,7 @@
 % TODO: animation?
 \MakeThePinguExplainIt[text width=7.65cm,yshift=-.33cm]{cap=!hide,glasses=!hide,eyes wink,strawhat,blush,right item angle=-112}{Es lässt sich auch mit \bjava{if(node == null)} beim Entnehmen prüfen.}
 \begin{frame}[fragile,c]{Let it be code}
-\begin{minted}{java}
+\begin{minted}[morekeywords={[3]{BinaryTree, IntegerNode}}]{java}
 !*\CodeFileMarkerAttach<11->[p-sol/]{BinaryTree.java}\AddCodeFileMarkerAttach<11->[p-sol/]{BinaryTreeMain.java} \AddCodeFileMarkerAttach<11->[p-sol/]{IntegerNode.java}\AddCodeFileMarkerAttach<11->[p-sol/]{Queue.java}*!
 !*\onslide<2->*!public void breadthFirstTraversal() {
 !*\onslide<3->*!    Queue queue = new Queue();
@@ -279,12 +279,12 @@ Betrachten Sie den folgenden Binärbaum:\medskip
 \begin{frame}{Grundlagen Fragen}
 \begin{enumerate}[<+(1)->]
     \itemsep8pt
-    \item \task{Welchen Verzweigungsgrad hat der Baum? Begründen Sie Ihre Antwort \textit{kurz}.}\pause
-        \(2\), alle Knoten haben \textit{höchstens} zwei Kinder.
-    \item \task{Welche Tiefe hat der Baum?}\pause
-        \(3\), der längste Pfad von einem Knoten zur Wurzel ist \(2\) lang.
-    \item \task{Wie viele Knoten hat der Baum und wie viele davon sind Blätter?}\pause
-        \(6\) Knoten \info{\(\{3, 6, 9, 1, 7, 5\}\)}, \(3\) davon sind Blätter \info{Knoten ohne Kinder, \(\{3, 1, 5\}\)}
+    \item \task{Welchen Verzweigungsgrad hat der Baum? Begründen Sie Ihre Antwort \textit{kurz}.}
+        \onslide<3->{\(2\), alle Knoten haben \textit{höchstens} zwei Kinder.}
+    \item<4-> \task{Welche Tiefe hat der Baum?}\pause
+        \onslide<5->{\(3\), der längste Pfad von einem Knoten zur Wurzel ist \(2\) lang.}
+    \item<6-> \task{Wie viele Knoten hat der Baum und wie viele davon sind Blätter?}
+        \onsldie<7->{\(6\) Knoten \info{\(\{3, 6, 9, 1, 7, 5\}\)}, \(3\) davon sind Blätter \info{Knoten ohne Kinder, \(\{3, 1, 5\}\)}}
     \item \task{Formt der Baum einen Max-Heap? Begründen Sie Ihre Antwort \textit{kurz}.}\pause
         Ja, die Elternknoten simd immer kleiner als alle ihre Kinder.
 \end{enumerate}
@@ -293,7 +293,7 @@ Betrachten Sie den folgenden Binärbaum:\medskip
 \end{tikzpicture}
 \end{frame}
 
-\MakeThePinguExplainIt[text width=6.65cm,yshift=-1.75cm]{cap=!hide,glasses=!hide,eyes wink,conical hat,blush,horse left,right item angle=-52,cup=!hide,horse left}{Neben Pre-, In- und Post-Order gibt es für spezifische Bäuem (wie Binärbäume) auch noch weitere Versionen, die uns aber erstmal egal sind.}
+\MakeThePinguExplainIt[text width=6.65cm,yshift=-1.75cm]{cap=!hide,glasses=!hide,eyes wink,conical hat,blush,horse left,right item angle=-52,cup=!hide,horse left}{Neben Pre-, In- und Post-Order gibt es für spezifische Bäume (wie Binärbäume) auch noch weitere Versionen, die uns aber erstmal egal sind.}
 \begin{frame}{Grundlagen Fragen\hfill II}
 \begin{enumerate}[<+(1)->]
     \setcounter{enumi}{4}
@@ -303,13 +303,13 @@ Betrachten Sie den folgenden Binärbaum:\medskip
         \item[In-Order:]   \(3\), \(6\), \(1\), \(9\), \(5\), \(7\)
         \item[Post-Order:] \(3\), \(1\), \(6\), \(5\), \(7\), \(9\)
     \end{description}
-    \infoblock{Unter Angabe der Variante (Prä-, In- oder Post-Order) reicht hier auch nur eine Version.}
-    \item \task{In welcher Reihenfolge werden die Knoten besucht, wenn der Baum im Breitendurchlauf traversiert wird?}\pause
-    \(9\), \(6\), \(7\), \(3\), \(1\), \(5\).
+    \onslide<6->{\infoblock{Unter Angabe der Variante (Prä-, In- oder Post-Order) reicht hier auch nur eine Version.}}
+    \item<7-> \task{In welcher Reihenfolge werden die Knoten besucht, wenn der Baum im Breitendurchlauf traversiert wird?}
+    \onslide<8->{\(9\), \(6\), \(7\), \(3\), \(1\), \(5\).}
 \end{enumerate}
 \begin{tikzpicture}[@O]
     \node[below left,yshift=-1.33cm] at(current page.north east) {\copy\pinguA};
-    \onslide<8->{\node[above left,xshift=5mm,scale=.8,yshift=\btdmfootheight] at(current page.south east) {\copy\pinguexplainbox};}% copy for animations
+    \onslide<9->{\node[above left,xshift=5mm,scale=.8,yshift=\btdmfootheight] at(current page.south east) {\copy\pinguexplainbox};}% copy for animations
 \end{tikzpicture}
 \end{frame}
 }
@@ -622,7 +622,7 @@ class Element {
 \end{frame}
 
 \begin{frame}{Aufgaben 2 und 3}
-    \begin{itemize}
+    \begin{itemize}[<+(1)->]
         \itemsep12pt
         \item Die Implementation eines Stacks sollte nach Schema \(F\) funktionieren
         \item Bei der Baum-Traversierung nicht abschrecken lassen \begin{itemize}
