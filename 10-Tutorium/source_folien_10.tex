@@ -386,23 +386,23 @@ Betrachten Sie den folgenden Binärbaum:\medskip
 \end{center}}
 \endtaskblock
 \end{onlyenv}
-\begin{onlyenv}<handout:2|3->
+\begin{onlyenv}<handout:2|5->
 \def\intaskfont{\scriptsize}
 \begin{enumerate}[<+(1)->]
-    \item \task{Nehmen Sie die Klassendefinition für \textattachfile{a2/Element.java}{Element}, die Sie bereits aus der Vorlesung kennen. Erweitern
+    \item<6-> \task{Nehmen Sie die Klassendefinition für \only<6->{\textattachfile{a2/Element.java}{Element}}, die Sie bereits aus der Vorlesung kennen. Erweitern
     Sie diese um eine private Referenz für den Vorgänger sowie passende getter und setter. Die Elemente sollen \bjava{int} halten.}
-    \item \task{Um den Ring Buffer zu implementieren, definieren Sie zunächst die entsprechende Klasse \T{RingBuffer}. Der
+    \item<7-> \task{Um den Ring Buffer zu implementieren, definieren Sie zunächst die entsprechende Klasse \T{RingBuffer}. Der
    überladene Konstruktor soll die Kapazität als Parameter übernehmen und die Datenstruktur anlegen, indem
    der Kapazität entsprechend viele Elemente (siehe a)) angelegt und verknüpft werden. \T{head} und \T{tail} zeigen
    nun auf das erste Element (obige Abb. i). Wird als Kapazität ein negativer Wert übergeben, soll eine
    \T{NegativeArraySizeException} ausgelöst werden.}
-    \item \task{Die Methode \T{public int peek()} der Klasse \T{RingBuffer} soll den Wert an der Position zurückliefern, auf die
+    \item<8-> \task{Die Methode \T{public int peek()} der Klasse \T{RingBuffer} soll den Wert an der Position zurückliefern, auf die
     \T{head} zeigt. Sollte der Buffer leer sein, soll eine \T{NoSuchElementException} ausgelöst werden.}
-    \item \task{Die Methode \T{public void put(int value)} der Klasse \T{RingBuffer} soll den übergebenen Wert an der
+    \item<9-> \task{Die Methode \T{public void put(int value)} der Klasse \T{RingBuffer} soll den übergebenen Wert an der
     Position im Ring Buffer speichern, auf die \T{tail} zeigt und \T{tail} auf den Nachfolger verschoben werden (obige Abb. ii). Sollte der Buffer komplett gefüllt sein, soll wieder von vorne begonnen werden und alte Elemente
     überschrieben werden (obige Abb. iii). In diesem Fall soll auch \T{head} auf den Nachfolger verschoben, damit
     \T{head} immer auf das älteste Element im Buffer zeigt und so die FIFO Eigenschaft gewahrt bleibt.}
-    \item \task{Die Methode \T{public int remove()} der Klasse \T{RingBuffer} soll den Wert an der Position zurückliefern, auf
+    \item<10-> \task{Die Methode \T{public int remove()} der Klasse \T{RingBuffer} soll den Wert an der Position zurückliefern, auf
     die \T{head} zeigt und \T{head} um eine Stelle zurückverschoben werden. Diese Methode simuliert also ein Abarbeiten
     der Elemente im Buffer. Sollte der Buffer leer sein, soll eine NoSuchElementException ausgelöst werden.}
 \end{enumerate}
@@ -411,8 +411,8 @@ Betrachten Sie den folgenden Binärbaum:\medskip
 
 \begin{frame}[fragile,c]{Extend the Element}
 \begin{enumerate}[<+(1)->]
-    \item \task{Nehmen Sie die Klassendefinition für \textattachfile{a2/Element.java}{Element}, die Sie bereits aus der Vorlesung kennen. Erweitern
-    Sie diese um eine private Referenz für den Vorgänger sowie passende getter und setter. Die Elemente sollen \bjava{int} halten.}
+    \item \task{Nehmen Sie die Klassendefinition für \only<2->{\textattachfile{a2/Element.java}{Element}}, die Sie bereits aus der Vorlesung kennen. Erweitern
+    Sie diese um eine private Referenz für den Vorgänger sowie passende getter und setter. Die Elemente sollen \bjava{int} halten. \vspace*{-.25\baselineskip}}
 \end{enumerate}
 \SetupLstHl\lstfs{9}
 \begin{onlyenv}<handout:0|3>
@@ -432,21 +432,21 @@ class Element {
 \begin{onlyenv}<4->
 \begin{minted}[escapeinside={/*}{*/}]{java}
 /*\CodeFileMarkerAttach<9->[a2-sol/]{Element.java}*/
-|ihl|class Element {|ihl|
-|ihl|    private int value; private Element next;|ihl|
+/*\onslide<1->*/|ihl|class Element {|ihl|
+/*\onslide<1->*/|ihl|    private int value; private Element next;|ihl|
 /*\onslide<5->*/    private Element previous;
-|ihl|    public Element() { this.next = null;  /*\onslide<6->*/|ihl|this.previous = null;|ihl| /*\onslide<1->*/}|ihl|
-|ihl|    public void setNextElement(Element n) { this.next = n; }|ihl|
-|ihl|    public Element getNextElement() { return this.next; }|ihl|
+/*\onslide<1->*/|ihl|    public Element() { this.next = null;  /*\onslide<6->*/|ihl|this.previous = null;|ihl| /*\onslide<1->*/}|ihl|
+/*\onslide<1->*/|ihl|    public void setNextElement(Element n) { this.next = n; }|ihl|
+/*\onslide<1->*/|ihl|    public Element getNextElement() { return this.next; }|ihl|
     /*\onslide<7->*/public void setPreviousElement(Element p) {
     /*\onslide<7->*/    this.previous = p;
     /*\onslide<7->*/}
     /*\onslide<8->*/public Element getPreviousElement() {
     /*\onslide<8->*/    return this.previous;
     /*\onslide<8->*/}
-|ihl|    public void setValue(int value) { this.value = value; }|ihl|
-|ihl|    public int getValue() { return this.value; }|ihl|
-|ihl|}|ihl|/*\onslide<1->*/
+/*\onslide<1->*/|ihl|    public void setValue(int value) { this.value = value; }|ihl|
+/*\onslide<1->*/|ihl|    public int getValue() { return this.value; }|ihl|
+/*\onslide<1->*/|ihl|}|ihl|/*\onslide<1->*/
 \end{minted}
 \end{onlyenv}
 \end{frame}
@@ -488,7 +488,7 @@ class Element {
     /*\onslide<7->*/    this.isEmpty = true;
     /*\onslide<8->*/    current = fillBuffer(capacity, current);
     /*\onslide<9->*/    this.head.setPreviousElement(current);
-    /*\onslide<10->*/   current.setNextElement(head);
+    /*\onslide<10->*/    current.setNextElement(head);
 /*\onslide<3->*/    |ihl|}|ihl|
 /*\onslide<2->*/|ihl|}|ihl|/*\onslide<1->*/
 \end{minted}
