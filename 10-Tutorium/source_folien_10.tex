@@ -13,7 +13,6 @@
 
 \TopicOverview{6}
 \fi
-\iffalse
 
 \iffull{\SummaryFrame
 \begin{frame}[c]{Kurzwiederholung\hfill{Sortierverfahren}}
@@ -314,7 +313,6 @@ Betrachten Sie den folgenden Binärbaum:\medskip
 \end{tikzpicture}
 \end{frame}
 }
-\fi
 
 \subsection{Aufgabe 2}
 {\taskenum
@@ -591,6 +589,7 @@ class Element {
 \section{Aussicht: Übungsblatt 11}
 \subsection{Aufgabe 1}
 \begin{frame}{Aufgabe 1: Graphen}
+\begin{center}
 \begin{minipage}{.3\linewidth}% igrate to columns?
 \centering\onslide<2->{\begin{tikzpicture}[kreis/.style={inner sep=4pt,circle,draw,font=\sffamily,outer sep=1pt}]
 \node[kreis] (a) at (0,0) {1};
@@ -606,19 +605,19 @@ class Element {
     \textcolor{gray}{3} & 1 & 0 & 0 & 1\cr
     \textcolor{gray}{4} & 0 & 1 & 0 & 0\cr
     }\)}
-\end{minipage}}\quad\begin{minipage}{.25\linewidth}
+\end{minipage}}\quad\onslide<4->{\begin{minipage}{.25\linewidth}
     \begin{enumerate}
         \item \(\to 2\)
         \item \(\to 3 \to 4\)
         \item \(\to 1 \to 4\)
         \item \(\to 2\)
     \end{enumerate}
-\end{minipage}
-\begin{itemize}[<+(1)->]
+\end{minipage}}\end{center}\bigskip\par
+\begin{itemize}
     \itemsep6pt
-    \item Je nach Kontext bietet sich die Adjazenzmatrix (links) oder die Adjazenzliste (rechts) mehr an
-    \item Für die Durchläufe markiert \(S\) den Startknoten
-    \item Auch hier hilft die \hyperlink{episode-trav-jmp}{Episode}
+    \item<5-> Je nach Kontext bietet sich die Adjazenzmatrix (links) oder die Adjazenzliste (rechts) mehr an
+    \item<6-> Für die Durchläufe markiert \(S\) den Startknoten
+    \item<7-> Auch hier hilft die \hyperlink{episode-trav-jmp}{\rawlink{Episode}}
 \end{itemize}
 \end{frame}
 
@@ -636,6 +635,7 @@ class Element {
 
 % \SetNextSectionText[.55\linewidth]{TODO}
 \section{Abschließendes}
+
 {\SummaryFrame
 \begin{frame}[fragile,t]{Zusammenfassend}
 % \printBibCommand
@@ -643,13 +643,54 @@ class Element {
 \vfill\vfill % double fill for more fraction
 \begin{itemize}[<+(1)->]
     \itemsep8pt
-    \item Prüfungsanmeldung
-    \item Feedback
+    \item Meldet euch für die Übungsleistung an \begin{itemize}
+        \item Dies geht in \link{https://campusonline.uni-ulm.de/qislsf/}{campusonline}
+        \item Die Prüfung heißt \say{10850 Praktische Informatik -  Übung}
+    \end{itemize}
+    \item Meldet euch auch für die Prüfung an
+    \item Feedback bezüglich des Tutoriums wird immer gern gesehen \begin{itemize}
+        \item Ist hier eine anonyme Umfrage erwünscht?
+    \end{itemize}
+    \item Die Betrachtung von Algorithmen und Datenstrukturen ist elementar!
 \end{itemize}
 \end{frame}
 }
 
+\setbox\pinguA=\hbox{\tikz{\pingu[body type=tilt-left,right wing raise,eyes shock,small,pants=pingu@purple!50!pingu@blue,strawhat,strawhat position={-26.9:(-.185cm,.14cm){1.275}},lollipop left=pingu@blue,left item angle=-30]}}
+\setbox\pinguB=\hbox{\tikz{\pingu[sunglasses round,tie=pingu@black,tie dots,cloak=pingu@black,left wing hug,eyes angry]}}
+\setbox\pinguC=\hbox{\tikz{\pingu[sunglasses,tie=pingu@black,tie dots,cloak=pingu@black,right wing hug,eyes angry]}}
+\setbox\pinguD=\hbox{\tikz{
+   \pingu[:back,wings raise,name=pingu,hair=gray,hair 2=pingu@blue]
+   \path[postaction={decorate},decoration={text along path, text={|\sffamily\bfseries|Safety},text align={fit to path},text color=white}] ([yshift=5mm]pingu-belly-center) ++ (270-75:22pt and 5pt) arc (270-75:270+75:22pt and 5pt);
+}}
 \outro{\vskip9mm\centering \onslide<2->{\scalebox{1.35}{\begin{tikzpicture}
+    % \pingu[conical hat, blush,santa beard, cane right, cape=paletteA]
+    [W/.style={rounded corners,draw,lightgray,line width=4pt,minimum width=1.5cm,minimum height=.65cm,scale=2,font=\sffamily\Large,text=black,fill=btdm@background},V/.style={-Kite,lightgray,line cap=round,line width=3.5pt}]
+   \node[W] (a) at(0,0) {7};
+   \node[W,above right=.5cm,xshift=.25cm] (b) at(a.east) {9};
+   \node[W,below right=.5cm,xshift=.25cm] (c) at(a.east) {-5};
+   \node[W,right=.75cm,yshift=-2mm] (d) at(b.east) {15};
+   \node[W,right=.75cm,yshift=2mm] (e) at(d.east) {17};
+
+   \node[W,below left=.5cm] (f) at(c.south) {-6};
+   \node[W,,opacity=.7,below right=.5cm] (g) at(c.south) {-2};
+
+   \node[W,below left=.5cm,xshift=-.25cm] (h) at(g.south) {-3};
+   \node[W,below right=.5cm,xshift=1cm] (i) at(g.south) {-1};
+
+   \node[below=-1.1cm] at(d.south) {\rotatebox{-50}{\copy\pinguA}};
+   \node[left=-3.5mm,yshift=2mm] at(h.west) {\copy\pinguB};
+   \node[right=-3.5mm,yshift=2mm] at(i.east) {\copy\pinguC};
+
+   \node[below=7.65cm,xshift=-1cm,scale=1.5] (k) at(d.south) {\copy\pinguD};
+
+   \graph[edges={V}]{(a) -> (b) -> (d) -> (e),(a) -> (c) -> {(f), (g)},(g) -> {(h),(i)}};
+
+   % Pfeil und Kachel auf dem Boden, "wurde entfernt" da dynamisch :D
+
+   \node[W,below left=4mm,rotate=-8] (ax) at(k.south) {-4};
+
+   \draw[V] ([xshift=-8mm,yshift=7mm]ax.north west) -- ++(2.45cm,6mm);
 
 \end{tikzpicture}}}}
 
