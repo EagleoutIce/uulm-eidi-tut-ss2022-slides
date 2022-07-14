@@ -214,10 +214,10 @@
 \immediate\write18{wget https://media.githubusercontent.com/media/EagleoutIce/Episode-Traversierung/gh-pages/preview-01.png -O logoTraversal-\jobname.png}
 \AddonFrame
 \begin{frame}[c]{Wääärbuuuung}
-    \begin{center}
+    \hypertarget<2>{episode-trav-jmp}{}\begin{center}
         \scalebox{.75}{\begin{tikzpicture}[align-base]
             \onslide<2->{\draw[thick,darkgray,rounded corners=2.5pt,path picture={\node at(path picture bounding box.center) {\href{https://media.githubusercontent.com/media/EagleoutIce/Episode-Traversierung/gh-pages/noanim_traversal.pdf}{\includegraphics[width=8.5cm,height=4.788cm,keepaspectratio]{logoTraversal-\jobname.png}}};}] (0,0) rectangle (8.5cm,4.788cm);}
-        \end{tikzpicture}}\qquad\fancyqr{https://github.com/EagleoutIce/Episode-Traversierung}
+        \end{tikzpicture}}\qquad\onslide<2->{\fancyqr{https://github.com/EagleoutIce/Episode-Traversierung}}
     \end{center}
 \end{frame}}\fi
 
@@ -591,11 +591,48 @@ class Element {
 \section{Aussicht: Übungsblatt 11}
 \subsection{Aufgabe 1}
 \begin{frame}{Aufgabe 1: Graphen}
+\begin{minipage}{.3\linewidth}% igrate to columns?
+\centering\onslide<2->{\begin{tikzpicture}[kreis/.style={inner sep=4pt,circle,draw,font=\sffamily,outer sep=1pt}]
+\node[kreis] (a) at (0,0) {1};
+\node[kreis] (b) at (2,0) {2};
+\node[kreis] (c) at (2,-2) {3};
+\node[kreis] (d) at (0,-2) {4};
+\draw[-Kite] (a) edge (b) (b) edge (c) (c) edge (a) (b) edge (d) (d) edge (b) (c) edge (d);
+\end{tikzpicture}}
+\end{minipage}\quad\onslide<3->{\begin{minipage}{.25\linewidth}%
+    \raisebox{2pt}{\(\bordermatrix{~ & \textcolor{gray}{1} & \textcolor{gray}{2} & \textcolor{gray}{3} & \textcolor{gray}{4} \cr
+    \textcolor{gray}{1} & 0 & 1 & 0 & 0\cr
+    \textcolor{gray}{2} & 0 & 0 & 1 & 1\cr
+    \textcolor{gray}{3} & 1 & 0 & 0 & 1\cr
+    \textcolor{gray}{4} & 0 & 1 & 0 & 0\cr
+    }\)}
+\end{minipage}}\quad\begin{minipage}{.25\linewidth}
+    \begin{enumerate}
+        \item \(\to 2\)
+        \item \(\to 3 \to 4\)
+        \item \(\to 1 \to 4\)
+        \item \(\to 2\)
+    \end{enumerate}
+\end{minipage}
 \begin{itemize}[<+(1)->]
-    \item Adjazenzmatrix und Liste (Kompakt Kram oder so letztes sem)
-    \item 3: Traversierungen angeben
+    \itemsep6pt
+    \item Je nach Kontext bietet sich die Adjazenzmatrix (links) oder die Adjazenzliste (rechts) mehr an
+    \item Für die Durchläufe markiert \(S\) den Startknoten
+    \item Auch hier hilft die \hyperlink{episode-trav-jmp}{Episode}
 \end{itemize}
 \end{frame}
+
+\begin{frame}{Aufgaben 2 und 3}
+    \begin{itemize}
+        \itemsep12pt
+        \item Die Implementation eines Stacks sollte nach Schema \(F\) funktionieren
+        \item Bei der Baum-Traversierung nicht abschrecken lassen \begin{itemize}
+            \item Bei Problemen erst einen kleinen Baum mit nur einer Operation probieren
+            \item Gerne auch Unterstützung für weitere Funktionen!
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+\fi
 
 % \SetNextSectionText[.55\linewidth]{TODO}
 \section{Abschließendes}
