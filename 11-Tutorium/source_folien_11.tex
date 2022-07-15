@@ -27,8 +27,26 @@
 \section{Präsenzaufgabe}
 {
 \begin{frame}[fragile,c]{Präsenzaufgabe}
-\begin{aufgabe}{TODO}
+\begin{aufgabe}{Dir streichen wir das Erbe!}
+    Gegeben sei die folgende abstrakte Klasse RegularPolygon, welche ein Polygon mit gleichen Seitenlängen bzw. Innenwinkeln repräsentieren soll:
+\begin{minted}{java}
+public abstract class RegularPolygon {
+    protected final int numSides;
+    protected final double sideLength;
+    public RegularPolygon(int numSides, double sideLength) {
+        this.numSides = numSides;
+        this.sideLength = sideLength;
+    }
+    public int getNumSides() {
+        return this.numSides;
+    }
+    public double getCircumference() {
+        return this.numSides * this.sideLength;
+    }
+    public abstract double getArea();
+ }
 
+\end{minted}
 \end{aufgabe}
 \end{frame}
 }
