@@ -18,7 +18,7 @@
 \begin{frame}[c]{Kurzwiederholung}
 \vspace*{1em}
 \begin{center}
-    Diesmal am Ende, als Zusammenfassung!
+    \onslide<2->{Diesmal am Ende, als Zusammenfassung!}
 \end{center}
 \end{frame}
 }\fi
@@ -69,7 +69,7 @@
       \item[Partielle Korrektheit:] \strut\onslide<+(1)->{Wenn terminiert, dann korrekt}
    \end{description}
    \item Weitere Eigenschaften \begin{description}[Determiniertheit: ]
-      \item[Determiniertheit:] \strut\onslide<+(1)->{Gleiche Eingabe~\(\to\) Gleiche Ausgabe}\infoblock{Einer determinierten Person ist egal, \textit{wie} sie ihr Ziel erreicht.}
+      \item[Determiniertheit:] \strut\onslide<+(1)->{Gleiche Eingabe~\(\to\) Gleiche Ausgabe\infoblock{Einer determinierten Person ist egal, \textit{wie} sie ihr Ziel erreicht.}}
       \item[Determinismus:] \strut\onslide<+(1)->{Gleiche Eingabe~\(\to\) Gleiche Zustandsfolge}
    \end{description}
 \end{itemize}\vfill
@@ -189,7 +189,7 @@
 \begin{columns}[c]
 \column{.35\linewidth}
 \begin{minted}[escapeinside={/*}{*/}]{java}
-/*\CodeMarker{\textbf{Head}-Recursive}*/
+/*\onslide<10->*//*\CodeMarker{\textbf{Head}-Recursive}*/
 /*\onslide<10->*/public int f(int x) {
 /*\onslide<10->*/    if(x < 2) return 1;
 /*\onslide<10->*/    else return f(x - 1) * x;
@@ -197,14 +197,14 @@
 \end{minted}
 \column{.45\linewidth}
 \begin{minted}[escapeinside={/*}{*/}]{java}
-/*\CodeMarker{\textbf{Tail}-Recursive, call as f(x, 1)}*/
+/*\onslide<11->*//*\CodeMarker{\textbf{Tail}-Recursive, call as f(x, 1)}*/
 /*\onslide<11->*/public static int f(int x, int acc) {
 /*\onslide<11->*/    if(x < 2) return acc;
 /*\onslide<11->*/    else return f(x - 1, acc * x);
 /*\onslide<11->*/}/*\onslide<1->*/
 \end{minted}
 \end{columns}\vspace*{-\smallskipamount}
-        \item Ruft sie sich auch mehrfach pro Rekursionsfall auf, ist sie \textit{verzweigt rekursiv}.
+        \item<12-> Ruft sie sich auch mehrfach pro Rekursionsfall auf, ist sie \textit{verzweigt rekursiv}.
     \end{itemize}
 \end{itemize}
 \end{frame}
@@ -222,11 +222,11 @@
               & & \multicolumn{2}{c}{Laufzeit \info{\(\oldO(\ldots)\)}}  & \vspace*{-\smallskipamount}\\
     \cmidrule{3-4}
     \onslide<2->{\rotatebox{90}{\rlap{\footnotesize Stabil?}}} & & \onslide<2->{best} & \onslide<2->{worst} & \onslide<2->{\normalsize Ansatz} \medskip\\
-    \onslide<3->{\(\checkmark\)} & \onslide<3->{\tikzmarknode{itstart}{Bubble}}      & \onslide<3->{\(\O(n^2)\)\textcolor{gray}{, \(\O(n)\)}}       & \onslide<3->{\(\O(n^2)\)} & \onslide<4->{Vertausche benachbarte El., solange unsortiert.} \\
-    \onslide<5->{\(\checkmark\)} & \onslide<5->{Insertion} & \onslide<5->{\(\O(n)\)}             & \onslide<5->{\(\O(n^2)\)}      & \onslide<6->{Sortiere 1. unsortiertes El. in sortierten Teil ein.}\\
+    \onslide<4->{\(\checkmark\)} & \onslide<3->{\tikzmarknode{itstart}{Bubble}}      & \onslide<3->{\(\O(n^2)\)\textcolor{gray}{, \(\O(n)\)}}       & \onslide<3->{\(\O(n^2)\)} & \onslide<4->{Vertausche benachbarte El., solange unsortiert.} \\
+    \onslide<6->{\(\checkmark\)} & \onslide<5->{Insertion} & \onslide<5->{\(\O(n)\)}             & \onslide<5->{\(\O(n^2)\)}      & \onslide<6->{Sortiere 1. unsortiertes El. in sortierten Teil ein.}\\
     & \onslide<7->{\tikzmarknode{itend}{Selection}} & \onslide<7->{\(\O(n^2)\)}    & \onslide<7->{\(\O(n^2)\)}      & \onslide<8->{Kleinstes unsortiertes El. an Ende des sortierten Teils.} \medskip\\
     % Quick-, merge und Heapsort können auch O(n)
-    \onslide<9->{\(\checkmark\)} & \onslide<9->{\tikzmarknode{rekstart}{Merge}}    & \onslide<9->{\(\O(n \log n)\)} & \onslide<9->{\(\O(n \log n)\)}  & \onslide<10->{Aufteilen bis einel., wiederholtes mergen sortierter Teillisten.}\\
+    \onslide<10->{\(\checkmark\)} & \onslide<9->{\tikzmarknode{rekstart}{Merge}}    & \onslide<9->{\(\O(n \log n)\)} & \onslide<9->{\(\O(n \log n)\)}  & \onslide<10->{Aufteilen bis einel., wiederholtes mergen sortierter Teillisten.}\\
     & \onslide<11->{Quick}                             & \onslide<11->{\(\O(n \log n)\)} & \onslide<11->{\(\O(n^2)\)}    & \onslide<12->{Pivot $\to$ Ende, \(\ell\) solang \(<\), \(r\) solang \(\geq\). Treffen \(\to\) tausche Pivot.}\\
     & \onslide<13->{\tikzmarknode{rekend}{Heap}}       & \onslide<13->{\(\O(n \log n)\)} & \onslide<13->{\(\O(n\log n)\)} & \onslide<14->{Baue Heap, entferne wiederholt Wurzel, heapify.}
 \end{tabular}\bigskip\par
@@ -241,7 +241,7 @@
 \end{tikzpicture}%
 \begin{description}[Einfach verketteter Binärbaum:]
     \itemsep25pt
-    \item<3->[Einfach verkettete Liste:] ~\onslide<4->{\tikzset{W/.style={draw, rounded corners=2pt},K/.style={W, rectangle split, rectangle split parts=2,rectangle split horizontal}}\scalebox{.8}{\begin{tikzpicture}[align-half-base]
+    \item<2->[Einfach verkettete Liste:] ~\onslide<3->{\tikzset{W/.style={draw, rounded corners=2pt},K/.style={W, rectangle split, rectangle split parts=2,rectangle split horizontal}}\scalebox{.8}{\begin{tikzpicture}[align-half-base]
     \node[K] (a) at (0,0) {4\nodepart{two}};
     \node[K,right=2mm] (b) at (a.east) {5\nodepart{two}};
     \node[K,right=2mm] (c) at (b.east) {1\nodepart{two}};
@@ -258,7 +258,7 @@
     \draw[Circle-Kite] ([xshift=-1.65ex]d.east) -- (e.west);
 \end{tikzpicture}}}
 % this is horrible, but i have no time
-    \item<5->[Doppelt verkettete Liste:] ~\onslide<6->{\tikzset{W/.style={draw, rounded corners=2pt},K/.style={W, rectangle split, rectangle split parts=3,rectangle split horizontal}}\scalebox{.8}{\begin{tikzpicture}[align-half-base]
+    \item<4->[Doppelt verkettete Liste:] ~\onslide<5->{\tikzset{W/.style={draw, rounded corners=2pt},K/.style={W, rectangle split, rectangle split parts=3,rectangle split horizontal}}\scalebox{.8}{\begin{tikzpicture}[align-half-base]
     \node[K] (a) at (0,0) {\nodepart{two}4\nodepart{three}};
     \node[W,left=2mm] (f) at (a.west) {\phantom{2}};
     \node[K,right=2mm] (b) at (a.east) {\nodepart{two}5\nodepart{three}};
@@ -280,8 +280,8 @@
     \draw[Circle-Kite] ([xshift=-1.65ex]d.east) -- (e.west);
     \draw[Circle-Kite] ([xshift=1.65ex]a.west) -- (f.east);
 \end{tikzpicture}}}
-    \item<7->[Einfach verketteter Binärbaum:] \tikzset{W/.style={draw, rounded corners=2pt}}%
-    \onslide<8->{\smash{\raisebox{-.5\height}{\rotatebox{90}{\scalebox{.6}{\begin{tikzpicture}[align-half-base]
+    \item<6->[Einfach verketteter Binärbaum:] ~\tikzset{W/.style={draw, rounded corners=2pt}}%
+    \onslide<7->{\smash{\raisebox{-.5\height}{\rotatebox{90}{\scalebox{.6}{\begin{tikzpicture}[align-half-base]
     \treenode[](0,0)a{\rotatebox{-90}{4}};
     \treenode[yshift=-2mm,below left=2mm](a.south)b{\rotatebox{-90}{5}};
     \treenode[yshift=-2mm,below right=2mm](a.south)c{\rotatebox{-90}{1}};
@@ -303,7 +303,7 @@
 % TODO: example code traversal
 % TODO: example code list append
 \begin{tikzpicture}[@O]
-\begin{onlyenv}<9->
+\begin{onlyenv}<8->
 \node[above right,xshift=5mm,yshift=\btdmfootheight+.25cm,text width=5cm] at(current page.south west) {%
 \begin{minted}{java}
 void inorder(Node n)  {
@@ -315,7 +315,7 @@ void inorder(Node n)  {
 \end{minted}
 };
 \end{onlyenv}
-\begin{onlyenv}<10->
+\begin{onlyenv}<9->
 \node[above left,xshift=-6.5mm,yshift=\btdmfootheight+1.5cm,text width=6.5cm] at(current page.south east) {%
 \begin{minted}[morekeywords={[3]{Elem}}]{java}
 private class Elem {
@@ -328,7 +328,7 @@ private class Elem {
 \end{minted}
 };
 \end{onlyenv}
-\begin{onlyenv}<11->
+\begin{onlyenv}<10->
     \node[above left,xshift=-.5mm,yshift=\btdmfootheight-.25cm,text width=6cm] at(current page.south east) {%
     \begin{minted}[morekeywords={[3]{Elem}}]{java}
 Elem head, tail;
