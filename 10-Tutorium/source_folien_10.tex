@@ -30,10 +30,9 @@
     % Quick-, merge und Heapsort können auch O(n)
     \onslide<9->{\tikzmarknode{rekstart}{Merge}}    & \onslide<9->{\(\O(n \log n)\)} & \onslide<9->{\(\O(n \log n)\)}  & \onslide<10->{Aufteilen bis einel., wiederholtes mergen sortierter Teill.}\\
     \onslide<11->{Quick}                             & \onslide<11->{\(\O(n \log n)\)} & \onslide<11->{\(\O(n^2)\)}    & \onslide<12->{Pivot $\to$ Ende, \(l\) sol. \(<\), \(r\) sol. \(\geq\). Treffen \(\to\) tausche Pivot.}\\
-    \onslide<13->{\tikzmarknode{rekend}{Heap}}       & \onslide<13->{\(\O(n \log n)\)} & \onslide<13->{\(\O(n\log n)\)} & \onslide<14->{Baue 4Heap, entferne wiederholt Wurzel, heapify.}\\
+    \onslide<13->{\tikzmarknode{rekend}{Heap}}       & \onslide<13->{\(\O(n \log n)\)} & \onslide<13->{\(\O(n\log n)\)} & \onslide<14->{Baue Heap, entferne wiederholt Wurzel, heapify.}\\
 \bottomrule
-\end{tabular}\medskip\par
-\only<0|handout:0>{\scriptsize\textit{Dies folgt den Implementationen der Vorlesung. Bereits leichte Modifikationen (wie: prüfe zuerst ob die Liste bereits sortiert ist) können die Daten verändern (beispielsweise einen best-case von \(\O(n)\) im Falle von Bubblesort).}}}
+\end{tabular}
 \begin{tikzpicture}[@O]
     \onslide<15->{\draw[decoration={brace,mirror},decorate] ([xshift=-1.25mm]itstart.north west) to[edge node={node[left=1mm] {\rotatebox{90}{iterativ}}}] ([xshift=-1.25mm]itend.south west);}
     \onslide<16->{\draw[decoration={brace,mirror},decorate] ([xshift=-1.25mm]rekstart.north west) to[edge node={node[left=1mm] {\rotatebox{90}{rekursiv}}}] ([xshift=-1.25mm]rekend.south west);}

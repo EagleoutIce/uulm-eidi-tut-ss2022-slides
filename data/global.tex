@@ -227,12 +227,12 @@
     \rule{0cm}{.5\overviewheight}%
     \color{gray}\ifnum#1=1\hl\else\ifnum#1=8\hl\fi\fi Theorie\quad
     %
-    & \MayLoadActive{1}{2} & & & \MayLoadActive{8}{12}\medskip\\
+    & \MayLoadActive{1}{2} & & & \MayLoadActive{8}{13}\medskip\\
     \color{gray}\ifnum#1>1\ifnum#1<5\hl\fi\fi Grundlagen\quad
     &
     \MayLoadActive{2}{3\,\&\,4} & \MayLoadActive{3}{5} & \MayLoadActive{4}{6} & \medskip\\
     \color{gray}\ifnum#1>4\ifnum#1<8\hl\fi\fi\ifnum#1=9\hl\fi Vertiefungen\quad
-    &\MayLoadActive{5}{7\,\&\,11}&\MayLoadActive{7}{8}&\MayLoadActive{9}{9}&\MayLoadActive{6}{10}
+    &\MayLoadActive{5}{7\,\&\,12}&\MayLoadActive{7}{8}&\MayLoadActive{9}{9}&\MayLoadActive{6}{10\,\&\,11}
 \endtabular
 }\par
 \vspace*{0pt plus 1filll}\null
@@ -369,7 +369,8 @@
 % current space hack:
 \preto\AnimateCode{\vspace*{-.65\baselineskip}}
 \appto\endAnimateCode{\vspace*{-\baselineskip}}
-\def\CodeFileMarker#1{{\color{lightgray}\sffamily\tiny\llap{\faFileCodeO~\thinspace}#1}}
+\def\CodeFileMarker#1{\CodeMarker{\llap{\faFileCodeO~\thinspace}#1}}
+\def\CodeMarker#1{{\color{lightgray}\sffamily\tiny#1}}
 \newcommand\ShowInTheWeb[2][.25mm]{\smash{\raisebox{#1}{\color{lightgray}\sffamily\tiny\fancyulcolor{lightgray}\link{#2}{display in browser}}}\vspace*{-#1}}
 
 % \def\CodeFileMarker#1{{\hfill\color{lightgray}\sffamily\tiny#1\rlap{\thinspace~\faFileCodeO}}}
