@@ -160,8 +160,8 @@
     \end{center}
 \end{frame}
 
-\def\Z#1{\onslide<#1>{\textcolor{codeouthl}{0}}}
-\def\K#1{\onslide<#1>{1}}
+\def\Z#1{\onslide<#1->{\textcolor{codeouthl}{0}}}
+\def\K#1{\onslide<#1->{1}}
 
 \begin{frame}[c]{Eine Adjazenzmatrix}
     \begin{enumerate}
@@ -195,16 +195,16 @@
             {\TT{12} \draw[-Kite,@] (7) -- (4);}
         \end{tikzpicture}}}\hskip2cm\begin{minipage}{.3\linewidth}
     \small\onslide<4->{\begin{equation*}
-\bordermatrix{~   & 0      & 1      & 2      & 3      & 4      & 5      & 6      & 7      & 8 \cr
-                0 & \Z{5}  & \K{5}  & \Z{5}  & \Z{5}  & \Z{5}  & \Z{5}  & \Z{5}  & \Z{5}  & \Z{5}  \cr
-                1 & \Z{6}  & \Z{6}  & \K{6}  & \Z{6}  & \Z{6}  & \K{6}  & \Z{6}  & \Z{6}  & \Z{6}  \cr
-                2 & \Z{7}  & \Z{7}  & \Z{7}  & \K{7}  & \Z{7}  & \Z{7}  & \K{7}  & \Z{7}  & \Z{7}  \cr
-                3 & \Z{8}  & \Z{8}  & \Z{8}  & \Z{8}  & \Z{8}  & \Z{8}  & \Z{8}  & \Z{8}  & \Z{8}  \cr
-                4 & \K{9}  & \Z{9}  & \Z{9}  & \Z{9}  & \Z{9}  & \K{9}  & \Z{9}  & \Z{9}  & \Z{9}  \cr
-                5 & \Z{10} & \Z{10} & \Z{10} & \Z{10} & \Z{10} & \Z{10} & \Z{10} & \Z{10} & \Z{10} \cr
-                6 & \Z{11} & \Z{11} & \Z{11} & \Z{11} & \Z{11} & \Z{11} & \Z{11} & \K{11} & \Z{11} \cr
-                7 & \Z{12} & \Z{12} & \Z{12} & \K{12} & \Z{12} & \Z{12} & \Z{12} & \Z{12} & \Z{12} \cr
-                8 & \Z{13} & \Z{13} & \Z{13} & \Z{13} & \Z{13} & \Z{13} & \Z{13} & \Z{13} & \Z{13} \cr
+   \bordermatrix{~   & 0      & 1      & 2      & 3      & 4      & 5      & 6      & 7      & 8 \cr
+\only<5>{\mathbf}{0} & \Z{5}  & \K{5}  & \Z{5}  & \Z{5}  & \Z{5}  & \Z{5}  & \Z{5}  & \Z{5}  & \Z{5}  \cr
+\only<6>{\mathbf}{1} & \Z{6}  & \Z{6}  & \K{6}  & \Z{6}  & \Z{6}  & \K{6}  & \Z{6}  & \Z{6}  & \Z{6}  \cr
+\only<7>{\mathbf}{2} & \Z{7}  & \Z{7}  & \Z{7}  & \K{7}  & \Z{7}  & \Z{7}  & \K{7}  & \Z{7}  & \Z{7}  \cr
+\only<8>{\mathbf}{3} & \Z{8}  & \Z{8}  & \Z{8}  & \Z{8}  & \Z{8}  & \Z{8}  & \Z{8}  & \Z{8}  & \Z{8}  \cr
+\only<9>{\mathbf}{4} & \K{9}  & \Z{9}  & \Z{9}  & \Z{9}  & \Z{9}  & \K{9}  & \Z{9}  & \Z{9}  & \Z{9}  \cr
+\only<10>{\mathbf}{5} & \Z{10} & \Z{10} & \Z{10} & \Z{10} & \Z{10} & \Z{10} & \Z{10} & \Z{10} & \Z{10} \cr
+\only<11>{\mathbf}{6} & \Z{11} & \Z{11} & \Z{11} & \Z{11} & \Z{11} & \Z{11} & \Z{11} & \K{11} & \Z{11} \cr
+\only<12>{\mathbf}{7} & \Z{12} & \Z{12} & \Z{12} & \K{12} & \Z{12} & \Z{12} & \Z{12} & \Z{12} & \Z{12} \cr
+\only<13>{\mathbf}{8} & \Z{13} & \Z{13} & \Z{13} & \Z{13} & \Z{13} & \Z{13} & \Z{13} & \Z{13} & \Z{13} \cr
             }
     \end{equation*}}
     \end{minipage}
@@ -219,7 +219,7 @@
 \MakeThePinguExplainIt[text width=3.77cm]{cap=!hide,glasses=!hide,halo,halo raise=2mm,devil horns,right item angle=5,cup=!hide,bow tie}{Natürlich~können~die\\Kanten~in~die~andere\\~Richtung~auch~ein~ande-\\res~Gewicht~aufweisen.}
 \begin{frame}[c]{Beispiel: Die Gegenrichtung}
     \begin{itemize}[<+(1)->]
-        \item Nun eine gewichtete Adjazenzmatrix (Kanten wie \tikz[align-half-base]{\draw[Kite-Kite] (0,0) -- (1,0);} können auch\\ungerichtet dargestellt werden):
+        \item Nun eine gewichtete Adjazenzmatrix (Kanten wie \tikz[align-half-base]{\draw[Kite-Kite] (0,0) -- (1,0);} können\\auch ungerichtet dargestellt werden):
     \end{itemize}
     \begin{center}
         \onslide<3->{\(
