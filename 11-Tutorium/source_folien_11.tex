@@ -28,7 +28,7 @@
 {
 \begin{frame}[fragile,c]{Präsenzaufgabe}
 \begin{aufgabe}{Dir streichen wir das Erbe!}
-\only<2-3|handout:0>{Gegeben sei die folgende abstrakte Klasse RegularPolygon, welche ein Polygon mit gleichen Seitenlängen bzw. Innenwinkeln repräsentieren soll:}\only<4->{\vspace*{-1.75em}}%
+\only<2-3|handout:0>{Gegeben sei die folgende abstrakte Klasse \T{RegularPolygon}, welche ein Polygon mit gleichen Seitenlängen bzw. Innenwinkeln repräsentieren soll:}\only<4->{\vspace*{-1.75em}}%
 \lstfs{9}%
 \begin{minted}{java}
 /*\CodeFileMarkerAttach<3->{RegularPolygon.java}*/
@@ -52,7 +52,7 @@
 
 \begin{frame}[c, fragile]{How to legacy}
 \begin{minted}{java}
-/*\CodeFileMarkerAttach<3->{EquilateralTriangle.java}*/
+/*\CodeFileMarkerAttach<2->{EquilateralTriangle.java}*/
 /*\onslide<2->*/public class EquilateralTriangle extends RegularPolygon {
 /*\onslide<3->*/   public EquilateralTriangle(int sideLength) {
 /*\onslide<4->*/      super(/*\onslide<5->*/3/*\onslide<6->*/, sideLength/*\onslide<4->*/);
@@ -70,10 +70,206 @@
 \section{Übungsblatt 11}
 \subsection{Aufgabe 1}
 {\taskenum
-\begin{frame}[c]{Aufgabe 1: TODO}
-    \taskblock<2->
 
-    \endtaskblock
+
+\tikzset{dot/.style={circle,draw}}
+\begin{frame}[c]{Präsenzaufgabe}
+\taskblock<2->
+    Geben sei der folgende Graph \(G\):
+    \vspace*{-.5\baselineskip}\begin{center}
+        \onslide<3->{\scalebox{.75}{\begin{tikzpicture}[align-half-base]
+            \node[dot] (1) at (0,0) {1};
+            \node[dot] (2) at (3,0) {2};
+            \node[dot] (0) at (0,-3) {0};
+            \node[dot] (3) at (3,-3) {3};
+            \node[dot] (5) at (.85,-.85) {5};
+            \node[dot] (6) at (2.15,-.85) {6};
+            \node[dot] (4) at (.85,-2.15) {4};
+            \node[dot] (7) at (2.15,-2.15) {7};
+            \node[dot] (8) at (2.15,-3) {8};
+            \node[left] at(0.west) {S};
+
+            \draw[-Kite] (0) -- (1);
+
+            \draw[-Kite] (1) -- (5);
+            \draw[-Kite] (1) -- (2);
+
+            \draw[-Kite] (2) -- (6);
+            \draw[-Kite] (2) -- (3);
+
+            \draw[-Kite] (4) -- (5);
+            \draw[-Kite] (4) -- (0);
+
+            \draw[-Kite] (6) -- (7);
+            \draw[-Kite] (7) -- (4);
+        \end{tikzpicture}}}
+    \end{center}
+    \begin{enumerate}
+        \item<4-> Geben Sie die Adjazenzliste für \(G\) an.
+        \item<4-> Geben Sie die Adjazenzmatrix für \(g\) an.
+        \item<5-> In welcher Reihenfolge werden die Knoten besucht, wenn \(G\) mittels eines \say{Tiefendurchlaufs} traversiert wird?
+        \item<5-> In welcher Reihenfolge werden die Knoten besucht, wenn \(G\) mittels eines \say{Breitendurchlaufs} traversiert wird?
+    \end{enumerate}
+\endtaskblock
+\end{frame}
+
+\def\TT#1{\only<#1|handout0>{\tikzset{@/.style={thick}}\color{paletteA}}}\tikzset{@/.style={}}
+\begin{frame}[c]{Eine Adjazenzliste}
+    \begin{enumerate}
+        \item<2-> \task{Geben Sie die Adjazenzliste für \(G\) an.}
+    \end{enumerate}
+    \begin{center}
+        \onslide<3->{\scalebox{.75}{\begin{tikzpicture}[align-half-base]
+            {\TT{4}  \node[dot] (0) at (0,-3)        {\only<4>{\bfseries}0};}
+            {\TT{5}  \node[dot] (1) at (0,0)         {\only<5>{\bfseries}1};}
+            {\TT{6}  \node[dot] (2) at (3,0)         {\only<6>{\bfseries}2};}
+            {\TT{7}  \node[dot] (3) at (3,-3)        {\only<7>{\bfseries}3};}
+            {\TT{8}  \node[dot] (4) at (.85,-2.15)   {\only<8>{\bfseries}4};}
+            {\TT{9}  \node[dot] (5) at (.85,-.85)    {\only<9>{\bfseries}5};}
+            {\TT{10} \node[dot] (6) at (2.15,-.85)  {\only<10>{\bfseries}6};}
+            {\TT{11} \node[dot] (7) at (2.15,-2.15) {\only<11>{\bfseries}7};}
+            {\TT{12} \node[dot] (8) at (2.15,-3)    {\only<12>{\bfseries}8};}
+            \node[left] at(0.west) {S};
+
+            {\TT{4} \draw[-Kite,@] (0) -- (1);}
+
+            {\TT{5} \draw[-Kite,@] (1) -- (5);
+            \draw[-Kite,@] (1) -- (2);}
+
+            {\TT{6} \draw[-Kite,@] (2) -- (6);
+            \draw[-Kite,@] (2) -- (3);}
+
+            {\TT{8} \draw[-Kite,@] (4) -- (5);
+            \draw[-Kite,@] (4) -- (0);}
+
+            {\TT{10} \draw[-Kite,@] (6) -- (7);}
+            {\TT{11} \draw[-Kite,@] (7) -- (4);}
+        \end{tikzpicture}}}\hskip2cm\begin{minipage}{.2\linewidth}
+    \small\begin{enumerate}[<+(1)->]
+            \item<4->[0]  \(\!\to 1\)
+            \item<5->[1]  \(\!\to 2 \to 5\)
+            \item<6->[2]  \(\!\to 3 \to 6\)
+            \item<7->[3]
+            \item<8->[4]  \(\!\to 0 \to 5\)
+            \item<9->[5]
+            \item<10->[6] \(\!\to 7\)
+            \item<11->[7] \(\!\to 4\)
+            \item<12->[8]
+        \end{enumerate}
+    \end{minipage}
+    \end{center}
+\end{frame}
+
+\def\Z#1{\onslide<#1>{\textcolor{codeouthl}{0}}}
+\def\K#1{\onslide<#1>{1}}
+
+\begin{frame}[c]{Eine Adjazenzmatrix}
+    \begin{enumerate}
+        \item<2-> \task{Geben Sie die Adjazenzmatrix für \(G\) an.}
+    \end{enumerate}
+    \begin{center}
+        \onslide<3->{\scalebox{.75}{\begin{tikzpicture}[align-half-base]
+            {\TT{5}  \node[dot] (0) at (0,-3)        {\only<5|handout:0>{\bfseries}0};}
+            {\TT{6}  \node[dot] (1) at (0,0)         {\only<6|handout:0>{\bfseries}1};}
+            {\TT{7}  \node[dot] (2) at (3,0)         {\only<7|handout:0>{\bfseries}2};}
+            {\TT{8}  \node[dot] (3) at (3,-3)        {\only<8|handout:0>{\bfseries}3};}
+            {\TT{9}  \node[dot] (4) at (.85,-2.15)   {\only<9|handout:0>{\bfseries}4};}
+            {\TT{10}  \node[dot] (5) at (.85,-.85)   {\only<10|handout:0>{\bfseries}5};}
+            {\TT{11} \node[dot] (6) at (2.15,-.85)   {\only<11|handout:0>{\bfseries}6};}
+            {\TT{12} \node[dot] (7) at (2.15,-2.15)  {\only<12|handout:0>{\bfseries}7};}
+            {\TT{13} \node[dot] (8) at (2.15,-3)     {\only<13|handout:0>{\bfseries}8};}
+            \node[left] at(0.west) {S};
+
+            {\TT{5} \draw[-Kite,@] (0) -- (1);}
+
+            {\TT{6} \draw[-Kite,@] (1) -- (5);
+            \draw[-Kite,@] (1) -- (2);}
+
+            {\TT{7} \draw[-Kite,@] (2) -- (6);
+            \draw[-Kite,@] (2) -- (3);}
+
+            {\TT{9} \draw[-Kite,@] (4) -- (5);
+            \draw[-Kite,@] (4) -- (0);}
+
+            {\TT{11} \draw[-Kite,@] (6) -- (7);}
+            {\TT{12} \draw[-Kite,@] (7) -- (4);}
+        \end{tikzpicture}}}\hskip2cm\begin{minipage}{.3\linewidth}
+    \small\onslide<4->{\begin{equation*}
+\bordermatrix{~   & 0      & 1      & 2      & 3      & 4      & 5      & 6      & 7      & 8 \cr
+                0 & \Z{5}  & \K{5}  & \Z{5}  & \Z{5}  & \Z{5}  & \Z{5}  & \Z{5}  & \Z{5}  & \Z{5}  \cr
+                1 & \Z{6}  & \Z{6}  & \K{6}  & \Z{6}  & \Z{6}  & \K{6}  & \Z{6}  & \Z{6}  & \Z{6}  \cr
+                2 & \Z{7}  & \Z{7}  & \Z{7}  & \K{7}  & \Z{7}  & \Z{7}  & \K{7}  & \Z{7}  & \Z{7}  \cr
+                3 & \Z{8}  & \Z{8}  & \Z{8}  & \Z{8}  & \Z{8}  & \Z{8}  & \Z{8}  & \Z{8}  & \Z{8}  \cr
+                4 & \K{9}  & \Z{9}  & \Z{9}  & \Z{9}  & \Z{9}  & \K{9}  & \Z{9}  & \Z{9}  & \Z{9}  \cr
+                5 & \Z{10} & \Z{10} & \Z{10} & \Z{10} & \Z{10} & \Z{10} & \Z{10} & \Z{10} & \Z{10} \cr
+                6 & \Z{11} & \Z{11} & \Z{11} & \Z{11} & \Z{11} & \Z{11} & \Z{11} & \K{11} & \Z{11} \cr
+                7 & \Z{12} & \Z{12} & \Z{12} & \K{12} & \Z{12} & \Z{12} & \Z{12} & \Z{12} & \Z{12} \cr
+                8 & \Z{13} & \Z{13} & \Z{13} & \Z{13} & \Z{13} & \Z{13} & \Z{13} & \Z{13} & \Z{13} \cr
+            }
+    \end{equation*}}
+    \end{minipage}
+    \end{center}
+    \begin{center}
+         \onslide<0|handout:1>{\info{Nullen können mit einem Kommentar, dass alle freien Einträge automatisch \say{0} sind, auch weggelassen werden.}}
+    \end{center}
+\end{frame}
+
+
+\def\g<#1>#2{{\only<-3|handout:0>{\text{\phantom{\bfseries#2}}}\only<4->{\color{gray}\text{\only<#1|handout:0>{\color{paletteA}\bfseries}#2}}}}
+\MakeThePinguExplainIt[text width=3.77cm]{cap=!hide,glasses=!hide,halo,halo raise=2mm,devil horns,right item angle=5,cup=!hide,bow tie}{Natürlich~können~die\\Kanten~in~die~andere\\~Richtung~auch~ein~ande-\\res~Gewicht~aufweisen.}
+\begin{frame}[c]{Beispiel: Die Gegenrichtung}
+    \begin{itemize}[<+(1)->]
+        \item Nun eine gewichtete Adjazenzmatrix (Kanten wie \tikz[align-half-base]{\draw[Kite-Kite] (0,0) -- (1,0);} können auch\\ungerichtet dargestellt werden):
+    \end{itemize}
+    \begin{center}
+        \onslide<3->{\(
+            \bordermatrix{~ & \g<0>1 & \g<0>2 & \g<0>3 & \g<0>4 & \g<0>5 \cr
+        \g<5>1 & 0 & 3 & 0 & 0 & 6 \cr
+        \g<6>2 & 3 & 0 & 5 & 0 & 7 \cr
+        \g<7>3 & 0 & 5 & 0 & 1 & 9 \cr
+        \g<8>4 & 4 & 0 & 1 & 0 & 2 \cr
+        \g<9>5 & 6 & 7 & 9 & 2 & 0 \cr
+        }
+    \)}\hskip2cm\onslide<4->{\begin{tikzpicture}[align-half-base,scale=1.5]
+        \node[dot] (1) at (0,0) {1};
+        \node[dot] (2) at (1.5,1) {2};
+        \node[dot] (3) at (3,0) {3};
+        \node[dot] (4) at (0,-1.5) {4};
+        \node[dot] (5) at (3,-1.5) {5};
+        \onslide<5->{%
+            \colorlet{g}{black}\only<6|handout:0>{\colorlet{g}{gray}}\only<7-|handout:0>{\colorlet{g}{lightgray}}
+            \only<-5|handout:0>{\draw[-Kite,g] (1) to[bend left=10,edge node={node[above,sloped]{3}}] (2);}
+            \only<-8|handout:0>{\draw[-Kite,g] (1) to[bend right=20,edge node={node[above,sloped]{6}}] (5);}
+        }
+        \onslide<6->{
+            \colorlet{g}{black}\only<7|handout:0>{\colorlet{g}{gray}}\only<8-|handout:0>{\colorlet{g}{lightgray}}
+            \draw[Kite-Kite,g] (2) to[bend right=10,edge node={node[above,sloped]{3}}] (1);
+            \only<-6|handout:0>{\draw[-Kite,g] (2) to[bend left=10,edge node={node[above,sloped]{5}}] (3);}
+            \only<-8|handout:0>{\draw[-Kite,g] (2) to[bend right=20,edge node={node[below,sloped]{7}}] (5);}
+        }
+        \onslide<7->{
+            \colorlet{g}{black}\only<8|handout:0>{\colorlet{g}{gray}}\only<9-|handout:0>{\colorlet{g}{lightgray}}
+            \draw[Kite-Kite,g] (3) to[bend right=10,edge node={node[above,sloped]{5}}] (2);
+            \only<-7|handout:0>{\draw[-Kite,g] (3) to[bend right=20,edge node={node[above,sloped]{1}}] (4);}
+            \only<-8|handout:0>{\draw[-Kite,g] (3) to[bend left=10,edge node={node[right]{9}}] (5);}
+        }
+        \onslide<8->{
+            \colorlet{g}{black}\only<9|handout:0>{\colorlet{g}{gray}}%\only<10->{\colorlet{g}{lightgray}}
+            \draw[-Kite,g] (4) to[bend left=20,edge node={node[left]{4}}] (1);
+            \draw[Kite-Kite,g] (4) to[bend left=20,edge node={node[above,sloped]{1}}] (3);
+            \only<-8|handout:0>{\draw[-Kite,g] (4) to[bend right=10,edge node={node[below,sloped]{2}}] (5);}
+        }
+        \onslide<9->{
+            \draw[Kite-Kite] (5) to[bend left=20,edge node={node[above,sloped]{6}}] (1);
+            \draw[Kite-Kite] (5) to[bend left=20,edge node={node[below,sloped]{7}}] (2);
+            \draw[Kite-Kite] (5) to[bend right=10,edge node={node[right]{9}}] (3);
+            \draw[Kite-Kite] (5) to[bend left=10,edge node={node[below,sloped]{2}}] (4);
+        }
+    \end{tikzpicture}}\vspace*{-2\baselineskip}
+    \end{center}
+\begin{tikzpicture}[overlay,remember picture]
+    \onslide<10->{\node[left=-18mm,scale=.8] at(current page.{5.25}) {\usebox\pinguexplainbox};}
+\end{tikzpicture}
 \end{frame}
 }
 
