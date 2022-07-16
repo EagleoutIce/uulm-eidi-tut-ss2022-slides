@@ -28,24 +28,20 @@
 {
 \begin{frame}[fragile,c]{Präsenzaufgabe}
 \begin{aufgabe}{Dir streichen wir das Erbe!}
-    Gegeben sei die folgende abstrakte Klasse RegularPolygon, welche ein Polygon mit gleichen Seitenlängen bzw. Innenwinkeln repräsentieren soll:
+    \only<2-3|handout:0>{Gegeben sei die folgende abstrakte Klasse RegularPolygon, welche ein Polygon mit gleichen Seitenlängen bzw. Innenwinkeln repräsentieren soll:}
+\lstfs{9}%
 \begin{minted}{java}
-public abstract class RegularPolygon {
-    protected final int numSides;
-    protected final double sideLength;
-    public RegularPolygon(int numSides, double sideLength) {
-        this.numSides = numSides;
-        this.sideLength = sideLength;
-    }
-    public int getNumSides() {
-        return this.numSides;
-    }
-    public double getCircumference() {
-        return this.numSides * this.sideLength;
-    }
-    public abstract double getArea();
- }
-
+/*\onslide<3->*/public abstract class RegularPolygon {
+/*\onslide<3->*/    protected final int numSides;
+/*\onslide<3->*/    protected final double sideLength;
+/*\onslide<3->*/    public RegularPolygon(int numSides, double sideLength) {
+/*\onslide<3->*/        numSides = numSides;
+/*\onslide<3->*/        sideLength = sideLength;
+/*\onslide<3->*/    }
+/*\onslide<3->*/    public int getNumSides() { return numSides; }
+/*\onslide<3->*/    public double getCircumference() { return numSides * sideLength; }
+/*\onslide<3->*/    public abstract double getArea();
+/*\onslide<3->*/}
 \end{minted}
 \end{aufgabe}
 \end{frame}
@@ -196,7 +192,7 @@ public abstract class RegularPolygon {
         f(x - 1) \cdot x & \text{ otherwise }
     \end{cases}\)}
 \column{.45\linewidth}
-\begin{minted}[escapeinside={/*}{*/}]{java}
+\begin{minted}{java}
 /*\onslide<5->*/public int f(int x) {
 /*\onslide<6->*/    if(x < 2) return 1;
 /*\onslide<7->*/    else return f(x - 1) * x;
@@ -207,7 +203,7 @@ public abstract class RegularPolygon {
         \item<9-> \textit{Endrekursiv}, wenn dieser Aufruf das letzte Statement ist \info{alles passiert im Abstieg}\vspace*{-\medskipamount}
 \begin{columns}[c]
 \column{.35\linewidth}
-\begin{minted}[escapeinside={/*}{*/}]{java}
+\begin{minted}{java}
 /*\onslide<10->*//*\CodeMarker{\textbf{Head}-Recursive}*/
 /*\onslide<10->*/public int f(int x) {
 /*\onslide<10->*/    if(x < 2) return 1;
@@ -215,7 +211,7 @@ public abstract class RegularPolygon {
 /*\onslide<10->*/}/*\onslide<1->*/
 \end{minted}
 \column{.45\linewidth}
-\begin{minted}[escapeinside={/*}{*/}]{java}
+\begin{minted}{java}
 /*\onslide<11->*//*\CodeMarker{\textbf{Tail}-Recursive, call as f(x, 1)}*/
 /*\onslide<11->*/public static int f(int x, int acc) {
 /*\onslide<11->*/    if(x < 2) return acc;

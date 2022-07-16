@@ -413,7 +413,7 @@ Betrachten Sie den folgenden Binärbaum:\medskip
 \end{enumerate}
 \SetupLstHl\lstfs{9}
 \begin{onlyenv}<handout:0|3>
-\begin{minted}[escapeinside={/*}{*/}]{java}
+\begin{minted}{java}
 /*\CodeFileMarkerAttach<9->[a2-sol/]{Element.java}*/
 class Element {
     private int value;
@@ -427,7 +427,7 @@ class Element {
 \end{minted}
 \end{onlyenv}
 \begin{onlyenv}<4->
-\begin{minted}[escapeinside={/*}{*/}]{java}
+\begin{minted}{java}
 /*\CodeFileMarkerAttach<9->[a2-sol/]{Element.java}*/
 /*\onslide<1->*/|ihl|class Element {|ihl|
 /*\onslide<1->*/|ihl|    private int value; private Element next;|ihl|
@@ -458,7 +458,7 @@ class Element {
     \T{NegativeArraySizeException} ausgelöst werden}
 \end{enumerate}
 \SetupLstHl
-\begin{minted}[escapeinside={/*}{*/}]{java}
+\begin{minted}{java}
 /*\CodeFileMarkerAttach<8->[a2-sol/]{RingBuffer.java}*/
 /*\onslide<3->*/public class RingBuffer {
 /*\onslide<4->*/    private Element head;
@@ -473,7 +473,7 @@ class Element {
 \end{frame}
 \begin{frame}[fragile]{Der Konstruktor}
 \SetupLstHl
-\begin{minted}[escapeinside={/*}{*/}]{java}
+\begin{minted}{java}
 /*\onslide<2->*/|ihl|public class RingBuffer {|ihl|
 /*\onslide<2->*/    |ihl|private Element head, tail; private boolean isEmpty;|ihl|
 /*\onslide<3->*/    |ihl|RingBuffer(int capacity) {|ihl|
@@ -493,7 +493,7 @@ class Element {
 
 \begin{frame}[fragile,c]{Der Konstruktor\hfill II}
 \SetupLstHl\lstfs{9}
-\begin{minted}[escapeinside={/*}{*/}]{java}
+\begin{minted}{java}
 /*\onslide<2->*/|ihl|public class RingBuffer {|ihl|
 /*\onslide<2->*/    |ihl|private Element head, tail; private boolean isEmpty;|ihl|
 /*\onslide<3->*/    |ihl|RingBuffer(int capacity) { ... }|ihl|
@@ -520,7 +520,7 @@ class Element {
     \T{head} zeigt. Sollte der Buffer leer sein, soll eine \T{NoSuchElementException} ausgelöst werden.}
 \end{enumerate}
 \SetupLstHl
-\begin{minted}[escapeinside={/*}{*/}]{java}
+\begin{minted}{java}
 /*\onslide<3->*/public class RingBuffer {
 /*\onslide<3->*/    |ihl|private Element head, tail; private boolean isEmpty;|ihl|
 /*\onslide<3->*/    |ihl|RingBuffer(int capacity) { ... }|ihl|
@@ -544,7 +544,7 @@ class Element {
     \T{head} immer auf das älteste Element im Buffer zeigt und so die FIFO Eigenschaft gewahrt bleibt.}
 \end{enumerate}
 \SetupLstHl
-\begin{minted}[escapeinside={/*}{*/}]{java}
+\begin{minted}{java}
 /*\onslide<3->*/public class RingBuffer {
 /*\onslide<3->*/    |ihl|private Element head, tail; private boolean isEmpty;|ihl|
 /*\onslide<3->*/    |ihl|RingBuffer(int capacity) { ... }|ihl|
@@ -567,7 +567,7 @@ class Element {
     der Elemente im Buffer. Sollte der Buffer leer sein, soll eine NoSuchElementException ausgelöst werden.}
 \end{enumerate}
 \SetupLstHl
-\begin{minted}[escapeinside={/*}{*/}]{java}
+\begin{minted}{java}
 /*\onslide<3->*/public class RingBuffer {
 /*\onslide<3->*/    |ihl|private Element head, tail; private boolean isEmpty;|ihl|
 /*\onslide<3->*/    |ihl|RingBuffer(int capacity) { ... }|ihl|
