@@ -197,7 +197,7 @@
 \AtBeginDocument{\def\O{\ensuremath{\mathcal{O}}}}
 \newsavebox\pinguA \newsavebox\pinguB \newsavebox\pinguC \newsavebox\pinguD
 \def\gend{\textcolor{gray}{\smaller:}}
-\def\PinguBanner#1#2{\tikz\pingu[wings wave, banner=#1, banner sticks length=3mm,banner bent=-42,banner raise=-3.55mm,banner font=\bfseries\Huge,eyes wink,banner height=5.25mm,#2];}
+\def\PinguBanner#1#2{\tikz{\pingu[wings wave, banner=#1, banner sticks length=3mm,banner bent=-42,banner raise=-3.55mm,banner font=\bfseries\Huge,eyes wink,banner height=5.25mm,#2]}}
 
 \usepackage{setspace}
 
@@ -426,7 +426,7 @@
 \end{tikzpicture}}
 
 \newsavebox\pingudoc
-\savebox\pingudoc{\tikz\pingu[body=pingu@black,shirt=pingu@red!80!pingu@black!70!white,bow tie=orange!90!purple, left wing wave, cape=pingu@white!75!gray, halo, halo raise=1.55mm,halo above,cloak wings=false,right eye wink,right,cloak cap=pingu@white!75!gray,monocle left,monocle left glass=pingu@bronze,cane right=pingu@bronze!90!pingu@black, cane right raise=-1.65mm];}
+\savebox\pingudoc{\tikz{\pingu[body=pingu@black,shirt=pingu@red!80!pingu@black!70!white,bow tie=orange!90!purple, left wing wave, cape=pingu@white!75!gray, halo, halo raise=1.55mm,halo above,cloak wings=false,right eye wink,right,cloak cap=pingu@white!75!gray,monocle left,monocle left glass=pingu@bronze,cane right=pingu@bronze!90!pingu@black, cane right raise=-1.65mm]}}
 
 
 % this is so we can have tables with rotate headers :D
