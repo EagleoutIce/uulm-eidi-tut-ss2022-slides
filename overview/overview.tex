@@ -277,10 +277,10 @@
 
    \node[above left=1cm] (g) at(x.north) {\copy\pinguG};
 
-   \draw[lightgray,line width=3pt,-{Triangle[round,open,fill=background color,scale=1.42]}] (g) -- (x);
-   \draw[lightgray,line width=3pt,-{Triangle[round,open,fill=background color,scale=1.42]}] (x) -- (e);
-   \draw[lightgray,line width=3pt,-{Triangle[round,open,fill=background color,scale=1.42]}] (x) -- (d);
-   \draw[lightgray,line width=3pt,-{Triangle[round,open,fill=background color,scale=1.42]}] (e) -- (f);
+   \draw[lightgray,line width=3pt,{Triangle[round,open,fill=background color,scale=1.42]}-] (g) -- (x);
+   \draw[lightgray,line width=3pt,{Triangle[round,open,fill=background color,scale=1.42]}-] (x) -- (e);
+   \draw[lightgray,line width=3pt,{Triangle[round,open,fill=background color,scale=1.42]}-] (x) -- (d);
+   \draw[lightgray,line width=3pt,{Triangle[round,open,fill=background color,scale=1.42]}-] (e) -- (f);
 \onback
    \fill[advanced] ([yshift=-3.5mm]current bounding box.center) circle[radius=12cm];
 \offback
