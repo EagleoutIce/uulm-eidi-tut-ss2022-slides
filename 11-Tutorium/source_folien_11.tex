@@ -28,26 +28,43 @@
 {
 \begin{frame}[fragile,c]{Präsenzaufgabe}
 \begin{aufgabe}{Dir streichen wir das Erbe!}
-    \only<2-3|handout:0>{Gegeben sei die folgende abstrakte Klasse RegularPolygon, welche ein Polygon mit gleichen Seitenlängen bzw. Innenwinkeln repräsentieren soll:}\only<4->{\vspace*{-1em}}%
+\only<2-3|handout:0>{Gegeben sei die folgende abstrakte Klasse RegularPolygon, welche ein Polygon mit gleichen Seitenlängen bzw. Innenwinkeln repräsentieren soll:}\only<4->{\vspace*{-1.75em}}%
 \lstfs{9}%
 \begin{minted}{java}
+/*\CodeFileMarkerAttach<3->{RegularPolygon.java}*/
 /*\onslide<3->*/public abstract class RegularPolygon {
 /*\onslide<3->*/    protected final int numSides;
 /*\onslide<3->*/    protected final double sideLength;
 /*\onslide<3->*/    public RegularPolygon(int numSides, double sideLength) {
-/*\onslide<3->*/        numSides = numSides;
-/*\onslide<3->*/        sideLength = sideLength;
+/*\onslide<3->*/        this.numSides = numSides;
+/*\onslide<3->*/        this.sideLength = sideLength;
 /*\onslide<3->*/    }
 /*\onslide<3->*/    public int getNumSides() { return numSides; }
 /*\onslide<3->*/    public double getCircumference() { return numSides * sideLength; }
 /*\onslide<3->*/    public abstract double getArea();
-/*\onslide<3->*/}
-\end{minted}
-\onslide<5->{Implementieren Sie die Klasse \T{EquilateralTriangle}, welche ein gleichseitiges Dreieck repräsentieren soll. Die abgeleitete Klasse soll von \T{RegularPolygon} erben und zusätzlich einen Konstruktor anbieten, welcher die Seitenlänge als Parameter übernimmt. Die
-Formel für den Flächeninhalt eines gleichseitigen Dreiecks mit einer Seitenlänge \(a\) lautet: \(A = \sfrac14 \cdot \sqrt3 \cdot a^2\).}
+/*\onslide<3->*/}/*\onslide<1->*/
+\end{minted}\vspace*{-.5\baselineskip}\par
+\footnotesize\onslide<5->{Erstellen Sie eine neue Klasse \T{EquilateralTriangle}, welche ein gleichseitiges Dreieck repräsentieren und von \T{RegularPolygon} erben soll. Erzeugen Sie einen Konstruktor, welcher die Seitenlänge als Parameter verarbeitet (\(A = \sfrac14 \cdot \sqrt3 \cdot a^2\)).}\vspace*{-.45\baselineskip}
 \end{aufgabe}
 \end{frame}
 }
+
+
+\begin{frame}[c, fragile]{How to legacy}
+\begin{minted}{java}
+/*\CodeFileMarkerAttach<3->{EquilateralTriangle.java}*/
+/*\onslide<2->*/public class EquilateralTriangle extends RegularPolygon {
+/*\onslide<3->*/   public EquilateralTriangle(int sideLength) {
+/*\onslide<4->*/      super(/*\onslide<5->*/3/*\onslide<6->*/, sideLength/*\onslide<4->*/);
+/*\onslide<3->*/   }
+/*\onslide<2->*/
+/*\onslide<9->*/   @Override
+/*\onslide<7->*/   public double getArea() {
+/*\onslide<8->*/      return 0.25 * Math.sqrt(2) * sideLength * sideLength;
+/*\onslide<7->*/   }
+/*\onslide<2->*/}/*\onslide<1->*/
+\end{minted}
+\end{frame}
 
 \SetNextSectionText{Dynamische Datenstrukturen II\\Abgabe: \DTMDate{2022-07-18}}
 \section{Übungsblatt 11}
@@ -360,6 +377,40 @@ public void addFront(int value) {
 \end{onlyenv}
 \end{tikzpicture}
 \end{description}
+\end{frame}
+
+\begin{frame}[fragile,c]{Weiterführende Konzepte der Objektorientierung}
+\begin{tikzpicture}[@O]
+    \node[below left,yshift=-1.4cm] at(current page.north east) {\LoadOverview{5}{}{}};
+\end{tikzpicture}\vspace*{-.66\baselineskip}%
+\begin{itemize}[<+(1)->]
+    \itemsep4pt
+    \item Vererbung (\bjava{extends}) erfolgt in Java nach dem Erweiterungsprinzip \begin{itemize}
+        \item Man kann nur von einer Klasse erben \info{keine Mehrfachvererbung}
+        % \item \bjava{private}-Attribute und Methoden sind nicht sichtbar!
+        \item Methoden und Attribute der Elternklasse sind über \bjava{super} erreichbar
+        \item Attribute werden statisch, Methoden dynamisch gebunden!
+    \end{itemize}
+    \item Erbt \T{Y} von \T{X} (\bjava{Y extends X}) gilt \say{Y \textit{is-a} X}
+\begin{columns}[c]
+\column{.3\linewidth}
+\bjava{X x = new Y();}
+\column{.3\linewidth}
+\bjava{x instanceof X} \textcolor{gray}{\scriptsize$\leadsto$ true}
+\column{.3\linewidth}
+\bjava{x instanceof Y} \textcolor{gray}{\scriptsize$\leadsto$ true}
+\end{columns}
+    \item Wir können Methoden der Elternklasse \textit{überschreiben} (gleiche Signatur \& sichtbar)
+    \item Von \textit{abstrakten Klassen} kann keine Instanz erzeugt werden \begin{itemize}
+        \item Sie erlauben die Deklaration abstrakter Methoden
+        \item Nicht-abstrakte erbende Subklassen müssen abstrakte Methoden überschrieben!
+    \end{itemize}
+    \item \textit{Interfaces} (\bjava{interface}) fordern Methoden von implementierenden Klassen \begin{itemize}
+        \item Eine Klasse kann mehrere Interfaces implementieren (\bjava{A implements X, Y, Z})
+        \item Interfaces fordern nur Verhalten (\bjava{default}, keinen Zustand, vs. abstrakte Klasse)
+        \item $\leadsto$ keine \say{Attribute} (automatisch \bjava{final} \& \bjava{static})
+    \end{itemize}
+\end{itemize}
 \end{frame}
 }\fi
 
