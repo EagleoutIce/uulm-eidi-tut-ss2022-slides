@@ -28,7 +28,7 @@
 {
 \begin{frame}[fragile,c]{Präsenzaufgabe}
 \begin{aufgabe}{Dir streichen wir das Erbe!}
-    \only<2-3|handout:0>{Gegeben sei die folgende abstrakte Klasse RegularPolygon, welche ein Polygon mit gleichen Seitenlängen bzw. Innenwinkeln repräsentieren soll:}%
+    \only<2-3|handout:0>{Gegeben sei die folgende abstrakte Klasse RegularPolygon, welche ein Polygon mit gleichen Seitenlängen bzw. Innenwinkeln repräsentieren soll:}\only<4->{\vspace*{-1em}}%
 \lstfs{9}%
 \begin{minted}{java}
 /*\onslide<3->*/public abstract class RegularPolygon {
@@ -43,7 +43,7 @@
 /*\onslide<3->*/    public abstract double getArea();
 /*\onslide<3->*/}
 \end{minted}
-\onslide<4->{Implementieren Sie die Klasse \T{EquilateralTriangle}, welche ein gleichseitiges Dreieck repräsentieren soll. Die abgeleitete Klasse soll von \T{RegularPolygon} erben und zusätzlich einen Konstruktor anbieten, welcher die Seitenlänge als Parameter übernimmt. Die
+\onslide<5->{Implementieren Sie die Klasse \T{EquilateralTriangle}, welche ein gleichseitiges Dreieck repräsentieren soll. Die abgeleitete Klasse soll von \T{RegularPolygon} erben und zusätzlich einen Konstruktor anbieten, welcher die Seitenlänge als Parameter übernimmt. Die
 Formel für den Flächeninhalt eines gleichseitigen Dreiecks mit einer Seitenlänge \(a\) lautet: \(A = \sfrac14 \cdot \sqrt3 \cdot a^2\).}
 \end{aufgabe}
 \end{frame}
