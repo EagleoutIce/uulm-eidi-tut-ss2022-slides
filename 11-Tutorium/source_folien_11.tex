@@ -414,10 +414,11 @@
 \makeatletter\sol@length@lst@numsep=11.5\p@
 \begin{frame}[fragile,c]{Ein Stack für die Masse}
 \lstfs{9}\only<13->{\lstcolorlet{linenumbers}{codeouthl}}%
-\solsetmintedstyle{plain number}%
-\AnimateCode{onslide={2, 3}, first slide=15}
+\only<11->{\solsetmintedstyle{plain number}}%
+\AnimateCode[@1]{onslide={o1:{16},-,-,:4:{7},:5:{2},:6:{3},h,:8:{14},9,/10:{value=3},11,12,/13:{size=1},*\Hidden\Reset,:8:{14},9,/10:{value=4},11,12,/13:{size=2},*\Hidden\Reset,h,-,-,-,-,-,-,-,0}, first slide=15}
+% somehow linenumberblackout broken
+~\mbox{\CodeFileMarkerAttach<13->{Stack.java}}\vspace*{-1.125\baselineskip}%
 \begin{minted}[morekeywords={[3]{Stack}}]{java}
-/*\CodeFileMarkerAttach<13->{Stack.java}*/
 /*\onslide<2->*/public class Stack {
 /*\onslide<3->*/   private Element top;
 /*\onslide<3->*/   private int size;
@@ -436,7 +437,7 @@
 /*\onslide<2->*/}/*\onslide<1->*/
 \end{minted}
 \endAnimateCode
-\AnimateCode{onslide={1, 3}, first slide=15}
+\AnimateCode[@2]{onslide={h,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,:1:{8},/2:{2$\leq$0},/4:{value=4},5,6,/7:{size=1},*\Hidden\Reset,0}, first slide=15}
 \begin{tikzpicture}[@O]
 \begin{uncoverenv}<12->
     \node[below left,yshift=-1.25cm] (@) at(current page.north east) {\begin{minted}[firstnumber=15]{java}
@@ -451,29 +452,26 @@
     \end{minted}};
     \color{gray}
     \only<13->{\color{codeouthl!50!btdm@background}}
-    \draw[-Kite] ([xshift=-1.25ex]@.south west) to[out=270,in=0] (pop-insert.east);
+    \draw[-Kite] ([xshift=-2ex]@.south west) to[out=270,in=0] (pop-insert.east);
 \end{uncoverenv}
 \end{tikzpicture}
 \endAnimateCode
-\AnimateCode{onslide={2, 3}, first slide=15}
-% scale the markers
-\def\ca@Leftmark{\llap{\scalebox{.66}{\@declaredcolor{paletteA}\RawMDRight~}}}
-\def\ca@Rightmark{\rlap{\scalebox{.66}{\@declaredcolor{paletteA}\RawMDLeft}}}% currently there is a buffer :D
-\def\ca@Botmark{\smash{\clap{\scalebox{.66}{\@declaredcolor{paletteA}\RawMDUp}}}}% currently there is a buffer :D
+\AnimateCode[@3]{onslide={:2:{7}, 3, *\Line{3}\Location{stack},o3:{},-,-,4,o4:{},-,-,-,-,-,5,o5:{},-,-,-,-,-,6,*\Line6\Location{pop},o6:{},-,-,-,-,*\Line6\Reset\NoLocation,/6:{4}}, first slide=15}
+\lstfs{8}
 \begin{tikzpicture}[@O]% allow animation to function by separate
 \begin{uncoverenv}<14->% guards, so they no not mess line caps
-    \node[below left,xshift=-5mm,fill=btdm@background,rounded corners=1pt,scale=.66] (@) at(current page.east) {\begin{minted}[firstnumber=23,morekeywords={[3]{Stack}}]{java}
+    \node[below left,xshift=-5mm,fill=btdm@background,rounded corners=1pt] (@) at(current page.east) {\begin{minted}[firstnumber=23,morekeywords={[3]{Stack}}]{java}
 /**//*\ShowInTheWeb[.1mm]{https://www.online-java.com/yY0G7zbHhO}*/
 /**/public static void main(String[] args) {
-/**/    Stack stack = new Stack();
+/**/    Stack stack = new /*\AnimLoc[10pt]{stack}*/Stack();
 /**/    stack.push(3);
 /**/    stack.push(4);
-/**/    stack.pop();
+/**/    System.out.println(stack/*\AnimLoc[3pt]{pop}*/.pop());
 /**/}
     \end{minted}};
     \color{gray}
     \only<13->{\color{codeouthl!50!btdm@background}}
-    \draw[-Kite] ([xshift=-1.25ex]@.south west) to[out=230,in=0] ([yshift=-1.25mm]pop-insert.east);
+    \draw[-Kite] ([xshift=-2ex]@.south west) to[out=200,in=0] ([yshift=-1.25mm]pop-insert.east);
 \end{uncoverenv}
 \end{tikzpicture}
 \endAnimateCode
