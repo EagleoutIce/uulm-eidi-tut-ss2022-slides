@@ -480,14 +480,14 @@
             \only<23-|handout:2->{\node[K,left=2mm] (b) at (c.west) {\only<24->{\rlap{3}}\phantom{3}\nodepart{two}};}
             \only<30-|handout:3->{\node[K,left=2mm] (a) at (b.west) {\only<31->{\rlap{4}}\phantom{4}\nodepart{two}};}
             \pgfinterruptboundingbox
-            \only<-25|handout:1>{\node[below=-.33mm,T] at (c.south) {top};}
-            \only<23-25|handout:0>{\node[below=-.33mm,T] at (b.south) {newTop};}
-            \only<26-27|handout:2>{\node[below=-.33mm,T] at (b.south) {newTop, top};}
-            \only<28-32|handout:3>{\node[below=-.33mm,T] at (b.south) {top};}
-            \only<30-32|handout:3>{\node[below=-.33mm,T] at (a.south) {newTop};}
-            \only<33-34|handout:0>{\node[below=-.33mm,T] at (a.south) {newTop, top};}
-            \only<35-39|handout:0>{\node[below=-.33mm,T] at (a.south) {top};}
-            \only<40-|handout:4>{\node[below=-.33mm,T] at (b.south) {top};}
+            \only<-25|handout:1>{\node[below=-.33mm,T] at (c.south) {\strut top};}
+            \only<23-25|handout:0>{\node[below=-.33mm,T] at (b.south) {\strut newTop};}
+            \only<26-27|handout:2>{\node[below=-.33mm,T] at (b.south) {\strut newTop, top};}
+            \only<28-32|handout:3>{\node[below=-.33mm,T] at (b.south) {\strut top};}
+            \only<30-32|handout:3>{\node[below=-.33mm,T] at (a.south) {\strut newTop};}
+            \only<33-34|handout:0>{\node[below=-.33mm,T] at (a.south) {\strut newTop, top};}
+            \only<35-39|handout:0>{\node[below=-.33mm,T] at (a.south) {\strut top};}
+            \only<40-|handout:4>{\node[below=-.33mm,T] at (b.south) {\strut top};}
             \endpgfinterruptboundingbox
             \draw[shorten <= .4mm,shorten >= .4mm,] (c.south west) -- (c.north east);
             \only<25-|handout:2->{\draw[Circle-Kite] ([xshift=-1.65ex]b.east) -- (c.west);}
