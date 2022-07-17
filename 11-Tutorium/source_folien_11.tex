@@ -474,7 +474,7 @@
 \end{tikzpicture}
 \endAnimateCode
 \begin{tikzpicture}[@O,W/.style={draw, rounded corners=2pt},K/.style={W, rectangle split, rectangle split parts=2,rectangle split horizontal}]%
-    \scope[shift={([yshift=\btdmfootheight+6.5mm,xshift=5cm]current page.south)}]
+    \scope[shift={([yshift=\btdmfootheight+8mm,xshift=5cm]current page.south)}]
         \only<19-|handout:1->{
             \node[W] (c) at (0,0) {\phantom{2}};
             \only<23-|handout:2->{\node[K,left=2mm] (b) at (c.west) {\only<24->{\rlap{3}}\phantom{3}\nodepart{two}};}
@@ -503,12 +503,14 @@
 {\taskenum
 \begin{frame}[c]{Aufgabe 3: Post-Order Traversierung von Binärbäumen}
 \taskblock<2->
-    Ein \T{BinaryExpressionTree} repräsentiert einen Ausdruck, bei dem die Operatoren höchstens zwei Operanden verarbeiten können. So an die Berechnungen \((2^3 + 5) * (4 - 2)\) durch den folgenden Baum ausgedrückt werden: \begin{center}
-\begin{forest}
-    for tree={circle,draw}
+    \smaller Ein \T{BinaryExpressionTree} repräsentiert einen Ausdruck, bei dem die Operatoren höchstens zwei Operanden verarbeiten können. So an die Berechnungen \((2^3 + 5) * (4 - 2)\) durch den folgenden Baum ausgedrückt werden:\medskip
+\begin{columns}[onlytextwidth,c]
+\column{.3\linewidth}
+\onslide<3->{\begin{forest}
+    for tree={circle,draw,minimum size=2em}
     [\say{*}
         [\say{+}
-            [\say{pow}
+            [\downsize{1.5em}{\say{pow}}
                 [\say{2}]
                 [\say{3}]
             ]
@@ -519,16 +521,58 @@
             [\say{2}]
         ]
     ]
-\end{forest}
-    \end{center}
-        Die Darstellungsweise erlaubt \textit{rekursives} abarbeiten des Ausdrucks. Dazu wird jeweils ein Knoten evaluiert: handelt es sich um einen Operator (kein Blatt und somit einen Rekursionsfall), wird dieser wieder evaluiert. Handelt es sich um einen Operanden (Blatt und somit ein Basisfall), kann das Ergebnis berechnet werden.
-
-        Wir beschränken uns hier einfachheitshalber nur auf balancierte Binärbäume, das heißt, es können nicht beliebige Ausdrücke dargestellt werden. Sie finden in den Unterlagen zu diesem Übungsblatt [TODO: LINK] die Klasse \T{StringNode.java}, die die Knoten darstellen soll, sowie die Klasse \T{BinaryExpressionTree.java}, die den Baum selbst repräsentiert, sowie \T{BinaryExpressionTreeMain.java} als Programmeinstiegspunkt.
-
-        Implementieren Sie die Methode \T{public double traverse(StringNode node)}, die den Binärbaum wie beschrieben \textit{rekursiv  im post-Order} Verfahren traversiert. Ihre Implementierung soll mindestens die Operatoren \T{+}, \T{-}, \T{*}, \T{/}, sowie \T{pow} unterstützten. Enthält ein Knoten einen unbekannten Operator, soll eine \T{InvalidParameterException} ausgelöst werden. Testen Sie Ihre Implementierung an dem obigen Beispiel. Die Methode \T{private void insertNodes(...)} der Klasse \T{BinaryExpressionTree.java} erstellt einen Binärbaum aus einem gegebenen String-Array.
+\end{forest}}
+\column{.7\linewidth}
+\onslide<3->{Die Darstellungsweise erlaubt \textit{rekursives} abarbeiten des Ausdrucks. Dazu wird jeweils ein Knoten evaluiert: handelt es sich um einen Operator (kein Blatt und somit einen Rekursionsfall), wird dieser wieder evaluiert. Handelt es sich um einen Operanden (Blatt und somit ein Basisfall), kann das Ergebnis berechnet werden.}
+\medskip\par
+\onslide<4->{Wir beschränken uns hier einfachheitshalber nur auf balancierte Binärbäume, das heißt, es können nicht beliebige Ausdrücke dargestellt werden. Sie finden in den Unterlagen (zu diesem Übungsblatt) die Klasse \FileMarkerAttach<4->{StringNode.java}, die die Knoten darstellen soll, sowie die Klasse \FileMarkerAttach<4->{BinaryExpressionTree.java}, die den Baum selbst repräsentiert, sowie \FileMarkerAttach<4->{BinaryExpressionTreeMain.java} als Programmeinstiegspunkt.}
+\medskip\par
+\onslide<5->{Implementieren Sie die Methode \T{public double traverse(StringNode node)}, die den Binärbaum wie beschrieben \textit{rekursiv im post-Order} Verfahren traversiert.\medskip\par}
+\end{columns}
+    \onslide<5->{Ihre Implementierung soll mindestens die Operatoren \T{+}, \T{-}, \T{*}, \T{/}, sowie \T{pow} unterstützten. Enthält ein Knoten einen unbekannten Operator, soll eine \T{InvalidParameterException} ausgelöst werden. Testen Sie Ihre Implementierung an dem obigen Beispiel. Die Methode \T{private void insertNodes(...)} der Klasse \T{BinaryExpressionTree} erstellt einen Binärbaum aus einem gegebenen String-Array.}
 \endtaskblock
 \end{frame}
 
+\begin{frame}[fragile,c]{Evaluate the World}
+\SetupLstHl\lstfs{9}\vspace*{-.25\baselineskip}
+\begin{minted}[morekeywords={[3]{BinaryExpressionTree}}]{java}
+/*\CodeFileMarkerAttach<2->[a3-sol/]{BinaryExpressionTree.java}\AddCodeFileMarkerAttach<2->[a3-sol/]{StringNode.java}*/
+/*\onslide<2->*/public class BinaryExpressionTree {
+/*\onslide<3->*/    public double traverse(StringNode node) {
+/*\onslide<4->*/        if (node == null) throw new IllegalStateException();
+/*\onslide<5->*/        if (node.isLeaf()) return Double.parseDouble(node.getItem());
+/*\onslide<2->*/
+/*\onslide<6->*/        double valueLeft = traverse(node.getLeftChild());
+/*\onslide<7->*/        double valueRight = traverse(node.getRightChild());
+/*\onslide<8->*/        switch (node.getItem()) {
+/*\onslide<9->*/            case "+":   return valueLeft + valueRight;
+/*\onslide<10->*/            case "-":   return valueLeft - valueRight;
+/*\onslide<10->*/            case "*":   return valueLeft * valueRight;
+/*\onslide<10->*/            case "/":   return valueLeft / valueRight;
+/*\onslide<11->*/            case "pow": return Math.pow(valueLeft, valueRight);
+/*\onslide<12->*/            default:    throw new InvalidParameterException();
+/*\onslide<8->*/        }
+/*\onslide<3->*/    }
+/*\onslide<2->*/}
+\end{minted}
+\end{frame}
+
+\begin{frame}[fragile,c]{Everything on Main!}
+\SetupLstHl\lstfs{9}
+\begin{minted}[morekeywords={[3]{BinaryExpressionTree}}]{java}
+/*\CodeFileMarkerAttach<2->[a3-sol/]{BinaryExpressionTreeMain.java}*/
+/*\onslide<2->*/public class BinaryExpressionTreeMain {
+/*\onslide<2->*/    /*\ShowInTheWeb[.1mm]{https://www.online-java.com/SeP17BxlaT}*/
+/*\onslide<3->*/    public static void main(String[] args) {
+/*\onslide<4->*/        String[] items = {"*", "+", "-", "pow", "5", "4", "2", "2", "3"};
+/*\onslide<5->*/        BinaryExpressionTree tree = new BinaryExpressionTree(items);
+/*\onslide<2->*/
+/*\onslide<6->*/        double result = tree.evaluate();
+/*\onslide<7->*/        System.out.println("Ergebnis: " + result);
+/*\onslide<3->*/    }
+/*\onslide<2->*/}
+\end{minted}
+\end{frame}
 }
 
 \iffull

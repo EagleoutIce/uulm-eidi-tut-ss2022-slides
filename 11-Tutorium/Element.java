@@ -4,7 +4,6 @@ class Element {
 
    public Element() {
        this.next = null;
-       this.previous = null;
    }
 
    public void setNextElement(Element nextElement) {
