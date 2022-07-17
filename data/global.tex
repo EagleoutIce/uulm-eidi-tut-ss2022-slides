@@ -370,7 +370,7 @@
 \solsetmintedstyle{plain}
 \def\sol@minted@setup#1#2#3{\lstset{style=#1,language=#2,escapeinside={/*}{*/},#3}}
 
-\newcommand<>\FileMarkerAttach[2][]{\only#3{\attachfilesetup{color=black}\textattachfile{\curpath #1#2}{\rawlink{#2}}}}
+\newcommand<>\FileMarkerAttach[2][]{\only#3{\attachfilesetup{color=.}\textattachfile{\curpath #1#2}{\rawlink{#2}}}}
 
 \mode<all>{\newcommand<>\onlyhandout[1]{\relax}}
 \mode<handout>{\let\onlyhandout\only}
