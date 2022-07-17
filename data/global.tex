@@ -362,7 +362,7 @@
 \appto\endAnimateCode{\vspace*{-\baselineskip}}
 \def\CodeFileMarker#1{\CodeMarker{\llap{\faFileCodeO~\thinspace}#1}}
 \def\CodeMarker#1{{\color{lightgray}\sffamily\tiny#1}}
-\newcommand\ShowInTheWeb[2][.25mm]{\smash{\raisebox{#1}{\color{lightgray}\sffamily\tiny\fancyulcolor{lightgray}\link{#2}{display in browser}}}\vspace*{-#1}}
+\newcommand\ShowInTheWeb[2][.25mm]{\smash{\raisebox{#1}{\color{lightgray}\sffamily\tiny\fancyulcolor{lightgray}\link{#2}{{\tikz[scale=.5]{\draw[rounded corners=.33pt] (0,0) -- (0,.25) -- (.3,.125) -- cycle;}} display in browser}}}\vspace*{-#1}}
 
 % \def\CodeFileMarker#1{{\hfill\color{lightgray}\sffamily\tiny#1\rlap{\thinspace~\faFileCodeO}}}
 \newcommand<>\CodeFileMarkerAttach[2][]{\only#3{\CodeFileMarker{\attachfilesetup{color=lightgray}\fancyulcolor{lightgray}\textattachfile{\curpath #1#2}{\rawlink{#2}}}}}

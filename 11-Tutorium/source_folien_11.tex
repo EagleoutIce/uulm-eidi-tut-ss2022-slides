@@ -23,6 +23,7 @@
 \end{frame}
 }\fi
 
+\iffalse
 % \SetNextSectionText[.6\linewidth]{TODO}
 \section{Präsenzaufgabe}
 {
@@ -71,8 +72,7 @@
 \subsection{Aufgabe 1}
 {\taskenum
 \tikzset{dot/.style={circle,draw}}
-\iffalse
-\begin{frame}[c]{Präsenzaufgabe}
+\begin{frame}[c]{Aufgabe 1: Graphen}
 \taskblock<2->
     Geben sei der folgende Graph \(G\):
     \vspace*{-.5\baselineskip}\begin{center}
@@ -220,7 +220,7 @@
 \MakeThePinguExplainIt[text width=3.77cm]{cap=!hide,glasses=!hide,halo,halo raise=2mm,devil horns,right item angle=5,cup=!hide,bow tie}{Natürlich~können~die\\Kanten~in~die~andere\\~Richtung~auch~ein~ande-\\res~Gewicht~aufweisen.}
 \begin{frame}[c]{Beispiel: Die Gegenrichtung}
     \begin{itemize}[<+(1)->]
-        \item Nun eine gewichtete Adjazenzmatrix (Kanten wie \tikz[align-half-base]{\draw[Kite-Kite] (0,0) -- (1,0);} können\\auch ungerichtet dargestellt werden):
+        \item Nun eine gewichtete Adjazenzmatrix (Kanten wie \smash{\raisebox{-1.33pt}{\tikz[align-half-base]{\draw[Kite-Kite] (0,0) -- (1,0);}}} können\\auch ungerichtet dargestellt werden):
     \end{itemize}
     \begin{center}
         \onslide<3->{\(
@@ -273,8 +273,6 @@
 \end{tikzpicture}
 \end{frame}
 }\fi
-\fi
-
 
 \def\TT#1#2#3{\only<#2|handout:#1>{\tikzset{@/.style={thick}}\color{paletteA}}\edef\nxt{\the\numexpr#2+1}\only<\nxt-|handout:#3->{\color{gray}}\tikzset{@/.style={}}}
 \MakeThePinguExplainIt[text width=6.77cm]{cap=!hide,glasses=!hide,laptop left,right item angle=-54,cup=!hide,strawhat}{Die Reihenfolge in der mehrere, noch nicht besuchte Nachbarn, auf den Stack gelegt werden, ist willkürlich und hängt von der Implementation ab.}
@@ -396,8 +394,93 @@
 \end{tikzpicture}
 \end{frame}
 }
+\fi
 
+\subsection{Aufgabe 2}
+{\taskenum
+\begin{frame}[c]{Aufgabe 2: Stacks}
+\taskblock<2->
+    In dieser Aufgabe sollen Sie einen \T{Stack} implementieren, welcher nach dem \T{LIFO}-Prinzip arbeitet (Last In First Out) und \bjava{int} Werte verwaltet. Nutzen Sie hierfür wieder die \FileMarkerAttach<2->{Element.java} Klasse. Legen Sie die Klasse \T{Stack.java} an und implementieren Sie die folgenden Methoden:
+    \begin{enumerate}
+        \item<3-> Implementieren Sie einen Konstruktor, der den Stack erstellt. Der Stack soll eine private Referenz auf das oberste Element, sowie eine private Instanzvariable, die die Größe des Stacks darstellt, besitzen.
+        \item<4-> Die Methode \T{public void push(int value)} soll den übergebenen Wert oben auf dem Stack platzieren.
+        \item<5-> Die Methode \T{public int pop()} soll den obersten Wert vom Stack entfernen und zurückgeben. Beachten Sie, dass der Stack unter Umständen leer sein kann. In diesem Fall soll eine \T{NoSuchElementException} ausgelöst werden.
+        \item<6-> Testen Sie Ihre Implementierungen, indem Sie einige Werte auf den Stack legen und wieder entfernen.
+    \end{enumerate}
+\endtaskblock
+\end{frame}
 
+{\solblacklistlinenumbers{1,23}
+\makeatletter\sol@length@lst@numsep=11.5\p@
+\begin{frame}[fragile,c]{Ein Stack für die Masse}
+\lstfs{9}\only<13->{\lstcolorlet{linenumbers}{codeouthl}}%
+\solsetmintedstyle{plain number}%
+\AnimateCode{onslide={2, 3}, first slide=15}
+\begin{minted}[morekeywords={[3]{Stack}}]{java}
+/*\CodeFileMarkerAttach<13->{Stack.java}*/
+/*\onslide<2->*/public class Stack {
+/*\onslide<3->*/   private Element top;
+/*\onslide<3->*/   private int size;
+/*\onslide<4->*/   public Stack() {
+/*\onslide<5->*/      this.top = null;
+/*\onslide<5->*/      this.size = 0;
+/*\onslide<4->*/   }
+/*\onslide<6->*/   public void push(int value) {
+/*\onslide<7->*/      Element newTop = new Element();
+/*\onslide<8->*/      newTop.setValue(value);
+/*\onslide<9->*/      newTop.setNextElement(this.top);
+/*\onslide<10->*/      this.top = newTop;
+/*\onslide<11->*/      size += 1;
+/*\onslide<6->*/   }
+/*\onslide<2->*/    /*\Snode{pop-insert}*/
+/*\onslide<2->*/}/*\onslide<1->*/
+\end{minted}
+\endAnimateCode
+\AnimateCode{onslide={1, 3}, first slide=15}
+\begin{tikzpicture}[@O]
+\begin{uncoverenv}<12->
+    \node[below left,yshift=-1.25cm] (@) at(current page.north east) {\begin{minted}[firstnumber=15]{java}
+/**/public int pop() {
+/**/    if (size <= 0)
+/**/        throw new NoSuchElementException();
+/**/    int value = top.getValue();
+/**/    top = top.getNextElement();
+/**/    size -= 1;
+/**/    return value;
+/**/}
+    \end{minted}};
+    \color{gray}
+    \only<13->{\color{codeouthl!50!btdm@background}}
+    \draw[-Kite] ([xshift=-1.25ex]@.south west) to[out=270,in=0] (pop-insert.east);
+\end{uncoverenv}
+\end{tikzpicture}
+\endAnimateCode
+\AnimateCode{onslide={2, 3}, first slide=15}
+% scale the markers
+\def\ca@Leftmark{\llap{\scalebox{.66}{\@declaredcolor{paletteA}\RawMDRight~}}}
+\def\ca@Rightmark{\rlap{\scalebox{.66}{\@declaredcolor{paletteA}\RawMDLeft}}}% currently there is a buffer :D
+\def\ca@Botmark{\smash{\clap{\scalebox{.66}{\@declaredcolor{paletteA}\RawMDUp}}}}% currently there is a buffer :D
+\begin{tikzpicture}[@O]% allow animation to function by separate
+\begin{uncoverenv}<14->% guards, so they no not mess line caps
+    \node[below left,xshift=-5mm,fill=btdm@background,rounded corners=1pt,scale=.66] (@) at(current page.east) {\begin{minted}[firstnumber=23,morekeywords={[3]{Stack}}]{java}
+/**//*\ShowInTheWeb[.1mm]{https://www.online-java.com/yY0G7zbHhO}*/
+/**/public static void main(String[] args) {
+/**/    Stack stack = new Stack();
+/**/    stack.push(3);
+/**/    stack.push(4);
+/**/    stack.pop();
+/**/}
+    \end{minted}};
+    \color{gray}
+    \only<13->{\color{codeouthl!50!btdm@background}}
+    \draw[-Kite] ([xshift=-1.25ex]@.south west) to[out=230,in=0] ([yshift=-1.25mm]pop-insert.east);
+\end{uncoverenv}
+\end{tikzpicture}
+\endAnimateCode
+\end{frame}
+}}
+
+\iffalse
 \iffull
 \SetNextSectionText{Fortgeschrittene OOP\\Abgabe: \T{null}}
 \section[Aussicht: Übungsblatt \T{Integer.MAX\_VALUE}]{Aussicht: Übungsblatt \textbf{\T{Integer.MAX\_VALUE}}}
@@ -407,7 +490,6 @@
 \end{frame}
 \fi
 
-\iffalse
 % \SetNextSectionText[.55\linewidth]{TODO}
 \section{Abschließendes}
 
@@ -735,7 +817,6 @@ public void addFront(int value) {
 \end{itemize}
 \end{frame}
 }\fi
-
 \fi
 
 \outro{\vskip9mm\centering \onslide<2->{\scalebox{1.75}{
