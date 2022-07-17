@@ -23,7 +23,6 @@
 \end{frame}
 }\fi
 
-\iffalse
 % \SetNextSectionText[.6\linewidth]{TODO}
 \section{Präsenzaufgabe}
 {
@@ -394,7 +393,6 @@
 \end{tikzpicture}
 \end{frame}
 }
-\fi
 
 \subsection{Aufgabe 2}
 {\taskenum
@@ -415,7 +413,7 @@
 \begin{frame}[fragile,c]{Ein Stack für die Masse}
 \lstfs{9}\only<13->{\lstcolorlet{linenumbers}{codeouthl}}%
 \only<11->{\solsetmintedstyle{plain number}}%
-\AnimateCode[@1]{onslide={o1:{16},-,-,:4:{7},:5:{2},:6:{3},h,:8:{14},9,/10:{value=3},11,12,/13:{size=1},*\Hidden\Reset,:8:{14},9,/10:{value=4},11,12,/13:{size=2},*\Hidden\Reset,h,-,-,-,-,-,-,-,0}, first slide=15}
+\AnimateCode[@1]{onslide={o1:{16},-,-,:4:{7},:5:{2},:6:{3},h,:8:{14},9,/10:{value=3},11,12,/13:{size=1},*\Hidden\Reset,:8:{14},9,/10:{value=4},11,12,/13:{size=2},*\Hidden\Reset,h,-,-,-,-,-,-,-,0}, first slide=15,handout={22/1,27/2,31/3,44/4}}
 % somehow linenumberblackout broken
 ~\mbox{\CodeFileMarkerAttach<13->{Stack.java}}\vspace*{-1.125\baselineskip}%
 \begin{minted}[morekeywords={[3]{Stack}}]{java}
@@ -437,7 +435,7 @@
 /*\onslide<2->*/}/*\onslide<1->*/
 \end{minted}
 \endAnimateCode
-\AnimateCode[@2]{onslide={h,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,:1:{8},/2:{2$\leq$0},/4:{value=4},5,6,/7:{size=1},*\Hidden\Reset,0}, first slide=15}
+\AnimateCode[@2]{onslide={h,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,:1:{8},/2:{2$\leq$0},/4:{value=4},5,6,/7:{size=1},*\Hidden\Reset,0}, first slide=15,handout={22/1,27/2,31/3,44/4}}
 \begin{tikzpicture}[@O]
 \begin{uncoverenv}<12->
     \node[below left,yshift=-1.25cm] (@) at(current page.north east) {\begin{minted}[firstnumber=15]{java}
@@ -456,7 +454,7 @@
 \end{uncoverenv}
 \end{tikzpicture}
 \endAnimateCode
-\AnimateCode[@3]{onslide={:2:{7}, 3, *\Line{3}\Location{stack},o3:{},-,-,4,o4:{},-,-,-,-,-,5,o5:{},-,-,-,-,-,6,*\Line6\Location{pop},o6:{},-,-,-,-,*\Line6\Reset\NoLocation,/6:{4}}, first slide=15}
+\AnimateCode[@3]{onslide={:2:{7}, 3, *\Line{3}\Location{stack},o3:{},-,-,4,o4:{},-,-,-,-,-,5,o5:{},-,-,-,-,-,6,*\Line6\Location{pop},o6:{},-,-,-,-,*\Line6\Reset\NoLocation,/6:{4}}, first slide=15,handout={22/1,27/2,31/3,44/4}}
 \lstfs{8}
 \begin{tikzpicture}[@O]% allow animation to function by separate
 \begin{uncoverenv}<14->% guards, so they no not mess line caps
@@ -475,10 +473,32 @@
 \end{uncoverenv}
 \end{tikzpicture}
 \endAnimateCode
+\begin{tikzpicture}[@O,W/.style={draw, rounded corners=2pt},K/.style={W, rectangle split, rectangle split parts=2,rectangle split horizontal}]%
+    \scope[shift={([yshift=\btdmfootheight+6.5mm,xshift=5cm]current page.south)}]
+        \only<19-|handout:1->{
+            \node[W] (c) at (0,0) {\phantom{2}};
+            \only<23-|handout:2->{\node[K,left=2mm] (b) at (c.west) {\only<24->{\rlap{3}}\phantom{3}\nodepart{two}};}
+            \only<30-|handout:3->{\node[K,left=2mm] (a) at (b.west) {\only<31->{\rlap{4}}\phantom{4}\nodepart{two}};}
+            \pgfinterruptboundingbox
+            \only<-25|handout:1>{\node[below=-.33mm,T] at (c.south) {top};}
+            \only<23-25|handout:0>{\node[below=-.33mm,T] at (b.south) {newTop};}
+            \only<26-27|handout:2>{\node[below=-.33mm,T] at (b.south) {newTop, top};}
+            \only<28-32|handout:3>{\node[below=-.33mm,T] at (b.south) {top};}
+            \only<30-32|handout:3>{\node[below=-.33mm,T] at (a.south) {newTop};}
+            \only<33-34|handout:0>{\node[below=-.33mm,T] at (a.south) {newTop, top};}
+            \only<35-39|handout:0>{\node[below=-.33mm,T] at (a.south) {top};}
+            \only<40-|handout:4>{\node[below=-.33mm,T] at (b.south) {top};}
+            \endpgfinterruptboundingbox
+            \draw[shorten <= .4mm,shorten >= .4mm,] (c.south west) -- (c.north east);
+            \only<25-|handout:2->{\draw[Circle-Kite] ([xshift=-1.65ex]b.east) -- (c.west);}
+            {\only<40-|handout:4>{\color{lightgray}}
+            \only<32-|handout:4->{\draw[Circle-Kite] ([xshift=-1.65ex]a.east) -- (b.west);}}
+        }
+    \endscope
+\end{tikzpicture}
 \end{frame}
 }}
 
-\iffalse
 \iffull
 \SetNextSectionText{Fortgeschrittene OOP\\Abgabe: \T{null}}
 \section[Aussicht: Übungsblatt \T{Integer.MAX\_VALUE}]{Aussicht: Übungsblatt \textbf{\T{Integer.MAX\_VALUE}}}
@@ -815,7 +835,6 @@ public void addFront(int value) {
 \end{itemize}
 \end{frame}
 }\fi
-\fi
 
 \outro{\vskip9mm\centering \onslide<2->{\scalebox{1.75}{
 
