@@ -70,9 +70,8 @@
 \section{Übungsblatt 11}
 \subsection{Aufgabe 1}
 {\taskenum
-
-
 \tikzset{dot/.style={circle,draw}}
+\iffalse
 \begin{frame}[c]{Präsenzaufgabe}
 \taskblock<2->
     Geben sei der folgende Graph \(G\):
@@ -113,7 +112,7 @@
 \endtaskblock
 \end{frame}
 
-\def\TT#1{\only<#1|handout0>{\tikzset{@/.style={thick}}\color{paletteA}}}\tikzset{@/.style={}}
+\def\TT#1{\only<#1|handout:0>{\tikzset{@/.style={thick}}\color{paletteA}}}\tikzset{@/.style={}}
 \begin{frame}[c]{Eine Adjazenzliste}
     \begin{enumerate}
         \item<2-> \task{Geben Sie die Adjazenzliste für \(G\) an.}
@@ -162,9 +161,10 @@
 
 \def\Z#1{\onslide<#1->{\textcolor{codeouthl}{0}}}
 \def\K#1{\onslide<#1->{1}}
-\def\M#1#2{\only<#1>{\rlap{$\mathbf{#2}$}}\phantom{\mathbf{#2}}}
+\def\M#1#2{\rlap{$\only<#1>{\mathbf}{#2}$}\phantom{\mathbf{#2}}}
 \begin{frame}[c]{Eine Adjazenzmatrix}
     \begin{enumerate}
+        \setcounter{enumi}{1}
         \item<2-> \task{Geben Sie die Adjazenzmatrix für \(G\) an.}
     \end{enumerate}
     \begin{center}
@@ -215,6 +215,7 @@
 \end{frame}
 
 
+\iffull{\AddonFrame
 \def\g<#1>#2{{\only<-3|handout:0>{\text{\phantom{\bfseries#2}}}\only<4->{\color{gray}\text{\only<#1|handout:0>{\color{paletteA}\bfseries}#2}}}}
 \MakeThePinguExplainIt[text width=3.77cm]{cap=!hide,glasses=!hide,halo,halo raise=2mm,devil horns,right item angle=5,cup=!hide,bow tie}{Natürlich~können~die\\Kanten~in~die~andere\\~Richtung~auch~ein~ande-\\res~Gewicht~aufweisen.}
 \begin{frame}[c]{Beispiel: Die Gegenrichtung}
@@ -271,7 +272,131 @@
     \onslide<10->{\node[left=-18mm,scale=.8] at(current page.{5.25}) {\usebox\pinguexplainbox};}
 \end{tikzpicture}
 \end{frame}
+}\fi
+\fi
+
+
+\def\TT#1#2#3{\only<#2|handout:#1>{\tikzset{@/.style={thick}}\color{paletteA}}\edef\nxt{\the\numexpr#2+1}\only<\nxt-|handout:#3->{\color{gray}}\tikzset{@/.style={}}}
+\MakeThePinguExplainIt[text width=6.77cm]{cap=!hide,glasses=!hide,laptop left,right item angle=-54,cup=!hide,strawhat}{Die Reihenfolge in der mehrere, noch nicht besuchte Nachbarn, auf den Stack gelegt werden, ist willkürlich und hängt von der Implementation ab.}
+\begin{frame}{Eine Tiefendurchlauf}
+\begin{enumerate}
+    \setcounter{enumi}{2}
+    \item<2-> \task{In welcher Reihenfolge werden die Knoten besucht, wenn \(G\) mittels eines \say{Tiefendurchlaufs} traversiert wird?}
+\end{enumerate}
+\vfill
+\begin{center}
+    \onslide<3->{\scalebox{.75}{\begin{tikzpicture}[align-half-base]
+        {\TT152  \node[dot] (0) at (0,-3)        {\only<5|handout:1>{\bfseries}0};}
+        {\TT062  \node[dot] (1) at (0,0)         {\only<6|handout:0>{\bfseries}1};}
+        {\TT273  \node[dot] (2) at (3,0)         {\only<7|handout:2>{\bfseries}2};}
+        {\TT083  \node[dot] (3) at (3,-3)        {\only<8|handout:0>{\bfseries}3};}
+        {\TT0{11}3  \node[dot] (4) at (.85,-2.15)  {\only<11|handout:0>{\bfseries}4};}
+        {\TT0{12}3  \node[dot] (5) at (.85,-.85)   {\only<12|handout:0>{\bfseries}5};}
+        {\TT0{9}3 \node[dot] (6) at (2.15,-.85)    {\only<9|handout:0>{\bfseries}6};}
+        {\TT0{10}3 \node[dot] (7) at (2.15,-2.15)  {\only<10|handout:0>{\bfseries}7};}
+        {\node[dot] (8) at (2.15,-3)     {8};}
+        \node[left] at(0.west) {S};
+
+        {\TT152 \draw[-Kite,@] (0) -- (1);}
+
+        {\TT062 \draw[-Kite,@] (1) -- (5);
+        \draw[-Kite,@] (1) -- (2);}
+
+        {\TT273 \draw[-Kite,@] (2) -- (6);
+        \draw[-Kite,@] (2) -- (3);}
+
+        {\TT0{11}3 \draw[-Kite,@] (4) -- (5);
+        \draw[-Kite,@] (4) -- (0);}
+
+        {\TT0{9}3 \draw[-Kite,@] (6) -- (7);}
+        {\TT0{10}3 \draw[-Kite,@] (7) -- (4);}
+    \end{tikzpicture}}}\hskip2cm\begin{minipage}{.3\linewidth}
+\onslide<4->{\begin{tikzpicture}[R/.style={draw,gray,minimum width=1.5cm,above right,outer xsep=0pt, inner xsep=0pt,minimum height=.5mm}]
+\scope
+\draw[rounded corners=2pt,gray,thick] (0,0) |- ++(1.5,-2) -- ++(0,2);
+\clip[rounded corners=2pt] (0,0) |- ++(1.5,-2) -- ++(0,2);
+\only<4|handout:0>{\node[R] at(0,-2) {0};}
+
+\only<5|handout:1>{\node[R] at(0,-2) {1};}
+\only<6-11|handout:2>{\node[R] at(0,-2) {5};}
+\only<6|handout:0>{\node[R] at(0,-1.5) {2};}
+\only<7-8|handout:2>{\node[R] at(0,-1.5) {6};}
+\only<7|handout:2>{\node[R] at(0,-1) {3};}
+\only<9|handout:0>{\node[R] at(0,-1.5) {7};}
+\only<10|handout:0>{\node[R] at(0,-1.5) {4};}
+\endscope
+\node[below=1.5mm] at(current bounding box.south) {Stack};
+
+\node[right=5mm] at(current bounding box.east) {\strut$\to$~\only<5-|handout:1->{0}\only<6-|handout:2->{, 1}\only<7-|handout:2->{, 2}\only<8-|handout:3->{, 3}\only<9-|handout:3->{, 6}\only<10-|handout:3->{, 7}\only<11-|handout:3->{, 4}\only<12-|handout:3->{, 5}\strut};
+\end{tikzpicture}}
+\end{minipage}
+\end{center}
+\vfill\null
+\begin{tikzpicture}[overlay,remember picture]
+    \onslide<13-|handout:1>{\node[left=4mm,yshift=\btdmfootheight+3.25mm,scale=.8] at(current page.south east) {\usebox\pinguexplainbox};}
+\end{tikzpicture}
+\end{frame}
+
+\MakeThePinguExplainIt[text width=6.77cm]{cap=!hide,glasses=!hide,laptop left,right item angle=5,cup=!hide,hair=pingu@green!60!paletteA}{Erneut ist die Reihenfolge bei mehreren Nachbarn willkürlich.}
+\begin{frame}{Eine Breitendurchlauf}
+\begin{enumerate}
+    \setcounter{enumi}{3}
+    \item<2-> \task{In welcher Reihenfolge werden die Knoten besucht, wenn \(G\) mittels eines \say{Breitendurchlaufs} traversiert wird?}
+\end{enumerate}
+\vfill
+\begin{center}
+    \onslide<3->{\scalebox{.75}{\begin{tikzpicture}[align-half-base]
+        {\TT152  \node[dot] (0) at (0,-3)        {\only<5|handout:1>{\bfseries}0};}
+        {\TT062  \node[dot] (1) at (0,0)         {\only<6|handout:0>{\bfseries}1};}
+        {\TT283  \node[dot] (2) at (3,0)         {\only<7|handout:2>{\bfseries}2};}
+        {\TT093  \node[dot] (3) at (3,-3)        {\only<8|handout:0>{\bfseries}3};}
+        {\TT0{12}3  \node[dot] (4) at (.85,-2.15)  {\only<11|handout:0>{\bfseries}4};}
+        {\TT072  \node[dot] (5) at (.85,-.85)   {\only<12|handout:0>{\bfseries}5};}
+        {\TT0{10}3 \node[dot] (6) at (2.15,-.85)    {\only<9|handout:0>{\bfseries}6};}
+        {\TT0{11}3 \node[dot] (7) at (2.15,-2.15)  {\only<10|handout:0>{\bfseries}7};}
+        {\node[dot] (8) at (2.15,-3)     {8};}
+        \node[left] at(0.west) {S};
+
+        {\TT152 \draw[-Kite,@] (0) -- (1);}
+
+        {\TT062 \draw[-Kite,@] (1) -- (5);
+        \draw[-Kite,@] (1) -- (2);}
+
+        {\TT283 \draw[-Kite,@] (2) -- (6);
+        \draw[-Kite,@] (2) -- (3);}
+
+        {\TT0{12}3 \draw[-Kite,@] (4) -- (5);
+        \draw[-Kite,@] (4) -- (0);}
+
+        {\TT0{10}3 \draw[-Kite,@] (6) -- (7);}
+        {\TT0{11}3 \draw[-Kite,@] (7) -- (4);}
+    \end{tikzpicture}}}\hskip2cm\begin{minipage}{.3\linewidth}
+\onslide<4->{\begin{tikzpicture}[R/.style={draw,gray,minimum width=1.5cm,above right,outer xsep=0pt, inner xsep=0pt,minimum height=.5mm}]
+\draw[gray,thick] (0,0) -- ++(0,-2.25)++(1.5,0) -- ++(0,2.25);
+\only<4|handout:0>{\node[R] at(0,-2) {0};}
+
+\only<5|handout:1>{\node[R] at(0,-2) {1};}
+\only<6|handout:0>{\node[R] at(0,-2) {5};}
+\only<6|handout:0>{\node[R] at(0,-1.5) {2};}
+\only<7|handout:0>{\node[R] at(0,-2) {2};}
+\only<8|handout:2>{\node[R] at(0,-1.5) {6};}
+\only<9|handout:0>{\node[R] at(0,-2) {6};}
+\only<8|handout:2>{\node[R] at(0,-2) {3};}
+\only<10|handout:0>{\node[R] at(0,-2) {7};}
+\only<11|handout:0>{\node[R] at(0,-2) {4};}
+\node[below=1.5mm] at(current bounding box.south) {Queue};
+
+\node[right=5mm] at(current bounding box.east) {\strut$\to$~\only<5-|handout:1->{0}\only<6-|handout:2->{, 1}\only<7-|handout:2->{, 5}\only<8-|handout:2->{, 2}\only<9-|handout:3->{, 3}\only<10-|handout:3->{, 6}\only<11-|handout:3->{, 7}\only<12-|handout:3->{, 4}\strut};
+\end{tikzpicture}}
+\end{minipage}
+\end{center}
+\vfill\null
+\begin{tikzpicture}[overlay,remember picture]
+    \onslide<13-|handout:1>{\node[left=4mm,yshift=\btdmfootheight+3mm,scale=.8] at(current page.south east) {\usebox\pinguexplainbox};}
+\end{tikzpicture}
+\end{frame}
 }
+
 
 \iffull
 \SetNextSectionText{Fortgeschrittene OOP\\Abgabe: \T{null}}
@@ -282,6 +407,7 @@
 \end{frame}
 \fi
 
+\iffalse
 % \SetNextSectionText[.55\linewidth]{TODO}
 \section{Abschließendes}
 
@@ -609,6 +735,8 @@ public void addFront(int value) {
 \end{itemize}
 \end{frame}
 }\fi
+
+\fi
 
 \outro{\vskip9mm\centering \onslide<2->{\scalebox{1.75}{
 
