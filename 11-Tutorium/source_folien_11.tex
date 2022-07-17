@@ -499,6 +499,38 @@
 \end{frame}
 }}
 
+\subsection{Aufgabe 3}
+{\taskenum
+\begin{frame}[c]{Aufgabe 3: Post-Order Traversierung von Binärbäumen}
+\taskblock<2->
+    Ein \T{BinaryExpressionTree} repräsentiert einen Ausdruck, bei dem die Operatoren höchstens zwei Operanden verarbeiten können. So an die Berechnungen \((2^3 + 5) * (4 - 2)\) durch den folgenden Baum ausgedrückt werden: \begin{center}
+\begin{forest}
+    for tree={circle,draw}
+    [\say{*}
+        [\say{+}
+            [\say{pow}
+                [\say{2}]
+                [\say{3}]
+            ]
+            [\say{5}]
+        ]
+        [\say{-}
+            [\say{4}]
+            [\say{2}]
+        ]
+    ]
+\end{forest
+    \end{center}
+        Die Darstellungsweise erlaubt \textit{rekursives} abarbeiten des Ausdrucks. Dazu wird jeweils ein Knoten evaluiert: handelt es sich um einen Operator (kein Blatt und somit einen Rekursionsfall), wird dieser wieder evaluiert. Handelt es sich um einen Operanden (Blatt und somit ein Basisfall), kann das Ergebnis berechnet werden.
+
+        Wir beschränken uns hier einfachheitshalber nur auf balancierte Binärbäume, das heißt, es können nicht beliebige Ausdrücke dargestellt werden. Sie finden in den Unterlagen zu diesem Übungsblatt [TODO: LINK] die Klasse \T{StringNode.java}, die die Knoten darstellen soll, sowie die Klasse \T{BinaryExpressionTree.java}, die den Baum selbst repräsentiert, sowie \T{BinaryExpressionTreeMain.java} als Programmeinstiegspunkt.
+
+        Implementieren Sie die Methode \T{public double traverse(StringNode node)}, die den Binärbaum wie beschrieben \textit{rekursiv  im post-Order} Verfahren traversiert. Ihre Implementierung soll mindestens die Operatoren \T{+}, \T{-}, \T{*}, \T{/}, sowie \T{pow} unterstützten. Enthält ein Knoten einen unbekannten Operator, soll eine \T{InvalidParameterException} ausgelöst werden. Testen Sie Ihre Implementierung an dem obigen Beispiel. Die Methode \T{private void insertNodes(...)} der Klasse \T{BinaryExpressionTree.java} erstellt einen Binärbaum aus einem gegebenen String-Array.
+\endtaskblock
+\end{frame}
+
+}
+
 \iffull
 \SetNextSectionText{Fortgeschrittene OOP\\Abgabe: \T{null}}
 \section[Aussicht: Übungsblatt \T{Integer.MAX\_VALUE}]{Aussicht: Übungsblatt \textbf{\T{Integer.MAX\_VALUE}}}
