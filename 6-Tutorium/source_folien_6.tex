@@ -873,11 +873,11 @@ public class Kreis {
 \tikzset{ca@CommentNode/.append style={font=\sffamily\scriptsize\slshape,right=.5mm,yshift=-.2mm,scale=.75},ca@CommentNode@out/.append style={font=\sffamily\scriptsize\slshape}}% compact :)
 \begin{frame}[fragile,t]{Aufgabe 3: Seiteneffekte}
 \begin{tikzpicture}[@O]
-    \onslide<32>{
+    \onslide<32|handout:0>{
         \hlbehindcodeunder{out1}{@out>}
         \node[below,xshift=5mm,T,scale=.75] at(@out>_down) {\say{Magic}};
     }
-    \onslide<49>{
+    \onslide<49|handout:0>{
         \hlbehindcodeunder{out2}{@out2>}
         \node[below,xshift=5mm,T,scale=.75] at(@out2>_down) {\say{Magic}};
     }
@@ -958,7 +958,7 @@ public class Kreis {
 \begin{minted}{java}
 /*\CodeFileMarkerAttach<4->[side-effects/]{TestPerson.java}*/
 class TestPerson {
-    /*\ShowInTheWeb[.1mm]{https://www.online-java.com/8VtpnJcU1f}*/
+   /*\ShowInTheWeb[.1mm]{https://www.online-java.com/8VtpnJcU1f}*/
    public static void main(String[] args) {
       Person p = new Person("Heinz", 11, 22);
       String n1 = p.getName();
