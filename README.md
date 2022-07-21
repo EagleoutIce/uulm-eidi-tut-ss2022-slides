@@ -1,4 +1,4 @@
-# EidI ss2022 Uni Ulm --- Tutoriumsfolien
+# EidI SS22 Uni Ulm --- Tutoriumsfolien
 
 ![latex](https://img.shields.io/badge/Made%20with-LaTeX-1f425f.svg) [![compile-slides](https://github.com/EagleoutIce/uulm-eidi-tut-ss2022-slides/actions/workflows/compile.yaml/badge.svg)](https://github.com/EagleoutIce/uulm-eidi-tut-ss2022-slides/actions/workflows/compile.yaml) ![maintenance](https://unmaintained.tech/badge.svg)
 
