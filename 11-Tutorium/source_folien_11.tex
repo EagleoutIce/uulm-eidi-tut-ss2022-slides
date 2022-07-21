@@ -44,7 +44,7 @@
 /*\onslide<3->*/    public abstract double getArea();
 /*\onslide<3->*/}/*\onslide<1->*/
 \end{minted}\vspace*{-.5\baselineskip}\par
-\footnotesize\onslide<5->{Erstellen Sie eine neue Klasse \T{EquilateralTriangle}, welche ein gleichseitiges Dreieck repräsentieren und von \T{RegularPolygon} erben soll. Erzeugen Sie einen Konstruktor, welcher die Seitenlänge als Parameter verarbeitet (\(A = \sfrac14 \cdot \sqrt3 \cdot a^2\)).}\vspace*{-.45\baselineskip}
+\footnotesize\onslide<5->{Erstellen Sie eine neue Klasse \T{EquilateralTriangle}, welche ein gleichseitiges Dreieck repräsentieren und von \T{RegularPolygon} erben soll. Erzeugen Sie einen Konstruktor, welcher die Seitenlänge~\(a\) als Parameter verarbeitet (\(A = \sfrac14 \cdot \sqrt3 \cdot a^2\)).}\vspace*{-.45\baselineskip}
 \end{aufgabe}
 \end{frame}
 }
@@ -54,7 +54,7 @@
 \begin{minted}{java}
 /*\CodeFileMarkerAttach<2->{EquilateralTriangle.java}*/
 /*\onslide<2->*/public class EquilateralTriangle extends RegularPolygon {
-/*\onslide<3->*/   public EquilateralTriangle(int sideLength) {
+/*\onslide<3->*/   public EquilateralTriangle(double sideLength) {
 /*\onslide<4->*/      super(/*\onslide<5->*/3/*\onslide<6->*/, sideLength/*\onslide<4->*/);
 /*\onslide<3->*/   }
 /*\onslide<2->*/
