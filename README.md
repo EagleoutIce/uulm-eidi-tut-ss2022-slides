@@ -14,7 +14,7 @@ Solange das Repository privat ist und keine pages die Informationen an die Öffe
 
 Die Folien finden sich hier durch die CI direkt im [Repository](https://github.com/EagleoutIce/uulm-eidi-tut-ss22-slides/tree/gh-pages/all_pdfs) (inklusive aller animierten Versionen).
 Für die Schnellklicker:\
-[<img src="https://github.com/EagleoutIce/uulm-eidi-tut-ss22-slides/blob/gh-pages/preview-01.png?raw=true" width="650"/>](https://media.githubusercontent.com/media/EagleoutIce/uulm-eidi-tut-ss22-slides/gh-pages/all_pdfs/eidi_tut_compact.pdf)
+[<img src="https://github.com/EagleoutIce/uulm-eidi-tut-ss22-slides/blob/gh-pages/preview-001.png?raw=true" width="650"/>](https://media.githubusercontent.com/media/EagleoutIce/uulm-eidi-tut-ss22-slides/gh-pages/all_pdfs/eidi_tut_compact.pdf)
 
 ### Die Versionen
 
