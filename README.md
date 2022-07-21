@@ -6,7 +6,7 @@ Dies sind die historisch gewachsenen LaTeX-Quellen für die Eidi-Tutoriums-Folie
 Diese Version hier ist eine aus dem Eidi-Repo extrahierte Quelle mit veränderter History und leicht modifizierten
 Inhalten um Einzelpersonen anonym zu halten.
 
-Andere Dateien wurden nachträglich entfernt und bleiben in der History, einfach nur weil, sie aus historischen Gründen keine Bedeutung mehr haben. Die Folien des letzten Semesters finden sich [hier](https://github.com/EagleoutIce/uulm-eidi-tut-ws2021-22-slides).
+Andere Dateien wurden nachträglich entfernt und bleiben in der History, einfach nur weil, sie aus historischen Gründen keine Bedeutung mehr haben.
 
 ## 🐧Gimme
 
