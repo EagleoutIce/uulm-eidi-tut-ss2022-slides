@@ -48,8 +48,9 @@ noanim_%-dark.pdf: $(DEPENDENCIES)
 # we only make use of temporary files to do not clutter
 define produce
 	echo "${__FILECONTENT}" > "${__FILENAME}"
-	sltx raw-compile "${__FILENAME}"
+	latexmk -shell-escape -output-directory=build/ -pdf "${__FILENAME}"
 	rm "${__FILENAME}"
+	mv build/*.pdf ./
 endef
 
 clean:
