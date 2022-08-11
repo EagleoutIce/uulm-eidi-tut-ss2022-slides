@@ -21,7 +21,7 @@ jobs:
       with:
         path: |
           **/build
-          **/*.pdf
+          overview
         key: ${{ runner.os }}-eidi-ss2022-slides-${{ github.run_id }}
         restore-keys: ${{ runner.os }}-eidi-ss2022-slides-
     - name: use make docker to do the magic
