@@ -223,20 +223,20 @@
 \MakeThePinguExplainIt[text width=7.65cm,yshift=-.33cm]{cap=!hide,glasses=!hide,eyes wink,strawhat,blush,right item angle=-112}{Es lässt sich auch mit \bjava{if(node == null)} beim Entnehmen prüfen.}
 \begin{frame}[fragile,c]{Let it be code}
 \begin{minted}[morekeywords={[3]{BinaryTree, IntegerNode}}]{java}
-!*\CodeFileMarkerAttach<11->[p-sol/]{BinaryTree.java}\AddCodeFileMarkerAttach<11->[p-sol/]{BinaryTreeMain.java} \AddCodeFileMarkerAttach<11->[p-sol/]{IntegerNode.java}\AddCodeFileMarkerAttach<11->[p-sol/]{Queue.java}*!
-!*\onslide<2->*!public void breadthFirstTraversal() {
-!*\onslide<3->*!    Queue queue = new Queue();
-!*\onslide<4->*!    queue.enqueue(root);
-!*\onslide<2->*!
-!*\onslide<5->*!    while (!queue.isEmpty()) {
-!*\onslide<6->*!        IntegerNode node = queue.dequeue();
-!*\onslide<7->*!        if (node.getLeftChild() != null)
-!*\onslide<8->*!            queue.enqueue(node.getLeftChild());
-!*\onslide<9->*!        if (node.getRightChild() != null)
-!*\onslide<9->*!            queue.enqueue(node.getRightChild());
-!*\onslide<10->*!        System.out.println(node.getValue());
-!*\onslide<5->*!    }
-!*\onslide<2->*!}
+/*\CodeFileMarkerAttach<11->[p-sol/]{BinaryTree.java}\AddCodeFileMarkerAttach<11->[p-sol/]{BinaryTreeMain.java}\AddCodeFileMarkerAttach<11->[p-sol/]{IntegerNode.java}\AddCodeFileMarkerAttach<11->[p-sol/]{Queue.java}*/
+/*\onslide<2->*/public void breadthFirstTraversal() {
+/*\onslide<3->*/    Queue queue = new Queue();
+/*\onslide<4->*/    queue.enqueue(root);
+/*\onslide<2->*/
+/*\onslide<5->*/    while (!queue.isEmpty()) {
+/*\onslide<6->*/        IntegerNode node = queue.dequeue();
+/*\onslide<7->*/        if (node.getLeftChild() != null)
+/*\onslide<8->*/            queue.enqueue(node.getLeftChild());
+/*\onslide<9->*/        if (node.getRightChild() != null)
+/*\onslide<9->*/            queue.enqueue(node.getRightChild());
+/*\onslide<10->*/        System.out.println(node.getValue());
+/*\onslide<5->*/    }
+/*\onslide<2->*/}
 \end{minted}
 \begin{tikzpicture}[@O]
 \onslide<2->{\node[below left,yshift=-1.33cm] at(current page.north east) {\copy\pinguA};}
