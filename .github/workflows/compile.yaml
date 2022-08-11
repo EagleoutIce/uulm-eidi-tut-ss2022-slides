@@ -14,6 +14,16 @@ jobs:
         submodules: true
     - name: get pu for preview
       run: sudo apt install poppler-utils
+# https://github.com/actions/cache/issues/342
+    - name: Caching
+      id: cache-slides
+      uses: actions/cache@v3
+      with:
+        path: |
+          **/build
+          **/*.pdf
+        key: ${{ runner.os }}-eidi-ss2022-slides-${{ github.run_id }}
+        restore-keys: ${{ runner.os }}-eidi-ss2022-slides-
     - name: use make docker to do the magic
       run: make docker
     - name: 'compiling the pdfs'
