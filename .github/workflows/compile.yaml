@@ -24,7 +24,7 @@ jobs:
           !**/build/*.pdf
           overview/*
           !Overview/*.pdf
-        key: ${{ runner.os }}-eidi-ss2022-slides-${{ github.run_id }}
+        key: ${{ runner.os }}-eidi-ss2022-slides-v2-${{ github.run_id }}
         restore-keys: ${{ runner.os }}-eidi-ss2022-slides-
     - name: use make docker to do the magic
       run: make docker
