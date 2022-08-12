@@ -25,7 +25,7 @@ jobs:
           overview/*
           !Overview/*.pdf
         key: ${{ runner.os }}-eidi-ss2022-slides-v2-${{ github.run_id }}
-        restore-keys: ${{ runner.os }}-eidi-ss2022-slides-
+        restore-keys: ${{ runner.os }}-eidi-ss2022-slides-v2-
     - name: use make docker to do the magic
       run: make docker
     - name: 'compiling the pdfs'
